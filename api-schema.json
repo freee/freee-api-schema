@@ -109,7 +109,7 @@
             "description": "取引先の作成",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/partnerParams"
+              "$ref": "#/definitions/partnerCreateParams"
             }
           }
         ],
@@ -136,7 +136,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引先を作成する</p>"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引先を作成する</p>\n<ul>\n<li>codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</li>\n<li>取引先コードの利用を有効にしている場合は、codeの指定は必須です。</li></ul>"
       }
     },
     "/partners/{id}": {
@@ -162,7 +162,7 @@
             "description": "取引先の更新",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/partnerParams"
+              "$ref": "#/definitions/partnerUpdateParams"
             }
           }
         ],
@@ -189,7 +189,58 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した取引先の情報を更新する</p>"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した取引先の情報を更新する</p>\n<ul>\n<li>codeを指定、更新することはできません。</li></ul>"
+      }
+    },
+    "/partners/code/{code}": {
+      "put": {
+        "tags": [
+          "Partners"
+        ],
+        "operationId": "update_partner_by_code",
+        "summary": "取引先の更新",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "取引先コード"
+          },
+          {
+            "name": "Parameters",
+            "in": "body",
+            "description": "取引先の更新",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/partnerCodeParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/partnersResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>取引先コードをキーに、指定した取引先の情報を更新する</p>\n<ul>\n<li>このAPIを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</li>\n<li>コードを日本語に設定している場合は、URLエンコードしてURLに含めるようにしてください。</li></ul>"
       }
     },
     "/forms/selectables": {
@@ -777,6 +828,12 @@
             "maximum": 999999999999
           },
           {
+            "name": "partner_code",
+            "type": "string",
+            "in": "query",
+            "description": "取引先コードで絞込"
+          },
+          {
             "name": "issue_date_start",
             "type": "string",
             "in": "query",
@@ -922,7 +979,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の請求書を作成する</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n<li> <p>取引先ID（partner_id）と取引先の名称項目（partner_name, partner_long_name, partner_zipcode, partner_prefecture_code, partner_address1, partner_address2）を同時に指定することはできません。名称項目のみ指定した場合は新規取引先として登録されます。</p> </li>\n<li> <p>請求書ステータス(invoice_status)を発行(issue)で利用した場合、請求内容の合計金額が0円以上になる必要があります。</p> </li>\n</ul>"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の請求書を作成する</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n<li> <p>取引先ID（partner_id）と取引先の名称項目（partner_name, partner_long_name, partner_zipcode, partner_prefecture_code, partner_address1, partner_address2）を同時に指定することはできません。名称項目のみ指定した場合は新規取引先として登録されます。</p> </li>\n<li> <p>請求書ステータス(invoice_status)を発行(issue)で利用した場合、請求内容の合計金額が0円以上になる必要があります。</p> </li>\n<li><p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。また「partner_code、partner_id、partner_name」は同時に指定することはできません。</p></li></ul>"
       }
     },
     "/invoices/{id}": {
@@ -977,7 +1034,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の請求書を更新する</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul> <li> <p>取引先ID（partner_id）と取引先の名称項目（partner_name, partner_long_name, partner_zipcode, partner_prefecture_code, partner_address1, partner_address2）の更新はできません。名称項目を変更したい場合は取引先APIをご利用ください。</p> </li> <li> <p>入金済みの請求書に対する金額関連の変更はできません。</p> </li> <li> <p>請求書ステータスは確定(issue)のみ指定可能です。請求書ステータスを確定する時のみ指定してください。</p> </li> <li> <p>請求書ワークフローを利用している場合、承認済み請求書は承認権限を持たないユーザーでは更新できません。</p> </li> <li> <p>更新後の請求書ステータス(invoice_status)が下書き以外の場合、請求内容の合計金額が0円以上になる必要があります。</p></li> </ul>"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の請求書を更新する</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul> <li> <p>取引先ID（partner_id）と取引先の名称項目（partner_name, partner_long_name, partner_zipcode, partner_prefecture_code, partner_address1, partner_address2）の更新はできません。名称項目を変更したい場合は取引先APIをご利用ください。</p> </li> <li> <p>入金済みの請求書に対する金額関連の変更はできません。</p> </li> <li> <p>請求書ステータスは確定(issue)のみ指定可能です。請求書ステータスを確定する時のみ指定してください。</p> </li> <li> <p>請求書WFを利用している場合、承認済み請求書は承認権限を持たないユーザーでは更新できません。</p> </li> <li> <p>更新後の請求書ステータス(invoice_status)が下書き以外の場合、請求内容の合計金額が0円以上になる必要があります。</p></li><li><p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。また「partner_code、partner_id、partner_name」は同時に指定することはできません。</p></li></ul>"
       },
       "delete": {
         "tags": [
@@ -1060,6 +1117,20 @@
             "description": "取引先IDで絞込",
             "minimum": 1,
             "maximum": 999999999999
+          },
+          {
+            "name": "account_item_id",
+            "type": "integer",
+            "in": "query",
+            "description": "勘定科目IDで絞込",
+            "minimum": 1,
+            "maximum": 999999999999
+          },
+          {
+            "name": "partner_code",
+            "type": "string",
+            "in": "query",
+            "description": "取引先コードで絞込"
           },
           {
             "name": "status",
@@ -1163,7 +1234,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引一覧（収入／支出）を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>due_date : 支払期日</p>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n\n<li>\n<p>type</p>\n\n<ul>\n<li>income : 収入</li>\n\n<li>expense : 支出</li>\n</ul>\n</li>\n\n<li>\n<p>details : 取引の明細行</p>\n</li>\n\n<li>\n<p>accruals : 取引の債権債務行</p>\n</li>\n\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n\n<li>\n<p>from_walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n\n<li>\n<p>registered_from</p>\n\n<ul>\n<li>all : すべての取引</li>\n\n<li>me : 自身が登録した取引</li>\n</ul>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>tax_idは廃止予定です。tax_codeをご利用ください。</li>\n\n<li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n</ul>"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引一覧（収入／支出）を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>due_date : 支払期日</p>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n\n<li>\n<p>type</p>\n\n<ul>\n<li>income : 収入</li>\n\n<li>expense : 支出</li>\n</ul>\n</li>\n\n<li>\n<p>details : 取引の明細行</p>\n</li>\n\n<li>\n<p>accruals : 取引の債権債務行</p>\n</li>\n\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n\n<li>\n<p>from_walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n\n<li>\n<p>registered_from</p>\n\n<ul>\n<li>all : すべての取引</li>\n\n<li>me : 自身が登録した取引</li>\n</ul>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>tax_idは廃止予定です。tax_codeをご利用ください。</li>\n\n<li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</li>\n</ul>"
       },
       "post": {
         "tags": [
@@ -1217,6 +1288,11 @@
                   "description": "取引先ID",
                   "minimum": 1,
                   "maximum": 999999999999
+                },
+                "partner_code": {
+                  "type": "string",
+                  "example": "code001",
+                  "description": "取引先コード"
                 },
                 "ref_number": {
                   "type": "string",
@@ -1392,7 +1468,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引（収入／支出）を作成する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>due_date : 支払期日</p>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n\n<li>\n<p>type</p>\n\n<ul>\n<li>income : 収入</li>\n\n<li>expense : 支出</li>\n</ul>\n</li>\n\n<li>\n<p>ref_number : 管理番号</p>\n</li>\n\n<li>\n<p>details : 取引の明細行</p>\n</li>\n\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n\n<li>\n<p>from_walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>\n<p>tax_idは廃止予定です。tax_codeをご利用ください。</p>\n</li>\n\n<li>\n<p>tax_code, tax_idはどちらかの指定が必須です。両方指定した場合はtax_codeが優先されます。</p>\n</li>\n\n<li>本APIでは+更新行(renews)の操作ができません。+更新行の作成APIをご利用ください。</li>\n\n<li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n</ul>\n\n"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引（収入／支出）を作成する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>due_date : 支払期日</p>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n\n<li>\n<p>type</p>\n\n<ul>\n<li>income : 収入</li>\n\n<li>expense : 支出</li>\n</ul>\n</li>\n\n<li>\n<p>ref_number : 管理番号</p>\n</li>\n\n<li>\n<p>details : 取引の明細行</p>\n</li>\n\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n\n<li>\n<p>from_walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>\n<p>tax_idは廃止予定です。tax_codeをご利用ください。</p>\n</li>\n\n<li>\n<p>tax_code, tax_idはどちらかの指定が必須です。両方指定した場合はtax_codeが優先されます。</p>\n</li>\n<p><li>本APIでは+更新行(renews)の操作ができません。+更新行の作成APIをご利用ください。</p></li>\n\n<p><li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</p></li>\n\n<li>\n<p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</p></li>\n</ul>\n\n"
       }
     },
     "/deals/{id}": {
@@ -1520,6 +1596,11 @@
                   "description": "取引先ID",
                   "minimum": 1,
                   "maximum": 999999999999
+                },
+                "partner_code": {
+                  "type": "string",
+                  "example": "code001",
+                  "description": "取引先コード"
                 },
                 "ref_number": {
                   "type": "string",
@@ -1657,7 +1738,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引（収入／支出）を更新する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>due_date : 支払期日</p>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n\n<li>\n<p>type</p>\n\n<ul>\n<li>income : 収入</li>\n\n<li>expense : 支出</li>\n</ul>\n</li>\n\n<li>\n<p>details : 取引の明細行</p>\n</li>\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>本APIでは支払行(payments)の操作ができません。支払行の作成・更新・削除APIをご利用ください。</li>\n<li>本APIでは+更新行(renews)の操作ができません。+更新行の作成・更新・削除APIをご利用ください。</li>\n\n<li>本APIでは収入／支出の切替えができません。既存の取引を削除後、再度作成してください。</li>\n\n<li>本APIで取引を更新すると、消費税の計算方法は必ず内税方式が選択されます。</li>\n\n<li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n</ul>"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引（収入／支出）を更新する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>due_date : 支払期日</p>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n\n<li>\n<p>type</p>\n\n<ul>\n<li>income : 収入</li>\n\n<li>expense : 支出</li>\n</ul>\n</li>\n\n<li>\n<p>details : 取引の明細行</p>\n</li>\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>本APIでは支払行(payments)の操作ができません。支払行の作成・更新・削除APIをご利用ください。</li>\n<li>本APIでは+更新行(renews)の操作ができません。+更新行の作成・更新・削除APIをご利用ください。</li>\n\n<li>本APIでは収入／支出の切替えができません。既存の取引を削除後、再度作成してください。</li>\n\n<li>本APIで取引を更新すると、消費税の計算方法は必ず内税方式が選択されます。</li>\n\n<li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</ul>"
       }
     },
     "/deals/{id}/renews": {
@@ -2110,6 +2191,12 @@
             "maximum": 999999999999
           },
           {
+            "name": "partner_code",
+            "type": "string",
+            "in": "query",
+            "description": "取引先コードで絞込"
+          },
+          {
             "name": "item_id",
             "type": "integer",
             "in": "query",
@@ -2222,7 +2309,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の振替伝票一覧を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>adjustment : 決算整理仕訳フラグ（true: 決算整理仕訳, false: 日常仕訳）</p>\n</li>\n\n<li>\n<p>txn_number : 仕訳番号</p>\n</li>\n\n<li>\n<p>details : 振替伝票の貸借行</p>\n</li>\n\n<li>\n<p>entry_side : 貸借区分</p>\n\n<ul>\n<li>credit : 貸方</li>\n\n<li>debit : 借方</li>\n</ul>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>振替伝票は売掛・買掛レポートには反映されません。債権・債務データの登録は取引(Deals)をお使いください。</li>\n<li>事業所の仕訳番号形式が有効な場合のみ、レスポンスで仕訳番号(txn_number)を返します。</li>\n<li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n</ul>"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の振替伝票一覧を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>adjustment : 決算整理仕訳フラグ（true: 決算整理仕訳, false: 日常仕訳）</p>\n</li>\n\n<li>\n<p>txn_number : 仕訳番号</p>\n</li>\n\n<li>\n<p>details : 振替伝票の貸借行</p>\n</li>\n\n<li>\n<p>entry_side : 貸借区分</p>\n\n<ul>\n<li>credit : 貸方</li>\n\n<li>debit : 借方</li>\n</ul>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>振替伝票は売掛・買掛レポートには反映されません。債権・債務データの登録は取引(Deals)をお使いください。</li>\n<li>事業所の仕訳番号形式が有効な場合のみ、レスポンスで仕訳番号(txn_number)を返します。</li>\n<li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</li></ul>"
       },
       "post": {
         "tags": [
@@ -2263,7 +2350,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の振替伝票を作成する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>adjustment : 決算整理仕訳フラグ（true: 決算整理仕訳, false: 日常仕訳）</p>\n</li>\n\n<li>\n<p>txn_number : 仕訳番号</p>\n</li>\n\n<li>\n<p>details : 振替伝票の貸借行</p>\n</li>\n\n<li>\n<p>entry_side : 貸借区分</p>\n\n<ul>\n<li>credit : 貸方</li>\n\n<li>debit : 借方</li>\n</ul>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>振替伝票は売掛・買掛レポートには反映されません。債権・債務データの登録は取引(Deals)をお使いください。</li>\n<li>事業所の仕訳番号形式が有効な場合のみ、レスポンスで仕訳番号(txn_number)を返します。</li>\n<li>貸借合わせて100行まで仕訳行を登録できます。</li>\n<li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n</ul>\n\n"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の振替伝票を作成する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>adjustment : 決算整理仕訳フラグ（true: 決算整理仕訳, false: 日常仕訳）</p>\n</li>\n\n<li>\n<p>txn_number : 仕訳番号</p>\n</li>\n\n<li>\n<p>details : 振替伝票の貸借行</p>\n</li>\n\n<li>\n<p>entry_side : 貸借区分</p>\n\n<ul>\n<li>credit : 貸方</li>\n\n<li>debit : 借方</li>\n</ul>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>振替伝票は売掛・買掛レポートには反映されません。債権・債務データの登録は取引(Deals)をお使いください。</li>\n<li>事業所の仕訳番号形式が有効な場合のみ、レスポンスで仕訳番号(txn_number)を返します。</li>\n<li>貸借合わせて100行まで仕訳行を登録できます。</li>\n<li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</li></ul>\n\n"
       }
     },
     "/manual_journals/{id}": {
@@ -2360,7 +2447,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の振替伝票を更新する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>adjustment : 決算整理仕訳フラグ（true: 決算整理仕訳, false: 日常仕訳）</p>\n</li>\n\n<li>\n<p>txn_number : 仕訳番号</p>\n</li>\n\n<li>\n<p>details : 振替伝票の貸借行</p>\n</li>\n\n<li>\n<p>entry_side : 貸借区分</p>\n\n<ul>\n<li>credit : 貸方</li>\n\n<li>debit : 借方</li>\n</ul>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>振替伝票は売掛・買掛レポートには反映されません。債権・債務データの登録は取引(Deals)をお使いください。</li>\n\n<li>事業所の仕訳番号形式が有効な場合のみ、レスポンスで仕訳番号(txn_number)を返します。</li>\n<li>貸借合わせて100行まで仕訳行を登録できます。</li>\n\n<li>detailsに含まれない既存の貸借行は削除されます。更新後も残したい行は、必ず貸借行IDを指定してdetailsに含めてください。</li>\n\n<li>detailsに含まれる貸借行IDの指定がある行は、更新行として扱われ更新されます。</li>\n\n<li>detailsに含まれる貸借行IDの指定がない行は、新規行として扱われ追加されます。</li>\n<li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n</ul>\n\n"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の振替伝票を更新する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>adjustment : 決算整理仕訳フラグ（true: 決算整理仕訳, false: 日常仕訳）</p>\n</li>\n\n<li>\n<p>txn_number : 仕訳番号</p>\n</li>\n\n<li>\n<p>details : 振替伝票の貸借行</p>\n</li>\n\n<li>\n<p>entry_side : 貸借区分</p>\n\n<ul>\n<li>credit : 貸方</li>\n\n<li>debit : 借方</li>\n</ul>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>振替伝票は売掛・買掛レポートには反映されません。債権・債務データの登録は取引(Deals)をお使いください。</li>\n\n<li>事業所の仕訳番号形式が有効な場合のみ、レスポンスで仕訳番号(txn_number)を返します。</li>\n<li>貸借合わせて100行まで仕訳行を登録できます。</li>\n\n<li>detailsに含まれない既存の貸借行は削除されます。更新後も残したい行は、必ず貸借行IDを指定してdetailsに含めてください。</li>\n\n<li>detailsに含まれる貸借行IDの指定がある行は、更新行として扱われ更新されます。</li>\n\n<li>detailsに含まれる貸借行IDの指定がない行は、新規行として扱われ追加されます。</li>\n<li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</li></ul>\n\n"
       },
       "delete": {
         "tags": [
@@ -2777,7 +2864,7 @@
                       "type": "integer",
                       "minimum": 0,
                       "maximum": 46,
-                      "description": "都道府県コード（0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野お、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄"
+                      "description": "都道府県コード（0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄"
                     },
                     "street_name1": {
                       "type": "string",
@@ -4163,6 +4250,12 @@
             "description": "取引先IDで絞込（0を指定すると、取引先が未選択で絞り込めます）"
           },
           {
+            "name": "partner_code",
+            "in": "query",
+            "type": "string",
+            "description": "取引先コードで絞込（事業所設定で取引先コードの利用を有効にしている場合のみ利用可能です）"
+          },
+          {
             "name": "item_id",
             "type": "integer",
             "in": "query",
@@ -4270,6 +4363,12 @@
             "in": "query",
             "minimum": 0,
             "description": "取引先IDで絞込（0を指定すると、取引先が未選択で絞り込めます）"
+          },
+          {
+            "name": "partner_code",
+            "in": "query",
+            "type": "string",
+            "description": "取引先コードで絞込（事業所設定で取引先コードの利用を有効にしている場合のみ利用可能です）"
           },
           {
             "name": "item_id",
@@ -4381,6 +4480,12 @@
             "description": "取引先IDで絞込（0を指定すると、取引先が未選択で絞り込めます）"
           },
           {
+            "name": "partner_code",
+            "in": "query",
+            "type": "string",
+            "description": "取引先コードで絞込（事業所設定で取引先コードの利用を有効にしている場合のみ利用可能です）"
+          },
+          {
             "name": "item_id",
             "type": "integer",
             "in": "query",
@@ -4489,6 +4594,12 @@
             "in": "query",
             "minimum": 0,
             "description": "取引先IDで絞込（0を指定すると、取引先が未選択で絞り込めます）"
+          },
+          {
+            "name": "partner_code",
+            "in": "query",
+            "type": "string",
+            "description": "取引先コードで絞込（事業所設定で取引先コードの利用を有効にしている場合のみ利用可能です）"
           },
           {
             "name": "item_id",
@@ -4618,6 +4729,12 @@
             "description": "取引先IDで絞込（0を指定すると、取引先が未選択で絞り込めます）"
           },
           {
+            "name": "partner_code",
+            "in": "query",
+            "type": "string",
+            "description": "取引先コードで絞込（事業所設定で取引先コードの利用を有効にしている場合のみ利用可能です）"
+          },
+          {
             "name": "item_id",
             "type": "integer",
             "in": "query",
@@ -4743,6 +4860,12 @@
             "in": "query",
             "minimum": 0,
             "description": "取引先IDで絞込（0を指定すると、取引先が未選択で絞り込めます）"
+          },
+          {
+            "name": "partner_code",
+            "in": "query",
+            "type": "string",
+            "description": "取引先コードで絞込（事業所設定で取引先コードの利用を有効にしている場合のみ利用可能です）"
           },
           {
             "name": "item_id",
@@ -4877,6 +5000,12 @@
             "in": "query",
             "minimum": 0,
             "description": "取引先IDで絞込（0を指定すると、取引先が未選択で絞り込めます）"
+          },
+          {
+            "name": "partner_code",
+            "in": "query",
+            "type": "string",
+            "description": "取引先コードで絞込（事業所設定で取引先コードの利用を有効にしている場合のみ利用可能です）"
           },
           {
             "name": "item_id",
@@ -5765,6 +5894,11 @@
                 "description": "取引先ID",
                 "maximum": 999999999999
               },
+              "partner_code": {
+                "type": "string",
+                "example": "code001",
+                "description": "取引先コード"
+              },
               "item_id": {
                 "type": "integer",
                 "example": 1,
@@ -5896,6 +6030,11 @@
                 "description": "取引先ID",
                 "maximum": 999999999999
               },
+              "partner_code": {
+                "type": "string",
+                "example": "code111",
+                "description": "取引先コード"
+              },
               "item_id": {
                 "type": "integer",
                 "example": 1,
@@ -5984,7 +6123,169 @@
         }
       }
     },
-    "partnerParams": {
+    "partnerCreateParams": {
+      "type": "object",
+      "required": [
+        "company_id",
+        "name"
+      ],
+      "properties": {
+        "company_id": {
+          "type": "integer",
+          "description": "事業所ID",
+          "example": 1,
+          "minimum": 1,
+          "maximum": 999999999999
+        },
+        "name": {
+          "type": "string",
+          "example": "新しい取引先",
+          "description": "取引先名 (30文字以内)"
+        },
+        "code": {
+          "type": "string",
+          "description": "取引先コード",
+          "example": "code001"
+        },
+        "shortcut1": {
+          "type": "string",
+          "example": "NEWPARTNER",
+          "description": "ショートカット１ (20文字以内)"
+        },
+        "shortcut2": {
+          "type": "string",
+          "example": "502",
+          "description": "ショートカット２ (20文字以内)"
+        },
+        "long_name": {
+          "type": "string",
+          "example": "新しい取引先正式名称",
+          "description": "正式名称（255文字以内）"
+        },
+        "name_kana": {
+          "type": "string",
+          "example": "アタラシイトリヒキサキメイショウ",
+          "description": "カナ名称（255文字以内）"
+        },
+        "default_title": {
+          "type": "string",
+          "example": "御中",
+          "enum": [
+            "",
+            "(空白)",
+            "御中",
+            "様"
+          ],
+          "description": "敬称（御中、様、(空白)の3つから選択）"
+        },
+        "phone": {
+          "type": "string",
+          "example": "03-3000-1111",
+          "description": "電話番号"
+        },
+        "contact_name": {
+          "type": "string",
+          "example": "営業担当",
+          "description": "営業担当者名"
+        },
+        "email": {
+          "type": "string",
+          "example": "contact@example.com",
+          "description": "営業担当者 メールアドレス"
+        },
+        "address_attributes": {
+          "type": "object",
+          "properties": {
+            "zipcode": {
+              "type": "string",
+              "description": "郵便番号",
+              "example": "012-0009"
+            },
+            "prefecture_code": {
+              "type": "integer",
+              "description": "都道府県コード（0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
+              "example": 4
+            },
+            "street_name1": {
+              "type": "string",
+              "description": "市区町村・番地",
+              "example": "湯沢市"
+            },
+            "street_name2": {
+              "type": "string",
+              "description": "建物名・部屋番号など",
+              "example": "Aビル"
+            }
+          }
+        },
+        "partner_doc_setting_attributes": {
+          "type": "object",
+          "properties": {
+            "sending_method": {
+              "type": "string",
+              "description": "請求書送付方法(mail:メール、posting:郵送、mail_and_posting:メールと郵送)",
+              "example": "posting"
+            }
+          }
+        },
+        "partner_bank_account_attributes": {
+          "type": "object",
+          "properties": {
+            "bank_name": {
+              "type": "string",
+              "description": "銀行名",
+              "example": "みずほ銀行"
+            },
+            "bank_name_kana": {
+              "type": "string",
+              "description": "銀行名（カナ）",
+              "example": "ミズホ"
+            },
+            "bank_code": {
+              "type": "string",
+              "description": "銀行番号",
+              "example": "001"
+            },
+            "branch_name": {
+              "type": "string",
+              "description": "支店名",
+              "example": "銀座支店"
+            },
+            "branch_kana": {
+              "type": "string",
+              "description": "支店名（カナ）",
+              "example": "ギンザ"
+            },
+            "branch_code": {
+              "type": "string",
+              "description": "支店番号",
+              "example": "101"
+            },
+            "account_type": {
+              "type": "string",
+              "description": "口座種別(ordinary:普通、checking：当座、earmarked：納税準備預金、savings：貯蓄、other:その他)",
+              "example": "ordinary"
+            },
+            "account_number": {
+              "type": "string",
+              "description": "口座番号",
+              "example": "1010101"
+            },
+            "long_account_name": {
+              "type": "string",
+              "description": "受取人名",
+              "example": "freee太郎"
+            },
+            "account_name": {
+              "type": "string",
+              "description": "受取人名（カナ）",
+              "example": "フリータロウ"
+            }
+          }
+        }
+      }
+    },
+    "partnerUpdateParams": {
       "type": "object",
       "required": [
         "company_id",
@@ -6059,7 +6360,164 @@
             },
             "prefecture_code": {
               "type": "integer",
-              "description": "都道府県コード（0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野お、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
+              "description": "都道府県コード（0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
+              "example": 4
+            },
+            "street_name1": {
+              "type": "string",
+              "description": "市区町村・番地",
+              "example": "湯沢市"
+            },
+            "street_name2": {
+              "type": "string",
+              "description": "建物名・部屋番号など",
+              "example": "Aビル"
+            }
+          }
+        },
+        "partner_doc_setting_attributes": {
+          "type": "object",
+          "properties": {
+            "sending_method": {
+              "type": "string",
+              "description": "請求書送付方法(mail:メール、posting:郵送、mail_and_posting:メールと郵送)",
+              "example": "posting"
+            }
+          }
+        },
+        "partner_bank_account_attributes": {
+          "type": "object",
+          "properties": {
+            "bank_name": {
+              "type": "string",
+              "description": "銀行名",
+              "example": "みずほ銀行"
+            },
+            "bank_name_kana": {
+              "type": "string",
+              "description": "銀行名（カナ）",
+              "example": "ミズホ"
+            },
+            "bank_code": {
+              "type": "string",
+              "description": "銀行番号",
+              "example": "001"
+            },
+            "branch_name": {
+              "type": "string",
+              "description": "支店名",
+              "example": "銀座支店"
+            },
+            "branch_kana": {
+              "type": "string",
+              "description": "支店名（カナ）",
+              "example": "ギンザ"
+            },
+            "branch_code": {
+              "type": "string",
+              "description": "支店番号",
+              "example": "101"
+            },
+            "account_type": {
+              "type": "string",
+              "description": "口座種別(ordinary:普通、checking：当座、earmarked：納税準備預金、savings：貯蓄、other:その他)",
+              "example": "ordinary"
+            },
+            "account_number": {
+              "type": "string",
+              "description": "口座番号",
+              "example": "1010101"
+            },
+            "long_account_name": {
+              "type": "string",
+              "description": "受取人名",
+              "example": "freee太郎"
+            },
+            "account_name": {
+              "type": "string",
+              "description": "受取人名（カナ）",
+              "example": "フリータロウ"
+            }
+          }
+        }
+      }
+    },
+    "partnerCodeParams": {
+      "type": "object",
+      "required": [
+        "company_id",
+        "name"
+      ],
+      "properties": {
+        "company_id": {
+          "type": "integer",
+          "description": "事業所ID",
+          "example": 1,
+          "minimum": 1,
+          "maximum": 999999999999
+        },
+        "name": {
+          "type": "string",
+          "example": "新しい取引先",
+          "description": "取引先名 (30文字以内)"
+        },
+        "shortcut1": {
+          "type": "string",
+          "example": "NEWPARTNER",
+          "description": "ショートカット１ (20文字以内)"
+        },
+        "shortcut2": {
+          "type": "string",
+          "example": "502",
+          "description": "ショートカット２ (20文字以内)"
+        },
+        "long_name": {
+          "type": "string",
+          "example": "新しい取引先正式名称",
+          "description": "正式名称（255文字以内）"
+        },
+        "name_kana": {
+          "type": "string",
+          "example": "アタラシイトリヒキサキメイショウ",
+          "description": "カナ名称（255文字以内）"
+        },
+        "default_title": {
+          "type": "string",
+          "example": "御中",
+          "enum": [
+            "",
+            "(空白)",
+            "御中",
+            "様"
+          ],
+          "description": "敬称（御中、様、(空白)の3つから選択）"
+        },
+        "phone": {
+          "type": "string",
+          "example": "03-3000-1111",
+          "description": "電話番号"
+        },
+        "contact_name": {
+          "type": "string",
+          "example": "営業担当",
+          "description": "営業担当者名"
+        },
+        "email": {
+          "type": "string",
+          "example": "contact@example.com",
+          "description": "営業担当者 メールアドレス"
+        },
+        "address_attributes": {
+          "type": "object",
+          "properties": {
+            "zipcode": {
+              "type": "string",
+              "description": "郵便番号",
+              "example": "012-0009"
+            },
+            "prefecture_code": {
+              "type": "integer",
+              "description": "都道府県コード（0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
               "example": 4
             },
             "street_name1": {
@@ -6155,6 +6613,14 @@
         },
         "account_item": {
           "type": "object",
+          "required": [
+            "name",
+            "account_category",
+            "group_name",
+            "tax_name",
+            "corresponding_income_name",
+            "corresponding_expense_name"
+          ],
           "example": {
             "name": "新しい勘定科目",
             "shortcut": "NEWACCOUNTITEM",
@@ -6733,13 +7199,28 @@
     "dealsIndexResponse": {
       "type": "object",
       "required": [
-        "deals"
+        "deals",
+        "meta"
       ],
       "properties": {
         "deals": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/deals"
+          }
+        },
+        "meta": {
+          "type": "object",
+          "required": [
+            "total_count"
+          ],
+          "properties": {
+            "total_count": {
+              "type": "integer",
+              "minimum": 0,
+              "example": 100,
+              "description": "検索条件に合致する取引の総数"
+            }
           }
         }
       }
@@ -7107,6 +7588,14 @@
           "example": 201,
           "description": "取引先ID"
         },
+        "partner_code": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "example": "code001",
+          "description": "取引先コード"
+        },
         "ref_number": {
           "type": "string",
           "example": "123-456",
@@ -7188,6 +7677,14 @@
           "type": "integer",
           "example": 201,
           "description": "取引先ID"
+        },
+        "partner_code": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "example": "code001",
+          "description": "取引先コード"
         },
         "ref_number": {
           "type": "string",
@@ -7656,6 +8153,14 @@
                 "example": "freee",
                 "description": "取引先名"
               },
+              "partner_code": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "code001",
+                "description": "取引先コード"
+              },
               "partner_long_name": {
                 "type": [
                   "string",
@@ -7943,7 +8448,7 @@
             },
             "prefecture_code": {
               "type": "integer",
-              "description": "都道府県コード（0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野お、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
+              "description": "都道府県コード（0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
               "example": 4,
               "minimum": 0,
               "maximum": 46
@@ -8066,7 +8571,8 @@
             "industry_class",
             "industry_code",
             "txn_number_format",
-            "private_settlement"
+            "private_settlement",
+            "use_partner_code"
           ],
           "properties": {
             "id": {
@@ -8189,7 +8695,7 @@
             },
             "prefecture_code": {
               "type": "integer",
-              "description": "都道府県コード（0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野お、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
+              "description": "都道府県コード（0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
               "example": 4
             },
             "street_name1": {
@@ -8266,6 +8772,11 @@
                 "disable"
               ],
               "description": "仕訳承認フロー（enable: 有効、 disable: 無効）"
+            },
+            "use_partner_code": {
+              "type": "boolean",
+              "example": true,
+              "description": "取引先コードの利用設定（true: 有効、 false: 無効）"
             }
           }
         }
@@ -8892,6 +9403,7 @@
       "type": "object",
       "required": [
         "id",
+        "code",
         "company_id",
         "name"
       ],
@@ -8900,6 +9412,14 @@
           "type": "integer",
           "example": 1,
           "description": "取引先ID"
+        },
+        "code": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "example": "code001",
+          "description": "取引先コード"
         },
         "company_id": {
           "type": "integer",
@@ -10136,7 +10656,7 @@
       "required": [
         "id",
         "company_id",
-        "issue_date",
+        "application_date",
         "title",
         "applicant_id",
         "approver_id",
@@ -10155,7 +10675,7 @@
           "description": "事業所ID",
           "example": 1
         },
-        "issue_date": {
+        "application_date": {
           "type": "string",
           "description": "申請日 (yyyy-mm-dd)",
           "example": "2018-07-19"
@@ -10171,7 +10691,10 @@
           "example": 1
         },
         "approver_id": {
-          "type": "integer",
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "承認者ID",
           "example": 1
         },
@@ -10195,19 +10718,14 @@
             "type": "object",
             "required": [
               "id",
-              "label",
-              "type"
+              "type",
+              "value"
             ],
             "properties": {
               "id": {
                 "type": "integer",
                 "description": "項目ID",
                 "example": 1
-              },
-              "label": {
-                "type": "string",
-                "description": "項目名",
-                "example": "出張理由"
               },
               "type": {
                 "type": "string",
@@ -10227,10 +10745,10 @@
     "segmentTagsIndexResponse": {
       "type": "object",
       "required": [
-        "segmentTags"
+        "segment_tags"
       ],
       "properties": {
-        "segmentTags": {
+        "segment_tags": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/segmentTag"
@@ -10241,10 +10759,10 @@
     "segmentTagsResponse": {
       "type": "object",
       "required": [
-        "segmentTag"
+        "segment_tag"
       ],
       "properties": {
-        "segmentTag": {
+        "segment_tag": {
           "$ref": "#/definitions/segmentTag"
         }
       }
@@ -10383,6 +10901,14 @@
           ],
           "example": 201,
           "description": "取引先ID"
+        },
+        "partner_code": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "example": "code001",
+          "description": "取引先コード"
         },
         "invoice_number": {
           "type": "string",
@@ -10703,6 +11229,14 @@
           "example": "exclusive",
           "description": "請求書の消費税計算方法(inclusive: 内税, exclusive: 外税)"
         },
+        "deal_id": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "example": null,
+          "description": "取引ID (invoice_statusがissuedの時のみIDが表示されます)"
+        },
         "invoice_contents": {
           "type": "array",
           "description": "請求内容",
@@ -10932,6 +11466,11 @@
           "description": "取引先ID",
           "minimum": 1,
           "maximum": 999999999999
+        },
+        "partner_code": {
+          "type": "string",
+          "example": "code001",
+          "description": "取引先コード"
         },
         "invoice_number": {
           "type": "string",
@@ -11215,6 +11754,11 @@
           "description": "取引先ID",
           "minimum": 0,
           "maximum": 999999999999
+        },
+        "partner_code": {
+          "type": "string",
+          "example": "code001",
+          "description": "取引先コード"
         },
         "invoice_number": {
           "type": "string",
