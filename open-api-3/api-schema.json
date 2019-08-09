@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "freee API",
-    "description": "\n<h1 id=\"freee_api\">freee API</h1>\n<hr />\n<h2 id=\"\">はじめに</h2>\n\n<ol>\n<li><a href=\"https://secure.freee.co.jp/\">freee</a>にサインアップします。</li>\n\n<li><a href=\"https://accounts.secure.freee.co.jp/public_api/applications\">アプリケーション一覧</a>から「新しいアプリケーションを登録」します。</li>\n\n<li>アプリケーションの登録が完了すると、Client IDとSecretが取得できます。</li>\n\n<li>ローカルの開発環境でテストする際は、認証用URLを直接リクエストしてAuthorization Codeを取得できます。</li>\n</ol>\n\n<p>アプリケーションの登録方法や認証方法、またはAPIの活用方法でご不明な点がある場合は<a href=\"https://support.freee.co.jp/hc/ja/sections/115000030743\">ヘルプセンター</a>もご確認ください</p>\n<hr />\n<h2 id=\"_2\">仕様</h2>\n\n<h3 id=\"api\">APIエンドポイント</h3>\n\n<p>https://api.freee.co.jp/ (httpsのみ)</p>\n\n<h3 id=\"_3\">認証方式</h3>\n\n<p><a href=\"http://tools.ietf.org/html/rfc6749\">OAuth2</a>に対応</p>\n\n<ul>\n<li>Authorization Code Flow (Webアプリ向け)</li>\n\n<li>Implicit Flow (Mobileアプリ向け)</li>\n</ul>\n\n<h3 id=\"_4\">認証エンドポイント</h3>\n\n<p>https://accounts.secure.freee.co.jp/</p>\n\n<ul>\n<li>authorize : https://accounts.secure.freee.co.jp/public_api/authorize</li>\n\n<li>token : https://accounts.secure.freee.co.jp/public_api/token</li>\n</ul>\n\n<h3 id=\"_5\">アクセストークンのリフレッシュ</h3>\n\n<p>認証時に得たrefresh_token を使ってtoken の期限をリフレッシュして新規に発行することが出来ます。</p>\n\n<p>grant_type=refresh_token で https://accounts.secure.freee.co.jp/public_api/token にアクセスすればリフレッシュされます。</p>\n\n<p>e.g.)</p>\n\n<p>POST: https://accounts.secure.freee.co.jp/public_api/token</p>\n\n<p>params: grant_type=refresh_token&amp;client_id=UID&amp;client_secret=SECRET&amp;refresh_token=REFRESH_TOKEN</p>\n\n<p>詳細は<a href=\"https://github.com/applicake/doorkeeper/wiki/Enable-Refresh-Token-Credentials#flow\">refresh_token</a>を参照下さい。</p>\n\n<h3 id=\"_6\">アクセストークンの破棄</h3>\n\n<p>認証時に得たaccess_tokenまたはrefresh_tokenを使って、tokenを破棄することができます。 token=access_tokenまたはtoken=refresh_tokenでhttps://accounts.secure.freee.co.jp/public_api/revokeにアクセスすると破棄されます。token_type_hintでaccess_tokenまたはrefresh_tokenを陽に指定できます。</p>\n\n<p>e.g.)</p>\n\n<p>POST: https://accounts.secure.freee.co.jp/public_api/revoke</p>\n\n<p>params: token=ACCESS_TOKEN</p>\n\n<p>または</p>\n\n<p>params: token=REFRESH_TOKEN</p>\n\n<p>または</p>\n\n<p>params: token=ACCESS_TOKEN&amp;token_type_hint=access_token</p>\n\n<p>または</p>\n\n<p>params: token=REFRESH_TOKEN&amp;token_type_hint=refresh_token</p>\n\n<p>詳細は <a href=\"https://tools.ietf.org/html/rfc7009\">OAuth 2.0 Token revocation</a> をご参照ください。</p>\n\n<h3 id=\"_7\">データフォーマット</h3>\n\n<p>リクエスト、レスポンスともにJSON形式をサポート</p>\n\n<h3 id=\"_8\">共通エラーレスポンス</h3>\n\n<ul>\n<li>\n<p>ステータスコードはレスポンス内のJSONに含まれる他、HTTPヘッダにも含まれる</p>\n</li>\n\n<li>\n<p>type</p>\n\n<ul>\n<li>status : HTTPステータスコードの説明</li>\n\n<li>validation : エラーの詳細の説明（開発者向け）</li>\n</ul>\n</li>\n</ul>\n\n<p>レスポンスの例</p>\n\n<pre><code>  {\n    &quot;status_code&quot; : 400,\n    &quot;errors&quot; : [\n      {\n        &quot;type&quot; : &quot;status&quot;,\n        &quot;messages&quot; : [&quot;不正なリクエストです。&quot;]\n      },\n      {\n        &quot;type&quot; : &quot;validation&quot;,\n        &quot;messages&quot; : [&quot;Date は不正な日付フォーマットです。入力例：2013-01-01&quot;]\n      }\n    ]\n  }</code></pre>\n<hr />\n<h2 id=\"_9\">連絡先</h2>\n\n<p>ご不明点、ご要望等は <a href=\"https://support.freee.co.jp/hc/ja/requests/new\">freee サポートデスクへのお問い合わせフォーム</a> からご連絡ください。</p>\n<hr />&copy; Since 2013 freee K.K.",
+    "description": "\n<h1 id=\"freee_api\">freee API</h1>\n<hr />\n<h2 id=\"\">はじめに</h2>\n\n<ol>\n<li><a href=\"https://secure.freee.co.jp/\">freee</a>にサインアップします。</li>\n\n<li><a href=\"https://accounts.secure.freee.co.jp/public_api/applications\">アプリケーション一覧</a>から「新しいアプリケーションを登録」します。</li>\n\n<li>アプリケーションの登録が完了すると、Client IDとSecretが取得できます。</li>\n\n<li>ローカルの開発環境でテストする際は、認証用URLを直接リクエストしてAuthorization Codeを取得できます。</li>\n</ol>\n\n<p>アプリケーションの登録方法や認証方法、またはAPIの活用方法でご不明な点がある場合は<a href=\"https://support.freee.co.jp/hc/ja/sections/115000030743\">ヘルプセンター</a>もご確認ください</p>\n<hr />\n<h2 id=\"_2\">仕様</h2>\n\n<h3 id=\"api\">APIエンドポイント</h3>\n\n<p>https://api.freee.co.jp/ (httpsのみ)</p>\n\n<h3 id=\"_3\">認証方式</h3>\n\n<p><a href=\"http://tools.ietf.org/html/rfc6749\">OAuth2</a>に対応</p>\n\n<ul>\n<li>Authorization Code Flow (Webアプリ向け)</li>\n\n<li>Implicit Flow (Mobileアプリ向け)</li>\n</ul>\n\n<h3 id=\"_4\">認証エンドポイント</h3>\n\n<p>https://accounts.secure.freee.co.jp/</p>\n\n<ul>\n<li>authorize : https://accounts.secure.freee.co.jp/public_api/authorize</li>\n\n<li>token : https://accounts.secure.freee.co.jp/public_api/token</li>\n</ul>\n\n<h3 id=\"_5\">アクセストークンのリフレッシュ</h3>\n\n<p>認証時に得たrefresh_token を使ってtoken の期限をリフレッシュして新規に発行することが出来ます。</p>\n\n<p>grant_type=refresh_token で https://accounts.secure.freee.co.jp/public_api/token にアクセスすればリフレッシュされます。</p>\n\n<p>e.g.)</p>\n\n<p>POST: https://accounts.secure.freee.co.jp/public_api/token</p>\n\n<p>params: grant_type=refresh_token&amp;client_id=UID&amp;client_secret=SECRET&amp;refresh_token=REFRESH_TOKEN</p>\n\n<p>詳細は<a href=\"https://github.com/applicake/doorkeeper/wiki/Enable-Refresh-Token-Credentials#flow\">refresh_token</a>を参照下さい。</p>\n\n<h3 id=\"_6\">アクセストークンの破棄</h3>\n\n<p>認証時に得たaccess_tokenまたはrefresh_tokenを使って、tokenを破棄することができます。 token=access_tokenまたはtoken=refresh_tokenでhttps://accounts.secure.freee.co.jp/public_api/revokeにアクセスすると破棄されます。token_type_hintでaccess_tokenまたはrefresh_tokenを陽に指定できます。</p>\n\n<p>e.g.)</p>\n\n<p>POST: https://accounts.secure.freee.co.jp/public_api/revoke</p>\n\n<p>params: token=ACCESS_TOKEN</p>\n\n<p>または</p>\n\n<p>params: token=REFRESH_TOKEN</p>\n\n<p>または</p>\n\n<p>params: token=ACCESS_TOKEN&amp;token_type_hint=access_token</p>\n\n<p>または</p>\n\n<p>params: token=REFRESH_TOKEN&amp;token_type_hint=refresh_token</p>\n\n<p>詳細は <a href=\"https://tools.ietf.org/html/rfc7009\">OAuth 2.0 Token revocation</a> をご参照ください。</p>\n\n<h3 id=\"_7\">データフォーマット</h3>\n\n<p>リクエスト、レスポンスともにJSON形式をサポート</p>\n\n<h3 id=\"_8\">共通レスポンスヘッダー</h3>\n\n<p>すべてのAPIのレスポンスには以下のHTTPヘッダーが含まれます。</p>\n\n<ul>\n<li>\n<p>X-Freee-Request-ID</p>\n<ul>\n<li>各リクエスト毎に発行されるID</li>\n</ul>\n</li>\n</ul>\n\n<h3 id=\"_9\">共通エラーレスポンス</h3>\n\n<ul>\n<li>\n<p>ステータスコードはレスポンス内のJSONに含まれる他、HTTPヘッダにも含まれる</p>\n</li>\n\n<li>\n<p>type</p>\n\n<ul>\n<li>status : HTTPステータスコードの説明</li>\n\n<li>validation : エラーの詳細の説明（開発者向け）</li>\n</ul>\n</li>\n</ul>\n\n<p>レスポンスの例</p>\n\n<pre><code>  {\n    &quot;status_code&quot; : 400,\n    &quot;errors&quot; : [\n      {\n        &quot;type&quot; : &quot;status&quot;,\n        &quot;messages&quot; : [&quot;不正なリクエストです。&quot;]\n      },\n      {\n        &quot;type&quot; : &quot;validation&quot;,\n        &quot;messages&quot; : [&quot;Date は不正な日付フォーマットです。入力例：2013-01-01&quot;]\n      }\n    ]\n  }</code></pre>\n<hr />\n<h2 id=\"_10\">連絡先</h2>\n\n<p>ご不明点、ご要望等は <a href=\"https://support.freee.co.jp/hc/ja/requests/new\">freee サポートデスクへのお問い合わせフォーム</a> からご連絡ください。</p>\n<hr />&copy; Since 2013 freee K.K.",
     "version": "v1.0",
     "x-copyright": "&copy; Since 2013 freee K.K."
   },
@@ -5897,7 +5897,7 @@
           "Expense applications"
         ],
         "summary": "経費申請の作成",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費申請を作成する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、経費申請の下書きを作成することができます。申請作業はWebから行ってください。</li>\n  <li>現在、申請経路はWeb上からのみ入力できます。Web上での申請時に指定してください。</li>\n  <li>申請時には、申請タイトル(title)に加え、申請日(issue_date)、項目行については金額(amount)、日付(transaction_date)、内容(description)が必須項目となります。申請時の業務効率化のため、API入力をお勧めします。</li>\n</ul>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費申請を作成する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、経費申請の下書きを作成することができます。申請作業はWebから行ってください。</li>\n  <li>現在、申請経路はWeb上からのみ入力できます。Web上での申請時に指定してください。</li>\n  <li>申請時には、申請タイトル(title)に加え、申請日(issue_date)、項目行については金額(amount)、日付(transaction_date)、内容(description)が必須項目となります。申請時の業務効率化のため、API入力をお勧めします。</li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
         "operationId": "create_expense_application",
         "requestBody": {
           "description": "経費申請の作成",
@@ -5960,7 +5960,7 @@
           "Expense applications"
         ],
         "summary": "経費申請の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の経費申請を更新する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、経費申請の下書きを更新することができます。申請作業はWebから行ってください。</li>\n  <li>現在、申請経路はWeb上からのみ入力できます。Web上での申請時に指定してください。</li>\n  <li>申請時には、申請タイトル(title)に加え、申請日(issue_date)、項目行については金額(amount)、日付(transaction_date)、内容(description)が必須項目となります。申請時の業務効率化のため、API入力をお勧めします。</li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の経費申請を更新する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、経費申請の下書きを更新することができます。申請作業はWebから行ってください。</li>\n  <li>現在、申請経路はWeb上からのみ入力できます。Web上での申請時に指定してください。</li>\n  <li>申請時には、申請タイトル(title)に加え、申請日(issue_date)、項目行については金額(amount)、日付(transaction_date)、内容(description)が必須項目となります。申請時の業務効率化のため、API入力をお勧めします。</li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
         "operationId": "update_expense_application",
         "parameters": [
           {
@@ -6038,7 +6038,7 @@
           "Expense applications"
         ],
         "summary": "経費申請の削除",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の経費申請を削除する</p>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の経費申請を削除する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
         "operationId": "destroy_expense_application",
         "parameters": [
           {
@@ -7206,313 +7206,321 @@
       },
       "trialPlResponse": {
         "required": [
-          "balances",
-          "company_id"
+          "trial_pl"
         ],
         "type": "object",
         "properties": {
-          "company_id": {
-            "type": "integer",
-            "description": "事業所ID",
-            "example": 1
-          },
-          "fiscal_year": {
-            "type": "integer",
-            "description": "会計年度(条件に指定した時、または条件に月、日条件がない時のみ含まれる）",
-            "example": 2019
-          },
-          "start_month": {
-            "type": "integer",
-            "description": "発生月で絞込：開始会計月(mm)(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "end_month": {
-            "type": "integer",
-            "description": "発生月で絞込：終了会計月(mm)(条件に指定した時のみ含まれる）",
-            "example": 12
-          },
-          "start_date": {
-            "type": "string",
-            "description": "発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
-            "example": "2019-01-01"
-          },
-          "end_date": {
-            "type": "string",
-            "description": "発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
-            "example": "2019-12-31"
-          },
-          "account_item_display_type": {
-            "type": "string",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）(条件に指定した時のみ含まれる）",
-            "enum": [
-              "account_item",
-              "group"
-            ]
-          },
-          "breakdown_display_type": {
-            "type": "string",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）(条件に指定した時のみ含まれる）",
-            "enum": [
-              "partner",
-              "item",
-              "section",
-              "account_item"
-            ]
-          },
-          "partner_id": {
-            "type": "integer",
-            "description": "取引先ID(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "partner_code": {
-            "type": "string",
-            "description": "取引先コード(条件に指定した時のみ含まれる）",
-            "example": "code001"
-          },
-          "item_id": {
-            "type": "integer",
-            "description": "品目ID(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "section_id": {
-            "type": "integer",
-            "description": "部門ID(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "adjustment": {
-            "type": "string",
-            "description": "決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）",
-            "example": "only",
-            "enum": [
-              "only",
-              "without"
-            ]
-          },
-          "cost_allocation": {
-            "type": "string",
-            "description": "配賦仕訳のみ：only,配賦仕訳以外：without(条件に指定した時のみ含まれる）",
-            "example": "only",
-            "enum": [
-              "only",
-              "without"
-            ]
-          },
-          "created_at": {
-            "type": "string",
-            "description": "作成日時",
-            "example": "2018-09-10T13:47:24.000+09:00"
-          },
-          "balances": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "account_item_name": {
-                  "type": "string",
-                  "description": "勘定科目名(勘定科目の時のみ含まれる)",
-                  "example": "現金"
-                },
-                "credit_amount": {
-                  "type": "integer",
-                  "description": "貸方金額",
-                  "example": 2592
-                },
-                "parent_account_category_name": {
-                  "type": "string",
-                  "description": "上位勘定科目カテゴリー名(上層が存在する場合含まれる)",
-                  "example": "他流動資産"
-                },
-                "debit_amount": {
-                  "type": "integer",
-                  "description": "借方金額",
-                  "example": 0
-                },
-                "sections": {
-                  "type": "array",
-                  "description": "breakdown_display_type:section, account_item_display_type:account_item指定時のみ含まれる",
-                  "items": {
-                    "required": [
-                      "id"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "closing_balance": {
-                        "type": "integer",
-                        "description": "期末残高",
-                        "example": -25920
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "部門名",
-                        "example": "開発部門"
-                      },
-                      "credit_amount": {
-                        "type": "integer",
-                        "description": "貸方金額",
-                        "example": 2592
-                      },
-                      "id": {
-                        "type": "integer",
-                        "description": "部門ID",
-                        "example": 1
-                      },
-                      "opening_balance": {
-                        "type": "integer",
-                        "description": "期首残高",
-                        "example": 0
-                      },
-                      "debit_amount": {
-                        "type": "integer",
-                        "description": "借方金額",
-                        "example": 0
-                      },
-                      "composition_ratio": {
-                        "type": "number",
-                        "description": "構成比",
-                        "example": 0.85
-                      }
-                    }
-                  }
-                },
-                "account_category_name": {
-                  "type": "string",
-                  "description": "勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)",
-                  "example": "流動資産"
-                },
-                "partners": {
-                  "type": "array",
-                  "description": "breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる",
-                  "items": {
-                    "required": [
-                      "id"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "closing_balance": {
-                        "type": "integer",
-                        "description": "期末残高",
-                        "example": -25920
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "取引先名",
-                        "example": "freee"
-                      },
-                      "credit_amount": {
-                        "type": "integer",
-                        "description": "貸方金額",
-                        "example": 2592
-                      },
-                      "id": {
-                        "type": "integer",
-                        "description": "取引先ID",
-                        "example": 22
-                      },
-                      "opening_balance": {
-                        "type": "integer",
-                        "description": "期首残高",
-                        "example": 0
-                      },
-                      "debit_amount": {
-                        "type": "integer",
-                        "description": "借方金額",
-                        "example": 0
-                      },
-                      "composition_ratio": {
-                        "type": "number",
-                        "description": "構成比",
-                        "example": 0.85
-                      }
-                    }
-                  }
-                },
-                "account_item_id": {
-                  "type": "integer",
-                  "description": "勘定科目ID(勘定科目の時のみ含まれる)",
-                  "example": 192
-                },
-                "closing_balance": {
-                  "type": "integer",
-                  "description": "期末残高",
-                  "example": -25920
-                },
-                "account_category_id": {
-                  "type": "integer",
-                  "description": "勘定科目カテゴリーID(勘定科目カテゴリーの時のみ含まれる)",
-                  "example": 8
-                },
-                "opening_balance": {
-                  "type": "integer",
-                  "description": "期首残高",
-                  "example": 0
-                },
+          "trial_pl": {
+            "required": [
+              "balances",
+              "company_id"
+            ],
+            "type": "object",
+            "properties": {
+              "end_date": {
+                "type": "string",
+                "description": "発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
+                "example": "2019-12-31"
+              },
+              "company_id": {
+                "type": "integer",
+                "description": "事業所ID",
+                "example": 1
+              },
+              "item_id": {
+                "type": "integer",
+                "description": "品目ID(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "breakdown_display_type": {
+                "type": "string",
+                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）(条件に指定した時のみ含まれる）",
+                "enum": [
+                  "partner",
+                  "item",
+                  "section",
+                  "account_item"
+                ]
+              },
+              "created_at": {
+                "type": "string",
+                "description": "作成日時",
+                "example": "2018-09-10T13:47:24.000+09:00"
+              },
+              "cost_allocation": {
+                "type": "string",
+                "description": "配賦仕訳のみ：only,配賦仕訳以外：without(条件に指定した時のみ含まれる）",
+                "example": "only",
+                "enum": [
+                  "only",
+                  "without"
+                ]
+              },
+              "balances": {
+                "type": "array",
                 "items": {
-                  "type": "array",
-                  "description": "breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる",
-                  "items": {
-                    "required": [
-                      "id"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "closing_balance": {
-                        "type": "integer",
-                        "description": "期末残高",
-                        "example": -25920
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "品目",
-                        "example": "源泉所得税"
-                      },
-                      "credit_amount": {
-                        "type": "integer",
-                        "description": "貸方金額",
-                        "example": 2592
-                      },
-                      "id": {
-                        "type": "integer",
-                        "description": "品目ID",
-                        "example": 1
-                      },
-                      "opening_balance": {
-                        "type": "integer",
-                        "description": "期首残高",
-                        "example": 0
-                      },
-                      "debit_amount": {
-                        "type": "integer",
-                        "description": "借方金額",
-                        "example": 0
-                      },
-                      "composition_ratio": {
-                        "type": "number",
-                        "description": "構成比",
-                        "example": 0.85
+                  "type": "object",
+                  "properties": {
+                    "account_item_name": {
+                      "type": "string",
+                      "description": "勘定科目名(勘定科目の時のみ含まれる)",
+                      "example": "現金"
+                    },
+                    "credit_amount": {
+                      "type": "integer",
+                      "description": "貸方金額",
+                      "example": 2592
+                    },
+                    "parent_account_category_name": {
+                      "type": "string",
+                      "description": "上位勘定科目カテゴリー名(上層が存在する場合含まれる)",
+                      "example": "他流動資産"
+                    },
+                    "debit_amount": {
+                      "type": "integer",
+                      "description": "借方金額",
+                      "example": 0
+                    },
+                    "sections": {
+                      "type": "array",
+                      "description": "breakdown_display_type:section, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "required": [
+                          "id"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "部門名",
+                            "example": "開発部門"
+                          },
+                          "credit_amount": {
+                            "type": "integer",
+                            "description": "貸方金額",
+                            "example": 2592
+                          },
+                          "id": {
+                            "type": "integer",
+                            "description": "部門ID",
+                            "example": 1
+                          },
+                          "opening_balance": {
+                            "type": "integer",
+                            "description": "期首残高",
+                            "example": 0
+                          },
+                          "debit_amount": {
+                            "type": "integer",
+                            "description": "借方金額",
+                            "example": 0
+                          },
+                          "composition_ratio": {
+                            "type": "number",
+                            "description": "構成比",
+                            "example": 0.85
+                          }
+                        }
                       }
+                    },
+                    "account_category_name": {
+                      "type": "string",
+                      "description": "勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)",
+                      "example": "流動資産"
+                    },
+                    "partners": {
+                      "type": "array",
+                      "description": "breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "required": [
+                          "id"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "取引先名",
+                            "example": "freee"
+                          },
+                          "credit_amount": {
+                            "type": "integer",
+                            "description": "貸方金額",
+                            "example": 2592
+                          },
+                          "id": {
+                            "type": "integer",
+                            "description": "取引先ID",
+                            "example": 22
+                          },
+                          "opening_balance": {
+                            "type": "integer",
+                            "description": "期首残高",
+                            "example": 0
+                          },
+                          "debit_amount": {
+                            "type": "integer",
+                            "description": "借方金額",
+                            "example": 0
+                          },
+                          "composition_ratio": {
+                            "type": "number",
+                            "description": "構成比",
+                            "example": 0.85
+                          }
+                        }
+                      }
+                    },
+                    "account_item_id": {
+                      "type": "integer",
+                      "description": "勘定科目ID(勘定科目の時のみ含まれる)",
+                      "example": 192
+                    },
+                    "closing_balance": {
+                      "type": "integer",
+                      "description": "期末残高",
+                      "example": -25920
+                    },
+                    "account_category_id": {
+                      "type": "integer",
+                      "description": "勘定科目カテゴリーID(勘定科目カテゴリーの時のみ含まれる)",
+                      "example": 8
+                    },
+                    "opening_balance": {
+                      "type": "integer",
+                      "description": "期首残高",
+                      "example": 0
+                    },
+                    "items": {
+                      "type": "array",
+                      "description": "breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "required": [
+                          "id"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "品目",
+                            "example": "源泉所得税"
+                          },
+                          "credit_amount": {
+                            "type": "integer",
+                            "description": "貸方金額",
+                            "example": 2592
+                          },
+                          "id": {
+                            "type": "integer",
+                            "description": "品目ID",
+                            "example": 1
+                          },
+                          "opening_balance": {
+                            "type": "integer",
+                            "description": "期首残高",
+                            "example": 0
+                          },
+                          "debit_amount": {
+                            "type": "integer",
+                            "description": "借方金額",
+                            "example": 0
+                          },
+                          "composition_ratio": {
+                            "type": "number",
+                            "description": "構成比",
+                            "example": 0.85
+                          }
+                        }
+                      }
+                    },
+                    "composition_ratio": {
+                      "type": "number",
+                      "description": "構成比",
+                      "example": 0.85
+                    },
+                    "total_line": {
+                      "type": "boolean",
+                      "description": "合計行(勘定科目カテゴリー名の時のみ含まれる)",
+                      "example": true
+                    },
+                    "hierarchy_level": {
+                      "type": "integer",
+                      "description": "階層レベル",
+                      "example": 3
+                    },
+                    "parent_account_category_id": {
+                      "type": "integer",
+                      "description": "上位科目カテゴリーID(上層が存在する場合含まれる)",
+                      "example": 19
                     }
                   }
-                },
-                "composition_ratio": {
-                  "type": "number",
-                  "description": "構成比",
-                  "example": 0.85
-                },
-                "total_line": {
-                  "type": "boolean",
-                  "description": "合計行(勘定科目カテゴリー名の時のみ含まれる)",
-                  "example": true
-                },
-                "hierarchy_level": {
-                  "type": "integer",
-                  "description": "階層レベル",
-                  "example": 3
-                },
-                "parent_account_category_id": {
-                  "type": "integer",
-                  "description": "上位科目カテゴリーID(上層が存在する場合含まれる)",
-                  "example": 19
                 }
+              },
+              "partner_id": {
+                "type": "integer",
+                "description": "取引先ID(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "section_id": {
+                "type": "integer",
+                "description": "部門ID(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "fiscal_year": {
+                "type": "integer",
+                "description": "会計年度(条件に指定した時、または条件に月、日条件がない時のみ含まれる）",
+                "example": 2019
+              },
+              "account_item_display_type": {
+                "type": "string",
+                "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）(条件に指定した時のみ含まれる）",
+                "enum": [
+                  "account_item",
+                  "group"
+                ]
+              },
+              "start_month": {
+                "type": "integer",
+                "description": "発生月で絞込：開始会計月(mm)(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "adjustment": {
+                "type": "string",
+                "description": "決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）",
+                "example": "only",
+                "enum": [
+                  "only",
+                  "without"
+                ]
+              },
+              "partner_code": {
+                "type": "string",
+                "description": "取引先コード(条件に指定した時のみ含まれる）",
+                "example": "code001"
+              },
+              "end_month": {
+                "type": "integer",
+                "description": "発生月で絞込：終了会計月(mm)(条件に指定した時のみ含まれる）",
+                "example": 12
+              },
+              "start_date": {
+                "type": "string",
+                "description": "発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
+                "example": "2019-01-01"
               }
             }
           }
@@ -8650,7 +8658,8 @@
           "company_id",
           "id",
           "issue_date",
-          "partner_id"
+          "partner_id",
+          "status"
         ],
         "type": "object",
         "properties": {
@@ -8703,6 +8712,15 @@
             "description": "管理番号",
             "example": "123-456"
           },
+          "status": {
+            "type": "string",
+            "description": "決済状況 (未決済: unsettled, 完了: settled)",
+            "example": "settled",
+            "enum": [
+              "unsettled",
+              "settled"
+            ]
+          },
           "details": {
             "type": "array",
             "description": "取引の明細行",
@@ -8728,236 +8746,244 @@
       },
       "trialBsThreeYearsResponse": {
         "required": [
-          "balances",
-          "company_id"
+          "trial_bs_three_years"
         ],
         "type": "object",
         "properties": {
-          "company_id": {
-            "type": "integer",
-            "description": "事業所ID",
-            "example": 1
-          },
-          "fiscal_year": {
-            "type": "integer",
-            "description": "会計年度(条件に指定した時、または条件に月、日条件がない時のみ含まれる）",
-            "example": 2019
-          },
-          "start_month": {
-            "type": "integer",
-            "description": "発生月で絞込：開始会計月(mm)(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "end_month": {
-            "type": "integer",
-            "description": "発生月で絞込：終了会計月(mm)(条件に指定した時のみ含まれる）",
-            "example": 12
-          },
-          "start_date": {
-            "type": "string",
-            "description": "発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
-            "example": "2019-01-01"
-          },
-          "end_date": {
-            "type": "string",
-            "description": "発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
-            "example": "2019-12-31"
-          },
-          "account_item_display_type": {
-            "type": "string",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）(条件に指定した時のみ含まれる）",
-            "enum": [
-              "account_item",
-              "group"
-            ]
-          },
-          "breakdown_display_type": {
-            "type": "string",
-            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item）(条件に指定した時のみ含まれる）",
-            "enum": [
-              "partner",
-              "item",
-              "account_item"
-            ]
-          },
-          "partner_id": {
-            "type": "integer",
-            "description": "取引先ID(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "partner_code": {
-            "type": "string",
-            "description": "取引先コード(条件に指定した時のみ含まれる）",
-            "example": "code001"
-          },
-          "item_id": {
-            "type": "integer",
-            "description": "品目ID(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "adjustment": {
-            "type": "string",
-            "description": "決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）",
-            "example": "only",
-            "enum": [
-              "only",
-              "without"
-            ]
-          },
-          "created_at": {
-            "type": "string",
-            "description": "作成日時",
-            "example": "2018-09-10T13:47:24.000+09:00"
-          },
-          "balances": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "account_item_name": {
-                  "type": "string",
-                  "description": "勘定科目名(勘定科目の時のみ含まれる)",
-                  "example": "現金"
-                },
-                "parent_account_category_name": {
-                  "type": "string",
-                  "description": "上位勘定科目カテゴリー名(上層が存在する場合含まれる)",
-                  "example": "他流動資産"
-                },
-                "year_on_year": {
-                  "type": "number",
-                  "description": "前年比",
-                  "example": 0.12
-                },
-                "account_category_name": {
-                  "type": "string",
-                  "description": "勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)",
-                  "example": "流動資産"
-                },
-                "partners": {
-                  "type": "array",
-                  "description": "breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる",
-                  "items": {
-                    "required": [
-                      "id"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "year_on_year": {
-                        "type": "number",
-                        "description": "前年比",
-                        "example": 0.12
-                      },
-                      "two_years_before_closing_balance": {
-                        "type": "integer",
-                        "description": "前々年度期末残高",
-                        "example": 0
-                      },
-                      "closing_balance": {
-                        "type": "integer",
-                        "description": "期末残高",
-                        "example": -25920
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "取引先名",
-                        "example": "freee"
-                      },
-                      "last_year_closing_balance": {
-                        "type": "integer",
-                        "description": "前年度期末残高",
-                        "example": 0
-                      },
-                      "id": {
-                        "type": "integer",
-                        "description": "取引先ID",
-                        "example": 22
-                      }
-                    }
-                  }
-                },
-                "two_years_before_closing_balance": {
-                  "type": "integer",
-                  "description": "前々年度期末残高",
-                  "example": 0
-                },
-                "account_item_id": {
-                  "type": "integer",
-                  "description": "勘定科目ID(勘定科目の時のみ含まれる)",
-                  "example": 192
-                },
-                "closing_balance": {
-                  "type": "integer",
-                  "description": "期末残高",
-                  "example": -25920
-                },
-                "last_year_closing_balance": {
-                  "type": "integer",
-                  "description": "前年度期末残高",
-                  "example": 0
-                },
-                "account_category_id": {
-                  "type": "integer",
-                  "description": "勘定科目カテゴリーID(勘定科目カテゴリーの時のみ含まれる)",
-                  "example": 8
-                },
+          "trial_bs_three_years": {
+            "required": [
+              "balances",
+              "company_id"
+            ],
+            "type": "object",
+            "properties": {
+              "end_date": {
+                "type": "string",
+                "description": "発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
+                "example": "2019-12-31"
+              },
+              "company_id": {
+                "type": "integer",
+                "description": "事業所ID",
+                "example": 1
+              },
+              "item_id": {
+                "type": "integer",
+                "description": "品目ID(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "breakdown_display_type": {
+                "type": "string",
+                "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item）(条件に指定した時のみ含まれる）",
+                "enum": [
+                  "partner",
+                  "item",
+                  "account_item"
+                ]
+              },
+              "created_at": {
+                "type": "string",
+                "description": "作成日時",
+                "example": "2018-09-10T13:47:24.000+09:00"
+              },
+              "balances": {
+                "type": "array",
                 "items": {
-                  "type": "array",
-                  "description": "breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる",
-                  "items": {
-                    "required": [
-                      "id"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "year_on_year": {
-                        "type": "number",
-                        "description": "前年比",
-                        "example": 0.12
-                      },
-                      "two_years_before_closing_balance": {
-                        "type": "integer",
-                        "description": "前々年度期末残高",
-                        "example": 0
-                      },
-                      "closing_balance": {
-                        "type": "integer",
-                        "description": "期末残高",
-                        "example": -25920
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "品目",
-                        "example": "源泉所得税"
-                      },
-                      "last_year_closing_balance": {
-                        "type": "integer",
-                        "description": "前年度期末残高",
-                        "example": 0
-                      },
-                      "id": {
-                        "type": "integer",
-                        "description": "品目ID",
-                        "example": 1
+                  "type": "object",
+                  "properties": {
+                    "account_item_name": {
+                      "type": "string",
+                      "description": "勘定科目名(勘定科目の時のみ含まれる)",
+                      "example": "現金"
+                    },
+                    "parent_account_category_name": {
+                      "type": "string",
+                      "description": "上位勘定科目カテゴリー名(上層が存在する場合含まれる)",
+                      "example": "他流動資産"
+                    },
+                    "year_on_year": {
+                      "type": "number",
+                      "description": "前年比",
+                      "example": 0.12
+                    },
+                    "account_category_name": {
+                      "type": "string",
+                      "description": "勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)",
+                      "example": "流動資産"
+                    },
+                    "partners": {
+                      "type": "array",
+                      "description": "breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "required": [
+                          "id"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "year_on_year": {
+                            "type": "number",
+                            "description": "前年比",
+                            "example": 0.12
+                          },
+                          "two_years_before_closing_balance": {
+                            "type": "integer",
+                            "description": "前々年度期末残高",
+                            "example": 0
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "取引先名",
+                            "example": "freee"
+                          },
+                          "last_year_closing_balance": {
+                            "type": "integer",
+                            "description": "前年度期末残高",
+                            "example": 0
+                          },
+                          "id": {
+                            "type": "integer",
+                            "description": "取引先ID",
+                            "example": 22
+                          }
+                        }
                       }
+                    },
+                    "two_years_before_closing_balance": {
+                      "type": "integer",
+                      "description": "前々年度期末残高",
+                      "example": 0
+                    },
+                    "account_item_id": {
+                      "type": "integer",
+                      "description": "勘定科目ID(勘定科目の時のみ含まれる)",
+                      "example": 192
+                    },
+                    "closing_balance": {
+                      "type": "integer",
+                      "description": "期末残高",
+                      "example": -25920
+                    },
+                    "last_year_closing_balance": {
+                      "type": "integer",
+                      "description": "前年度期末残高",
+                      "example": 0
+                    },
+                    "account_category_id": {
+                      "type": "integer",
+                      "description": "勘定科目カテゴリーID(勘定科目カテゴリーの時のみ含まれる)",
+                      "example": 8
+                    },
+                    "items": {
+                      "type": "array",
+                      "description": "breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "required": [
+                          "id"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "year_on_year": {
+                            "type": "number",
+                            "description": "前年比",
+                            "example": 0.12
+                          },
+                          "two_years_before_closing_balance": {
+                            "type": "integer",
+                            "description": "前々年度期末残高",
+                            "example": 0
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "品目",
+                            "example": "源泉所得税"
+                          },
+                          "last_year_closing_balance": {
+                            "type": "integer",
+                            "description": "前年度期末残高",
+                            "example": 0
+                          },
+                          "id": {
+                            "type": "integer",
+                            "description": "品目ID",
+                            "example": 1
+                          }
+                        }
+                      }
+                    },
+                    "total_line": {
+                      "type": "boolean",
+                      "description": "合計行(勘定科目カテゴリー名の時のみ含まれる)",
+                      "example": true
+                    },
+                    "hierarchy_level": {
+                      "type": "integer",
+                      "description": "階層レベル",
+                      "example": 3
+                    },
+                    "parent_account_category_id": {
+                      "type": "integer",
+                      "description": "上位科目カテゴリーID(上層が存在する場合含まれる)",
+                      "example": 19
                     }
                   }
-                },
-                "total_line": {
-                  "type": "boolean",
-                  "description": "合計行(勘定科目カテゴリー名の時のみ含まれる)",
-                  "example": true
-                },
-                "hierarchy_level": {
-                  "type": "integer",
-                  "description": "階層レベル",
-                  "example": 3
-                },
-                "parent_account_category_id": {
-                  "type": "integer",
-                  "description": "上位科目カテゴリーID(上層が存在する場合含まれる)",
-                  "example": 19
                 }
+              },
+              "partner_id": {
+                "type": "integer",
+                "description": "取引先ID(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "fiscal_year": {
+                "type": "integer",
+                "description": "会計年度(条件に指定した時、または条件に月、日条件がない時のみ含まれる）",
+                "example": 2019
+              },
+              "account_item_display_type": {
+                "type": "string",
+                "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）(条件に指定した時のみ含まれる）",
+                "enum": [
+                  "account_item",
+                  "group"
+                ]
+              },
+              "start_month": {
+                "type": "integer",
+                "description": "発生月で絞込：開始会計月(mm)(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "adjustment": {
+                "type": "string",
+                "description": "決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）",
+                "example": "only",
+                "enum": [
+                  "only",
+                  "without"
+                ]
+              },
+              "partner_code": {
+                "type": "string",
+                "description": "取引先コード(条件に指定した時のみ含まれる）",
+                "example": "code001"
+              },
+              "end_month": {
+                "type": "integer",
+                "description": "発生月で絞込：終了会計月(mm)(条件に指定した時のみ含まれる）",
+                "example": 12
+              },
+              "start_date": {
+                "type": "string",
+                "description": "発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
+                "example": "2019-01-01"
               }
             }
           }
@@ -9046,293 +9072,301 @@
       },
       "trialPlThreeYearsResponse": {
         "required": [
-          "balances",
-          "company_id"
+          "trial_pl_three_years"
         ],
         "type": "object",
         "properties": {
-          "company_id": {
-            "type": "integer",
-            "description": "事業所ID",
-            "example": 1
-          },
-          "fiscal_year": {
-            "type": "integer",
-            "description": "会計年度(条件に指定した時、または条件に月、日条件がない時のみ含まれる）",
-            "example": 2019
-          },
-          "start_month": {
-            "type": "integer",
-            "description": "発生月で絞込：開始会計月(mm)(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "end_month": {
-            "type": "integer",
-            "description": "発生月で絞込：終了会計月(mm)(条件に指定した時のみ含まれる）",
-            "example": 12
-          },
-          "start_date": {
-            "type": "string",
-            "description": "発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
-            "example": "2019-01-01"
-          },
-          "end_date": {
-            "type": "string",
-            "description": "発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
-            "example": "2019-12-31"
-          },
-          "account_item_display_type": {
-            "type": "string",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）(条件に指定した時のみ含まれる）",
-            "enum": [
-              "account_item",
-              "group"
-            ]
-          },
-          "breakdown_display_type": {
-            "type": "string",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）(条件に指定した時のみ含まれる）",
-            "enum": [
-              "partner",
-              "item",
-              "section",
-              "account_item"
-            ]
-          },
-          "partner_id": {
-            "type": "integer",
-            "description": "取引先ID(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "partner_code": {
-            "type": "string",
-            "description": "取引先コード(条件に指定した時のみ含まれる）",
-            "example": "code001"
-          },
-          "item_id": {
-            "type": "integer",
-            "description": "品目ID(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "section_id": {
-            "type": "integer",
-            "description": "部門ID(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "adjustment": {
-            "type": "string",
-            "description": "決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）",
-            "example": "only",
-            "enum": [
-              "only",
-              "without"
-            ]
-          },
-          "cost_allocation": {
-            "type": "string",
-            "description": "配賦仕訳のみ：only,配賦仕訳以外：without(条件に指定した時のみ含まれる）",
-            "example": "only",
-            "enum": [
-              "only",
-              "without"
-            ]
-          },
-          "created_at": {
-            "type": "string",
-            "description": "作成日時",
-            "example": "2018-09-10T13:47:24.000+09:00"
-          },
-          "balances": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "account_item_name": {
-                  "type": "string",
-                  "description": "勘定科目名(勘定科目の時のみ含まれる)",
-                  "example": "現金"
-                },
-                "parent_account_category_name": {
-                  "type": "string",
-                  "description": "上位勘定科目カテゴリー名(上層が存在する場合含まれる)",
-                  "example": "他流動資産"
-                },
-                "sections": {
-                  "type": "array",
-                  "description": "breakdown_display_type:section, account_item_display_type:account_item指定時のみ含まれる",
-                  "items": {
-                    "required": [
-                      "id"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "year_on_year": {
-                        "type": "number",
-                        "description": "前年比",
-                        "example": 0.12
-                      },
-                      "two_years_before_closing_balance": {
-                        "type": "integer",
-                        "description": "前々年度期末残高",
-                        "example": 0
-                      },
-                      "closing_balance": {
-                        "type": "integer",
-                        "description": "期末残高",
-                        "example": -25920
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "部門名",
-                        "example": "開発部門"
-                      },
-                      "last_year_closing_balance": {
-                        "type": "integer",
-                        "description": "前年度期末残高",
-                        "example": 0
-                      },
-                      "id": {
-                        "type": "integer",
-                        "description": "部門ID",
-                        "example": 1
-                      }
-                    }
-                  }
-                },
-                "year_on_year": {
-                  "type": "number",
-                  "description": "前年比",
-                  "example": 0.12
-                },
-                "account_category_name": {
-                  "type": "string",
-                  "description": "勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)",
-                  "example": "流動資産"
-                },
-                "partners": {
-                  "type": "array",
-                  "description": "breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる",
-                  "items": {
-                    "required": [
-                      "id"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "year_on_year": {
-                        "type": "number",
-                        "description": "前年比",
-                        "example": 0.12
-                      },
-                      "two_years_before_closing_balance": {
-                        "type": "integer",
-                        "description": "前々年度期末残高",
-                        "example": 0
-                      },
-                      "closing_balance": {
-                        "type": "integer",
-                        "description": "期末残高",
-                        "example": -25920
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "取引先名",
-                        "example": "freee"
-                      },
-                      "last_year_closing_balance": {
-                        "type": "integer",
-                        "description": "前年度期末残高",
-                        "example": 0
-                      },
-                      "id": {
-                        "type": "integer",
-                        "description": "取引先ID",
-                        "example": 22
-                      }
-                    }
-                  }
-                },
-                "two_years_before_closing_balance": {
-                  "type": "integer",
-                  "description": "前々年度期末残高",
-                  "example": 0
-                },
-                "account_item_id": {
-                  "type": "integer",
-                  "description": "勘定科目ID(勘定科目の時のみ含まれる)",
-                  "example": 192
-                },
-                "closing_balance": {
-                  "type": "integer",
-                  "description": "期末残高",
-                  "example": -25920
-                },
-                "last_year_closing_balance": {
-                  "type": "integer",
-                  "description": "前年度期末残高",
-                  "example": 0
-                },
-                "account_category_id": {
-                  "type": "integer",
-                  "description": "勘定科目カテゴリーID(勘定科目カテゴリーの時のみ含まれる)",
-                  "example": 8
-                },
+          "trial_pl_three_years": {
+            "required": [
+              "balances",
+              "company_id"
+            ],
+            "type": "object",
+            "properties": {
+              "end_date": {
+                "type": "string",
+                "description": "発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
+                "example": "2019-12-31"
+              },
+              "company_id": {
+                "type": "integer",
+                "description": "事業所ID",
+                "example": 1
+              },
+              "item_id": {
+                "type": "integer",
+                "description": "品目ID(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "breakdown_display_type": {
+                "type": "string",
+                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）(条件に指定した時のみ含まれる）",
+                "enum": [
+                  "partner",
+                  "item",
+                  "section",
+                  "account_item"
+                ]
+              },
+              "created_at": {
+                "type": "string",
+                "description": "作成日時",
+                "example": "2018-09-10T13:47:24.000+09:00"
+              },
+              "cost_allocation": {
+                "type": "string",
+                "description": "配賦仕訳のみ：only,配賦仕訳以外：without(条件に指定した時のみ含まれる）",
+                "example": "only",
+                "enum": [
+                  "only",
+                  "without"
+                ]
+              },
+              "balances": {
+                "type": "array",
                 "items": {
-                  "type": "array",
-                  "description": "breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる",
-                  "items": {
-                    "required": [
-                      "id"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "year_on_year": {
-                        "type": "number",
-                        "description": "前年比",
-                        "example": 0.12
-                      },
-                      "two_years_before_closing_balance": {
-                        "type": "integer",
-                        "description": "前々年度期末残高",
-                        "example": 0
-                      },
-                      "closing_balance": {
-                        "type": "integer",
-                        "description": "期末残高",
-                        "example": -25920
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "品目",
-                        "example": "源泉所得税"
-                      },
-                      "last_year_closing_balance": {
-                        "type": "integer",
-                        "description": "前年度期末残高",
-                        "example": 0
-                      },
-                      "id": {
-                        "type": "integer",
-                        "description": "品目ID",
-                        "example": 1
+                  "type": "object",
+                  "properties": {
+                    "account_item_name": {
+                      "type": "string",
+                      "description": "勘定科目名(勘定科目の時のみ含まれる)",
+                      "example": "現金"
+                    },
+                    "parent_account_category_name": {
+                      "type": "string",
+                      "description": "上位勘定科目カテゴリー名(上層が存在する場合含まれる)",
+                      "example": "他流動資産"
+                    },
+                    "sections": {
+                      "type": "array",
+                      "description": "breakdown_display_type:section, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "required": [
+                          "id"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "year_on_year": {
+                            "type": "number",
+                            "description": "前年比",
+                            "example": 0.12
+                          },
+                          "two_years_before_closing_balance": {
+                            "type": "integer",
+                            "description": "前々年度期末残高",
+                            "example": 0
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "部門名",
+                            "example": "開発部門"
+                          },
+                          "last_year_closing_balance": {
+                            "type": "integer",
+                            "description": "前年度期末残高",
+                            "example": 0
+                          },
+                          "id": {
+                            "type": "integer",
+                            "description": "部門ID",
+                            "example": 1
+                          }
+                        }
                       }
+                    },
+                    "year_on_year": {
+                      "type": "number",
+                      "description": "前年比",
+                      "example": 0.12
+                    },
+                    "account_category_name": {
+                      "type": "string",
+                      "description": "勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)",
+                      "example": "流動資産"
+                    },
+                    "partners": {
+                      "type": "array",
+                      "description": "breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "required": [
+                          "id"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "year_on_year": {
+                            "type": "number",
+                            "description": "前年比",
+                            "example": 0.12
+                          },
+                          "two_years_before_closing_balance": {
+                            "type": "integer",
+                            "description": "前々年度期末残高",
+                            "example": 0
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "取引先名",
+                            "example": "freee"
+                          },
+                          "last_year_closing_balance": {
+                            "type": "integer",
+                            "description": "前年度期末残高",
+                            "example": 0
+                          },
+                          "id": {
+                            "type": "integer",
+                            "description": "取引先ID",
+                            "example": 22
+                          }
+                        }
+                      }
+                    },
+                    "two_years_before_closing_balance": {
+                      "type": "integer",
+                      "description": "前々年度期末残高",
+                      "example": 0
+                    },
+                    "account_item_id": {
+                      "type": "integer",
+                      "description": "勘定科目ID(勘定科目の時のみ含まれる)",
+                      "example": 192
+                    },
+                    "closing_balance": {
+                      "type": "integer",
+                      "description": "期末残高",
+                      "example": -25920
+                    },
+                    "last_year_closing_balance": {
+                      "type": "integer",
+                      "description": "前年度期末残高",
+                      "example": 0
+                    },
+                    "account_category_id": {
+                      "type": "integer",
+                      "description": "勘定科目カテゴリーID(勘定科目カテゴリーの時のみ含まれる)",
+                      "example": 8
+                    },
+                    "items": {
+                      "type": "array",
+                      "description": "breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "required": [
+                          "id"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "year_on_year": {
+                            "type": "number",
+                            "description": "前年比",
+                            "example": 0.12
+                          },
+                          "two_years_before_closing_balance": {
+                            "type": "integer",
+                            "description": "前々年度期末残高",
+                            "example": 0
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "品目",
+                            "example": "源泉所得税"
+                          },
+                          "last_year_closing_balance": {
+                            "type": "integer",
+                            "description": "前年度期末残高",
+                            "example": 0
+                          },
+                          "id": {
+                            "type": "integer",
+                            "description": "品目ID",
+                            "example": 1
+                          }
+                        }
+                      }
+                    },
+                    "total_line": {
+                      "type": "boolean",
+                      "description": "合計行(勘定科目カテゴリー名の時のみ含まれる)",
+                      "example": true
+                    },
+                    "hierarchy_level": {
+                      "type": "integer",
+                      "description": "階層レベル",
+                      "example": 3
+                    },
+                    "parent_account_category_id": {
+                      "type": "integer",
+                      "description": "上位科目カテゴリーID(上層が存在する場合含まれる)",
+                      "example": 19
                     }
                   }
-                },
-                "total_line": {
-                  "type": "boolean",
-                  "description": "合計行(勘定科目カテゴリー名の時のみ含まれる)",
-                  "example": true
-                },
-                "hierarchy_level": {
-                  "type": "integer",
-                  "description": "階層レベル",
-                  "example": 3
-                },
-                "parent_account_category_id": {
-                  "type": "integer",
-                  "description": "上位科目カテゴリーID(上層が存在する場合含まれる)",
-                  "example": 19
                 }
+              },
+              "partner_id": {
+                "type": "integer",
+                "description": "取引先ID(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "section_id": {
+                "type": "integer",
+                "description": "部門ID(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "fiscal_year": {
+                "type": "integer",
+                "description": "会計年度(条件に指定した時、または条件に月、日条件がない時のみ含まれる）",
+                "example": 2019
+              },
+              "account_item_display_type": {
+                "type": "string",
+                "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）(条件に指定した時のみ含まれる）",
+                "enum": [
+                  "account_item",
+                  "group"
+                ]
+              },
+              "start_month": {
+                "type": "integer",
+                "description": "発生月で絞込：開始会計月(mm)(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "adjustment": {
+                "type": "string",
+                "description": "決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）",
+                "example": "only",
+                "enum": [
+                  "only",
+                  "without"
+                ]
+              },
+              "partner_code": {
+                "type": "string",
+                "description": "取引先コード(条件に指定した時のみ含まれる）",
+                "example": "code001"
+              },
+              "end_month": {
+                "type": "integer",
+                "description": "発生月で絞込：終了会計月(mm)(条件に指定した時のみ含まれる）",
+                "example": 12
+              },
+              "start_date": {
+                "type": "string",
+                "description": "発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
+                "example": "2019-01-01"
               }
             }
           }
@@ -9340,221 +9374,229 @@
       },
       "trialBsTwoYearsResponse": {
         "required": [
-          "balances",
-          "company_id"
+          "trial_bs_two_years"
         ],
         "type": "object",
         "properties": {
-          "company_id": {
-            "type": "integer",
-            "description": "事業所ID",
-            "example": 1
-          },
-          "fiscal_year": {
-            "type": "integer",
-            "description": "会計年度(条件に指定した時、または条件に月、日条件がない時のみ含まれる）",
-            "example": 2019
-          },
-          "start_month": {
-            "type": "integer",
-            "description": "発生月で絞込：開始会計月(mm)(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "end_month": {
-            "type": "integer",
-            "description": "発生月で絞込：終了会計月(mm)(条件に指定した時のみ含まれる）",
-            "example": 12
-          },
-          "start_date": {
-            "type": "string",
-            "description": "発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
-            "example": "2019-01-01"
-          },
-          "end_date": {
-            "type": "string",
-            "description": "発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
-            "example": "2019-12-31"
-          },
-          "account_item_display_type": {
-            "type": "string",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）(条件に指定した時のみ含まれる）",
-            "enum": [
-              "account_item",
-              "group"
-            ]
-          },
-          "breakdown_display_type": {
-            "type": "string",
-            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item）(条件に指定した時のみ含まれる）",
-            "enum": [
-              "partner",
-              "item",
-              "account_item"
-            ]
-          },
-          "partner_id": {
-            "type": "integer",
-            "description": "取引先ID(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "partner_code": {
-            "type": "string",
-            "description": "取引先コード(条件に指定した時のみ含まれる）",
-            "example": "code001"
-          },
-          "item_id": {
-            "type": "integer",
-            "description": "品目ID(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "adjustment": {
-            "type": "string",
-            "description": "決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）",
-            "example": "only",
-            "enum": [
-              "only",
-              "without"
-            ]
-          },
-          "created_at": {
-            "type": "string",
-            "description": "作成日時",
-            "example": "2018-09-10T13:47:24.000+09:00"
-          },
-          "balances": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "account_item_name": {
-                  "type": "string",
-                  "description": "勘定科目名(勘定科目の時のみ含まれる)",
-                  "example": "現金"
-                },
-                "parent_account_category_name": {
-                  "type": "string",
-                  "description": "上位勘定科目カテゴリー名(上層が存在する場合含まれる)",
-                  "example": "他流動資産"
-                },
-                "year_on_year": {
-                  "type": "number",
-                  "description": "前年比",
-                  "example": 0.12
-                },
-                "account_category_name": {
-                  "type": "string",
-                  "description": "勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)",
-                  "example": "流動資産"
-                },
-                "partners": {
-                  "type": "array",
-                  "description": "breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる",
-                  "items": {
-                    "required": [
-                      "id"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "year_on_year": {
-                        "type": "number",
-                        "description": "前年比",
-                        "example": 0.12
-                      },
-                      "closing_balance": {
-                        "type": "integer",
-                        "description": "期末残高",
-                        "example": -25920
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "取引先名",
-                        "example": "freee"
-                      },
-                      "last_year_closing_balance": {
-                        "type": "integer",
-                        "description": "前年度期末残高",
-                        "example": 0
-                      },
-                      "id": {
-                        "type": "integer",
-                        "description": "取引先ID",
-                        "example": 22
-                      }
-                    }
-                  }
-                },
-                "account_item_id": {
-                  "type": "integer",
-                  "description": "勘定科目ID(勘定科目の時のみ含まれる)",
-                  "example": 192
-                },
-                "closing_balance": {
-                  "type": "integer",
-                  "description": "期末残高",
-                  "example": -25920
-                },
-                "last_year_closing_balance": {
-                  "type": "integer",
-                  "description": "前年度期末残高",
-                  "example": 0
-                },
-                "account_category_id": {
-                  "type": "integer",
-                  "description": "勘定科目カテゴリーID(勘定科目カテゴリーの時のみ含まれる)",
-                  "example": 8
-                },
+          "trial_bs_two_years": {
+            "required": [
+              "balances",
+              "company_id"
+            ],
+            "type": "object",
+            "properties": {
+              "end_date": {
+                "type": "string",
+                "description": "発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
+                "example": "2019-12-31"
+              },
+              "company_id": {
+                "type": "integer",
+                "description": "事業所ID",
+                "example": 1
+              },
+              "item_id": {
+                "type": "integer",
+                "description": "品目ID(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "breakdown_display_type": {
+                "type": "string",
+                "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item）(条件に指定した時のみ含まれる）",
+                "enum": [
+                  "partner",
+                  "item",
+                  "account_item"
+                ]
+              },
+              "created_at": {
+                "type": "string",
+                "description": "作成日時",
+                "example": "2018-09-10T13:47:24.000+09:00"
+              },
+              "balances": {
+                "type": "array",
                 "items": {
-                  "type": "array",
-                  "description": "breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる",
-                  "items": {
-                    "required": [
-                      "id"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "year_on_year": {
-                        "type": "number",
-                        "description": "前年比",
-                        "example": 0.12
-                      },
-                      "closing_balance": {
-                        "type": "integer",
-                        "description": "期末残高",
-                        "example": -25920
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "品目",
-                        "example": "源泉所得税"
-                      },
-                      "last_year_closing_balance": {
-                        "type": "integer",
-                        "description": "前年度期末残高",
-                        "example": 0
-                      },
-                      "id": {
-                        "type": "integer",
-                        "description": "品目ID",
-                        "example": 1
+                  "type": "object",
+                  "properties": {
+                    "account_item_name": {
+                      "type": "string",
+                      "description": "勘定科目名(勘定科目の時のみ含まれる)",
+                      "example": "現金"
+                    },
+                    "parent_account_category_name": {
+                      "type": "string",
+                      "description": "上位勘定科目カテゴリー名(上層が存在する場合含まれる)",
+                      "example": "他流動資産"
+                    },
+                    "year_on_year": {
+                      "type": "number",
+                      "description": "前年比",
+                      "example": 0.12
+                    },
+                    "account_category_name": {
+                      "type": "string",
+                      "description": "勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)",
+                      "example": "流動資産"
+                    },
+                    "partners": {
+                      "type": "array",
+                      "description": "breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "required": [
+                          "id"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "year_on_year": {
+                            "type": "number",
+                            "description": "前年比",
+                            "example": 0.12
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "取引先名",
+                            "example": "freee"
+                          },
+                          "last_year_closing_balance": {
+                            "type": "integer",
+                            "description": "前年度期末残高",
+                            "example": 0
+                          },
+                          "id": {
+                            "type": "integer",
+                            "description": "取引先ID",
+                            "example": 22
+                          }
+                        }
                       }
+                    },
+                    "account_item_id": {
+                      "type": "integer",
+                      "description": "勘定科目ID(勘定科目の時のみ含まれる)",
+                      "example": 192
+                    },
+                    "closing_balance": {
+                      "type": "integer",
+                      "description": "期末残高",
+                      "example": -25920
+                    },
+                    "last_year_closing_balance": {
+                      "type": "integer",
+                      "description": "前年度期末残高",
+                      "example": 0
+                    },
+                    "account_category_id": {
+                      "type": "integer",
+                      "description": "勘定科目カテゴリーID(勘定科目カテゴリーの時のみ含まれる)",
+                      "example": 8
+                    },
+                    "items": {
+                      "type": "array",
+                      "description": "breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "required": [
+                          "id"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "year_on_year": {
+                            "type": "number",
+                            "description": "前年比",
+                            "example": 0.12
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "品目",
+                            "example": "源泉所得税"
+                          },
+                          "last_year_closing_balance": {
+                            "type": "integer",
+                            "description": "前年度期末残高",
+                            "example": 0
+                          },
+                          "id": {
+                            "type": "integer",
+                            "description": "品目ID",
+                            "example": 1
+                          }
+                        }
+                      }
+                    },
+                    "total_line": {
+                      "type": "boolean",
+                      "description": "合計行(勘定科目カテゴリー名の時のみ含まれる)",
+                      "example": true
+                    },
+                    "hierarchy_level": {
+                      "type": "integer",
+                      "description": "階層レベル",
+                      "example": 3
+                    },
+                    "parent_account_category_id": {
+                      "type": "integer",
+                      "description": "上位科目カテゴリーID(上層が存在する場合含まれる)",
+                      "example": 19
                     }
                   }
-                },
-                "total_line": {
-                  "type": "boolean",
-                  "description": "合計行(勘定科目カテゴリー名の時のみ含まれる)",
-                  "example": true
-                },
-                "hierarchy_level": {
-                  "type": "integer",
-                  "description": "階層レベル",
-                  "example": 3
-                },
-                "parent_account_category_id": {
-                  "type": "integer",
-                  "description": "上位科目カテゴリーID(上層が存在する場合含まれる)",
-                  "example": 19
                 }
+              },
+              "partner_id": {
+                "type": "integer",
+                "description": "取引先ID(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "fiscal_year": {
+                "type": "integer",
+                "description": "会計年度(条件に指定した時、または条件に月、日条件がない時のみ含まれる）",
+                "example": 2019
+              },
+              "account_item_display_type": {
+                "type": "string",
+                "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）(条件に指定した時のみ含まれる）",
+                "enum": [
+                  "account_item",
+                  "group"
+                ]
+              },
+              "start_month": {
+                "type": "integer",
+                "description": "発生月で絞込：開始会計月(mm)(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "adjustment": {
+                "type": "string",
+                "description": "決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）",
+                "example": "only",
+                "enum": [
+                  "only",
+                  "without"
+                ]
+              },
+              "partner_code": {
+                "type": "string",
+                "description": "取引先コード(条件に指定した時のみ含まれる）",
+                "example": "code001"
+              },
+              "end_month": {
+                "type": "integer",
+                "description": "発生月で絞込：終了会計月(mm)(条件に指定した時のみ含まれる）",
+                "example": 12
+              },
+              "start_date": {
+                "type": "string",
+                "description": "発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
+                "example": "2019-01-01"
               }
             }
           }
@@ -9763,8 +9805,9 @@
             "example": 1
           },
           "name": {
+            "maxLength": 255,
             "type": "string",
-            "description": "取引先名 (30文字以内)",
+            "description": "取引先名 (255文字以内)",
             "example": "新しい取引先"
           },
           "code": {
@@ -9773,13 +9816,15 @@
             "example": "code001"
           },
           "shortcut1": {
+            "maxLength": 255,
             "type": "string",
-            "description": "ショートカット１ (20文字以内)",
+            "description": "ショートカット１ (255文字以内)",
             "example": "NEWPARTNER"
           },
           "shortcut2": {
+            "maxLength": 255,
             "type": "string",
-            "description": "ショートカット２ (20文字以内)",
+            "description": "ショートカット２ (255文字以内)",
             "example": "502"
           },
           "long_name": {
@@ -9809,13 +9854,15 @@
             "example": "03-3000-1111"
           },
           "contact_name": {
+            "maxLength": 255,
             "type": "string",
-            "description": "営業担当者名",
+            "description": "営業担当者名 (255文字以内)",
             "example": "営業担当"
           },
           "email": {
+            "maxLength": 255,
             "type": "string",
-            "description": "営業担当者 メールアドレス",
+            "description": "営業担当者 メールアドレス (255文字以内)",
             "example": "contact@example.com"
           },
           "address_attributes": {
@@ -10634,233 +10681,241 @@
       },
       "trialPlSectionsResponse": {
         "required": [
-          "balances",
-          "company_id",
-          "section_ids"
+          "trial_pl_sections"
         ],
         "type": "object",
         "properties": {
-          "company_id": {
-            "type": "integer",
-            "description": "事業所ID",
-            "example": 1
-          },
-          "section_ids": {
-            "type": "string",
-            "description": "出力する部門の指定",
-            "example": "123"
-          },
-          "fiscal_year": {
-            "type": "integer",
-            "description": "会計年度(条件に指定した時、または条件に月、日条件がない時のみ含まれる）",
-            "example": 2019
-          },
-          "start_month": {
-            "type": "integer",
-            "description": "発生月で絞込：開始会計月(mm)(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "end_month": {
-            "type": "integer",
-            "description": "発生月で絞込：終了会計月(mm)(条件に指定した時のみ含まれる）",
-            "example": 12
-          },
-          "start_date": {
-            "type": "string",
-            "description": "発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
-            "example": "2019-01-01"
-          },
-          "end_date": {
-            "type": "string",
-            "description": "発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
-            "example": "2019-12-31"
-          },
-          "account_item_display_type": {
-            "type": "string",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）(条件に指定した時のみ含まれる）",
-            "enum": [
-              "account_item",
-              "group"
-            ]
-          },
-          "breakdown_display_type": {
-            "type": "string",
-            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item）(条件に指定した時のみ含まれる）",
-            "enum": [
-              "partner",
-              "item",
-              "account_item"
-            ]
-          },
-          "partner_id": {
-            "type": "integer",
-            "description": "取引先ID(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "partner_code": {
-            "type": "string",
-            "description": "取引先コード(条件に指定した時のみ含まれる）",
-            "example": "code001"
-          },
-          "item_id": {
-            "type": "integer",
-            "description": "品目ID(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "adjustment": {
-            "type": "string",
-            "description": "決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）",
-            "example": "only",
-            "enum": [
-              "only",
-              "without"
-            ]
-          },
-          "cost_allocation": {
-            "type": "string",
-            "description": "配賦仕訳のみ：only,配賦仕訳以外：without(条件に指定した時のみ含まれる）",
-            "example": "only",
-            "enum": [
-              "only",
-              "without"
-            ]
-          },
-          "created_at": {
-            "type": "string",
-            "description": "作成日時",
-            "example": "2018-09-10T13:47:24.000+09:00"
-          },
-          "balances": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "account_category_name": {
-                  "type": "string",
-                  "description": "勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)",
-                  "example": "流動資産"
-                },
-                "account_item_name": {
-                  "type": "string",
-                  "description": "勘定科目名(勘定科目の時のみ含まれる)",
-                  "example": "現金"
-                },
-                "account_item_id": {
-                  "type": "integer",
-                  "description": "勘定科目ID(勘定科目の時のみ含まれる)",
-                  "example": 192
-                },
-                "closing_balance": {
-                  "type": "integer",
-                  "description": "期末残高",
-                  "example": -25920
-                },
-                "account_category_id": {
-                  "type": "integer",
-                  "description": "勘定科目カテゴリーID(勘定科目カテゴリーの時のみ含まれる)",
-                  "example": 8
-                },
-                "parent_account_category_name": {
-                  "type": "string",
-                  "description": "上位勘定科目カテゴリー名(上層が存在する場合含まれる)",
-                  "example": "他流動資産"
-                },
-                "sections": {
-                  "type": "array",
-                  "description": "部門(勘定科目の時のみ含まれる)",
-                  "items": {
-                    "required": [
-                      "id"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "partners": {
-                        "type": "array",
-                        "description": "breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる",
-                        "items": {
-                          "required": [
-                            "id"
-                          ],
-                          "type": "object",
-                          "properties": {
-                            "closing_balance": {
-                              "type": "integer",
-                              "description": "期末残高",
-                              "example": -25920
-                            },
-                            "name": {
-                              "type": "string",
-                              "description": "取引先名",
-                              "example": "freee"
-                            },
-                            "id": {
-                              "type": "integer",
-                              "description": "取引先ID",
-                              "example": 22
-                            }
-                          }
-                        }
-                      },
-                      "closing_balance": {
-                        "type": "integer",
-                        "description": "期末残高",
-                        "example": -25920
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "部門名",
-                        "example": "開発部門"
-                      },
-                      "id": {
-                        "type": "integer",
-                        "description": "部門ID",
-                        "example": 1
-                      },
+          "trial_pl_sections": {
+            "required": [
+              "balances",
+              "company_id",
+              "section_ids"
+            ],
+            "type": "object",
+            "properties": {
+              "end_date": {
+                "type": "string",
+                "description": "発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
+                "example": "2019-12-31"
+              },
+              "company_id": {
+                "type": "integer",
+                "description": "事業所ID",
+                "example": 1
+              },
+              "item_id": {
+                "type": "integer",
+                "description": "品目ID(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "breakdown_display_type": {
+                "type": "string",
+                "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item）(条件に指定した時のみ含まれる）",
+                "enum": [
+                  "partner",
+                  "item",
+                  "account_item"
+                ]
+              },
+              "created_at": {
+                "type": "string",
+                "description": "作成日時",
+                "example": "2018-09-10T13:47:24.000+09:00"
+              },
+              "cost_allocation": {
+                "type": "string",
+                "description": "配賦仕訳のみ：only,配賦仕訳以外：without(条件に指定した時のみ含まれる）",
+                "example": "only",
+                "enum": [
+                  "only",
+                  "without"
+                ]
+              },
+              "balances": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "account_category_name": {
+                      "type": "string",
+                      "description": "勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)",
+                      "example": "流動資産"
+                    },
+                    "account_item_name": {
+                      "type": "string",
+                      "description": "勘定科目名(勘定科目の時のみ含まれる)",
+                      "example": "現金"
+                    },
+                    "account_item_id": {
+                      "type": "integer",
+                      "description": "勘定科目ID(勘定科目の時のみ含まれる)",
+                      "example": 192
+                    },
+                    "closing_balance": {
+                      "type": "integer",
+                      "description": "期末残高",
+                      "example": -25920
+                    },
+                    "account_category_id": {
+                      "type": "integer",
+                      "description": "勘定科目カテゴリーID(勘定科目カテゴリーの時のみ含まれる)",
+                      "example": 8
+                    },
+                    "parent_account_category_name": {
+                      "type": "string",
+                      "description": "上位勘定科目カテゴリー名(上層が存在する場合含まれる)",
+                      "example": "他流動資産"
+                    },
+                    "sections": {
+                      "type": "array",
+                      "description": "部門(勘定科目の時のみ含まれる)",
                       "items": {
-                        "type": "array",
-                        "description": "breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる",
-                        "items": {
-                          "required": [
-                            "id"
-                          ],
-                          "type": "object",
-                          "properties": {
-                            "closing_balance": {
-                              "type": "integer",
-                              "description": "期末残高",
-                              "example": -25920
-                            },
-                            "name": {
-                              "type": "string",
-                              "description": "品目",
-                              "example": "源泉所得税"
-                            },
-                            "id": {
-                              "type": "integer",
-                              "description": "品目ID",
-                              "example": 1
+                        "required": [
+                          "id"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "partners": {
+                            "type": "array",
+                            "description": "breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる",
+                            "items": {
+                              "required": [
+                                "id"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "closing_balance": {
+                                  "type": "integer",
+                                  "description": "期末残高",
+                                  "example": -25920
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "description": "取引先名",
+                                  "example": "freee"
+                                },
+                                "id": {
+                                  "type": "integer",
+                                  "description": "取引先ID",
+                                  "example": 22
+                                }
+                              }
+                            }
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "部門名",
+                            "example": "開発部門"
+                          },
+                          "id": {
+                            "type": "integer",
+                            "description": "部門ID",
+                            "example": 1
+                          },
+                          "items": {
+                            "type": "array",
+                            "description": "breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる",
+                            "items": {
+                              "required": [
+                                "id"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "closing_balance": {
+                                  "type": "integer",
+                                  "description": "期末残高",
+                                  "example": -25920
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "description": "品目",
+                                  "example": "源泉所得税"
+                                },
+                                "id": {
+                                  "type": "integer",
+                                  "description": "品目ID",
+                                  "example": 1
+                                }
+                              }
                             }
                           }
                         }
                       }
+                    },
+                    "total_line": {
+                      "type": "boolean",
+                      "description": "合計行(勘定科目カテゴリー名の時のみ含まれる)",
+                      "example": true
+                    },
+                    "hierarchy_level": {
+                      "type": "integer",
+                      "description": "階層レベル",
+                      "example": 3
+                    },
+                    "parent_account_category_id": {
+                      "type": "integer",
+                      "description": "上位科目カテゴリーID(上層が存在する場合含まれる)",
+                      "example": 19
                     }
                   }
-                },
-                "total_line": {
-                  "type": "boolean",
-                  "description": "合計行(勘定科目カテゴリー名の時のみ含まれる)",
-                  "example": true
-                },
-                "hierarchy_level": {
-                  "type": "integer",
-                  "description": "階層レベル",
-                  "example": 3
-                },
-                "parent_account_category_id": {
-                  "type": "integer",
-                  "description": "上位科目カテゴリーID(上層が存在する場合含まれる)",
-                  "example": 19
                 }
+              },
+              "partner_id": {
+                "type": "integer",
+                "description": "取引先ID(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "fiscal_year": {
+                "type": "integer",
+                "description": "会計年度(条件に指定した時、または条件に月、日条件がない時のみ含まれる）",
+                "example": 2019
+              },
+              "section_ids": {
+                "type": "string",
+                "description": "出力する部門の指定",
+                "example": "123"
+              },
+              "account_item_display_type": {
+                "type": "string",
+                "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）(条件に指定した時のみ含まれる）",
+                "enum": [
+                  "account_item",
+                  "group"
+                ]
+              },
+              "start_month": {
+                "type": "integer",
+                "description": "発生月で絞込：開始会計月(mm)(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "adjustment": {
+                "type": "string",
+                "description": "決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）",
+                "example": "only",
+                "enum": [
+                  "only",
+                  "without"
+                ]
+              },
+              "partner_code": {
+                "type": "string",
+                "description": "取引先コード(条件に指定した時のみ含まれる）",
+                "example": "code001"
+              },
+              "end_month": {
+                "type": "integer",
+                "description": "発生月で絞込：終了会計月(mm)(条件に指定した時のみ含まれる）",
+                "example": 12
+              },
+              "start_date": {
+                "type": "string",
+                "description": "発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
+                "example": "2019-01-01"
               }
             }
           }
@@ -11450,273 +11505,281 @@
       },
       "trialPlTwoYearsResponse": {
         "required": [
-          "balances",
-          "company_id"
+          "trial_pl_two_years"
         ],
         "type": "object",
         "properties": {
-          "company_id": {
-            "type": "integer",
-            "description": "事業所ID",
-            "example": 1
-          },
-          "fiscal_year": {
-            "type": "integer",
-            "description": "会計年度(条件に指定した時、または条件に月、日条件がない時のみ含まれる）",
-            "example": 2019
-          },
-          "start_month": {
-            "type": "integer",
-            "description": "発生月で絞込：開始会計月(mm)(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "end_month": {
-            "type": "integer",
-            "description": "発生月で絞込：終了会計月(mm)(条件に指定した時のみ含まれる）",
-            "example": 12
-          },
-          "start_date": {
-            "type": "string",
-            "description": "発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
-            "example": "2019-01-01"
-          },
-          "end_date": {
-            "type": "string",
-            "description": "発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
-            "example": "2019-12-31"
-          },
-          "account_item_display_type": {
-            "type": "string",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）(条件に指定した時のみ含まれる）",
-            "enum": [
-              "account_item",
-              "group"
-            ]
-          },
-          "breakdown_display_type": {
-            "type": "string",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）(条件に指定した時のみ含まれる）",
-            "enum": [
-              "partner",
-              "item",
-              "section",
-              "account_item"
-            ]
-          },
-          "partner_id": {
-            "type": "integer",
-            "description": "取引先ID(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "partner_code": {
-            "type": "string",
-            "description": "取引先コード(条件に指定した時のみ含まれる）",
-            "example": "code001"
-          },
-          "item_id": {
-            "type": "integer",
-            "description": "品目ID(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "section_id": {
-            "type": "integer",
-            "description": "部門ID(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "adjustment": {
-            "type": "string",
-            "description": "決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）",
-            "example": "only",
-            "enum": [
-              "only",
-              "without"
-            ]
-          },
-          "cost_allocation": {
-            "type": "string",
-            "description": "配賦仕訳のみ：only,配賦仕訳以外：without(条件に指定した時のみ含まれる）",
-            "example": "only",
-            "enum": [
-              "only",
-              "without"
-            ]
-          },
-          "created_at": {
-            "type": "string",
-            "description": "作成日時",
-            "example": "2018-09-10T13:47:24.000+09:00"
-          },
-          "balances": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "account_item_name": {
-                  "type": "string",
-                  "description": "勘定科目名(勘定科目の時のみ含まれる)",
-                  "example": "現金"
-                },
-                "parent_account_category_name": {
-                  "type": "string",
-                  "description": "上位勘定科目カテゴリー名(上層が存在する場合含まれる)",
-                  "example": "他流動資産"
-                },
-                "sections": {
-                  "type": "array",
-                  "description": "breakdown_display_type:section, account_item_display_type:account_item指定時のみ含まれる",
-                  "items": {
-                    "required": [
-                      "id"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "year_on_year": {
-                        "type": "number",
-                        "description": "前年比",
-                        "example": 0.12
-                      },
-                      "closing_balance": {
-                        "type": "integer",
-                        "description": "期末残高",
-                        "example": -25920
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "部門名",
-                        "example": "開発部門"
-                      },
-                      "last_year_closing_balance": {
-                        "type": "integer",
-                        "description": "前年度期末残高",
-                        "example": 0
-                      },
-                      "id": {
-                        "type": "integer",
-                        "description": "部門ID",
-                        "example": 1
-                      }
-                    }
-                  }
-                },
-                "year_on_year": {
-                  "type": "number",
-                  "description": "前年比",
-                  "example": 0.12
-                },
-                "account_category_name": {
-                  "type": "string",
-                  "description": "勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)",
-                  "example": "流動資産"
-                },
-                "partners": {
-                  "type": "array",
-                  "description": "breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる",
-                  "items": {
-                    "required": [
-                      "id"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "year_on_year": {
-                        "type": "number",
-                        "description": "前年比",
-                        "example": 0.12
-                      },
-                      "closing_balance": {
-                        "type": "integer",
-                        "description": "期末残高",
-                        "example": -25920
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "取引先名",
-                        "example": "freee"
-                      },
-                      "last_year_closing_balance": {
-                        "type": "integer",
-                        "description": "前年度期末残高",
-                        "example": 0
-                      },
-                      "id": {
-                        "type": "integer",
-                        "description": "取引先ID",
-                        "example": 22
-                      }
-                    }
-                  }
-                },
-                "account_item_id": {
-                  "type": "integer",
-                  "description": "勘定科目ID(勘定科目の時のみ含まれる)",
-                  "example": 192
-                },
-                "closing_balance": {
-                  "type": "integer",
-                  "description": "期末残高",
-                  "example": -25920
-                },
-                "last_year_closing_balance": {
-                  "type": "integer",
-                  "description": "前年度期末残高",
-                  "example": 0
-                },
-                "account_category_id": {
-                  "type": "integer",
-                  "description": "勘定科目カテゴリーID(勘定科目カテゴリーの時のみ含まれる)",
-                  "example": 8
-                },
+          "trial_pl_two_years": {
+            "required": [
+              "balances",
+              "company_id"
+            ],
+            "type": "object",
+            "properties": {
+              "end_date": {
+                "type": "string",
+                "description": "発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
+                "example": "2019-12-31"
+              },
+              "company_id": {
+                "type": "integer",
+                "description": "事業所ID",
+                "example": 1
+              },
+              "item_id": {
+                "type": "integer",
+                "description": "品目ID(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "breakdown_display_type": {
+                "type": "string",
+                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）(条件に指定した時のみ含まれる）",
+                "enum": [
+                  "partner",
+                  "item",
+                  "section",
+                  "account_item"
+                ]
+              },
+              "created_at": {
+                "type": "string",
+                "description": "作成日時",
+                "example": "2018-09-10T13:47:24.000+09:00"
+              },
+              "cost_allocation": {
+                "type": "string",
+                "description": "配賦仕訳のみ：only,配賦仕訳以外：without(条件に指定した時のみ含まれる）",
+                "example": "only",
+                "enum": [
+                  "only",
+                  "without"
+                ]
+              },
+              "balances": {
+                "type": "array",
                 "items": {
-                  "type": "array",
-                  "description": "breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる",
-                  "items": {
-                    "required": [
-                      "id"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "year_on_year": {
-                        "type": "number",
-                        "description": "前年比",
-                        "example": 0.12
-                      },
-                      "closing_balance": {
-                        "type": "integer",
-                        "description": "期末残高",
-                        "example": -25920
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "品目",
-                        "example": "源泉所得税"
-                      },
-                      "last_year_closing_balance": {
-                        "type": "integer",
-                        "description": "前年度期末残高",
-                        "example": 0
-                      },
-                      "id": {
-                        "type": "integer",
-                        "description": "品目ID",
-                        "example": 1
+                  "type": "object",
+                  "properties": {
+                    "account_item_name": {
+                      "type": "string",
+                      "description": "勘定科目名(勘定科目の時のみ含まれる)",
+                      "example": "現金"
+                    },
+                    "parent_account_category_name": {
+                      "type": "string",
+                      "description": "上位勘定科目カテゴリー名(上層が存在する場合含まれる)",
+                      "example": "他流動資産"
+                    },
+                    "sections": {
+                      "type": "array",
+                      "description": "breakdown_display_type:section, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "required": [
+                          "id"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "year_on_year": {
+                            "type": "number",
+                            "description": "前年比",
+                            "example": 0.12
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "部門名",
+                            "example": "開発部門"
+                          },
+                          "last_year_closing_balance": {
+                            "type": "integer",
+                            "description": "前年度期末残高",
+                            "example": 0
+                          },
+                          "id": {
+                            "type": "integer",
+                            "description": "部門ID",
+                            "example": 1
+                          }
+                        }
                       }
+                    },
+                    "year_on_year": {
+                      "type": "number",
+                      "description": "前年比",
+                      "example": 0.12
+                    },
+                    "account_category_name": {
+                      "type": "string",
+                      "description": "勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)",
+                      "example": "流動資産"
+                    },
+                    "partners": {
+                      "type": "array",
+                      "description": "breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "required": [
+                          "id"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "year_on_year": {
+                            "type": "number",
+                            "description": "前年比",
+                            "example": 0.12
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "取引先名",
+                            "example": "freee"
+                          },
+                          "last_year_closing_balance": {
+                            "type": "integer",
+                            "description": "前年度期末残高",
+                            "example": 0
+                          },
+                          "id": {
+                            "type": "integer",
+                            "description": "取引先ID",
+                            "example": 22
+                          }
+                        }
+                      }
+                    },
+                    "account_item_id": {
+                      "type": "integer",
+                      "description": "勘定科目ID(勘定科目の時のみ含まれる)",
+                      "example": 192
+                    },
+                    "closing_balance": {
+                      "type": "integer",
+                      "description": "期末残高",
+                      "example": -25920
+                    },
+                    "last_year_closing_balance": {
+                      "type": "integer",
+                      "description": "前年度期末残高",
+                      "example": 0
+                    },
+                    "account_category_id": {
+                      "type": "integer",
+                      "description": "勘定科目カテゴリーID(勘定科目カテゴリーの時のみ含まれる)",
+                      "example": 8
+                    },
+                    "items": {
+                      "type": "array",
+                      "description": "breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "required": [
+                          "id"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "year_on_year": {
+                            "type": "number",
+                            "description": "前年比",
+                            "example": 0.12
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "品目",
+                            "example": "源泉所得税"
+                          },
+                          "last_year_closing_balance": {
+                            "type": "integer",
+                            "description": "前年度期末残高",
+                            "example": 0
+                          },
+                          "id": {
+                            "type": "integer",
+                            "description": "品目ID",
+                            "example": 1
+                          }
+                        }
+                      }
+                    },
+                    "total_line": {
+                      "type": "boolean",
+                      "description": "合計行(勘定科目カテゴリー名の時のみ含まれる)",
+                      "example": true
+                    },
+                    "hierarchy_level": {
+                      "type": "integer",
+                      "description": "階層レベル",
+                      "example": 3
+                    },
+                    "parent_account_category_id": {
+                      "type": "integer",
+                      "description": "上位科目カテゴリーID(上層が存在する場合含まれる)",
+                      "example": 19
                     }
                   }
-                },
-                "total_line": {
-                  "type": "boolean",
-                  "description": "合計行(勘定科目カテゴリー名の時のみ含まれる)",
-                  "example": true
-                },
-                "hierarchy_level": {
-                  "type": "integer",
-                  "description": "階層レベル",
-                  "example": 3
-                },
-                "parent_account_category_id": {
-                  "type": "integer",
-                  "description": "上位科目カテゴリーID(上層が存在する場合含まれる)",
-                  "example": 19
                 }
+              },
+              "partner_id": {
+                "type": "integer",
+                "description": "取引先ID(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "section_id": {
+                "type": "integer",
+                "description": "部門ID(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "fiscal_year": {
+                "type": "integer",
+                "description": "会計年度(条件に指定した時、または条件に月、日条件がない時のみ含まれる）",
+                "example": 2019
+              },
+              "account_item_display_type": {
+                "type": "string",
+                "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）(条件に指定した時のみ含まれる）",
+                "enum": [
+                  "account_item",
+                  "group"
+                ]
+              },
+              "start_month": {
+                "type": "integer",
+                "description": "発生月で絞込：開始会計月(mm)(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "adjustment": {
+                "type": "string",
+                "description": "決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）",
+                "example": "only",
+                "enum": [
+                  "only",
+                  "without"
+                ]
+              },
+              "partner_code": {
+                "type": "string",
+                "description": "取引先コード(条件に指定した時のみ含まれる）",
+                "example": "code001"
+              },
+              "end_month": {
+                "type": "integer",
+                "description": "発生月で絞込：終了会計月(mm)(条件に指定した時のみ含まれる）",
+                "example": 12
+              },
+              "start_date": {
+                "type": "string",
+                "description": "発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
+                "example": "2019-01-01"
               }
             }
           }
@@ -11743,251 +11806,259 @@
       },
       "trialBsResponse": {
         "required": [
-          "balances",
-          "company_id"
+          "trial_bs"
         ],
         "type": "object",
         "properties": {
-          "company_id": {
-            "type": "integer",
-            "description": "事業所ID",
-            "example": 1
-          },
-          "fiscal_year": {
-            "type": "integer",
-            "description": "会計年度(条件に指定した時、または条件に月、日条件がない時のみ含まれる）",
-            "example": 2019
-          },
-          "start_month": {
-            "type": "integer",
-            "description": "発生月で絞込：開始会計月(mm)(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "end_month": {
-            "type": "integer",
-            "description": "発生月で絞込：終了会計月(mm)(条件に指定した時のみ含まれる）",
-            "example": 12
-          },
-          "start_date": {
-            "type": "string",
-            "description": "発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
-            "example": "2019-01-01"
-          },
-          "end_date": {
-            "type": "string",
-            "description": "発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
-            "example": "2019-12-31"
-          },
-          "account_item_display_type": {
-            "type": "string",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）(条件に指定した時のみ含まれる）",
-            "enum": [
-              "account_item",
-              "group"
-            ]
-          },
-          "breakdown_display_type": {
-            "type": "string",
-            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item）(条件に指定した時のみ含まれる）",
-            "enum": [
-              "partner",
-              "item",
-              "account_item"
-            ]
-          },
-          "partner_id": {
-            "type": "integer",
-            "description": "取引先ID(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "partner_code": {
-            "type": "string",
-            "description": "取引先コード(条件に指定した時のみ含まれる）",
-            "example": "code001"
-          },
-          "item_id": {
-            "type": "integer",
-            "description": "品目ID(条件に指定した時のみ含まれる）",
-            "example": 1
-          },
-          "adjustment": {
-            "type": "string",
-            "description": "決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）",
-            "example": "only",
-            "enum": [
-              "only",
-              "without"
-            ]
-          },
-          "created_at": {
-            "type": "string",
-            "description": "作成日時",
-            "example": "2018-09-10T13:47:24.000+09:00"
-          },
-          "balances": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "account_item_name": {
-                  "type": "string",
-                  "description": "勘定科目名(勘定科目の時のみ含まれる)",
-                  "example": "現金"
-                },
-                "credit_amount": {
-                  "type": "integer",
-                  "description": "貸方金額",
-                  "example": 2592
-                },
-                "parent_account_category_name": {
-                  "type": "string",
-                  "description": "上位勘定科目カテゴリー名(上層が存在する場合含まれる)",
-                  "example": "他流動資産"
-                },
-                "debit_amount": {
-                  "type": "integer",
-                  "description": "借方金額",
-                  "example": 0
-                },
-                "account_category_name": {
-                  "type": "string",
-                  "description": "勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)",
-                  "example": "流動資産"
-                },
-                "partners": {
-                  "type": "array",
-                  "description": "breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる",
-                  "items": {
-                    "required": [
-                      "id"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "closing_balance": {
-                        "type": "integer",
-                        "description": "期末残高",
-                        "example": -25920
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "取引先名",
-                        "example": "freee"
-                      },
-                      "credit_amount": {
-                        "type": "integer",
-                        "description": "貸方金額",
-                        "example": 2592
-                      },
-                      "id": {
-                        "type": "integer",
-                        "description": "取引先ID",
-                        "example": 22
-                      },
-                      "opening_balance": {
-                        "type": "integer",
-                        "description": "期首残高",
-                        "example": 0
-                      },
-                      "debit_amount": {
-                        "type": "integer",
-                        "description": "借方金額",
-                        "example": 0
-                      },
-                      "composition_ratio": {
-                        "type": "number",
-                        "description": "構成比",
-                        "example": 0.85
-                      }
-                    }
-                  }
-                },
-                "account_item_id": {
-                  "type": "integer",
-                  "description": "勘定科目ID(勘定科目の時のみ含まれる)",
-                  "example": 192
-                },
-                "closing_balance": {
-                  "type": "integer",
-                  "description": "期末残高",
-                  "example": -25920
-                },
-                "account_category_id": {
-                  "type": "integer",
-                  "description": "勘定科目カテゴリーID(勘定科目カテゴリーの時のみ含まれる)",
-                  "example": 8
-                },
-                "opening_balance": {
-                  "type": "integer",
-                  "description": "期首残高",
-                  "example": 0
-                },
+          "trial_bs": {
+            "required": [
+              "balances",
+              "company_id"
+            ],
+            "type": "object",
+            "properties": {
+              "end_date": {
+                "type": "string",
+                "description": "発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
+                "example": "2019-12-31"
+              },
+              "company_id": {
+                "type": "integer",
+                "description": "事業所ID",
+                "example": 1
+              },
+              "item_id": {
+                "type": "integer",
+                "description": "品目ID(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "breakdown_display_type": {
+                "type": "string",
+                "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item）(条件に指定した時のみ含まれる）",
+                "enum": [
+                  "partner",
+                  "item",
+                  "account_item"
+                ]
+              },
+              "created_at": {
+                "type": "string",
+                "description": "作成日時",
+                "example": "2018-09-10T13:47:24.000+09:00"
+              },
+              "balances": {
+                "type": "array",
                 "items": {
-                  "type": "array",
-                  "description": "breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる",
-                  "items": {
-                    "required": [
-                      "id"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "closing_balance": {
-                        "type": "integer",
-                        "description": "期末残高",
-                        "example": -25920
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "品目",
-                        "example": "源泉所得税"
-                      },
-                      "credit_amount": {
-                        "type": "integer",
-                        "description": "貸方金額",
-                        "example": 2592
-                      },
-                      "id": {
-                        "type": "integer",
-                        "description": "品目ID",
-                        "example": 1
-                      },
-                      "opening_balance": {
-                        "type": "integer",
-                        "description": "期首残高",
-                        "example": 0
-                      },
-                      "debit_amount": {
-                        "type": "integer",
-                        "description": "借方金額",
-                        "example": 0
-                      },
-                      "composition_ratio": {
-                        "type": "number",
-                        "description": "構成比",
-                        "example": 0.85
+                  "type": "object",
+                  "properties": {
+                    "account_item_name": {
+                      "type": "string",
+                      "description": "勘定科目名(勘定科目の時のみ含まれる)",
+                      "example": "現金"
+                    },
+                    "credit_amount": {
+                      "type": "integer",
+                      "description": "貸方金額",
+                      "example": 2592
+                    },
+                    "parent_account_category_name": {
+                      "type": "string",
+                      "description": "上位勘定科目カテゴリー名(上層が存在する場合含まれる)",
+                      "example": "他流動資産"
+                    },
+                    "debit_amount": {
+                      "type": "integer",
+                      "description": "借方金額",
+                      "example": 0
+                    },
+                    "account_category_name": {
+                      "type": "string",
+                      "description": "勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)",
+                      "example": "流動資産"
+                    },
+                    "partners": {
+                      "type": "array",
+                      "description": "breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "required": [
+                          "id"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "取引先名",
+                            "example": "freee"
+                          },
+                          "credit_amount": {
+                            "type": "integer",
+                            "description": "貸方金額",
+                            "example": 2592
+                          },
+                          "id": {
+                            "type": "integer",
+                            "description": "取引先ID",
+                            "example": 22
+                          },
+                          "opening_balance": {
+                            "type": "integer",
+                            "description": "期首残高",
+                            "example": 0
+                          },
+                          "debit_amount": {
+                            "type": "integer",
+                            "description": "借方金額",
+                            "example": 0
+                          },
+                          "composition_ratio": {
+                            "type": "number",
+                            "description": "構成比",
+                            "example": 0.85
+                          }
+                        }
                       }
+                    },
+                    "account_item_id": {
+                      "type": "integer",
+                      "description": "勘定科目ID(勘定科目の時のみ含まれる)",
+                      "example": 192
+                    },
+                    "closing_balance": {
+                      "type": "integer",
+                      "description": "期末残高",
+                      "example": -25920
+                    },
+                    "account_category_id": {
+                      "type": "integer",
+                      "description": "勘定科目カテゴリーID(勘定科目カテゴリーの時のみ含まれる)",
+                      "example": 8
+                    },
+                    "opening_balance": {
+                      "type": "integer",
+                      "description": "期首残高",
+                      "example": 0
+                    },
+                    "items": {
+                      "type": "array",
+                      "description": "breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "required": [
+                          "id"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "品目",
+                            "example": "源泉所得税"
+                          },
+                          "credit_amount": {
+                            "type": "integer",
+                            "description": "貸方金額",
+                            "example": 2592
+                          },
+                          "id": {
+                            "type": "integer",
+                            "description": "品目ID",
+                            "example": 1
+                          },
+                          "opening_balance": {
+                            "type": "integer",
+                            "description": "期首残高",
+                            "example": 0
+                          },
+                          "debit_amount": {
+                            "type": "integer",
+                            "description": "借方金額",
+                            "example": 0
+                          },
+                          "composition_ratio": {
+                            "type": "number",
+                            "description": "構成比",
+                            "example": 0.85
+                          }
+                        }
+                      }
+                    },
+                    "composition_ratio": {
+                      "type": "number",
+                      "description": "構成比",
+                      "example": 0.85
+                    },
+                    "total_line": {
+                      "type": "boolean",
+                      "description": "合計行(勘定科目カテゴリー名の時のみ含まれる)",
+                      "example": true
+                    },
+                    "hierarchy_level": {
+                      "type": "integer",
+                      "description": "階層レベル",
+                      "example": 3
+                    },
+                    "parent_account_category_id": {
+                      "type": "integer",
+                      "description": "上位科目カテゴリーID(上層が存在する場合含まれる)",
+                      "example": 19
                     }
                   }
-                },
-                "composition_ratio": {
-                  "type": "number",
-                  "description": "構成比",
-                  "example": 0.85
-                },
-                "total_line": {
-                  "type": "boolean",
-                  "description": "合計行(勘定科目カテゴリー名の時のみ含まれる)",
-                  "example": true
-                },
-                "hierarchy_level": {
-                  "type": "integer",
-                  "description": "階層レベル",
-                  "example": 3
-                },
-                "parent_account_category_id": {
-                  "type": "integer",
-                  "description": "上位科目カテゴリーID(上層が存在する場合含まれる)",
-                  "example": 19
                 }
+              },
+              "partner_id": {
+                "type": "integer",
+                "description": "取引先ID(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "fiscal_year": {
+                "type": "integer",
+                "description": "会計年度(条件に指定した時、または条件に月、日条件がない時のみ含まれる）",
+                "example": 2019
+              },
+              "account_item_display_type": {
+                "type": "string",
+                "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）(条件に指定した時のみ含まれる）",
+                "enum": [
+                  "account_item",
+                  "group"
+                ]
+              },
+              "start_month": {
+                "type": "integer",
+                "description": "発生月で絞込：開始会計月(mm)(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "adjustment": {
+                "type": "string",
+                "description": "決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）",
+                "example": "only",
+                "enum": [
+                  "only",
+                  "without"
+                ]
+              },
+              "partner_code": {
+                "type": "string",
+                "description": "取引先コード(条件に指定した時のみ含まれる）",
+                "example": "code001"
+              },
+              "end_month": {
+                "type": "integer",
+                "description": "発生月で絞込：終了会計月(mm)(条件に指定した時のみ含まれる）",
+                "example": 12
+              },
+              "start_date": {
+                "type": "string",
+                "description": "発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）",
+                "example": "2019-01-01"
               }
             }
           }
@@ -12868,7 +12939,8 @@
           "company_id",
           "id",
           "issue_date",
-          "partner_id"
+          "partner_id",
+          "status"
         ],
         "type": "object",
         "properties": {
@@ -12920,6 +12992,15 @@
             "type": "string",
             "description": "管理番号",
             "example": "123-456"
+          },
+          "status": {
+            "type": "string",
+            "description": "決済状況 (未決済: unsettled, 完了: settled)",
+            "example": "settled",
+            "enum": [
+              "unsettled",
+              "settled"
+            ]
           },
           "details": {
             "type": "array",
@@ -13085,18 +13166,21 @@
             "example": 1
           },
           "name": {
+            "maxLength": 255,
             "type": "string",
-            "description": "取引先名 (30文字以内)",
+            "description": "取引先名 (255文字以内)",
             "example": "新しい取引先"
           },
           "shortcut1": {
+            "maxLength": 255,
             "type": "string",
-            "description": "ショートカット１ (20文字以内)",
+            "description": "ショートカット１ (255文字以内)",
             "example": "NEWPARTNER"
           },
           "shortcut2": {
+            "maxLength": 255,
             "type": "string",
-            "description": "ショートカット２ (20文字以内)",
+            "description": "ショートカット２ (255文字以内)",
             "example": "502"
           },
           "long_name": {
@@ -13126,13 +13210,15 @@
             "example": "03-3000-1111"
           },
           "contact_name": {
+            "maxLength": 255,
             "type": "string",
-            "description": "営業担当者名",
+            "description": "営業担当者名 (255文字以内)",
             "example": "営業担当"
           },
           "email": {
+            "maxLength": 255,
             "type": "string",
-            "description": "営業担当者 メールアドレス",
+            "description": "営業担当者 メールアドレス (255文字以内)",
             "example": "contact@example.com"
           },
           "address_attributes": {
