@@ -656,7 +656,7 @@
           {
             "name": "base_date",
             "in": "query",
-            "description": "基準日",
+            "description": "基準日:指定した場合、勘定科目に紐づく税区分(default_tax_code)が、基準日の税率に基づいて返ります。",
             "schema": {
               "type": "string"
             }
@@ -7746,6 +7746,7 @@
         "required": [
           "company_id",
           "expense_application_lines",
+          "issue_date",
           "title"
         ],
         "type": "object",
@@ -10208,6 +10209,7 @@
         "required": [
           "company_id",
           "expense_application_lines",
+          "issue_date",
           "title"
         ],
         "type": "object",
@@ -13609,7 +13611,6 @@
       },
       "createWalletableParams": {
         "required": [
-          "bank_id",
           "company_id",
           "name",
           "type"
