@@ -423,7 +423,7 @@
             "name": "base_date",
             "type": "string",
             "in": "query",
-            "description": "基準日"
+            "description": "基準日:指定した場合、勘定科目に紐づく税区分(default_tax_code)が、基準日の税率に基づいて返ります。"
           }
         ],
         "responses": {
@@ -5779,8 +5779,7 @@
       "required": [
         "name",
         "type",
-        "company_id",
-        "bank_id"
+        "company_id"
       ],
       "properties": {
         "name": {
@@ -5892,6 +5891,7 @@
       "required": [
         "company_id",
         "title",
+        "issue_date",
         "expense_application_lines"
       ],
       "properties": {
@@ -5988,6 +5988,7 @@
       "required": [
         "company_id",
         "title",
+        "issue_date",
         "expense_application_lines"
       ],
       "properties": {
@@ -10865,11 +10866,8 @@
         "searchable": {
           "type": "integer",
           "enum": [
-            0,
-            1,
             2,
-            3,
-            99
+            3
           ],
           "example": 2,
           "description": "検索可能:2, 検索不可：3"
