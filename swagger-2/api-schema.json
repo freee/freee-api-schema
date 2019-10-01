@@ -2229,66 +2229,7 @@
           "200": {
             "description": "",
             "schema": {
-              "required": [
-                "companies"
-              ],
-              "properties": {
-                "companies": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "required": [
-                      "id",
-                      "name",
-                      "name_kana",
-                      "display_name",
-                      "role"
-                    ],
-                    "properties": {
-                      "id": {
-                        "type": "integer",
-                        "description": "事業所ID",
-                        "example": 1
-                      },
-                      "name": {
-                        "type": [
-                          "string",
-                          "null"
-                        ],
-                        "description": "事業所名",
-                        "example": "freee事務所"
-                      },
-                      "name_kana": {
-                        "type": [
-                          "string",
-                          "null"
-                        ],
-                        "description": "事業所名（カナ）",
-                        "example": "フリージムショ"
-                      },
-                      "display_name": {
-                        "type": [
-                          "string",
-                          "null"
-                        ],
-                        "description": "事業所名",
-                        "example": "freee事務所"
-                      },
-                      "role": {
-                        "type": "string",
-                        "description": "ユーザーの権限",
-                        "enum": [
-                          "admin",
-                          "simple_accounting",
-                          "self_only",
-                          "read_only"
-                        ],
-                        "example": "admin"
-                      }
-                    }
-                  }
-                }
-              }
+              "$ref": "#/definitions/companiesIndexResponse"
             }
           },
           "400": {
@@ -10473,6 +10414,69 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/fiscal_years"
+              }
+            }
+          }
+        }
+      }
+    },
+    "companiesIndexResponse": {
+      "type": "object",
+      "required": [
+        "companies"
+      ],
+      "properties": {
+        "companies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "name",
+              "name_kana",
+              "display_name",
+              "role"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "事業所ID",
+                "example": 1
+              },
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "事業所名",
+                "example": "freee事務所"
+              },
+              "name_kana": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "事業所名（カナ）",
+                "example": "フリージムショ"
+              },
+              "display_name": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "事業所名",
+                "example": "freee事務所"
+              },
+              "role": {
+                "type": "string",
+                "description": "ユーザーの権限",
+                "enum": [
+                  "admin",
+                  "simple_accounting",
+                  "self_only",
+                  "read_only"
+                ],
+                "example": "admin"
               }
             }
           }
