@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "freee API",
-    "description": "\n<h1 id=\"freee_api\">freee API</h1>\n<hr />\n<h2 id=\"\">はじめに</h2>\n\n<ol>\n<li><a href=\"https://secure.freee.co.jp/\">freee</a>にサインアップします。</li>\n\n<li><a href=\"https://accounts.secure.freee.co.jp/public_api/applications\">アプリケーション一覧</a>から「新しいアプリケーションを登録」します。</li>\n\n<li>アプリケーションの登録が完了すると、Client IDとSecretが取得できます。</li>\n\n<li>ローカルの開発環境でテストする際は、認証用URLを直接リクエストしてAuthorization Codeを取得できます。</li>\n</ol>\n\n<p>アプリケーションの登録方法や認証方法、またはAPIの活用方法でご不明な点がある場合は<a href=\"https://support.freee.co.jp/hc/ja/sections/115000030743\">ヘルプセンター</a>もご確認ください</p>\n<hr />\n<h2 id=\"_2\">仕様</h2>\n\n<h3 id=\"api\">APIエンドポイント</h3>\n\n<p>https://api.freee.co.jp/ (httpsのみ)</p>\n\n<h3 id=\"_3\">認証方式</h3>\n\n<p><a href=\"http://tools.ietf.org/html/rfc6749\">OAuth2</a>に対応</p>\n\n<ul>\n<li>Authorization Code Flow (Webアプリ向け)</li>\n\n<li>Implicit Flow (Mobileアプリ向け)</li>\n</ul>\n\n<h3 id=\"_4\">認証エンドポイント</h3>\n\n<p>https://accounts.secure.freee.co.jp/</p>\n\n<ul>\n<li>authorize : https://accounts.secure.freee.co.jp/public_api/authorize</li>\n\n<li>token : https://accounts.secure.freee.co.jp/public_api/token</li>\n</ul>\n\n<h3 id=\"_5\">アクセストークンのリフレッシュ</h3>\n\n<p>認証時に得たrefresh_token を使ってtoken の期限をリフレッシュして新規に発行することが出来ます。</p>\n\n<p>grant_type=refresh_token で https://accounts.secure.freee.co.jp/public_api/token にアクセスすればリフレッシュされます。</p>\n\n<p>e.g.)</p>\n\n<p>POST: https://accounts.secure.freee.co.jp/public_api/token</p>\n\n<p>params: grant_type=refresh_token&amp;client_id=UID&amp;client_secret=SECRET&amp;refresh_token=REFRESH_TOKEN</p>\n\n<p>詳細は<a href=\"https://github.com/applicake/doorkeeper/wiki/Enable-Refresh-Token-Credentials#flow\">refresh_token</a>を参照下さい。</p>\n\n<h3 id=\"_6\">アクセストークンの破棄</h3>\n\n<p>認証時に得たaccess_tokenまたはrefresh_tokenを使って、tokenを破棄することができます。 token=access_tokenまたはtoken=refresh_tokenでhttps://accounts.secure.freee.co.jp/public_api/revokeにアクセスすると破棄されます。token_type_hintでaccess_tokenまたはrefresh_tokenを陽に指定できます。</p>\n\n<p>e.g.)</p>\n\n<p>POST: https://accounts.secure.freee.co.jp/public_api/revoke</p>\n\n<p>params: token=ACCESS_TOKEN</p>\n\n<p>または</p>\n\n<p>params: token=REFRESH_TOKEN</p>\n\n<p>または</p>\n\n<p>params: token=ACCESS_TOKEN&amp;token_type_hint=access_token</p>\n\n<p>または</p>\n\n<p>params: token=REFRESH_TOKEN&amp;token_type_hint=refresh_token</p>\n\n<p>詳細は <a href=\"https://tools.ietf.org/html/rfc7009\">OAuth 2.0 Token revocation</a> をご参照ください。</p>\n\n<h3 id=\"_7\">データフォーマット</h3>\n\n<p>リクエスト、レスポンスともにJSON形式をサポート</p>\n\n<h3 id=\"_8\">共通レスポンスヘッダー</h3>\n\n<p>すべてのAPIのレスポンスには以下のHTTPヘッダーが含まれます。</p>\n\n<ul>\n<li>\n<p>X-Freee-Request-ID</p>\n<ul>\n<li>各リクエスト毎に発行されるID</li>\n</ul>\n</li>\n</ul>\n\n<h3 id=\"_9\">共通エラーレスポンス</h3>\n\n<ul>\n<li>\n<p>ステータスコードはレスポンス内のJSONに含まれる他、HTTPヘッダにも含まれる</p>\n</li>\n\n<li>\n<p>type</p>\n\n<ul>\n<li>status : HTTPステータスコードの説明</li>\n\n<li>validation : エラーの詳細の説明（開発者向け）</li>\n</ul>\n</li>\n</ul>\n\n<p>レスポンスの例</p>\n\n<pre><code>  {\n    &quot;status_code&quot; : 400,\n    &quot;errors&quot; : [\n      {\n        &quot;type&quot; : &quot;status&quot;,\n        &quot;messages&quot; : [&quot;不正なリクエストです。&quot;]\n      },\n      {\n        &quot;type&quot; : &quot;validation&quot;,\n        &quot;messages&quot; : [&quot;Date は不正な日付フォーマットです。入力例：2013-01-01&quot;]\n      }\n    ]\n  }</code></pre>\n<hr />\n<h2 id=\"_10\">連絡先</h2>\n\n<p>ご不明点、ご要望等は <a href=\"https://support.freee.co.jp/hc/ja/requests/new\">freee サポートデスクへのお問い合わせフォーム</a> からご連絡ください。</p>\n<hr />&copy; Since 2013 freee K.K.",
+    "description": "\n<h1 id=\"freee_api\">freee API</h1>\n<hr />\n<h2 id=\"\">スタートガイド</h2>\n<p>1. セットアップ</p>\n<ol>\n<ul><li><a href=\"https://support.freee.co.jp/hc/ja/articles/202847230\" class=\"external-link\" rel=\"nofollow\">freeeアカウント（無料）</a>を<a href=\"https://secure.freee.co.jp/users/sign_up\" class=\"external-link\" rel=\"nofollow\">作成</a>します（すでにお持ちの場合は次へ）</li><li><a href=\"https://app.secure.freee.co.jp/developers/demo_companies/description\" class=\"external-link\" rel=\"nofollow\">開発者向け事業所・環境を作成</a>します</li><li><span><a href=\"https://app.secure.freee.co.jp/developers/applications\" class=\"external-link\" rel=\"nofollow\">前のステップで作成した事業所を選択してfreeeアプリを追加</a>します</span></li><li>Client IDをCopyしておきます</li>\n</ul>\n</ol>\n\n<p>2. 実際にAPIを叩いてみる（ブラウザからAPIのレスポンスを確認する）</p>\n<ol>\n<ul><li><span><span>以下のURLの●をclient_idに入れ替えて<a href=\"https://app.secure.freee.co.jp/developers/tutorials/3-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B#%E8%AA%8D%E5%8F%AF%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B\" class=\"external-link\" rel=\"nofollow\">アクセストークンを取得</a>します</span></span><ul><li><span><span><pre><code>https://accounts.secure.freee.co.jp/public_api/authorize?client_id=●&amp;redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&amp;response_type=token</a></code></pre></span></span></li></ul></li><li><span><a href=\"https://developer.freee.co.jp/docs/accounting/reference#/%E9%80%A3%E7%B5%A1%E5%85%88\" class=\"external-link\" rel=\"nofollow\">APIリファレンス</a>で<code>Authorize</code>を押下します</span></li><li><span>アクセストークン<span><span>を入力して</span></span>&nbsp;もう一度<span><code>Authorize</code>を押下して<code>Close</code>を押下します</span></span></li><li>リファレンス内のCompanies（事業所）に移動し、<code>Try it out</code>を押下し、<code>Execute</code>を押下します</li><li>Response bodyを参照し、事業所ID(id属性)を活用して、Companies以外のエンドポイントでどのようなデータのやりとりできるのか確認します</li></ul>\n</ol>\n<p>3. 連携を実装する</p>\n<ol>\n<ul><li><a href=\"https://developer.freee.co.jp/tips\" class=\"external-link\" rel=\"nofollow\">API TIPS</a>を参考に、ユースケースごとの連携の概要を学びます。<span>例えば</span><span>&nbsp;</span><a href=\"https://developer.freee.co.jp/tips/how-to-cooperate-salesmanegement-system\" class=\"external-link\" rel=\"nofollow\">SFA、CRM、販売管理システムから会計freeeへの連携</a>や<a href=\"https://developer.freee.co.jp/tips/how-to-cooperate-excel-and-spreadsheet\" class=\"external-link\" rel=\"nofollow\">エクセルやgoogle spreadsheetからの連携</a>です</li><li>実利用向け事業所がすでにある場合は利用、ない場合は作成します（セットアップで作成したのは開発者向け環境のため活用不可）</li><li><a href=\"https://developer.freee.co.jp/docs/accounting/reference\" class=\"external-link\" rel=\"nofollow\">API documentation</a><span>&nbsp;を参照し、躓いた場合は</span><span>&nbsp;</span><a href=\"https://developer.freee.co.jp/community/forum/community\" class=\"external-link\" rel=\"nofollow\">Community</a><span>&nbsp;で質問してみましょう</span></li></ul>\n</ol>\n<p>アプリケーションの登録方法や認証方法、またはAPIの活用方法でご不明な点がある場合は<a href=\"https://support.freee.co.jp/hc/ja/sections/115000030743\">ヘルプセンター</a>もご確認ください</p>\n<hr />\n<h2 id=\"_2\">仕様</h2>\n\n<h3 id=\"api\">APIエンドポイント</h3>\n\n<p>https://api.freee.co.jp/ (httpsのみ)</p>\n\n<h3 id=\"_3\">認証方式</h3>\n\n<p><a href=\"http://tools.ietf.org/html/rfc6749\">OAuth2</a>に対応</p>\n\n<ul>\n<li>Authorization Code Flow (Webアプリ向け)</li>\n\n<li>Implicit Flow (Mobileアプリ向け)</li>\n</ul>\n\n<h3 id=\"_4\">認証エンドポイント</h3>\n\n<p>https://accounts.secure.freee.co.jp/</p>\n\n<ul>\n<li>authorize : https://accounts.secure.freee.co.jp/public_api/authorize</li>\n\n<li>token : https://accounts.secure.freee.co.jp/public_api/token</li>\n</ul>\n\n<h3 id=\"_5\">アクセストークンのリフレッシュ</h3>\n\n<p>認証時に得たrefresh_token を使ってtoken の期限をリフレッシュして新規に発行することが出来ます。</p>\n\n<p>grant_type=refresh_token で https://accounts.secure.freee.co.jp/public_api/token にアクセスすればリフレッシュされます。</p>\n\n<p>e.g.)</p>\n\n<p>POST: https://accounts.secure.freee.co.jp/public_api/token</p>\n\n<p>params: grant_type=refresh_token&amp;client_id=UID&amp;client_secret=SECRET&amp;refresh_token=REFRESH_TOKEN</p>\n\n<p>詳細は<a href=\"https://github.com/applicake/doorkeeper/wiki/Enable-Refresh-Token-Credentials#flow\">refresh_token</a>を参照下さい。</p>\n\n<h3 id=\"_6\">アクセストークンの破棄</h3>\n\n<p>認証時に得たaccess_tokenまたはrefresh_tokenを使って、tokenを破棄することができます。 token=access_tokenまたはtoken=refresh_tokenでhttps://accounts.secure.freee.co.jp/public_api/revokeにアクセスすると破棄されます。token_type_hintでaccess_tokenまたはrefresh_tokenを陽に指定できます。</p>\n\n<p>e.g.)</p>\n\n<p>POST: https://accounts.secure.freee.co.jp/public_api/revoke</p>\n\n<p>params: token=ACCESS_TOKEN</p>\n\n<p>または</p>\n\n<p>params: token=REFRESH_TOKEN</p>\n\n<p>または</p>\n\n<p>params: token=ACCESS_TOKEN&amp;token_type_hint=access_token</p>\n\n<p>または</p>\n\n<p>params: token=REFRESH_TOKEN&amp;token_type_hint=refresh_token</p>\n\n<p>詳細は <a href=\"https://tools.ietf.org/html/rfc7009\">OAuth 2.0 Token revocation</a> をご参照ください。</p>\n\n<h3 id=\"_7\">データフォーマット</h3>\n\n<p>リクエスト、レスポンスともにJSON形式をサポート</p>\n\n<h3 id=\"_8\">共通レスポンスヘッダー</h3>\n\n<p>すべてのAPIのレスポンスには以下のHTTPヘッダーが含まれます。</p>\n\n<ul>\n<li>\n<p>X-Freee-Request-ID</p>\n<ul>\n<li>各リクエスト毎に発行されるID</li>\n</ul>\n</li>\n</ul>\n\n<h3 id=\"_9\">共通エラーレスポンス</h3>\n\n<ul>\n<li>\n<p>ステータスコードはレスポンス内のJSONに含まれる他、HTTPヘッダにも含まれる</p>\n</li>\n\n<li>\n<p>type</p>\n\n<ul>\n<li>status : HTTPステータスコードの説明</li>\n\n<li>validation : エラーの詳細の説明（開発者向け）</li>\n</ul>\n</li>\n</ul>\n\n<p>レスポンスの例</p>\n\n<pre><code>  {\n    &quot;status_code&quot; : 400,\n    &quot;errors&quot; : [\n      {\n        &quot;type&quot; : &quot;status&quot;,\n        &quot;messages&quot; : [&quot;不正なリクエストです。&quot;]\n      },\n      {\n        &quot;type&quot; : &quot;validation&quot;,\n        &quot;messages&quot; : [&quot;Date は不正な日付フォーマットです。入力例：2013-01-01&quot;]\n      }\n    ]\n  }</code></pre>\n<hr />\n<h2 id=\"_10\">連絡先</h2>\n\n<p>ご不明点、ご要望等は <a href=\"https://support.freee.co.jp/hc/ja/requests/new\">freee サポートデスクへのお問い合わせフォーム</a> からご連絡ください。</p>\n<hr />&copy; Since 2013 freee K.K.",
     "version": "v1.0",
     "x-copyright": "&copy; Since 2013 freee K.K."
   },
@@ -140,6 +140,60 @@
       }
     },
     "/partners/{id}": {
+      "get": {
+        "tags": [
+          "Partners"
+        ],
+        "summary": "取引先の取得",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引先を取得する</p>",
+        "operationId": "get_partner",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "取引先ID",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1,
+            "type": "integer"
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/partnersResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
       "put": {
         "tags": [
           "Partners"
@@ -190,6 +244,69 @@
           }
         },
         "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した取引先の情報を更新する</p>\n<ul>\n<li>codeを指定、更新することはできません。</li></ul>"
+      },
+      "delete": {
+        "tags": [
+          "Partners"
+        ],
+        "summary": "取引先の削除",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引先を削除する</p>",
+        "operationId": "destroy_partner",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "取引先ID",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1,
+            "type": "integer"
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "content": {
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+            }
+          }
+        }
       }
     },
     "/partners/code/{code}": {
@@ -400,6 +517,65 @@
           }
         },
         "description": "\n<h2 id=\"\">概要</h2>\n\n<p>勘定科目を更新する</p>"
+      },
+      "delete": {
+        "tags": [
+          "Account items"
+        ],
+        "summary": "勘定科目の削除",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した勘定科目を削除する</p>\n<h2 id=\"\">注意点</h2>\n<ul>\n<li>削除できる勘定科目は、追加で作成したカスタム勘定項目のみです。</li>\n<li>デフォルトで存在する勘定科目や口座の勘定科目は削除できません。</li></ul>",
+        "operationId": "destroy_account_item",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1,
+            "type": "integer"
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "content": {
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+            }
+          }
+        }
       }
     },
     "/account_items": {
@@ -550,35 +726,7 @@
             "required": true,
             "description": "メモタグの作成",
             "schema": {
-              "type": "object",
-              "required": [
-                "name",
-                "company_id"
-              ],
-              "properties": {
-                "company_id": {
-                  "type": "integer",
-                  "example": 1,
-                  "description": "事業所ID",
-                  "minimum": 1,
-                  "maximum": 999999999999
-                },
-                "name": {
-                  "type": "string",
-                  "example": "メモタグ",
-                  "description": "メモタグ名 (30文字以内)"
-                },
-                "shortcut1": {
-                  "type": "string",
-                  "example": "MEMOTAG",
-                  "description": "ショートカット１ (20文字以内)"
-                },
-                "shortcut2": {
-                  "type": "string",
-                  "example": "123",
-                  "description": "ショートカット２ (20文字以内)"
-                }
-              }
+              "$ref": "#/definitions/tagsParams"
             }
           }
         ],
@@ -586,7 +734,7 @@
           "201": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/tagsCreateResponse"
+              "$ref": "#/definitions/tagsResponse"
             }
           },
           "400": {
@@ -606,6 +754,163 @@
           }
         },
         "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のメモタグを作成する</p>"
+      }
+    },
+    "/tags/{id}": {
+      "get": {
+        "tags": [
+          "Tags"
+        ],
+        "summary": "メモタグの詳細情報の取得",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のメモタグを取得する</p>",
+        "operationId": "get_tag",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "タグID",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1,
+            "type": "integer"
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/tagsResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tags"
+        ],
+        "summary": "メモタグの更新",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のメモタグを更新する</p>",
+        "operationId": "update_tag",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "integer",
+            "in": "path",
+            "description": "メモタグID",
+            "required": true,
+            "minimum": 1,
+            "maximum": 999999999999
+          },
+          {
+            "name": "Parameters",
+            "in": "body",
+            "description": "メモタグの更新",
+            "schema": {
+              "$ref": "#/definitions/tagsParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/tagsResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tags"
+        ],
+        "summary": "メモタグの削除",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のメモタグを削除する</p>",
+        "operationId": "destroy_tag",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "タグID",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1,
+            "type": "integer"
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     },
     "/sections": {
@@ -694,6 +999,67 @@
       }
     },
     "/sections/{id}": {
+      "get": {
+        "tags": [
+          "Sections"
+        ],
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の部門を参照する</p><h2 id=\"_2\">レスポンスの例</h2>\n\n<pre><code>// プレミアムプラン（個人）、ビジネスプラン（法人）、エンタープライズプラン（法人）\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;long_name&quot;: &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;,\n    &quot;indent_count&quot;: 1,\n    &quot;parent_id&quot;: 101\n  }\n}\n// それ以外のプラン\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;long_name&quot;: &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;\n  }\n}</code></pre>\n",
+        "operationId": "get_section",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "integer",
+            "in": "path",
+            "description": "部門ID",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1
+          },
+          {
+            "name": "company_id",
+            "type": "integer",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": null
+            },
+            "schema": {
+              "$ref": "#/definitions/sectionsShowResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": null
+            },
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": null
+            },
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "Sections"
@@ -968,10 +1334,64 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の請求書を作成する</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n<li> <p>取引先ID（partner_id）と取引先の名称項目（partner_name, partner_long_name, partner_zipcode, partner_prefecture_code, partner_address1, partner_address2）を同時に指定することはできません。名称項目のみ指定した場合は新規取引先として登録されます。</p> </li>\n<li> <p>請求書ステータス(invoice_status)を発行(issue)で利用した場合、請求内容の合計金額が0円以上になる必要があります。</p> </li>\n<li><p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。また「partner_code、partner_id、partner_name」は同時に指定することはできません。</p></li></ul>"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の請求書を作成する</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n<li> <p>取引先ID（partner_id）と取引先の名称項目（partner_name, partner_long_name, partner_zipcode, partner_prefecture_code, partner_address1, partner_address2）を同時に指定することはできません。名称項目のみ指定した場合は新規取引先として登録されます。</p> </li>\n<li> <p>[重要] <a rel=\"noopener noreferrer\" href=\"https://developer.freee.co.jp/news/1783\" target=\"_blank\">parnter_idは必須化予定</a>です。parnter_idを必ず指定してご利用ください。</p> </li>\n<li> <p>請求書ステータス(invoice_status)を発行(issue)で利用した場合、請求内容の合計金額が0円以上になる必要があります。</p> </li>\n<li><p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。また「partner_code、partner_id、partner_name」は同時に指定することはできません。</p></li></ul>"
       }
     },
     "/invoices/{id}": {
+      "get": {
+        "tags": [
+          "Invoices"
+        ],
+        "summary": "請求書の取得",
+        "operationId": "get_invoice",
+        "parameters": [
+          {
+            "name": "company_id",
+            "type": "integer",
+            "in": "query",
+            "required": true,
+            "description": "事業所ID",
+            "minimum": 1,
+            "maximum": 999999999999
+          },
+          {
+            "name": "id",
+            "type": "integer",
+            "in": "path",
+            "required": true,
+            "description": "請求書ID",
+            "minimum": 1,
+            "maximum": 999999999999
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/invoicesResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の請求書詳細を取得する</p>"
+      },
       "put": {
         "tags": [
           "Invoices"
@@ -1023,7 +1443,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の請求書を更新する</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul> <li> <p>取引先ID（partner_id）と取引先の名称項目（partner_name, partner_long_name, partner_zipcode, partner_prefecture_code, partner_address1, partner_address2）の更新はできません。名称項目を変更したい場合は取引先APIをご利用ください。</p> </li> <li> <p>入金済みの請求書に対する金額関連の変更はできません。</p> </li> <li> <p>請求書ステータスは確定(issue)のみ指定可能です。請求書ステータスを確定する時のみ指定してください。</p> </li> <li> <p>請求書WFを利用している場合、承認済み請求書は承認権限を持たないユーザーでは更新できません。</p> </li> <li> <p>更新後の請求書ステータス(invoice_status)が下書き以外の場合、請求内容の合計金額が0円以上になる必要があります。</p></li><li><p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。また「partner_code、partner_id、partner_name」は同時に指定することはできません。</p></li></ul>"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の請求書を更新する</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul> <li> <p>取引先ID（partner_id）と取引先の名称項目（partner_name, partner_long_name, partner_zipcode, partner_prefecture_code, partner_address1, partner_address2）の更新はできません。名称項目を変更したい場合は取引先APIをご利用ください。</p> </li> \n<li> <p>[重要] <a rel=\"noopener noreferrer\" href=\"https://developer.freee.co.jp/news/1783\" target=\"_blank\">parnter_idは必須化予定</a>です。parnter_idを必ず指定してご利用ください。</p> </li>\n<li> <p>入金済みの請求書に対する金額関連の変更はできません。</p> </li> \n<li> <p>請求書ステータスは確定(issue)のみ指定可能です。請求書ステータスを確定する時のみ指定してください。</p> </li> \n<li> <p>請求書WFを利用している場合、承認済み請求書は承認権限を持たないユーザーでは更新できません。</p> </li> \n<li> <p>更新後の請求書ステータス(invoice_status)が下書き以外の場合、請求内容の合計金額が0円以上になる必要があります。</p></li>\n<li><p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。また「partner_code、partner_id、partner_name」は同時に指定することはできません。</p></li></ul>"
       },
       "delete": {
         "tags": [
@@ -1387,6 +1807,56 @@
           }
         },
         "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引（収入／支出）を更新する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>due_date : 支払期日</p>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n\n<li>\n<p>type</p>\n\n<ul>\n<li>income : 収入</li>\n\n<li>expense : 支出</li>\n</ul>\n</li>\n\n<li>\n<p>details : 取引の明細行</p>\n</li>\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>本APIでは支払行(payments)の操作ができません。支払行の作成・更新・削除APIをご利用ください。</li>\n<li>本APIでは+更新行(renews)の操作ができません。+更新行の作成・更新・削除APIをご利用ください。</li>\n\n<li>本APIでは収入／支出の切替えができません。既存の取引を削除後、再度作成してください。</li>\n\n<li>本APIで取引を更新すると、消費税の計算方法は必ず内税方式が選択されます。</li>\n\n<li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</ul>"
+      },
+      "delete": {
+        "tags": [
+          "Deals"
+        ],
+        "operationId": "destroy_deal",
+        "summary": "取引（収入／支出）の削除",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "integer",
+            "in": "path",
+            "required": true,
+            "description": "取引ID",
+            "minimum": 1,
+            "maximum": 999999999999
+          },
+          {
+            "name": "company_id",
+            "type": "integer",
+            "in": "query",
+            "required": true,
+            "description": "事業所ID",
+            "minimum": 1,
+            "maximum": 999999999999
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     },
     "/deals/{id}/renews": {
@@ -2121,6 +2591,63 @@
         "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の振替伝票を削除する</p>"
       }
     },
+    "/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "事業所に所属するユーザー一覧の取得",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>事業所に所属するユーザーの一覧を取得する</p>",
+        "operationId": "get_users",
+        "parameters": [
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "取得上限数,最大3000件",
+            "schema": {
+              "type": "integer",
+              "maximum": 3000,
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/usersIndexResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/users/me": {
       "get": {
         "tags": [
@@ -2166,6 +2693,50 @@
           }
         },
         "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ユーザの情報を取得する</p>"
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "ユーザー情報の更新",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ユーザー情報を更新する</p>",
+        "operationId": "update_user",
+        "parameters": [
+          {
+            "name": "Parameters",
+            "in": "body",
+            "description": "ユーザー情報の更新",
+            "schema": {
+              "$ref": "#/definitions/userUpdateParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/usersUpdateResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     },
     "/users/capabilities": {
@@ -2479,7 +3050,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/itemsCreateResponse"
+              "$ref": "#/definitions/itemResponse"
             }
           },
           "400": {
@@ -2501,6 +3072,163 @@
         "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目を作成する</p>"
       }
     },
+    "/items/{id}": {
+      "get": {
+        "tags": [
+          "Items"
+        ],
+        "operationId": "get_item",
+        "summary": "品目の取得",
+        "parameters": [
+          {
+            "name": "company_id",
+            "type": "integer",
+            "in": "query",
+            "required": true,
+            "description": "事業所ID",
+            "minimum": 1,
+            "maximum": 999999999999
+          },
+          {
+            "name": "id",
+            "type": "integer",
+            "in": "path",
+            "required": true,
+            "description": "品目ID",
+            "minimum": 1,
+            "maximum": 999999999999
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/itemResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目を取得する</p>"
+      },
+      "put": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "品目の更新",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目を更新する</p>",
+        "operationId": "update_item",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1,
+            "type": "integer",
+            "description": "品目ID"
+          },
+          {
+            "name": "Parameters",
+            "in": "body",
+            "description": "品目の更新",
+            "schema": {
+              "$ref": "#/definitions/updateItemParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/itemResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "品目の削除",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目を削除する</p>",
+        "operationId": "destroy_item",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "品目ID",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1,
+            "type": "integer"
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/taxes/codes": {
       "get": {
         "tags": [
@@ -2515,7 +3243,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/taxesCodesResponse"
+              "$ref": "#/definitions/taxesCodesIndexResponse"
             }
           },
           "400": {
@@ -2535,6 +3263,51 @@
           }
         },
         "description": "\n<h2 id=\"\">概要</h2>\n\n<p>税区分コード一覧を取得する</p>"
+      }
+    },
+    "/taxes/codes/{code}": {
+      "get": {
+        "tags": [
+          "Taxes"
+        ],
+        "operationId": "get_tax_code",
+        "summary": "税区分コードの取得",
+        "parameters": [
+          {
+            "name": "code",
+            "type": "integer",
+            "in": "path",
+            "required": true,
+            "description": "税区分コード"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/taxesCodesShowResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>税区分コードを取得する</p>"
       }
     },
     "/taxes/companies/{company_id}": {
@@ -2642,7 +3415,7 @@
             "description": "口座の作成",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/createWalletableParams"
+              "$ref": "#/definitions/walletableCreateParams"
             }
           }
         ],
@@ -2669,7 +3442,231 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所に口座を作成する</p>\n\n<p>同期に対応した口座はこのAPIでは作成できません</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n\n<li>\n<p>name : 口座名</p>\n</li>\n\n<li>\n<p>bank_id : サービスID</p>\n</li>\n\n<li>\n<p>group_name : 決算書表示名（小カテゴリー）　例：売掛金, 受取手形, 未収入金（法人のみ）, 買掛金, 支払手形, 未払金, 預り金, 前受金</p>\n</li>\n</ul>"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所に口座を作成する</p>\n\n<h2 id=\"\">注意点</h2>\n<ul><li>同期に対応した口座はこのAPIでは作成できません</li></ul>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n\n<li>\n<p>name : 口座名</p>\n</li>\n\n<li>\n<p>bank_id : サービスID</p>\n</li>\n\n<li>\n<p>group_name : 決算書表示名（小カテゴリー）　例：売掛金, 受取手形, 未収入金（法人のみ）, 買掛金, 支払手形, 未払金, 預り金, 前受金</p>\n</li>\n</ul>"
+      }
+    },
+    "/walletables/{type}/{id}": {
+      "get": {
+        "tags": [
+          "Walletables"
+        ],
+        "summary": "口座情報の取得",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の口座情報を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>type\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n\n<li>walletable_balance : 登録残高</li>\n\n<li>last_balance : 同期残高</li>\n</ul>",
+        "operationId": "get_walletable",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "口座ID",
+            "required": true,
+            "schema": {
+              "maximum": 999999999999,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "bank_account",
+              "credit_card",
+              "wallet"
+            ],
+            "description": "口座種別（bank_account : 銀行口座, credit_card : クレジットカード, wallet : その他の決済口座）"
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "schema": {
+              "maximum": 999999999999,
+              "minimum": 1,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": null
+            },
+            "schema": {
+              "$ref": "#/definitions/walletablesResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": null
+            },
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": null
+            },
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Walletables"
+        ],
+        "summary": "口座の更新",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>口座を更新する</p>",
+        "operationId": "update_walletable",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1,
+            "type": "integer"
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "bank_account",
+              "credit_card",
+              "wallet"
+            ],
+            "description": "口座種別（bank_account : 銀行口座, credit_card : クレジットカード, wallet : その他の決済口座）"
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "schema": {
+              "maximum": 999999999999,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "name": "Parameters",
+            "description": "口座の作成",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/walletableUpdateParams"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/walletablesResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Walletables"
+        ],
+        "summary": "口座の削除",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の口座を削除する</p>\n\n<h2 id=\"\">注意点</h2>\n<ul>\n<li>削除を実行するには、当該口座に関連する仕訳データを事前に削除する必要があります。</li>\n<li>当該口座に仕訳が残っていないか確認するには、レポートの「仕訳帳」等を参照し、必要に応じて、「取引」や「口座振替」も削除します。</li>\n\n</ul>",
+        "operationId": "destroy_walletable",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "口座ID",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1,
+            "type": "integer"
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "bank_account",
+              "credit_card",
+              "wallet"
+            ],
+            "description": "口座種別（bank_account : 銀行口座, credit_card : クレジットカード, wallet : その他の決済口座）"
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "content": {
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/badRequestError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/unauthorizedError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+            }
+          }
+        }
       }
     },
     "/banks": {
@@ -2728,6 +3725,53 @@
           }
         },
         "description": "\n<h2 id=\"\">概要</h2>\n\n<p>連携しているサービス一覧を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>type\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>"
+      }
+    },
+    "/banks/{id}": {
+      "get": {
+        "tags": [
+          "Banks"
+        ],
+        "summary": "連携サービスの取得",
+        "operationId": "get_bank",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "integer",
+            "in": "path",
+            "required": true,
+            "description": "連携サービスID",
+            "minimum": 1,
+            "maximum": 999999999999
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/banksShowResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>連携しているサービスを取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>type\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>"
       }
     },
     "/transfers": {
@@ -2803,76 +3847,7 @@
             "in": "body",
             "description": "取引（振替）の作成",
             "schema": {
-              "type": "object",
-              "required": [
-                "to_walletable_id",
-                "to_walletable_type",
-                "from_walletable_id",
-                "from_walletable_type",
-                "amount",
-                "date",
-                "company_id"
-              ],
-              "properties": {
-                "to_walletable_id": {
-                  "type": "integer",
-                  "description": "振替先口座ID",
-                  "example": 1,
-                  "minimum": 1,
-                  "maximum": 999999999999
-                },
-                "to_walletable_type": {
-                  "type": "string",
-                  "description": "振替先口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
-                  "enum": [
-                    "bank_account",
-                    "credit_card",
-                    "wallet"
-                  ],
-                  "example": "bank_account"
-                },
-                "from_walletable_id": {
-                  "type": "integer",
-                  "description": "振替元口座ID",
-                  "example": 1,
-                  "minimum": 1,
-                  "maximum": 999999999999
-                },
-                "from_walletable_type": {
-                  "type": "string",
-                  "description": "振替元口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
-                  "enum": [
-                    "bank_account",
-                    "credit_card",
-                    "wallet"
-                  ],
-                  "example": "credit_card"
-                },
-                "amount": {
-                  "type": "integer",
-                  "description": "金額",
-                  "example": 5000,
-                  "minimum": -999999999999,
-                  "maximum": 999999999999
-                },
-                "date": {
-                  "type": "string",
-                  "description": "振替日 (yyyy-mm-dd)",
-                  "example": "2018-01-01"
-                },
-                "company_id": {
-                  "type": "integer",
-                  "description": "事業所ID",
-                  "example": 1,
-                  "minimum": 1,
-                  "maximum": 999999999999
-                },
-                "description": {
-                  "type": "string",
-                  "description": "備考",
-                  "example": "備考"
-                }
-              }
+              "$ref": "#/definitions/transferParams"
             }
           }
         ],
@@ -2880,7 +3855,7 @@
           "201": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/transfersCreateResponse"
+              "$ref": "#/definitions/transfersResponse"
             }
           },
           "400": {
@@ -2900,6 +3875,164 @@
           }
         },
         "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引（振替）を作成する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>amount : 振替金額</p>\n</li>\n\n<li>\n<p>from_walletable_type, to_walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>"
+      }
+    },
+    "/transfers/{id}": {
+      "get": {
+        "tags": [
+          "Transfers"
+        ],
+        "summary": "取引（振替）の取得",
+        "operationId": "get_transfer",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "integer",
+            "in": "path",
+            "required": true,
+            "description": "取引(振替)ID",
+            "minimum": 1,
+            "maximum": 999999999999
+          },
+          {
+            "name": "company_id",
+            "type": "integer",
+            "in": "query",
+            "required": true,
+            "description": "事業所ID",
+            "minimum": 1,
+            "maximum": 999999999999
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/transfersResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引（振替）を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>amount : 振替金額</p>\n</li>\n\n<li>\n<p>from_walletable_type, to_walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>"
+      },
+      "put": {
+        "tags": [
+          "Transfers"
+        ],
+        "summary": "取引（振替）の更新",
+        "operationId": "update_transfer",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "取引(振替)ID",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1,
+            "type": "integer"
+          },
+          {
+            "name": "Parameter",
+            "in": "body",
+            "description": "取引（振替）の更新",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/transferParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/transfersResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引（振替）を更新する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>amount : 振替金額</p>\n</li>\n\n<li>\n<p>from_walletable_type, to_walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>"
+      },
+      "delete": {
+        "tags": [
+          "Transfers"
+        ],
+        "operationId": "destroy_transfer",
+        "summary": "取引（振替）の削除する",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "integer",
+            "in": "path",
+            "required": true,
+            "description": "取引(振替)ID",
+            "minimum": 1,
+            "maximum": 999999999999
+          },
+          {
+            "name": "company_id",
+            "type": "integer",
+            "in": "query",
+            "required": true,
+            "description": "事業所ID",
+            "minimum": 1,
+            "maximum": 999999999999
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引（振替）を削除する</p>"
       }
     },
     "/wallet_txns": {
@@ -3018,7 +4151,7 @@
           "201": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/walletTxnsCreateResponse"
+              "$ref": "#/definitions/walletTxnsShowResponse"
             }
           },
           "400": {
@@ -3038,6 +4171,113 @@
           }
         },
         "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の明細を作成する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>amount : 明細金額</p>\n</li>\n\n<li>\n<p>due_amount : 取引登録待ち金額</p>\n</li>\n\n<li>\n<p>balance : 残高</p>\n</li>\n\n<li>\n<p>entry_side</p>\n\n<ul>\n<li>income : 入金</li>\n\n<li>expense : 出金</li>\n</ul>\n</li>\n\n<li>\n<p>walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>"
+      }
+    },
+    "/wallet_txns/{id}": {
+      "get": {
+        "tags": [
+          "Wallet txns"
+        ],
+        "summary": "明細の取得",
+        "operationId": "get_wallet_txn",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "integer",
+            "in": "path",
+            "required": true,
+            "description": "明細ID",
+            "minimum": 1,
+            "maximum": 999999999999
+          },
+          {
+            "name": "company_id",
+            "type": "integer",
+            "in": "query",
+            "required": true,
+            "description": "事業所ID",
+            "minimum": 1,
+            "maximum": 999999999999
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/walletTxnsShowResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の明細を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>amount : 明細金額</p>\n</li>\n\n<li>\n<p>due_amount : 取引登録待ち金額</p>\n</li>\n\n<li>\n<p>balance : 残高</p>\n</li>\n\n<li>\n<p>entry_side</p>\n\n<ul>\n<li>income : 入金</li>\n\n<li>expense : 出金</li>\n</ul>\n</li>\n\n<li>\n<p>walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>"
+      },
+      "delete": {
+        "tags": [
+          "Wallet txns"
+        ],
+        "summary": "明細の削除",
+        "operationId": "destroy_wallet_txn",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "integer",
+            "in": "path",
+            "required": true,
+            "description": "明細ID",
+            "minimum": 1,
+            "maximum": 999999999999
+          },
+          {
+            "name": "company_id",
+            "type": "integer",
+            "in": "query",
+            "required": true,
+            "description": "事業所ID",
+            "minimum": 1,
+            "maximum": 999999999999
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の明細を削除する</p>"
       }
     },
     "/journals": {
@@ -4188,6 +5428,126 @@
       }
     },
     "/receipts": {
+      "get": {
+        "tags": [
+          "Receipts"
+        ],
+        "summary": "ファイルボックス 証憑ファイル一覧の取得",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のファイルボックス 証憑ファイル一覧を取得する</p>",
+        "operationId": "get_receipts",
+        "parameters": [
+          {
+            "name": "company_id",
+            "type": "integer",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1,
+            "example": 1
+          },
+          {
+            "name": "start_date",
+            "type": "string",
+            "in": "query",
+            "description": "アップロード日 (yyyy-mm-dd)",
+            "example": "2019-05-01",
+            "required": true
+          },
+          {
+            "name": "end_date",
+            "type": "string",
+            "in": "query",
+            "description": "アップロード日 (yyyy-mm-dd)",
+            "example": "2019-05-31",
+            "required": true
+          },
+          {
+            "name": "user_name",
+            "type": "string",
+            "in": "query",
+            "description": "アップロードしたユーザー名、メールアドレス",
+            "example": "uploaduser@example.com"
+          },
+          {
+            "name": "number",
+            "type": "integer",
+            "in": "query",
+            "description": "アップロードファイルNo",
+            "example": 1,
+            "minimum": 1,
+            "maximum": 999999999999
+          },
+          {
+            "name": "comment_type",
+            "type": "string",
+            "in": "query",
+            "description": "posted:コメントあり, raised:未解決, resolved:解決済",
+            "example": "raised",
+            "enum": [
+              "posted",
+              "raised",
+              "resolved"
+            ]
+          },
+          {
+            "name": "comment_important",
+            "type": "boolean",
+            "in": "query",
+            "description": "trueの時、重要コメント付きが対象",
+            "example": true
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "enum": [
+              "all",
+              "without_deal",
+              "with_expense_application_line",
+              "with_deal",
+              "ignored"
+            ],
+            "in": "query",
+            "description": "all:すべて、without_deal:未登録、with_expense_application_line:経費申請中, with_deal:登録済み、ignored:無視",
+            "example": "without_deal"
+          },
+          {
+            "name": "offset",
+            "type": "integer",
+            "in": "query",
+            "description": "取得レコードのオフセット (デフォルト: 0)"
+          },
+          {
+            "name": "limit",
+            "type": "integer",
+            "in": "query",
+            "description": "取得レコードの件数 (デフォルト: 50, 最大: 3000)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/receiptsIndexResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
       "post": {
         "tags": [
           "Receipts"
@@ -4232,7 +5592,7 @@
           "201": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/receiptCreateResponse"
+              "$ref": "#/definitions/receiptsResponse"
             }
           },
           "400": {
@@ -4254,7 +5614,227 @@
         "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ファイルボックスに証憑ファイルをアップロードする</p>"
       }
     },
+    "/receipts/{id}": {
+      "get": {
+        "tags": [
+          "Receipts"
+        ],
+        "summary": "ファイルボックス 証憑ファイルの取得",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のファイルボックス 証憑ファイルを取得する</p>",
+        "operationId": "get_receipt",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "証憑ID",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1,
+            "type": "integer"
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/receiptsResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Receipts"
+        ],
+        "summary": "ファイルボックス 証憑ファイル情報更新",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ファイルボックスの証憑ファイル情報を更新する</p>\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、証憑ファイルの再アップロードはできません。</li>\n</ul>",
+        "operationId": "update_receipt",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "証憑ID",
+            "required": true,
+            "schema": {
+              "maximum": 999999999999,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "name": "Parameters",
+            "description": "経費申請の更新",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/receiptUpdateParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/receiptsResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Receipts"
+        ],
+        "summary": "ファイルボックス 証憑ファイルを削除する",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ファイルボックスの証憑ファイルを削除する</p>",
+        "operationId": "destroy_receipt",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "integer",
+            "in": "path",
+            "description": "証憑ID",
+            "required": true,
+            "minimum": 1,
+            "maximum": 999999999999
+          },
+          {
+            "name": "company_id",
+            "type": "integer",
+            "in": "query",
+            "required": true,
+            "description": "事業所ID",
+            "minimum": 1,
+            "maximum": 999999999999
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/expense_applications": {
+      "get": {
+        "tags": [
+          "Expense applications"
+        ],
+        "operationId": "get_expense_applications",
+        "summary": "経費申請一覧の取得",
+        "parameters": [
+          {
+            "name": "company_id",
+            "type": "integer",
+            "in": "query",
+            "required": true,
+            "description": "事業所ID",
+            "minimum": 1,
+            "maximum": 999999999999
+          },
+          {
+            "name": "offset",
+            "type": "integer",
+            "in": "query",
+            "description": "取得レコードのオフセット (デフォルト: 0)",
+            "minimum": 0,
+            "maximum": 999999999999
+          },
+          {
+            "name": "limit",
+            "type": "integer",
+            "in": "query",
+            "description": "取得レコードの件数 (デフォルト: 50, 最大: 500)",
+            "minimum": 1,
+            "maximum": 500
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/expenseApplicationsIndexResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
       "post": {
         "tags": [
           "Expense applications"
@@ -4298,6 +5878,59 @@
       }
     },
     "/expense_applications/{id}": {
+      "get": {
+        "tags": [
+          "Expense applications"
+        ],
+        "operationId": "get_expense_application",
+        "summary": "経費申請詳細の取得",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "integer",
+            "in": "path",
+            "required": true,
+            "description": "経費申請ID",
+            "minimum": 1,
+            "maximum": 999999999999
+          },
+          {
+            "name": "company_id",
+            "type": "integer",
+            "in": "query",
+            "required": true,
+            "description": "事業所ID",
+            "minimum": 1,
+            "maximum": 999999999999
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/expenseApplicationsResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
       "put": {
         "tags": [
           "Expense applications"
@@ -4458,6 +6091,201 @@
           }
         },
         "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の経費科目一覧を取得する</p>"
+      },
+      "post": {
+        "tags": [
+          "Expense application line templates"
+        ],
+        "operationId": "create_expense_application_line_template",
+        "summary": "経費科目の作成",
+        "parameters": [
+          {
+            "name": "Parameters",
+            "in": "body",
+            "description": "経費科目の作成",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/expenseApplicationLineTemplateParams"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/expenseApplicationLineTemplatesResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/expense_application_line_templates/{id}": {
+      "get": {
+        "tags": [
+          "Expense application line templates"
+        ],
+        "operationId": "get_expense_application_line_template",
+        "summary": "経費科目の取得",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "経費科目ID",
+            "minimum": 1,
+            "maximum": 999999999999
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "required": true,
+            "description": "事業所ID",
+            "minimum": 1,
+            "maximum": 999999999999
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/expenseApplicationLineTemplatesResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Expense application line templates"
+        ],
+        "operationId": "update_expense_application_line_template",
+        "summary": "経費科目の更新",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "経費科目ID",
+            "required": true,
+            "schema": {
+              "maximum": 999999999999,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "name": "Parameters",
+            "in": "body",
+            "description": "経費科目の更新",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/expenseApplicationLineTemplateParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/expenseApplicationLineTemplatesResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Expense application line templates"
+        ],
+        "operationId": "destroy_expense_application_line_template",
+        "summary": "経費科目の削除",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "経費科目ID",
+            "required": true,
+            "maximum": 999999999999,
+            "minimum": 1,
+            "type": "integer"
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "required": true,
+            "description": "事業所ID",
+            "minimum": 1,
+            "maximum": 999999999999
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     },
     "/segments/{segment_id}/tags": {
@@ -5379,10 +7207,10 @@
         "address_attributes": {
           "type": "object",
           "example": {
-            "zipcode": "012-0009",
+            "zipcode": "000-0000",
             "prefecture_code": 4,
-            "street_name1": "湯沢市",
-            "street_name2": "te"
+            "street_name1": "ＸＸ区ＹＹ１−１ー１",
+            "street_name2": "ビル１Ｆ"
           },
           "properties": {
             "zipcode": {
@@ -5407,17 +7235,17 @@
         },
         "phone1": {
           "type": "string",
-          "example": "03-3000-1111",
+          "example": "03-1234-xxxx",
           "description": "電話番号１"
         },
         "phone2": {
           "type": "string",
-          "example": "090-1234-5678",
+          "example": "090-1234-xxxx",
           "description": "電話番号２"
         },
         "fax": {
           "type": "string",
-          "example": "03-3000-1111",
+          "example": "03-1234-xxxx",
           "description": "FAX"
         },
         "sales_information_attributes": {
@@ -5684,6 +7512,37 @@
         }
       }
     },
+    "updateItemParams": {
+      "required": [
+        "company_id",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "company_id": {
+          "type": "integer",
+          "description": "事業所ID",
+          "example": 1,
+          "minimum": 1,
+          "maximum": 999999999999
+        },
+        "name": {
+          "type": "string",
+          "description": "品目名 (30文字以内)",
+          "example": "新しい品目"
+        },
+        "shortcut1": {
+          "type": "string",
+          "description": "ショートカット１ (20文字以内)",
+          "example": "NEWITEM"
+        },
+        "shortcut2": {
+          "type": "string",
+          "description": "ショートカット２ (20文字以内)",
+          "example": "202"
+        }
+      }
+    },
     "createItemParams": {
       "type": "object",
       "required": [
@@ -5715,7 +7574,7 @@
         }
       }
     },
-    "createWalletableParams": {
+    "walletableCreateParams": {
       "type": "object",
       "required": [
         "name",
@@ -5725,8 +7584,9 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "口座名",
-          "example": "〇〇銀行"
+          "description": "口座名 (255文字以内)",
+          "example": "ＸＸ銀行",
+          "maxLength": 255
         },
         "type": {
           "type": "string",
@@ -5754,8 +7614,102 @@
         },
         "group_name": {
           "type": "string",
-          "description": "決算書表示名（小カテゴリー） 例：売掛金, 受取手形, 未収入金（法人のみ）, 買掛金, 支払手形, 未払金, 預り金, 前受金",
-          "example": "前受金"
+          "description": "決算書表示名（小カテゴリー）　例：売掛金, 受取手形, 未収入金（法人のみ）, 買掛金, 支払手形, 未払金, 預り金, 前受金",
+          "example": "売掛金"
+        }
+      }
+    },
+    "walletableUpdateParams": {
+      "type": "object",
+      "required": [
+        "name",
+        "company_id"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "口座名 (255文字以内)",
+          "example": "ＸＸ銀行",
+          "maxLength": 255
+        },
+        "company_id": {
+          "type": "integer",
+          "description": "事業所ID",
+          "example": 1,
+          "minimum": 1,
+          "maximum": 999999999999
+        }
+      }
+    },
+    "transferParams": {
+      "type": "object",
+      "required": [
+        "to_walletable_id",
+        "to_walletable_type",
+        "from_walletable_id",
+        "from_walletable_type",
+        "amount",
+        "date",
+        "company_id"
+      ],
+      "properties": {
+        "to_walletable_id": {
+          "type": "integer",
+          "description": "振替先口座ID",
+          "example": 1,
+          "minimum": 1,
+          "maximum": 999999999999
+        },
+        "to_walletable_type": {
+          "type": "string",
+          "description": "振替先口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
+          "enum": [
+            "bank_account",
+            "credit_card",
+            "wallet"
+          ],
+          "example": "bank_account"
+        },
+        "from_walletable_id": {
+          "type": "integer",
+          "description": "振替元口座ID",
+          "example": 1,
+          "minimum": 1,
+          "maximum": 999999999999
+        },
+        "from_walletable_type": {
+          "type": "string",
+          "description": "振替元口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
+          "enum": [
+            "bank_account",
+            "credit_card",
+            "wallet"
+          ],
+          "example": "credit_card"
+        },
+        "amount": {
+          "type": "integer",
+          "description": "金額",
+          "example": 5000,
+          "minimum": -999999999999,
+          "maximum": 999999999999
+        },
+        "date": {
+          "type": "string",
+          "description": "振替日 (yyyy-mm-dd)",
+          "example": "2018-01-01"
+        },
+        "company_id": {
+          "type": "integer",
+          "description": "事業所ID",
+          "example": 1,
+          "minimum": 1,
+          "maximum": 999999999999
+        },
+        "description": {
+          "type": "string",
+          "description": "備考",
+          "example": "備考"
         }
       }
     },
@@ -5782,7 +7736,7 @@
         "description": {
           "type": "string",
           "description": "備考",
-          "example": "振込 カ）ABC"
+          "example": "備考"
         },
         "amount": {
           "type": "integer",
@@ -6028,6 +7982,39 @@
         }
       }
     },
+    "sectionsShowResponse": {
+      "required": [
+        "section"
+      ],
+      "type": "object",
+      "properties": {
+        "section": {
+          "required": [
+            "company_id",
+            "id",
+            "name"
+          ],
+          "type": "object",
+          "properties": {
+            "company_id": {
+              "type": "integer",
+              "description": "事業所ID",
+              "example": 1
+            },
+            "name": {
+              "type": "string",
+              "description": "部門名 (30文字以内)",
+              "example": "開発部門"
+            },
+            "id": {
+              "type": "integer",
+              "description": "部門ID",
+              "example": 1
+            }
+          }
+        }
+      }
+    },
     "sectionParams": {
       "type": "object",
       "required": [
@@ -6124,7 +8111,7 @@
         },
         "phone": {
           "type": "string",
-          "example": "03-3000-1111",
+          "example": "03-1234-xxxx",
           "description": "電話番号"
         },
         "contact_name": {
@@ -6145,7 +8132,7 @@
             "zipcode": {
               "type": "string",
               "description": "郵便番号",
-              "example": "012-0009"
+              "example": "000-0000"
             },
             "prefecture_code": {
               "type": "integer",
@@ -6155,12 +8142,12 @@
             "street_name1": {
               "type": "string",
               "description": "市区町村・番地",
-              "example": "湯沢市"
+              "example": "ＸＸ区ＹＹ１−１−１"
             },
             "street_name2": {
               "type": "string",
               "description": "建物名・部屋番号など",
-              "example": "Aビル"
+              "example": "ビル１Ｆ"
             }
           }
         },
@@ -6180,12 +8167,12 @@
             "bank_name": {
               "type": "string",
               "description": "銀行名",
-              "example": "みずほ銀行"
+              "example": "ＸＸ銀行"
             },
             "bank_name_kana": {
               "type": "string",
               "description": "銀行名（カナ）",
-              "example": "ミズホ"
+              "example": "ＸＸ"
             },
             "bank_code": {
               "type": "string",
@@ -6286,7 +8273,7 @@
         },
         "phone": {
           "type": "string",
-          "example": "03-3000-1111",
+          "example": "03-1234-xxxx",
           "description": "電話番号"
         },
         "contact_name": {
@@ -6307,7 +8294,7 @@
             "zipcode": {
               "type": "string",
               "description": "郵便番号",
-              "example": "012-0009"
+              "example": "000-0000"
             },
             "prefecture_code": {
               "type": "integer",
@@ -6317,12 +8304,12 @@
             "street_name1": {
               "type": "string",
               "description": "市区町村・番地",
-              "example": "湯沢市"
+              "example": "ＸＸ区ＹＹ１−１−１"
             },
             "street_name2": {
               "type": "string",
               "description": "建物名・部屋番号など",
-              "example": "Aビル"
+              "example": "ビル１Ｆ"
             }
           }
         },
@@ -6342,12 +8329,12 @@
             "bank_name": {
               "type": "string",
               "description": "銀行名",
-              "example": "みずほ銀行"
+              "example": "ＸＸ銀行"
             },
             "bank_name_kana": {
               "type": "string",
               "description": "銀行名（カナ）",
-              "example": "ミズホ"
+              "example": "ＸＸ"
             },
             "bank_code": {
               "type": "string",
@@ -6445,7 +8432,7 @@
         },
         "phone": {
           "type": "string",
-          "example": "03-3000-1111",
+          "example": "03-1234-xxxx",
           "description": "電話番号"
         },
         "contact_name": {
@@ -6464,7 +8451,7 @@
             "zipcode": {
               "type": "string",
               "description": "郵便番号",
-              "example": "012-0009"
+              "example": "000-0000"
             },
             "prefecture_code": {
               "type": "integer",
@@ -6474,12 +8461,12 @@
             "street_name1": {
               "type": "string",
               "description": "市区町村・番地",
-              "example": "湯沢市"
+              "example": "ＸＸ区ＹＹ１−１−１"
             },
             "street_name2": {
               "type": "string",
               "description": "建物名・部屋番号など",
-              "example": "Aビル"
+              "example": "ビル１Ｆ"
             }
           }
         },
@@ -6499,12 +8486,12 @@
             "bank_name": {
               "type": "string",
               "description": "銀行名",
-              "example": "みずほ銀行"
+              "example": "ＸＸ銀行"
             },
             "bank_name_kana": {
               "type": "string",
               "description": "銀行名（カナ）",
-              "example": "ミズホ"
+              "example": "ＸＸ"
             },
             "bank_code": {
               "type": "string",
@@ -6547,6 +8534,32 @@
               "example": "フリータロウ"
             }
           }
+        }
+      }
+    },
+    "receiptUpdateParams": {
+      "required": [
+        "company_id",
+        "issue_date"
+      ],
+      "properties": {
+        "company_id": {
+          "maximum": 999999999999,
+          "minimum": 1,
+          "type": "integer",
+          "description": "事業所ID",
+          "example": 1
+        },
+        "description": {
+          "maxLength": 255,
+          "type": "string",
+          "description": "メモ (255文字以内)",
+          "example": "メモ"
+        },
+        "issue_date": {
+          "type": "string",
+          "description": "取引日 (yyyy-mm-dd)",
+          "example": "2018-01-01"
         }
       }
     },
@@ -6800,41 +8813,55 @@
         "banks": {
           "type": "array",
           "items": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "integer",
-                "example": 1,
-                "description": "連携サービスID"
-              },
-              "name": {
-                "type": "string",
-                "example": "〇〇銀行",
-                "description": "連携サービス名"
-              },
-              "type": {
-                "type": "string",
-                "enum": [
-                  "bank_account",
-                  "credit_card",
-                  "wallet"
-                ],
-                "example": "bank_account",
-                "description": "連携サービス種別: (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)"
-              },
-              "name_kana": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "example": "ギンコウ",
-                "description": "連携サービス名(カナ)"
-              }
-            }
+            "$ref": "#/definitions/bank"
           }
+        }
+      }
+    },
+    "banksShowResponse": {
+      "type": "object",
+      "required": [
+        "bank"
+      ],
+      "properties": {
+        "bank": {
+          "$ref": "#/definitions/bank"
+        }
+      }
+    },
+    "bank": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 1,
+          "description": "連携サービスID"
+        },
+        "name": {
+          "type": "string",
+          "example": "〇〇銀行",
+          "description": "連携サービス名"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "bank_account",
+            "credit_card",
+            "wallet"
+          ],
+          "example": "bank_account",
+          "description": "連携サービス種別: (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)"
+        },
+        "name_kana": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "example": "ギンコウ",
+          "description": "連携サービス名(カナ)"
         }
       }
     },
@@ -8880,6 +10907,55 @@
         }
       }
     },
+    "section": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "company_id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 1,
+          "description": "部門ID"
+        },
+        "name": {
+          "type": "string",
+          "example": "開発部門",
+          "description": "部門名 (30文字以内)"
+        },
+        "long_name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "example": "開発部門",
+          "description": "正式名称 (255文字以内)"
+        },
+        "company_id": {
+          "type": "integer",
+          "example": 1,
+          "description": "事業所ID"
+        },
+        "shortcut1": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "example": "DEVELOPER",
+          "description": "ショートカット1 (20文字以内)"
+        },
+        "shortcut2": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "example": "123",
+          "description": "ショートカット2 (20文字以内)"
+        }
+      }
+    },
     "sectionsIndexResponse": {
       "type": "object",
       "required": [
@@ -8889,54 +10965,19 @@
         "sections": {
           "type": "array",
           "items": {
-            "type": "object",
-            "required": [
-              "id",
-              "name",
-              "company_id"
-            ],
-            "properties": {
-              "id": {
-                "type": "integer",
-                "example": 1,
-                "description": "部門ID"
-              },
-              "name": {
-                "type": "string",
-                "example": "開発部門",
-                "description": "部門名 (30文字以内)"
-              },
-              "long_name": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "example": "開発部門",
-                "description": "正式名称 (255文字以内)"
-              },
-              "company_id": {
-                "type": "integer",
-                "example": 1,
-                "description": "事業所ID"
-              },
-              "shortcut1": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "example": "DEVELOPER",
-                "description": "ショートカット1 (20文字以内)"
-              },
-              "shortcut2": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "example": "123",
-                "description": "ショートカット2 (20文字以内)"
-              }
-            }
+            "$ref": "#/definitions/section"
           }
+        }
+      }
+    },
+    "sectionsResponse": {
+      "type": "object",
+      "required": [
+        "section"
+      ],
+      "properties": {
+        "section": {
+          "$ref": "#/definitions/section"
         }
       }
     },
@@ -9340,7 +11381,7 @@
         }
       }
     },
-    "itemsCreateResponse": {
+    "itemResponse": {
       "type": "object",
       "required": [
         "item"
@@ -10163,7 +12204,41 @@
         }
       }
     },
-    "tagsCreateResponse": {
+    "tagsParams": {
+      "required": [
+        "company_id",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "company_id": {
+          "maximum": 999999999999,
+          "minimum": 1,
+          "type": "integer",
+          "description": "事業所ID",
+          "example": 1
+        },
+        "name": {
+          "maxLength": 30,
+          "type": "string",
+          "description": "メモタグ名 (30文字以内)",
+          "example": "メモタグ1"
+        },
+        "shortcut1": {
+          "maxLength": 20,
+          "type": "string",
+          "description": "メモタグ検索用 (20文字以内)",
+          "example": "tag1"
+        },
+        "shortcut2": {
+          "maxLength": 20,
+          "type": "string",
+          "description": "メモタグ検索用 (20文字以内)",
+          "example": "t1"
+        }
+      }
+    },
+    "tagsResponse": {
       "type": "object",
       "required": [
         "tag"
@@ -10304,7 +12379,7 @@
             },
             "phone1": {
               "type": "string",
-              "example": "03-1234-5678",
+              "example": "03-1234-xxxx",
               "description": "電話番号１"
             },
             "phone2": {
@@ -10312,7 +12387,7 @@
                 "string",
                 "null"
               ],
-              "example": "090-1234-5678",
+              "example": "090-1234-xxxx",
               "description": "電話番号２"
             },
             "fax": {
@@ -10320,13 +12395,13 @@
                 "string",
                 "null"
               ],
-              "example": "03-1234-5678",
+              "example": "03-1234-xxxx",
               "description": "FAX"
             },
             "zipcode": {
               "type": "string",
               "description": "郵便番号",
-              "example": "012-0009"
+              "example": "000-0000"
             },
             "prefecture_code": {
               "type": "integer",
@@ -10338,12 +12413,12 @@
             "street_name1": {
               "type": "string",
               "description": "市区町村・番地",
-              "example": "湯沢市"
+              "example": "ＸＸ区ＹＹ１−１−１"
             },
             "street_name2": {
               "type": "string",
               "description": "建物名・部屋番号など",
-              "example": "te"
+              "example": "ビル１Ｆ"
             },
             "invoice_layout": {
               "type": "integer",
@@ -10614,7 +12689,7 @@
             },
             "phone1": {
               "type": "string",
-              "example": "03-1234-5678",
+              "example": "03-1234-xxxx",
               "description": "電話番号１"
             },
             "phone2": {
@@ -10622,7 +12697,7 @@
                 "string",
                 "null"
               ],
-              "example": "090-1234-5678",
+              "example": "090-1234-xxxx",
               "description": "電話番号２"
             },
             "fax": {
@@ -10630,13 +12705,13 @@
                 "string",
                 "null"
               ],
-              "example": "03-1234-5678",
+              "example": "03-1234-xxxx",
               "description": "FAX"
             },
             "zipcode": {
               "type": "string",
               "description": "郵便番号",
-              "example": "012-0009"
+              "example": "000-0000"
             },
             "prefecture_code": {
               "type": "integer",
@@ -10646,12 +12721,12 @@
             "street_name1": {
               "type": "string",
               "description": "市区町村・番地",
-              "example": "湯沢市"
+              "example": "ＸＸ区ＹＹ１−１−１"
             },
             "street_name2": {
               "type": "string",
               "description": "建物名・部屋番号など",
-              "example": "te"
+              "example": "ビル１Ｆ"
             },
             "invoice_layout": {
               "type": "integer",
@@ -11099,7 +13174,7 @@
                     "string",
                     "null"
                   ],
-                  "example": "03-0987-6543",
+                  "example": "03-1234-xxxx",
                   "description": "電話番号"
                 },
                 "contact_name": {
@@ -11115,7 +13190,7 @@
                     "string",
                     "null"
                   ],
-                  "example": "email@freee.co.jp",
+                  "example": "contact@example.com",
                   "description": "営業担当者 メールアドレス"
                 },
                 "address_attributes[zipcode]": {
@@ -11123,7 +13198,7 @@
                     "string",
                     "null"
                   ],
-                  "example": "012-0009",
+                  "example": "000-0000",
                   "description": "郵便番号"
                 },
                 "address_attributes[prefecture_code]": {
@@ -11138,7 +13213,7 @@
                     "string",
                     "null"
                   ],
-                  "example": "湯沢市",
+                  "example": "ＸＸ区ＹＹ１−１−１",
                   "description": "市区町村・番地"
                 },
                 "address_attributes[street_name2]": {
@@ -11146,7 +13221,7 @@
                     "string",
                     "null"
                   ],
-                  "example": "Aビル",
+                  "example": "ビル１Ｆ",
                   "description": "建物名・部屋番号など"
                 },
                 "partner_doc_setting_attributes[sending_method]": {
@@ -11168,7 +13243,7 @@
                     "string",
                     "null"
                   ],
-                  "example": "みずほ銀行",
+                  "example": "ＸＸ銀行",
                   "description": "銀行名"
                 },
                 "partner_bank_account_attributes[bank_name_kana]": {
@@ -11176,7 +13251,7 @@
                     "string",
                     "null"
                   ],
-                  "example": "ミズホ",
+                  "example": "ＸＸ",
                   "description": "銀行名（カナ）"
                 },
                 "partner_bank_account_attributes[bank_code]": {
@@ -11287,7 +13362,7 @@
         }
       }
     },
-    "taxesCodesResponse": {
+    "taxesCodesIndexResponse": {
       "type": "object",
       "required": [
         "taxes"
@@ -11296,30 +13371,44 @@
         "taxes": {
           "type": "array",
           "items": {
-            "type": "object",
-            "required": [
-              "code",
-              "name",
-              "name_ja"
-            ],
-            "properties": {
-              "code": {
-                "type": "integer",
-                "example": 21,
-                "description": "税区分コード"
-              },
-              "name": {
-                "type": "string",
-                "example": "sales_with_tax",
-                "description": "税区分名"
-              },
-              "name_ja": {
-                "type": "string",
-                "example": "課税売上",
-                "description": "税区分名（日本語表示用）"
-              }
-            }
+            "$ref": "#/definitions/taxesCode"
           }
+        }
+      }
+    },
+    "taxesCodesShowResponse": {
+      "type": "object",
+      "required": [
+        "tax"
+      ],
+      "properties": {
+        "tax": {
+          "$ref": "#/definitions/taxesCode"
+        }
+      }
+    },
+    "taxesCode": {
+      "type": "object",
+      "required": [
+        "code",
+        "name",
+        "name_ja"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "example": 21,
+          "description": "税区分コード"
+        },
+        "name": {
+          "type": "string",
+          "example": "sales_with_tax",
+          "description": "税区分名"
+        },
+        "name_ja": {
+          "type": "string",
+          "example": "課税売上",
+          "description": "税区分名（日本語表示用）"
         }
       }
     },
@@ -11391,53 +13480,68 @@
           "type": "array",
           "items": {
             "type": "object",
-            "required": [
-              "id",
-              "name",
-              "bank_id",
-              "type"
-            ],
-            "properties": {
-              "id": {
-                "type": "integer",
-                "example": 1,
-                "description": "口座ID"
-              },
-              "name": {
-                "type": "string",
-                "example": "三井住友（契約者番号）",
-                "description": "口座名 (255文字以内)"
-              },
-              "bank_id": {
-                "type": [
-                  "integer",
-                  "null"
-                ],
-                "example": 1,
-                "description": "サービスID"
-              },
-              "type": {
-                "type": "string",
-                "enum": [
-                  "bank_account",
-                  "credit_card",
-                  "wallet"
-                ],
-                "example": "bank_account",
-                "description": "口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)"
-              },
-              "walletable_balance": {
-                "type": "integer",
-                "example": 1340261,
-                "description": "登録残高"
-              },
-              "last_balance": {
-                "type": "integer",
-                "example": 1565583,
-                "description": "同期残高"
-              }
-            }
+            "$ref": "#/definitions/walletable"
           }
+        }
+      }
+    },
+    "walletablesResponse": {
+      "type": "object",
+      "required": [
+        "walletable"
+      ],
+      "properties": {
+        "walletable": {
+          "$ref": "#/definitions/walletable"
+        }
+      }
+    },
+    "walletable": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "bank_id",
+        "type"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 1,
+          "description": "口座ID"
+        },
+        "name": {
+          "type": "string",
+          "example": "freee銀行",
+          "description": "口座名 (255文字以内)"
+        },
+        "bank_id": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "example": 3,
+          "description": "サービスID"
+        },
+        "type": {
+          "type": "string",
+          "example": "bank_account",
+          "description": "口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
+          "enum": [
+            "bank_account",
+            "credit_card",
+            "wallet"
+          ]
+        },
+        "last_balance": {
+          "type": "integer",
+          "example": 1565583,
+          "description": "同期残高"
+        },
+        "walletable_balance": {
+          "type": "integer",
+          "example": 1340261,
+          "description": "登録残高"
         }
       }
     },
@@ -11486,23 +13590,23 @@
         "wallet_txns": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/walletTxns"
+            "$ref": "#/definitions/walletTxn"
           }
         }
       }
     },
-    "walletTxnsCreateResponse": {
+    "walletTxnsShowResponse": {
       "type": "object",
       "required": [
         "wallet_txn"
       ],
       "properties": {
         "wallet_txn": {
-          "$ref": "#/definitions/walletTxns"
+          "$ref": "#/definitions/walletTxn"
         }
       }
     },
-    "walletTxns": {
+    "walletTxn": {
       "type": "object",
       "required": [
         "id",
@@ -11514,7 +13618,8 @@
         "due_amount",
         "entry_side",
         "walletable_id",
-        "walletable_type"
+        "walletable_type",
+        "status"
       ],
       "properties": {
         "id": {
@@ -11575,6 +13680,11 @@
           "type": "string",
           "example": "振込 カ）ABC",
           "description": "備考"
+        },
+        "status": {
+          "type": "integer",
+          "example": "振込 カ）ABC",
+          "description": "明細のステータス（消込待ち: 1, 消込済み: 2, 無視: 3, 消込中: 4）"
         }
       }
     },
@@ -11592,7 +13702,7 @@
         }
       }
     },
-    "transfersCreateResponse": {
+    "transfersResponse": {
       "type": "object",
       "required": [
         "transfer"
@@ -11634,7 +13744,7 @@
         },
         "date": {
           "type": "string",
-          "example": "2013-01-01",
+          "example": "2019-11-01",
           "description": "振替日 (yyyy-mm-dd)"
         },
         "from_walletable_type": {
@@ -11682,6 +13792,117 @@
         }
       }
     },
+    "user": {
+      "type": "object",
+      "required": [
+        "id",
+        "email"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "ユーザーID",
+          "example": 1
+        },
+        "email": {
+          "type": "string",
+          "description": "メールアドレス",
+          "example": "example@freee.co.jp"
+        },
+        "display_name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "表示名",
+          "example": "山田太郎"
+        },
+        "first_name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "氏名（名）",
+          "example": "太郎"
+        },
+        "last_name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "氏名（姓）",
+          "example": "山田"
+        },
+        "first_name_kana": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "氏名（カナ・名）",
+          "example": "タロウ"
+        },
+        "last_name_kana": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "氏名（カナ・姓）",
+          "example": "ヤマダ"
+        }
+      }
+    },
+    "usersIndexResponse": {
+      "properties": {
+        "users": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/user"
+          }
+        }
+      }
+    },
+    "userUpdateParams": {
+      "type": "object",
+      "properties": {
+        "display_name": {
+          "type": "string",
+          "description": "表示名 (20文字以内)",
+          "example": "山田太郎",
+          "maxLength": 20
+        },
+        "first_name": {
+          "type": "string",
+          "description": "氏名（名） (20文字以内)",
+          "example": "太郎",
+          "maxLength": 20
+        },
+        "last_name": {
+          "type": "string",
+          "description": "氏名（姓） (20文字以内)",
+          "example": "山田",
+          "maxLength": 20
+        },
+        "first_name_kana": {
+          "type": "string",
+          "description": "氏名（カナ・名） (20文字以内)",
+          "example": "タロウ",
+          "maxLength": 20
+        },
+        "last_name_kana": {
+          "type": "string",
+          "description": "氏名（カナ・姓） (20文字以内)",
+          "example": "ヤマダ",
+          "maxLength": 20
+        }
+      }
+    },
+    "usersUpdateResponse": {
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/user"
+        }
+      }
+    },
     "usersMeResponse": {
       "type": "object",
       "required": [
@@ -11702,7 +13923,7 @@
             },
             "email": {
               "type": "string",
-              "example": "example@freee.co.jp",
+              "example": "contaxt@example.com",
               "description": "メールアドレス"
             },
             "display_name": {
@@ -11763,7 +13984,7 @@
                   },
                   "display_name": {
                     "type": "string",
-                    "example": "CFO株式会社",
+                    "example": "freee株式会社",
                     "description": "表示名"
                   },
                   "role": {
@@ -12061,110 +14282,127 @@
         }
       }
     },
-    "receiptCreateResponse": {
+    "receipt": {
       "type": "object",
       "required": [
-        "receipt"
+        "id",
+        "status",
+        "mime_type",
+        "origin",
+        "created_at",
+        "file_src",
+        "user"
       ],
       "properties": {
-        "receipt": {
+        "id": {
+          "type": "integer",
+          "example": 1,
+          "description": "証憑ID"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "unconfirmed",
+            "confirmed",
+            "deleted",
+            "ignored"
+          ],
+          "example": "unconfirmed",
+          "description": "ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)"
+        },
+        "description": {
+          "type": "string",
+          "example": "タクシー利用",
+          "description": "メモ"
+        },
+        "mime_type": {
+          "type": "string",
+          "example": "image/png",
+          "description": "MIMEタイプ"
+        },
+        "issue_date": {
+          "type": "string",
+          "example": "2019-01-01",
+          "description": "発生日"
+        },
+        "origin": {
+          "type": "string",
+          "enum": [
+            "unknown",
+            "web",
+            "mobile_camera",
+            "mobile_album",
+            "scansnap",
+            "scannable",
+            "dropbox",
+            "mail",
+            "safety_contact_file",
+            "public_api"
+          ],
+          "example": "public_api",
+          "description": "アップロード元種別"
+        },
+        "created_at": {
+          "type": "string",
+          "example": "2018-09-12T18:30:24+09:00",
+          "description": "作成日時（ISO8601形式）"
+        },
+        "file_src": {
+          "type": "string",
+          "description": "ファイルのURL（freeeにログインした状態でのみ閲覧可能です。）",
+          "example": "https://www.freee.co.jp/api/p/receipts/revisions/1234xxxxx/image?width=300"
+        },
+        "user": {
           "type": "object",
           "required": [
             "id",
-            "status",
-            "mime_type",
-            "origin",
-            "created_at",
-            "user"
+            "email"
           ],
           "properties": {
             "id": {
               "type": "integer",
               "example": 1,
-              "description": "証憑ID"
+              "description": "ユーザID"
             },
-            "status": {
+            "email": {
               "type": "string",
-              "enum": [
-                "unconfirmed",
-                "confirmed",
-                "deleted",
-                "ignored"
-              ],
-              "example": "unconfirmed",
-              "description": "ステータス"
+              "example": "contact@example.com",
+              "description": "メールアドレス"
             },
-            "description": {
+            "display_name": {
               "type": [
                 "string",
                 "null"
               ],
-              "example": "タクシー利用",
-              "description": "メモ"
-            },
-            "mime_type": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "example": "image/png",
-              "description": "MIMEタイプ"
-            },
-            "issue_date": {
-              "type": "string",
-              "example": "2019-01-01",
-              "description": "発生日"
-            },
-            "origin": {
-              "type": "string",
-              "enum": [
-                "unknown",
-                "web",
-                "mobile_camera",
-                "mobile_album",
-                "scansnap",
-                "scannable",
-                "dropbox",
-                "mail",
-                "safety_contact_file",
-                "public_api"
-              ],
-              "example": "public_api",
-              "description": "アップロード元種別"
-            },
-            "created_at": {
-              "type": "string",
-              "example": "2018-09-12T18:30:24+09:00",
-              "description": "作成日時（ISO8601形式）"
-            },
-            "user": {
-              "type": "object",
-              "required": [
-                "id",
-                "email"
-              ],
-              "properties": {
-                "id": {
-                  "type": "integer",
-                  "example": 1,
-                  "description": "ユーザID"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "user@example.com",
-                  "description": "メールアドレス"
-                },
-                "display_name": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "example": "フリー太郎",
-                  "description": "表示名"
-                }
-              }
+              "example": "フリー太郎",
+              "description": "表示名"
             }
           }
+        }
+      }
+    },
+    "receiptsIndexResponse": {
+      "required": [
+        "receipts"
+      ],
+      "type": "object",
+      "properties": {
+        "receipts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/receipt"
+          }
+        }
+      }
+    },
+    "receiptsResponse": {
+      "required": [
+        "receipt"
+      ],
+      "type": "object",
+      "properties": {
+        "receipt": {
+          "$ref": "#/definitions/receipt"
         }
       }
     },
@@ -12245,6 +14483,20 @@
         }
       }
     },
+    "expenseApplicationsIndexResponse": {
+      "type": "object",
+      "required": [
+        "expense_applications"
+      ],
+      "properties": {
+        "expense_applications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/expenseApplication"
+          }
+        }
+      }
+    },
     "expenseApplicationsResponse": {
       "type": "object",
       "required": [
@@ -12284,7 +14536,10 @@
           "example": "大阪出張"
         },
         "issue_date": {
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "申請日 (yyyy-mm-dd)",
           "example": "2018-07-19"
         },
@@ -12312,7 +14567,10 @@
           ]
         },
         "section_id": {
-          "type": "integer",
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "部門ID",
           "example": 101
         },
@@ -12382,6 +14640,17 @@
         }
       }
     },
+    "expenseApplicationLineTemplatesResponse": {
+      "required": [
+        "expense_application_line_template"
+      ],
+      "type": "object",
+      "properties": {
+        "expense_application_line_template": {
+          "$ref": "#/definitions/expenseApplicationLineTemplate"
+        }
+      }
+    },
     "expenseApplicationLineTemplate": {
       "type": "object",
       "required": [
@@ -12401,10 +14670,20 @@
           "description": "経費科目名",
           "example": "交通費"
         },
+        "account_item_id": {
+          "type": "integer",
+          "description": "勘定科目ID",
+          "example": 1
+        },
         "account_item_name": {
           "type": "string",
           "description": "勘定科目名",
           "example": "旅費交通費"
+        },
+        "tax_code": {
+          "type": "integer",
+          "description": "税区分コード",
+          "example": 1
         },
         "tax_name": {
           "type": "string",
@@ -12667,6 +14946,56 @@
       "properties": {
         "deal": {
           "$ref": "#/definitions/deals"
+        }
+      }
+    },
+    "expenseApplicationLineTemplateParams": {
+      "required": [
+        "company_id",
+        "name",
+        "account_item_id",
+        "tax_code"
+      ],
+      "type": "object",
+      "properties": {
+        "company_id": {
+          "maximum": 999999999999,
+          "type": "integer",
+          "description": "事業所ID",
+          "example": 1
+        },
+        "name": {
+          "type": "string",
+          "description": "経費科目名",
+          "example": "交通費",
+          "maxLength": 1000
+        },
+        "account_items_id": {
+          "type": "integer",
+          "description": "勘定科目ID",
+          "example": 1
+        },
+        "item_id": {
+          "type": "integer",
+          "description": "品目ID",
+          "example": 1
+        },
+        "tax_code": {
+          "type": "integer",
+          "description": "税区分コード（税区分のdisplay_categoryがtax_5: 5%表示の税区分, tax_r8: 軽減税率8%表示の税区分に該当するtax_codeのみ利用可能です。税区分のdisplay_categoryは /taxes/companies/{:company_id}のAPIから取得可能です。）",
+          "example": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "経費科目の説明",
+          "example": "電車、バス、飛行機などの交通費",
+          "maxLength": 1000
+        },
+        "line_description": {
+          "type": "string",
+          "description": "内容の補足",
+          "example": "移動区間",
+          "maxLength": 1000
         }
       }
     },
@@ -13120,7 +15449,7 @@
             "string",
             "null"
           ],
-          "example": "012-0009",
+          "example": "000-0000",
           "description": "郵便番号"
         },
         "partner_prefecture_code": {
@@ -13175,7 +15504,7 @@
             "string",
             "null"
           ],
-          "example": "141-0031",
+          "example": "000-0000",
           "description": "郵便番号"
         },
         "company_prefecture_code": {
@@ -13201,7 +15530,7 @@
             "string",
             "null"
           ],
-          "example": "品川区西五反田２丁目８−１",
+          "example": "ＸＸ区ＸＸ１−１−１",
           "description": "市区町村・番地"
         },
         "company_address2": {
@@ -13209,7 +15538,7 @@
             "string",
             "null"
           ],
-          "example": "五反田ファーストビル 9F",
+          "example": "ビル1F",
           "description": "建物名・部屋番号など"
         },
         "company_contact_info": {
@@ -13235,7 +15564,7 @@
             "string",
             "null"
           ],
-          "example": "楽天銀行 第一営業支店 724937",
+          "example": "ＸＸ銀行ＹＹ支店1111111",
           "description": "支払口座"
         },
         "message": {
@@ -13623,7 +15952,7 @@
         },
         "company_zipcode": {
           "type": "string",
-          "example": "141-0031",
+          "example": "000-0000",
           "description": "郵便番号 (デフォルトは事業所設定情報が補完されます)"
         },
         "company_prefecture_code": {
@@ -13635,12 +15964,12 @@
         },
         "company_address1": {
           "type": "string",
-          "example": "品川区西五反田２丁目８−１",
+          "example": "ＸＸ区ＹＹ１−１−１",
           "description": "市区町村・番地 (デフォルトは事業所設定情報が補完されます)"
         },
         "company_address2": {
           "type": "string",
-          "example": "五反田ファーストビル 9F",
+          "example": "ビル1F",
           "description": "建物名・部屋番号など (デフォルトは事業所設定情報が補完されます)"
         },
         "company_contact_info": {
@@ -13659,7 +15988,7 @@
         },
         "payment_bank_info": {
           "type": "string",
-          "example": "楽天銀行 第一営業支店 724937",
+          "example": "ＸＸ銀行ＹＹ支店1111111",
           "description": "支払口座"
         },
         "use_virtual_transfer_account": {
@@ -13911,7 +16240,7 @@
         },
         "company_zipcode": {
           "type": "string",
-          "example": "141-0031",
+          "example": "000-0000",
           "description": "郵便番号 (デフォルトは事業所設定情報が補完されます)"
         },
         "company_prefecture_code": {
@@ -13923,12 +16252,12 @@
         },
         "company_address1": {
           "type": "string",
-          "example": "品川区西五反田２丁目８−１",
+          "example": "ＸＸ区ＹＹ１−１ー１",
           "description": "市区町村・番地 (デフォルトは事業所設定情報が補完されます)"
         },
         "company_address2": {
           "type": "string",
-          "example": "五反田ファーストビル 9F",
+          "example": "ビル 1F",
           "description": "建物名・部屋番号など (デフォルトは事業所設定情報が補完されます)"
         },
         "company_contact_info": {
@@ -13947,7 +16276,7 @@
         },
         "payment_bank_info": {
           "type": "string",
-          "example": "楽天銀行 第一営業支店 724937",
+          "example": "ＸＸ銀行ＹＹ支店 1111111",
           "description": "支払口座"
         },
         "use_virtual_transfer_account": {
