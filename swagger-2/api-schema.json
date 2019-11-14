@@ -1443,7 +1443,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の請求書を更新する</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul> <li> <p>取引先ID（partner_id）と取引先の名称項目（partner_name, partner_long_name, partner_zipcode, partner_prefecture_code, partner_address1, partner_address2）の更新はできません。名称項目を変更したい場合は取引先APIをご利用ください。</p> </li> \n<li> <p>[重要] <a rel=\"noopener noreferrer\" href=\"https://developer.freee.co.jp/news/1783\" target=\"_blank\">parnter_idは必須化予定</a>です。parnter_idを必ず指定してご利用ください。</p> </li>\n<li> <p>入金済みの請求書に対する金額関連の変更はできません。</p> </li> \n<li> <p>請求書ステータスは確定(issue)のみ指定可能です。請求書ステータスを確定する時のみ指定してください。</p> </li> \n<li> <p>請求書WFを利用している場合、承認済み請求書は承認権限を持たないユーザーでは更新できません。</p> </li> \n<li> <p>更新後の請求書ステータス(invoice_status)が下書き以外の場合、請求内容の合計金額が0円以上になる必要があります。</p></li>\n<li><p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。また「partner_code、partner_id、partner_name」は同時に指定することはできません。</p></li></ul>"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の請求書を更新する</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul> <li> <p>取引先ID（partner_id）と取引先の名称項目（partner_name, partner_long_name, partner_zipcode, partner_prefecture_code, partner_address1, partner_address2）の更新はできません。名称項目を変更したい場合は取引先APIをご利用ください。</p> </li>\n<li> <p>[重要] <a rel=\"noopener noreferrer\" href=\"https://developer.freee.co.jp/news/1783\" target=\"_blank\">parnter_idは必須化予定</a>です。parnter_idを必ず指定してご利用ください。</p> </li>\n<li> <p>入金済みの請求書に対する金額関連の変更はできません。</p> </li>\n<li> <p>請求書ステータスは確定(issue)のみ指定可能です。請求書ステータスを確定する時のみ指定してください。</p> </li>\n<li> <p>請求書WFを利用している場合、承認済み請求書は承認権限を持たないユーザーでは更新できません。</p> </li>\n<li> <p>更新後の請求書ステータス(invoice_status)が下書き以外の場合、請求内容の合計金額が0円以上になる必要があります。</p></li>\n<li><p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。また「partner_code、partner_id、partner_name」は同時に指定することはできません。</p></li></ul>"
       },
       "delete": {
         "tags": [
@@ -1688,7 +1688,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引（収入／支出）を作成する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>due_date : 支払期日</p>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n\n<li>\n<p>type</p>\n\n<ul>\n<li>income : 収入</li>\n\n<li>expense : 支出</li>\n</ul>\n</li>\n\n<li>\n<p>ref_number : 管理番号</p>\n</li>\n\n<li>\n<p>details : 取引の明細行</p>\n</li>\n\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n\n<li>\n<p>from_walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : 現金</li>\n\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>\n<p>tax_idは廃止予定です。tax_codeをご利用ください。</p>\n</li>\n\n<li>\n<p>tax_code, tax_idはどちらかの指定が必須です。両方指定した場合はtax_codeが優先されます。</p>\n</li>\n<p><li>本APIでは+更新行(renews)の操作ができません。+更新行の作成APIをご利用ください。</p></li>\n\n<p><li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</p></li>\n\n<li>\n<p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</p></li>\n</ul>\n\n"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引（収入／支出）を作成する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>due_date : 支払期日</p>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n\n<li>\n<p>type</p>\n\n<ul>\n<li>income : 収入</li>\n\n<li>expense : 支出</li>\n</ul>\n</li>\n\n<li>\n<p>ref_number : 管理番号</p>\n</li>\n\n<li>\n<p>details : 取引の明細行</p>\n</li>\n\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n\n<li>\n<p>receipt_ids : 証憑ファイルID</p>\n</li>\n\n<li>\n<p>from_walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : 現金</li>\n\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>\n<p>tax_idは廃止予定です。tax_codeをご利用ください。</p>\n</li>\n\n<li>\n<p>tax_code, tax_idはどちらかの指定が必須です。両方指定した場合はtax_codeが優先されます。</p>\n</li>\n<p><li>本APIでは+更新行(renews)の操作ができません。+更新行の作成APIをご利用ください。</p></li>\n\n<p><li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</p></li>\n\n<li>\n<p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</p></li>\n</ul>\n\n"
       }
     },
     "/deals/{id}": {
@@ -1806,7 +1806,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引（収入／支出）を更新する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>due_date : 支払期日</p>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n\n<li>\n<p>type</p>\n\n<ul>\n<li>income : 収入</li>\n\n<li>expense : 支出</li>\n</ul>\n</li>\n\n<li>\n<p>details : 取引の明細行</p>\n</li>\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>本APIでは支払行(payments)の操作ができません。支払行の作成・更新・削除APIをご利用ください。</li>\n<li>本APIでは+更新行(renews)の操作ができません。+更新行の作成・更新・削除APIをご利用ください。</li>\n\n<li>本APIでは収入／支出の切替えができません。既存の取引を削除後、再度作成してください。</li>\n\n<li>本APIで取引を更新すると、消費税の計算方法は必ず内税方式が選択されます。</li>\n\n<li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</ul>"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引（収入／支出）を更新する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>due_date : 支払期日</p>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n\n<li>\n<p>type</p>\n\n<ul>\n<li>income : 収入</li>\n\n<li>expense : 支出</li>\n</ul>\n</li>\n\n<li>\n<p>details : 取引の明細行</p>\n</li>\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n<li>\n<p>receipt_ids : 証憑ファイルID</p>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>本APIでは支払行(payments)の操作ができません。支払行の作成・更新・削除APIをご利用ください。</li>\n<li>本APIでは+更新行(renews)の操作ができません。+更新行の作成・更新・削除APIをご利用ください。</li>\n\n<li>本APIでは収入／支出の切替えができません。既存の取引を削除後、再度作成してください。</li>\n\n<li>本APIで取引を更新すると、消費税の計算方法は必ず内税方式が選択されます。</li>\n\n<li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</ul>"
       },
       "delete": {
         "tags": [
@@ -4626,7 +4626,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の貸借対照表を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_item_name: 親の勘定科目名</p>\n</li>\n<li>\n<p>opening_balance : 期首残高 </p>\n</li>\n\n<li>\n<p>debit_amount : 借方金額 </p>\n</li>\n<li>\n<p>credit_amount:  貸方金額 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>composition_ratio : 構成比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul> <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li> <li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li> </ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_bs?company_id=1&amp;fiscal_year=2017&amp;breakdown_display_type=partner</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_bs&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2017,\n      &quot;breakdown_display_type&quot; : &quot;partner&quot;,\n      &quot;created_at&quot; : &quot;2018-05-01 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1000,\n        &quot;account_item_name&quot; : &quot;現金&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;parent_account_item_id&quot; : 100;\n        &quot;parent_account_item_name&quot; : &quot;流動資産&quot;,\n        &quot;opening_balance&quot; : 100000,\n        &quot;debit_amount&quot; : 50000,\n        &quot;credit_amount&quot; : 20000,\n        &quot;closing_balance&quot; : 130000,\n        &quot;composition_ratio&quot; : 0.25\n        &quot;partners&quot; : [{\n          &quot;id&quot; : 123,\n          &quot;name&quot; : &quot;freee&quot;,\n          &quot;long_name&quot; : &quot;freee株式会社&quot;,\n          &quot;opening_balance&quot; : 100000,\n          &quot;debit_amount&quot; : 50000,\n          &quot;credit_amount&quot; : 20000,\n          &quot;closing_balance&quot; : 130000,\n          &quot;composition_ratio&quot; : 0.25\n          },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の貸借対照表を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_item_name: 親の勘定科目名</p>\n</li>\n<li>\n<p>opening_balance : 期首残高 </p>\n</li>\n\n<li>\n<p>debit_amount : 借方金額 </p>\n</li>\n<li>\n<p>credit_amount:  貸方金額 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>composition_ratio : 構成比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul> <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li> <li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li> <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>  </ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_bs?company_id=1&amp;fiscal_year=2017&amp;breakdown_display_type=partner</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_bs&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2017,\n      &quot;breakdown_display_type&quot; : &quot;partner&quot;,\n      &quot;created_at&quot; : &quot;2018-05-01 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1000,\n        &quot;account_item_name&quot; : &quot;現金&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;parent_account_item_id&quot; : 100;\n        &quot;parent_account_item_name&quot; : &quot;流動資産&quot;,\n        &quot;opening_balance&quot; : 100000,\n        &quot;debit_amount&quot; : 50000,\n        &quot;credit_amount&quot; : 20000,\n        &quot;closing_balance&quot; : 130000,\n        &quot;composition_ratio&quot; : 0.25\n        &quot;partners&quot; : [{\n          &quot;id&quot; : 123,\n          &quot;name&quot; : &quot;freee&quot;,\n          &quot;long_name&quot; : &quot;freee株式会社&quot;,\n          &quot;opening_balance&quot; : 100000,\n          &quot;debit_amount&quot; : 50000,\n          &quot;credit_amount&quot; : 20000,\n          &quot;closing_balance&quot; : 130000,\n          &quot;composition_ratio&quot; : 0.25\n          },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n"
       }
     },
     "/reports/trial_bs_two_years": {
@@ -4747,7 +4747,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の貸借対照表(前年比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_item_name: 親の勘定科目名</p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul> <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li> <li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li> </ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_bs_two_years?company_id=1&amp;fiscal_year=2017</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_bs_two_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2017,\n      &quot;created_at&quot; : &quot;2018-05-01 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1000,\n        &quot;account_item_name&quot; : &quot;現金&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;parent_account_item_id&quot; : 100;\n        &quot;parent_account_item_name&quot; : &quot;流動資産&quot;,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n\n      },\n      ...\n      ]\n    }\n}</code></pre>\n"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の貸借対照表(前年比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_item_name: 親の勘定科目名</p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul> <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li> <li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li> <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>  </ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_bs_two_years?company_id=1&amp;fiscal_year=2017</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_bs_two_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2017,\n      &quot;created_at&quot; : &quot;2018-05-01 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1000,\n        &quot;account_item_name&quot; : &quot;現金&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;parent_account_item_id&quot; : 100;\n        &quot;parent_account_item_name&quot; : &quot;流動資産&quot;,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n\n      },\n      ...\n      ]\n    }\n}</code></pre>\n"
       }
     },
     "/reports/trial_bs_three_years": {
@@ -4868,7 +4868,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の貸借対照表(３期間比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_item_name: 親の勘定科目名</p>\n</li>\n<li>\n<p>two_years_before_closing_balance:  前々年度期末残高 </p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>year_on_year : 前年比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul> <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li> <li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li> </ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_bs_three_years?company_id=1&amp;fiscal_year=2017</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_bs_three_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2017,\n      &quot;created_at&quot; : &quot;2018-05-01 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1000,\n        &quot;account_item_name&quot; : &quot;現金&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;parent_account_item_id&quot; : 100;\n        &quot;parent_account_item_name&quot; : &quot;流動資産&quot;,\n        &quot;two_year_before_closing_balance&quot; : 50000,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n      },\n      ...\n      ]\n    }\n}</code></pre>\n"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の貸借対照表(３期間比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_item_name: 親の勘定科目名</p>\n</li>\n<li>\n<p>two_years_before_closing_balance:  前々年度期末残高 </p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>year_on_year : 前年比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul> <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li> <li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li> <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>  </ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_bs_three_years?company_id=1&amp;fiscal_year=2017</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_bs_three_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2017,\n      &quot;created_at&quot; : &quot;2018-05-01 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1000,\n        &quot;account_item_name&quot; : &quot;現金&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;parent_account_item_id&quot; : 100;\n        &quot;parent_account_item_name&quot; : &quot;流動資産&quot;,\n        &quot;two_year_before_closing_balance&quot; : 50000,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n      },\n      ...\n      ]\n    }\n}</code></pre>\n"
       }
     },
     "/reports/trial_pl": {
@@ -5007,7 +5007,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_item_name: 親の勘定科目名</p>\n</li>\n<li>\n<p>opening_balance : 期首残高 </p>\n</li>\n\n<li>\n<p>debit_amount : 借方金額 </p>\n</li>\n<li>\n<p>credit_amount:  貸方金額 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>composition_ratio : 構成比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul> <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li> <li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li> </ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl?company_id=1&amp;fiscal_year=2017&amp;breakdown_display_type=partner</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2017,\n      &quot;breakdown_display_type&quot; : &quot;partner&quot;,\n      &quot;created_at&quot; : &quot;2018-05-01 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;parent_account_item_id&quot; : 100;\n        &quot;parent_account_item_name&quot; : &quot;営業収益&quot;,\n        &quot;opening_balance&quot; : 100000,\n        &quot;debit_amount&quot; : 50000,\n        &quot;credit_amount&quot; : 20000,\n        &quot;closing_balance&quot; : 130000,\n        &quot;composition_ratio&quot; : 0.25\n        &quot;partners&quot; : [{\n          &quot;id&quot; : 123,\n          &quot;name&quot; : &quot;freee&quot;,\n          &quot;long_name&quot; : &quot;freee株式会社&quot;,\n          &quot;opening_balance&quot; : 100000,\n          &quot;debit_amount&quot; : 50000,\n          &quot;credit_amount&quot; : 20000,\n          &quot;closing_balance&quot; : 130000,\n          &quot;composition_ratio&quot; : 0.25\n          },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_item_name: 親の勘定科目名</p>\n</li>\n<li>\n<p>opening_balance : 期首残高 </p>\n</li>\n\n<li>\n<p>debit_amount : 借方金額 </p>\n</li>\n<li>\n<p>credit_amount:  貸方金額 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>composition_ratio : 構成比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul> <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li> <li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li> <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>  </ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl?company_id=1&amp;fiscal_year=2017&amp;breakdown_display_type=partner</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2017,\n      &quot;breakdown_display_type&quot; : &quot;partner&quot;,\n      &quot;created_at&quot; : &quot;2018-05-01 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;parent_account_item_id&quot; : 100;\n        &quot;parent_account_item_name&quot; : &quot;営業収益&quot;,\n        &quot;opening_balance&quot; : 100000,\n        &quot;debit_amount&quot; : 50000,\n        &quot;credit_amount&quot; : 20000,\n        &quot;closing_balance&quot; : 130000,\n        &quot;composition_ratio&quot; : 0.25\n        &quot;partners&quot; : [{\n          &quot;id&quot; : 123,\n          &quot;name&quot; : &quot;freee&quot;,\n          &quot;long_name&quot; : &quot;freee株式会社&quot;,\n          &quot;opening_balance&quot; : 100000,\n          &quot;debit_amount&quot; : 50000,\n          &quot;credit_amount&quot; : 20000,\n          &quot;closing_balance&quot; : 130000,\n          &quot;composition_ratio&quot; : 0.25\n          },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n"
       }
     },
     "/reports/trial_pl_two_years": {
@@ -5146,7 +5146,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書(前年比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_item_name: 親の勘定科目名</p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>year_on_year : 前年比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul> <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li> <li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li> </ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_two_years?company_id=1&amp;fiscal_year=2017</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_two_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2017,\n      &quot;created_at&quot; : &quot;2018-05-01 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;parent_account_item_id&quot; : 100;\n        &quot;parent_account_item_name&quot; : &quot;営業収益&quot;,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n\n      },\n      ...\n      ]\n    }\n}</code></pre>\n"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書(前年比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_item_name: 親の勘定科目名</p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>year_on_year : 前年比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul> <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li> <li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li> <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>  </ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_two_years?company_id=1&amp;fiscal_year=2017</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_two_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2017,\n      &quot;created_at&quot; : &quot;2018-05-01 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;parent_account_item_id&quot; : 100;\n        &quot;parent_account_item_name&quot; : &quot;営業収益&quot;,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n\n      },\n      ...\n      ]\n    }\n}</code></pre>\n"
       }
     },
     "/reports/trial_pl_three_years": {
@@ -5285,7 +5285,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書(３期間比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_item_name: 親の勘定科目名</p>\n</li>\n<li>\n<p>two_years_before_closing_balance:  前々年度期末残高 </p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>year_on_year : 前年比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul> <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li> <li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li> </ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_three_years?company_id=1&fiscal_year=2017</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_three_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2017,\n      &quot;created_at&quot; : &quot;2018-05-01 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;parent_account_item_id&quot; : 100;\n        &quot;parent_account_item_name&quot; : &quot;営業収益&quot;,\n        &quot;two_year_before_closing_balance&quot; : 50000,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n      },\n      ...\n      ]\n    }\n}</code></pre>\n"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書(３期間比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_item_name: 親の勘定科目名</p>\n</li>\n<li>\n<p>two_years_before_closing_balance:  前々年度期末残高 </p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>year_on_year : 前年比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul> <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li> <li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li> <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>  </ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_three_years?company_id=1&fiscal_year=2017</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_three_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2017,\n      &quot;created_at&quot; : &quot;2018-05-01 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;parent_account_item_id&quot; : 100;\n        &quot;parent_account_item_name&quot; : &quot;営業収益&quot;,\n        &quot;two_year_before_closing_balance&quot; : 50000,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n      },\n      ...\n      ]\n    }\n}</code></pre>\n"
       }
     },
     "/reports/trial_pl_sections": {
@@ -5424,7 +5424,7 @@
             "description": "Internal Server Error"
           }
         },
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書(部門比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_item_name: 親の勘定科目名</p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul> <li>個人向けのプレミアムプラン、法人向けのビジネスプラン以上で利用可能なAPIです。対象外のプランでは401エラーを返却します。</li> <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li> <li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li> </ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_three_years?company_id=1&amp;section_ids=1,2,3&amp;fiscal_year=2017</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_sections&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;section_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2017,\n      &quot;created_at&quot; : &quot;2018-05-01 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;parent_account_item_id&quot; : 100;\n        &quot;parent_account_item_name&quot; : &quot;営業収益&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;sections&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;営業部&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;広報部&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;人事部&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n"
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書(部門比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_item_name: 親の勘定科目名</p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul> <li>個人向けのプレミアムプラン、法人向けのビジネスプラン以上で利用可能なAPIです。対象外のプランでは401エラーを返却します。</li> <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li> <li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li> <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>  </ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_three_years?company_id=1&amp;section_ids=1,2,3&amp;fiscal_year=2017</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_sections&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;section_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2017,\n      &quot;created_at&quot; : &quot;2018-05-01 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;parent_account_item_id&quot; : 100;\n        &quot;parent_account_item_name&quot; : &quot;営業収益&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;sections&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;営業部&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;広報部&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;人事部&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n"
       }
     },
     "/receipts": {
@@ -6763,6 +6763,16 @@
               }
             }
           }
+        },
+        "receipt_ids": {
+          "type": "array",
+          "description": "証憑ファイルID（配列）",
+          "items": {
+            "type": "integer",
+            "example": 1,
+            "minimum": 1,
+            "maximum": 999999999999
+          }
         }
       }
     },
@@ -6917,6 +6927,16 @@
                 "description": "消費税額（指定しない場合は自動で計算されます）"
               }
             }
+          }
+        },
+        "receipt_ids": {
+          "type": "array",
+          "description": "証憑ファイルID（配列）",
+          "items": {
+            "type": "integer",
+            "example": 1,
+            "minimum": 1,
+            "maximum": 999999999999
           }
         }
       }
@@ -9034,13 +9054,19 @@
           "type": "object",
           "required": [
             "company_id",
-            "balances"
+            "balances",
+            "up_to_date"
           ],
           "properties": {
             "company_id": {
               "type": "integer",
               "example": 1,
               "description": "事業所ID"
+            },
+            "up_to_date": {
+              "type": "boolean",
+              "example": true,
+              "description": "集計結果が最新かどうか"
             },
             "fiscal_year": {
               "type": "integer",
@@ -9294,13 +9320,19 @@
           "type": "object",
           "required": [
             "company_id",
-            "balances"
+            "balances",
+            "up_to_date"
           ],
           "properties": {
             "company_id": {
               "type": "integer",
               "example": 1,
               "description": "事業所ID"
+            },
+            "up_to_date": {
+              "type": "boolean",
+              "example": true,
+              "description": "集計結果が最新かどうか"
             },
             "fiscal_year": {
               "type": "integer",
@@ -9524,13 +9556,19 @@
           "type": "object",
           "required": [
             "company_id",
-            "balances"
+            "balances",
+            "up_to_date"
           ],
           "properties": {
             "company_id": {
               "type": "integer",
               "example": 1,
               "description": "事業所ID"
+            },
+            "up_to_date": {
+              "type": "boolean",
+              "example": true,
+              "description": "集計結果が最新かどうか"
             },
             "fiscal_year": {
               "type": "integer",
@@ -9769,13 +9807,19 @@
           "type": "object",
           "required": [
             "company_id",
-            "balances"
+            "balances",
+            "up_to_date"
           ],
           "properties": {
             "company_id": {
               "type": "integer",
               "example": 1,
               "description": "事業所ID"
+            },
+            "up_to_date": {
+              "type": "boolean",
+              "example": true,
+              "description": "集計結果が最新かどうか"
             },
             "fiscal_year": {
               "type": "integer",
@@ -10091,13 +10135,19 @@
           "type": "object",
           "required": [
             "company_id",
-            "balances"
+            "balances",
+            "up_to_date"
           ],
           "properties": {
             "company_id": {
               "type": "integer",
               "example": 1,
               "description": "事業所ID"
+            },
+            "up_to_date": {
+              "type": "boolean",
+              "example": true,
+              "description": "集計結果が最新かどうか"
             },
             "fiscal_year": {
               "type": "integer",
@@ -10373,13 +10423,19 @@
           "type": "object",
           "required": [
             "company_id",
-            "balances"
+            "balances",
+            "up_to_date"
           ],
           "properties": {
             "company_id": {
               "type": "integer",
               "example": 1,
               "description": "事業所ID"
+            },
+            "up_to_date": {
+              "type": "boolean",
+              "example": true,
+              "description": "集計結果が最新かどうか"
             },
             "fiscal_year": {
               "type": "integer",
@@ -10676,13 +10732,19 @@
           "required": [
             "company_id",
             "section_ids",
-            "balances"
+            "balances",
+            "up_to_date"
           ],
           "properties": {
             "company_id": {
               "type": "integer",
               "example": 1,
               "description": "事業所ID"
+            },
+            "up_to_date": {
+              "type": "boolean",
+              "example": true,
+              "description": "集計結果が最新かどうか"
             },
             "section_ids": {
               "type": "string",
@@ -11526,6 +11588,13 @@
           "description": "取引の支払行",
           "items": {
             "$ref": "#/definitions/deals_payments"
+          }
+        },
+        "receipts": {
+          "type": "array",
+          "description": "証憑ファイル",
+          "items": {
+            "$ref": "#/definitions/receipt"
           }
         }
       }
@@ -15026,7 +15095,7 @@
       "properties": {
         "id": {
           "type": "integer",
-          "description": "その他申請ID",
+          "description": "各種申請ID",
           "example": 1
         },
         "company_id": {
@@ -15072,7 +15141,7 @@
         },
         "request_items": {
           "type": "array",
-          "description": "その他申請の項目一覧（配列）",
+          "description": "各種申請の項目一覧（配列）",
           "items": {
             "type": "object",
             "required": [
