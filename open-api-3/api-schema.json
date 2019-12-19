@@ -8,7 +8,7 @@
   },
   "servers": [
     {
-      "url": "https://api.freee.co.jp/api/1"
+      "url": "https://api.freee.co.jp"
     }
   ],
   "security": [
@@ -118,7 +118,7 @@
     }
   ],
   "paths": {
-    "/partners": {
+    "/api/1/partners": {
       "get": {
         "tags": [
           "Partners"
@@ -195,8 +195,13 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -256,15 +261,20 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
         "x-codegen-request-body-name": "Parameters"
       }
     },
-    "/partners/{id}": {
+    "/api/1/partners/{id}": {
       "get": {
         "tags": [
           "Partners"
@@ -328,13 +338,23 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -407,8 +427,13 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
@@ -448,33 +473,52 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
             }
           },
           "401": {
             "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/partners/code/{code}": {
+    "/api/1/partners/code/{code}": {
       "put": {
         "tags": [
           "Partners"
@@ -541,15 +585,20 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
         "x-codegen-request-body-name": "Parameters"
       }
     },
-    "/forms/selectables": {
+    "/api/1/forms/selectables": {
       "get": {
         "tags": [
           "Selectables"
@@ -613,14 +662,19 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/account_items/{id}": {
+    "/api/1/account_items/{id}": {
       "get": {
         "tags": [
           "Account items"
@@ -684,13 +738,23 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -762,8 +826,13 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
@@ -802,28 +871,42 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
             }
           },
           "401": {
             "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/account_items": {
+    "/api/1/account_items": {
       "get": {
         "tags": [
           "Account items"
@@ -884,8 +967,13 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -945,15 +1033,20 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
         "x-codegen-request-body-name": "Parameters"
       }
     },
-    "/tags": {
+    "/api/1/tags": {
       "get": {
         "tags": [
           "Tags"
@@ -1006,8 +1099,13 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -1067,15 +1165,20 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
         "x-codegen-request-body-name": "Parameters"
       }
     },
-    "/tags/{id}": {
+    "/api/1/tags/{id}": {
       "get": {
         "tags": [
           "Tags"
@@ -1139,13 +1242,23 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -1217,9 +1330,24 @@
               }
             }
           },
-          "500": {
-            "description": "Internal Server Error",
+          "404": {
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
@@ -1259,8 +1387,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -1283,19 +1410,29 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/sections": {
+    "/api/1/sections": {
       "get": {
         "tags": [
           "Sections"
@@ -1348,8 +1485,13 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -1409,15 +1551,20 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
         "x-codegen-request-body-name": "Parameters"
       }
     },
-    "/sections/{id}": {
+    "/api/1/sections/{id}": {
       "get": {
         "tags": [
           "Sections"
@@ -1479,9 +1626,24 @@
               }
             }
           },
-          "500": {
-            "description": "Internal Server Error",
+          "404": {
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -1553,8 +1715,13 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
@@ -1593,8 +1760,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -1617,14 +1783,19 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/invoices": {
+    "/api/1/invoices": {
       "get": {
         "tags": [
           "Invoices"
@@ -1790,13 +1961,23 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -1856,20 +2037,30 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
         "x-codegen-request-body-name": "Parameters"
       }
     },
-    "/invoices/{id}": {
+    "/api/1/invoices/{id}": {
       "get": {
         "tags": [
           "Invoices"
@@ -1933,13 +2124,23 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -2012,13 +2213,23 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
@@ -2055,8 +2266,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -2078,15 +2288,30 @@
               }
             }
           },
-          "500": {
-            "description": "Internal Server Error",
+          "404": {
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/deals": {
+    "/api/1/deals": {
       "get": {
         "tags": [
           "Deals"
@@ -2278,13 +2503,23 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -2313,7 +2548,7 @@
           "required": false
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "",
             "content": {
               "application/json": {
@@ -2344,20 +2579,30 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
         "x-codegen-request-body-name": "Parameters"
       }
     },
-    "/deals/{id}": {
+    "/api/1/deals/{id}": {
       "get": {
         "tags": [
           "Deals"
@@ -2432,13 +2677,23 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -2511,13 +2766,23 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
@@ -2556,8 +2821,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -2580,19 +2844,29 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/deals/{id}/renews": {
+    "/api/1/deals/{id}/renews": {
       "post": {
         "tags": [
           "Renews"
@@ -2661,15 +2935,20 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
         "x-codegen-request-body-name": "Parameters"
       }
     },
-    "/deals/{id}/renews/{renew_id}": {
+    "/api/1/deals/{id}/renews/{renew_id}": {
       "put": {
         "tags": [
           "Renews"
@@ -2749,8 +3028,13 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
@@ -2830,14 +3114,19 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/deals/{id}/payments": {
+    "/api/1/deals/{id}/payments": {
       "post": {
         "tags": [
           "Payments"
@@ -2875,7 +3164,7 @@
           "required": true
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "",
             "content": {
               "application/json": {
@@ -2906,20 +3195,30 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
         "x-codegen-request-body-name": "Parameters"
       }
     },
-    "/deals/{id}/payments/{payment_id}": {
+    "/api/1/deals/{id}/payments/{payment_id}": {
       "put": {
         "tags": [
           "Payments"
@@ -2999,13 +3298,23 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
@@ -3056,8 +3365,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -3080,19 +3388,29 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/manual_journals": {
+    "/api/1/manual_journals": {
       "get": {
         "tags": [
           "ManualJournals"
@@ -3332,8 +3650,13 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -3393,15 +3716,30 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/serviceUnavailableError"
+                }
+              }
             }
           }
         },
         "x-codegen-request-body-name": "Parameters"
       }
     },
-    "/manual_journals/{id}": {
+    "/api/1/manual_journals/{id}": {
       "get": {
         "tags": [
           "ManualJournals"
@@ -3461,9 +3799,24 @@
               }
             }
           },
-          "500": {
-            "description": "Internal Server Error",
+          "404": {
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -3533,8 +3886,13 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
@@ -3571,8 +3929,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -3594,15 +3951,30 @@
               }
             }
           },
-          "500": {
-            "description": "Internal Server Error",
+          "404": {
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/users": {
+    "/api/1/users": {
       "get": {
         "tags": [
           "Users"
@@ -3617,6 +3989,9 @@
             "description": "事業所ID",
             "required": true,
             "schema": {
+              "maximum": 999999999999,
+              "minimum": 1,
+              "type": "integer"
             }
           },
           {
@@ -3624,6 +3999,7 @@
             "in": "query",
             "description": "取得上限数,最大3000件",
             "schema": {
+              "type": "integer"
             }
           }
         ],
@@ -3659,19 +4035,29 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/users/me": {
+    "/api/1/users/me": {
       "get": {
         "tags": [
           "Users"
@@ -3724,13 +4110,23 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -3790,20 +4186,30 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
         "x-codegen-request-body-name": "Parameters"
       }
     },
-    "/users/capabilities": {
+    "/api/1/users/capabilities": {
       "get": {
         "tags": [
           "Users"
@@ -3856,19 +4262,29 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/companies": {
+    "/api/1/companies": {
       "get": {
         "tags": [
           "Companies"
@@ -3908,14 +4324,19 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/companies/{id}": {
+    "/api/1/companies/{id}": {
       "get": {
         "tags": [
           "Companies"
@@ -4056,8 +4477,13 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -4129,15 +4555,20 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
         "x-codegen-request-body-name": "Parameters"
       }
     },
-    "/items": {
+    "/api/1/items": {
       "get": {
         "tags": [
           "Items"
@@ -4190,8 +4621,13 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -4220,7 +4656,7 @@
           "required": false
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "",
             "content": {
               "application/json": {
@@ -4251,15 +4687,20 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
         "x-codegen-request-body-name": "Parameters"
       }
     },
-    "/items/{id}": {
+    "/api/1/items/{id}": {
       "get": {
         "tags": [
           "Items"
@@ -4323,13 +4764,23 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -4402,8 +4853,13 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
@@ -4443,8 +4899,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -4467,19 +4922,29 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/taxes/codes": {
+    "/api/1/taxes/codes": {
       "get": {
         "tags": [
           "Taxes"
@@ -4519,14 +4984,19 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/taxes/codes/{code}": {
+    "/api/1/taxes/codes/{code}": {
       "get": {
         "tags": [
           "Taxes"
@@ -4577,19 +5047,29 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/taxes/companies/{company_id}": {
+    "/api/1/taxes/companies/{company_id}": {
       "get": {
         "tags": [
           "Taxes"
@@ -4641,14 +5121,19 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/walletables": {
+    "/api/1/walletables": {
       "get": {
         "tags": [
           "Walletables"
@@ -4709,8 +5194,13 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -4770,15 +5260,20 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
         "x-codegen-request-body-name": "Parameters"
       }
     },
-    "/walletables/{type}/{id}": {
+    "/api/1/walletables/{type}/{id}": {
       "get": {
         "tags": [
           "Walletables"
@@ -4793,6 +5288,7 @@
             "description": "口座ID",
             "required": true,
             "schema": {
+              "type": "integer"
             }
           },
           {
@@ -4815,6 +5311,9 @@
             "description": "事業所ID",
             "required": true,
             "schema": {
+              "maximum": 999999999999,
+              "minimum": 1,
+              "type": "integer"
             }
           }
         ],
@@ -4849,9 +5348,24 @@
               }
             }
           },
-          "500": {
-            "description": "Internal Server Error",
+          "404": {
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -4894,6 +5408,9 @@
             "description": "事業所ID",
             "required": true,
             "schema": {
+              "maximum": 999999999999,
+              "minimum": 1,
+              "type": "integer"
             }
           }
         ],
@@ -4914,7 +5431,7 @@
           "required": false
         },
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "content": {
               "application/json": {
@@ -4944,9 +5461,24 @@
               }
             }
           },
-          "500": {
-            "description": "Internal Server Error",
+          "404": {
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
@@ -5000,28 +5532,46 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "401": {
             "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/banks": {
+    "/api/1/banks": {
       "get": {
         "tags": [
           "Banks"
@@ -5092,14 +5642,19 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/banks/{id}": {
+    "/api/1/banks/{id}": {
       "get": {
         "tags": [
           "Banks"
@@ -5152,19 +5707,29 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/transfers": {
+    "/api/1/transfers": {
       "get": {
         "tags": [
           "Transfers"
@@ -5229,18 +5794,33 @@
             }
           },
           "400": {
-            "description": "Bad Request",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
             }
           },
           "401": {
-            "description": "Unauthorized",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -5300,15 +5880,20 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
         "x-codegen-request-body-name": "Parameter"
       }
     },
-    "/transfers/{id}": {
+    "/api/1/transfers/{id}": {
       "get": {
         "tags": [
           "Transfers"
@@ -5372,13 +5957,23 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -5450,9 +6045,24 @@
               }
             }
           },
-          "500": {
-            "description": "Internal Server Error",
+          "404": {
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
@@ -5492,8 +6102,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -5516,19 +6125,29 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/wallet_txns": {
+    "/api/1/wallet_txns": {
       "get": {
         "tags": [
           "Wallet txns"
@@ -5648,8 +6267,13 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -5709,15 +6333,20 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
         "x-codegen-request-body-name": "Parameters"
       }
     },
-    "/wallet_txns/{id}": {
+    "/api/1/wallet_txns/{id}": {
       "get": {
         "tags": [
           "Wallet txns"
@@ -5781,13 +6410,23 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -5826,8 +6465,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -5850,19 +6488,29 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/journals": {
+    "/api/1/journals": {
       "get": {
         "tags": [
           "Journals"
@@ -5968,14 +6616,19 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/journals/reports/{id}/status": {
+    "/api/1/journals/reports/{id}/status": {
       "get": {
         "tags": [
           "Journals"
@@ -6076,14 +6729,19 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/journals/reports/{id}/download": {
+    "/api/1/journals/reports/{id}/download": {
       "get": {
         "tags": [
           "Journals"
@@ -6117,8 +6775,7 @@
         "responses": {
           "200": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -6166,14 +6823,19 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/reports/trial_bs": {
+    "/api/1/reports/trial_bs": {
       "get": {
         "tags": [
           "Trial balance"
@@ -6188,6 +6850,8 @@
             "description": "事業所ID",
             "required": true,
             "schema": {
+              "maximum": 999999999999,
+              "minimum": 1,
               "type": "integer"
             }
           },
@@ -6311,24 +6975,39 @@
             }
           },
           "400": {
-            "description": "Bad Request",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
             }
           },
           "401": {
-            "description": "Unauthorized",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/reports/trial_bs_two_years": {
+    "/api/1/reports/trial_bs_two_years": {
       "get": {
         "tags": [
           "Trial balance"
@@ -6343,6 +7022,8 @@
             "description": "事業所ID",
             "required": true,
             "schema": {
+              "maximum": 999999999999,
+              "minimum": 1,
               "type": "integer"
             }
           },
@@ -6466,24 +7147,39 @@
             }
           },
           "400": {
-            "description": "Bad Request",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
             }
           },
           "401": {
-            "description": "Unauthorized",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/reports/trial_bs_three_years": {
+    "/api/1/reports/trial_bs_three_years": {
       "get": {
         "tags": [
           "Trial balance"
@@ -6498,6 +7194,8 @@
             "description": "事業所ID",
             "required": true,
             "schema": {
+              "maximum": 999999999999,
+              "minimum": 1,
               "type": "integer"
             }
           },
@@ -6621,24 +7319,39 @@
             }
           },
           "400": {
-            "description": "Bad Request",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
             }
           },
           "401": {
-            "description": "Unauthorized",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/reports/trial_pl": {
+    "/api/1/reports/trial_pl": {
       "get": {
         "tags": [
           "Trial balance"
@@ -6653,6 +7366,8 @@
             "description": "事業所ID",
             "required": true,
             "schema": {
+              "maximum": 999999999999,
+              "minimum": 1,
               "type": "integer"
             }
           },
@@ -6798,24 +7513,39 @@
             }
           },
           "400": {
-            "description": "Bad Request",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
             }
           },
           "401": {
-            "description": "Unauthorized",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/reports/trial_pl_two_years": {
+    "/api/1/reports/trial_pl_two_years": {
       "get": {
         "tags": [
           "Trial balance"
@@ -6830,6 +7560,8 @@
             "description": "事業所ID",
             "required": true,
             "schema": {
+              "maximum": 999999999999,
+              "minimum": 1,
               "type": "integer"
             }
           },
@@ -6975,24 +7707,39 @@
             }
           },
           "400": {
-            "description": "Bad Request",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
             }
           },
           "401": {
-            "description": "Unauthorized",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/reports/trial_pl_three_years": {
+    "/api/1/reports/trial_pl_three_years": {
       "get": {
         "tags": [
           "Trial balance"
@@ -7007,6 +7754,8 @@
             "description": "事業所ID",
             "required": true,
             "schema": {
+              "maximum": 999999999999,
+              "minimum": 1,
               "type": "integer"
             }
           },
@@ -7152,24 +7901,39 @@
             }
           },
           "400": {
-            "description": "Bad Request",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
             }
           },
           "401": {
-            "description": "Unauthorized",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/reports/trial_pl_sections": {
+    "/api/1/reports/trial_pl_sections": {
       "get": {
         "tags": [
           "Trial balance"
@@ -7184,6 +7948,8 @@
             "description": "事業所ID",
             "required": true,
             "schema": {
+              "maximum": 999999999999,
+              "minimum": 1,
               "type": "integer"
             }
           },
@@ -7329,24 +8095,39 @@
             }
           },
           "400": {
-            "description": "Bad Request",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
             }
           },
           "401": {
-            "description": "Unauthorized",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/receipts": {
+    "/api/1/receipts": {
       "get": {
         "tags": [
           "Receipts"
@@ -7487,8 +8268,13 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -7568,14 +8354,19 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/receipts/{id}": {
+    "/api/1/receipts/{id}": {
       "get": {
         "tags": [
           "Receipts"
@@ -7639,13 +8430,23 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -7664,6 +8465,7 @@
             "description": "証憑ID",
             "required": true,
             "schema": {
+              "type": "integer"
             }
           }
         ],
@@ -7715,13 +8517,23 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
@@ -7761,8 +8573,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -7785,19 +8596,29 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/expense_applications": {
+    "/api/1/expense_applications": {
       "get": {
         "tags": [
           "Expense applications"
@@ -7869,8 +8690,13 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -7930,15 +8756,20 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
         "x-codegen-request-body-name": "Parameters"
       }
     },
-    "/expense_applications/{id}": {
+    "/api/1/expense_applications/{id}": {
       "get": {
         "tags": [
           "Expense applications"
@@ -8001,13 +8832,23 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -8079,13 +8920,23 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
@@ -8124,8 +8975,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -8148,19 +8998,29 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/expense_application_line_templates": {
+    "/api/1/expense_application_line_templates": {
       "get": {
         "tags": [
           "Expense application line templates"
@@ -8232,8 +9092,13 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -8292,15 +9157,20 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
         "x-codegen-request-body-name": "Parameters"
       }
     },
-    "/expense_application_line_templates/{id}": {
+    "/api/1/expense_application_line_templates/{id}": {
       "get": {
         "tags": [
           "Expense application line templates"
@@ -8361,13 +9231,23 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -8385,6 +9265,7 @@
             "description": "経費科目ID",
             "required": true,
             "schema": {
+              "type": "integer"
             }
           }
         ],
@@ -8435,9 +9316,24 @@
               }
             }
           },
-          "500": {
-            "description": "Internal Server Error",
+          "404": {
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
@@ -8475,8 +9371,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -8499,19 +9394,29 @@
             }
           },
           "404": {
-            "description": "Not Found",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
       }
     },
-    "/segments/{segment_id}/tags": {
+    "/api/1/segments/{segment_id}/tags": {
       "get": {
         "tags": [
           "Segment tags"
@@ -8593,8 +9498,13 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -8667,15 +9577,20 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
         "x-codegen-request-body-name": "Parameters"
       }
     },
-    "/segments/{segment_id}/tags/{id}": {
+    "/api/1/segments/{segment_id}/tags/{id}": {
       "put": {
         "tags": [
           "Segment tags"
@@ -8755,8 +9670,13 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         },
@@ -8807,8 +9727,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -8831,8 +9750,13 @@
             }
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "",
             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
             }
           }
         }
@@ -8853,6 +9777,7 @@
         "properties": {
           "company_id": {
             "maximum": 999999999999,
+            "minimum": 1,
             "type": "integer",
             "description": "事業所ID",
             "example": 1
@@ -9265,6 +10190,7 @@
         "properties": {
           "company_id": {
             "maximum": 999999999999,
+            "minimum": 1,
             "type": "integer",
             "description": "事業所ID",
             "example": 1
@@ -9394,6 +10320,7 @@
         "properties": {
           "company_id": {
             "maximum": 999999999999,
+            "minimum": 1,
             "type": "integer",
             "description": "事業所ID",
             "example": 1
@@ -9727,7 +10654,7 @@
             "minimum": 0,
             "type": "number",
             "description": "従業員数（0: 経営者のみ、1: 2~5人、2: 6~10人、3: 11~20人、4: 21~30人、5: 31~40人、6: 41~100人、7: 100人以上",
-            "example": 1.0
+            "example": 1
           },
           "corporate_number": {
             "type": "string",
@@ -10183,7 +11110,7 @@
                   "example": "交通費：新幹線往復（東京〜大阪）"
                 },
                 "amount": {
-                  "maximum": 1000000000.0,
+                  "maximum": 1000000000,
                   "minimum": 0,
                   "type": "integer",
                   "description": "金額",
@@ -10287,7 +11214,7 @@
                   "example": "交通費：新幹線往復（東京〜大阪）"
                 },
                 "amount": {
-                  "maximum": 1000000000.0,
+                  "maximum": 1000000000,
                   "minimum": 0,
                   "type": "integer",
                   "description": "金額",
@@ -10327,6 +11254,8 @@
             "type": "object",
             "properties": {
               "company_id": {
+                "maximum": 999999999999,
+                "minimum": 1,
                 "type": "integer",
                 "description": "事業所ID",
                 "example": 1
@@ -10354,6 +11283,7 @@
         "properties": {
           "company_id": {
             "maximum": 999999999999,
+            "minimum": 1,
             "type": "integer",
             "description": "事業所ID",
             "example": 1
@@ -10903,6 +11833,7 @@
         "properties": {
           "company_id": {
             "maximum": 999999999999,
+            "minimum": 1,
             "type": "integer",
             "description": "事業所ID",
             "example": 1
@@ -11030,7 +11961,8 @@
                 "categories",
                 "default_tax_code",
                 "id",
-                "name"
+                "name",
+                "walletable_id"
               ],
               "type": "object",
               "properties": {
@@ -11043,6 +11975,18 @@
                   "type": "string",
                   "description": "勘定科目名 (30文字以内)",
                   "example": "ソフトウェア"
+                },
+                "shortcut": {
+                  "type": "string",
+                  "description": "ショートカット1 (20文字以内)",
+                  "example": "SOFUTO",
+                  "nullable": true
+                },
+                "shortcut_num": {
+                  "type": "string",
+                  "description": "ショートカット2(勘定科目コード) (20文字以内)",
+                  "example": "123",
+                  "nullable": true
                 },
                 "default_tax_id": {
                   "maximum": 999999999999,
@@ -11068,6 +12012,12 @@
                   "type": "boolean",
                   "description": "勘定科目の使用設定（true: 使用する、false: 使用しない）",
                   "example": true
+                },
+                "walletable_id": {
+                  "type": "integer",
+                  "description": "口座ID",
+                  "example": 1,
+                  "nullable": true
                 }
               }
             }
@@ -11157,6 +12107,12 @@
               "credit_card",
               "wallet"
             ]
+          },
+          "name_kana": {
+            "type": "string",
+            "description": "連携サービス名(カナ)",
+            "example": "ギンコウ",
+            "nullable": true
           }
         }
       },
@@ -11184,6 +12140,8 @@
                 "example": ":id でリクエストを受け付けました。"
               },
               "company_id": {
+                "maximum": 999999999999,
+                "minimum": 1,
                 "type": "integer",
                 "description": "事業所ID",
                 "example": 1
@@ -11258,6 +12216,8 @@
                 "example": 1
               },
               "company_id": {
+                "maximum": 999999999999,
+                "minimum": 1,
                 "type": "integer",
                 "description": "事業所ID",
                 "example": 1
@@ -11334,6 +12294,8 @@
             "type": "object",
             "properties": {
               "company_id": {
+                "maximum": 999999999999,
+                "minimum": 1,
                 "type": "integer",
                 "description": "事業所ID",
                 "example": 1
@@ -11600,6 +12562,8 @@
             "type": "object",
             "properties": {
               "company_id": {
+                "maximum": 999999999999,
+                "minimum": 1,
                 "type": "integer",
                 "description": "事業所ID",
                 "example": 1
@@ -11836,6 +12800,8 @@
             "type": "object",
             "properties": {
               "company_id": {
+                "maximum": 999999999999,
+                "minimum": 1,
                 "type": "integer",
                 "description": "事業所ID",
                 "example": 1
@@ -12087,6 +13053,8 @@
             "type": "object",
             "properties": {
               "company_id": {
+                "maximum": 999999999999,
+                "minimum": 1,
                 "type": "integer",
                 "description": "事業所ID",
                 "example": 1
@@ -12415,6 +13383,8 @@
             "type": "object",
             "properties": {
               "company_id": {
+                "maximum": 999999999999,
+                "minimum": 1,
                 "type": "integer",
                 "description": "事業所ID",
                 "example": 1
@@ -12703,6 +13673,8 @@
             "type": "object",
             "properties": {
               "company_id": {
+                "maximum": 999999999999,
+                "minimum": 1,
                 "type": "integer",
                 "description": "事業所ID",
                 "example": 1
@@ -13012,6 +13984,8 @@
             "type": "object",
             "properties": {
               "company_id": {
+                "maximum": 999999999999,
+                "minimum": 1,
                 "type": "integer",
                 "description": "事業所ID",
                 "example": 1
@@ -13262,10 +14236,30 @@
             "description": "部門名 (30文字以内)",
             "example": "開発部門"
           },
+          "long_name": {
+            "type": "string",
+            "description": "正式名称 (255文字以内)",
+            "example": "開発部門",
+            "nullable": true
+          },
           "company_id": {
+            "maximum": 999999999999,
+            "minimum": 1,
             "type": "integer",
             "description": "事業所ID",
             "example": 1
+          },
+          "shortcut1": {
+            "type": "string",
+            "description": "ショートカット1 (20文字以内)",
+            "example": "DEVELOPER",
+            "nullable": true
+          },
+          "shortcut2": {
+            "type": "string",
+            "description": "ショートカット2 (20文字以内)",
+            "example": "123",
+            "nullable": true
           }
         }
       },
@@ -13318,10 +14312,30 @@
                 "description": "部門名 (30文字以内)",
                 "example": "開発部門"
               },
+              "long_name": {
+                "type": "string",
+                "description": "正式名称（255文字以内）",
+                "example": "開発部門",
+                "nullable": true
+              },
               "company_id": {
+                "maximum": 999999999999,
+                "minimum": 1,
                 "type": "integer",
                 "description": "事業所ID",
                 "example": 1
+              },
+              "shortcut1": {
+                "type": "string",
+                "description": "ショートカット１ (20文字以内)",
+                "example": "DEVELOPER",
+                "nullable": true
+              },
+              "shortcut2": {
+                "type": "string",
+                "description": "ショートカット２ (20文字以内)",
+                "example": "123",
+                "nullable": true
               }
             }
           }
@@ -13351,10 +14365,30 @@
                 "description": "部門名 (30文字以内)",
                 "example": "開発部門"
               },
+              "long_name": {
+                "type": "string",
+                "description": "正式名称 (255文字以内)",
+                "example": "開発部門",
+                "nullable": true
+              },
               "company_id": {
+                "maximum": 999999999999,
+                "minimum": 1,
                 "type": "integer",
                 "description": "事業所ID",
                 "example": 1
+              },
+              "shortcut1": {
+                "type": "string",
+                "description": "ショートカット１ (20文字以内)",
+                "example": "DEVELOPER",
+                "nullable": true
+              },
+              "shortcut2": {
+                "type": "string",
+                "description": "ショートカット２ (20文字以内)",
+                "example": "123",
+                "nullable": true
               }
             }
           }
@@ -13616,6 +14650,8 @@
                   "example": 101
                 },
                 "company_id": {
+                  "maximum": 999999999999,
+                  "minimum": 1,
                   "type": "integer",
                   "description": "事業所ID",
                   "example": 1
@@ -13624,6 +14660,18 @@
                   "type": "string",
                   "description": "品目名 (30文字以内)",
                   "example": "タクシー代"
+                },
+                "shortcut1": {
+                  "type": "string",
+                  "description": "ショートカット１ (20文字以内)",
+                  "example": "TAXI",
+                  "nullable": true
+                },
+                "shortcut2": {
+                  "type": "string",
+                  "description": "ショートカット２ (20文字以内)",
+                  "example": "201",
+                  "nullable": true
                 }
               }
             }
@@ -13650,6 +14698,8 @@
                 "example": 102
               },
               "company_id": {
+                "maximum": 999999999999,
+                "minimum": 1,
                 "type": "integer",
                 "description": "事業所ID",
                 "example": 1
@@ -13658,6 +14708,18 @@
                 "type": "string",
                 "description": "品目名 (30文字以内)",
                 "example": "新しい品目"
+              },
+              "shortcut1": {
+                "type": "string",
+                "description": "ショートカット１ (20文字以内)",
+                "example": "NEWITEM",
+                "nullable": true
+              },
+              "shortcut2": {
+                "type": "string",
+                "description": "ショートカット２ (20文字以内)",
+                "example": "202",
+                "nullable": true
               }
             }
           }
@@ -13680,6 +14742,8 @@
             "example": 101
           },
           "company_id": {
+            "maximum": 999999999999,
+            "minimum": 1,
             "type": "integer",
             "description": "事業所ID",
             "example": 1
@@ -13717,6 +14781,12 @@
             "type": "integer",
             "description": "取引先ID",
             "example": 201
+          },
+          "partner_code": {
+            "type": "string",
+            "description": "取引先コード",
+            "example": "code001",
+            "nullable": true
           },
           "ref_number": {
             "type": "string",
@@ -13779,6 +14849,8 @@
             "example": 101
           },
           "company_id": {
+            "maximum": 999999999999,
+            "minimum": 1,
             "type": "integer",
             "description": "事業所ID",
             "example": 1
@@ -13816,6 +14888,12 @@
             "type": "integer",
             "description": "取引先ID",
             "example": 201
+          },
+          "partner_code": {
+            "type": "string",
+            "description": "取引先コード",
+            "example": "code001",
+            "nullable": true
           },
           "ref_number": {
             "type": "string",
@@ -13878,6 +14956,18 @@
             "description": "税区分コード",
             "example": 2
           },
+          "item_id": {
+            "type": "integer",
+            "description": "品目ID",
+            "example": 501,
+            "nullable": true
+          },
+          "section_id": {
+            "type": "integer",
+            "description": "部門ID",
+            "example": 1,
+            "nullable": true
+          },
           "tag_ids": {
             "type": "array",
             "description": "メモタグID",
@@ -13889,6 +14979,24 @@
             "items": {
               "type": "integer"
             }
+          },
+          "segment_1_tag_id": {
+            "type": "integer",
+            "description": "セグメント１ID",
+            "example": 1,
+            "nullable": true
+          },
+          "segment_2_tag_id": {
+            "type": "integer",
+            "description": "セグメント２ID",
+            "example": 1,
+            "nullable": true
+          },
+          "segment_3_tag_id": {
+            "type": "integer",
+            "description": "セグメント３ID",
+            "example": 1,
+            "nullable": true
           },
           "amount": {
             "type": "integer",
@@ -14036,6 +15144,20 @@
                   "description": "税区分コード",
                   "example": 1
                 },
+                "item_id": {
+                  "maximum": 999999999999,
+                  "type": "integer",
+                  "description": "品目ID",
+                  "example": 1,
+                  "nullable": true
+                },
+                "section_id": {
+                  "maximum": 999999999999,
+                  "type": "integer",
+                  "description": "部門ID",
+                  "example": 1,
+                  "nullable": true
+                },
                 "tag_ids": {
                   "type": "array",
                   "items": {
@@ -14044,6 +15166,24 @@
                     "description": "メモタグID",
                     "example": 1
                   }
+                },
+                "segment_1_tag_id": {
+                  "type": "integer",
+                  "description": "セグメント１ID",
+                  "example": 1,
+                  "nullable": true
+                },
+                "segment_2_tag_id": {
+                  "type": "integer",
+                  "description": "セグメント２ID",
+                  "example": 1,
+                  "nullable": true
+                },
+                "segment_3_tag_id": {
+                  "type": "integer",
+                  "description": "セグメント３ID",
+                  "example": 1,
+                  "nullable": true
                 },
                 "amount": {
                   "type": "integer",
@@ -14054,6 +15194,12 @@
                   "type": "integer",
                   "description": "消費税額（指定しない場合は自動で計算されます）",
                   "example": 8000
+                },
+                "description": {
+                  "type": "string",
+                  "description": "備考",
+                  "example": "備考",
+                  "nullable": true
                 }
               }
             }
@@ -14113,7 +15259,8 @@
           "company_id",
           "details",
           "id",
-          "issue_date"
+          "issue_date",
+          "txn_number"
         ],
         "type": "object",
         "properties": {
@@ -14123,6 +15270,8 @@
             "example": 1
           },
           "company_id": {
+            "maximum": 999999999999,
+            "minimum": 1,
             "type": "integer",
             "description": "事業所ID",
             "example": 1
@@ -14137,6 +15286,12 @@
             "description": "決算整理仕訳フラグ（falseまたは未指定の場合: 日常仕訳）",
             "example": false
           },
+          "txn_number": {
+            "type": "string",
+            "description": "仕訳番号",
+            "example": "2CX05",
+            "nullable": true
+          },
           "details": {
             "type": "array",
             "description": "貸借行一覧（配列）: 貸借合わせて100行まで登録できます。",
@@ -14147,6 +15302,13 @@
                 "description",
                 "entry_side",
                 "id",
+                "item_id",
+                "item_name",
+                "partner_id",
+                "partner_long_name",
+                "partner_name",
+                "section_id",
+                "section_name",
                 "tag_ids",
                 "tag_names",
                 "tax_code",
@@ -14177,6 +15339,54 @@
                   "type": "integer",
                   "description": "税区分ID",
                   "example": 1
+                },
+                "partner_id": {
+                  "type": "integer",
+                  "description": "取引先ID",
+                  "example": 1,
+                  "nullable": true
+                },
+                "partner_name": {
+                  "type": "string",
+                  "description": "取引先名",
+                  "example": "freee",
+                  "nullable": true
+                },
+                "partner_code": {
+                  "type": "string",
+                  "description": "取引先コード",
+                  "example": "code001",
+                  "nullable": true
+                },
+                "partner_long_name": {
+                  "type": "string",
+                  "description": "正式名称（255文字以内）",
+                  "example": "freee株式会社",
+                  "nullable": true
+                },
+                "item_id": {
+                  "type": "integer",
+                  "description": "品目ID",
+                  "example": 1,
+                  "nullable": true
+                },
+                "item_name": {
+                  "type": "string",
+                  "description": "品目",
+                  "example": "会計freee",
+                  "nullable": true
+                },
+                "section_id": {
+                  "type": "integer",
+                  "description": "部門ID",
+                  "example": 1,
+                  "nullable": true
+                },
+                "section_name": {
+                  "type": "string",
+                  "description": "部門",
+                  "example": "開発部",
+                  "nullable": true
                 },
                 "tag_ids": {
                   "type": "array",
@@ -14309,15 +15519,21 @@
           "company": {
             "required": [
               "amount_fraction",
+              "contact_name",
               "corporate_number",
               "display_name",
+              "fax",
+              "head_count",
               "id",
               "industry_class",
               "industry_code",
               "invoice_layout",
               "invoice_style",
               "minus_format",
+              "name",
+              "name_kana",
               "phone1",
+              "phone2",
               "prefecture_code",
               "private_settlement",
               "role",
@@ -14335,6 +15551,18 @@
                 "description": "事業所ID",
                 "example": 1
               },
+              "name": {
+                "type": "string",
+                "description": "事業所の正式名称 (100文字以内)",
+                "example": "freee事務所",
+                "nullable": true
+              },
+              "name_kana": {
+                "type": "string",
+                "description": "正式名称フリガナ (100文字以内)",
+                "example": "フリージムショ",
+                "nullable": true
+              },
               "display_name": {
                 "type": "string",
                 "description": "事業所名",
@@ -14344,6 +15572,20 @@
                 "type": "integer",
                 "description": "源泉徴収税計算（0: 消費税を含める、1: 消費税を含めない）",
                 "example": 0
+              },
+              "contact_name": {
+                "type": "string",
+                "description": "担当者名 (50文字以内)",
+                "example": "user1",
+                "nullable": true
+              },
+              "head_count": {
+                "maximum": 7,
+                "minimum": 0,
+                "type": "integer",
+                "description": "従業員数（0: 経営者のみ、1: 2~5人、2: 6~10人、3: 11~20人、4: 21~30人、5: 31~40人、6: 41~100人、7: 100人以上",
+                "example": 1,
+                "nullable": true
               },
               "corporate_number": {
                 "type": "string",
@@ -14392,6 +15634,18 @@
                 "type": "string",
                 "description": "電話番号１",
                 "example": "03-1234-xxxx"
+              },
+              "phone2": {
+                "type": "string",
+                "description": "電話番号２",
+                "example": "090-1234-xxxx",
+                "nullable": true
+              },
+              "fax": {
+                "type": "string",
+                "description": "FAX",
+                "example": "03-1234-xxxx",
+                "nullable": true
               },
               "zipcode": {
                 "type": "string",
@@ -14500,7 +15754,10 @@
             "type": "array",
             "items": {
               "required": [
+                "display_name",
                 "id",
+                "name",
+                "name_kana",
                 "role"
               ],
               "type": "object",
@@ -14509,6 +15766,24 @@
                   "type": "integer",
                   "description": "事業所ID",
                   "example": 1
+                },
+                "name": {
+                  "type": "string",
+                  "description": "事業所名",
+                  "example": "freee事務所",
+                  "nullable": true
+                },
+                "name_kana": {
+                  "type": "string",
+                  "description": "事業所名（カナ）",
+                  "example": "フリージムショ",
+                  "nullable": true
+                },
+                "display_name": {
+                  "type": "string",
+                  "description": "事業所名",
+                  "example": "freee事務所",
+                  "nullable": true
                 },
                 "role": {
                   "type": "string",
@@ -14535,15 +15810,21 @@
           "company": {
             "required": [
               "amount_fraction",
+              "contact_name",
               "corporate_number",
               "display_name",
+              "fax",
+              "head_count",
               "id",
               "industry_class",
               "industry_code",
               "invoice_layout",
               "invoice_style",
               "minus_format",
+              "name",
+              "name_kana",
               "phone1",
+              "phone2",
               "prefecture_code",
               "private_settlement",
               "role",
@@ -14562,6 +15843,18 @@
                 "description": "事業所ID",
                 "example": 1
               },
+              "name": {
+                "type": "string",
+                "description": "事業所の正式名称 (100文字以内)",
+                "example": "freee事務所",
+                "nullable": true
+              },
+              "name_kana": {
+                "type": "string",
+                "description": "正式名称フリガナ (100文字以内)",
+                "example": "フリージムショ",
+                "nullable": true
+              },
               "display_name": {
                 "type": "string",
                 "description": "事業所名",
@@ -14571,6 +15864,20 @@
                 "type": "integer",
                 "description": "源泉徴収税計算（0: 消費税を含める、1: 消費税を含めない）",
                 "example": 0
+              },
+              "contact_name": {
+                "type": "string",
+                "description": "担当者名 (50文字以内)",
+                "example": "user1",
+                "nullable": true
+              },
+              "head_count": {
+                "maximum": 7,
+                "minimum": 0,
+                "type": "integer",
+                "description": "従業員数（0: 経営者のみ、1: 2~5人、2: 6~10人、3: 11~20人、4: 21~30人、5: 31~40人、6: 41~100人、7: 100人以上",
+                "example": 1,
+                "nullable": true
               },
               "corporate_number": {
                 "type": "string",
@@ -14619,6 +15926,18 @@
                 "type": "string",
                 "description": "電話番号１",
                 "example": "03-1234-xxxx"
+              },
+              "phone2": {
+                "type": "string",
+                "description": "電話番号２",
+                "example": "090-1234-xxxx",
+                "nullable": true
+              },
+              "fax": {
+                "type": "string",
+                "description": "FAX",
+                "example": "03-1234-xxxx",
+                "nullable": true
               },
               "zipcode": {
                 "type": "string",
@@ -14715,15 +16034,21 @@
         }
       },
       "unauthorizedError": {
-        "required": [
-          "message"
-        ],
         "type": "object",
         "properties": {
           "message": {
             "type": "string",
             "enum": [
               "ログインをしてください",
+              "ログインをして下さい",
+              "アクセスする権限がありません"
+            ]
+          },
+          "messages": {
+            "type": "string",
+            "enum": [
+              "ログインをしてください",
+              "ログインをして下さい",
               "アクセスする権限がありません"
             ]
           }
@@ -14746,18 +16071,154 @@
               "type": "object",
               "properties": {
                 "messages": {
-                  "type": "array",
-                  "items": {
-                    "type": "string",
-                    "example": "不正なリクエストです。"
-                  }
+                  "anyOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "不正なリクエストです。"
+                      }
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ]
                 },
                 "type": {
                   "type": "string",
                   "example": "validation",
                   "enum": [
                     "status",
-                    "validation"
+                    "validation",
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "badRequestNotFoundError": {
+        "type": "object",
+        "properties": {
+          "status_code": {
+            "type": "integer",
+            "example": 404
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "required": [
+                "messages",
+                "type"
+              ],
+              "type": "object",
+              "properties": {
+                "messages": {
+                  "anyOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "リソースが見つかりません。"
+                      }
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ]
+                },
+                "type": {
+                  "type": "string",
+                  "example": "validation",
+                  "enum": [
+                    "status",
+                    "validation",
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "internalServerError": {
+        "type": "object",
+        "properties": {
+          "status_code": {
+            "type": "integer",
+            "example": 500
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "required": [
+                "messages",
+                "type"
+              ],
+              "type": "object",
+              "properties": {
+                "messages": {
+                  "anyOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "エラーが発生しました。"
+                      }
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ]
+                },
+                "type": {
+                  "type": "string",
+                  "example": "status",
+                  "enum": [
+                    "status",
+                    "validation",
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "serviceUnavailableError": {
+        "type": "object",
+        "required": [
+          "status_code",
+          "errors"
+        ],
+        "properties": {
+          "status_code": {
+            "type": "integer",
+            "example": 503
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "required": [
+                "messages",
+                "type"
+              ],
+              "type": "object",
+              "properties": {
+                "messages": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "このAPIは現在ご利用いただけません。"
+                  }
+                },
+                "type": {
+                  "type": "string",
+                  "example": "error",
+                  "enum": [
+                    "status",
+                    "error"
                   ]
                 }
               }
@@ -14804,7 +16265,8 @@
           "id",
           "name",
           "searchable",
-          "tax_code"
+          "tax_code",
+          "walletable_id"
         ],
         "type": "object",
         "properties": {
@@ -14819,6 +16281,8 @@
             "example": "ソフトウェア"
           },
           "company_id": {
+            "maximum": 999999999999,
+            "minimum": 1,
             "type": "integer",
             "description": "事業所ID",
             "example": 1
@@ -14911,13 +16375,20 @@
             "type": "boolean",
             "description": "勘定科目の使用設定（true: 使用する、false: 使用しない）",
             "example": true
+          },
+          "walletable_id": {
+            "type": "integer",
+            "description": "口座ID",
+            "example": 1,
+            "nullable": true
           }
         }
       },
       "tag": {
         "required": [
           "company_id",
-          "id"
+          "id",
+          "name"
         ],
         "type": "object",
         "properties": {
@@ -14927,9 +16398,29 @@
             "example": 1
           },
           "company_id": {
+            "maximum": 999999999999,
+            "minimum": 1,
             "type": "integer",
             "description": "事業所ID",
             "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "名前(30文字以内)",
+            "example": "メモタグ",
+            "nullable": true
+          },
+          "shortcut1": {
+            "type": "string",
+            "description": "ショートカット1 (255文字以内)",
+            "example": "MEMOTAG",
+            "nullable": true
+          },
+          "shortcut2": {
+            "type": "string",
+            "description": "ショートカット2 (255文字以内)",
+            "example": "123",
+            "nullable": true
           }
         }
       },
@@ -14958,6 +16449,7 @@
             "allOf": [
               {
                 "required": [
+                  "code",
                   "company_id",
                   "id",
                   "name"
@@ -14969,7 +16461,15 @@
                     "description": "取引先ID",
                     "example": 1
                   },
+                  "code": {
+                    "type": "string",
+                    "description": "取引先コード",
+                    "example": "code001",
+                    "nullable": true
+                  },
                   "company_id": {
+                    "maximum": 999999999999,
+                    "minimum": 1,
                     "type": "integer",
                     "description": "事業所ID",
                     "example": 1
@@ -14978,18 +16478,167 @@
                     "type": "string",
                     "description": "取引先名",
                     "example": "ABC商店"
+                  },
+                  "shortcut1": {
+                    "type": "string",
+                    "description": "ショートカット1 (20文字以内)",
+                    "example": "ABC",
+                    "nullable": true
+                  },
+                  "shortcut2": {
+                    "type": "string",
+                    "description": "ショートカット2 (20文字以内)",
+                    "example": "501",
+                    "nullable": true
                   }
                 }
               },
               {
                 "type": "object",
                 "properties": {
+                  "long_name": {
+                    "type": "string",
+                    "description": "正式名称（255文字以内）",
+                    "example": "新しい取引先正式名称",
+                    "nullable": true
+                  },
+                  "name_kana": {
+                    "type": "string",
+                    "description": "カナ名称（255文字以内）",
+                    "example": "アタラシイトリヒキサキメイショウ",
+                    "nullable": true
+                  },
+                  "default_title": {
+                    "type": "string",
+                    "description": "敬称（御中、様、(空白)の3つから選択）",
+                    "example": "御中",
+                    "enum": [
+                      "御中",
+                      "様",
+                      "(空白)"
+                    ],
+                    "nullable": true
+                  },
+                  "phone": {
+                    "type": "string",
+                    "description": "電話番号",
+                    "example": "03-1234-xxxx",
+                    "nullable": true
+                  },
+                  "contact_name": {
+                    "type": "string",
+                    "description": "営業担当者名",
+                    "example": "営業担当",
+                    "nullable": true
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "営業担当者 メールアドレス",
+                    "example": "contact@example.com",
+                    "nullable": true
+                  },
+                  "address_attributes[zipcode]": {
+                    "type": "string",
+                    "description": "郵便番号",
+                    "example": "000-0000",
+                    "nullable": true
+                  },
                   "address_attributes[prefecture_code]": {
                     "maximum": 46,
                     "minimum": 0,
                     "type": "integer",
                     "description": "都道府県コード（0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
                     "example": 4
+                  },
+                  "address_attributes[street_name1]": {
+                    "type": "string",
+                    "description": "市区町村・番地",
+                    "example": "ＸＸ区ＹＹ１−１−１",
+                    "nullable": true
+                  },
+                  "address_attributes[street_name2]": {
+                    "type": "string",
+                    "description": "建物名・部屋番号など",
+                    "example": "ビル１Ｆ",
+                    "nullable": true
+                  },
+                  "partner_doc_setting_attributes[sending_method]": {
+                    "type": "string",
+                    "description": "請求書送付方法(mail:メール、posting:郵送、mail_and_posting:メールと郵送)",
+                    "example": "posting",
+                    "enum": [
+                      "mail",
+                      "posting",
+                      "main_and_posting"
+                    ],
+                    "nullable": true
+                  },
+                  "partner_bank_account_attributes[bank_name]": {
+                    "type": "string",
+                    "description": "銀行名",
+                    "example": "ＸＸ銀行",
+                    "nullable": true
+                  },
+                  "partner_bank_account_attributes[bank_name_kana]": {
+                    "type": "string",
+                    "description": "銀行名（カナ）",
+                    "example": "ＸＸ",
+                    "nullable": true
+                  },
+                  "partner_bank_account_attributes[bank_code]": {
+                    "type": "string",
+                    "description": "銀行番号",
+                    "example": "001",
+                    "nullable": true
+                  },
+                  "partner_bank_account_attributes[branch_name]": {
+                    "type": "string",
+                    "description": "支店名",
+                    "example": "銀座支店",
+                    "nullable": true
+                  },
+                  "partner_bank_account_attributes[branch_kana]": {
+                    "type": "string",
+                    "description": "支店名（カナ）",
+                    "example": "ギンザ",
+                    "nullable": true
+                  },
+                  "partner_bank_account_attributes[branch_code]": {
+                    "type": "string",
+                    "description": "受取人名（カナ）",
+                    "example": "フリータロウ",
+                    "nullable": true
+                  },
+                  "partner_bank_account_attributes[account_type]": {
+                    "type": "string",
+                    "description": "口座種別(ordinary:普通、checking:当座、earmarked:納税準備預金、savings:貯蓄、other:その他)",
+                    "example": "ordinary",
+                    "enum": [
+                      "ordinary",
+                      "checking",
+                      "earmarked",
+                      "savings",
+                      "other"
+                    ],
+                    "nullable": true
+                  },
+                  "partner_bank_account_attributes[account_number]": {
+                    "type": "string",
+                    "description": "口座番号",
+                    "example": "1010101",
+                    "nullable": true
+                  },
+                  "partner_bank_account_attributes[account_name]": {
+                    "type": "string",
+                    "description": "受取人名（カナ）",
+                    "example": "フリータロウ",
+                    "nullable": true
+                  },
+                  "partner_bank_account_attributes[long_account_name]": {
+                    "type": "string",
+                    "description": "受取人名",
+                    "example": "freee太郎",
+                    "nullable": true
                   }
                 }
               }
@@ -15089,6 +16738,7 @@
               "required": [
                 "available",
                 "code",
+                "display_category",
                 "name",
                 "name_ja"
               ],
@@ -15108,6 +16758,18 @@
                   "type": "string",
                   "description": "税区分名（日本語表示用）",
                   "example": "課税売上"
+                },
+                "display_category": {
+                  "type": "string",
+                  "description": "税区分の表示カテゴリ（tax_5: 5%表示の税区分、tax_8: 8%表示の税区分、tax_r8: 軽減税率8%表示の税区分、tax_10: 10%表示の税区分、null: 税率未設定税区分）",
+                  "example": "tax_8",
+                  "enum": [
+                    "tax_5",
+                    "tax_8",
+                    "tax_r8",
+                    "tax_10"
+                  ],
+                  "nullable": true
                 },
                 "available": {
                   "type": "boolean",
@@ -15146,6 +16808,7 @@
       },
       "walletable": {
         "required": [
+          "bank_id",
           "id",
           "name",
           "type"
@@ -15161,6 +16824,12 @@
             "type": "string",
             "description": "口座名 (255文字以内)",
             "example": "freee銀行"
+          },
+          "bank_id": {
+            "type": "integer",
+            "description": "サービスID",
+            "example": 3,
+            "nullable": true
           },
           "type": {
             "type": "string",
@@ -15267,6 +16936,8 @@
             "example": 1
           },
           "company_id": {
+            "maximum": 999999999999,
+            "minimum": 1,
             "type": "integer",
             "description": "事業所ID",
             "example": 1
@@ -15358,8 +17029,10 @@
           "date",
           "description",
           "from_walletable_id",
+          "from_walletable_type",
           "id",
-          "to_walletable_id"
+          "to_walletable_id",
+          "to_walletable_type"
         ],
         "type": "object",
         "properties": {
@@ -15369,6 +17042,8 @@
             "example": 1
           },
           "company_id": {
+            "maximum": 999999999999,
+            "minimum": 1,
             "type": "integer",
             "description": "事業所ID",
             "example": 1
@@ -15383,10 +17058,32 @@
             "description": "振替日 (yyyy-mm-dd)",
             "example": "2019-11-01"
           },
+          "from_walletable_type": {
+            "type": "string",
+            "description": "振替元口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
+            "example": "credit_card",
+            "enum": [
+              "bank_account",
+              "wallet",
+              "credit_card"
+            ],
+            "nullable": true
+          },
           "from_walletable_id": {
             "type": "integer",
             "description": "振替元口座ID",
             "example": 101
+          },
+          "to_walletable_type": {
+            "type": "string",
+            "description": "振替先口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
+            "example": "bank_account",
+            "enum": [
+              "bank_account",
+              "wallet",
+              "credit_card"
+            ],
+            "nullable": true
           },
           "to_walletable_id": {
             "type": "integer",
@@ -15416,6 +17113,36 @@
             "type": "string",
             "description": "メールアドレス",
             "example": "example@freee.co.jp"
+          },
+          "display_name": {
+            "type": "string",
+            "description": "表示名",
+            "example": "山田太郎",
+            "nullable": true
+          },
+          "first_name": {
+            "type": "string",
+            "description": "氏名（名）",
+            "example": "太郎",
+            "nullable": true
+          },
+          "last_name": {
+            "type": "string",
+            "description": "氏名（姓）",
+            "example": "山田",
+            "nullable": true
+          },
+          "first_name_kana": {
+            "type": "string",
+            "description": "氏名（カナ・名）",
+            "example": "タロウ",
+            "nullable": true
+          },
+          "last_name_kana": {
+            "type": "string",
+            "description": "氏名（カナ・姓）",
+            "example": "ヤマダ",
+            "nullable": true
           }
         }
       },
@@ -15495,6 +17222,36 @@
                 "type": "string",
                 "description": "メールアドレス",
                 "example": "contaxt@example.com"
+              },
+              "display_name": {
+                "type": "string",
+                "description": "表示ユーザー名",
+                "example": "フリー太郎",
+                "nullable": true
+              },
+              "first_name": {
+                "type": "string",
+                "description": "名",
+                "example": "太郎",
+                "nullable": true
+              },
+              "last_name": {
+                "type": "string",
+                "description": "姓",
+                "example": "フリー",
+                "nullable": true
+              },
+              "first_name_kana": {
+                "type": "string",
+                "description": "名（カナ）",
+                "example": "タロウ",
+                "nullable": true
+              },
+              "last_name_kana": {
+                "type": "string",
+                "description": "姓（カナ）",
+                "example": "フリー",
+                "nullable": true
               },
               "companies": {
                 "type": "array",
@@ -15879,8 +17636,8 @@
           },
           "file_src": {
             "type": "string",
-            "description": "ファイルのURL（freeeにログインした状態でのみ閲覧可能です。）",
-            "example": "https://www.freee.co.jp/api/p/receipts/revisions/1234xxxxx/image?width=300"
+            "description": "ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。）",
+            "example": "https://www.freee.co.jp/api/p/receipts/revisions/1234xxxxx/download"
           },
           "user": {
             "required": [
@@ -15898,6 +17655,12 @@
                 "type": "string",
                 "description": "メールアドレス",
                 "example": "contact@example.com"
+              },
+              "display_name": {
+                "type": "string",
+                "description": "表示名",
+                "example": "フリー太郎",
+                "nullable": true
               }
             }
           }
@@ -16036,6 +17799,7 @@
           "editable_on_web",
           "expense_application_lines",
           "id",
+          "issue_date",
           "status",
           "title"
         ],
@@ -16047,6 +17811,8 @@
             "example": 1
           },
           "company_id": {
+            "maximum": 999999999999,
+            "minimum": 1,
             "type": "integer",
             "description": "事業所ID",
             "example": 1
@@ -16055,6 +17821,12 @@
             "type": "string",
             "description": "申請タイトル",
             "example": "大阪出張"
+          },
+          "issue_date": {
+            "type": "string",
+            "description": "申請日 (yyyy-mm-dd)",
+            "example": "2018-07-19",
+            "nullable": true
           },
           "description": {
             "type": "string",
@@ -16078,6 +17850,12 @@
             "enum": [
               "draft"
             ]
+          },
+          "section_id": {
+            "type": "integer",
+            "description": "部門ID",
+            "example": 101,
+            "nullable": true
           },
           "tag_ids": {
             "type": "array",
@@ -16218,6 +17996,7 @@
         "properties": {
           "company_id": {
             "maximum": 999999999999,
+            "minimum": 1,
             "type": "integer",
             "description": "事業所ID",
             "example": 1
@@ -16253,6 +18032,7 @@
         "properties": {
           "company_id": {
             "maximum": 999999999999,
+            "minimum": 1,
             "type": "integer",
             "description": "事業所ID",
             "example": 1
@@ -16464,6 +18244,7 @@
         "properties": {
           "company_id": {
             "maximum": 999999999999,
+            "minimum": 1,
             "type": "integer",
             "description": "事業所ID",
             "example": 1
@@ -16519,6 +18300,7 @@
           "applicant_id",
           "application_date",
           "application_number",
+          "approver_id",
           "company_id",
           "id",
           "request_items",
@@ -16533,6 +18315,8 @@
             "example": 1
           },
           "company_id": {
+            "maximum": 999999999999,
+            "minimum": 1,
             "type": "integer",
             "description": "事業所ID",
             "example": 1
@@ -16551,6 +18335,12 @@
             "type": "integer",
             "description": "申請者ID",
             "example": 1
+          },
+          "approver_id": {
+            "type": "integer",
+            "description": "承認者ID",
+            "example": 1,
+            "nullable": true
           },
           "application_number": {
             "type": "string",
@@ -16623,8 +18413,11 @@
       },
       "segmentTag": {
         "required": [
+          "description",
           "id",
-          "name"
+          "name",
+          "shortcut1",
+          "shortcut2"
         ],
         "type": "object",
         "properties": {
@@ -16637,6 +18430,24 @@
             "type": "string",
             "description": "セグメントタグ",
             "example": "プロジェクトA"
+          },
+          "description": {
+            "type": "string",
+            "description": "備考",
+            "example": "備考",
+            "nullable": true
+          },
+          "shortcut1": {
+            "type": "string",
+            "description": "ショートカット１ (20文字以内)",
+            "example": "A",
+            "nullable": true
+          },
+          "shortcut2": {
+            "type": "string",
+            "description": "ショートカット２ (20文字以内)",
+            "example": "123",
+            "nullable": true
           }
         }
       },
@@ -16714,6 +18525,7 @@
           "invoice_number",
           "invoice_status",
           "issue_date",
+          "partner_id",
           "payment_type",
           "posting_status",
           "tax_entry_method",
@@ -16728,6 +18540,8 @@
             "example": 101
           },
           "company_id": {
+            "maximum": 999999999999,
+            "minimum": 1,
             "type": "integer",
             "description": "事業所ID",
             "example": 1
@@ -16737,10 +18551,34 @@
             "description": "請求日 (yyyy-mm-dd)",
             "example": "2013-01-01"
           },
+          "partner_id": {
+            "type": "integer",
+            "description": "取引先ID",
+            "example": 201,
+            "nullable": true
+          },
+          "partner_code": {
+            "type": "string",
+            "description": "取引先コード",
+            "example": "code001",
+            "nullable": true
+          },
           "invoice_number": {
             "type": "string",
             "description": "請求書番号",
             "example": "A001"
+          },
+          "title": {
+            "type": "string",
+            "description": "タイトル",
+            "example": "請求書",
+            "nullable": true
+          },
+          "due_date": {
+            "type": "string",
+            "description": "期日 (yyyy-mm-dd)",
+            "example": "2013-02-28",
+            "nullable": true
           },
           "total_amount": {
             "type": "integer",
@@ -16756,6 +18594,18 @@
             "type": "integer",
             "description": "小計",
             "example": 100000
+          },
+          "booking_date": {
+            "type": "string",
+            "description": "売上計上日",
+            "example": "2013-01-01",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "概要",
+            "example": "８月分請求書",
+            "nullable": true
           },
           "invoice_status": {
             "type": "string",
@@ -16778,6 +18628,36 @@
               "settled"
             ]
           },
+          "payment_date": {
+            "type": "string",
+            "description": "入金日",
+            "example": "2013-03-01",
+            "nullable": true
+          },
+          "web_published_at": {
+            "type": "string",
+            "description": "Web共有日時(最新)",
+            "example": "2013-03-01 10:00:00",
+            "nullable": true
+          },
+          "web_downloaded_at": {
+            "type": "string",
+            "description": "Web共有ダウンロード日時(最新)",
+            "example": "2013-03-01 10:00:00",
+            "nullable": true
+          },
+          "web_confirmed_at": {
+            "type": "string",
+            "description": "Web共有取引先確認日時(最新)",
+            "example": "2013-03-01 10:00:00",
+            "nullable": true
+          },
+          "mail_sent_at": {
+            "type": "string",
+            "description": "メール送信日時(最新)",
+            "example": "2013-03-01 10:00:00",
+            "nullable": true
+          },
           "posting_status": {
             "type": "string",
             "description": "郵送ステータス(unrequested: リクエスト前, preview_registered: プレビュー登録, preview_failed: プレビュー登録失敗, ordered: 注文中, order_failed: 注文失敗, printing: 印刷中, canceled: キャンセル, posted: 投函済み)",
@@ -16794,10 +18674,109 @@
               "posted"
             ]
           },
+          "partner_name": {
+            "type": "string",
+            "description": "取引先名",
+            "example": "freeeパートナー",
+            "nullable": true
+          },
+          "partner_long_name": {
+            "type": "string",
+            "description": "取引先正式名称",
+            "example": "株式会社freeeパートナー",
+            "nullable": true
+          },
+          "partner_title": {
+            "type": "string",
+            "description": "敬称（御中、様、(空白)の3つから選択）",
+            "example": "御中",
+            "enum": [
+              "御中",
+              "様",
+              "(空白)"
+            ],
+            "nullable": true
+          },
+          "partner_zipcode": {
+            "type": "string",
+            "description": "郵便番号",
+            "example": "000-0000",
+            "nullable": true
+          },
+          "partner_prefecture_code": {
+            "maximum": 46,
+            "minimum": 0,
+            "type": "integer",
+            "description": "都道府県コード（0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
+            "example": 4,
+            "nullable": true
+          },
+          "partner_prefecture_name": {
+            "type": "string",
+            "description": "都道府県",
+            "example": "秋田県",
+            "nullable": true
+          },
+          "partner_address1": {
+            "type": "string",
+            "description": "市区町村・番地",
+            "example": "湯沢市",
+            "nullable": true
+          },
+          "partner_address2": {
+            "type": "string",
+            "description": "建物名・部屋番号など",
+            "example": "Aビル",
+            "nullable": true
+          },
+          "partner_contact_info": {
+            "type": "string",
+            "description": "取引先担当者名",
+            "example": "営業担当",
+            "nullable": true
+          },
           "company_name": {
             "type": "string",
             "description": "事業所名",
             "example": "freee株式会社"
+          },
+          "company_zipcode": {
+            "type": "string",
+            "description": "郵便番号",
+            "example": "000-0000",
+            "nullable": true
+          },
+          "company_prefecture_code": {
+            "maximum": 46,
+            "minimum": 0,
+            "type": "integer",
+            "description": "都道府県コード（0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
+            "example": 12,
+            "nullable": true
+          },
+          "company_prefecture_name": {
+            "type": "string",
+            "description": "都道府県",
+            "example": "東京都",
+            "nullable": true
+          },
+          "company_address1": {
+            "type": "string",
+            "description": "市区町村・番地",
+            "example": "ＸＸ区ＸＸ１−１−１",
+            "nullable": true
+          },
+          "company_address2": {
+            "type": "string",
+            "description": "建物名・部屋番号など",
+            "example": "ビル1F",
+            "nullable": true
+          },
+          "company_contact_info": {
+            "type": "string",
+            "description": "事業所担当者名",
+            "example": "法人営業担当",
+            "nullable": true
           },
           "payment_type": {
             "type": "string",
@@ -16808,6 +18787,24 @@
               "transfer",
               "direct_debit"
             ]
+          },
+          "payment_bank_info": {
+            "type": "string",
+            "description": "支払口座",
+            "example": "ＸＸ銀行ＹＹ支店1111111",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "description": "メッセージ",
+            "example": "下記の通りご請求申し上げます。",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "description": "備考",
+            "example": "毎度ありがとうございます",
+            "nullable": true
           },
           "invoice_layout": {
             "type": "string",
@@ -16834,19 +18831,33 @@
               "exclusive"
             ]
           },
+          "deal_id": {
+            "type": "integer",
+            "description": "取引ID (invoice_statusがissuedの時のみIDが表示されます)",
+            "nullable": true
+          },
           "invoice_contents": {
             "type": "array",
             "description": "請求内容",
             "items": {
               "required": [
+                "account_item_id",
+                "account_item_name",
                 "amount",
+                "description",
                 "id",
+                "item_id",
+                "item_name",
                 "order",
                 "qty",
                 "reduced_vat",
+                "section_id",
+                "section_name",
                 "tag_ids",
                 "tag_names",
+                "tax_code",
                 "type",
+                "unit",
                 "unit_price",
                 "vat"
               ],
@@ -16875,12 +18886,18 @@
                 "qty": {
                   "type": "number",
                   "description": "数量",
-                  "example": 1.0
+                  "example": 1
+                },
+                "unit": {
+                  "type": "string",
+                  "description": "単位",
+                  "example": "個",
+                  "nullable": true
                 },
                 "unit_price": {
                   "type": "number",
                   "description": "単価",
-                  "example": 1.0
+                  "example": 1
                 },
                 "amount": {
                   "type": "integer",
@@ -16897,6 +18914,54 @@
                   "description": "軽減税率税区分（true: 対象、false: 対象外）",
                   "example": true
                 },
+                "description": {
+                  "type": "string",
+                  "description": "備考",
+                  "example": "備考",
+                  "nullable": true
+                },
+                "account_item_id": {
+                  "type": "integer",
+                  "description": "勘定科目ID",
+                  "example": 1,
+                  "nullable": true
+                },
+                "account_item_name": {
+                  "type": "string",
+                  "description": "勘定科目名",
+                  "example": "売上",
+                  "nullable": true
+                },
+                "tax_code": {
+                  "type": "integer",
+                  "description": "税区分コード",
+                  "example": 1,
+                  "nullable": true
+                },
+                "item_id": {
+                  "type": "integer",
+                  "description": "品目ID",
+                  "example": 1,
+                  "nullable": true
+                },
+                "item_name": {
+                  "type": "string",
+                  "description": "品目",
+                  "example": "会計freee",
+                  "nullable": true
+                },
+                "section_id": {
+                  "type": "integer",
+                  "description": "部門ID",
+                  "example": 1,
+                  "nullable": true
+                },
+                "section_name": {
+                  "type": "string",
+                  "description": "部門",
+                  "example": "開発部",
+                  "nullable": true
+                },
                 "tag_ids": {
                   "type": "array",
                   "items": {
@@ -16912,6 +18977,42 @@
                     "description": "メモタグ",
                     "example": "メモタグ"
                   }
+                },
+                "segment_1_tag_id": {
+                  "type": "integer",
+                  "description": "セグメント１ID",
+                  "example": 1,
+                  "nullable": true
+                },
+                "segment_1_tag_name": {
+                  "type": "string",
+                  "description": "セグメント１ID",
+                  "example": "セグメント１",
+                  "nullable": true
+                },
+                "segment_2_tag_id": {
+                  "type": "integer",
+                  "description": "セグメント２ID",
+                  "example": 1,
+                  "nullable": true
+                },
+                "segment_2_tag_name": {
+                  "type": "string",
+                  "description": "セグメント２",
+                  "example": "セグメント２",
+                  "nullable": true
+                },
+                "segment_3_tag_id": {
+                  "type": "integer",
+                  "description": "セグメント３ID",
+                  "example": 1,
+                  "nullable": true
+                },
+                "segment_3_tag_name": {
+                  "type": "string",
+                  "description": "セグメント３",
+                  "example": "セグメント３",
+                  "nullable": true
                 }
               }
             }
@@ -16961,6 +19062,7 @@
         "properties": {
           "company_id": {
             "maximum": 999999999999,
+            "minimum": 1,
             "type": "integer",
             "description": "事業所ID",
             "example": 1
@@ -17156,7 +19258,7 @@
                   "minimum": 1,
                   "type": "number",
                   "description": "数量",
-                  "example": 1.0
+                  "example": 1
                 },
                 "unit": {
                   "type": "string",
@@ -17168,7 +19270,7 @@
                   "minimum": -999999999999,
                   "type": "number",
                   "description": "単価 (tax_entry_method: inclusiveの場合は税込価格、tax_entry_method: exclusiveの場合は税抜価格となります)",
-                  "example": 1.0
+                  "example": 1
                 },
                 "vat": {
                   "type": "integer",
@@ -17250,6 +19352,7 @@
         "properties": {
           "company_id": {
             "maximum": 999999999999,
+            "minimum": 1,
             "type": "integer",
             "description": "事業所ID",
             "example": 1
@@ -17452,7 +19555,7 @@
                   "minimum": 1,
                   "type": "number",
                   "description": "数量",
-                  "example": 1.0
+                  "example": 1
                 },
                 "unit": {
                   "type": "string",
@@ -17464,7 +19567,7 @@
                   "minimum": -999999999999,
                   "type": "number",
                   "description": "単価 (tax_entry_method: inclusiveの場合は税込価格、tax_entry_method: exclusiveの場合は税抜価格となります)",
-                  "example": 1.0
+                  "example": 1
                 },
                 "vat": {
                   "type": "integer",
