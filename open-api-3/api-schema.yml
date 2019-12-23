@@ -9839,12 +9839,12 @@ components:
         contact_name:
           maxLength: 255
           type: string
-          description: 営業担当者名 (255文字以内)
+          description: 担当者 氏名 (255文字以内)
           example: 営業担当
         email:
           maxLength: 255
           type: string
-          description: 営業担当者 メールアドレス (255文字以内)
+          description: 担当者 メールアドレス (255文字以内)
           example: contact@example.com
         address_attributes:
           type: object
@@ -9966,12 +9966,12 @@ components:
         contact_name:
           maxLength: 255
           type: string
-          description: 営業担当者名 (255文字以内)
+          description: 担当者 氏名 (255文字以内)
           example: 営業担当
         email:
           maxLength: 255
           type: string
-          description: 営業担当者 メールアドレス (255文字以内)
+          description: 担当者 メールアドレス (255文字以内)
           example: contact@example.com
         address_attributes:
           type: object
@@ -10089,11 +10089,11 @@ components:
           example: 03-1234-xxxx
         contact_name:
           type: string
-          description: 営業担当者名
+          description: 担当者 氏名
           example: 営業担当
         email:
           type: string
-          description: 営業担当者 メールアドレス
+          description: 担当者 メールアドレス
           example: contact@example.com
         address_attributes:
           type: object
@@ -13475,11 +13475,11 @@ components:
             properties:
               messages:
                 anyOf:
-                 - type: array
-                   items:
-                     type: string
-                     example: 不正なリクエストです。
-                 - type: string
+                  - type: array
+                    items:
+                      type: string
+                      example: 不正なリクエストです。
+                  - type: string
               type:
                 type: string
                 example: validation
@@ -13503,11 +13503,11 @@ components:
             properties:
               messages:
                 anyOf:
-                 - type: array
-                   items:
-                     type: string
-                     example: リソースが見つかりません。
-                 - type: string
+                  - type: array
+                    items:
+                      type: string
+                      example: リソースが見つかりません。
+                  - type: string
               type:
                 type: string
                 example: validation
@@ -13531,11 +13531,11 @@ components:
             properties:
               messages:
                 anyOf:
-                 - type: array
-                   items:
-                     type: string
-                     example: エラーが発生しました。
-                 - type: string
+                  - type: array
+                    items:
+                      type: string
+                      example: エラーが発生しました。
+                  - type: string
               type:
                 type: string
                 example: status
@@ -13804,12 +13804,12 @@ components:
                   nullable: true
                 contact_name:
                   type: string
-                  description: 営業担当者名
+                  description: 担当者 氏名
                   example: 営業担当
                   nullable: true
                 email:
                   type: string
-                  description: 営業担当者 メールアドレス
+                  description: 担当者 メールアドレス
                   example: contact@example.com
                   nullable: true
                 'address_attributes[zipcode]':
@@ -15263,7 +15263,7 @@ components:
           example: 1
         name:
           type: string
-          description: セグメントタグ
+          description: セグメントタグ名
           example: プロジェクトA
         description:
           type: string
@@ -15295,7 +15295,7 @@ components:
         name:
           maxLength: 30
           type: string
-          description: セグメントタグ
+          description: セグメントタグ名
           example: プロジェクトA
         description:
           maxLength: 30
