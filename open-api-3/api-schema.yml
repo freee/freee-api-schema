@@ -9827,11 +9827,6 @@ components:
           type: string
           description: 敬称（御中、様、(空白)の3つから選択）
           example: 御中
-          enum:
-            - ''
-            - (空白)
-            - 御中
-            - 様
         phone:
           type: string
           description: 電話番号
@@ -9954,11 +9949,6 @@ components:
           type: string
           description: 敬称（御中、様、(空白)の3つから選択）
           example: 御中
-          enum:
-            - ''
-            - (空白)
-            - 御中
-            - 様
         phone:
           type: string
           description: 電話番号
@@ -10078,11 +10068,6 @@ components:
           type: string
           description: 敬称（御中、様、(空白)の3つから選択）
           example: 御中
-          enum:
-            - ''
-            - (空白)
-            - 御中
-            - 様
         phone:
           type: string
           description: 電話番号
@@ -13449,16 +13434,8 @@ components:
       properties:
         message:
           type: string
-          enum:
-            - ログインをしてください
-            - ログインをして下さい
-            - アクセスする権限がありません
         messages:
           type: string
-          enum:
-            - ログインをしてください
-            - ログインをして下さい
-            - アクセスする権限がありません
     badRequestError:
       type: object
       properties:
@@ -13792,10 +13769,6 @@ components:
                   type: string
                   description: 敬称（御中、様、(空白)の3つから選択）
                   example: 御中
-                  enum:
-                    - 御中
-                    - 様
-                    - (空白)
                   nullable: true
                 phone:
                   type: string
@@ -15475,10 +15448,6 @@ components:
           type: string
           description: 敬称（御中、様、(空白)の3つから選択）
           example: 御中
-          enum:
-            - 御中
-            - 様
-            - (空白)
           nullable: true
         partner_zipcode:
           type: string
@@ -15832,10 +15801,6 @@ components:
           type: string
           description: 敬称（御中、様、(空白)の3つから選択）
           example: 御中
-          enum:
-            - 御中
-            - 様
-            - (空白)
         partner_contact_info:
           type: string
           description: 取引先担当者名
@@ -16066,10 +16031,6 @@ components:
           type: string
           description: 敬称（御中、様、(空白)の3つから選択）
           example: 御中
-          enum:
-            - 御中
-            - 様
-            - (空白)
         partner_contact_info:
           type: string
           description: 取引先担当者名
