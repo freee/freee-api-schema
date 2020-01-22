@@ -8121,12 +8121,6 @@
         "default_title": {
           "type": "string",
           "example": "御中",
-          "enum": [
-            "",
-            "(空白)",
-            "御中",
-            "様"
-          ],
           "description": "敬称（御中、様、(空白)の3つから選択）"
         },
         "phone": {
@@ -8283,12 +8277,6 @@
         "default_title": {
           "type": "string",
           "example": "御中",
-          "enum": [
-            "",
-            "(空白)",
-            "御中",
-            "様"
-          ],
           "description": "敬称（御中、様、(空白)の3つから選択）"
         },
         "phone": {
@@ -8442,12 +8430,6 @@
         "default_title": {
           "type": "string",
           "example": "御中",
-          "enum": [
-            "",
-            "(空白)",
-            "御中",
-            "様"
-          ],
           "description": "敬称（御中、様、(空白)の3つから選択）"
         },
         "phone": {
@@ -12878,11 +12860,7 @@
       "type": "object",
       "properties": {
         "message": {
-          "type": "string",
-          "enum": [
-            "ログインをしてください",
-            "アクセスする権限がありません"
-          ]
+          "type": "string"
         }
       }
     },
@@ -13231,11 +13209,6 @@
                     "null"
                   ],
                   "example": "御中",
-                  "enum": [
-                    "御中",
-                    "様",
-                    "(空白)"
-                  ],
                   "description": "敬称（御中、様、(空白)の3つから選択）"
                 },
                 "phone": {
@@ -15506,11 +15479,6 @@
             "null"
           ],
           "example": "御中",
-          "enum": [
-            "御中",
-            "様",
-            "(空白)"
-          ],
           "description": "敬称（御中、様、(空白)の3つから選択）"
         },
         "partner_zipcode": {
@@ -16002,11 +15970,6 @@
         "partner_title": {
           "type": "string",
           "example": "御中",
-          "enum": [
-            "御中",
-            "様",
-            "(空白)"
-          ],
           "description": "敬称（御中、様、(空白)の3つから選択）"
         },
         "partner_contact_info": {
@@ -16290,11 +16253,6 @@
         "partner_title": {
           "type": "string",
           "example": "御中",
-          "enum": [
-            "御中",
-            "様",
-            "(空白)"
-          ],
           "description": "敬称（御中、様、(空白)の3つから選択）"
         },
         "partner_contact_info": {
