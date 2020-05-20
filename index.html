@@ -1,0 +1,72 @@
+<!-- HTML for static distribution bundle build -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Swagger UI</title>
+    <link rel="stylesheet" type="text/css" href="github_pages/swagger-ui.css" >
+    <link rel="icon" type="image/png" href="github_pages/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="github_pages/favicon-16x16.png" sizes="16x16" />
+    <style>
+      html
+      {
+        box-sizing: border-box;
+        overflow: -moz-scrollbars-vertical;
+        overflow-y: scroll;
+      }
+
+      *,
+      *:before,
+      *:after
+      {
+        box-sizing: inherit;
+      }
+
+      body
+      {
+        margin:0;
+        background: #fafafa;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="swagger-ui"></div>
+
+    <script src="github_pages/swagger-ui-bundle.js"> </script>
+    <script src="github_pages/swagger-ui-standalone-preset.js"> </script>
+    <script>
+    function urlSearchParams(name){
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        if (results == null){
+           return null;
+        }
+        else {
+           return decodeURI(results[1]) || 0;
+        }
+    }
+    const DEFAULT_API_VERSION = 'v1'
+    const api_version = urlSearchParams('apiVersion') || DEFAULT_API_VERSION
+    window.onload = function() {
+      // Begin Swagger UI call region
+      const ui = SwaggerUIBundle({
+        url: "https://raw.githubusercontent.com/freee/freee-api-schema/master/" + api_version + "/open-api-3/api-schema.yml",
+        dom_id: '#swagger-ui',
+        deepLinking: true,
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIStandalonePreset
+        ],
+        plugins: [
+          SwaggerUIBundle.plugins.DownloadUrl
+        ],
+        layout: "StandaloneLayout",
+        displayRequestDuration: false
+      })
+      // End Swagger UI call region
+
+      window.ui = ui
+    }
+  </script>
+  </body>
+</html>
