@@ -64,14 +64,6 @@
         apisSorter: "alpha",
         operationsSorter: "method",
         tagsSorter: "alpha",
-        requestInterceptor: (req) => {
-          if (req.headers.Authorization != undefined) {
-            req.headers.Authorization = 'Bearer ' + req.headers.Authorization
-          } else {
-            req.headers.Authorization = 'Bearer '
-          }
-          return req
-        }
       })
       // End Swagger UI call region
 
