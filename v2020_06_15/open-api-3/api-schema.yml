@@ -4,13 +4,6 @@ info:
   description: |-
 
     <h1 id="freee_api">freee API</h1>
-
-    <pre><code>[注意]<br>
-    廃止予定のAPIバージョンのリファレンスです。
-    こちらのリファレンスページからは、「Try it out」ボタンを押しても、会計freee APIのリクエスト送信やレスポンスのチェックはできません。
-    実際に会計freee APIを試したい場合は、新バージョンのこちらのリファレンスページから行ってください。
-    </code></pre>
-
     <hr />
     <h2 id="start_guide">スタートガイド</h2>
 
@@ -18,6 +11,17 @@ info:
 
     <hr />
     <h2 id="specification">仕様</h2>
+
+    <pre><code>【重要】会計freee APIの新バージョンについて
+    2020年12月まで、2つのバージョンが利用できる状態です。古いものは2020年12月に利用不可となります。<br>
+    新しいAPIを利用するにはリクエストヘッダーに以下を指定します。
+    X-Api-Version: 2020-06-15<br>
+    指定がない場合は2020年12月に廃止予定のAPIを利用することとなります。<br>
+    【重要】APIのバージョン指定をせずに利用し続ける場合
+    2020年12月に新しいバージョンのAPIに自動的に切り替わります。
+    詳細は、<a href="https://developer.freee.co.jp/release-note/2948" target="_blank">リリースノート</a>をご覧ください。<br>
+    旧バージョンのAPIリファレンスを確認したい場合は、<a href="https://freee.github.io/freee-api-schema/" target="_blank">旧バージョンのAPIリファレンスページ</a>をご覧ください。
+    </code></pre>
 
     <h3 id="api_endpoint">APIエンドポイント</h3>
 
@@ -1009,6 +1013,20 @@ paths:
             type: integer
             minimum: 1
             maximum: 2147483647
+        - name: offset
+          in: query
+          description: '取得レコードのオフセット (デフォルト: 0)'
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 2147483647
+        - name: limit
+          in: query
+          description: '取得レコードの件数 (デフォルト: 50, 最小: 1, 最大: 3000)'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 3000
       responses:
         '200':
           description: ''
@@ -1720,22 +1738,22 @@ paths:
           description: 取引先コードで絞込
           schema:
             type: string
-        - name: issue_date_start
+        - name: start_issue_date
           in: query
           description: 請求日の開始日(yyyy-mm-dd)
           schema:
             type: string
-        - name: issue_date_end
+        - name: end_issue_date
           in: query
           description: 請求日の終了日(yyyy-mm-dd)
           schema:
             type: string
-        - name: due_date_start
+        - name: start_due_date
           in: query
           description: 期日の開始日(yyyy-mm-dd)
           schema:
             type: string
-        - name: due_date_end
+        - name: end_due_date
           in: query
           description: 期日の終了日(yyyy-mm-dd)
           schema:
@@ -2533,7 +2551,6 @@ paths:
         </ul>
         <h2 id="_3">注意点</h2>
         <ul>
-        <li>tax_idは廃止予定です。tax_codeをご利用ください。</li>
         <li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>
         <li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</li>
         </ul>
@@ -2748,12 +2765,6 @@ paths:
         </ul>
         <h2 id="_3">注意点</h2>
         <ul>
-        <li>
-        <p>tax_idは廃止予定です。tax_codeをご利用ください。</p>
-        </li>
-        <li>
-        <p>tax_code, tax_idはどちらかの指定が必須です。両方指定した場合はtax_codeが優先されます。</p>
-        </li>
         <p><li>本APIでは+更新行(renews)の操作ができません。+更新行の作成APIをご利用ください。</p></li>
         <p><li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</p></li>
         <li>
@@ -2867,7 +2878,6 @@ paths:
         </ul>
         <h2 id="_3">注意点</h2>
         <ul>
-        <li>tax_idは廃止予定です。tax_codeをご利用ください。</li>
         <li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>
         </ul>
       operationId: get_deal
@@ -4915,6 +4925,20 @@ paths:
             type: integer
             minimum: 1
             maximum: 2147483647
+        - name: offset
+          in: query
+          description: '取得レコードのオフセット (デフォルト: 0)'
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 2147483647
+        - name: limit
+          in: query
+          description: '取得レコードの件数 (デフォルト: 50, 最小: 1, 最大: 3000)'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 3000
       responses:
         '200':
           description: ''
@@ -5885,7 +5909,7 @@ paths:
           schema:
             type: string
             enum:
-              - bank
+              - bank_account
               - credit_card
               - wallet
       responses:
@@ -7143,7 +7167,7 @@ paths:
         </li>
 
         <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名(上層が存在する場合含まれる)</p>
+        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
         </li>
         <li>
         <p>opening_balance : 期首残高 </p>
@@ -7180,8 +7204,7 @@ paths:
                 &quot;account_item_id&quot; : 1000,
                 &quot;account_item_name&quot; : &quot;現金&quot;,
                 &quot;hierarchy_level&quot; : 2,
-                &quot;parent_account_category_id&quot; : 100;
-                &quot;parent_account_category_name&quot; : &quot;流動資産&quot;,
+                &quot;account_category_name&quot; : &quot;流動資産&quot;,
                 &quot;opening_balance&quot; : 100000,
                 &quot;debit_amount&quot; : 50000,
                 &quot;credit_amount&quot; : 20000,
@@ -7351,7 +7374,7 @@ paths:
         </li>
 
         <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名(上層が存在する場合含まれる)</p>
+        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
         </li>
         <li>
         <p>last_year_closing_balance:  前年度期末残高 </p>
@@ -7378,8 +7401,7 @@ paths:
                 &quot;account_item_id&quot; : 1000,
                 &quot;account_item_name&quot; : &quot;現金&quot;,
                 &quot;hierarchy_level&quot; : 2,
-                &quot;parent_account_category_id&quot; : 100;
-                &quot;parent_account_category_name&quot; : &quot;流動資産&quot;,
+                &quot;account_category_name&quot; : &quot;流動資産&quot;,
                 &quot;last_year_closing_balance&quot; : 25000,
                 &quot;closing_balance&quot; : 100000,
                 &quot;year_on_year&quot; : 0.85
@@ -7537,7 +7559,7 @@ paths:
         </li>
 
         <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名(上層が存在する場合含まれる)</p>
+        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
         </li>
         <li>
         <p>two_years_before_closing_balance:  前々年度期末残高 </p>
@@ -7569,8 +7591,7 @@ paths:
                 &quot;account_item_id&quot; : 1000,
                 &quot;account_item_name&quot; : &quot;現金&quot;,
                 &quot;hierarchy_level&quot; : 2,
-                &quot;parent_account_category_id&quot; : 100;
-                &quot;parent_account_category_name&quot; : &quot;流動資産&quot;,
+                &quot;account_category_name&quot; : &quot;流動資産&quot;,
                 &quot;two_year_before_closing_balance&quot; : 50000,
                 &quot;last_year_closing_balance&quot; : 25000,
                 &quot;closing_balance&quot; : 100000,
@@ -7728,7 +7749,7 @@ paths:
         </li>
 
         <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名(上層が存在する場合含まれる)</p>
+        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
         </li>
         <li>
         <p>opening_balance : 期首残高 </p>
@@ -7765,8 +7786,7 @@ paths:
                 &quot;account_item_id&quot; : 1500,
                 &quot;account_item_name&quot; : &quot;売上高&quot;,
                 &quot;hierarchy_level&quot; : 2,
-                &quot;parent_account_category_id&quot; : 100;
-                &quot;parent_account_category_name&quot; : &quot;営業収益&quot;,
+                &quot;account_category_name&quot; : &quot;営業収益&quot;,
                 &quot;opening_balance&quot; : 100000,
                 &quot;debit_amount&quot; : 50000,
                 &quot;credit_amount&quot; : 20000,
@@ -7952,7 +7972,7 @@ paths:
         </li>
 
         <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名(上層が存在する場合含まれる)</p>
+        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
         </li>
         <li>
         <p>last_year_closing_balance:  前年度期末残高 </p>
@@ -7982,8 +8002,7 @@ paths:
                 &quot;account_item_id&quot; : 1500,
                 &quot;account_item_name&quot; : &quot;売上高&quot;,
                 &quot;hierarchy_level&quot; : 2,
-                &quot;parent_account_category_id&quot; : 100;
-                &quot;parent_account_category_name&quot; : &quot;営業収益&quot;,
+                &quot;account_category_name&quot; : &quot;営業収益&quot;,
                 &quot;last_year_closing_balance&quot; : 25000,
                 &quot;closing_balance&quot; : 100000,
                 &quot;year_on_year&quot; : 0.85
@@ -8157,7 +8176,7 @@ paths:
         </li>
 
         <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名(上層が存在する場合含まれる)</p>
+        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
         </li>
         <li>
         <p>two_years_before_closing_balance:  前々年度期末残高 </p>
@@ -8189,8 +8208,7 @@ paths:
                 &quot;account_item_id&quot; : 1500,
                 &quot;account_item_name&quot; : &quot;売上高&quot;,
                 &quot;hierarchy_level&quot; : 2,
-                &quot;parent_account_category_id&quot; : 100;
-                &quot;parent_account_category_name&quot; : &quot;営業収益&quot;,
+                &quot;account_category_name&quot; : &quot;営業収益&quot;,
                 &quot;two_year_before_closing_balance&quot; : 50000,
                 &quot;last_year_closing_balance&quot; : 25000,
                 &quot;closing_balance&quot; : 100000,
@@ -8364,7 +8382,7 @@ paths:
         </li>
 
         <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名(上層が存在する場合含まれる)</p>
+        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
         </li>
         <li>
         <p>closing_balance : 期末残高 </p>
@@ -8374,7 +8392,7 @@ paths:
         <h2 id="_4">レスポンスの例</h2>
 
         <blockquote>
-        <p>GET https://api.freee.co.jp/api/1/reports/trial_pl_sections?company_id=1&amp;section_ids=1,2,3&amp;fiscal_year=2017</p></p>
+        <p>GET https://api.freee.co.jp/api/1/reports/trial_pl_section?company_id=1&amp;section_ids=1,2,3&amp;fiscal_year=2017</p></p>
         </blockquote>
 
         <pre><code>{
@@ -8388,8 +8406,7 @@ paths:
                 &quot;account_item_id&quot; : 1500,
                 &quot;account_item_name&quot; : &quot;売上高&quot;,
                 &quot;hierarchy_level&quot; : 2,
-                &quot;parent_account_category_id&quot; : 100;
-                &quot;parent_account_category_name&quot; : &quot;営業収益&quot;,
+                &quot;account_category_name&quot; : &quot;営業収益&quot;,
                 &quot;closing_balance&quot; : 1000000,
                 &quot;sections&quot; : [{
                   &quot;id&quot;: 1
@@ -9946,6 +9963,7 @@ components:
           type: array
           items:
             required:
+              - tax_code
               - account_item_id
               - amount
             type: object
@@ -9955,12 +9973,6 @@ components:
                 minimum: 0
                 maximum: 2147483647
                 description: 税区分コード
-                example: 1
-              tax_id:
-                type: integer
-                minimum: 0
-                maximum: 2147483647
-                description: '税区分ID（廃止予定。上記tax_codeを使用してください。tax_code, tax_idはどちらかの指定が必須です。）'
                 example: 1
               account_item_id:
                 type: integer
@@ -10111,6 +10123,7 @@ components:
           type: array
           items:
             required:
+              - tax_code
               - account_item_id
               - amount
             type: object
@@ -10126,12 +10139,6 @@ components:
                 minimum: 0
                 maximum: 2147483647
                 description: 税区分コード
-                example: 1
-              tax_id:
-                type: integer
-                minimum: 0
-                maximum: 2147483647
-                description: '税区分ID（廃止予定。上記tax_codeを使用してください。tax_code, tax_idはどちらかの指定が必須です。）'
                 example: 1
               account_item_id:
                 type: integer
@@ -10450,174 +10457,6 @@ components:
           maxLength: 50
           description: 担当者名 (50文字以内)
           example: 担当者
-        address_attributes:
-          type: object
-          properties:
-            zipcode:
-              type: string
-              description: 郵便番号
-            prefecture_code:
-              type: integer
-              minimum: 0
-              maximum: 46
-              description: '都道府県コード（0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄'
-            street_name1:
-              type: string
-              description: 市区町村・番地
-            street_name2:
-              type: string
-              description: 建物名・部屋番号など
-          example:
-            zipcode: 000-0000
-            prefecture_code: 4
-            street_name1: ＸＸ区ＹＹ１−１ー１
-            street_name2: ビル１Ｆ
-        phone1:
-          type: string
-          description: 電話番号１
-          example: 03-1234-xxxx
-        phone2:
-          type: string
-          description: 電話番号２
-          example: 090-1234-xxxx
-        fax:
-          type: string
-          description: FAX
-          example: 03-1234-xxxx
-        sales_information_attributes:
-          type: object
-          properties:
-            industry_class:
-              type: string
-              description: '種別（agriculture_forestry_fisheries_ore: 農林水産業/鉱業、construction: 建設、manufacturing_processing: 製造/加工、it: IT、transportation_logistics: 運輸/物流、retail_wholesale: 小売/卸売、finance_insurance: 金融/保険、real_estate_rental: 不動産/レンタル、profession: 士業/学術/専門技術サービス、design_production: デザイン/制作、food: 飲食、leisure_entertainment: レジャー/娯楽、lifestyle: 生活関連サービス、education: 教育/学習支援、medical_welfare: 医療/福祉、other_services: その他サービス、other: その他）'
-              example: agriculture_forestry_fisheries_ore
-              enum:
-                - agriculture_forestry_fisheries_ore
-                - construction
-                - manufacturing_processing
-                - it
-                - transportation_logistics
-                - retail_wholesale
-                - finance_insurance
-                - real_estate_rental
-                - profession
-                - design_production
-                - food
-                - leisure_entertainment
-                - lifestyle
-                - education
-                - medical_welfare
-                - other_services
-                - other
-            industry_code:
-              type: string
-              description: '業種（agriculture: 農業, forestry: 林業, fishing_industry: 漁業、水産養殖業, mining: 鉱業、採石業、砂利採取業, civil_contractors: 土木工事業, pavement: 舗装工事業, carpenter: とび、大工、左官等の建設工事業, renovation: リフォーム工事業, electrical_plumbing: 電気、管工事等の設備工事業, grocery: 食料品の製造加工業, machinery_manufacturing: 機械器具の製造加工業, printing: 印刷業, other_manufacturing: その他の製造加工業, software_development: 受託：ソフトウェア、アプリ開発業, system_development: 受託：システム開発業, survey_analysis: 受託：調査、分析等の情報処理業, server_management: 受託：サーバー運営管理, website_production: 受託：ウェブサイト制作, online_service_management: オンラインサービス運営業, online_advertising_agency: オンライン広告代理店業, online_advertising_planning_production: オンライン広告企画・制作業, online_media_management: オンラインメディア運営業, portal_site_management: ポータルサイト運営業, other_it_services: その他、IT サービス業, transport_delivery: 輸送業、配送業, delivery: バイク便等の配達業, other_transportation_logistics: その他の運輸業、物流業, other_wholesale: 卸売業：その他, clothing_wholesale_fiber: 卸売業：衣類卸売／繊維, food_wholesale: 卸売業：飲食料品, entrusted_development_wholesale: 卸売業：機械器具, online_shop: 小売業：無店舗　オンラインショップ, fashion_grocery_store: 小売業：店舗あり　ファッション、雑貨, food_store: 小売業：店舗あり　生鮮食品、飲食料品, entrusted_store: 小売業：店舗あり　機械、器具, other_store: 小売業：店舗あり　その他, financial_instruments_exchange: 金融業：金融商品取引, commodity_futures_investment_advisor: 金融業：商品先物取引、商品投資顧問, other_financial: 金融業：その他, brokerage_insurance: 保険業：仲介、代理, other_insurance: 保険業：その他, real_estate_developer: 不動産業：ディベロッパー, real_estate_brokerage: 不動産業：売買、仲介, rent_coin_parking_management: 不動産業：賃貸、コインパーキング、管理, rental_office_co_working_space: 不動産業：レンタルオフィス、コワーキングスペース, rental_lease: レンタル業、リース業, cpa_tax_accountant: 士業：公認会計士事務所、税理士事務所, law_office: 士業：法律事務所, judicial_and_administrative_scrivener: 士業：司法書士事務所／行政書士事務所, labor_consultant: 士業：社会保険労務士事務所, other_profession: 士業：その他, business_consultant: 経営コンサルタント, academic_research_development: 学術・開発研究機関, advertising_agency: 広告代理店, advertising_planning_production: 広告企画／制作, design_development: ソフトウェア、アプリ開発業（受託）, apparel_industry_design: 服飾デザイン業、工業デザイン業, website_design: ウェブサイト制作（受託）, advertising_planning_design: 広告企画／制作業, other_design: その他、デザイン／制作, restaurants_coffee_shops: レストラン、喫茶店等の飲食店業, sale_of_lunch: 弁当の販売業, bread_confectionery_manufacture_sale: パン、菓子等の製造販売業, delivery_catering_mobile_catering: デリバリー業、ケータリング業、移動販売業, hotel_inn: 宿泊業：ホテル、旅館, homestay: 宿泊業：民泊, travel_agency: 旅行代理店業, leisure_sports_facility_management: レジャー、スポーツ等の施設運営業, show_event_management: ショー、イベント等の興行、イベント運営業, barber: ビューティ、ヘルスケア業：床屋、理容室, beauty_salon: ビューティ、ヘルスケア業：美容室, spa_sand_bath_sauna: ビューティ、ヘルスケア業：スパ、砂風呂、サウナ等, este_ail_salon: ビューティ、ヘルスケア業：その他、エステサロン、ネイルサロン等, bridal_planning_introduce_wedding: 冠婚葬祭業：ブライダルプランニング、結婚式場紹介等, memorial_ceremony_funeral: 冠婚葬祭業：メモリアルセレモニー、葬儀等, moving: 引っ越し業, courier_industry: 宅配業, house_maid_cleaning_agency: 家事代行サービス業：無店舗　ハウスメイド、掃除代行等, re_tailoring_clothes: 家事代行サービス業：店舗あり　衣類修理、衣類仕立て直し等, training_institute_management: 研修所等の施設運営業, tutoring_school: 学習塾、進学塾等の教育・学習支援業, music_calligraphy_abacus_classroom: 音楽教室、書道教室、そろばん教室等のの教育・学習支援業, english_school: 英会話スクール等の語学学習支援業, tennis_yoga_judo_school: テニススクール、ヨガ教室、柔道場等のスポーツ指導、支援業, culture_school: その他、カルチャースクール等の教育・学習支援業, seminar_planning_management: セミナー等の企画、運営業, hospital_clinic: 医療業：病院、一般診療所、クリニック等, dental_clinic: 医療業：歯科診療所, other_medical_services: 医療業：その他、医療サービス等, nursery: 福祉業：保育所等、児童向け施設型サービス, nursing_home: 福祉業：老人ホーム等、老人向け施設型サービス, rehabilitation_support_services: 福祉業：療育支援サービス等、障害者等向け施設型サービス, other_welfare: 福祉業：その他、施設型福祉サービス, visit_welfare_service: 福祉業：訪問型福祉サービス, recruitment_temporary_staffing: 人材紹介業、人材派遣業, life_related_recruitment_temporary_staffing: 生活関連サービスの人材紹介業、人材派遣業, car_maintenance_car_repair: 自動車整備業、自動車修理業, machinery_equipment_maintenance_repair: 機械機器類の整備業、修理業, cleaning_maintenance_building_management: 清掃業、メンテナンス業、建物管理業, security: 警備業, other_services: その他のサービス業, npo: NPO, general_incorporated_association: 一般社団法人, general_incorporated_foundation: 一般財団法人, other_association: その他組織)'
-              enum:
-                - agriculture
-                - forestry
-                - fishing_industry
-                - mining
-                - civil_contractors
-                - pavement
-                - carpenter
-                - renovation
-                - electrical_plumbing
-                - grocery
-                - machinery_manufacturing
-                - printing
-                - other_manufacturing
-                - software_development
-                - system_development
-                - survey_analysis
-                - server_management
-                - website_production
-                - online_service_management
-                - online_advertising_agency
-                - online_advertising_planning_production
-                - online_media_management
-                - portal_site_management
-                - other_it_services
-                - transport_delivery
-                - delivery
-                - other_transportation_logistics
-                - other_wholesale
-                - clothing_wholesale_fiber
-                - food_wholesale
-                - entrusted_development_wholesale
-                - online_shop
-                - fashion_grocery_store
-                - food_store
-                - entrusted_store
-                - other_store
-                - financial_instruments_exchange
-                - commodity_futures_investment_advisor
-                - other_financial
-                - brokerage_insurance
-                - other_insurance
-                - real_estate_developer
-                - real_estate_brokerage
-                - rent_coin_parking_management
-                - rental_office_co_working_space
-                - rental_lease
-                - cpa_tax_accountant
-                - law_office
-                - judicial_and_administrative_scrivener
-                - labor_consultant
-                - other_profession
-                - business_consultant
-                - academic_research_development
-                - advertising_agency
-                - advertising_planning_production
-                - design_development
-                - apparel_industry_design
-                - website_design
-                - advertising_planning_design
-                - other_design
-                - restaurants_coffee_shops
-                - sale_of_lunch
-                - bread_confectionery_manufacture_sale
-                - delivery_catering_mobile_catering
-                - hotel_inn
-                - homestay
-                - travel_agency
-                - leisure_sports_facility_management
-                - show_event_management
-                - barber
-                - beauty_salon
-                - spa_sand_bath_sauna
-                - este_ail_salon
-                - bridal_planning_introduce_wedding
-                - memorial_ceremony_funeral
-                - moving
-                - courier_industry
-                - house_maid_cleaning_agency
-                - re_tailoring_clothes
-                - training_institute_management
-                - tutoring_school
-                - music_calligraphy_abacus_classroom
-                - english_school
-                - tennis_yoga_judo_school
-                - culture_school
-                - seminar_planning_management
-                - hospital_clinic
-                - dental_clinic
-                - other_medical_services
-                - nursery
-                - nursing_home
-                - rehabilitation_support_services
-                - other_welfare
-                - visit_welfare_service
-                - recruitment_temporary_staffing
-                - life_related_recruitment_temporary_staffing
-                - car_maintenance_car_repair
-                - machinery_equipment_maintenance_repair
-                - cleaning_maintenance_building_management
-                - security
-                - other_services
-                - npo
-                - general_incorporated_association
-                - general_incorporated_foundation
-                - other_association
         head_count:
           type: number
           description: '従業員数（0: 経営者のみ、1: 2~5人、2: 6~10人、3: 11~20人、13: 21~50人、14: 51~100人、15: 101~300人、18: 301~500人、16: 501~1,000人、17: 1,001人以上'
@@ -10637,93 +10476,265 @@ components:
           type: string
           description: 法人番号 (半角数字13桁、法人のみ)
           example: '1234567890123'
-        fiscal_years_attributes:
-          type: object
-          properties:
-            use_industry_template:
-              type: integer
-              minimum: 0
-              maximum: 1
-              description: '製造業向け機能（0: 使用しない、1: 使用する）'
-            indirect_write_off_method:
-              type: integer
-              minimum: 0
-              maximum: 1
-              description: '固定資産の控除法（0: 直接控除法、1: 間接控除法）'
-            indirect_write_off_method_type:
-              type: integer
-              minimum: 0
-              maximum: 1
-              description: '間接控除時の累計額（0: 共通、1: 資産分類別）'
-            start_date:
-              type: string
-              description: 期首日
-            end_date:
-              type: string
-              description: 期末日（決算日��
-            accounting_period:
-              type: integer
-              description: 期
-            depreciation_fraction:
-              type: integer
-              minimum: 0
-              maximum: 1
-              description: '減価償却端数処理法(法人のみ)(0: 切り捨て、1: 切り上げ)'
-            return_code:
-              type: integer
-              minimum: 0
-              maximum: 3
-              description: '不動産所得使用区分(個人事業主のみ)（0: 使用しない、3: 使用する）'
-            tax_fraction:
-              type: integer
-              minimum: 0
-              maximum: 2
-              description: '消費税端数処理方法（0: 切り上げ、1: 切り捨て, 2: 四捨五入）'
-          example:
-            use_industry_template: 0
-            indirect_write_off_method: 0
-            indirect_write_off_method_type: 0
-            start_date: '2018-01-01'
-            end_date: '2018-12-31'
-            depreciation_fraction: 0
-            accounting_period: 1
-            tax_fraction: 0
-        doc_template:
-          type: object
-          properties:
-            invoice_layout:
-              type: integer
-              minimum: 0
-              maximum: 5
-              description: 'レイアウト(0: レイアウト1, 1:レイアウト2, 3:封筒1, 4:レイアウト3(繰越金額欄あり), 5: 封筒2(繰越金額欄あり))'
-            invoice_style:
-              type: integer
-              minimum: 0
-              maximum: 1
-              description: 'スタイル(0: クラシック, 1: モダン)'
-            amount_fraction:
-              type: integer
-              minimum: 0
-              maximum: 2
-              description: '金額端数処理方法（0: 切り上げ、1: 切り捨て, 2: 四捨五入）'
-          example:
-            amount_fraction: 0
-            invoice_layout: 0
-            invoice_style: 0
         txn_number_format:
           type: string
-          description: '仕訳番号形式（not_used: 使用しない、digits: 数字（例：5091824）、alnum: 英数字（例：59J0P））Available values : not_used, digits, alnum'
+          description: '仕訳番号形式（not_used: 使用しない、digits: 数字（例：5091824）、alnum: 英数字（例：59J0P））'
           example: not_used
           enum:
             - not_used
             - digits
             - alnum
         private_settlement:
+          type: boolean
+          description: 'プライベート資金/役員資金（false: 使用しない、true: 使用する）'
+          example: true
+        phone1:
+          type: string
+          description: 電話番号１
+          example: 03-1234-xxxx
+        phone2:
+          type: string
+          description: 電話番号２
+          example: 090-1234-xxxx
+        fax:
+          type: string
+          description: FAX
+          example: 03-1234-xxxx
+        zipcode:
+          type: string
+          description: 郵便番号
+          example: 000-0000
+        prefecture_code:
           type: integer
           minimum: 0
-          maximum: 1
-          description: 'プライベート資金/役員資金（0: 使用しない、1: 使用する）'
+          maximum: 46
+          description: '都道府県コード（0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄'
+          example: 4
+        street_name1:
+          type: string
+          description: 市区町村・番地
+          example: ＸＸ区ＹＹ１−１ー１
+        street_name2:
+          type: string
+          description: 建物名・部屋番号など
+          example: ビル１Ｆ
+        invoice_layout:
+          type: string
+          description: |-
+            請求書レイアウト
+            * `default_classic` - レイアウト１/クラシック (デフォルト)
+
+            * `standard_classic` - レイアウト２/クラシック
+
+            * `envelope_classic` - 封筒１/クラシック
+
+            * `carried_forward_standard_classic` - レイアウト３（繰越金額欄あり）/クラシック
+
+            * `carried_forward_envelope_classic` - 封筒２（繰越金額欄あり）/クラシック
+
+            * `default_modern` - レイアウト１/モダン
+
+            * `standard_modern` - レイアウト２/モダン
+
+            * `envelope_modern` - 封筒/モダン
+          example: default_classic
+          enum:
+            - default_classic
+            - standard_classic
+            - envelope_classic
+            - carried_forward_standard_classic
+            - carried_forward_envelope_classic
+            - default_modern
+            - standard_modern
+            - envelope_modern
+        amount_fraction:
+          type: integer
+          minimum: 0
+          maximum: 2
+          description: '金額端数処理方法（0: 切り捨て、1: 切り上げ, 2: 四捨五入）'
+          example: 0
+        industry_class:
+          type: string
+          description: '種別（agriculture_forestry_fisheries_ore: 農林水産業/鉱業、construction: 建設、manufacturing_processing: 製造/加工、it: IT、transportation_logistics: 運輸/物流、retail_wholesale: 小売/卸売、finance_insurance: 金融/保険、real_estate_rental: 不動産/レンタル、profession: 士業/学術/専門技術サービス、design_production: デザイン/制作、food: 飲食、leisure_entertainment: レジャー/娯楽、lifestyle: 生活関連サービス、education: 教育/学習支援、medical_welfare: 医療/福祉、other_services: その他サービス、other: その他）'
+          example: agriculture_forestry_fisheries_ore
+          enum:
+            - agriculture_forestry_fisheries_ore
+            - construction
+            - manufacturing_processing
+            - it
+            - transportation_logistics
+            - retail_wholesale
+            - finance_insurance
+            - real_estate_rental
+            - profession
+            - design_production
+            - food
+            - leisure_entertainment
+            - lifestyle
+            - education
+            - medical_welfare
+            - other_services
+            - other
+        industry_code:
+          type: string
+          description: '業種（agriculture: 農業, forestry: 林業, fishing_industry: 漁業、水産養殖業, mining: 鉱業、採石業、砂利採取業, civil_contractors: 土木工事業, pavement: 舗装工事業, carpenter: とび、大工、左官等の建設工事業, renovation: リフォーム工事業, electrical_plumbing: 電気、管工事等の設備工事業, grocery: 食料品の製造加工業, machinery_manufacturing: 機械器具の製造加工業, printing: 印刷業, other_manufacturing: その他の製造加工業, software_development: 受託：ソフトウェア、アプリ開発業, system_development: 受託：システム開発業, survey_analysis: 受託：調査、分析等の情報処理業, server_management: 受託：サーバー運営管理, website_production: 受託：ウェブサイト制作, online_service_management: オンラインサービス運営業, online_advertising_agency: オンライン広告代理店業, online_advertising_planning_production: オンライン広告企画・制作業, online_media_management: オンラインメディア運営業, portal_site_management: ポータルサイト運営業, other_it_services: その他、IT サービス業, transport_delivery: 輸送業、配送業, delivery: バイク便等の配達業, other_transportation_logistics: その他の運輸業、物流業, other_wholesale: 卸売業：その他, clothing_wholesale_fiber: 卸売業：衣類卸売／繊維, food_wholesale: 卸売業：飲食料品, entrusted_development_wholesale: 卸売業：機械器具, online_shop: 小売業：無店舗　オンラインショップ, fashion_grocery_store: 小売業：店舗あり　ファッション、雑貨, food_store: 小売業：店舗あり　生鮮食品、飲食料品, entrusted_store: 小売業：店舗あり　機械、器具, other_store: 小売業：店舗あり　その他, financial_instruments_exchange: 金融業：金融商品取引, commodity_futures_investment_advisor: 金融業：商品先物取引、商品投資顧問, other_financial: 金融業：その他, brokerage_insurance: 保険業：仲介、代理, other_insurance: 保険業：その他, real_estate_developer: 不動産業：ディベロッパー, real_estate_brokerage: 不動産業：売買、仲介, rent_coin_parking_management: 不動産業：賃貸、コインパーキング、管理, rental_office_co_working_space: 不動産業：レンタルオフィス、コワーキングスペース, rental_lease: レンタル業、リース業, cpa_tax_accountant: 士業：公認会計士事務所、税理士事務所, law_office: 士業：法律事務所, judicial_and_administrative_scrivener: 士業：司法書士事務所／行政書士事務所, labor_consultant: 士業：社会保険労務士事務所, other_profession: 士業：その他, business_consultant: 経営コンサルタント, academic_research_development: 学術・開発研究機関, advertising_agency: 広告代理店, advertising_planning_production: 広告企画／制作, design_development: ソフトウェア、アプリ開発業（受託）, apparel_industry_design: 服飾デザイン業、工業デザイン業, website_design: ウェブサイト制作（受託）, advertising_planning_design: 広告企画／制作業, other_design: その他、デザイン／制作, restaurants_coffee_shops: レストラン、喫茶店等の飲食店業, sale_of_lunch: 弁当の販売業, bread_confectionery_manufacture_sale: パン、菓子等の製造販売業, delivery_catering_mobile_catering: デリバリー業、ケータリング業、移動販売業, hotel_inn: 宿泊業：ホテル、旅館, homestay: 宿泊業：民泊, travel_agency: 旅行代理店業, leisure_sports_facility_management: レジャー、スポーツ等の施設運営業, show_event_management: ショー、イベント等の興行、イベント運営業, barber: ビューティ、ヘルスケア業：床屋、理容室, beauty_salon: ビューティ、ヘルスケア業：美容室, spa_sand_bath_sauna: ビューティ、ヘルスケア業：スパ、砂風呂、サウナ等, este_ail_salon: ビューティ、ヘルスケア業：その他、エステサロン、ネイルサロン等, bridal_planning_introduce_wedding: 冠婚葬祭業：ブライダルプランニング、結婚式場紹介等, memorial_ceremony_funeral: 冠婚葬祭業：メモリアルセレモニー、葬儀等, moving: 引っ越し業, courier_industry: 宅配業, house_maid_cleaning_agency: 家事代行サービス業：無店舗　ハウスメイド、掃除代行等, re_tailoring_clothes: 家事代行サービス業：店舗あり　衣類修理、衣類仕立て直し等, training_institute_management: 研修所等の施設運営業, tutoring_school: 学習塾、進学塾等の教育・学習支援業, music_calligraphy_abacus_classroom: 音楽教室、書道教室、そろばん教室等のの教育・学習支援業, english_school: 英会話スクール等の語学学習支援業, tennis_yoga_judo_school: テニススクール、ヨガ教室、柔道場等のスポーツ指導、支援業, culture_school: その他、カルチャースクール等の教育・学習支援業, seminar_planning_management: セミナー等の企画、運営業, hospital_clinic: 医療業：病院、一般診療所、クリニック等, dental_clinic: 医療業：歯科診療所, other_medical_services: 医療業：その他、医療サービス等, nursery: 福祉業：保育所等、児童向け施設型サービス, nursing_home: 福祉業：老人ホーム等、老人向け施設型サービス, rehabilitation_support_services: 福祉業：療育支援サービス等、障害者等向け施設型サービス, other_welfare: 福祉業：その他、施設型福祉サービス, visit_welfare_service: 福祉業：訪問型福祉サービス, recruitment_temporary_staffing: 人材紹介業、人材派遣業, life_related_recruitment_temporary_staffing: 生活関連サービスの人材紹介業、人材派遣業, car_maintenance_car_repair: 自動車整備業、自動車修理業, machinery_equipment_maintenance_repair: 機械機器類の整備業、修理業, cleaning_maintenance_building_management: 清掃業、メンテナンス業、建物管理業, security: 警備業, other_services: その他のサービス業, npo: NPO, general_incorporated_association: 一般社団法人, general_incorporated_foundation: 一般財団法人, other_association: その他組織)'
+          enum:
+            - agriculture
+            - forestry
+            - fishing_industry
+            - mining
+            - civil_contractors
+            - pavement
+            - carpenter
+            - renovation
+            - electrical_plumbing
+            - grocery
+            - machinery_manufacturing
+            - printing
+            - other_manufacturing
+            - software_development
+            - system_development
+            - survey_analysis
+            - server_management
+            - website_production
+            - online_service_management
+            - online_advertising_agency
+            - online_advertising_planning_production
+            - online_media_management
+            - portal_site_management
+            - other_it_services
+            - transport_delivery
+            - delivery
+            - other_transportation_logistics
+            - other_wholesale
+            - clothing_wholesale_fiber
+            - food_wholesale
+            - entrusted_development_wholesale
+            - online_shop
+            - fashion_grocery_store
+            - food_store
+            - entrusted_store
+            - other_store
+            - financial_instruments_exchange
+            - commodity_futures_investment_advisor
+            - other_financial
+            - brokerage_insurance
+            - other_insurance
+            - real_estate_developer
+            - real_estate_brokerage
+            - rent_coin_parking_management
+            - rental_office_co_working_space
+            - rental_lease
+            - cpa_tax_accountant
+            - law_office
+            - judicial_and_administrative_scrivener
+            - labor_consultant
+            - other_profession
+            - business_consultant
+            - academic_research_development
+            - advertising_agency
+            - advertising_planning_production
+            - design_development
+            - apparel_industry_design
+            - website_design
+            - advertising_planning_design
+            - other_design
+            - restaurants_coffee_shops
+            - sale_of_lunch
+            - bread_confectionery_manufacture_sale
+            - delivery_catering_mobile_catering
+            - hotel_inn
+            - homestay
+            - travel_agency
+            - leisure_sports_facility_management
+            - show_event_management
+            - barber
+            - beauty_salon
+            - spa_sand_bath_sauna
+            - este_ail_salon
+            - bridal_planning_introduce_wedding
+            - memorial_ceremony_funeral
+            - moving
+            - courier_industry
+            - house_maid_cleaning_agency
+            - re_tailoring_clothes
+            - training_institute_management
+            - tutoring_school
+            - music_calligraphy_abacus_classroom
+            - english_school
+            - tennis_yoga_judo_school
+            - culture_school
+            - seminar_planning_management
+            - hospital_clinic
+            - dental_clinic
+            - other_medical_services
+            - nursery
+            - nursing_home
+            - rehabilitation_support_services
+            - other_welfare
+            - visit_welfare_service
+            - recruitment_temporary_staffing
+            - life_related_recruitment_temporary_staffing
+            - car_maintenance_car_repair
+            - machinery_equipment_maintenance_repair
+            - cleaning_maintenance_building_management
+            - security
+            - other_services
+            - npo
+            - general_incorporated_association
+            - general_incorporated_foundation
+            - other_association
+        default_wallet_account_id:
+          type: integer
+          minimum: 1
+          maximum: 2147483647
+          description: 決済口座のデフォルト
           example: 1
+        fiscal_years:
+          type: object
+          properties:
+            use_industry_template:
+              type: boolean
+              description: '製造業向け機能（true: 使用する、false: 使用しない）'
+              example: false
+            indirect_write_off_method:
+              type: boolean
+              description: '固定資産の控除法（true: 間接控除法、false: 直接控除法）'
+              example: true
+            indirect_write_off_method_type:
+              type: boolean
+              description: '間接控除時の累計額（true: 資産分類別、false: 共通）'
+              example: false
+            start_date:
+              type: string
+              description: 期首日
+              example: '2018-01-01'
+            end_date:
+              type: string
+              description: 期末日
+              example: '2018-12-31'
+            accounting_period:
+              type: integer
+              description: 期
+              example: 1
+            depreciation_fraction:
+              type: integer
+              minimum: 0
+              maximum: 1
+              description: '減価償却端数処理法(法人のみ)(0: 切り捨て、1: 切り上げ)'
+              example: 1
+            tax_fraction:
+              type: integer
+              minimum: 0
+              maximum: 2
+              description: '消費税端数処理方法（0: 切り上げ、1: 切り捨て, 2: 四捨五入）'
+              example: 0
+            return_code:
+              type: integer
+              minimum: 0
+              maximum: 3
+              description: '不動産所得使用区分（0: 一般、3: 一般/不動産） ※個人事業主のみ設定可能'
+              example: 0
     itemParams:
       type: object
       required:
@@ -11523,12 +11534,12 @@ components:
         account_item:
           type: object
           required:
-            - account_category
-            - corresponding_expense_name
-            - corresponding_income_name
+            - account_category_id
+            - corresponding_expense_id
+            - corresponding_income_id
             - group_name
             - name
-            - tax_name
+            - tax_code
           properties:
             name:
               type: string
@@ -11545,30 +11556,34 @@ components:
               maxLength: 20
               description: ショートカット2(勘定科目コード)(20文字以内)
               example: '999'
-            tax_name:
-              type: string
-              description: 税区分
-              example: 課税売上
+            tax_code:
+              type: integer
+              minimum: 0
+              maximum: 2147483647
+              description: 税区分コード
+              example: 1
             group_name:
               type: string
-              description: 決算書表示名（小カテゴリー）
+              description: 決算書表示名（小カテゴリー） Selectablesフォーム用選択項目情報エンドポイント(account_groups.name)で取得可能です
               example: その他預金
-            account_category:
-              type: string
-              description: 勘定科目カテゴリー
-              example: 現金・預金
-            corresponding_income_name:
-              type: string
-              description: 収入取引相手勘定科目名
-              example: 売掛金
-            corresponding_expense_name:
-              type: string
-              description: 支出取引相手勘定科目名
-              example: 買掛金
-            accumulated_dep_account_item_name:
-              type: string
-              description: 減価償却累計額勘定科目（法人のみ利用可能）
-              example: 減価償却累計額勘定科目
+            account_category_id:
+              type: integer
+              minimum: 1
+              maximum: 2147483647
+              description: 勘定科目カテゴリーID Selectablesフォーム用選択項目情報エンドポイント(account_groups.account_category_id)で取得可能です
+              example: 1
+            corresponding_income_id:
+              type: integer
+              description: 収入取引相手勘定科目ID
+              example: 1
+            corresponding_expense_id:
+              type: integer
+              description: 支出取引相手勘定科目ID
+              example: 1
+            accumulated_dep_account_item_id:
+              type: integer
+              description: 減価償却累計額勘定科目ID（法人のみ利用可能）
+              example: 1
             searchable:
               type: integer
               minimum: 2
@@ -11714,8 +11729,6 @@ components:
             - account_category_id
             - available
             - company_id
-            - corresponding_type_expense
-            - corresponding_type_income
             - id
             - name
             - searchable
@@ -11765,18 +11778,6 @@ components:
               maxLength: 20
               description: ショートカット2(勘定科目コード) (20文字以内)
               example: '123'
-            corresponding_type_expense:
-              type: integer
-              minimum: 1
-              maximum: 2147483647
-              description: 支出取引相手勘定科目種別
-              example: 5
-            corresponding_type_income:
-              type: integer
-              minimum: 1
-              maximum: 2147483647
-              description: 収入取引相手勘定科目種別
-              example: 2
             searchable:
               type: integer
               minimum: 2
@@ -11787,6 +11788,11 @@ components:
               type: string
               description: 減価償却累計額勘定科目（法人のみ利用可能）
               example: 減価償却累計額
+            accumulated_dep_account_item_id:
+              type: integer
+              description: 減価償却累計額勘定科目ID（法人のみ利用可能）
+              example: 1
+              nullable: true
             items:
               type: array
               items:
@@ -11910,9 +11916,11 @@ components:
               description: 受け付けID
               example: 1
             messages:
-              type: string
-              description: 受け付けメッセージ
-              example: ':id でリクエストを受け付けました。'
+              type: array
+              items:
+                type: string
+                description: 受け付けメッセージ
+                example: ':id でリクエストを受け付けました。'
             company_id:
               type: integer
               minimum: 1
@@ -12125,6 +12133,10 @@ components:
                     type: string
                     description: 勘定科目名(勘定科目の時のみ含まれる)
                     example: 現金
+                  account_group_name:
+                    type: string
+                    description: '決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)'
+                    example: 現金及び預金
                   partners:
                     type: array
                     description: 'breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる'
@@ -12201,33 +12213,21 @@ components:
                           type: number
                           description: 構成比
                           example: 0.85
-                  account_category_id:
-                    type: integer
-                    minimum: 1
-                    maximum: 2147483647
-                    description: 勘定科目カテゴリーID(勘定科目カテゴリーの時のみ含まれる)
-                    example: 8
                   account_category_name:
                     type: string
-                    description: 勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)
+                    description: 勘定科目カテゴリー名
                     example: 流動資産
                   total_line:
                     type: boolean
-                    description: 合計行(勘定科目カテゴリー名の時のみ含まれる)
+                    description: 合計行(勘定科目カテゴリーの時のみ含まれる)
                     example: true
                   hierarchy_level:
                     type: integer
                     description: 階層レベル
                     example: 3
-                  parent_account_category_id:
-                    type: integer
-                    minimum: 1
-                    maximum: 2147483647
-                    description: 上位科目カテゴリーID(上層が存在する場合含まれる)
-                    example: 19
                   parent_account_category_name:
                     type: string
-                    description: 上位勘定科目カテゴリー名(上層が存在する場合含まれる)
+                    description: 上位勘定科目カテゴリー名(勘定科目カテゴリーの時のみ、上層が存在する場合含まれる)
                     example: 他流動資産
                   opening_balance:
                     type: integer
@@ -12350,6 +12350,10 @@ components:
                     type: string
                     description: 勘定科目名(勘定科目の時のみ含まれる)
                     example: 現金
+                  account_group_name:
+                    type: string
+                    description: '決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)'
+                    example: 現金及び預金
                   partners:
                     type: array
                     description: 'breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる'
@@ -12410,33 +12414,21 @@ components:
                           type: number
                           description: 前年比
                           example: 0.12
-                  account_category_id:
-                    type: integer
-                    minimum: 1
-                    maximum: 2147483647
-                    description: 勘定科目カテゴリーID(勘定科目カテゴリーの時のみ含まれる)
-                    example: 8
                   account_category_name:
                     type: string
-                    description: 勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)
+                    description: 勘定科目カテゴリー名
                     example: 流動資産
                   total_line:
                     type: boolean
-                    description: 合計行(勘定科目カテゴリー名の時のみ含まれる)
+                    description: 合計行(勘定科目カテゴリーの時のみ含まれる)
                     example: true
                   hierarchy_level:
                     type: integer
                     description: 階層レベル
                     example: 3
-                  parent_account_category_id:
-                    type: integer
-                    minimum: 1
-                    maximum: 2147483647
-                    description: 上位科目カテゴリーID(上層が存在する場合含まれる)
-                    example: 19
                   parent_account_category_name:
                     type: string
-                    description: 上位勘定科目カテゴリー名(上層が存在する場合含まれる)
+                    description: 上位勘定科目カテゴリー名(勘定科目カテゴリーの時のみ、上層が存在する場合含まれる)
                     example: 他流動資産
                   last_year_closing_balance:
                     type: integer
@@ -12551,6 +12543,10 @@ components:
                     type: string
                     description: 勘定科目名(勘定科目の時のみ含まれる)
                     example: 現金
+                  account_group_name:
+                    type: string
+                    description: '決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)'
+                    example: 現金及び預金
                   partners:
                     type: array
                     description: 'breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる'
@@ -12619,33 +12615,21 @@ components:
                           type: number
                           description: 前年比
                           example: 0.12
-                  account_category_id:
-                    type: integer
-                    minimum: 1
-                    maximum: 2147483647
-                    description: 勘定科目カテゴリーID(勘定科目カテゴリーの時のみ含まれる)
-                    example: 8
                   account_category_name:
                     type: string
-                    description: 勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)
+                    description: 勘定科目カテゴリー名
                     example: 流動資産
                   total_line:
                     type: boolean
-                    description: 合計行(勘定科目カテゴリー名の時のみ含まれる)
+                    description: 合計行(勘定科目カテゴリーの時のみ含まれる)
                     example: true
                   hierarchy_level:
                     type: integer
                     description: 階層レベル
                     example: 3
-                  parent_account_category_id:
-                    type: integer
-                    minimum: 1
-                    maximum: 2147483647
-                    description: 上位科目カテゴリーID(上層が存在する場合含まれる)
-                    example: 19
                   parent_account_category_name:
                     type: string
-                    description: 上位勘定科目カテゴリー名(上層が存在する場合含まれる)
+                    description: 上位勘定科目カテゴリー名(勘定科目カテゴリーの時のみ、上層が存在する場合含まれる)
                     example: 他流動資産
                   two_years_before_closing_balance:
                     type: integer
@@ -12778,6 +12762,10 @@ components:
                     type: string
                     description: 勘定科目名(勘定科目の時のみ含まれる)
                     example: 現金
+                  account_group_name:
+                    type: string
+                    description: '決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)'
+                    example: 現金及び預金
                   partners:
                     type: array
                     description: 'breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる'
@@ -12892,33 +12880,21 @@ components:
                           type: number
                           description: 構成比
                           example: 0.85
-                  account_category_id:
-                    type: integer
-                    minimum: 1
-                    maximum: 2147483647
-                    description: 勘定科目カテゴリーID(勘定科目カテゴリーの時のみ含まれる)
-                    example: 8
                   account_category_name:
                     type: string
-                    description: 勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)
+                    description: 勘定科目カテゴリー名
                     example: 流動資産
                   total_line:
                     type: boolean
-                    description: 合計行(勘定科目カテゴリー名の時のみ含まれる)
+                    description: 合計行(勘定科目カテゴリーの時のみ含まれる)
                     example: true
                   hierarchy_level:
                     type: integer
                     description: 階層レベル
                     example: 3
-                  parent_account_category_id:
-                    type: integer
-                    minimum: 1
-                    maximum: 2147483647
-                    description: 上位科目カテゴリーID(上層が存在する場合含まれる)
-                    example: 19
                   parent_account_category_name:
                     type: string
-                    description: 上位勘定科目カテゴリー名(上層が存在する場合含まれる)
+                    description: 上位勘定科目カテゴリー名(勘定科目カテゴリーの時のみ、上層が存在する場合含まれる)
                     example: 他流動資産
                   opening_balance:
                     type: integer
@@ -13055,6 +13031,10 @@ components:
                     type: string
                     description: 勘定科目名(勘定科目の時のみ含まれる)
                     example: 現金
+                  account_group_name:
+                    type: string
+                    description: '決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)'
+                    example: 現金及び預金
                   partners:
                     type: array
                     description: 'breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる'
@@ -13145,33 +13125,21 @@ components:
                           type: number
                           description: 前年比
                           example: 0.12
-                  account_category_id:
-                    type: integer
-                    minimum: 1
-                    maximum: 2147483647
-                    description: 勘定科目カテゴリーID(勘定科目カテゴリーの時のみ含まれる)
-                    example: 8
                   account_category_name:
                     type: string
-                    description: 勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)
+                    description: 勘定科目カテゴリー名
                     example: 流動資産
                   total_line:
                     type: boolean
-                    description: 合計行(勘定科目カテゴリー名の時のみ含まれる)
+                    description: 合計行(勘定科目カテゴリーの時のみ含まれる)
                     example: true
                   hierarchy_level:
                     type: integer
                     description: 階層レベル
                     example: 3
-                  parent_account_category_id:
-                    type: integer
-                    minimum: 1
-                    maximum: 2147483647
-                    description: 上位科目カテゴリーID(上層が存在する場合含まれる)
-                    example: 19
                   parent_account_category_name:
                     type: string
-                    description: 上位勘定科目カテゴリー名(上層が存在する場合含まれる)
+                    description: 上位勘定科目カテゴリー名(勘定科目カテゴリーの時のみ、上層が存在する場合含まれる)
                     example: 他流動資産
                   last_year_closing_balance:
                     type: integer
@@ -13300,6 +13268,10 @@ components:
                     type: string
                     description: 勘定科目名(勘定科目の時のみ含まれる)
                     example: 現金
+                  account_group_name:
+                    type: string
+                    description: '決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)'
+                    example: 現金及び預金
                   partners:
                     type: array
                     description: 'breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる'
@@ -13402,33 +13374,21 @@ components:
                           type: number
                           description: 前年比
                           example: 0.12
-                  account_category_id:
-                    type: integer
-                    minimum: 1
-                    maximum: 2147483647
-                    description: 勘定科目カテゴリーID(勘定科目カテゴリーの時のみ含まれる)
-                    example: 8
                   account_category_name:
                     type: string
-                    description: 勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)
+                    description: 勘定科目カテゴリー名
                     example: 流動資産
                   total_line:
                     type: boolean
-                    description: 合計行(勘定科目カテゴリー名の時のみ含まれる)
+                    description: 合計行(勘定科目カテゴリーの時のみ含まれる)
                     example: true
                   hierarchy_level:
                     type: integer
                     description: 階層レベル
                     example: 3
-                  parent_account_category_id:
-                    type: integer
-                    minimum: 1
-                    maximum: 2147483647
-                    description: 上位科目カテゴリーID(上層が存在する場合含まれる)
-                    example: 19
                   parent_account_category_name:
                     type: string
-                    description: 上位勘定科目カテゴリー名(上層が存在する場合含まれる)
+                    description: 上位勘定科目カテゴリー名(勘定科目カテゴリーの時のみ、上層が存在する場合含まれる)
                     example: 他流動資産
                   two_years_before_closing_balance:
                     type: integer
@@ -13559,6 +13519,10 @@ components:
                     type: string
                     description: 勘定科目名(勘定科目の時のみ含まれる)
                     example: 現金
+                  account_group_name:
+                    type: string
+                    description: '決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)'
+                    example: 現金及び預金
                   sections:
                     type: array
                     description: 部門
@@ -13603,28 +13567,6 @@ components:
                                 type: integer
                                 description: 期末残高
                                 example: -25920
-                        account_items:
-                          type: array
-                          description: 'breakdown_display_type:account_item, account_item_display_type:account_item指定時のみ含まれる'
-                          items:
-                            type: object
-                            required:
-                              - id
-                            properties:
-                              id:
-                                type: integer
-                                minimum: 1
-                                maximum: 2147483647
-                                description: 勘定科目ID
-                                example: 1
-                              name:
-                                type: string
-                                description: 勘定科目
-                                example: ソフトウェア
-                              closing_balance:
-                                type: integer
-                                description: 期末残高
-                                example: -25920
                         items:
                           type: array
                           description: 'breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる'
@@ -13647,33 +13589,21 @@ components:
                                 type: integer
                                 description: 期末残高
                                 example: -25920
-                  account_category_id:
-                    type: integer
-                    minimum: 1
-                    maximum: 2147483647
-                    description: 勘定科目カテゴリーID(勘定科目カテゴリーの時のみ含まれる)
-                    example: 8
                   account_category_name:
                     type: string
-                    description: 勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)
+                    description: 勘定科目カテゴリー名
                     example: 流動資産
                   total_line:
                     type: boolean
-                    description: 合計行(勘定科目カテゴリー名の時のみ含まれる)
+                    description: 合計行(勘定科目カテゴリーの時のみ含まれる)
                     example: true
                   hierarchy_level:
                     type: integer
                     description: 階層レベル
                     example: 3
-                  parent_account_category_id:
-                    type: integer
-                    minimum: 1
-                    maximum: 2147483647
-                    description: 上位科目カテゴリーID(上層が存在する場合含まれる)
-                    example: 19
                   parent_account_category_name:
                     type: string
-                    description: 上位勘定科目カテゴリー名(上層が存在する場合含まれる)
+                    description: 上位勘定科目カテゴリー名(勘定科目カテゴリーの時のみ、上層が存在する場合含まれる)
                     example: 他流動資産
                   closing_balance:
                     type: integer
@@ -13863,12 +13793,6 @@ components:
                     maximum: 2147483647
                     description: 勘定科目ID
                     example: 803
-                  tax_id:
-                    type: integer
-                    minimum: 1
-                    maximum: 2147483647
-                    description: 税区分ID（廃止予定）
-                    example: 14
                   tax_code:
                     type: integer
                     minimum: 0
@@ -14082,12 +14006,6 @@ components:
                     maximum: 2147483647
                     description: 勘定科目ID
                     example: 803
-                  tax_id:
-                    type: integer
-                    minimum: 1
-                    maximum: 2147483647
-                    description: 税区分ID（廃止予定）
-                    example: 14
                   tax_code:
                     type: integer
                     minimum: 0
@@ -14887,7 +14805,6 @@ components:
             - industry_class
             - industry_code
             - invoice_layout
-            - invoice_style
             - minus_format
             - name
             - name_kana
@@ -15014,17 +14931,34 @@ components:
               description: 建物名・部屋番号など
               example: ビル１Ｆ
             invoice_layout:
-              type: integer
-              minimum: 0
-              maximum: 5
-              description: 'レイアウト(0: レイアウト1, 1:レイアウト2, 3:封筒1, 4:レイアウト3(繰越金額欄あり), 5: 封筒2(繰越金額欄あり))'
-              example: 0
-            invoice_style:
-              type: integer
-              minimum: 0
-              maximum: 1
-              description: 'スタイル(0: クラシック, 1: モダン)'
-              example: 0
+              type: string
+              description: |-
+                請求書レイアウト
+                * `default_classic` - レイアウト１/クラシック (デフォルト)
+
+                * `standard_classic` - レイアウト２/クラシック
+
+                * `envelope_classic` - 封筒１/クラシック
+
+                * `carried_forward_standard_classic` - レイアウト３（繰越金額欄あり）/クラシック
+
+                * `carried_forward_envelope_classic` - 封筒２（繰越金額欄あり）/クラシック
+
+                * `default_modern` - レイアウト１/モダン
+
+                * `standard_modern` - レイアウト２/モダン
+
+                * `envelope_modern` - 封筒/モダン
+              example: default_classic
+              enum:
+                - default_classic
+                - standard_classic
+                - envelope_classic
+                - carried_forward_standard_classic
+                - carried_forward_envelope_classic
+                - default_modern
+                - standard_modern
+                - envelope_modern
             amount_fraction:
               type: integer
               minimum: 0
@@ -15036,7 +14970,6 @@ components:
               description: '種別（agriculture_forestry_fisheries_ore: 農林水産業/鉱業、construction: 建設、manufacturing_processing: 製造/加工、it: IT、transportation_logistics: 運輸/物流、retail_wholesale: 小売/卸売、finance_insurance: 金融/保険、real_estate_rental: 不動産/レンタル、profession: 士業/学術/専門技術サービス、design_production: デザイン/制作、food: 飲食、leisure_entertainment: レジャー/娯楽、lifestyle: 生活関連サービス、education: 教育/学習支援、medical_welfare: 医療/福祉、other_services: その他サービス、other: その他）'
               example: agriculture_forestry_fisheries_ore
               enum:
-                - ''
                 - agriculture_forestry_fisheries_ore
                 - construction
                 - manufacturing_processing
@@ -15056,13 +14989,113 @@ components:
                 - other
             industry_code:
               type: string
-              description: 'コード（transport_delivery: 輸送業/配送業、delivery: バイク便等の配達業、other_transportation_logistics: その他の運輸業、物流業）'
-              example: transport_delivery
+              description: '業種（agriculture: 農業, forestry: 林業, fishing_industry: 漁業、水産養殖業, mining: 鉱業、採石業、砂利採取業, civil_contractors: 土木工事業, pavement: 舗装工事業, carpenter: とび、大工、左官等の建設工事業, renovation: リフォーム工事業, electrical_plumbing: 電気、管工事等の設備工事業, grocery: 食料品の製造加工業, machinery_manufacturing: 機械器具の製造加工業, printing: 印刷業, other_manufacturing: その他の製造加工業, software_development: 受託：ソフトウェア、アプリ開発業, system_development: 受託：システム開発業, survey_analysis: 受託：調査、分析等の情報処理業, server_management: 受託：サーバー運営管理, website_production: 受託：ウェブサイト制作, online_service_management: オンラインサービス運営業, online_advertising_agency: オンライン広告代理店業, online_advertising_planning_production: オンライン広告企画・制作業, online_media_management: オンラインメディア運営業, portal_site_management: ポータルサイト運営業, other_it_services: その他、IT サービス業, transport_delivery: 輸送業、配送業, delivery: バイク便等の配達業, other_transportation_logistics: その他の運輸業、物流業, other_wholesale: 卸売業：その他, clothing_wholesale_fiber: 卸売業：衣類卸売／繊維, food_wholesale: 卸売業：飲食料品, entrusted_development_wholesale: 卸売業：機械器具, online_shop: 小売業：無店舗　オンラインショップ, fashion_grocery_store: 小売業：店舗あり　ファッション、雑貨, food_store: 小売業：店舗あり　生鮮食品、飲食料品, entrusted_store: 小売業：店舗あり　機械、器具, other_store: 小売業：店舗あり　その他, financial_instruments_exchange: 金融業：金融商品取引, commodity_futures_investment_advisor: 金融業：商品先物取引、商品投資顧問, other_financial: 金融業：その他, brokerage_insurance: 保険業：仲介、代理, other_insurance: 保険業：その他, real_estate_developer: 不動産業：ディベロッパー, real_estate_brokerage: 不動産業：売買、仲介, rent_coin_parking_management: 不動産業：賃貸、コインパーキング、管理, rental_office_co_working_space: 不動産業：レンタルオフィス、コワーキングスペース, rental_lease: レンタル業、リース業, cpa_tax_accountant: 士業：公認会計士事務所、税理士事務所, law_office: 士業：法律事務所, judicial_and_administrative_scrivener: 士業：司法書士事務所／行政書士事務所, labor_consultant: 士業：社会保険労務士事務所, other_profession: 士業：その他, business_consultant: 経営コンサルタント, academic_research_development: 学術・開発研究機関, advertising_agency: 広告代理店, advertising_planning_production: 広告企画／制作, design_development: ソフトウェア、アプリ開発業（受託）, apparel_industry_design: 服飾デザイン業、工業デザイン業, website_design: ウェブサイト制作（受託）, advertising_planning_design: 広告企画／制作業, other_design: その他、デザイン／制作, restaurants_coffee_shops: レストラン、喫茶店等の飲食店業, sale_of_lunch: 弁当の販売業, bread_confectionery_manufacture_sale: パン、菓子等の製造販売業, delivery_catering_mobile_catering: デリバリー業、ケータリング業、移動販売業, hotel_inn: 宿泊業：ホテル、旅館, homestay: 宿泊業：民泊, travel_agency: 旅行代理店業, leisure_sports_facility_management: レジャー、スポーツ等の施設運営業, show_event_management: ショー、イベント等の興行、イベント運営業, barber: ビューティ、ヘルスケア業：床屋、理容室, beauty_salon: ビューティ、ヘルスケア業：美容室, spa_sand_bath_sauna: ビューティ、ヘルスケア業：スパ、砂風呂、サウナ等, este_ail_salon: ビューティ、ヘルスケア業：その他、エステサロン、ネイルサロン等, bridal_planning_introduce_wedding: 冠婚葬祭業：ブライダルプランニング、結婚式場紹介等, memorial_ceremony_funeral: 冠婚葬祭業：メモリアルセレモニー、葬儀等, moving: 引っ越し業, courier_industry: 宅配業, house_maid_cleaning_agency: 家事代行サービス業：無店舗　ハウスメイド、掃除代行等, re_tailoring_clothes: 家事代行サービス業：店舗あり　衣類修理、衣類仕立て直し等, training_institute_management: 研修所等の施設運営業, tutoring_school: 学習塾、進学塾等の教育・学習支援業, music_calligraphy_abacus_classroom: 音楽教室、書道教室、そろばん教室等のの教育・学習支援業, english_school: 英会話スクール等の語学学習支援業, tennis_yoga_judo_school: テニススクール、ヨガ教室、柔道場等のスポーツ指導、支援業, culture_school: その他、カルチャースクール等の教育・学習支援業, seminar_planning_management: セミナー等の企画、運営業, hospital_clinic: 医療業：病院、一般診療所、クリニック等, dental_clinic: 医療業：歯科診療所, other_medical_services: 医療業：その他、医療サービス等, nursery: 福祉業：保育所等、児童向け施設型サービス, nursing_home: 福祉業：老人ホーム等、老人向け施設型サービス, rehabilitation_support_services: 福祉業：療育支援サービス等、障害者等向け施設型サービス, other_welfare: 福祉業：その他、施設型福祉サービス, visit_welfare_service: 福祉業：訪問型福祉サービス, recruitment_temporary_staffing: 人材紹介業、人材派遣業, life_related_recruitment_temporary_staffing: 生活関連サービスの人材紹介業、人材派遣業, car_maintenance_car_repair: 自動車整備業、自動車修理業, machinery_equipment_maintenance_repair: 機械機器類の整備業、修理業, cleaning_maintenance_building_management: 清掃業、メンテナンス業、建物管理業, security: 警備業, other_services: その他のサービス業, npo: NPO, general_incorporated_association: 一般社団法人, general_incorporated_foundation: 一般財団法人, other_association: その他組織)'
               enum:
-                - ''
+                - agriculture
+                - forestry
+                - fishing_industry
+                - mining
+                - civil_contractors
+                - pavement
+                - carpenter
+                - renovation
+                - electrical_plumbing
+                - grocery
+                - machinery_manufacturing
+                - printing
+                - other_manufacturing
+                - software_development
+                - system_development
+                - survey_analysis
+                - server_management
+                - website_production
+                - online_service_management
+                - online_advertising_agency
+                - online_advertising_planning_production
+                - online_media_management
+                - portal_site_management
+                - other_it_services
                 - transport_delivery
                 - delivery
                 - other_transportation_logistics
+                - other_wholesale
+                - clothing_wholesale_fiber
+                - food_wholesale
+                - entrusted_development_wholesale
+                - online_shop
+                - fashion_grocery_store
+                - food_store
+                - entrusted_store
+                - other_store
+                - financial_instruments_exchange
+                - commodity_futures_investment_advisor
+                - other_financial
+                - brokerage_insurance
+                - other_insurance
+                - real_estate_developer
+                - real_estate_brokerage
+                - rent_coin_parking_management
+                - rental_office_co_working_space
+                - rental_lease
+                - cpa_tax_accountant
+                - law_office
+                - judicial_and_administrative_scrivener
+                - labor_consultant
+                - other_profession
+                - business_consultant
+                - academic_research_development
+                - advertising_agency
+                - advertising_planning_production
+                - design_development
+                - apparel_industry_design
+                - website_design
+                - advertising_planning_design
+                - other_design
+                - restaurants_coffee_shops
+                - sale_of_lunch
+                - bread_confectionery_manufacture_sale
+                - delivery_catering_mobile_catering
+                - hotel_inn
+                - homestay
+                - travel_agency
+                - leisure_sports_facility_management
+                - show_event_management
+                - barber
+                - beauty_salon
+                - spa_sand_bath_sauna
+                - este_ail_salon
+                - bridal_planning_introduce_wedding
+                - memorial_ceremony_funeral
+                - moving
+                - courier_industry
+                - house_maid_cleaning_agency
+                - re_tailoring_clothes
+                - training_institute_management
+                - tutoring_school
+                - music_calligraphy_abacus_classroom
+                - english_school
+                - tennis_yoga_judo_school
+                - culture_school
+                - seminar_planning_management
+                - hospital_clinic
+                - dental_clinic
+                - other_medical_services
+                - nursery
+                - nursing_home
+                - rehabilitation_support_services
+                - other_welfare
+                - visit_welfare_service
+                - recruitment_temporary_staffing
+                - life_related_recruitment_temporary_staffing
+                - car_maintenance_car_repair
+                - machinery_equipment_maintenance_repair
+                - cleaning_maintenance_building_management
+                - security
+                - other_services
+                - npo
+                - general_incorporated_association
+                - general_incorporated_foundation
+                - other_association
             workflow_setting:
               type: string
               description: '仕訳承認フロー（enable: 有効、 disable: 無効）'
@@ -15091,7 +15124,7 @@ components:
                     example: false
                   indirect_write_off_method:
                     type: boolean
-                    description: '固定資産の控除法(false: 減価償却累計額でまとめる、true: 独立間接控除方式)'
+                    description: '固定資産の控除法（true: 間接控除法、false: 直接控除法）'
                     example: true
                   indirect_write_off_method_type:
                     type: boolean
@@ -15142,8 +15175,8 @@ components:
                   return_code:
                     type: integer
                     minimum: 0
-                    maximum: 1
-                    description: '不動産所得使用区分（0: 一般、1: 一般/不動産） ※個人事業主のみ設定可能'
+                    maximum: 3
+                    description: '不動産所得使用区分（0: 一般、3: 一般/不動産） ※個人事業主のみ設定可能'
                     example: 0
     companyIndexResponse:
       type: object
@@ -15210,7 +15243,6 @@ components:
             - industry_class
             - industry_code
             - invoice_layout
-            - invoice_style
             - minus_format
             - name
             - name_kana
@@ -15338,17 +15370,34 @@ components:
               description: 建物名・部屋番号など
               example: ビル１Ｆ
             invoice_layout:
-              type: integer
-              minimum: 0
-              maximum: 5
-              description: 'レイアウト(0: レイアウト1, 1:レイアウト2, 3:封筒1, 4:レイアウト3(繰越金額欄あり), 5: 封筒2(繰越金額欄あり))'
-              example: 0
-            invoice_style:
-              type: integer
-              minimum: 0
-              maximum: 1
-              description: 'スタイル(0: クラシック, 1: モダン)'
-              example: 0
+              type: string
+              description: |-
+                請求書レイアウト
+                * `default_classic` - レイアウト１/クラシック (デフォルト)
+
+                * `standard_classic` - レイアウト２/クラシック
+
+                * `envelope_classic` - 封筒１/クラシック
+
+                * `carried_forward_standard_classic` - レイアウト３（繰越金額欄あり）/クラシック
+
+                * `carried_forward_envelope_classic` - 封筒２（繰越金額欄あり）/クラシック
+
+                * `default_modern` - レイアウト１/モダン
+
+                * `standard_modern` - レイアウト２/モダン
+
+                * `envelope_modern` - 封筒/モダン
+              example: default_classic
+              enum:
+                - default_classic
+                - standard_classic
+                - envelope_classic
+                - carried_forward_standard_classic
+                - carried_forward_envelope_classic
+                - default_modern
+                - standard_modern
+                - envelope_modern
             amount_fraction:
               type: integer
               minimum: 0
@@ -15360,7 +15409,6 @@ components:
               description: '種別（agriculture_forestry_fisheries_ore: 農林水産業/鉱業、construction: 建設、manufacturing_processing: 製造/加工、it: IT、transportation_logistics: 運輸/物流、retail_wholesale: 小売/卸売、finance_insurance: 金融/保険、real_estate_rental: 不動産/レンタル、profession: 士業/学術/専門技術サービス、design_production: デザイン/制作、food: 飲食、leisure_entertainment: レジャー/娯楽、lifestyle: 生活関連サービス、education: 教育/学習支援、medical_welfare: 医療/福祉、other_services: その他サービス、other: その他）'
               example: agriculture_forestry_fisheries_ore
               enum:
-                - ''
                 - agriculture_forestry_fisheries_ore
                 - construction
                 - manufacturing_processing
@@ -15380,13 +15428,113 @@ components:
                 - other
             industry_code:
               type: string
-              description: 'コード（transport_delivery: 輸送業/配送業、delivery: バイク便等の配達業、other_transportation_logistics: その他の運輸業、物流業）'
-              example: transport_delivery
+              description: '業種（agriculture: 農業, forestry: 林業, fishing_industry: 漁業、水産養殖業, mining: 鉱業、採石業、砂利採取業, civil_contractors: 土木工事業, pavement: 舗装工事業, carpenter: とび、大工、左官等の建設工事業, renovation: リフォーム工事業, electrical_plumbing: 電気、管工事等の設備工事業, grocery: 食料品の製造加工業, machinery_manufacturing: 機械器具の製造加工業, printing: 印刷業, other_manufacturing: その他の製造加工業, software_development: 受託：ソフトウェア、アプリ開発業, system_development: 受託：システム開発業, survey_analysis: 受託：調査、分析等の情報処理業, server_management: 受託：サーバー運営管理, website_production: 受託：ウェブサイト制作, online_service_management: オンラインサービス運営業, online_advertising_agency: オンライン広告代理店業, online_advertising_planning_production: オンライン広告企画・制作業, online_media_management: オンラインメディア運営業, portal_site_management: ポータルサイト運営業, other_it_services: その他、IT サービス業, transport_delivery: 輸送業、配送業, delivery: バイク便等の配達業, other_transportation_logistics: その他の運輸業、物流業, other_wholesale: 卸売業：その他, clothing_wholesale_fiber: 卸売業：衣類卸売／繊維, food_wholesale: 卸売業：飲食料品, entrusted_development_wholesale: 卸売業：機械器具, online_shop: 小売業：無店舗　オンラインショップ, fashion_grocery_store: 小売業：店舗あり　ファッション、雑貨, food_store: 小売業：店舗あり　生鮮食品、飲食料品, entrusted_store: 小売業：店舗あり　機械、器具, other_store: 小売業：店舗あり　その他, financial_instruments_exchange: 金融業：金融商品取引, commodity_futures_investment_advisor: 金融業：商品先物取引、商品投資顧問, other_financial: 金融業：その他, brokerage_insurance: 保険業：仲介、代理, other_insurance: 保険業：その他, real_estate_developer: 不動産業：ディベロッパー, real_estate_brokerage: 不動産業：売買、仲介, rent_coin_parking_management: 不動産業：賃貸、コインパーキング、管理, rental_office_co_working_space: 不動産業：レンタルオフィス、コワーキングスペース, rental_lease: レンタル業、リース業, cpa_tax_accountant: 士業：公認会計士事務所、税理士事務所, law_office: 士業：法律事務所, judicial_and_administrative_scrivener: 士業：司法書士事務所／行政書士事務所, labor_consultant: 士業：社会保険労務士事務所, other_profession: 士業：その他, business_consultant: 経営コンサルタント, academic_research_development: 学術・開発研究機関, advertising_agency: 広告代理店, advertising_planning_production: 広告企画／制作, design_development: ソフトウェア、アプリ開発業（受託）, apparel_industry_design: 服飾デザイン業、工業デザイン業, website_design: ウェブサイト制作（受託）, advertising_planning_design: 広告企画／制作業, other_design: その他、デザイン／制作, restaurants_coffee_shops: レストラン、喫茶店等の飲食店業, sale_of_lunch: 弁当の販売業, bread_confectionery_manufacture_sale: パン、菓子等の製造販売業, delivery_catering_mobile_catering: デリバリー業、ケータリング業、移動販売業, hotel_inn: 宿泊業：ホテル、旅館, homestay: 宿泊業：民泊, travel_agency: 旅行代理店業, leisure_sports_facility_management: レジャー、スポーツ等の施設運営業, show_event_management: ショー、イベント等の興行、イベント運営業, barber: ビューティ、ヘルスケア業：床屋、理容室, beauty_salon: ビューティ、ヘルスケア業：美容室, spa_sand_bath_sauna: ビューティ、ヘルスケア業：スパ、砂風呂、サウナ等, este_ail_salon: ビューティ、ヘルスケア業：その他、エステサロン、ネイルサロン等, bridal_planning_introduce_wedding: 冠婚葬祭業：ブライダルプランニング、結婚式場紹介等, memorial_ceremony_funeral: 冠婚葬祭業：メモリアルセレモニー、葬儀等, moving: 引っ越し業, courier_industry: 宅配業, house_maid_cleaning_agency: 家事代行サービス業：無店舗　ハウスメイド、掃除代行等, re_tailoring_clothes: 家事代行サービス業：店舗あり　衣類修理、衣類仕立て直し等, training_institute_management: 研修所等の施設運営業, tutoring_school: 学習塾、進学塾等の教育・学習支援業, music_calligraphy_abacus_classroom: 音楽教室、書道教室、そろばん教室等のの教育・学習支援業, english_school: 英会話スクール等の語学学習支援業, tennis_yoga_judo_school: テニススクール、ヨガ教室、柔道場等のスポーツ指導、支援業, culture_school: その他、カルチャースクール等の教育・学習支援業, seminar_planning_management: セミナー等の企画、運営業, hospital_clinic: 医療業：病院、一般診療所、クリニック等, dental_clinic: 医療業：歯科診療所, other_medical_services: 医療業：その他、医療サービス等, nursery: 福祉業：保育所等、児童向け施設型サービス, nursing_home: 福祉業：老人ホーム等、老人向け施設型サービス, rehabilitation_support_services: 福祉業：療育支援サービス等、障害者等向け施設型サービス, other_welfare: 福祉業：その他、施設型福祉サービス, visit_welfare_service: 福祉業：訪問型福祉サービス, recruitment_temporary_staffing: 人材紹介業、人材派遣業, life_related_recruitment_temporary_staffing: 生活関連サービスの人材紹介業、人材派遣業, car_maintenance_car_repair: 自動車整備業、自動車修理業, machinery_equipment_maintenance_repair: 機械機器類の整備業、修理業, cleaning_maintenance_building_management: 清掃業、メンテナンス業、建物管理業, security: 警備業, other_services: その他のサービス業, npo: NPO, general_incorporated_association: 一般社団法人, general_incorporated_foundation: 一般財団法人, other_association: その他組織)'
               enum:
-                - ''
+                - agriculture
+                - forestry
+                - fishing_industry
+                - mining
+                - civil_contractors
+                - pavement
+                - carpenter
+                - renovation
+                - electrical_plumbing
+                - grocery
+                - machinery_manufacturing
+                - printing
+                - other_manufacturing
+                - software_development
+                - system_development
+                - survey_analysis
+                - server_management
+                - website_production
+                - online_service_management
+                - online_advertising_agency
+                - online_advertising_planning_production
+                - online_media_management
+                - portal_site_management
+                - other_it_services
                 - transport_delivery
                 - delivery
                 - other_transportation_logistics
+                - other_wholesale
+                - clothing_wholesale_fiber
+                - food_wholesale
+                - entrusted_development_wholesale
+                - online_shop
+                - fashion_grocery_store
+                - food_store
+                - entrusted_store
+                - other_store
+                - financial_instruments_exchange
+                - commodity_futures_investment_advisor
+                - other_financial
+                - brokerage_insurance
+                - other_insurance
+                - real_estate_developer
+                - real_estate_brokerage
+                - rent_coin_parking_management
+                - rental_office_co_working_space
+                - rental_lease
+                - cpa_tax_accountant
+                - law_office
+                - judicial_and_administrative_scrivener
+                - labor_consultant
+                - other_profession
+                - business_consultant
+                - academic_research_development
+                - advertising_agency
+                - advertising_planning_production
+                - design_development
+                - apparel_industry_design
+                - website_design
+                - advertising_planning_design
+                - other_design
+                - restaurants_coffee_shops
+                - sale_of_lunch
+                - bread_confectionery_manufacture_sale
+                - delivery_catering_mobile_catering
+                - hotel_inn
+                - homestay
+                - travel_agency
+                - leisure_sports_facility_management
+                - show_event_management
+                - barber
+                - beauty_salon
+                - spa_sand_bath_sauna
+                - este_ail_salon
+                - bridal_planning_introduce_wedding
+                - memorial_ceremony_funeral
+                - moving
+                - courier_industry
+                - house_maid_cleaning_agency
+                - re_tailoring_clothes
+                - training_institute_management
+                - tutoring_school
+                - music_calligraphy_abacus_classroom
+                - english_school
+                - tennis_yoga_judo_school
+                - culture_school
+                - seminar_planning_management
+                - hospital_clinic
+                - dental_clinic
+                - other_medical_services
+                - nursery
+                - nursing_home
+                - rehabilitation_support_services
+                - other_welfare
+                - visit_welfare_service
+                - recruitment_temporary_staffing
+                - life_related_recruitment_temporary_staffing
+                - car_maintenance_car_repair
+                - machinery_equipment_maintenance_repair
+                - cleaning_maintenance_building_management
+                - security
+                - other_services
+                - npo
+                - general_incorporated_association
+                - general_incorporated_foundation
+                - other_association
             workflow_setting:
               type: string
               description: '仕訳承認フロー（enable: 有効、 disable: 無効）'
@@ -15431,12 +15579,10 @@ components:
             type: object
             properties:
               messages:
-                anyOf:
-                  - type: array
-                    items:
-                      type: string
-                      example: 不正なリクエストです。
-                  - type: string
+                type: array
+                items:
+                  type: string
+                  example: 不正なリクエストです。
               type:
                 type: string
                 example: validation
@@ -15459,12 +15605,10 @@ components:
             type: object
             properties:
               messages:
-                anyOf:
-                  - type: array
-                    items:
-                      type: string
-                      example: リソースが見つかりません。
-                  - type: string
+                type: array
+                items:
+                  type: string
+                  example: リソースが見つかりません。
               type:
                 type: string
                 example: validation
@@ -15519,12 +15663,10 @@ components:
             type: object
             properties:
               messages:
-                anyOf:
-                  - type: array
-                    items:
-                      type: string
-                      example: エラーが発生しました。
-                  - type: string
+                type: array
+                items:
+                  type: string
+                  example: エラーが発生しました。
               type:
                 type: string
                 example: status
@@ -16034,37 +16176,42 @@ components:
               description: 登録残高
               example: 1340261
     walletableCreateResponse:
-      required:
-        - bank_id
-        - id
-        - name
-        - type
       type: object
+      required:
+        - walletable
       properties:
-        id:
-          type: integer
-          minimum: 1
-          maximum: 2147483647
-          description: 口座ID
-          example: 1
-        name:
-          type: string
-          description: '口座名, 最大255文字'
-          example: 〇〇銀行
-        bank_id:
-          type: integer
-          minimum: 1
-          maximum: 2147483647
-          description: サービスID
-          example: 1
-        type:
-          type: string
-          description: '口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)'
-          example: bank_account
-          enum:
-            - bank_account
-            - credit_card
-            - wallet
+        walletable:
+          type: object
+          required:
+            - bank_id
+            - id
+            - name
+            - type
+          properties:
+            id:
+              type: integer
+              minimum: 1
+              maximum: 2147483647
+              description: 口座ID
+              example: 1
+            name:
+              type: string
+              description: '口座名, 最大255文字'
+              example: 〇〇銀行
+            bank_id:
+              type: integer
+              minimum: 1
+              maximum: 2147483647
+              description: サービスID
+              example: 1
+            type:
+              type: string
+              description: '口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)'
+              example: bank_account
+              enum:
+                - bank_account
+                - credit_card
+                - wallet
     walletTxnResponse:
       type: object
       required:
@@ -16494,7 +16641,7 @@ components:
           example: false
         indirect_write_off_method:
           type: boolean
-          description: '固定資産の控除法(false: 減価償却累計額でまとめる、true: 独立間接控除方式)'
+          description: '固定資産の控除法（true: 間接控除法、false: 直接控除法）'
           example: true
         start_date:
           type: string
@@ -16537,8 +16684,8 @@ components:
         return_code:
           type: integer
           minimum: 0
-          maximum: 1
-          description: '不動産所得使用区分（0: 一般、1: 一般/不動産） ※個人事業主のみ設定可能'
+          maximum: 3
+          description: '不動産所得使用区分（0: 一般、3: 一般/不動産） ※個人事業主のみ設定可能'
           example: 0
     expenseApplicationResponse:
       type: object
@@ -18223,14 +18370,15 @@ components:
               nullable: true
             invoice_status:
               type: string
-              description: '請求書ステータス  (draft: 下書き, applying: 申請中, remanded: 差し戻し, rejected: 却下, approved: 承認済み, issued: 発行済み)'
+              description: '請求書ステータス  (draft: 下書き, applying: 申請中, remanded: 差し戻し, rejected: 却下, approved: 承認済み, submitted: 送付済み, unsubmitted: 請求書の承認フローが無効の場合のみ、unsubmitted（送付待ち）の値をとります)'
               enum:
                 - draft
                 - applying
                 - remanded
                 - rejected
                 - approved
-                - issued
+                - submitted
+                - unsubmitted
             payment_status:
               type: string
               description: '入金ステータス  (unsettled: 入金待ち, settled: 入金済み)'
@@ -18282,9 +18430,9 @@ components:
               description: 取引先名
               example: freeeパートナー
               nullable: true
-            partner_long_name:
+            partner_display_name:
               type: string
-              description: 取引先正式名称
+              description: 請求書に表示する取引先名
               example: 株式会社freeeパートナー
               nullable: true
             partner_title:
@@ -18385,7 +18533,23 @@ components:
               nullable: true
             invoice_layout:
               type: string
-              description: 'レイアウト(default_classic: レイアウト１/クラシック, standard_classic: レイアウト２/クラシック, envelope_classic: 封筒１/クラシック, carried_forward_standard_classic: レイアウト３（繰越金額欄あり）/クラシック, carried_forward_envelope_classic: 封筒２（繰越金額欄あり）/クラシック, default_modern: レイアウト１/モダン, standard_modern: レイアウト２/モダン, envelope_modern: 封筒/モダン)'
+              description: |-
+                請求書レイアウト
+                * `default_classic` - レイアウト１/クラシック (デフォルト)
+
+                * `standard_classic` - レイアウト２/クラシック
+
+                * `envelope_classic` - 封筒１/クラシック
+
+                * `carried_forward_standard_classic` - レイアウト３（繰越金額欄あり）/クラシック
+
+                * `carried_forward_envelope_classic` - 封筒２（繰越金額欄あり）/クラシック
+
+                * `default_modern` - レイアウト１/モダン
+
+                * `standard_modern` - レイアウト２/モダン
+
+                * `envelope_modern` - 封筒/モダン
               example: default_classic
               enum:
                 - default_classic
@@ -18408,7 +18572,7 @@ components:
               type: integer
               minimum: 1
               maximum: 2147483647
-              description: 取引ID (invoice_statusがissuedの時のみIDが表示されます)
+              description: '取引ID (invoice_statusがsubmitted, unsubmittedの時IDが表示されます)'
               nullable: true
             invoice_contents:
               type: array
@@ -18613,6 +18777,8 @@ components:
       type: object
       required:
         - company_id
+        - partner_display_name
+        - partner_title
       properties:
         company_id:
           type: integer
@@ -18662,11 +18828,10 @@ components:
           enum:
             - draft
             - issue
-        partner_name:
+        partner_display_name:
           type: string
-          nullable: true
-          description: 請求書に表示する取引先名（未指定の場合は取引先の名称をそのまま利用します）
-          example: freeeパートナー株式会社
+          description: 請求書に表示する取引先名
+          example: 株式会社freeeパートナー
         partner_title:
           type: string
           description: 敬称（御中、様、(空白)の3つから選択）
@@ -18753,7 +18918,23 @@ components:
           example: 毎度ありがとうございます
         invoice_layout:
           type: string
-          description: 'レイアウト(default_classic: レイアウト１/クラシック (デフォルト), standard_classic: レイアウト２/クラシック, envelope_classic: 封筒１/クラシック, carried_forward_standard_classic: レイアウト３（繰越金額欄あり）/クラシック, carried_forward_envelope_classic: 封筒２（繰越金額欄あり）/クラシック, default_modern: レイアウト１/モダン, standard_modern: レイアウト２/モダン, envelope_modern: 封筒/モダン)'
+          description: |-
+            請求書レイアウト
+            * `default_classic` - レイアウト１/クラシック (デフォルト)
+
+            * `standard_classic` - レイアウト２/クラシック
+
+            * `envelope_classic` - 封筒１/クラシック
+
+            * `carried_forward_standard_classic` - レイアウト３（繰越金額欄あり）/クラシック
+
+            * `carried_forward_envelope_classic` - 封筒２（繰越金額欄あり）/クラシック
+
+            * `default_modern` - レイアウト１/モダン
+
+            * `standard_modern` - レイアウト２/モダン
+
+            * `envelope_modern` - 封筒/モダン
           example: default_classic
           enum:
             - default_classic
@@ -18879,6 +19060,8 @@ components:
       type: object
       required:
         - company_id
+        - partner_display_name
+        - partner_title
       properties:
         company_id:
           type: integer
@@ -18928,11 +19111,10 @@ components:
           enum:
             - draft
             - issue
-        partner_name:
+        partner_display_name:
           type: string
-          nullable: true
-          description: 請求書に表示する取引先名（未指定の場合は取引先の名称をそのまま利用します）
-          example: freeeパートナー株式会社
+          description: 請求書に表示する取引先名
+          example: 株式会社freeeパートナー
         partner_title:
           type: string
           description: 敬称（御中、様、(空白)の3つから選択）
@@ -19019,7 +19201,23 @@ components:
           example: 毎度ありがとうございます
         invoice_layout:
           type: string
-          description: 'レイアウト(default_classic: レイアウト１/クラシック (デフォルト), standard_classic: レイアウト２/クラシック, envelope_classic: 封筒１/クラシック, carried_forward_standard_classic: レイアウト３（繰越金額欄あり）/クラシック, carried_forward_envelope_classic: 封筒２（繰越金額欄あり）/クラシック, default_modern: レイアウト１/モダン, standard_modern: レイアウト２/モダン, envelope_modern: 封筒/モダン)'
+          description: |-
+            請求書レイアウト
+            * `default_classic` - レイアウト１/クラシック (デフォルト)
+
+            * `standard_classic` - レイアウト２/クラシック
+
+            * `envelope_classic` - 封筒１/クラシック
+
+            * `carried_forward_standard_classic` - レイアウト３（繰越金額欄あり）/クラシック
+
+            * `carried_forward_envelope_classic` - 封筒２（繰越金額欄あり）/クラシック
+
+            * `default_modern` - レイアウト１/モダン
+
+            * `standard_modern` - レイアウト２/モダン
+
+            * `envelope_modern` - 封筒/モダン
           example: default_classic
           enum:
             - default_classic
@@ -19254,7 +19452,7 @@ components:
               nullable: true
             partner_display_name:
               type: string
-              description: 取引先正式名称
+              description: 見積書に表示する取引先名
               example: 株式会社freeeパートナー
               nullable: true
             partner_title:
@@ -19346,14 +19544,24 @@ components:
               nullable: true
             quotation_layout:
               type: string
-              description: 'レイアウト(default_classic: レイアウト１/クラシック, standard_classic: レイアウト２/クラシック, envelope_classic: 封筒１/クラシック, carried_forward_standard_classic: レイアウト３（繰越金額欄あり）/クラシック, carried_forward_envelope_classic: 封筒２（繰越金額欄あり）/クラシック, default_modern: レイアウト１/モダン, standard_modern: レイアウト２/モダン, envelope_modern: 封筒/モダン)'
+              description: |-
+                見積書レイアウト
+                * `default_classic` - レイアウト１/クラシック (デフォルト)
+
+                * `standard_classic` - レイアウト２/クラシック
+
+                * `envelope_classic` - 封筒１/クラシック
+
+                * `default_modern` - レイアウト１/モダン
+
+                * `standard_modern` - レイアウト２/モダン
+
+                * `envelope_modern` - 封筒/モダン
               example: default_classic
               enum:
                 - default_classic
                 - standard_classic
                 - envelope_classic
-                - carried_forward_standard_classic
-                - carried_forward_envelope_classic
                 - default_modern
                 - standard_modern
                 - envelope_modern
@@ -19660,7 +19868,19 @@ components:
           example: 毎度ありがとうございます
         quotation_layout:
           type: string
-          description: 'レイアウト(default_classic: レイアウト１/クラシック (デフォルト), standard_classic: レイアウト２/クラシック, envelope_classic: 封筒１/クラシック, default_modern: レイアウト１/モダン, standard_modern: レイアウト２/モダン, envelope_modern: 封筒/モダン)'
+          description: |-
+            請求書レイアウト
+            * `default_classic` - レイアウト１/クラシック (デフォルト)
+
+            * `standard_classic` - レイアウト２/クラシック
+
+            * `envelope_classic` - 封筒１/クラシック
+
+            * `default_modern` - レイアウト１/モダン
+
+            * `standard_modern` - レイアウト２/モダン
+
+            * `envelope_modern` - 封筒/モダン
           example: default_classic
           enum:
             - default_classic
@@ -19898,7 +20118,19 @@ components:
           example: 毎度ありがとうございます
         quotation_layout:
           type: string
-          description: 'レイアウト(default_classic: レイアウト１/クラシック (デフォルト), standard_classic: レイアウト２/クラシック, envelope_classic: 封筒１/クラシック, default_modern: レイアウト１/モダン, standard_modern: レイアウト２/モダン, envelope_modern: 封筒/モダン)'
+          description: |-
+            請求書レイアウト
+            * `default_classic` - レイアウト１/クラシック (デフォルト)
+
+            * `standard_classic` - レイアウト２/クラシック
+
+            * `envelope_classic` - 封筒１/クラシック
+
+            * `default_modern` - レイアウト１/モダン
+
+            * `standard_modern` - レイアウト２/モダン
+
+            * `envelope_modern` - 封筒/モダン
           example: default_classic
           enum:
             - default_classic
