@@ -8,7 +8,7 @@ info:
     <pre><code>[注意]<br>
     廃止予定のAPIバージョンのリファレンスです。
     こちらのリファレンスページからは、「Try it out」ボタンを押しても、会計freee APIのリクエスト送信やレスポンスのチェックはできません。
-    実際に会計freee APIを試したい場合は、新バージョンのこちらのリファレンスページから行ってください。
+    実際に会計freee APIを試したい場合は、<a href="https://developer.freee.co.jp/docs/accounting/reference" target="_blank">新バージョンのAPIリファレンスページ</a>から行ってください。
     </code></pre>
 
     <hr />
