@@ -328,6 +328,806 @@
         "summary": "勘定科目の更新"
       }
     },
+    "/api/1/approval_flow_routes": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "事業所ID",
+            "in": "query",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "name": "company_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "経路に含まれるユーザーのユーザーID",
+            "in": "query",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "name": "included_user_id",
+            "type": "integer"
+          },
+          {
+            "description": "申請種別（各申請種別が使用できる申請経路に絞り込めます。例えば、ApprovalRequest を指定すると、各種申請が使用できる申請経路に絞り込めます。）\n* `TxnApproval` - 仕訳承認\n* `ExpenseApplication` - 経費精算\n* `PaymentRequest` - 支払依頼\n* `ApprovalRequest` - 各種申請\n* `DocApproval` - 請求書等 (見積書・納品書・請求書・発注書)",
+            "enum": [
+              "TxnApproval",
+              "ExpenseApplication",
+              "PaymentRequest",
+              "ApprovalRequest",
+              "DocApproval"
+            ],
+            "in": "query",
+            "name": "usage",
+            "type": "string"
+          },
+          {
+            "description": "申請フォームID request_form_id指定時はusage条件をApprovalRequestに指定してください。指定しない場合無効になります。",
+            "in": "query",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "name": "request_form_id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/approvalFlowRoutesIndexResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "403": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/forbiddenError"
+            }
+          },
+          "404": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestNotFoundError"
+            }
+          },
+          "500": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/internalServerError"
+            }
+          }
+        },
+        "tags": [
+          "Approval flow routes"
+        ],
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の申請経路一覧を取得する</p>\n\n<h2 id=\"\">注意点</h2>\n\n<ul>\n  <li>\n    <p>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している各種申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</p>\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
+        "operationId": "get_approval_flow_routes",
+        "summary": "申請経路一覧の取得"
+      }
+    },
+    "/api/1/approval_flow_routes/{id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "経路申請ID",
+            "in": "path",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "事業所ID",
+            "in": "query",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "name": "company_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/approvalFlowRouteResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "403": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/forbiddenError"
+            }
+          },
+          "404": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestNotFoundError"
+            }
+          },
+          "500": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/internalServerError"
+            }
+          }
+        },
+        "tags": [
+          "Approval flow routes"
+        ],
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の申請経路を取得する</p>\n\n<h2 id=\"\">注意点</h2>\n\n<ul>\n  <li>\n    <p>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している各種申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</p>\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
+        "operationId": "get_approval_flow_route",
+        "summary": "申請経路の取得"
+      }
+    },
+    "/api/1/approval_requests": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "事業所ID",
+            "in": "query",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "name": "company_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下, feedback:差戻し)",
+            "enum": [
+              "draft",
+              "in_progress",
+              "approved",
+              "rejected",
+              "feedback"
+            ],
+            "in": "query",
+            "name": "status",
+            "type": "string",
+            "x-example": "draft"
+          },
+          {
+            "description": "申請No.",
+            "in": "query",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "name": "application_number",
+            "type": "integer",
+            "x-example": 2
+          },
+          {
+            "description": "申請タイトル",
+            "in": "query",
+            "name": "title",
+            "type": "string",
+            "x-example": "大阪出張"
+          },
+          {
+            "description": "申請フォームID",
+            "in": "query",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "name": "form_id",
+            "type": "integer"
+          },
+          {
+            "description": "申請日で絞込：開始日(yyyy-mm-dd)",
+            "in": "query",
+            "name": "start_application_date",
+            "type": "string"
+          },
+          {
+            "description": "申請日で絞込：終了日(yyyy-mm-dd)",
+            "in": "query",
+            "name": "end_application_date",
+            "type": "string"
+          },
+          {
+            "description": "申請者のユーザーID",
+            "in": "query",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "name": "applicant_id",
+            "type": "integer"
+          },
+          {
+            "description": "承認者のユーザーID",
+            "in": "query",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "name": "approver_id",
+            "type": "integer",
+            "x-example": 1
+          },
+          {
+            "description": "取得レコードのオフセット (デフォルト: 0)",
+            "in": "query",
+            "maximum": 2147483647,
+            "minimum": 0,
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "description": "取得レコードの件数 (デフォルト: 50, 最小: 1, 最大: 500)",
+            "in": "query",
+            "maximum": 500,
+            "minimum": 1,
+            "name": "limit",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/approvalRequestsIndexResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "403": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/forbiddenError"
+            }
+          },
+          "404": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestNotFoundError"
+            }
+          },
+          "500": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/internalServerError"
+            }
+          }
+        },
+        "tags": [
+          "Approval requests"
+        ],
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の各種申請一覧を取得する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、各種申請の一覧を取得することができます。</li>\n  <li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している各種申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>本APIはエンタープライズプランをご利用の事業所のみ利用可能です。</li>\n</ul>",
+        "operationId": "get_approval_requests",
+        "summary": "各種申請の一覧"
+      },
+      "post": {
+        "consumes": [
+          "application/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "各種申請の作成",
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/approvalRequestCreateParams"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/approvalRequestResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "403": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/forbiddenError"
+            }
+          },
+          "404": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestNotFoundError"
+            }
+          },
+          "500": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/internalServerError"
+            }
+          }
+        },
+        "tags": [
+          "Approval requests"
+        ],
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の各種申請を作成する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、各種申請を作成することができます。</li>\n  <li>\n    申請項目(request_items)については、申請フォームで設定された項目のIDとそれに対応する値を入力してください。\n    <ul>\n      <li>タイトル(title)：文字列(改行なし) 例)予算申請</li>\n      <li>1行コメント(single_line)：文字列(改行なし) 例)予算に関する申請</li>\n      <li>複数行コメント(multi_line)：文字列(改行あり)\n      <br>\n      &nbsp;&nbsp;例)<br>\n      &nbsp;&nbsp;予算に関する申請<br>\n      &nbsp;&nbsp;申請日 2020-01-01<br>\n      </li>\n      <li>プルダウン(select)： プルダウンの選択肢の名前(改行なし) 例)開発部</li>\n      <li>日付(date)： 日付形式 例)2020-01-01</li>\n      <li>金額(amount)： 数値(申請フォームで設定した上限・下限金額内の値, 改行なし) 例)10000</li>\n      <li>添付ファイル(receipt)： ファイルボックスAPIのID 例)1</li>\n    </ul>\n  </li>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している各種申請は本API経由で作成ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>Web画面やAPIを通じて申請フォームが変更されると、本APIで使用する項目ID（request_itemsで指定するid）も変更されます。本API利用前に各種申請の取得APIを利用し、最新の申請フォームを取得することを推奨します。</li>\n  <li>本APIはエンタープライズプランをご利用の事業所のみ利用可能です。</li>\n</ul>",
+        "operationId": "create_approval_request",
+        "summary": "各種申請の作成"
+      }
+    },
+    "/api/1/approval_requests/forms": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "事業所ID",
+            "in": "query",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "name": "company_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "properties": {
+                "approval_request_forms": {
+                  "items": {
+                    "$ref": "#/definitions/approvalRequestFormResponse/properties/approval_request_form"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "approval_request_forms"
+              ],
+              "type": "object"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "403": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/forbiddenError"
+            }
+          },
+          "404": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestNotFoundError"
+            }
+          },
+          "500": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/internalServerError"
+            }
+          }
+        },
+        "tags": [
+          "Approval requests"
+        ],
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の各種申請の申請フォーム一覧を取得する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIはエンタープライズプランをご利用の事業所のみ利用可能です。</li>\n</ul>",
+        "operationId": "get_approval_request_forms",
+        "summary": "各種申請の申請フォーム一覧の取得"
+      }
+    },
+    "/api/1/approval_requests/forms/{id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "申請フォームID",
+            "in": "path",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "事業所ID",
+            "in": "query",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "name": "company_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/approvalRequestFormResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "403": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/forbiddenError"
+            }
+          },
+          "404": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestNotFoundError"
+            }
+          },
+          "500": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/internalServerError"
+            }
+          }
+        },
+        "tags": [
+          "Approval requests"
+        ],
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の各種申請の申請フォームを取得する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIはエンタープライズプランをご利用の事業所のみ利用可能です。</li>\n</ul>",
+        "operationId": "get_approval_request_form",
+        "summary": "各種申請の申請フォームの取得"
+      }
+    },
+    "/api/1/approval_requests/{id}": {
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "各種申請ID",
+            "in": "path",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "事業所ID",
+            "in": "query",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "name": "company_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "403": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/forbiddenError"
+            }
+          },
+          "404": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestNotFoundError"
+            }
+          },
+          "500": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/internalServerError"
+            }
+          }
+        },
+        "tags": [
+          "Approval requests"
+        ],
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の各種申請を削除する</p>\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>本APIはエンタープライズプランをご利用の事業所のみ利用可能です。</li>\n</ul>",
+        "operationId": "destroy_approval_request",
+        "summary": "各種申請の削除"
+      },
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "各種申請ID",
+            "in": "path",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "事業所ID",
+            "in": "query",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "name": "company_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/approvalRequestResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "403": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/forbiddenError"
+            }
+          },
+          "404": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestNotFoundError"
+            }
+          },
+          "500": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/internalServerError"
+            }
+          }
+        },
+        "tags": [
+          "Approval requests"
+        ],
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の各種申請を取得する</p>\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している各種申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>本APIはエンタープライズプランをご利用の事業所のみ利用可能です。</li>\n</ul>",
+        "operationId": "get_approval_request",
+        "summary": "各種申請の取得"
+      },
+      "put": {
+        "consumes": [
+          "application/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "各種申請ID",
+            "in": "path",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "各種申請の更新",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/approvalRequestUpdateParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/approvalRequestResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "403": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/forbiddenError"
+            }
+          },
+          "404": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestNotFoundError"
+            }
+          },
+          "500": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/internalServerError"
+            }
+          }
+        },
+        "tags": [
+          "Approval requests"
+        ],
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の各種申請を更新する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、各種申請を更新することができます。</li>\n  <li>\n    申請項目(request_items)については、各種申請の取得APIで取得したrequest_items.idとそれに対応する値を入力してください。\n    <ul>\n      <li>タイトル(title)：文字列(改行なし) 例)予算申請</li>\n      <li>1行コメント(single_line)：文字列(改行なし) 例)予算に関する申請</li>\n      <li>複数行コメント(multi_line)：文字列(改行あり)\n      <br>\n      &nbsp;&nbsp;例)<br>\n      &nbsp;&nbsp;予算に関する申請<br>\n      &nbsp;&nbsp;申請日 2020-01-01<br>\n      </li>\n      <li>プルダウン(select)： プルダウンの選択肢の名前(改行なし) 例)開発部</li>\n      <li>日付(date)： 日付形式 例)2020-01-01</li>\n      <li>金額(amount)： 数値(申請フォームで設定した上限・下限金額内の値, 改行なし) 例)10000</li>\n      <li>添付ファイル(receipt)： ファイルボックスAPIのID 例)1</li>\n    </ul>\n  </li>\n  <li>本APIでは、status(申請ステータス): draft:下書き, feedback:差戻しのみ更新可能です。</li>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している各種申請は本API経由で更新ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>Web画面やAPIを通じて申請フォームが変更されると、本APIで使用する項目ID（request_itemsで指定するid）も変更されます。本APIで使用する項目IDは申請作成時点の項目IDです。本API利用前に各種申請の取得APIを利用し、申請作成時点の項目IDを取得することを推奨します。</li>\n  <li>本APIはエンタープライズプランをご利用の事業所のみ利用可能です。</li>\n</ul>",
+        "operationId": "update_approval_request",
+        "summary": "各種申請の更新"
+      }
+    },
+    "/api/1/approval_requests/{id}/actions": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "各種申請ID",
+            "in": "path",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "各種申請の承認操作",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/approvalRequestActionCreateParams"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/approvalRequestResponse"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestError"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedError"
+            }
+          },
+          "403": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/forbiddenError"
+            }
+          },
+          "404": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/badRequestNotFoundError"
+            }
+          },
+          "500": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/internalServerError"
+            }
+          }
+        },
+        "tags": [
+          "Approval requests"
+        ],
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の各種申請の承認操作を行う</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、各種申請の承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）を行うことができます。</li>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n　<li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している各種申請はAPI経由で承認ステータスの変更ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>本APIはエンタープライズプランをご利用の事業所のみ利用可能です。</li>\n</ul>",
+        "operationId": "update_approval_request_action",
+        "summary": "各種申請の承認操作"
+      }
+    },
     "/api/1/banks": {
       "get": {
         "produces": [
@@ -975,7 +1775,7 @@
         "tags": [
           "Deals"
         ],
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入／支出）を作成する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>ref_number : 管理番号</p>\n</li>\n<li>\n<p>details : 取引の明細行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>receipt_ids : 証憑ファイルID</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<p><li>本APIでは+更新行(renews)の操作ができません。+更新行の作成APIをご利用ください。</p></li>\n<p><li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</p></li>\n<li>\n<p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</p></li>\n</ul>\n",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入／支出）を作成する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>ref_number : 管理番号</p>\n</li>\n<li>\n<p>details : 取引の明細行(最大40行)</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>receipt_ids : 証憑ファイルID</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n    <li><p>本APIでは+更新行(renews)の操作ができません。+更新行の作成APIをご利用ください。</p></li>\n    <li><p>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</p></li>\n    <li>\n        <p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</p></li>\n    <li>\n        <p>本APIでは取引の明細行(details)は、最大40行までになります。</p>\n    </li>\n</ul>\n",
         "operationId": "create_deal",
         "summary": "取引（収入／支出）の作成"
       }
@@ -1193,7 +1993,7 @@
         "tags": [
           "Deals"
         ],
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入／支出）を更新する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>details : 取引の明細行</p>\n</li>\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n<li>\n<p>receipt_ids : 証憑ファイルID</p>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>本APIでは支払行(payments)の操作ができません。支払行の作成・更新・削除APIをご利用ください。</li>\n<li>本APIでは+更新行(renews)の操作ができません。+更新行の作成・更新・削除APIをご利用ください。</li>\n<li>本APIでは収入／支出の切替えができません。既存の取引を削除後、再度作成してください。</li>\n<li>本APIで取引を更新すると、消費税の計算方法は必ず内税方式が選択されます。</li>\n<li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</ul>",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入／支出）を更新する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>details : 取引の明細行(最大40行)</p>\n</li>\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n<li>\n<p>receipt_ids : 証憑ファイルID</p>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n    <li><p>本APIでは支払行(payments)の操作ができません。支払行の作成・更新・削除APIをご利用ください。</p></li>\n    <li><p>本APIでは+更新行(renews)の操作ができません。+更新行の作成・更新・削除APIをご利用ください。</p></li>\n    <li><p>本APIでは収入／支出の切替えができません。既存の取引を削除後、再度作成してください。</p></li>\n    <li><p>本APIで取引を更新すると、消費税の計算方法は必ず内税方式が選択されます。</p></li>\n    <li><p>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</p></li>\n    <li><p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</p></li>\n    <li>\n        <p>本APIでは取引の明細行(details)は、最大40行までになります。</p>\n    </li>\n</ul>",
         "operationId": "update_deal",
         "summary": "取引（収入／支出）の更新"
       }
@@ -10152,7 +10952,7 @@
               "items": {
                 "properties": {
                   "action": {
-                    "description": "操作(apply: 申請, approve: 承認, force_approve: 代理承認, ancel: 取消, reject: 却下, eedback: 差戻し)",
+                    "description": "操作(apply: 申請, approve: 承認, force_approve: 代理承認, cancel: 取消, reject: 却下, feedback: 差戻し)",
                     "enum": [
                       "apply",
                       "approve",
@@ -10165,7 +10965,7 @@
                     "type": "string"
                   },
                   "updated_at": {
-                    "description": "コメント日時(ISO8601形式)",
+                    "description": "更新日時(ISO8601形式)",
                     "example": "2018-09-12T18:30:24+09:00",
                     "type": "string"
                   },
@@ -10301,7 +11101,7 @@
               "type": "object"
             },
             "approvers": {
-              "description": "承認者（配列）",
+              "description": "承認者（配列）\n  承認ステップのresource_typeがunspecified (指定なし)の場合はapproversはレスポンスに含まれません。\n  しかし、resource_typeがunspecifiedの承認ステップにおいて誰かが承認・却下・差し戻しのいずれかのアクションを取った後は、\n   approversはレスポンスに含まれるようになります。\n   その場合approversにはアクションを行ったステップのIDとアクションを行ったユーザーのIDが含まれます。",
               "items": {
                 "properties": {
                   "is_force_action": {
@@ -10342,7 +11142,7 @@
                     "type": "integer"
                   },
                   "user_id": {
-                    "description": "承認者のユーザーID\n下記の場合はnullになります。\n<ul>\n  <li>resource_type:selected_userの場合で承認者未指定時(申請がdraftの時)</li>\n  <li>resource_type:or_positionで前stepに依存する場合</li>\n  <li>resource_type:or_positionで申請時に部門を指定する場合</li>\n</ul>",
+                    "description": "承認者のユーザーID\n下記の場合はnullになります。\n<ul>\n  <li>resource_type:selected_userの場合で承認者未指定時</li>\n  <li>resource_type:or_positionで前stepで部門未指定の場合</li>\n</ul>",
                     "example": 1,
                     "maximum": 2147483647,
                     "minimum": 1,
@@ -13472,7 +14272,7 @@
     },
     "expenseApplicationLineTemplateParams": {
       "properties": {
-        "account_items_id": {
+        "account_item_id": {
           "description": "勘定科目ID",
           "example": 1,
           "maximum": 2147483647,
@@ -19561,23 +20361,23 @@
               "maximum": 12,
               "minimum": 1,
               "type": "integer"
-            },
-            "up_to_date": {
-              "description": "集計結果が最新かどうか",
-              "example": true,
-              "type": "boolean"
             }
           },
           "required": [
             "balances",
-            "company_id",
-            "up_to_date"
+            "company_id"
           ],
           "type": "object"
+        },
+        "up_to_date": {
+          "description": "集計結果が最新かどうか",
+          "example": true,
+          "type": "boolean"
         }
       },
       "required": [
-        "trial_bs"
+        "trial_bs",
+        "up_to_date"
       ],
       "type": "object"
     },
@@ -19823,23 +20623,23 @@
               "maximum": 12,
               "minimum": 1,
               "type": "integer"
-            },
-            "up_to_date": {
-              "description": "集計結果が最新かどうか",
-              "example": true,
-              "type": "boolean"
             }
           },
           "required": [
             "balances",
-            "company_id",
-            "up_to_date"
+            "company_id"
           ],
           "type": "object"
+        },
+        "up_to_date": {
+          "description": "集計結果が最新かどうか",
+          "example": true,
+          "type": "boolean"
         }
       },
       "required": [
-        "trial_bs_three_years"
+        "trial_bs_three_years",
+        "up_to_date"
       ],
       "type": "object"
     },
@@ -20070,23 +20870,23 @@
               "maximum": 12,
               "minimum": 1,
               "type": "integer"
-            },
-            "up_to_date": {
-              "description": "集計結果が最新かどうか",
-              "example": true,
-              "type": "boolean"
             }
           },
           "required": [
             "balances",
-            "company_id",
-            "up_to_date"
+            "company_id"
           ],
           "type": "object"
+        },
+        "up_to_date": {
+          "description": "集計結果が最新かどうか",
+          "example": true,
+          "type": "boolean"
         }
       },
       "required": [
-        "trial_bs_two_years"
+        "trial_bs_two_years",
+        "up_to_date"
       ],
       "type": "object"
     },
@@ -20413,23 +21213,23 @@
               "maximum": 12,
               "minimum": 1,
               "type": "integer"
-            },
-            "up_to_date": {
-              "description": "集計結果が最新かどうか",
-              "example": true,
-              "type": "boolean"
             }
           },
           "required": [
             "balances",
-            "company_id",
-            "up_to_date"
+            "company_id"
           ],
           "type": "object"
+        },
+        "up_to_date": {
+          "description": "集計結果が最新かどうか",
+          "example": true,
+          "type": "boolean"
         }
       },
       "required": [
-        "trial_pl"
+        "trial_pl",
+        "up_to_date"
       ],
       "type": "object"
     },
@@ -20673,24 +21473,24 @@
               "maximum": 12,
               "minimum": 1,
               "type": "integer"
-            },
-            "up_to_date": {
-              "description": "集計結果が最新かどうか",
-              "example": true,
-              "type": "boolean"
             }
           },
           "required": [
             "balances",
             "company_id",
-            "section_ids",
-            "up_to_date"
+            "section_ids"
           ],
           "type": "object"
+        },
+        "up_to_date": {
+          "description": "集計結果が最新かどうか",
+          "example": true,
+          "type": "boolean"
         }
       },
       "required": [
-        "trial_pl_sections"
+        "trial_pl_sections",
+        "up_to_date"
       ],
       "type": "object"
     },
@@ -20997,23 +21797,23 @@
               "maximum": 12,
               "minimum": 1,
               "type": "integer"
-            },
-            "up_to_date": {
-              "description": "集計結果が最新かどうか",
-              "example": true,
-              "type": "boolean"
             }
           },
           "required": [
             "balances",
-            "company_id",
-            "up_to_date"
+            "company_id"
           ],
           "type": "object"
+        },
+        "up_to_date": {
+          "description": "集計結果が最新かどうか",
+          "example": true,
+          "type": "boolean"
         }
       },
       "required": [
-        "trial_pl_three_years"
+        "trial_pl_three_years",
+        "up_to_date"
       ],
       "type": "object"
     },
@@ -21300,23 +22100,23 @@
               "maximum": 12,
               "minimum": 1,
               "type": "integer"
-            },
-            "up_to_date": {
-              "description": "集計結果が最新かどうか",
-              "example": true,
-              "type": "boolean"
             }
           },
           "required": [
             "balances",
-            "company_id",
-            "up_to_date"
+            "company_id"
           ],
           "type": "object"
+        },
+        "up_to_date": {
+          "description": "集計結果が最新かどうか",
+          "example": true,
+          "type": "boolean"
         }
       },
       "required": [
-        "trial_pl_two_years"
+        "trial_pl_two_years",
+        "up_to_date"
       ],
       "type": "object"
     },
@@ -21904,6 +22704,14 @@
     {
       "description": "\n<p>経費科目</p>\n",
       "name": "Expense application line templates"
+    },
+    {
+      "description": "\n<p>各種申請</p>\n",
+      "name": "Approval requests"
+    },
+    {
+      "description": "\n<p>申請経路</p>\n",
+      "name": "Approval flow routes"
     },
     {
       "description": "\n<p>セグメントタグ</p>\n",
