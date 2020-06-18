@@ -3426,7 +3426,7 @@
           "Deals"
         ],
         "summary": "取引（収入／支出）の作成",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入／支出）を作成する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>ref_number : 管理番号</p>\n</li>\n<li>\n<p>details : 取引の明細行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>receipt_ids : 証憑ファイルID</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>\n<p>tax_idは廃止予定です。tax_codeをご利用ください。</p>\n</li>\n<li>\n<p>tax_code, tax_idはどちらかの指定が必須です。両方指定した場合はtax_codeが優先されます。</p>\n</li>\n<p><li>本APIでは+更新行(renews)の操作ができません。+更新行の作成APIをご利用ください。</p></li>\n<p><li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</p></li>\n<li>\n<p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</p></li>\n</ul>\n",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入／支出）を作成する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>ref_number : 管理番号</p>\n</li>\n<li>\n<p>details : 取引の明細行(最大40行)</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>receipt_ids : 証憑ファイルID</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n    <li>\n        <p>tax_idは廃止予定です。tax_codeをご利用ください。</p>\n    </li>\n    <li>\n        <p>tax_code, tax_idはどちらかの指定が必須です。両方指定した場合はtax_codeが優先されます。</p>\n    </li>\n    <li><p>本APIでは+更新行(renews)の操作ができません。+更新行の作成APIをご利用ください。</p></li>\n    <li><p>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</p></li>\n    <li>\n        <p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。\n        </p>\n    </li>\n    <li>\n        <p>本APIでは取引の明細行(details)は、最大40行までになります。</p>\n    </li>\n</ul>\n",
         "operationId": "create_deal",
         "requestBody": {
           "description": "取引（収入／支出）の作成",
@@ -3619,7 +3619,7 @@
           "Deals"
         ],
         "summary": "取引（収入／支出）の更新",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入／支出）を更新する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>details : 取引の明細行</p>\n</li>\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n<li>\n<p>receipt_ids : 証憑ファイルID</p>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>本APIでは支払行(payments)の操作ができません。支払行の作成・更新・削除APIをご利用ください。</li>\n<li>本APIでは+更新行(renews)の操作ができません。+更新行の作成・更新・削除APIをご利用ください。</li>\n<li>本APIでは収入／支出の切替えができません。既存の取引を削除後、再度作成してください。</li>\n<li>本APIで取引を更新すると、消費税の計算方法は必ず内税方式が選択されます。</li>\n<li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</ul>",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入／支出）を更新する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>details : 取引の明細行(最大40行)</p>\n</li>\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n<li>\n<p>receipt_ids : 証憑ファイルID</p>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n    <li><p>本APIでは支払行(payments)の操作ができません。支払行の作成・更新・削除APIをご利用ください。</p></li>\n    <li><p>本APIでは+更新行(renews)の操作ができません。+更新行の作成・更新・削除APIをご利用ください。</p></li>\n    <li><p>本APIでは収入／支出の切替えができません。既存の取引を削除後、再度作成してください。</p></li>\n    <li><p>本APIで取引を更新すると、消費税の計算方法は必ず内税方式が選択されます。</p></li>\n    <li><p>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</p></li>\n    <li>\n        <p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。\n        </p>\n    </li>\n    <li>\n        <p>本APIでは取引の明細行(details)は、最大40行までになります。</p>\n    </li>\n</ul>",
         "operationId": "update_deal",
         "parameters": [
           {
@@ -14676,15 +14676,15 @@
       "trialBsResponse": {
         "type": "object",
         "required": [
-          "trial_bs"
+          "trial_bs",
+          "up_to_date"
         ],
         "properties": {
           "trial_bs": {
             "type": "object",
             "required": [
               "balances",
-              "company_id",
-              "up_to_date"
+              "company_id"
             ],
             "properties": {
               "company_id": {
@@ -14693,11 +14693,6 @@
                 "maximum": 2147483647,
                 "description": "事業所ID",
                 "example": 1
-              },
-              "up_to_date": {
-                "type": "boolean",
-                "description": "集計結果が最新かどうか",
-                "example": true
               },
               "fiscal_year": {
                 "type": "integer",
@@ -14956,21 +14951,26 @@
                 }
               }
             }
+          },
+          "up_to_date": {
+            "type": "boolean",
+            "description": "集計結果が最新かどうか",
+            "example": true
           }
         }
       },
       "trialBsTwoYearsResponse": {
         "type": "object",
         "required": [
-          "trial_bs_two_years"
+          "trial_bs_two_years",
+          "up_to_date"
         ],
         "properties": {
           "trial_bs_two_years": {
             "type": "object",
             "required": [
               "balances",
-              "company_id",
-              "up_to_date"
+              "company_id"
             ],
             "properties": {
               "company_id": {
@@ -14979,11 +14979,6 @@
                 "maximum": 2147483647,
                 "description": "事業所ID",
                 "example": 1
-              },
-              "up_to_date": {
-                "type": "boolean",
-                "description": "集計結果が最新かどうか",
-                "example": true
               },
               "fiscal_year": {
                 "type": "integer",
@@ -15212,12 +15207,18 @@
                 }
               }
             }
+          },
+          "up_to_date": {
+            "type": "boolean",
+            "description": "集計結果が最新かどうか",
+            "example": true
           }
         }
       },
       "trialBsThreeYearsResponse": {
         "required": [
-          "trial_bs_three_years"
+          "trial_bs_three_years",
+          "up_to_date"
         ],
         "type": "object",
         "properties": {
@@ -15225,8 +15226,7 @@
             "type": "object",
             "required": [
               "balances",
-              "company_id",
-              "up_to_date"
+              "company_id"
             ],
             "properties": {
               "company_id": {
@@ -15235,11 +15235,6 @@
                 "maximum": 2147483647,
                 "description": "事業所ID",
                 "example": 1
-              },
-              "up_to_date": {
-                "type": "boolean",
-                "description": "集計結果が最新かどうか",
-                "example": true
               },
               "fiscal_year": {
                 "type": "integer",
@@ -15483,20 +15478,25 @@
                 }
               }
             }
+          },
+          "up_to_date": {
+            "type": "boolean",
+            "description": "集計結果が最新かどうか",
+            "example": true
           }
         }
       },
       "trialPlResponse": {
         "type": "object",
         "required": [
-          "trial_pl"
+          "trial_pl",
+          "up_to_date"
         ],
         "properties": {
           "trial_pl": {
             "required": [
               "balances",
-              "company_id",
-              "up_to_date"
+              "company_id"
             ],
             "type": "object",
             "properties": {
@@ -15506,11 +15506,6 @@
                 "maximum": 2147483647,
                 "description": "事業所ID",
                 "example": 1
-              },
-              "up_to_date": {
-                "type": "boolean",
-                "description": "集計結果が最新かどうか",
-                "example": true
               },
               "fiscal_year": {
                 "type": "integer",
@@ -15835,21 +15830,26 @@
                 }
               }
             }
+          },
+          "up_to_date": {
+            "type": "boolean",
+            "description": "集計結果が最新かどうか",
+            "example": true
           }
         }
       },
       "trialPlTwoYearsResponse": {
         "type": "object",
         "required": [
-          "trial_pl_two_years"
+          "trial_pl_two_years",
+          "up_to_date"
         ],
         "properties": {
           "trial_pl_two_years": {
             "type": "object",
             "required": [
               "balances",
-              "company_id",
-              "up_to_date"
+              "company_id"
             ],
             "properties": {
               "company_id": {
@@ -15858,11 +15858,6 @@
                 "maximum": 2147483647,
                 "description": "事業所ID",
                 "example": 1
-              },
-              "up_to_date": {
-                "type": "boolean",
-                "description": "集計結果が最新かどうか",
-                "example": true
               },
               "fiscal_year": {
                 "type": "integer",
@@ -16147,21 +16142,26 @@
                 }
               }
             }
+          },
+          "up_to_date": {
+            "type": "boolean",
+            "description": "集計結果が最新かどうか",
+            "example": true
           }
         }
       },
       "trialPlThreeYearsResponse": {
         "type": "object",
         "required": [
-          "trial_pl_three_years"
+          "trial_pl_three_years",
+          "up_to_date"
         ],
         "properties": {
           "trial_pl_three_years": {
             "type": "object",
             "required": [
               "balances",
-              "company_id",
-              "up_to_date"
+              "company_id"
             ],
             "properties": {
               "company_id": {
@@ -16170,11 +16170,6 @@
                 "maximum": 2147483647,
                 "description": "事業所ID",
                 "example": 1
-              },
-              "up_to_date": {
-                "type": "boolean",
-                "description": "集計結果が最新かどうか",
-                "example": true
               },
               "fiscal_year": {
                 "type": "integer",
@@ -16479,13 +16474,19 @@
                 }
               }
             }
+          },
+          "up_to_date": {
+            "type": "boolean",
+            "description": "集計結果が最新かどうか",
+            "example": true
           }
         }
       },
       "trialPlSectionsResponse": {
         "type": "object",
         "required": [
-          "trial_pl_sections"
+          "trial_pl_sections",
+          "up_to_date"
         ],
         "properties": {
           "trial_pl_sections": {
@@ -16493,8 +16494,7 @@
             "required": [
               "balances",
               "company_id",
-              "section_ids",
-              "up_to_date"
+              "section_ids"
             ],
             "properties": {
               "company_id": {
@@ -16503,11 +16503,6 @@
                 "maximum": 2147483647,
                 "description": "事業所ID",
                 "example": 1
-              },
-              "up_to_date": {
-                "type": "boolean",
-                "description": "集計結果が最新かどうか",
-                "example": true
               },
               "section_ids": {
                 "type": "string",
@@ -16778,6 +16773,11 @@
                 }
               }
             }
+          },
+          "up_to_date": {
+            "type": "boolean",
+            "description": "集計結果が最新かどうか",
+            "example": true
           }
         }
       },
@@ -21129,7 +21129,7 @@
             "description": "経費科目名 (100文字以内)",
             "example": "交通費"
           },
-          "account_items_id": {
+          "account_item_id": {
             "type": "integer",
             "minimum": 1,
             "maximum": 2147483647,
@@ -21492,7 +21492,7 @@
                       "type": "integer",
                       "minimum": 1,
                       "maximum": 2147483647,
-                      "description": "承認者のユーザーID\n下記の場合はnullになります。\n<ul>\n  <li>resource_type:selected_userの場合で承認者未指定時(申請がdraftの時)</li>\n  <li>resource_type:or_positionで前stepに依存する場合</li>\n  <li>resource_type:or_positionで申請時に部門を指定する場合</li>\n</ul>",
+                      "description": "承認者のユーザーID\n下記の場合はnullになります。\n<ul>\n  <li>resource_type:selected_userの場合で承認者未指定時</li>\n  <li>resource_type:or_positionで前stepで部門未指定の場合</li>\n</ul>",
                       "example": 1,
                       "nullable": true
                     },
@@ -21644,7 +21644,7 @@
                   "properties": {
                     "action": {
                       "type": "string",
-                      "description": "操作(apply: 申請, approve: 承認, force_approve: 代理承認, ancel: 取消, reject: 却下, eedback: 差戻し)",
+                      "description": "操作(apply: 申請, approve: 承認, force_approve: 代理承認, cancel: 取消, reject: 却下, feedback: 差戻し)",
                       "enum": [
                         "apply",
                         "approve",
@@ -21664,7 +21664,7 @@
                     },
                     "updated_at": {
                       "type": "string",
-                      "description": "コメント日時(ISO8601形式)",
+                      "description": "更新日時(ISO8601形式)",
                       "example": "2018-09-12T18:30:24+09:00"
                     }
                   }
