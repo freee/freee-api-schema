@@ -138,7 +138,7 @@ info:
           },
           {
             &quot;type&quot; : &quot;validation&quot;,
-            &quot;messages&quot; : [&quot;Date は不正な日付フォーマットです。入力例：2020-01-01&quot;]
+            &quot;messages&quot; : [&quot;Date は不正な日付フォーマットです。入力例：2013-01-01&quot;]
           }
         ]
       }</code></pre>
