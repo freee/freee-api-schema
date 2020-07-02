@@ -116,8 +116,12 @@ info:
 
     </li>
 
-
     <li>
+
+    <p>一部のエラーレスポンスにはエラーコードが含まれます。<br>詳細は、<a
+    href="https://developer.freee.co.jp/tips/faq/40x-checkpoint">HTTPステータスコード400台エラー時のチェックポイント</a>を参照してください</p>
+
+    </li>
 
     <p>type</p>
 
