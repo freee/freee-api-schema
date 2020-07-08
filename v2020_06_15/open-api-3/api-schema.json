@@ -22272,6 +22272,7 @@
         "required": [
           "company_id",
           "name",
+          "account_item_id",
           "tax_code"
         ],
         "properties": {
