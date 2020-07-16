@@ -4959,9 +4959,9 @@ paths:
             minimum: 1
             type: integer
         - description: 補助科目やコメントとして出力する項目
-          explode: false
+          explode: true
           in: query
-          name: visible_tags
+          name: 'visible_tags[]'
           schema:
             items:
               enum:
@@ -5183,9 +5183,9 @@ paths:
             minimum: 1
             type: integer
         - description: 補助科目やコメントとして出力する項目
-          explode: false
+          explode: true
           in: query
-          name: visible_tags
+          name: 'visible_tags[]'
           schema:
             items:
               enum:
@@ -15815,6 +15815,7 @@ components:
       required:
         - company_id
         - name
+        - account_item_id
         - tax_code
       type: object
     expenseApplicationLineTemplateResponse:
