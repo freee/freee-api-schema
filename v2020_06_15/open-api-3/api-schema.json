@@ -8418,11 +8418,11 @@
             }
           },
           {
-            "name": "visible_tags",
+            "name": "visible_tags[]",
             "in": "query",
             "description": "補助科目やコメントとして出力する項目",
             "style": "form",
-            "explode": false,
+            "explode": true,
             "schema": {
               "type": "array",
               "items": {
@@ -8542,11 +8542,11 @@
             }
           },
           {
-            "name": "visible_tags",
+            "name": "visible_tags[]",
             "in": "query",
             "description": "補助科目やコメントとして出力する項目",
             "style": "form",
-            "explode": false,
+            "explode": true,
             "schema": {
               "type": "array",
               "items": {
@@ -22272,6 +22272,7 @@
         "required": [
           "company_id",
           "name",
+          "account_item_id",
           "tax_code"
         ],
         "properties": {

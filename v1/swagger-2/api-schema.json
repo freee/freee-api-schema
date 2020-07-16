@@ -4005,7 +4005,7 @@
             "type": "integer"
           },
           {
-            "collectionFormat": "csv",
+            "collectionFormat": "multi",
             "description": "補助科目やコメントとして出力する項目",
             "in": "query",
             "items": {
@@ -4020,7 +4020,7 @@
               ],
               "type": "string"
             },
-            "name": "visible_tags",
+            "name": "visible_tags[]",
             "type": "array"
           },
           {
@@ -4174,7 +4174,7 @@
             "type": "integer"
           },
           {
-            "collectionFormat": "csv",
+            "collectionFormat": "multi",
             "description": "補助科目やコメントとして出力する項目",
             "in": "query",
             "items": {
@@ -4189,7 +4189,7 @@
               ],
               "type": "string"
             },
-            "name": "visible_tags",
+            "name": "visible_tags[]",
             "type": "array"
           },
           {
@@ -14132,6 +14132,7 @@
       "required": [
         "company_id",
         "name",
+        "account_item_id",
         "tax_code"
       ],
       "type": "object"
