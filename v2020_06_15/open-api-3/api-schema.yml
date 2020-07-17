@@ -4252,7 +4252,7 @@ paths:
             type: string
         - description: >-
             請求書ステータス  (draft: 下書き, applying: 申請中, remanded: 差し戻し, rejected: 却下,
-            approved: 承認済み, issued: 発行済み, unsubmitted: 送付待ち)
+            approved: 承認済み, unsubmitted: 送付待ち, submitted: 送付済み)
           in: query
           name: invoice_status
           schema:
@@ -4262,8 +4262,8 @@ paths:
               - remanded
               - rejected
               - approved
-              - issued
               - unsubmitted
+              - submitted
             type: string
         - description: '入金ステータス  (unsettled: 入金待ち, settled: 入金済み)'
           in: query
