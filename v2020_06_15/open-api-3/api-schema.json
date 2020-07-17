@@ -2157,7 +2157,7 @@
           {
             "name": "invoice_status",
             "in": "query",
-            "description": "請求書ステータス  (draft: 下書き, applying: 申請中, remanded: 差し戻し, rejected: 却下, approved: 承認済み, issued: 発行済み, unsubmitted: 送付待ち)",
+            "description": "請求書ステータス  (draft: 下書き, applying: 申請中, remanded: 差し戻し, rejected: 却下, approved: 承認済み, unsubmitted: 送付待ち, submitted: 送付済み)",
             "schema": {
               "type": "string",
               "enum": [
@@ -2166,8 +2166,8 @@
                 "remanded",
                 "rejected",
                 "approved",
-                "issued",
-                "unsubmitted"
+                "unsubmitted",
+                "submitted"
               ]
             }
           },
