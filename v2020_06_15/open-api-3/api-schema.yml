@@ -4971,6 +4971,9 @@ paths:
                 - section
                 - description
                 - wallet_txn_description
+                - segment_1_tag
+                - segment_2_tag
+                - segment_3_tag
                 - all
               type: string
             type: array
@@ -5073,6 +5076,12 @@ paths:
 
         <li>wallet_txn_description : 明細の備考欄</li>
 
+        <li>
+          segment_1_tag : セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン)<br>
+          segment_2_tag  : セグメント2(法人向け エンタープライズプラン)<br>
+          segment_3_tag : セグメント3(法人向け エンタープライズプラン)<br><br>
+          <a href="https://support.freee.co.jp/hc/ja/articles/360020679611-%E3%82%BB%E3%82%B0%E3%83%A1%E3%83%B3%E3%83%88-%E5%88%86%E6%9E%90%E7%94%A8%E3%82%BF%E3%82%B0-%E3%81%AE%E8%A8%AD%E5%AE%9A" target="_blank">セグメント（分析用タグ）の設定</a><br>
+        </li>
 
         <li>all : 指定された場合は上記の設定をすべて有効として扱います</li>
 
@@ -11729,14 +11738,6 @@ paths:
               - credit_card
               - wallet
             type: string
-        - description: 事業所ID
-          in: query
-          name: company_id
-          required: true
-          schema:
-            maximum: 2147483647
-            minimum: 1
-            type: integer
       responses:
         '200':
           content:
