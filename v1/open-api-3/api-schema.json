@@ -14593,6 +14593,25 @@
             "description": "ショートカット２ (255文字以内)",
             "example": "502"
           },
+          "org_code": {
+            "type": "integer",
+            "description": "事業所種別（null: 未設定、1: 法人、2: 個人）",
+            "example": 1,
+            "enum": [
+              1,
+              2
+            ],
+            "nullable": true
+          },
+          "country_code": {
+            "type": "string",
+            "description": "地域（JP: 国内、ZZ:国外）",
+            "example": "JP",
+            "enum": [
+              "JP",
+              "ZZ"
+            ]
+          },
           "long_name": {
             "type": "string",
             "maxLength": 255,
@@ -14829,6 +14848,25 @@
             "maxLength": 255,
             "description": "ショートカット２ (255文字以内)",
             "example": "502"
+          },
+          "org_code": {
+            "type": "integer",
+            "description": "事業所種別（null: 未設定、1: 法人、2: 個人）",
+            "example": 1,
+            "enum": [
+              1,
+              2
+            ],
+            "nullable": true
+          },
+          "country_code": {
+            "type": "string",
+            "description": "地域（JP: 国内、ZZ:国外）",
+            "example": "JP",
+            "enum": [
+              "JP",
+              "ZZ"
+            ]
           },
           "long_name": {
             "type": "string",
@@ -20253,6 +20291,19 @@
                   "example": "501",
                   "nullable": true
                 },
+                "org_code": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2,
+                  "description": "事業所種別（null: 未設定、1: 法人、2: 個人）",
+                  "example": 1,
+                  "nullable": true
+                },
+                "country_code": {
+                  "type": "string",
+                  "description": "地域（JP: 国内、ZZ:国外）",
+                  "example": "JP"
+                },
                 "long_name": {
                   "type": "string",
                   "maxLength": 255,
@@ -20469,6 +20520,19 @@
                 "description": "ショートカット2 (20文字以内)",
                 "example": "501",
                 "nullable": true
+              },
+              "org_code": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 2,
+                "description": "事業所種別（null: 未設定、1: 法人、2: 個人）",
+                "example": 1,
+                "nullable": true
+              },
+              "country_code": {
+                "type": "string",
+                "description": "地域（JP: 国内、ZZ:国外）",
+                "example": "JP"
               },
               "long_name": {
                 "type": "string",
