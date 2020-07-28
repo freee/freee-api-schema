@@ -17654,6 +17654,13 @@ components:
           example: 営業担当
           maxLength: 255
           type: string
+        country_code:
+          description: '地域（JP: 国内、ZZ:国外）'
+          enum:
+            - JP
+            - ZZ
+          example: JP
+          type: string
         default_title:
           description: 敬称（御中、様、(空白)の3つから選択）
           example: 御中
@@ -17699,6 +17706,14 @@ components:
           example: アタラシイトリヒキサキメイショウ
           maxLength: 255
           type: string
+        org_code:
+          description: '事業所種別（null: 未設定、1: 法人、2: 個人）'
+          enum:
+            - 1
+            - 2
+          example: 1
+          nullable: true
+          type: integer
         partner_bank_account_attributes:
           properties:
             account_name:
@@ -17850,6 +17865,10 @@ components:
               example: 営業担当
               nullable: true
               type: string
+            country_code:
+              description: '地域（JP: 国内、ZZ:国外）'
+              example: JP
+              type: string
             default_title:
               description: 敬称（御中、様、(空白)の3つから選択）
               example: 御中
@@ -17903,6 +17922,13 @@ components:
               maxLength: 255
               nullable: true
               type: string
+            org_code:
+              description: '事業所種別（null: 未設定、1: 法人、2: 個人）'
+              example: 1
+              maximum: 2
+              minimum: 1
+              nullable: true
+              type: integer
             'partner_bank_account_attributes[account_name]':
               description: 受取人名（カナ）
               example: フリータロウ
@@ -18069,6 +18095,13 @@ components:
           example: 営業担当
           maxLength: 255
           type: string
+        country_code:
+          description: '地域（JP: 国内、ZZ:国外）'
+          enum:
+            - JP
+            - ZZ
+          example: JP
+          type: string
         default_title:
           description: 敬称（御中、様、(空白)の3つから選択）
           example: 御中
@@ -18114,6 +18147,14 @@ components:
           example: アタラシイトリヒキサキメイショウ
           maxLength: 255
           type: string
+        org_code:
+          description: '事業所種別（null: 未設定、1: 法人、2: 個人）'
+          enum:
+            - 1
+            - 2
+          example: 1
+          nullable: true
+          type: integer
         partner_bank_account_attributes:
           properties:
             account_name:
@@ -18266,6 +18307,10 @@ components:
                 example: 営業担当
                 nullable: true
                 type: string
+              country_code:
+                description: '地域（JP: 国内、ZZ:国外）'
+                example: JP
+                type: string
               default_title:
                 description: 敬称（御中、様、(空白)の3つから選択）
                 example: 御中
@@ -18298,6 +18343,13 @@ components:
                 maxLength: 255
                 nullable: true
                 type: string
+              org_code:
+                description: '事業所種別（null: 未設定、1: 法人、2: 個人）'
+                example: 1
+                maximum: 2
+                minimum: 1
+                nullable: true
+                type: integer
               'partner_bank_account_attributes[account_name]':
                 description: 受取人名（カナ）
                 example: フリータロウ

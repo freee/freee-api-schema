@@ -16914,6 +16914,15 @@
           "maxLength": 255,
           "type": "string"
         },
+        "country_code": {
+          "description": "地域（JP: 国内、ZZ:国外）",
+          "enum": [
+            "JP",
+            "ZZ"
+          ],
+          "example": "JP",
+          "type": "string"
+        },
         "default_title": {
           "description": "敬称（御中、様、(空白)の3つから選択）",
           "example": "御中",
@@ -16968,6 +16977,16 @@
           "example": "アタラシイトリヒキサキメイショウ",
           "maxLength": 255,
           "type": "string"
+        },
+        "org_code": {
+          "description": "事業所種別（null: 未設定、1: 法人、2: 個人）",
+          "enum": [
+            1,
+            2
+          ],
+          "example": 1,
+          "type": "integer",
+          "x-nullable": true
         },
         "partner_bank_account_attributes": {
           "properties": {
@@ -17154,6 +17173,11 @@
               "type": "string",
               "x-nullable": true
             },
+            "country_code": {
+              "description": "地域（JP: 国内、ZZ:国外）",
+              "example": "JP",
+              "type": "string"
+            },
             "default_title": {
               "description": "敬称（御中、様、(空白)の3つから選択）",
               "example": "御中",
@@ -17214,6 +17238,14 @@
               "example": "アタラシイトリヒキサキメイショウ",
               "maxLength": 255,
               "type": "string",
+              "x-nullable": true
+            },
+            "org_code": {
+              "description": "事業所種別（null: 未設定、1: 法人、2: 個人）",
+              "example": 1,
+              "maximum": 2,
+              "minimum": 1,
+              "type": "integer",
               "x-nullable": true
             },
             "partner_bank_account_attributes[account_name]": {
@@ -17415,6 +17447,15 @@
           "maxLength": 255,
           "type": "string"
         },
+        "country_code": {
+          "description": "地域（JP: 国内、ZZ:国外）",
+          "enum": [
+            "JP",
+            "ZZ"
+          ],
+          "example": "JP",
+          "type": "string"
+        },
         "default_title": {
           "description": "敬称（御中、様、(空白)の3つから選択）",
           "example": "御中",
@@ -17469,6 +17510,16 @@
           "example": "アタラシイトリヒキサキメイショウ",
           "maxLength": 255,
           "type": "string"
+        },
+        "org_code": {
+          "description": "事業所種別（null: 未設定、1: 法人、2: 個人）",
+          "enum": [
+            1,
+            2
+          ],
+          "example": 1,
+          "type": "integer",
+          "x-nullable": true
         },
         "partner_bank_account_attributes": {
           "properties": {
@@ -17656,6 +17707,11 @@
                 "type": "string",
                 "x-nullable": true
               },
+              "country_code": {
+                "description": "地域（JP: 国内、ZZ:国外）",
+                "example": "JP",
+                "type": "string"
+              },
               "default_title": {
                 "description": "敬称（御中、様、(空白)の3つから選択）",
                 "example": "御中",
@@ -17692,6 +17748,14 @@
                 "example": "アタラシイトリヒキサキメイショウ",
                 "maxLength": 255,
                 "type": "string",
+                "x-nullable": true
+              },
+              "org_code": {
+                "description": "事業所種別（null: 未設定、1: 法人、2: 個人）",
+                "example": 1,
+                "maximum": 2,
+                "minimum": 1,
+                "type": "integer",
                 "x-nullable": true
               },
               "partner_bank_account_attributes[account_name]": {
