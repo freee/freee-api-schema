@@ -3841,15 +3841,7 @@ paths:
           content:
             application/json:
               schema:
-                properties:
-                  expense_applications:
-                    items:
-                      $ref: >-
-                        #/components/schemas/expenseApplicationResponse/properties/expense_application
-                    type: array
-                required:
-                  - expense_applications
-                type: object
+                $ref: '#/components/schemas/expenseApplicationsIndexResponse'
           description: ''
         '400':
           content:
@@ -16091,6 +16083,144 @@ components:
         - expense_application_lines
         - issue_date
         - title
+      type: object
+    expenseApplicationsIndexResponse:
+      properties:
+        expense_applications:
+          items:
+            properties:
+              company_id:
+                description: 事業所ID
+                example: 1
+                maximum: 2147483647
+                minimum: 1
+                type: integer
+              deal_id:
+                description: '取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)'
+                example: 1
+                maximum: 2147483647
+                minimum: 1
+                nullable: true
+                type: integer
+              deal_status:
+                description: >-
+                  取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます
+                  settled:精算済み, unsettled:清算待ち)
+                enum:
+                  - settled
+                  - unsettled
+                example: settled
+                nullable: true
+                type: string
+              description:
+                description: 備考
+                example: '◯◯連携先ID: cx12345'
+                type: string
+              editable_on_web:
+                description: >-
+                  会計freeeのWeb画面から申請内容を編集可能：falseの場合、Web上からの項目行の追加／削除・金額の編集が出来なくなります。APIでの編集は可能です。
+                example: false
+                type: boolean
+              expense_application_lines:
+                description: 経費申請の項目行一覧（配列）
+                items:
+                  properties:
+                    amount:
+                      description: 金額
+                      example: 30000
+                      maximum: 1000000000
+                      minimum: 0
+                      type: integer
+                    description:
+                      description: 内容
+                      example: 交通費：新幹線往復（東京〜大阪）
+                      type: string
+                    expense_application_line_template_id:
+                      description: 経費科目ID
+                      example: 505
+                      maximum: 2147483647
+                      minimum: 1
+                      type: integer
+                    id:
+                      description: 経費申請の項目行ID
+                      example: 1
+                      maximum: 2147483647
+                      minimum: 1
+                      type: integer
+                    receipt_id:
+                      description: 証憑ID
+                      example: 606
+                      maximum: 2147483647
+                      minimum: 1
+                      type: integer
+                    transaction_date:
+                      description: 日付 (yyyy-mm-dd)
+                      example: '2018-07-18'
+                      type: string
+                  required:
+                    - id
+                  type: object
+                type: array
+              id:
+                description: 経費申請ID
+                example: 1
+                maximum: 2147483647
+                minimum: 1
+                type: integer
+              issue_date:
+                description: 申請日 (yyyy-mm-dd)
+                example: '2018-07-19'
+                nullable: true
+                type: string
+              section_id:
+                description: 部門ID
+                example: 101
+                maximum: 2147483647
+                minimum: 1
+                nullable: true
+                type: integer
+              status:
+                description: >-
+                  申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下,
+                  feedback:差戻し)
+                enum:
+                  - draft
+                  - in_progress
+                  - approved
+                  - rejected
+                  - feedback
+                example: draft
+                type: string
+              tag_ids:
+                description: メモタグID
+                items:
+                  example: 202
+                  maximum: 2147483647
+                  minimum: 1
+                  type: integer
+                type: array
+              title:
+                description: 申請タイトル
+                example: 大阪出張
+                type: string
+              total_amount:
+                description: 合計金額
+                example: 30000
+                type: integer
+            required:
+              - company_id
+              - editable_on_web
+              - expense_application_lines
+              - id
+              - issue_date
+              - status
+              - title
+              - deal_id
+              - deal_status
+            type: object
+          type: array
+      required:
+        - expense_applications
       type: object
     fiscal_years:
       properties:
