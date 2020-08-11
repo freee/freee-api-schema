@@ -11785,7 +11785,7 @@
               "type": "integer"
             },
             "end_date": {
-              "description": "期末日（決算日��",
+              "description": "期末日（決算日）",
               "type": "string"
             },
             "indirect_write_off_method": {
@@ -13551,7 +13551,7 @@
                     "type": "integer"
                   },
                   "renew_target_type": {
-                    "description": "+更���の対象行タイプ",
+                    "description": "+更新の対象行タイプ",
                     "enum": [
                       "detail",
                       "accrual",
@@ -14870,7 +14870,7 @@
                 "type": "integer"
               },
               "type": {
-                "description": "行の種類\n<ul>\n<li>normal、discountを指定する場合、account_item_id,tax_codeとunit_priceが必須となります。</li>\n<li>normalを指定した場合、qtyが必須となります。</li>\n<li>discountを指定した場合、qtyとunitは値を登録できずにエラーとなります。</li>\n</ul>",
+                "description": "行の種類\n<ul>\n<li>normal、discountを指定する場合、account_item_id,tax_codeとunit_priceが必須となります。</li>\n<li>normalを指定した場合、qtyが必須となります。</li>\n</ul>",
                 "enum": [
                   "normal",
                   "discount",
@@ -15765,7 +15765,7 @@
                 "type": "integer"
               },
               "type": {
-                "description": "行の種類\n<ul>\n<li>normal、discountを指定する場合、account_item_id,tax_codeとunit_priceが必須となります。</li>\n<li>normalを指定した場合、qtyが必須となります。</li>\n<li>discountを指定した場合、qtyとunitは値を登録できずにエラーとなります。</li>\n</ul>",
+                "description": "行の種類\n<ul>\n<li>normal、discountを指定する場合、account_item_id,tax_codeとunit_priceが必須となります。</li>\n<li>normalを指定した場合、qtyが必須となります。</li>\n</ul>",
                 "enum": [
                   "normal",
                   "discount",
@@ -18088,7 +18088,7 @@
                 "type": "integer"
               },
               "type": {
-                "description": "行の種類\n<ul>\n<li>normal、discountを指定する場合、account_item_id,tax_codeとunit_priceが必須となります。</li>\n<li>normalを指定した場合、qtyが必須となります。</li>\n<li>discountを指定した場合、qtyとunitは値を登録できずにエラーとなります。</li>\n</ul>",
+                "description": "行の種類\n<ul>\n<li>normal、discountを指定する場合、account_item_id,tax_codeとunit_priceが必須となります。</li>\n<li>normalを指定した場合、qtyが必須となります。</li>\n</ul>",
                 "enum": [
                   "normal",
                   "discount",
@@ -18854,7 +18854,7 @@
                 "type": "integer"
               },
               "type": {
-                "description": "行の種類\n<ul>\n<li>normal、discountを指定する場合、account_item_id,tax_codeとunit_priceが必須となります。</li>\n<li>normalを指定した場合、qtyが必須となります。</li>\n<li>discountを指定した場合、qtyとunitは値を登録できずにエラーとなります。</li>\n</ul>",
+                "description": "行の種類\n<ul>\n<li>normal、discountを指定する場合、account_item_id,tax_codeとunit_priceが必須となります。</li>\n<li>normalを指定した場合、qtyが必須となります。</li>\n</ul>",
                 "enum": [
                   "normal",
                   "discount",
