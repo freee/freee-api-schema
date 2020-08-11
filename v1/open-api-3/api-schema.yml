@@ -13387,7 +13387,7 @@ components:
               minimum: 0
               type: integer
             end_date:
-              description: 期末日（決算日��
+              description: 期末日（決算日）
               type: string
             indirect_write_off_method:
               description: '固定資産の控除法（0: 直接控除法、1: 間接控除法）'
@@ -15000,7 +15000,7 @@ components:
                     minimum: 1
                     type: integer
                   renew_target_type:
-                    description: +更���の対象行タイプ
+                    description: +更新の対象行タイプ
                     enum:
                       - detail
                       - accrual
@@ -16101,8 +16101,6 @@ components:
 
                   <li>normalを指定した場合、qtyが必須となります。</li>
 
-                  <li>discountを指定した場合、qtyとunitは値を登録できずにエラーとなります。</li>
-
                   </ul>
                 enum:
                   - normal
@@ -16880,8 +16878,6 @@ components:
                   <li>normal、discountを指定する場合、account_item_id,tax_codeとunit_priceが必須となります。</li>
 
                   <li>normalを指定した場合、qtyが必須となります。</li>
-
-                  <li>discountを指定した場合、qtyとunitは値を登録できずにエラーとなります。</li>
 
                   </ul>
                 enum:
@@ -18812,8 +18808,6 @@ components:
 
                   <li>normalを指定した場合、qtyが必須となります。</li>
 
-                  <li>discountを指定した場合、qtyとunitは値を登録できずにエラーとなります。</li>
-
                   </ul>
                 enum:
                   - normal
@@ -19470,8 +19464,6 @@ components:
                   <li>normal、discountを指定する場合、account_item_id,tax_codeとunit_priceが必須となります。</li>
 
                   <li>normalを指定した場合、qtyが必須となります。</li>
-
-                  <li>discountを指定した場合、qtyとunitは値を登録できずにエラーとなります。</li>
 
                   </ul>
                 enum:
