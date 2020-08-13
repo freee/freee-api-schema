@@ -16412,7 +16412,7 @@ components:
                   type: integer
                 type: array
               tax_code:
-                description: 税区分ID
+                description: 税区分コード
                 example: 1
                 maximum: 2147483647
                 minimum: 0
@@ -17213,7 +17213,7 @@ components:
                   type: integer
                 type: array
               tax_code:
-                description: 税区分ID
+                description: 税区分コード
                 example: 1
                 maximum: 2147483647
                 minimum: 0
@@ -17850,7 +17850,7 @@ components:
                       type: string
                     type: array
                   tax_code:
-                    description: 税区分ID
+                    description: 税区分コード
                     example: 1
                     maximum: 2147483647
                     minimum: 0
@@ -19160,7 +19160,7 @@ components:
                   type: integer
                 type: array
               tax_code:
-                description: 税区分ID
+                description: 税区分コード
                 example: 1
                 maximum: 2147483647
                 minimum: 0
@@ -19830,7 +19830,7 @@ components:
                   type: integer
                 type: array
               tax_code:
-                description: 税区分ID
+                description: 税区分コード
                 example: 1
                 maximum: 2147483647
                 minimum: 0

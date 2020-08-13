@@ -14866,7 +14866,7 @@
                 "type": "array"
               },
               "tax_code": {
-                "description": "税区分ID",
+                "description": "税区分コード",
                 "example": 1,
                 "maximum": 2147483647,
                 "minimum": 0,
@@ -15761,7 +15761,7 @@
                 "type": "array"
               },
               "tax_code": {
-                "description": "税区分ID",
+                "description": "税区分コード",
                 "example": 1,
                 "maximum": 2147483647,
                 "minimum": 0,
@@ -16505,7 +16505,7 @@
                     "type": "array"
                   },
                   "tax_code": {
-                    "description": "税区分ID",
+                    "description": "税区分コード",
                     "example": 1,
                     "maximum": 2147483647,
                     "minimum": 0,
@@ -18089,7 +18089,7 @@
                 "type": "array"
               },
               "tax_code": {
-                "description": "税区分ID",
+                "description": "税区分コード",
                 "example": 1,
                 "maximum": 2147483647,
                 "minimum": 0,
@@ -18855,7 +18855,7 @@
                 "type": "array"
               },
               "tax_code": {
-                "description": "税区分ID",
+                "description": "税区分コード",
                 "example": 1,
                 "maximum": 2147483647,
                 "minimum": 0,

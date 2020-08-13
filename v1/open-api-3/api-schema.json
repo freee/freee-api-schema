@@ -19133,7 +19133,7 @@
                       "type": "integer",
                       "minimum": 0,
                       "maximum": 2147483647,
-                      "description": "税区分ID",
+                      "description": "税区分コード",
                       "example": 1
                     },
                     "partner_id": {
@@ -24406,7 +24406,7 @@
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 2147483647,
-                  "description": "税区分ID",
+                  "description": "税区分コード",
                   "example": 1
                 },
                 "item_id": {
@@ -24732,7 +24732,7 @@
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 2147483647,
-                  "description": "税区分ID",
+                  "description": "税区分コード",
                   "example": 1
                 },
                 "item_id": {
@@ -25491,7 +25491,7 @@
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 2147483647,
-                  "description": "税区分ID",
+                  "description": "税区分コード",
                   "example": 1
                 },
                 "item_id": {
@@ -25782,7 +25782,7 @@
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 2147483647,
-                  "description": "税区分ID",
+                  "description": "税区分コード",
                   "example": 1
                 },
                 "item_id": {
