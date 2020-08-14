@@ -41,6 +41,10 @@
       "description": "\n<p>部門</p>\n"
     },
     {
+      "name": "Docs",
+      "description": "\n<p>請求書類</p>\n"
+    },
+    {
       "name": "Invoices",
       "description": "\n<p>請求書</p>\n"
     },
@@ -114,6 +118,10 @@
     },
     {
       "name": "Approval requests",
+      "description": "\n<p>各種申請</p>\n"
+    },
+    {
+      "name": "Deprecated approval requests",
       "description": "\n<p>各種申請</p>\n"
     },
     {
@@ -2047,6 +2055,552 @@
           }
         }
       }
+    },
+    "/api/1/docs": {
+      "get": {
+        "tags": [
+          "Docs"
+        ],
+        "summary": "請求書類一覧の取得",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の請求書類一覧を取得する</p>\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>\n    <p>本APIはエンタープライズプランをご利用の事業所のみ利用可能です。</p>\n  </li>\n</ul>\n",
+        "operationId": "get_docs",
+        "parameters": [
+          {
+            "name": "doc_type",
+            "in": "query",
+            "description": "書類種別(請求書: invoice, 見積書: quotation, 納品書: delivery_note, 発注書: order_sheet, 領収書: income_receipt)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "invoice",
+                "quotation",
+                "delivery_note",
+                "order_sheet",
+                "income_receipt"
+              ]
+            }
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "name": "partner_id",
+            "in": "query",
+            "description": "取引先IDで絞込",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "name": "issue_date_start",
+            "in": "query",
+            "description": "開始日(yyyy-mm-dd)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "issue_date_end",
+            "in": "query",
+            "description": "終了日(yyyy-mm-dd)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "取得レコードのオフセット (デフォルト: 0)",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9223372036854775807
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "取得レコードの件数 (デフォルト: 20, 最小: 1, 最大: 100) ",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "ステータス(0: 下書き、1: 未承認、2: 承認済み、3: 登録済み、4: 入金済み)",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Docs"
+        ],
+        "summary": "請求書類の作成",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の請求書を作成する</p>\n\n<h2 id=\"_1\">注意点</h2>\n\n<ul>\n<li> <p>本APIはエンタープライズプランをご利用の事業所のみ利用可能です。</p> </li>\n<li> <p>partner_code, partner_idはどちらかの指定が必須です。ただし両方同時に指定することはできません。</p> </li>\n<li> <p>領収書の場合は、取引先ID（partner_id）と取引先名（partner_name）をどちらも指定すると、partner_idで指定された取引先のマスタ名が更新されます。マスタ名の変更を行わない場合は、取引先ID（partner_id）のみ指定してください。</p> </li>\n<li> <p>item_nameは廃止予定です。item_idをご利用ください。</p> </li>\n<li> <p>section_nameは廃止予定です。section_idをご利用ください。</p> </li>\n</ul>\n\n<h2 id=\"_2\">リクエストの例</h2>\n\n<blockquote>\n<p>POST https://api.freee.co.jp/api/1/docs</p>\n</blockquote>\n\n<pre><code>{\n  &quot;company_id&quot; : 1,\n  &quot;type&quot; : &quot;invoice&quot;,\n  &quot;partner_id&quot; : 1,\n  &quot;partner_name&quot; : &quot;請求先株式会社&quot;,\n  &quot;parnter_zipcode&quot; : &quot;100-0001&quot;,\n  &quot;partner_prefecture_code&quot; : 12,\n  &quot;partner_address1&quot; : &quot;千代田区大手町1-1-1&quot;,\n  &quot;partner_address2&quot; : &quot;請求先ビル１F&quot;,\n  &quot;partner_info&quot; : &quot;総務部 佐藤様&quot;,\n  &quot;company_info&quot; : &quot;営業部 山田&quot;,\n  &quot;description&quot; : &quot;XXXプロジェクトに関する請求&quot;,\n  &quot;issue_date&quot; : &quot;2017-04-01&quot;,\n  &quot;sales_added_date&quot; : &quot;2017-04-01&quot;,\n  &quot;payment_date&quot; : &quot;2017-05-31&quot;,\n  &quot;payment_type&quot; : 1,\n  &quot;bank_info&quot; : &quot;freee銀行 五反田支店 普通 1234567&quot;,\n  &quot;doc_reference_id&quot; : &quot;請求書 201701&quot;,\n  &quot;status&quot; : 3,\n  &quot;notes&quot; : &quot;振込手数料はお客様のご負担となりますのでご了承ください&quot;,\n  &quot;tax_entry_method&quot; : &quot;1&quot;,\n  &quot;doc_items&quot; : [\n    {\n      &quot;order&quot;: 0,\n      &quot;qty&quot;: 10,\n      &quot;unit&quot;: &quot;個&quot;,\n      &quot;unit_price&quot;: 100000,\n      &quot;description&quot;: &quot;業務用PC&quot;,\n      &quot;account_item_id&quot; : 1,\n      &quot;tax_name&quot;: &quot;課税売上8%&quot;,\n      &quot;vat&quot;: 800,\n      &quot;item_id&quot;: 2,\n      &quot;section_id&quot;: 3\n    }\n  ]\n}</code></pre>",
+        "operationId": "create_doc",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "company_id",
+                  "type"
+                ],
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "書類種別"
+                  },
+                  "company_id": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2147483647,
+                    "description": "事業所ID",
+                    "format": "int32"
+                  },
+                  "partner_id": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2147483647,
+                    "description": "取引先ID",
+                    "format": "int32"
+                  },
+                  "partner_name": {
+                    "type": "string",
+                    "description": "取引先名（領収書の場合は、取引先IDと同時に指定すると、取引先IDで指定された取引先のマスタ名が更新されます。マスタ名の変更を行わない場合は、取引先IDのみ指定してください）"
+                  },
+                  "partner_long_name": {
+                    "type": "string",
+                    "description": "取引先正式名称"
+                  },
+                  "partner_zipcode": {
+                    "type": "string",
+                    "description": "取引先の郵便番号",
+                    "nullable": true
+                  },
+                  "partner_prefecture_code": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 46,
+                    "description": "取引先の都道府県コード（0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、\n      5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、\n      16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、\n      27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、\n      38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
+                    "format": "int32",
+                    "nullable": true
+                  },
+                  "partner_address1": {
+                    "type": "string",
+                    "description": "取引先の市区町村・番地",
+                    "nullable": true
+                  },
+                  "partner_address2": {
+                    "type": "string",
+                    "description": "取引先の建物名・部屋番号など",
+                    "nullable": true
+                  },
+                  "partner_info": {
+                    "type": "string",
+                    "description": "取引先の連絡先情報"
+                  },
+                  "company_info": {
+                    "type": "string",
+                    "description": "連絡先情報"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "請求書の概要"
+                  },
+                  "issue_date": {
+                    "type": "string",
+                    "description": "発行日"
+                  },
+                  "sales_added_date": {
+                    "type": "string",
+                    "description": "売上計上日"
+                  },
+                  "payment_date": {
+                    "type": "string",
+                    "description": "振込期日"
+                  },
+                  "payment_type": {
+                    "type": "integer",
+                    "description": "支払い種別(0: 振込払い、1: 口座引き落とし)",
+                    "format": "int32"
+                  },
+                  "bank_info": {
+                    "type": "string",
+                    "description": "振込先"
+                  },
+                  "doc_reference_id": {
+                    "type": "string",
+                    "description": "請求書番号"
+                  },
+                  "status": {
+                    "type": "integer",
+                    "description": "ステータス(0: 下書き、3: 承認済み)",
+                    "format": "int32"
+                  },
+                  "notes": {
+                    "type": "string",
+                    "description": "備考"
+                  },
+                  "tax_entry_method": {
+                    "type": "integer",
+                    "description": "税区分（0: 内税、1: 外税、3: 税込、4: 別記）",
+                    "format": "int32"
+                  },
+                  "doc_items": {
+                    "type": "array",
+                    "description": "取引内容",
+                    "items": {
+                      "type": "object"
+                    }
+                  },
+                  "doc_items[ i ][order]": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 2147483647,
+                    "description": "順序",
+                    "format": "int32"
+                  },
+                  "doc_items[ i ][qty]": {
+                    "type": "number",
+                    "description": "数量"
+                  },
+                  "doc_items[ i ][unit]": {
+                    "type": "string",
+                    "description": "単位"
+                  },
+                  "doc_items[ i ][unit_price]": {
+                    "type": "number",
+                    "description": "単価"
+                  },
+                  "doc_items[ i ][description]": {
+                    "type": "string",
+                    "description": "詳細"
+                  },
+                  "doc_items[ i ][account_item_id]": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2147483647,
+                    "description": "勘定科目ID",
+                    "format": "int32"
+                  },
+                  "doc_items[ i ][tax_name]": {
+                    "type": "string",
+                    "description": "税区分"
+                  },
+                  "doc_items[ i ][vat]": {
+                    "type": "integer",
+                    "description": "消費税",
+                    "format": "int32"
+                  },
+                  "doc_items[ i ][item_id]": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2147483647,
+                    "description": "品目ID",
+                    "format": "int32"
+                  },
+                  "doc_items[ i ][item_name]": {
+                    "type": "string",
+                    "description": "品目名（廃止予定。上記item_idを使用してください。）"
+                  },
+                  "doc_items[ i ][section_id]": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2147483647,
+                    "description": "部門ID",
+                    "format": "int32"
+                  },
+                  "doc_items[ i ][section_name]": {
+                    "type": "string",
+                    "description": "部門名（廃止予定。上記section_idを使用してください。）"
+                  }
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "required": [
+                  "company_id",
+                  "type"
+                ],
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "書類種別"
+                  },
+                  "company_id": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2147483647,
+                    "description": "事業所ID",
+                    "format": "int32"
+                  },
+                  "partner_id": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2147483647,
+                    "description": "取引先ID",
+                    "format": "int32"
+                  },
+                  "partner_name": {
+                    "type": "string",
+                    "description": "取引先名（領収書の場合は、取引先IDと同時に指定すると、取引先IDで指定された取引先のマスタ名が更新されます。マスタ名の変更を行わない場合は、取引先IDのみ指定してください）"
+                  },
+                  "partner_long_name": {
+                    "type": "string",
+                    "description": "取引先正式名称"
+                  },
+                  "partner_zipcode": {
+                    "type": "string",
+                    "description": "取引先の郵便番号"
+                  },
+                  "partner_prefecture_code": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 46,
+                    "description": "取引先の都道府県コード（0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、\n      5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、\n      16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、\n      27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、\n      38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
+                    "format": "int32"
+                  },
+                  "partner_address1": {
+                    "type": "string",
+                    "description": "取引先の市区町村・番地"
+                  },
+                  "partner_address2": {
+                    "type": "string",
+                    "description": "取引先の建物名・部屋番号など"
+                  },
+                  "partner_info": {
+                    "type": "string",
+                    "description": "取引先の連絡先情報"
+                  },
+                  "company_info": {
+                    "type": "string",
+                    "description": "連絡先情報"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "請求書の概要"
+                  },
+                  "issue_date": {
+                    "type": "string",
+                    "description": "発行日"
+                  },
+                  "sales_added_date": {
+                    "type": "string",
+                    "description": "売上計上日"
+                  },
+                  "payment_date": {
+                    "type": "string",
+                    "description": "振込期日"
+                  },
+                  "payment_type": {
+                    "type": "integer",
+                    "description": "支払い種別(0: 振込払い、1: 口座引き落とし)",
+                    "format": "int32"
+                  },
+                  "bank_info": {
+                    "type": "string",
+                    "description": "振込先"
+                  },
+                  "doc_reference_id": {
+                    "type": "string",
+                    "description": "請求書番号"
+                  },
+                  "status": {
+                    "type": "integer",
+                    "description": "ステータス(0: 下書き、3: 承認済み)",
+                    "format": "int32"
+                  },
+                  "notes": {
+                    "type": "string",
+                    "description": "備考"
+                  },
+                  "tax_entry_method": {
+                    "type": "integer",
+                    "description": "税区分（0: 内税、1: 外税、3: 税込、4: 別記）",
+                    "format": "int32"
+                  },
+                  "doc_items": {
+                    "type": "array",
+                    "description": "取引内容",
+                    "items": {
+                      "type": "object"
+                    }
+                  },
+                  "doc_items[ i ][order]": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 2147483647,
+                    "description": "順序",
+                    "format": "int32"
+                  },
+                  "doc_items[ i ][qty]": {
+                    "type": "number",
+                    "description": "数量"
+                  },
+                  "doc_items[ i ][unit]": {
+                    "type": "string",
+                    "description": "単位"
+                  },
+                  "doc_items[ i ][unit_price]": {
+                    "type": "number",
+                    "description": "単価"
+                  },
+                  "doc_items[ i ][description]": {
+                    "type": "string",
+                    "description": "詳細"
+                  },
+                  "doc_items[ i ][account_item_id]": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2147483647,
+                    "description": "勘定科目ID",
+                    "format": "int32"
+                  },
+                  "doc_items[ i ][tax_name]": {
+                    "type": "string",
+                    "description": "税区分"
+                  },
+                  "doc_items[ i ][vat]": {
+                    "type": "integer",
+                    "description": "消費税",
+                    "format": "int32"
+                  },
+                  "doc_items[ i ][item_id]": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2147483647,
+                    "description": "品目ID",
+                    "format": "int32"
+                  },
+                  "doc_items[ i ][item_name]": {
+                    "type": "string",
+                    "description": "品目名（廃止予定。上記item_idを使用してください。）"
+                  },
+                  "doc_items[ i ][section_id]": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2147483647,
+                    "description": "部門ID",
+                    "format": "int32"
+                  },
+                  "doc_items[ i ][section_name]": {
+                    "type": "string",
+                    "description": "部門名（廃止予定。上記section_idを使用してください。）"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-undocumented": true,
+      "x-skip-committee-response-validation": true
     },
     "/api/1/invoices": {
       "get": {
@@ -6399,6 +6953,111 @@
           }
         }
       }
+    },
+    "/api/1/taxes": {
+      "get": {
+        "tags": [
+          "Taxes"
+        ],
+        "summary": "税区分一覧の取得 (deprecated)",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の税区分一覧を取得する\n\n税区分名をリクエストに使う場合は name_ja（日本語表示用） ではなく name を使うようにしてください。</p>",
+        "operationId": "get_taxes",
+        "parameters": [
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "taxes"
+                  ],
+                  "properties": {
+                    "taxes": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "name"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2147483647,
+                            "description": "税区分ID",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "税区分",
+                            "example": "課税売上"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-undocumented": true
     },
     "/api/1/taxes/codes": {
       "get": {
@@ -11591,6 +12250,176 @@
         }
       }
     },
+    "/api/1/deprecated/approval_requests": {
+      "post": {
+        "tags": [
+          "Deprecated approval requests"
+        ],
+        "summary": "各種申請の作成",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の各種申請を作成する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、各種申請の下書きを作成することができます。申請作業はWebから行ってください。</li>\n  <li>現在、申請経路は１段階承認のみ利用できます。Web上での申請時に指定してください。</li>\n  <li>申請項目(request_items)については、申請フォームで設定された項目のIDとそれに対応する値を入力してください。プルダウン(select)： プルダウンの選択肢の名前、金額(amount)： 数値(申請フォームで設定した上限・下限金額内の値)、添付ファイル(receipt)： ファイルボックスAPIのID（複数の場合はカンマ区切り） を入力してください。</li>\n</ul>",
+        "operationId": "create_deprecated_approval_request",
+        "requestBody": {
+          "description": "各種申請の作成",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/deprecatedApprovalRequestParams"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/deprecatedApprovalRequestParams"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/deprecatedApprovalRequestResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-undocumented": true
+    },
+    "/api/1/deprecated/approval_requests/{id}": {
+      "delete": {
+        "tags": [
+          "Deprecated approval requests"
+        ],
+        "summary": "各種申請の削除",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の各種申請を削除する</p>",
+        "operationId": "destroy_deprecated_approval_request",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "content": {
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-undocumented": true
+    },
     "/api/1/approval_requests": {
       "get": {
         "tags": [
@@ -13055,6 +13884,90 @@
           }
         }
       }
+    },
+    "/api/1/companies_plan/{id}": {
+      "get": {
+        "tags": [
+          "Companies plan"
+        ],
+        "summary": "会計プランの取得",
+        "operationId": "get_companies_plan",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/companiesPlanResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-undocumented": true
     }
   },
   "components": {
@@ -15086,9 +15999,8 @@
             "description": "取引日 (yyyy-mm-dd)"
           },
           "receipt": {
-            "type": "string",
-            "description": "証憑ファイル",
-            "format": "binary"
+            "type": "file",
+            "description": "証憑ファイル"
           }
         }
       },
@@ -19133,7 +20045,7 @@
                       "type": "integer",
                       "minimum": 0,
                       "maximum": 2147483647,
-                      "description": "税区分ID",
+                      "description": "税区分コード",
                       "example": 1
                     },
                     "partner_id": {
@@ -23274,7 +24186,8 @@
             "items": {
               "type": "object",
               "required": [
-                "id"
+                "id",
+                "default_route"
               ],
               "properties": {
                 "id": {
@@ -23339,6 +24252,11 @@
                     "description": "申請フォームID",
                     "example": 1
                   }
+                },
+                "default_route": {
+                  "type": "boolean",
+                  "description": "基本経路として設定されているかどうか<br><br>\nリクエストパラメータusageに下記のいずれかが指定され、かつ、基本経路の場合はtrueになります。\n* `TxnApproval` - 仕訳承認\n* `ExpenseApplication` - 経費精算\n* `PaymentRequest` - 支払依頼\n* `ApprovalRequest`(リクエストパラメータrequest_form_idを同時に指定) - 各種申請\n* `DocApproval` - 請求書等 (見積書・納品書・請求書・発注書)\n\n<a href=\"https://support.freee.co.jp/hc/ja/articles/900000507963-%E7%94%B3%E8%AB%8B%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%E3%81%AE%E5%9F%BA%E6%9C%AC%E7%B5%8C%E8%B7%AF%E8%A8%AD%E5%AE%9A\" target=\"_blank\">申請フォームの基本経路設定</a>\n",
+                  "example": true
                 }
               }
             }
@@ -24406,7 +25324,7 @@
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 2147483647,
-                  "description": "税区分ID",
+                  "description": "税区分コード",
                   "example": 1
                 },
                 "item_id": {
@@ -24732,7 +25650,7 @@
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 2147483647,
-                  "description": "税区分ID",
+                  "description": "税区分コード",
                   "example": 1
                 },
                 "item_id": {
@@ -25491,7 +26409,7 @@
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 2147483647,
-                  "description": "税区分ID",
+                  "description": "税区分コード",
                   "example": 1
                 },
                 "item_id": {
@@ -25782,7 +26700,7 @@
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 2147483647,
-                  "description": "税区分ID",
+                  "description": "税区分コード",
                   "example": 1
                 },
                 "item_id": {
