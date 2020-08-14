@@ -15086,9 +15086,8 @@
             "description": "取引日 (yyyy-mm-dd)"
           },
           "receipt": {
-            "type": "string",
-            "description": "証憑ファイル",
-            "format": "binary"
+            "type": "file",
+            "description": "証憑ファイル"
           }
         }
       },
@@ -19133,7 +19132,7 @@
                       "type": "integer",
                       "minimum": 0,
                       "maximum": 2147483647,
-                      "description": "税区分ID",
+                      "description": "税区分コード",
                       "example": 1
                     },
                     "partner_id": {
@@ -23274,7 +23273,8 @@
             "items": {
               "type": "object",
               "required": [
-                "id"
+                "id",
+                "default_route"
               ],
               "properties": {
                 "id": {
@@ -23339,6 +23339,11 @@
                     "description": "申請フォームID",
                     "example": 1
                   }
+                },
+                "default_route": {
+                  "type": "boolean",
+                  "description": "基本経路として設定されているかどうか<br><br>\nリクエストパラメータusageに下記のいずれかが指定され、かつ、基本経路の場合はtrueになります。\n* `TxnApproval` - 仕訳承認\n* `ExpenseApplication` - 経費精算\n* `PaymentRequest` - 支払依頼\n* `ApprovalRequest`(リクエストパラメータrequest_form_idを同時に指定) - 各種申請\n* `DocApproval` - 請求書等 (見積書・納品書・請求書・発注書)\n\n<a href=\"https://support.freee.co.jp/hc/ja/articles/900000507963-%E7%94%B3%E8%AB%8B%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%E3%81%AE%E5%9F%BA%E6%9C%AC%E7%B5%8C%E8%B7%AF%E8%A8%AD%E5%AE%9A\" target=\"_blank\">申請フォームの基本経路設定</a>\n",
+                  "example": true
                 }
               }
             }
@@ -24406,7 +24411,7 @@
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 2147483647,
-                  "description": "税区分ID",
+                  "description": "税区分コード",
                   "example": 1
                 },
                 "item_id": {
@@ -24732,7 +24737,7 @@
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 2147483647,
-                  "description": "税区分ID",
+                  "description": "税区分コード",
                   "example": 1
                 },
                 "item_id": {
@@ -25491,7 +25496,7 @@
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 2147483647,
-                  "description": "税区分ID",
+                  "description": "税区分コード",
                   "example": 1
                 },
                 "item_id": {
@@ -25782,7 +25787,7 @@
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 2147483647,
-                  "description": "税区分ID",
+                  "description": "税区分コード",
                   "example": 1
                 },
                 "item_id": {
