@@ -5719,11 +5719,10 @@
           },
           {
             "description": "証憑ファイル",
-            "format": "binary",
             "in": "formData",
             "name": "receipt",
             "required": true,
-            "type": "string"
+            "type": "file"
           }
         ],
         "responses": {
@@ -18972,8 +18971,7 @@
         },
         "receipt": {
           "description": "証憑ファイル",
-          "format": "binary",
-          "type": "string"
+          "type": "file"
         }
       },
       "required": [
