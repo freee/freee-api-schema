@@ -5719,11 +5719,10 @@
           },
           {
             "description": "証憑ファイル",
-            "format": "binary",
             "in": "formData",
             "name": "receipt",
             "required": true,
-            "type": "string"
+            "type": "file"
           }
         ],
         "responses": {
@@ -17255,8 +17254,8 @@
               "x-nullable": true
             },
             "partner_bank_account_attributes[branch_code]": {
-              "description": "受取人名（カナ）",
-              "example": "フリータロウ",
+              "description": "支店番号",
+              "example": "999",
               "type": "string",
               "x-nullable": true
             },
@@ -17765,8 +17764,8 @@
                 "x-nullable": true
               },
               "partner_bank_account_attributes[branch_code]": {
-                "description": "受取人名（カナ）",
-                "example": "フリータロウ",
+                "description": "支店番号",
+                "example": "999",
                 "type": "string",
                 "x-nullable": true
               },
@@ -18972,8 +18971,7 @@
         },
         "receipt": {
           "description": "証憑ファイル",
-          "format": "binary",
-          "type": "string"
+          "type": "file"
         }
       },
       "required": [
