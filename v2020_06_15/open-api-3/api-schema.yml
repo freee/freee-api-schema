@@ -18481,8 +18481,8 @@ components:
               nullable: true
               type: string
             'partner_bank_account_attributes[branch_code]':
-              description: 受取人名（カナ）
-              example: フリータロウ
+              description: 支店番号
+              example: '999'
               nullable: true
               type: string
             'partner_bank_account_attributes[branch_kana]':
@@ -18902,8 +18902,8 @@ components:
                 nullable: true
                 type: string
               'partner_bank_account_attributes[branch_code]':
-                description: 受取人名（カナ）
-                example: フリータロウ
+                description: 支店番号
+                example: '999'
                 nullable: true
                 type: string
               'partner_bank_account_attributes[branch_kana]':
