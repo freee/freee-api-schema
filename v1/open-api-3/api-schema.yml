@@ -146,7 +146,7 @@ info:
   version: v1.0
   x-copyright: '&copy; Since 2013 freee K.K.'
 servers:
-  - url: 'https://api.freee.co.jp'
+  - url: 'https://nishiiwa-api.freee.co.jp'
 security:
   - oauth2:
       - write
