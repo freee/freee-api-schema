@@ -20154,7 +20154,7 @@
                   },
                   "account_category_name": {
                     "description": "勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)",
-                    "example": "流動資産",
+                    "example": "販売管理費",
                     "type": "string"
                   },
                   "account_item_id": {
@@ -20440,7 +20440,7 @@
                   },
                   "account_category_name": {
                     "description": "勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)",
-                    "example": "流動資産",
+                    "example": "販売管理費",
                     "type": "string"
                   },
                   "account_item_id": {
@@ -20711,7 +20711,7 @@
                   },
                   "account_category_name": {
                     "description": "勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)",
-                    "example": "流動資産",
+                    "example": "販売管理費",
                     "type": "string"
                   },
                   "account_item_id": {
@@ -20967,7 +20967,7 @@
                   },
                   "account_category_name": {
                     "description": "勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)",
-                    "example": "流動資産",
+                    "example": "販売管理費",
                     "type": "string"
                   },
                   "account_item_id": {
@@ -21319,7 +21319,7 @@
                   },
                   "account_category_name": {
                     "description": "勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)",
-                    "example": "流動資産",
+                    "example": "販売管理費",
                     "type": "string"
                   },
                   "account_item_id": {
@@ -21618,7 +21618,7 @@
                   },
                   "account_category_name": {
                     "description": "勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)",
-                    "example": "流動資産",
+                    "example": "販売管理費",
                     "type": "string"
                   },
                   "account_item_id": {
@@ -21950,7 +21950,7 @@
                   },
                   "account_category_name": {
                     "description": "勘定科目カテゴリー名(勘定科目カテゴリーの時のみ含まれる)",
-                    "example": "流動資産",
+                    "example": "販売管理費",
                     "type": "string"
                   },
                   "account_item_id": {

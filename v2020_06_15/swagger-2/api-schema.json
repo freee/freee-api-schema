@@ -20347,7 +20347,7 @@
                 "properties": {
                   "account_category_name": {
                     "description": "勘定科目カテゴリー名",
-                    "example": "流動資産",
+                    "example": "販売管理費",
                     "type": "string"
                   },
                   "account_group_name": {
@@ -20624,7 +20624,7 @@
                 "properties": {
                   "account_category_name": {
                     "description": "勘定科目カテゴリー名",
-                    "example": "流動資産",
+                    "example": "販売管理費",
                     "type": "string"
                   },
                   "account_group_name": {
@@ -20886,7 +20886,7 @@
                 "properties": {
                   "account_category_name": {
                     "description": "勘定科目カテゴリー名",
-                    "example": "流動資産",
+                    "example": "販売管理費",
                     "type": "string"
                   },
                   "account_group_name": {
@@ -21133,7 +21133,7 @@
                 "properties": {
                   "account_category_name": {
                     "description": "勘定科目カテゴリー名",
-                    "example": "流動資産",
+                    "example": "販売管理費",
                     "type": "string"
                   },
                   "account_group_name": {
@@ -21476,7 +21476,7 @@
                 "properties": {
                   "account_category_name": {
                     "description": "勘定科目カテゴリー名",
-                    "example": "流動資産",
+                    "example": "販売管理費",
                     "type": "string"
                   },
                   "account_group_name": {
@@ -21737,7 +21737,7 @@
                 "properties": {
                   "account_category_name": {
                     "description": "勘定科目カテゴリー名",
-                    "example": "流動資産",
+                    "example": "販売管理費",
                     "type": "string"
                   },
                   "account_group_name": {
@@ -22060,7 +22060,7 @@
                 "properties": {
                   "account_category_name": {
                     "description": "勘定科目カテゴリー名",
-                    "example": "流動資産",
+                    "example": "販売管理費",
                     "type": "string"
                   },
                   "account_group_name": {

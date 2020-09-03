@@ -20898,7 +20898,7 @@ components:
                 properties:
                   account_category_name:
                     description: 勘定科目カテゴリー名
-                    example: 流動資産
+                    example: 販売管理費
                     type: string
                   account_group_name:
                     description: '決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)'
@@ -21121,7 +21121,7 @@ components:
                 properties:
                   account_category_name:
                     description: 勘定科目カテゴリー名
-                    example: 流動資産
+                    example: 販売管理費
                     type: string
                   account_group_name:
                     description: '決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)'
@@ -21332,7 +21332,7 @@ components:
                 properties:
                   account_category_name:
                     description: 勘定科目カテゴリー名
-                    example: 流動資産
+                    example: 販売管理費
                     type: string
                   account_group_name:
                     description: '決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)'
@@ -21531,7 +21531,7 @@ components:
                 properties:
                   account_category_name:
                     description: 勘定科目カテゴリー名
-                    example: 流動資産
+                    example: 販売管理費
                     type: string
                   account_group_name:
                     description: '決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)'
@@ -21808,7 +21808,7 @@ components:
                 properties:
                   account_category_name:
                     description: 勘定科目カテゴリー名
-                    example: 流動資産
+                    example: 販売管理費
                     type: string
                   account_group_name:
                     description: '決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)'
@@ -22017,7 +22017,7 @@ components:
                 properties:
                   account_category_name:
                     description: 勘定科目カテゴリー名
-                    example: 流動資産
+                    example: 販売管理費
                     type: string
                   account_group_name:
                     description: '決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)'
@@ -22278,7 +22278,7 @@ components:
                 properties:
                   account_category_name:
                     description: 勘定科目カテゴリー名
-                    example: 流動資産
+                    example: 販売管理費
                     type: string
                   account_group_name:
                     description: '決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)'
