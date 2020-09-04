@@ -4337,7 +4337,7 @@
           {
             "description": "セグメント１IDで絞り込み（0を指定すると、セグメント１が未選択の貸借行を絞り込めます）",
             "in": "query",
-            "maximum": 2147483647,
+            "maximum": 9223372036854776000,
             "minimum": 0,
             "name": "segment_1_tag_id",
             "type": "integer"
@@ -4345,7 +4345,7 @@
           {
             "description": "セグメント２IDで絞り込み（0を指定すると、セグメント２が未選択の貸借行を絞り込めます）",
             "in": "query",
-            "maximum": 2147483647,
+            "maximum": 9223372036854776000,
             "minimum": 0,
             "name": "segment_2_tag_id",
             "type": "integer"
@@ -4353,7 +4353,7 @@
           {
             "description": "セグメント３IDで絞り込み（0を指定すると、セグメント３が未選択の貸借行を絞り込めます）",
             "in": "query",
-            "maximum": 2147483647,
+            "maximum": 9223372036854776000,
             "minimum": 0,
             "name": "segment_3_tag_id",
             "type": "integer"
@@ -12660,21 +12660,21 @@
               "segment_1_tag_id": {
                 "description": "セグメント１ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
               "segment_2_tag_id": {
                 "description": "セグメント２ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
               "segment_3_tag_id": {
                 "description": "セグメント３ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
@@ -12892,7 +12892,7 @@
                   "segment_1_tag_id": {
                     "description": "セグメント１ID",
                     "example": 1,
-                    "maximum": 2147483647,
+                    "maximum": 9223372036854776000,
                     "minimum": 1,
                     "type": "integer",
                     "x-nullable": true
@@ -12900,7 +12900,7 @@
                   "segment_2_tag_id": {
                     "description": "セグメント２ID",
                     "example": 1,
-                    "maximum": 2147483647,
+                    "maximum": 9223372036854776000,
                     "minimum": 1,
                     "type": "integer",
                     "x-nullable": true
@@ -12908,7 +12908,7 @@
                   "segment_3_tag_id": {
                     "description": "セグメント３ID",
                     "example": 1,
-                    "maximum": 2147483647,
+                    "maximum": 9223372036854776000,
                     "minimum": 1,
                     "type": "integer",
                     "x-nullable": true
@@ -13161,7 +13161,7 @@
                   "segment_1_tag_id": {
                     "description": "セグメント１ID",
                     "example": 1,
-                    "maximum": 2147483647,
+                    "maximum": 9223372036854776000,
                     "minimum": 1,
                     "type": "integer",
                     "x-nullable": true
@@ -13169,7 +13169,7 @@
                   "segment_2_tag_id": {
                     "description": "セグメント２ID",
                     "example": 1,
-                    "maximum": 2147483647,
+                    "maximum": 9223372036854776000,
                     "minimum": 1,
                     "type": "integer",
                     "x-nullable": true
@@ -13177,7 +13177,7 @@
                   "segment_3_tag_id": {
                     "description": "セグメント３ID",
                     "example": 1,
-                    "maximum": 2147483647,
+                    "maximum": 9223372036854776000,
                     "minimum": 1,
                     "type": "integer",
                     "x-nullable": true
@@ -13487,7 +13487,7 @@
                         "segment_1_tag_id": {
                           "description": "セグメント１ID",
                           "example": 1,
-                          "maximum": 2147483647,
+                          "maximum": 9223372036854776000,
                           "minimum": 1,
                           "type": "integer",
                           "x-nullable": true
@@ -13495,7 +13495,7 @@
                         "segment_2_tag_id": {
                           "description": "セグメント２ID",
                           "example": 1,
-                          "maximum": 2147483647,
+                          "maximum": 9223372036854776000,
                           "minimum": 1,
                           "type": "integer",
                           "x-nullable": true
@@ -13503,7 +13503,7 @@
                         "segment_3_tag_id": {
                           "description": "セグメント３ID",
                           "example": 1,
-                          "maximum": 2147483647,
+                          "maximum": 9223372036854776000,
                           "minimum": 1,
                           "type": "integer",
                           "x-nullable": true
@@ -13675,21 +13675,21 @@
               "segment_1_tag_id": {
                 "description": "セグメント１ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
               "segment_2_tag_id": {
                 "description": "セグメント２ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
               "segment_3_tag_id": {
                 "description": "セグメント３ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
@@ -14842,21 +14842,21 @@
               "segment_1_tag_id": {
                 "description": "セグメント１ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
               "segment_2_tag_id": {
                 "description": "セグメント２ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
               "segment_3_tag_id": {
                 "description": "セグメント３ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
@@ -14895,8 +14895,8 @@
               "unit_price": {
                 "description": "単価 (tax_entry_method: inclusiveの場合は税込価格、tax_entry_method: exclusiveの場合は税抜価格となります)",
                 "example": 1,
-                "maximum": 9999999999999,
-                "minimum": -9999999999999,
+                "maximum": 999999999999,
+                "minimum": -999999999999,
                 "type": "number"
               },
               "vat": {
@@ -15230,7 +15230,7 @@
                   "segment_1_tag_id": {
                     "description": "セグメント１ID",
                     "example": 1,
-                    "maximum": 2147483647,
+                    "maximum": 9223372036854776000,
                     "minimum": 1,
                     "type": "integer",
                     "x-nullable": true
@@ -15244,7 +15244,7 @@
                   "segment_2_tag_id": {
                     "description": "セグメント２ID",
                     "example": 1,
-                    "maximum": 2147483647,
+                    "maximum": 9223372036854776000,
                     "minimum": 1,
                     "type": "integer",
                     "x-nullable": true
@@ -15258,7 +15258,7 @@
                   "segment_3_tag_id": {
                     "description": "セグメント３ID",
                     "example": 1,
-                    "maximum": 2147483647,
+                    "maximum": 9223372036854776000,
                     "minimum": 1,
                     "type": "integer",
                     "x-nullable": true
@@ -15737,21 +15737,21 @@
               "segment_1_tag_id": {
                 "description": "セグメント１ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
               "segment_2_tag_id": {
                 "description": "セグメント２ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
               "segment_3_tag_id": {
                 "description": "セグメント３ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
@@ -15790,8 +15790,8 @@
               "unit_price": {
                 "description": "単価 (tax_entry_method: inclusiveの場合は税込価格、tax_entry_method: exclusiveの場合は税抜価格となります)",
                 "example": 1,
-                "maximum": 9999999999999,
-                "minimum": -9999999999999,
+                "maximum": 999999999999,
+                "minimum": -999999999999,
                 "type": "number"
               },
               "vat": {
@@ -16284,21 +16284,21 @@
               "segment_1_tag_id": {
                 "description": "セグメント１ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
               "segment_2_tag_id": {
                 "description": "セグメント２ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
               "segment_3_tag_id": {
                 "description": "セグメント３ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
@@ -16461,7 +16461,7 @@
                   "segment_1_tag_id": {
                     "description": "セグメント１ID",
                     "example": 1,
-                    "maximum": 2147483647,
+                    "maximum": 9223372036854776000,
                     "minimum": 1,
                     "type": "integer"
                   },
@@ -16472,7 +16472,7 @@
                   "segment_2_tag_id": {
                     "description": "セグメント２ID",
                     "example": 1,
-                    "maximum": 2147483647,
+                    "maximum": 9223372036854776000,
                     "minimum": 1,
                     "type": "integer"
                   },
@@ -16483,7 +16483,7 @@
                   "segment_3_tag_id": {
                     "description": "セグメント３ID",
                     "example": 1,
-                    "maximum": 2147483647,
+                    "maximum": 9223372036854776000,
                     "minimum": 1,
                     "type": "integer"
                   },
@@ -16661,21 +16661,21 @@
               "segment_1_tag_id": {
                 "description": "セグメント１ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
               "segment_2_tag_id": {
                 "description": "セグメント２ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
               "segment_3_tag_id": {
                 "description": "セグメント３ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
@@ -18065,21 +18065,21 @@
               "segment_1_tag_id": {
                 "description": "セグメント１ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
               "segment_2_tag_id": {
                 "description": "セグメント２ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
               "segment_3_tag_id": {
                 "description": "セグメント３ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
@@ -18118,8 +18118,8 @@
               "unit_price": {
                 "description": "単価 (tax_entry_method: inclusiveの場合は税込価格、tax_entry_method: exclusiveの場合は税抜価格となります)",
                 "example": 1,
-                "maximum": 9999999999999,
-                "minimum": -9999999999999,
+                "maximum": 999999999999,
+                "minimum": -999999999999,
                 "type": "number"
               },
               "vat": {
@@ -18831,21 +18831,21 @@
               "segment_1_tag_id": {
                 "description": "セグメント１ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
               "segment_2_tag_id": {
                 "description": "セグメント２ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
               "segment_3_tag_id": {
                 "description": "セグメント３ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
@@ -18884,8 +18884,8 @@
               "unit_price": {
                 "description": "単価 (tax_entry_method: inclusiveの場合は税込価格、tax_entry_method: exclusiveの場合は税抜価格となります)",
                 "example": 1,
-                "maximum": 9999999999999,
-                "minimum": -9999999999999,
+                "maximum": 999999999999,
+                "minimum": -999999999999,
                 "type": "number"
               },
               "vat": {
@@ -19165,21 +19165,21 @@
               "segment_1_tag_id": {
                 "description": "セグメント１ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
               "segment_2_tag_id": {
                 "description": "セグメント２ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
               "segment_3_tag_id": {
                 "description": "セグメント３ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
@@ -19291,21 +19291,21 @@
               "segment_1_tag_id": {
                 "description": "セグメント１ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 0,
                 "type": "integer"
               },
               "segment_2_tag_id": {
                 "description": "セグメント２ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 0,
                 "type": "integer"
               },
               "segment_3_tag_id": {
                 "description": "セグメント３ID",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 0,
                 "type": "integer"
               },
