@@ -4400,6 +4400,8 @@ paths:
 
         <li> <p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</p> </li>
 
+        <li> <p>本APIでは請求内容(invoice_contents)は、最大100行までになります。</p> </li>
+
         </ul>
       operationId: create_invoice
       requestBody:
@@ -4612,6 +4614,8 @@ paths:
         <li> <p>partner_code, partner_idを両方同時に指定することはできません。</p> </li>
 
         <li> <p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</p> </li>
+
+        <li> <p>本APIでは請求内容(invoice_contents)は、最大100行までになります。</p> </li>
 
         </ul>
       operationId: update_invoice
@@ -6549,6 +6553,8 @@ paths:
 
         <li> <p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</p> </li>
 
+        <li> <p>本APIでは見積内容(quotation_contents)は、最大100行までになります。</p> </li>
+
         </ul>
       operationId: create_quotation
       requestBody:
@@ -6746,6 +6752,7 @@ paths:
         <ul>
         <li> <p>partner_code, partner_idを両方同時に指定することはできません。</p> </li>
         <li> <p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</p> </li>
+        <li> <p>本APIでは見積内容(quotation_contents)は、最大100行までになります。</p> </li>
         </ul>
       operationId: update_quotation
       requestBody:
