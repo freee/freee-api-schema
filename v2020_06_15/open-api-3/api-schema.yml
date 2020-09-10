@@ -13369,11 +13369,14 @@ components:
               example: '2018-12-31'
               type: string
             indirect_write_off_method:
-              description: '固定資産の控除法（true: 間接控除法、false: 直接控除法）'
+              description: |
+                固定資産の控除法（true\: 間接控除法、false\: 直接控除法）<br>
+                間接控除法は法人のみ対応しています。
               example: true
               type: boolean
             indirect_write_off_method_type:
-              description: '間接控除時の累計額（true: 資産分類別、false: 共通）'
+              description: |
+                間接控除時の累計額(法人のみ)（true: 資産分類別、false: 共通）'
               example: false
               type: boolean
             return_code:

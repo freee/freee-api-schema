@@ -11785,12 +11785,12 @@
               "type": "string"
             },
             "indirect_write_off_method": {
-              "description": "固定資産の控除法（true: 間接控除法、false: 直接控除法）",
+              "description": "固定資産の控除法（true\\: 間接控除法、false\\: 直接控除法）<br>\n間接控除法は法人のみ対応しています。\n",
               "example": true,
               "type": "boolean"
             },
             "indirect_write_off_method_type": {
-              "description": "間接控除時の累計額（true: 資産分類別、false: 共通）",
+              "description": "間接控除時の累計額(法人のみ)（true: 資産分類別、false: 共通）'\n",
               "example": false,
               "type": "boolean"
             },
