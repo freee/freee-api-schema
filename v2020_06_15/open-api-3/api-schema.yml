@@ -3829,6 +3829,98 @@ paths:
             maximum: 2147483647
             minimum: 1
             type: integer
+        - description: >-
+            申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下,
+            feedback:差戻し)、 取引ステータス(unsettled:清算待ち, settled:精算済み)
+          in: query
+          name: status
+          schema:
+            enum:
+              - draft
+              - in_progress
+              - approved
+              - rejected
+              - feedback
+              - unsettled
+              - settled
+            type: string
+        - description: 'true:給与連携あり、false:給与連携なし、未指定時:絞り込みなし'
+          example: true
+          in: query
+          name: payroll_attached
+          schema:
+            type: boolean
+        - description: 発生日(経費申請項目の日付)で絞込：開始日(yyyy-mm-dd)
+          example: '2020-07-01'
+          in: query
+          name: start_transaction_date
+          schema:
+            type: string
+        - description: 発生日(経費申請項目の日付)で絞込：終了日(yyyy-mm-dd)
+          example: '2020-07-02'
+          in: query
+          name: end_transaction_date
+          schema:
+            type: string
+        - description: 申請No.
+          example: 2
+          in: query
+          name: application_number
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+        - description: 申請タイトル
+          example: 大阪出張
+          in: query
+          name: title
+          schema:
+            maxLength: 250
+            type: string
+        - description: 申請日で絞込：開始日(yyyy-mm-dd)
+          example: '2020-07-01'
+          in: query
+          name: start_issue_date
+          schema:
+            type: string
+        - description: 申請日で絞込：終了日(yyyy-mm-dd)
+          example: '2020-07-02'
+          in: query
+          name: end_issue_date
+          schema:
+            type: string
+        - description: 申請者のユーザーID
+          example: 1
+          in: query
+          name: applicant_id
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+        - description: 承認者のユーザーID
+          example: 1
+          in: query
+          name: approver_id
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+        - description: 金額で絞り込み (下限金額)
+          example: 5000
+          in: query
+          name: min_amount
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+        - description: 金額で絞り込み (上限金額)
+          example: 10000
+          in: query
+          name: max_amount
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
         - description: '取得レコードのオフセット (デフォルト: 0)'
           in: query
           name: offset
@@ -3876,6 +3968,26 @@ paths:
           description: ''
       tags:
         - Expense applications
+      description: |-
+
+        <h2 id="_1">概要</h2>
+
+        <p>指定した事業所の経費申請一覧を取得する</p>
+
+        <h2 id="_2">注意点</h2>
+        <ul>
+          <li>本APIでは、経費申請の一覧を取得することができます。</li>
+          <li>
+            申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している経費申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。
+            <ul>
+              <li>役職指定（申請者の所属部門）</li>
+              <li>役職指定（申請時に部門指定）</li>
+              <li>部門および役職指定</li>
+            </ul>
+          </li>
+          <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>
+          <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>
+        </ul>
       operationId: get_expense_applications
       summary: 経費申請一覧の取得
     post:
@@ -3920,9 +4032,39 @@ paths:
 
         <h2 id="_2">注意点</h2>
         <ul>
-          <li>本APIでは、経費申請の下書きを作成することができます。申請作業はWebから行ってください。</li>
-          <li>現在、申請経路はWeb上からのみ入力できます。Web上での申請時に指定してください。</li>
+          <li>
+            申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。
+            <ul>
+              <li>
+                承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。
+                <ul>
+                  <li>
+                    初回申請の場合
+                    <ul><li>申請の作成（POST）</li></ul>
+                  </li>
+                  <li>
+                    作成済みの申請の申請ステータス変更・更新する場合
+                    <ul><li>申請の更新（PUT）</li></ul>
+                  </li>
+                  <li>
+                    申請中、承認済み、却下の申請の承認操作を行う場合
+                    <ul><li>承認操作の実行（POST）</li></ul>
+                  </li>
+                </ul>
+              </li>
+              <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>
+            </ul>
+          </li>
+          <li>
+            申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している経費申請は本API経由で作成ができません。
+            <ul>
+              <li>役職指定（申請者の所属部門）</li>
+              <li>役職指定（申請時に部門指定）</li>
+              <li>部門および役職指定</li>
+            </ul>
+          </li>
           <li>申請時には、申請タイトル(title)に加え、申請日(issue_date)、項目行については金額(amount)、日付(transaction_date)、内容(description)が必須項目となります。申請時の業務効率化のため、API入力をお勧めします。</li>
+          <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は作成できません。</li>
           <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>
           <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>
         </ul>
@@ -4000,6 +4142,31 @@ paths:
 
         <h2 id="_2">注意点</h2>
         <ul>
+          <li>
+            申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。
+            <ul>
+              <li>
+                承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。
+                <ul>
+                  <li>
+                    初回申請の場合
+                    <ul><li>申請の作成（POST）</li></ul>
+                  </li>
+                  <li>
+                    作成済みの申請の申請ステータス変更・更新する場合
+                    <ul><li>申請の更新（PUT）</li></ul>
+                  </li>
+                  <li>
+                    申請中、承認済み、却下の申請の承認操作を行う場合
+                    <ul><li>承認操作の実行（POST）</li></ul>
+                  </li>
+                </ul>
+              </li>
+              <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>
+              <li>自分が申請者でない申請の削除が可能なのはユーザーの権限が管理者権限、且つ申請ステータスが差し戻しの場合のみです</li>
+            </ul>
+          </li>
+          <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は削除できません。</li>
           <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>
           <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>
         </ul>
@@ -4062,6 +4229,26 @@ paths:
           description: ''
       tags:
         - Expense applications
+      description: |-
+
+        <h2 id="">概要</h2>
+
+        <p>指定した事業所の経費申請を取得する</p>
+
+        <h2 id="_2">注意点</h2>
+        <ul>
+          <li>
+            申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している経費申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。
+            <ul>
+              <li>役職指定（申請者の所属部門）</li>
+              <li>役職指定（申請時に部門指定）</li>
+              <li>部門および役職指定</li>
+            </ul>
+          </li>
+          <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は取得できません。</li>
+          <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>
+          <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>
+        </ul>
       operationId: get_expense_application
       summary: 経費申請詳細の取得
     put:
@@ -4120,9 +4307,41 @@ paths:
 
         <h2 id="_2">注意点</h2>
         <ul>
-          <li>本APIでは、経費申請の下書きを更新することができます。申請作業はWebから行ってください。</li>
-          <li>現在、申請経路はWeb上からのみ入力できます。Web上での申請時に指定してください。</li>
+          <li>本APIでは、経費申請を更新することができます。</li>
+          <li>本APIでは、status(申請ステータス): draft:下書き, feedback:差戻しのみ更新可能です。</li>
+          <li>
+            申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。
+            <ul>
+              <li>
+                承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。
+                <ul>
+                  <li>
+                    初回申請の場合
+                    <ul><li>申請の作成（POST）</li></ul>
+                  </li>
+                  <li>
+                    作成済みの申請の申請ステータス変更・更新する場合
+                    <ul><li>申請の更新（PUT）</li></ul>
+                  </li>
+                  <li>
+                    申請中、承認済み、却下の申請の承認操作を行う場合
+                    <ul><li>承認操作の実行（POST）</li></ul>
+                  </li>
+                </ul>
+              </li>
+              <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>
+            </ul>
+          </li>
+          <li>
+            申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している経費申請は本API経由で更新ができません。
+            <ul>
+              <li>役職指定（申請者の所属部門）</li>
+              <li>役職指定（申請時に部門指定）</li>
+              <li>部門および役職指定</li>
+            </ul>
+          </li>
           <li>申請時には、申請タイトル(title)に加え、申請日(issue_date)、項目行については金額(amount)、日付(transaction_date)、内容(description)が必須項目となります。申請時の業務効率化のため、API入力をお勧めします。</li>
+          <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は更新できません。</li>
           <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>
           <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>
         </ul>
@@ -4138,6 +4357,112 @@ paths:
         description: 経費申請の更新
         required: false
       summary: 経費申請の更新
+  '/api/1/expense_applications/{id}/actions':
+    post:
+      parameters:
+        - description: 経費申請ID
+          in: path
+          name: id
+          required: true
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/expenseApplicationResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestError'
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedError'
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenError'
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestNotFoundError'
+          description: ''
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerError'
+          description: ''
+      tags:
+        - Expense applications
+      description: |-
+
+        <h2 id="_1">概要</h2>
+
+        <p>指定した事業所の経費申請の承認操作を行う</p>
+
+        <h2 id="_2">注意点</h2>
+        <ul>
+          <li>本APIでは、経費申請の承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）を行うことができます。</li>
+          <li>
+            申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。
+            <ul>
+              <li>
+                承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。
+                <ul>
+                  <li>
+                    初回申請の場合
+                    <ul><li>申請の作成（POST）</li></ul>
+                  </li>
+                  <li>
+                    作成済みの申請の申請ステータス変更・更新する場合
+                    <ul><li>申請の更新（PUT）</li></ul>
+                  </li>
+                  <li>
+                    申請中、承認済み、却下の申請の承認操作を行う場合
+                    <ul><li>承認操作の実行（POST）</li></ul>
+                  </li>
+                </ul>
+              </li>
+              <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>
+            </ul>
+          </li>
+        　<li>
+            申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している経費申請はAPI経由で承認ステータスの変更ができません。
+            <ul>
+              <li>役職指定（申請者の所属部門）</li>
+              <li>役職指定（申請時に部門指定）</li>
+              <li>部門および役職指定</li>
+            </ul>
+          </li>
+          <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は承認操作できません。</li>
+          <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>
+          <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>
+        </ul>
+      operationId: update_expense_application_action
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/expenseApplicationActionCreateParams'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/expenseApplicationActionCreateParams'
+        description: 経費申請の承認操作
+        required: true
+      summary: 経費申請の承認操作
   /api/1/forms/selectables:
     get:
       parameters:
@@ -13369,11 +13694,14 @@ components:
               example: '2018-12-31'
               type: string
             indirect_write_off_method:
-              description: '固定資産の控除法（true: 間接控除法、false: 直接控除法）'
+              description: |
+                固定資産の控除法（true\: 間接控除法、false\: 直接控除法）<br>
+                間接控除法は法人のみ対応しています。
               example: true
               type: boolean
             indirect_write_off_method_type:
-              description: '間接控除時の累計額（true: 資産分類別、false: 共通）'
+              description: |
+                間接控除時の累計額(法人のみ)（true: 資産分類別、false: 共通）'
               example: false
               type: boolean
             return_code:
@@ -15689,8 +16017,88 @@ components:
       required:
         - approval_request
       type: object
+    expenseApplicationActionCreateParams:
+      properties:
+        approval_action:
+          description: >-
+            操作(approve: 承認する、force_approve: 代理承認する、cancel: 申請を取り消す、reject:
+            却下する、feedback: 申請者へ差し戻す、force_feedback: 承認済み・却下済みを取り消す)
+          enum:
+            - approve
+            - force_approve
+            - cancel
+            - reject
+            - feedback
+            - force_feedback
+          example: approve
+          type: string
+        company_id:
+          description: 事業所ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        next_approver_id:
+          description: 次ステップの承認者のユーザーID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          nullable: true
+          type: integer
+        target_round:
+          description: >-
+            対象round。差し戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。経費申請の取得APIレスポンス.current_roundを送信してください。
+          example: 1
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        target_step_id:
+          description: 対象承認ステップID 経費申請の取得APIレスポンス.current_step_idを送信してください。
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      required:
+        - company_id
+        - approval_action
+        - target_step_id
+        - target_round
+      type: object
     expenseApplicationCreateParams:
       properties:
+        approval_flow_route_id:
+          description: |
+            申請経路ID<br>
+            <ul>
+                <li>経費申請のステータスを申請中として作成する場合は、必ず指定してください。</li>
+                <li>指定する申請経路IDは、申請経路APIを利用して取得してください。</li>
+                <li>
+                    未指定の場合は、基本経路を設定している事業所では基本経路が、基本経路を設定していない事業所では利用可能な申請経路の中から最初の申請経路が自動的に使用されます。
+                    <ul>
+                       <li>意図しない申請経路を持った経費申請の作成を防ぐために、使用する申請経路IDを指定することを推奨します。</li>
+                    </ul>
+                </li>
+                <li>
+                    ベーシックプランの事業所では以下のデフォルトで用意された申請経路のみ指定できます
+                    <ul>
+                    <li>指定なし</li>
+                    <li>承認者を指定</li>
+                    </ul>
+                </li>
+            </ul>
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        approver_id:
+          description: |
+            承認者のユーザーID<br>
+            「承認者を指定」の経路を申請経路として使用する場合に指定してください。<br>
+            指定する承認者のユーザーIDは、申請経路APIを利用して取得してください。
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
         company_id:
           description: 事業所ID
           example: 1
@@ -15702,10 +16110,19 @@ components:
           example: '◯◯連携先ID: cx12345'
           maxLength: 10000
           type: string
+        draft:
+          description: |
+            経費申請のステータス<br>
+            falseを指定した時は申請中（in_progress）で経費申請を作成します。<br>
+            trueを指定した時は下書き（draft）で経費申請を作成します。<br>
+            未指定の時は下書きとみなして経費申請を作成します。
+          example: true
+          type: boolean
         editable_on_web:
-          description: >-
-            会計freeeのWeb画面から申請内容を編集可能（デフォルト:
-            false）：falseの場合、Web上からの項目行の追加／削除・金額の編集が出来なくなります。APIでの編集は可能です。
+          description: |
+            会計freeeのWeb画面で申請内容を編集可能にするかどうか<br>
+            falseの場合は、Web画面での項目行の追加／削除・金額の編集が出来なくなりますが、APIでの編集は可能です。<br>
+            デフォルトはfalseです。
           example: false
           type: boolean
         expense_application_lines:
@@ -15714,7 +16131,7 @@ components:
               amount:
                 description: 金額
                 example: 30000
-                maximum: 1000000000
+                maximum: 2147483647
                 minimum: 0
                 type: integer
               description:
@@ -15744,10 +16161,60 @@ components:
           description: 申請日 (yyyy-mm-dd)
           example: '2018-07-19'
           type: string
+        parent_id:
+          description: |
+            親申請ID(法人向け エンタープライズプラン)<br>
+            <ul>
+              <li>承認済みの既存各種申請IDのみ指定可能です。</li>
+              <li>各種申請一覧APIを利用して取得してください。</li>
+            </ul>
+          example: 2
+          maximum: 2147483647
+          minimum: 1
+          type: integer
         section_id:
           description: 部門ID
           example: 101
           maximum: 2147483647
+          minimum: 1
+          type: integer
+        segment_1_tag_id:
+          description: >
+            セグメント１ID(法人向けプロフェッショナル, 法人向けエンタープライズプラン)<br>
+
+            セグメントタグ一覧APIを利用して取得してください。<br>
+
+            <a
+            href="https://support.freee.co.jp/hc/ja/articles/360020679611-%E3%82%BB%E3%82%B0%E3%83%A1%E3%83%B3%E3%83%88-%E5%88%86%E6%9E%90%E7%94%A8%E3%82%BF%E3%82%B0-%E3%81%AE%E8%A8%AD%E5%AE%9A"
+            target="_blank">セグメント（分析用タグ）の設定</a><br>
+          example: 1
+          maximum: 9223372036854776000
+          minimum: 1
+          type: integer
+        segment_2_tag_id:
+          description: >
+            セグメント２ID(法人向け エンタープライズプラン)<br>
+
+            セグメントタグ一覧APIを利用して取得してください。<br>
+
+            <a
+            href="https://support.freee.co.jp/hc/ja/articles/360020679611-%E3%82%BB%E3%82%B0%E3%83%A1%E3%83%B3%E3%83%88-%E5%88%86%E6%9E%90%E7%94%A8%E3%82%BF%E3%82%B0-%E3%81%AE%E8%A8%AD%E5%AE%9A"
+            target="_blank">セグメント（分析用タグ）の設定</a><br>
+          example: 2
+          maximum: 9223372036854776000
+          minimum: 1
+          type: integer
+        segment_3_tag_id:
+          description: >
+            セグメント３ID(法人向け エンタープライズプラン)<br>
+
+            セグメントタグ一覧APIを利用して取得してください。<br>
+
+            <a
+            href="https://support.freee.co.jp/hc/ja/articles/360020679611-%E3%82%BB%E3%82%B0%E3%83%A1%E3%83%B3%E3%83%88-%E5%88%86%E6%9E%90%E7%94%A8%E3%82%BF%E3%82%B0-%E3%81%AE%E8%A8%AD%E5%AE%9A"
+            target="_blank">セグメント（分析用タグ）の設定</a><br>
+          example: 3
+          maximum: 9223372036854776000
           minimum: 1
           type: integer
         tag_ids:
@@ -15873,11 +16340,171 @@ components:
       properties:
         expense_application:
           properties:
+            applicant_id:
+              description: 申請者のユーザーID
+              example: 1
+              maximum: 2147483647
+              minimum: 1
+              type: integer
+            application_number:
+              description: 申請No.
+              example: '2'
+              type: string
+            approval_flow_logs:
+              description: 経費申請の承認履歴（配列）
+              items:
+                properties:
+                  action:
+                    description: >-
+                      操作(apply: 申請, approve: 承認, force_approve: 代理承認, cancel:
+                      取消, reject: 却下, feedback: 差戻し)
+                    enum:
+                      - apply
+                      - approve
+                      - force_approve
+                      - cancel
+                      - reject
+                      - feedback
+                    example: approve
+                    type: string
+                  updated_at:
+                    description: 更新日時(ISO8601形式)
+                    example: '2018-09-12T18:30:24+09:00'
+                    type: string
+                  user_id:
+                    description: ユーザーID
+                    example: 1
+                    maximum: 2147483647
+                    minimum: 1
+                    type: integer
+                required:
+                  - action
+                  - user_id
+                  - updated_at
+                type: object
+              type: array
+            approval_flow_route_id:
+              description: 申請経路ID
+              example: 1
+              maximum: 2147483647
+              minimum: 1
+              type: integer
+            approvers:
+              description: |-
+                承認者（配列）
+                  承認ステップのresource_typeがunspecified (指定なし)の場合はapproversはレスポンスに含まれません。
+                  しかし、resource_typeがunspecifiedの承認ステップにおいて誰かが承認・却下・差し戻しのいずれかのアクションを取った後は、
+                   approversはレスポンスに含まれるようになります。
+                   その場合approversにはアクションを行ったステップのIDとアクションを行ったユーザーのIDが含まれます。
+              items:
+                properties:
+                  is_force_action:
+                    description: 代理承認済みかどうか
+                    example: true
+                    type: boolean
+                  resource_type:
+                    description: |-
+                      承認ステップの承認方法
+                      * ` predefined_user` - メンバー指定 (1人),
+                      * ` selected_user` - 申請時にメンバー指定
+                      * ` unspecified` - 指定なし
+                      * ` and_resource` - メンバー指定 (複数、全員の承認),
+                      * ` or_resource` - メンバー指定 (複数、1人の承認)
+                      * ` and_position` - 役職指定 (複数、全員の承認)
+                      * ` or_position` - 役職指定 (複数、1人の承認)
+                    enum:
+                      - predefined_user
+                      - selected_user
+                      - unspecified
+                      - and_resource
+                      - or_resource
+                      - and_position
+                      - or_position
+                    example: predefined_user
+                    type: string
+                  status:
+                    description: |-
+                      承認者の承認状態
+                      * `initial` - 初期状態
+                      * `approved` - 承認済
+                      * `rejected` - 却下
+                      * `feedback` - 差戻し
+                    enum:
+                      - initial
+                      - approved
+                      - rejected
+                      - feedback
+                    example: initial
+                    type: string
+                  step_id:
+                    description: 承認ステップID
+                    example: 1
+                    maximum: 2147483647
+                    minimum: 1
+                    type: integer
+                  user_id:
+                    description: |-
+                      承認者のユーザーID
+                      下記の場合はnullになります。
+                      <ul>
+                        <li>resource_type:selected_userの場合で承認者未指定時</li>
+                        <li>resource_type:or_positionで前stepで部門未指定の場合</li>
+                      </ul>
+                    example: 1
+                    maximum: 2147483647
+                    minimum: 1
+                    nullable: true
+                    type: integer
+                required:
+                  - step_id
+                  - user_id
+                  - status
+                  - is_force_action
+                  - resource_type
+                type: object
+              type: array
+            comments:
+              description: 経費申請のコメント一覧（配列）
+              items:
+                properties:
+                  comment:
+                    description: コメント内容
+                    example: 訂正をお願いします。
+                    type: string
+                  posted_at:
+                    description: コメント日時(ISO8601形式)
+                    example: '2018-09-12T18:30:24+09:00'
+                    type: string
+                  user_id:
+                    description: ユーザーID
+                    example: 1
+                    maximum: 2147483647
+                    minimum: 1
+                    type: integer
+                required:
+                  - comment
+                  - user_id
+                  - posted_at
+                type: object
+              type: array
             company_id:
               description: 事業所ID
               example: 1
               maximum: 2147483647
               minimum: 1
+              type: integer
+            current_round:
+              description: 現在のround。差し戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。
+              example: 1
+              maximum: 2147483647
+              minimum: 0
+              type: integer
+            current_step_id:
+              description: 現在承認ステップID
+              example: 1
+              maximum: 2147483647
+              minimum: 1
+              nullable: true
               type: integer
             deal_id:
               description: '取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)'
@@ -15899,6 +16526,7 @@ components:
             description:
               description: 備考
               example: '◯◯連携先ID: cx12345'
+              nullable: true
               type: string
             editable_on_web:
               description: >-
@@ -15912,18 +16540,20 @@ components:
                   amount:
                     description: 金額
                     example: 30000
-                    maximum: 1000000000
+                    maximum: 2147483647
                     minimum: 0
                     type: integer
                   description:
                     description: 内容
                     example: 交通費：新幹線往復（東京〜大阪）
+                    nullable: true
                     type: string
                   expense_application_line_template_id:
                     description: 経費科目ID
                     example: 505
                     maximum: 2147483647
                     minimum: 1
+                    nullable: true
                     type: integer
                   id:
                     description: 経費申請の項目行ID
@@ -15936,10 +16566,12 @@ components:
                     example: 606
                     maximum: 2147483647
                     minimum: 1
+                    nullable: true
                     type: integer
                   transaction_date:
                     description: 日付 (yyyy-mm-dd)
                     example: '2018-07-18'
+                    nullable: true
                     type: string
                 required:
                   - id
@@ -15954,12 +16586,32 @@ components:
             issue_date:
               description: 申請日 (yyyy-mm-dd)
               example: '2018-07-19'
-              nullable: true
               type: string
             section_id:
               description: 部門ID
               example: 101
               maximum: 2147483647
+              minimum: 1
+              nullable: true
+              type: integer
+            segment_1_tag_id:
+              description: セグメント１ID。セグメント１が使用可能なプランの時のみレスポンスに含まれます。
+              example: 1
+              maximum: 9223372036854776000
+              minimum: 1
+              nullable: true
+              type: integer
+            segment_2_tag_id:
+              description: セグメント２ID。セグメント２が使用可能なプランの時のみレスポンスに含まれます。
+              example: 2
+              maximum: 9223372036854776000
+              minimum: 1
+              nullable: true
+              type: integer
+            segment_3_tag_id:
+              description: セグメント３ID。セグメント３が使用可能なプランの時のみレスポンスに含まれます。
+              example: 3
+              maximum: 9223372036854776000
               minimum: 1
               nullable: true
               type: integer
@@ -15992,6 +16644,9 @@ components:
               example: 30000
               type: integer
           required:
+            - applicant_id
+            - application_number
+            - approvers
             - company_id
             - editable_on_web
             - expense_application_lines
@@ -16001,12 +16656,49 @@ components:
             - title
             - deal_id
             - deal_status
+            - approval_flow_route_id
+            - comments
+            - approval_flow_logs
+            - current_step_id
+            - current_round
           type: object
       required:
         - expense_application
       type: object
     expenseApplicationUpdateParams:
       properties:
+        approval_flow_route_id:
+          description: |
+            申請経路ID<br>
+            <ul>
+                <li>経費申請のステータスを申請中として作成する場合は、必ず指定してください。</li>
+                <li>指定する申請経路IDは、申請経路APIを利用して取得してください。</li>
+                <li>
+                    未指定の場合は、基本経路を設定している事業所では基本経路が、基本経路を設定していない事業所では利用可能な申請経路の中から最初の申請経路が自動的に使用されます。
+                    <ul>
+                       <li>意図しない申請経路を持った経費申請の作成を防ぐために、使用する申請経路IDを指定することを推奨します。</li>
+                    </ul>
+                </li>
+                <li>
+                    ベーシックプランの事業所では以下のデフォルトで用意された申請経路のみ指定できます
+                    <ul>
+                    <li>指定なし</li>
+                    <li>承認者を指定</li>
+                    </ul>
+                </li>
+            </ul>
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        approver_id:
+          description: |
+            承認者のユーザーID<br>
+            指定する承認者のユーザーIDは、申請経路APIを利用して取得してください。
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
         company_id:
           description: 事業所ID
           example: 1
@@ -16018,9 +16710,19 @@ components:
           example: '◯◯連携先ID: cx12345'
           maxLength: 10000
           type: string
+        draft:
+          description: |
+            経費申請のステータス<br>
+            falseを指定した時は申請中（in_progress）で経費申請を更新します。<br>
+            trueを指定した時は下書き（draft）で経費申請を更新します。<br>
+            未指定の時は下書きとみなして経費申請を更新します。
+          example: true
+          type: boolean
         editable_on_web:
-          description: >-
-            会計freeeのWeb画面から申請内容を編集可能：falseの場合、Web上からの項目行の追加／削除・金額の編集が出来なくなります。APIでの編集は可能です。
+          description: |
+            会計freeeのWeb画面で申請内容を編集可能にするかどうか<br>
+            falseの場合は、Web画面での項目行の追加／削除・金額の編集が出来なくなりますが、APIでの編集は可能です。<br>
+            デフォルトはfalseです。
           example: false
           type: boolean
         expense_application_lines:
@@ -16029,7 +16731,7 @@ components:
               amount:
                 description: 金額
                 example: 30000
-                maximum: 1000000000
+                maximum: 2147483647
                 minimum: 0
                 type: integer
               description:
@@ -16073,6 +16775,45 @@ components:
           maximum: 2147483647
           minimum: 1
           type: integer
+        segment_1_tag_id:
+          description: >
+            セグメント１ID(法人向けプロフェッショナル, 法人向けエンタープライズプラン)<br>
+
+            セグメントタグ一覧APIを利用して取得してください。<br>
+
+            <a
+            href="https://support.freee.co.jp/hc/ja/articles/360020679611-%E3%82%BB%E3%82%B0%E3%83%A1%E3%83%B3%E3%83%88-%E5%88%86%E6%9E%90%E7%94%A8%E3%82%BF%E3%82%B0-%E3%81%AE%E8%A8%AD%E5%AE%9A"
+            target="_blank">セグメント（分析用タグ）の設定</a><br>
+          example: 1
+          maximum: 9223372036854776000
+          minimum: 1
+          type: integer
+        segment_2_tag_id:
+          description: >
+            セグメント２ID(法人向け エンタープライズプラン)<br>
+
+            セグメントタグ一覧APIを利用して取得してください。<br>
+
+            <a
+            href="https://support.freee.co.jp/hc/ja/articles/360020679611-%E3%82%BB%E3%82%B0%E3%83%A1%E3%83%B3%E3%83%88-%E5%88%86%E6%9E%90%E7%94%A8%E3%82%BF%E3%82%B0-%E3%81%AE%E8%A8%AD%E5%AE%9A"
+            target="_blank">セグメント（分析用タグ）の設定</a><br>
+          example: 2
+          maximum: 9223372036854776000
+          minimum: 1
+          type: integer
+        segment_3_tag_id:
+          description: >
+            セグメント３ID(法人向け エンタープライズプラン)<br>
+
+            セグメントタグ一覧APIを利用して取得してください。<br>
+
+            <a
+            href="https://support.freee.co.jp/hc/ja/articles/360020679611-%E3%82%BB%E3%82%B0%E3%83%A1%E3%83%B3%E3%83%88-%E5%88%86%E6%9E%90%E7%94%A8%E3%82%BF%E3%82%B0-%E3%81%AE%E8%A8%AD%E5%AE%9A"
+            target="_blank">セグメント（分析用タグ）の設定</a><br>
+          example: 3
+          maximum: 9223372036854776000
+          minimum: 1
+          type: integer
         tag_ids:
           description: メモタグID
           items:
@@ -16097,11 +16838,34 @@ components:
         expense_applications:
           items:
             properties:
+              applicant_id:
+                description: 申請者のユーザーID
+                example: 1
+                maximum: 2147483647
+                minimum: 1
+                type: integer
+              application_number:
+                description: 申請No.
+                example: '2'
+                type: string
               company_id:
                 description: 事業所ID
                 example: 1
                 maximum: 2147483647
                 minimum: 1
+                type: integer
+              current_round:
+                description: 現在のround。差し戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。
+                example: 1
+                maximum: 2147483647
+                minimum: 0
+                type: integer
+              current_step_id:
+                description: 現在承認ステップID
+                example: 1
+                maximum: 2147483647
+                minimum: 1
+                nullable: true
                 type: integer
               deal_id:
                 description: '取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)'
@@ -16136,7 +16900,7 @@ components:
                     amount:
                       description: 金額
                       example: 30000
-                      maximum: 1000000000
+                      maximum: 2147483647
                       minimum: 0
                       type: integer
                     description:
@@ -16178,12 +16942,32 @@ components:
               issue_date:
                 description: 申請日 (yyyy-mm-dd)
                 example: '2018-07-19'
-                nullable: true
                 type: string
               section_id:
                 description: 部門ID
                 example: 101
                 maximum: 2147483647
+                minimum: 1
+                nullable: true
+                type: integer
+              segment_1_tag_id:
+                description: セグメント１ID
+                example: 1
+                maximum: 9223372036854776000
+                minimum: 1
+                nullable: true
+                type: integer
+              segment_2_tag_id:
+                description: セグメント２ID
+                example: 2
+                maximum: 9223372036854776000
+                minimum: 1
+                nullable: true
+                type: integer
+              segment_3_tag_id:
+                description: セグメント３ID
+                example: 3
+                maximum: 9223372036854776000
                 minimum: 1
                 nullable: true
                 type: integer
@@ -16216,6 +17000,8 @@ components:
                 example: 30000
                 type: integer
             required:
+              - applicant_id
+              - application_number
               - company_id
               - editable_on_web
               - expense_application_lines
