@@ -3968,13 +3968,21 @@ paths:
           description: ''
       tags:
         - Expense applications
-      description: |-
+      description: >-
 
         <h2 id="_1">概要</h2>
 
+
         <p>指定した事業所の経費申請一覧を取得する</p>
 
+
+        <p>経費申請APIの使い方については、<a
+        href="https://developer.freee.co.jp/tips/accounting-expense-applications"
+        target="_blank">会計freeeの経費申請APIの使い方</a>をご参照ください</p>
+
+
         <h2 id="_2">注意点</h2>
+
         <ul>
           <li>本APIでは、経費申請の一覧を取得することができます。</li>
           <li>
@@ -4024,13 +4032,21 @@ paths:
           description: ''
       tags:
         - Expense applications
-      description: |-
+      description: >-
 
         <h2 id="_1">概要</h2>
 
+
         <p>指定した事業所の経費申請を作成する</p>
 
+
+        <p>経費申請APIの使い方については、<a
+        href="https://developer.freee.co.jp/tips/accounting-expense-applications"
+        target="_blank">会計freeeの経費申請APIの使い方</a>をご参照ください</p>
+
+
         <h2 id="_2">注意点</h2>
+
         <ul>
           <li>
             申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。
@@ -4134,13 +4150,21 @@ paths:
           description: ''
       tags:
         - Expense applications
-      description: |-
+      description: >-
 
         <h2 id="">概要</h2>
 
+
         <p>指定した事業所の経費申請を削除する</p>
 
+
+        <p>経費申請APIの使い方については、<a
+        href="https://developer.freee.co.jp/tips/accounting-expense-applications"
+        target="_blank">会計freeeの経費申請APIの使い方</a>をご参照ください</p>
+
+
         <h2 id="_2">注意点</h2>
+
         <ul>
           <li>
             申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。
@@ -4229,13 +4253,21 @@ paths:
           description: ''
       tags:
         - Expense applications
-      description: |-
+      description: >-
 
         <h2 id="">概要</h2>
 
+
         <p>指定した事業所の経費申請を取得する</p>
 
+
+        <p>経費申請APIの使い方については、<a
+        href="https://developer.freee.co.jp/tips/accounting-expense-applications"
+        target="_blank">会計freeeの経費申請APIの使い方</a>をご参照ください</p>
+
+
         <h2 id="_2">注意点</h2>
+
         <ul>
           <li>
             申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している経費申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。
@@ -4299,13 +4331,21 @@ paths:
           description: ''
       tags:
         - Expense applications
-      description: |-
+      description: >-
 
         <h2 id="">概要</h2>
 
+
         <p>指定した事業所の経費申請を更新する</p>
 
+
+        <p>経費申請APIの使い方については、<a
+        href="https://developer.freee.co.jp/tips/accounting-expense-applications"
+        target="_blank">会計freeeの経費申請APIの使い方</a>をご参照ください</p>
+
+
         <h2 id="_2">注意点</h2>
+
         <ul>
           <li>本APIでは、経費申請を更新することができます。</li>
           <li>本APIでは、status(申請ステータス): draft:下書き, feedback:差戻しのみ更新可能です。</li>
@@ -4407,13 +4447,21 @@ paths:
           description: ''
       tags:
         - Expense applications
-      description: |-
+      description: >-
 
         <h2 id="_1">概要</h2>
 
+
         <p>指定した事業所の経費申請の承認操作を行う</p>
 
+
+        <p>経費申請APIの使い方については、<a
+        href="https://developer.freee.co.jp/tips/accounting-expense-applications"
+        target="_blank">会計freeeの経費申請APIの使い方</a>をご参照ください</p>
+
+
         <h2 id="_2">注意点</h2>
+
         <ul>
           <li>本APIでは、経費申請の承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）を行うことができます。</li>
           <li>
