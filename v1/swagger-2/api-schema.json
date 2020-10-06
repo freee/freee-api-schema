@@ -3038,6 +3038,7 @@
         ],
         "parameters": [
           {
+            "description": "経費申請ID",
             "in": "path",
             "maximum": 2147483647,
             "minimum": 1,
@@ -3176,6 +3177,7 @@
         ],
         "parameters": [
           {
+            "description": "経費申請ID",
             "in": "path",
             "maximum": 2147483647,
             "minimum": 1,

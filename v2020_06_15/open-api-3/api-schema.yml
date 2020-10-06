@@ -4099,7 +4099,8 @@ paths:
   '/api/1/expense_applications/{id}':
     delete:
       parameters:
-        - in: path
+        - description: 経費申請ID
+          in: path
           name: id
           required: true
           schema:
@@ -4285,7 +4286,8 @@ paths:
       summary: 経費申請詳細の取得
     put:
       parameters:
-        - in: path
+        - description: 経費申請ID
+          in: path
           name: id
           required: true
           schema:
