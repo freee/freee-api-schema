@@ -11082,6 +11082,7 @@
           {
             "name": "id",
             "in": "path",
+            "description": "経費申請ID",
             "required": true,
             "schema": {
               "type": "integer",
@@ -11180,6 +11181,7 @@
           {
             "name": "id",
             "in": "path",
+            "description": "経費申請ID",
             "required": true,
             "schema": {
               "type": "integer",
