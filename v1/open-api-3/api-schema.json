@@ -4530,7 +4530,7 @@
           {
             "name": "segment_1_tag_id",
             "in": "query",
-            "description": "セグメント１IDで絞り込み（0を指定すると、セグメント１が未選択の貸借行を絞り込めます）",
+            "description": "セグメント１IDで絞込（0を指定すると、セグメント１が未選択の貸借行を絞り込めます）",
             "schema": {
               "type": "integer",
               "minimum": 0,
@@ -4540,7 +4540,7 @@
           {
             "name": "segment_2_tag_id",
             "in": "query",
-            "description": "セグメント２IDで絞り込み（0を指定すると、セグメント２が未選択の貸借行を絞り込めます）",
+            "description": "セグメント２IDで絞込（0を指定すると、セグメント２が未選択の貸借行を絞り込めます）",
             "schema": {
               "type": "integer",
               "minimum": 0,
@@ -4550,7 +4550,7 @@
           {
             "name": "segment_3_tag_id",
             "in": "query",
-            "description": "セグメント３IDで絞り込み（0を指定すると、セグメント３が未選択の貸借行を絞り込めます）",
+            "description": "セグメント３IDで絞込（0を指定すると、セグメント３が未選択の貸借行を絞り込めます）",
             "schema": {
               "type": "integer",
               "minimum": 0,
@@ -10811,7 +10811,7 @@
               "minimum": 1,
               "maximum": 2147483647
             },
-            "description": "金額で絞り込み (下限金額)",
+            "description": "金額で絞込 (下限金額)",
             "example": 5000
           },
           {
@@ -10822,7 +10822,7 @@
               "minimum": 1,
               "maximum": 2147483647
             },
-            "description": "金額で絞り込み (上限金額)",
+            "description": "金額で絞込 (上限金額)",
             "example": 10000
           },
           {

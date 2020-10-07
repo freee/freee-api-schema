@@ -3910,7 +3910,7 @@ paths:
             maximum: 2147483647
             minimum: 1
             type: integer
-        - description: 金額で絞り込み (下限金額)
+        - description: 金額で絞込 (下限金額)
           example: 5000
           in: query
           name: min_amount
@@ -3918,7 +3918,7 @@ paths:
             maximum: 2147483647
             minimum: 1
             type: integer
-        - description: 金額で絞り込み (上限金額)
+        - description: 金額で絞込 (上限金額)
           example: 10000
           in: query
           name: max_amount
@@ -5703,21 +5703,21 @@ paths:
             maximum: 2147483647
             minimum: 0
             type: integer
-        - description: セグメント１IDで絞り込み（0を指定すると、セグメント１が未選択の貸借行を絞り込めます）
+        - description: セグメント１IDで絞込（0を指定すると、セグメント１が未選択の貸借行を絞り込めます）
           in: query
           name: segment_1_tag_id
           schema:
             maximum: 9223372036854776000
             minimum: 0
             type: integer
-        - description: セグメント２IDで絞り込み（0を指定すると、セグメント２が未選択の貸借行を絞り込めます）
+        - description: セグメント２IDで絞込（0を指定すると、セグメント２が未選択の貸借行を絞り込めます）
           in: query
           name: segment_2_tag_id
           schema:
             maximum: 9223372036854776000
             minimum: 0
             type: integer
-        - description: セグメント３IDで絞り込み（0を指定すると、セグメント３が未選択の貸借行を絞り込めます）
+        - description: セグメント３IDで絞込（0を指定すると、セグメント３が未選択の貸借行を絞り込めます）
           in: query
           name: segment_3_tag_id
           schema:
