@@ -4550,7 +4550,7 @@
           {
             "name": "segment_1_tag_id",
             "in": "query",
-            "description": "セグメント１IDで絞り込み（0を指定すると、セグメント１が未選択の貸借行を絞り込めます）",
+            "description": "セグメント１IDで絞込（0を指定すると、セグメント１が未選択の貸借行を絞り込めます）",
             "schema": {
               "type": "integer",
               "minimum": 0,
@@ -4560,7 +4560,7 @@
           {
             "name": "segment_2_tag_id",
             "in": "query",
-            "description": "セグメント２IDで絞り込み（0を指定すると、セグメント２が未選択の貸借行を絞り込めます）",
+            "description": "セグメント２IDで絞込（0を指定すると、セグメント２が未選択の貸借行を絞り込めます）",
             "schema": {
               "type": "integer",
               "minimum": 0,
@@ -4570,7 +4570,7 @@
           {
             "name": "segment_3_tag_id",
             "in": "query",
-            "description": "セグメント３IDで絞り込み（0を指定すると、セグメント３が未選択の貸借行を絞り込めます）",
+            "description": "セグメント３IDで絞込（0を指定すると、セグメント３が未選択の貸借行を絞り込めます）",
             "schema": {
               "type": "integer",
               "minimum": 0,
@@ -10851,7 +10851,7 @@
               "minimum": 1,
               "maximum": 2147483647
             },
-            "description": "金額で絞り込み (下限金額)",
+            "description": "金額で絞込 (下限金額)",
             "example": 5000
           },
           {
@@ -10862,7 +10862,7 @@
               "minimum": 1,
               "maximum": 2147483647
             },
-            "description": "金額で絞り込み (上限金額)",
+            "description": "金額で絞込 (上限金額)",
             "example": 10000
           },
           {
@@ -24917,10 +24917,12 @@
           },
           "invoice_status": {
             "type": "string",
-            "description": "請求書ステータス  (draft: 下書き (デフォルト), issue: 発行(請求先ワークフローを利用している場合は指定できません))",
+            "description": "請求書ステータス<br>\n<ul>\n  <li>draft: 下書き (デフォルト)</li>\n  <li>(廃止予定) issue: 発行 (送付待ち (unsubmitted) と同じです。)</li>\n  <li>unsubmitted: 送付待ち</li>\n  <li>submitted: 送付済み</li>\n</ul>\nissue, unsubmitted, submitted は請求書承認ワークフローを利用している場合は指定できません。\n",
             "enum": [
               "draft",
-              "issue"
+              "issue",
+              "unsubmitted",
+              "submitted"
             ]
           },
           "partner_display_name": {
@@ -25237,10 +25239,12 @@
           },
           "invoice_status": {
             "type": "string",
-            "description": "請求書ステータス  (draft: 下書き (デフォルト), issue: 発行(請求先ワークフローを利用している場合は承認済の請求書にのみ指定できます))",
+            "description": "請求書ステータス<br>\n<ul>\n  <li>draft: 下書き (デフォルト)</li>\n  <li>(廃止予定) issue: 発行 (送付待ち (unsubmitted) と同じです。)</li>\n  <li>unsubmitted: 送付待ち</li>\n  <li>submitted: 送付済み</li>\n</ul>\nissue, unsubmitted は請求書承認ワークフローを利用している場合は、承認済みの請求書にのみ指定できます。<br>\nsubmitted は請求書承認ワークフローを利用している場合は、送付待ちの請求書にのみ指定できます。\n",
             "enum": [
               "draft",
-              "issue"
+              "issue",
+              "unsubmitted",
+              "submitted"
             ]
           },
           "partner_display_name": {
