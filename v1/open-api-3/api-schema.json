@@ -2190,18 +2190,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "required": [
-                    "invoices"
-                  ],
-                  "properties": {
-                    "invoices": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/invoiceResponse/properties/invoice"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/invoiceIndexResponse"
                 }
               }
             }
@@ -2738,18 +2727,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "required": [
-                    "quotations"
-                  ],
-                  "properties": {
-                    "quotations": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/quotationResponse/properties/quotation"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/quotationIndexResponse"
                 }
               }
             }
@@ -24202,6 +24180,578 @@
           }
         }
       },
+      "invoiceIndexResponse": {
+        "type": "object",
+        "required": [
+          "invoices"
+        ],
+        "properties": {
+          "invoices": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "company_id",
+                "company_name",
+                "id",
+                "invoice_layout",
+                "invoice_number",
+                "invoice_status",
+                "issue_date",
+                "partner_id",
+                "payment_type",
+                "posting_status",
+                "tax_entry_method",
+                "total_amount",
+                "total_amount_per_vat_rate"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "請求書ID",
+                  "example": 101
+                },
+                "company_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "事業所ID",
+                  "example": 1
+                },
+                "issue_date": {
+                  "type": "string",
+                  "description": "請求日 (yyyy-mm-dd)",
+                  "example": "2013-01-01"
+                },
+                "partner_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "取引先ID",
+                  "example": 201,
+                  "nullable": true
+                },
+                "partner_code": {
+                  "type": "string",
+                  "description": "取引先コード",
+                  "example": "code001",
+                  "nullable": true
+                },
+                "invoice_number": {
+                  "type": "string",
+                  "description": "請求書番号",
+                  "example": "A001"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "タイトル",
+                  "example": "請求書",
+                  "nullable": true
+                },
+                "due_date": {
+                  "type": "string",
+                  "description": "期日 (yyyy-mm-dd)",
+                  "example": "2013-02-28",
+                  "nullable": true
+                },
+                "total_amount": {
+                  "type": "integer",
+                  "description": "合計金額",
+                  "example": 108000
+                },
+                "total_vat": {
+                  "type": "integer",
+                  "description": "合計金額",
+                  "example": 8000
+                },
+                "sub_total": {
+                  "type": "integer",
+                  "description": "小計",
+                  "example": 100000
+                },
+                "booking_date": {
+                  "type": "string",
+                  "description": "売上計上日",
+                  "example": "2013-01-01",
+                  "nullable": true
+                },
+                "description": {
+                  "type": "string",
+                  "description": "概要",
+                  "example": "８月分請求書",
+                  "nullable": true
+                },
+                "invoice_status": {
+                  "type": "string",
+                  "description": "請求書ステータス  (draft: 下書き, applying: 申請中, remanded: 差し戻し, rejected: 却下, approved: 承認済み, issued: 発行済み)",
+                  "enum": [
+                    "draft",
+                    "applying",
+                    "remanded",
+                    "rejected",
+                    "approved",
+                    "issued"
+                  ]
+                },
+                "payment_status": {
+                  "type": "string",
+                  "description": "入金ステータス  (unsettled: 入金待ち, settled: 入金済み)",
+                  "enum": [
+                    "",
+                    "unsettled",
+                    "settled"
+                  ]
+                },
+                "payment_date": {
+                  "type": "string",
+                  "description": "入金日",
+                  "example": "2013-03-01",
+                  "nullable": true
+                },
+                "web_published_at": {
+                  "type": "string",
+                  "description": "Web共有日時(最新)",
+                  "example": "2013-03-01 10:00:00",
+                  "nullable": true
+                },
+                "web_downloaded_at": {
+                  "type": "string",
+                  "description": "Web共有ダウンロード日時(最新)",
+                  "example": "2013-03-01 10:00:00",
+                  "nullable": true
+                },
+                "web_confirmed_at": {
+                  "type": "string",
+                  "description": "Web共有取引先確認日時(最新)",
+                  "example": "2013-03-01 10:00:00",
+                  "nullable": true
+                },
+                "mail_sent_at": {
+                  "type": "string",
+                  "description": "メール送信日時(最新)",
+                  "example": "2013-03-01 10:00:00",
+                  "nullable": true
+                },
+                "posting_status": {
+                  "type": "string",
+                  "description": "郵送ステータス(unrequested: リクエスト前, preview_registered: プレビュー登録, preview_failed: プレビュー登録失敗, ordered: 注文中, order_failed: 注文失敗, printing: 印刷中, canceled: キャンセル, posted: 投函済み)",
+                  "example": "unrequested",
+                  "enum": [
+                    "",
+                    "unrequested",
+                    "preview_registered",
+                    "preview_failed",
+                    "ordered",
+                    "order_failed",
+                    "printing",
+                    "canceled",
+                    "posted"
+                  ]
+                },
+                "partner_name": {
+                  "type": "string",
+                  "description": "取引先名",
+                  "example": "freeeパートナー",
+                  "nullable": true
+                },
+                "partner_long_name": {
+                  "type": "string",
+                  "description": "取引先正式名称",
+                  "example": "株式会社freeeパートナー",
+                  "nullable": true
+                },
+                "partner_title": {
+                  "type": "string",
+                  "description": "敬称（御中、様、(空白)の3つから選択）",
+                  "example": "御中",
+                  "nullable": true
+                },
+                "partner_zipcode": {
+                  "type": "string",
+                  "description": "郵便番号",
+                  "example": "000-0000",
+                  "nullable": true
+                },
+                "partner_prefecture_code": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 46,
+                  "description": "都道府県コード（0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
+                  "example": 4,
+                  "nullable": true
+                },
+                "partner_prefecture_name": {
+                  "type": "string",
+                  "description": "都道府県",
+                  "example": "秋田県",
+                  "nullable": true
+                },
+                "partner_address1": {
+                  "type": "string",
+                  "description": "市区町村・番地",
+                  "example": "湯沢市",
+                  "nullable": true
+                },
+                "partner_address2": {
+                  "type": "string",
+                  "description": "建物名・部屋番号など",
+                  "example": "Aビル",
+                  "nullable": true
+                },
+                "partner_contact_info": {
+                  "type": "string",
+                  "description": "取引先担当者名",
+                  "example": "営業担当",
+                  "nullable": true
+                },
+                "company_name": {
+                  "type": "string",
+                  "description": "事業所名",
+                  "example": "freee株式会社"
+                },
+                "company_zipcode": {
+                  "type": "string",
+                  "description": "郵便番号",
+                  "example": "000-0000",
+                  "nullable": true
+                },
+                "company_prefecture_code": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 46,
+                  "description": "都道府県コード（0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
+                  "example": 12,
+                  "nullable": true
+                },
+                "company_prefecture_name": {
+                  "type": "string",
+                  "description": "都道府県",
+                  "example": "東京都",
+                  "nullable": true
+                },
+                "company_address1": {
+                  "type": "string",
+                  "description": "市区町村・番地",
+                  "example": "ＸＸ区ＸＸ１−１−１",
+                  "nullable": true
+                },
+                "company_address2": {
+                  "type": "string",
+                  "description": "建物名・部屋番号など",
+                  "example": "ビル1F",
+                  "nullable": true
+                },
+                "company_contact_info": {
+                  "type": "string",
+                  "description": "事業所担当者名",
+                  "example": "法人営業担当",
+                  "nullable": true
+                },
+                "payment_type": {
+                  "type": "string",
+                  "description": "支払方法 (振込: transfer, 引き落とし: direct_debit)",
+                  "example": "transfer",
+                  "enum": [
+                    "",
+                    "transfer",
+                    "direct_debit"
+                  ]
+                },
+                "payment_bank_info": {
+                  "type": "string",
+                  "description": "支払口座",
+                  "example": "ＸＸ銀行ＹＹ支店1111111",
+                  "nullable": true
+                },
+                "message": {
+                  "type": "string",
+                  "description": "メッセージ",
+                  "example": "下記の通りご請求申し上げます。",
+                  "nullable": true
+                },
+                "notes": {
+                  "type": "string",
+                  "description": "備考",
+                  "example": "毎度ありがとうございます",
+                  "nullable": true
+                },
+                "invoice_layout": {
+                  "type": "string",
+                  "description": "レイアウト(default_classic: レイアウト１/クラシック, standard_classic: レイアウト２/クラシック, envelope_classic: 封筒１/クラシック, carried_forward_standard_classic: レイアウト３（繰越金額欄あり）/クラシック, carried_forward_envelope_classic: 封筒２（繰越金額欄あり）/クラシック, default_modern: レイアウト１/モダン, standard_modern: レイアウト２/モダン, envelope_modern: 封筒/モダン)",
+                  "example": "default_classic",
+                  "enum": [
+                    "default_classic",
+                    "standard_classic",
+                    "envelope_classic",
+                    "carried_forward_standard_classic",
+                    "carried_forward_envelope_classic",
+                    "default_modern",
+                    "standard_modern",
+                    "envelope_modern"
+                  ]
+                },
+                "tax_entry_method": {
+                  "type": "string",
+                  "description": "請求書の消費税計算方法(inclusive: 内税, exclusive: 外税)",
+                  "example": "exclusive",
+                  "enum": [
+                    "",
+                    "inclusive",
+                    "exclusive"
+                  ]
+                },
+                "deal_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "取引ID (invoice_statusがissuedの時のみIDが表示されます)",
+                  "nullable": true
+                },
+                "invoice_contents": {
+                  "type": "array",
+                  "description": "請求内容",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "account_item_id",
+                      "account_item_name",
+                      "amount",
+                      "description",
+                      "id",
+                      "item_id",
+                      "item_name",
+                      "order",
+                      "qty",
+                      "reduced_vat",
+                      "section_id",
+                      "section_name",
+                      "tag_ids",
+                      "tag_names",
+                      "tax_code",
+                      "type",
+                      "unit",
+                      "unit_price",
+                      "vat"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 2147483647,
+                        "description": "請求内容ID",
+                        "example": 1
+                      },
+                      "order": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 2147483647,
+                        "description": "順序",
+                        "example": 1
+                      },
+                      "type": {
+                        "type": "string",
+                        "description": "行の種類",
+                        "example": "normal",
+                        "enum": [
+                          "normal",
+                          "discount",
+                          "text"
+                        ]
+                      },
+                      "qty": {
+                        "type": "number",
+                        "description": "数量",
+                        "example": 1
+                      },
+                      "unit": {
+                        "type": "string",
+                        "description": "単位",
+                        "example": "個",
+                        "nullable": true
+                      },
+                      "unit_price": {
+                        "type": "number",
+                        "description": "単価",
+                        "example": 1
+                      },
+                      "amount": {
+                        "type": "integer",
+                        "minimum": -9223372036854775808,
+                        "maximum": 9223372036854775807,
+                        "description": "金額",
+                        "example": 108000
+                      },
+                      "vat": {
+                        "type": "integer",
+                        "description": "消費税額",
+                        "example": 8000
+                      },
+                      "reduced_vat": {
+                        "type": "boolean",
+                        "description": "軽減税率税区分（true: 対象、false: 対象外）",
+                        "example": true
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "備考",
+                        "example": "備考",
+                        "nullable": true
+                      },
+                      "account_item_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 2147483647,
+                        "description": "勘定科目ID",
+                        "example": 1,
+                        "nullable": true
+                      },
+                      "account_item_name": {
+                        "type": "string",
+                        "description": "勘定科目名",
+                        "example": "売上",
+                        "nullable": true
+                      },
+                      "tax_code": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 2147483647,
+                        "description": "税区分コード",
+                        "example": 1,
+                        "nullable": true
+                      },
+                      "item_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 2147483647,
+                        "description": "品目ID",
+                        "example": 1,
+                        "nullable": true
+                      },
+                      "item_name": {
+                        "type": "string",
+                        "description": "品目",
+                        "example": "会計freee",
+                        "nullable": true
+                      },
+                      "section_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 2147483647,
+                        "description": "部門ID",
+                        "example": 1,
+                        "nullable": true
+                      },
+                      "section_name": {
+                        "type": "string",
+                        "description": "部門",
+                        "example": "開発部",
+                        "nullable": true
+                      },
+                      "tag_ids": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 2147483647,
+                          "description": "メモタグID",
+                          "example": 1
+                        }
+                      },
+                      "tag_names": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "description": "メモタグ",
+                          "example": "メモタグ"
+                        }
+                      },
+                      "segment_1_tag_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 9223372036854775807,
+                        "description": "セグメント１ID",
+                        "example": 1,
+                        "nullable": true
+                      },
+                      "segment_1_tag_name": {
+                        "type": "string",
+                        "description": "セグメント１ID",
+                        "example": "セグメント１",
+                        "nullable": true
+                      },
+                      "segment_2_tag_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 9223372036854775807,
+                        "description": "セグメント２ID",
+                        "example": 1,
+                        "nullable": true
+                      },
+                      "segment_2_tag_name": {
+                        "type": "string",
+                        "description": "セグメント２",
+                        "example": "セグメント２",
+                        "nullable": true
+                      },
+                      "segment_3_tag_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 9223372036854775807,
+                        "description": "セグメント３ID",
+                        "example": 1,
+                        "nullable": true
+                      },
+                      "segment_3_tag_name": {
+                        "type": "string",
+                        "description": "セグメント３",
+                        "example": "セグメント３",
+                        "nullable": true
+                      }
+                    }
+                  }
+                },
+                "total_amount_per_vat_rate": {
+                  "type": "object",
+                  "required": [
+                    "reduced_vat_8",
+                    "vat_10",
+                    "vat_5",
+                    "vat_8"
+                  ],
+                  "properties": {
+                    "vat_5": {
+                      "type": "integer",
+                      "maximum": 9223372036854775807,
+                      "description": "税率5%の税込み金額合計",
+                      "example": 0
+                    },
+                    "vat_8": {
+                      "type": "integer",
+                      "maximum": 9223372036854775807,
+                      "description": "税率8%の税込み金額合計",
+                      "example": 108000
+                    },
+                    "reduced_vat_8": {
+                      "type": "integer",
+                      "maximum": 9223372036854775807,
+                      "description": "軽減税率8%の税込み金額合計",
+                      "example": 0
+                    },
+                    "vat_10": {
+                      "type": "integer",
+                      "maximum": 9223372036854775807,
+                      "description": "税率10%の税込み金額合計",
+                      "example": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "invoiceResponse": {
         "type": "object",
         "required": [
@@ -25410,6 +25960,484 @@
                   "maximum": 9223372036854775807,
                   "description": "セグメント３ID",
                   "example": 1
+                }
+              }
+            }
+          }
+        }
+      },
+      "quotationIndexResponse": {
+        "type": "object",
+        "required": [
+          "quotations"
+        ],
+        "properties": {
+          "quotations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "company_id",
+                "company_name",
+                "id",
+                "quotation_layout",
+                "quotation_number",
+                "quotation_status",
+                "issue_date",
+                "partner_id",
+                "partner_title",
+                "tax_entry_method",
+                "total_amount",
+                "total_amount_per_vat_rate"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "見積書ID",
+                  "example": 101
+                },
+                "company_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "事業所ID",
+                  "example": 1
+                },
+                "issue_date": {
+                  "type": "string",
+                  "description": "見積日 (yyyy-mm-dd)",
+                  "example": "2013-01-01"
+                },
+                "partner_id": {
+                  "type": "integer",
+                  "description": "取引先ID",
+                  "example": 201,
+                  "nullable": true
+                },
+                "partner_code": {
+                  "type": "string",
+                  "description": "取引先コード",
+                  "example": "code001",
+                  "nullable": true
+                },
+                "quotation_number": {
+                  "type": "string",
+                  "description": "見積書番号",
+                  "example": "A001"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "タイトル",
+                  "example": "見積書",
+                  "nullable": true
+                },
+                "total_amount": {
+                  "type": "integer",
+                  "description": "合計金額",
+                  "example": 108000
+                },
+                "total_vat": {
+                  "type": "integer",
+                  "description": "消費税",
+                  "example": 8000
+                },
+                "sub_total": {
+                  "type": "integer",
+                  "description": "小計",
+                  "example": 100000
+                },
+                "description": {
+                  "type": "string",
+                  "description": "概要",
+                  "example": "８月分見積書",
+                  "nullable": true
+                },
+                "quotation_status": {
+                  "type": "string",
+                  "description": "見積書ステータス  (unsubmitted: 送付待ち, submitted: 送付済み, all: 全て)",
+                  "enum": [
+                    "unsubmitted",
+                    "submitted",
+                    "all"
+                  ]
+                },
+                "web_published_at": {
+                  "type": "string",
+                  "description": "Web共有日時(最新)",
+                  "example": "2013-03-01 10:00:00",
+                  "nullable": true
+                },
+                "web_downloaded_at": {
+                  "type": "string",
+                  "description": "Web共有ダウンロード日時(最新)",
+                  "example": "2013-03-01 10:00:00",
+                  "nullable": true
+                },
+                "web_confirmed_at": {
+                  "type": "string",
+                  "description": "Web共有取引先確認日時(最新)",
+                  "example": "2013-03-01 10:00:00",
+                  "nullable": true
+                },
+                "mail_sent_at": {
+                  "type": "string",
+                  "description": "メール送信日時(最新)",
+                  "example": "2013-03-01 10:00:00",
+                  "nullable": true
+                },
+                "partner_name": {
+                  "type": "string",
+                  "description": "取引先名",
+                  "example": "freeeパートナー",
+                  "nullable": true
+                },
+                "partner_display_name": {
+                  "type": "string",
+                  "description": "取引先正式名称",
+                  "example": "株式会社freeeパートナー",
+                  "nullable": true
+                },
+                "partner_title": {
+                  "type": "string",
+                  "description": "敬称（御中、様、(空白)の3つから選択）",
+                  "example": "御中",
+                  "nullable": true
+                },
+                "partner_zipcode": {
+                  "type": "string",
+                  "description": "郵便番号",
+                  "example": "000-0000",
+                  "nullable": true
+                },
+                "partner_prefecture_code": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 46,
+                  "description": "都道府県コード（0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
+                  "example": 4,
+                  "nullable": true
+                },
+                "partner_prefecture_name": {
+                  "type": "string",
+                  "description": "都道府県",
+                  "example": "秋田県",
+                  "nullable": true
+                },
+                "partner_address1": {
+                  "type": "string",
+                  "description": "市区町村・番地",
+                  "example": "湯沢市",
+                  "nullable": true
+                },
+                "partner_address2": {
+                  "type": "string",
+                  "description": "建物名・部屋番号など",
+                  "example": "Aビル",
+                  "nullable": true
+                },
+                "partner_contact_info": {
+                  "type": "string",
+                  "description": "取引先担当者名",
+                  "example": "営業担当",
+                  "nullable": true
+                },
+                "company_name": {
+                  "type": "string",
+                  "description": "事業所名",
+                  "example": "freee株式会社"
+                },
+                "company_zipcode": {
+                  "type": "string",
+                  "description": "郵便番号",
+                  "example": "000-0000",
+                  "nullable": true
+                },
+                "company_prefecture_code": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 46,
+                  "description": "都道府県コード（0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
+                  "example": 12,
+                  "nullable": true
+                },
+                "company_prefecture_name": {
+                  "type": "string",
+                  "description": "都道府県",
+                  "example": "東京都",
+                  "nullable": true
+                },
+                "company_address1": {
+                  "type": "string",
+                  "description": "市区町村・番地",
+                  "example": "ＸＸ区ＸＸ１−１−１",
+                  "nullable": true
+                },
+                "company_address2": {
+                  "type": "string",
+                  "description": "建物名・部屋番号など",
+                  "example": "ビル1F",
+                  "nullable": true
+                },
+                "company_contact_info": {
+                  "type": "string",
+                  "description": "事業所担当者名",
+                  "example": "法人営業担当",
+                  "nullable": true
+                },
+                "message": {
+                  "type": "string",
+                  "description": "メッセージ",
+                  "example": "下記の通り御見積もり申し上げます。",
+                  "nullable": true
+                },
+                "notes": {
+                  "type": "string",
+                  "description": "備考",
+                  "example": "毎度お世話になっております。",
+                  "nullable": true
+                },
+                "quotation_layout": {
+                  "type": "string",
+                  "description": "レイアウト(default_classic: レイアウト１/クラシック, standard_classic: レイアウト２/クラシック, envelope_classic: 封筒１/クラシック, carried_forward_standard_classic: レイアウト３（繰越金額欄あり）/クラシック, carried_forward_envelope_classic: 封筒２（繰越金額欄あり）/クラシック, default_modern: レイアウト１/モダン, standard_modern: レイアウト２/モダン, envelope_modern: 封筒/モダン)",
+                  "example": "default_classic",
+                  "enum": [
+                    "default_classic",
+                    "standard_classic",
+                    "envelope_classic",
+                    "carried_forward_standard_classic",
+                    "carried_forward_envelope_classic",
+                    "default_modern",
+                    "standard_modern",
+                    "envelope_modern"
+                  ]
+                },
+                "tax_entry_method": {
+                  "type": "string",
+                  "description": "見積書の消費税計算方法(inclusive: 内税, exclusive: 外税)",
+                  "example": "exclusive",
+                  "enum": [
+                    "",
+                    "inclusive",
+                    "exclusive"
+                  ]
+                },
+                "quotation_contents": {
+                  "type": "array",
+                  "description": "見積内容",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "account_item_id",
+                      "account_item_name",
+                      "amount",
+                      "description",
+                      "id",
+                      "item_id",
+                      "item_name",
+                      "order",
+                      "qty",
+                      "reduced_vat",
+                      "section_id",
+                      "section_name",
+                      "tag_ids",
+                      "tag_names",
+                      "tax_code",
+                      "type",
+                      "unit",
+                      "unit_price",
+                      "vat"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "description": "見積内容ID",
+                        "example": 1
+                      },
+                      "order": {
+                        "type": "integer",
+                        "description": "順序",
+                        "example": 1
+                      },
+                      "type": {
+                        "type": "string",
+                        "description": "行の種類",
+                        "example": "normal",
+                        "enum": [
+                          "normal",
+                          "discount",
+                          "text"
+                        ]
+                      },
+                      "qty": {
+                        "type": "number",
+                        "description": "数量",
+                        "example": 1
+                      },
+                      "unit": {
+                        "type": "string",
+                        "description": "単位",
+                        "example": "個",
+                        "nullable": true
+                      },
+                      "unit_price": {
+                        "type": "number",
+                        "description": "単価",
+                        "example": 1
+                      },
+                      "amount": {
+                        "type": "integer",
+                        "description": "金額",
+                        "example": 108000
+                      },
+                      "vat": {
+                        "type": "integer",
+                        "description": "消費税額",
+                        "example": 8000
+                      },
+                      "reduced_vat": {
+                        "type": "boolean",
+                        "description": "軽減税率税区分（true: 対象、false: 対象外）",
+                        "example": true
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "備考",
+                        "example": "備考",
+                        "nullable": true
+                      },
+                      "account_item_id": {
+                        "type": "integer",
+                        "description": "勘定科目ID",
+                        "example": 1,
+                        "nullable": true
+                      },
+                      "account_item_name": {
+                        "type": "string",
+                        "description": "勘定科目名",
+                        "example": "売上",
+                        "nullable": true
+                      },
+                      "tax_code": {
+                        "type": "integer",
+                        "description": "税区分コード",
+                        "example": 1,
+                        "nullable": true
+                      },
+                      "item_id": {
+                        "type": "integer",
+                        "description": "品目ID",
+                        "example": 1,
+                        "nullable": true
+                      },
+                      "item_name": {
+                        "type": "string",
+                        "description": "品目",
+                        "example": "会計freee",
+                        "nullable": true
+                      },
+                      "section_id": {
+                        "type": "integer",
+                        "description": "部門ID",
+                        "example": 1,
+                        "nullable": true
+                      },
+                      "section_name": {
+                        "type": "string",
+                        "description": "部門",
+                        "example": "開発部",
+                        "nullable": true
+                      },
+                      "tag_ids": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer",
+                          "description": "メモタグID",
+                          "example": 1
+                        }
+                      },
+                      "tag_names": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "description": "メモタグ",
+                          "example": "メモタグ"
+                        }
+                      },
+                      "segment_1_tag_id": {
+                        "type": "integer",
+                        "description": "セグメント１ID",
+                        "example": 1,
+                        "nullable": true
+                      },
+                      "segment_1_tag_name": {
+                        "type": "string",
+                        "description": "セグメント１ID",
+                        "example": "セグメント１",
+                        "nullable": true
+                      },
+                      "segment_2_tag_id": {
+                        "type": "integer",
+                        "description": "セグメント２ID",
+                        "example": 1,
+                        "nullable": true
+                      },
+                      "segment_2_tag_name": {
+                        "type": "string",
+                        "description": "セグメント２",
+                        "example": "セグメント２",
+                        "nullable": true
+                      },
+                      "segment_3_tag_id": {
+                        "type": "integer",
+                        "description": "セグメント３ID",
+                        "example": 1,
+                        "nullable": true
+                      },
+                      "segment_3_tag_name": {
+                        "type": "string",
+                        "description": "セグメント３",
+                        "example": "セグメント３",
+                        "nullable": true
+                      }
+                    }
+                  }
+                },
+                "total_amount_per_vat_rate": {
+                  "type": "object",
+                  "required": [
+                    "reduced_vat_8",
+                    "vat_10",
+                    "vat_5",
+                    "vat_8"
+                  ],
+                  "properties": {
+                    "vat_5": {
+                      "type": "integer",
+                      "maximum": 9223372036854775807,
+                      "description": "税率5%の税込み金額合計",
+                      "example": 0
+                    },
+                    "vat_8": {
+                      "type": "integer",
+                      "maximum": 9223372036854775807,
+                      "description": "税率8%の税込み金額合計",
+                      "example": 108000
+                    },
+                    "reduced_vat_8": {
+                      "type": "integer",
+                      "maximum": 9223372036854775807,
+                      "description": "軽減税率8%の税込み金額合計",
+                      "example": 0
+                    },
+                    "vat_10": {
+                      "type": "integer",
+                      "maximum": 9223372036854775807,
+                      "description": "税率10%の税込み金額合計",
+                      "example": 0
+                    }
+                  }
                 }
               }
             }
