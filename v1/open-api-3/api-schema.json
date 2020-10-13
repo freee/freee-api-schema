@@ -10656,6 +10656,114 @@
         }
       }
     },
+    "/api/1/receipts/{id}/download": {
+      "get": {
+        "tags": [
+          "Receipts"
+        ],
+        "summary": "ファイルボックス 証憑ファイルのダウンロード",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のファイルボックス 証憑ファイルのダウンロードをする</p>",
+        "operationId": "download_receipt",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "証憑ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/1/expense_applications": {
       "get": {
         "tags": [
@@ -19103,8 +19211,9 @@
                     },
                     "file_src": {
                       "type": "string",
-                      "description": "ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。）",
-                      "example": "https://www.freee.co.jp/api/p/receipts/revisions/1234xxxxx/download"
+                      "description": "ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。）\n<br>\n<br>\nfile_srcは廃止予定の属性になります。<br>\nfile_srcに替わり、証憑ファイルのダウンロード APIをご利用ください。<br>\n証憑ファイルのダウンロードAPIを利用することで、以下のようになります。\n<ul>\n  <li>アプリケーション利用者はfreee APIアプリケーションにログインしていれば、証憑ダウンロード毎にfreeeに改めてログインすることなくファイルが参照できるようになります。</li>\n</ul>",
+                      "example": "https://www.freee.co.jp/api/p/receipts/revisions/1234xxxxx/download",
+                      "deprecated": true
                     },
                     "user": {
                       "required": [
@@ -21705,8 +21814,9 @@
               },
               "file_src": {
                 "type": "string",
-                "description": "ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。）",
-                "example": "https://www.freee.co.jp/api/p/receipts/revisions/1234xxxxx/download"
+                "description": "ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。）\n<br>\n<br>\nfile_srcは廃止予定の属性になります。<br>\nfile_srcに替わり、証憑ファイルのダウンロード APIをご利用ください。<br>\n証憑ファイルのダウンロードAPIを利用することで、以下のようになります。\n<ul>\n  <li>アプリケーション利用者はfreee APIアプリケーションにログインしていれば、証憑ダウンロード毎にfreeeに改めてログインすることなくファイルが参照できるようになります。</li>\n</ul>",
+                "example": "https://www.freee.co.jp/api/p/receipts/revisions/1234xxxxx/download",
+                "deprecated": true
               },
               "user": {
                 "type": "object",
@@ -25316,6 +25426,18 @@
                     "example": 0
                   }
                 }
+              },
+              "related_quotation_ids": {
+                "type": "array",
+                "description": "関連する見積書ID(配列)<br>\n下記で作成したものが該当します。\n\n<a href=\"https://support.freee.co.jp/hc/ja/articles/203318410-請求書-納品書-見積書を作成する%231-2#1-2\" target=\"_blank\">見積書・納品書を納品書・請求書に変換する</a><br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/209076226\" target=\"_blank\">複数の見積書・納品書から合算請求書を作成する</a><br>\n",
+                "example": 1,
+                "items": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "関連する見積書ID",
+                  "example": 3
+                }
               }
             }
           }
@@ -26913,6 +27035,26 @@
                     "description": "税率10%の税込み金額合計",
                     "example": 0
                   }
+                }
+              },
+              "related_invoice_id": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 2147483647,
+                "description": "関連する請求書ID<br>\n下記で作成したものが該当します。\n\n<a href=\"https://support.freee.co.jp/hc/ja/articles/203318410-請求書-納品書-見積書を作成する%231-2#1-2\" target=\"_blank\">見積書・納品書を納品書・請求書に変換する</a><br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/209076226\" target=\"_blank\">複数の見積書・納品書から合算請求書を作成する</a><br>\n",
+                "example": 1,
+                "nullable": true
+              },
+              "related_quotation_ids": {
+                "type": "array",
+                "description": "関連する見積書ID(配列)<br>\n下記で作成したものが該当します。\n\n<a href=\"https://support.freee.co.jp/hc/ja/articles/203318410-請求書-納品書-見積書を作成する%231-2#1-2\" target=\"_blank\">見積書・納品書を納品書・請求書に変換する</a><br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/209076226\" target=\"_blank\">複数の見積書・納品書から合算請求書を作成する</a><br>\n",
+                "example": 1,
+                "items": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "関連する見積書ID",
+                  "example": 3
                 }
               }
             }
