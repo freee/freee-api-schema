@@ -155,11 +155,17 @@ info:
       <p>freeeは一定期間に過度のアクセスを検知した場合、APIアクセスをコントロールする場合があります。</p>
       <p>その際のhttp status codeは403となります。制限がかかってから10分程度が過ぎると再度使用することができるようになります。</p>
 
-    <h4 id="reports_api_endpoint">/reportsエンドポイント</h4>
+    <h4 id="reports_api_endpoint">/reportsと/receipts/{id}/downloadエンドポイント</h4>
 
 
-    <p>freeeは/reportsエンドポイントに対して1秒間に10以上のアクセスを検知した場合、APIアクセスをコントロールする場合があります。その際のhttp
-    status codeは429（too many requests）となります。</p>
+    <p>freeeはエンドポイント毎に一定頻度以上のアクセスを検知した場合、APIアクセスをコントロールする場合があります。その際のhttp status
+    codeは429（too many requests）となります。</p>
+
+
+    <ul>
+      <li>/reports:1秒に10回まで</li>
+      <li>/receipts/{id}/download:1秒に3回まで</li>
+    </ul>
 
 
     <p>レスポンスボディのmetaプロパティに以下を含めます。</p>
