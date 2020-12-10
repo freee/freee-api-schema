@@ -11614,8 +11614,13 @@ paths:
       description: |-
 
         <h2 id="">概要</h2>
-
         <p>指定した事業所の明細を削除する</p>
+
+        <h2 id="">注意点</h2>
+        <ul>
+          <li>同期をして取得したデータが「明細」の場合は、削除および再取得はできません。</li>
+          <li>詳細は<a target="_blank" href="https://support.freee.co.jp/hc/ja/articles/360015892332">freeeヘルプセンター</a>をご確認ください。</li>
+        </ul>
       operationId: destroy_wallet_txn
       summary: 明細の削除
     get:
@@ -19669,8 +19674,8 @@ components:
               example: ordinary
               type: string
             bank_code:
-              description: 銀行番号
-              example: '001'
+              description: 銀行コード
+              example: '0001'
               type: string
             bank_name:
               description: 銀行名
@@ -19891,8 +19896,8 @@ components:
               nullable: true
               type: string
             'partner_bank_account_attributes[bank_code]':
-              description: 銀行番号
-              example: '001'
+              description: 銀行コード
+              example: '0001'
               nullable: true
               type: string
             'partner_bank_account_attributes[bank_name]':
@@ -20110,8 +20115,8 @@ components:
               example: ordinary
               type: string
             bank_code:
-              description: 銀行番号
-              example: '001'
+              description: 銀行コード
+              example: '0001'
               type: string
             bank_name:
               description: 銀行名
@@ -20312,8 +20317,8 @@ components:
                 nullable: true
                 type: string
               'partner_bank_account_attributes[bank_code]':
-                description: 銀行番号
-                example: '001'
+                description: 銀行コード
+                example: '0001'
                 nullable: true
                 type: string
               'partner_bank_account_attributes[bank_name]':
@@ -20638,8 +20643,8 @@ components:
                 type: object
               type: array
             bank_code:
-              description: 銀行番号
-              example: '001'
+              description: 銀行コード
+              example: '0001'
               type: string
             bank_name:
               description: 銀行名

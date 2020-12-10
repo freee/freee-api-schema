@@ -8224,7 +8224,7 @@
           "Wallet txns"
         ],
         "summary": "明細の削除",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の明細を削除する</p>",
+        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の明細を削除する</p>\n\n<h2 id=\"\">注意点</h2>\n<ul>\n  <li>同期をして取得したデータが「明細」の場合は、削除および再取得はできません。</li>\n  <li>詳細は<a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/360015892332\">freeeヘルプセンター</a>をご確認ください。</li>\n</ul>",
         "operationId": "destroy_wallet_txn",
         "parameters": [
           {
@@ -15132,8 +15132,8 @@
               },
               "bank_code": {
                 "type": "string",
-                "description": "銀行番号",
-                "example": "001"
+                "description": "銀行コード",
+                "example": "0001"
               },
               "branch_name": {
                 "type": "string",
@@ -15388,8 +15388,8 @@
               },
               "bank_code": {
                 "type": "string",
-                "description": "銀行番号",
-                "example": "001"
+                "description": "銀行コード",
+                "example": "0001"
               },
               "branch_name": {
                 "type": "string",
@@ -20824,8 +20824,8 @@
                 },
                 "partner_bank_account_attributes[bank_code]": {
                   "type": "string",
-                  "description": "銀行番号",
-                  "example": "001",
+                  "description": "銀行コード",
+                  "example": "0001",
                   "nullable": true
                 },
                 "partner_bank_account_attributes[branch_name]": {
@@ -21054,8 +21054,8 @@
               },
               "partner_bank_account_attributes[bank_code]": {
                 "type": "string",
-                "description": "銀行番号",
-                "example": "001",
+                "description": "銀行コード",
+                "example": "0001",
                 "nullable": true
               },
               "partner_bank_account_attributes[branch_name]": {
