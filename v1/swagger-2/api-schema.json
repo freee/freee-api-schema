@@ -9603,7 +9603,7 @@
         "tags": [
           "Wallet txns"
         ],
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の明細を削除する</p>",
+        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の明細を削除する</p>\n\n<h2 id=\"\">注意点</h2>\n<ul>\n  <li>同期をして取得したデータが「明細」の場合は、削除および再取得はできません。</li>\n  <li>詳細は<a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/360015892332\">freeeヘルプセンター</a>をご確認ください。</li>\n</ul>",
         "operationId": "destroy_wallet_txn",
         "summary": "明細の削除"
       },
@@ -18149,8 +18149,8 @@
               "type": "string"
             },
             "bank_code": {
-              "description": "銀行番号",
-              "example": "001",
+              "description": "銀行コード",
+              "example": "0001",
               "type": "string"
             },
             "bank_name": {
@@ -18417,8 +18417,8 @@
               "x-nullable": true
             },
             "partner_bank_account_attributes[bank_code]": {
-              "description": "銀行番号",
-              "example": "001",
+              "description": "銀行コード",
+              "example": "0001",
               "type": "string",
               "x-nullable": true
             },
@@ -18682,8 +18682,8 @@
               "type": "string"
             },
             "bank_code": {
-              "description": "銀行番号",
-              "example": "001",
+              "description": "銀行コード",
+              "example": "0001",
               "type": "string"
             },
             "bank_name": {
@@ -18927,8 +18927,8 @@
                 "x-nullable": true
               },
               "partner_bank_account_attributes[bank_code]": {
-                "description": "銀行番号",
-                "example": "001",
+                "description": "銀行コード",
+                "example": "0001",
                 "type": "string",
                 "x-nullable": true
               },
