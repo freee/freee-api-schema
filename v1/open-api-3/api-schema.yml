@@ -651,7 +651,7 @@ paths:
 
         <ul>
           <li>
-            <p>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している各種申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</p>
+            <p>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</p>
             <ul>
               <li>役職指定（申請者の所属部門）</li>
               <li>役職指定（申請時に部門指定）</li>
@@ -739,7 +739,7 @@ paths:
 
         <ul>
           <li>
-            <p>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している各種申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</p>
+            <p>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</p>
             <ul>
               <li>役職指定（申請者の所属部門）</li>
               <li>役職指定（申請時に部門指定）</li>
@@ -5531,33 +5531,6 @@ paths:
             maximum: 2147483647
             minimum: 1
             type: integer
-        - description: 補助科目やコメントとして出力する項目
-          explode: true
-          in: query
-          name: 'visible_tags[]'
-          schema:
-            items:
-              enum:
-                - partner
-                - item
-                - tag
-                - section
-                - description
-                - wallet_txn_description
-                - all
-              type: string
-            type: array
-          style: form
-        - description: 取得開始日 (yyyy-mm-dd)
-          in: query
-          name: start_date
-          schema:
-            type: string
-        - description: 取得終了日 (yyyy-mm-dd)
-          in: query
-          name: end_date
-          schema:
-            type: string
       responses:
         '200':
           content:
