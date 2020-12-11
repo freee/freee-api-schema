@@ -414,7 +414,7 @@
         "tags": [
           "Approval flow routes"
         ],
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の申請経路一覧を取得する</p>\n\n<p>各種申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-approval-requests\" target=\"_blank\">会計freeeの各種申請APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"\">注意点</h2>\n\n<ul>\n  <li>\n    <p>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</p>\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の申請経路一覧を取得する</p>\n\n<p>各種申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-approval-requests\" target=\"_blank\">会計freeeの各種申請APIの使い方</a>をご参照ください</p>\n<p>経費精算APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">会計freeeの経費精算APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"\">注意点</h2>\n\n<ul>\n  <li>\n    <p>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</p>\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
         "operationId": "get_approval_flow_routes",
         "summary": "申請経路一覧の取得"
       }
@@ -485,7 +485,7 @@
         "tags": [
           "Approval flow routes"
         ],
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の申請経路を取得する</p>\n\n<p>各種申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-approval-requests\" target=\"_blank\">会計freeeの各種申請APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"\">注意点</h2>\n\n<ul>\n  <li>\n    <p>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</p>\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の申請経路を取得する</p>\n\n<p>各種申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-approval-requests\" target=\"_blank\">会計freeeの各種申請APIの使い方</a>をご参照ください</p>\n<p>経費精算APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">会計freeeの経費精算APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"\">注意点</h2>\n\n<ul>\n  <li>\n    <p>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</p>\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
         "operationId": "get_approval_flow_route",
         "summary": "申請経路の取得"
       }
@@ -10520,6 +10520,13 @@
                 "type": "string",
                 "x-nullable": true
               },
+              "tax_code": {
+                "description": "税区分コード",
+                "example": 1,
+                "maximum": 2147483647,
+                "minimum": 0,
+                "type": "integer"
+              },
               "walletable_id": {
                 "description": "口座ID",
                 "example": 1,
@@ -10537,6 +10544,7 @@
               "default_tax_code",
               "id",
               "name",
+              "tax_code",
               "walletable_id"
             ],
             "type": "object"

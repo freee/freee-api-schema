@@ -12768,7 +12768,7 @@
           "Approval flow routes"
         ],
         "summary": "申請経路一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の申請経路一覧を取得する</p>\n\n<p>各種申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-approval-requests\" target=\"_blank\">会計freeeの各種申請APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"\">注意点</h2>\n\n<ul>\n  <li>\n    <p>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</p>\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の申請経路一覧を取得する</p>\n\n<p>各種申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-approval-requests\" target=\"_blank\">会計freeeの各種申請APIの使い方</a>をご参照ください</p>\n<p>経費精算APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">会計freeeの経費精算APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"\">注意点</h2>\n\n<ul>\n  <li>\n    <p>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</p>\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
         "operationId": "get_approval_flow_routes",
         "parameters": [
           {
@@ -12888,7 +12888,7 @@
           "Approval flow routes"
         ],
         "summary": "申請経路の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の申請経路を取得する</p>\n\n<p>各種申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-approval-requests\" target=\"_blank\">会計freeeの各種申請APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"\">注意点</h2>\n\n<ul>\n  <li>\n    <p>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</p>\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の申請経路を取得する</p>\n\n<p>各種申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-approval-requests\" target=\"_blank\">会計freeeの各種申請APIの使い方</a>をご参照ください</p>\n<p>経費精算APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">会計freeeの経費精算APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"\">注意点</h2>\n\n<ul>\n  <li>\n    <p>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</p>\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
         "operationId": "get_approval_flow_route",
         "parameters": [
           {
@@ -14973,6 +14973,270 @@
           }
         }
       },
+      "paymentRequestCreateParams": {
+        "type": "object",
+        "required": [
+          "company_id",
+          "title",
+          "application_date",
+          "payment_request_lines",
+          "approval_flow_route_id",
+          "draft",
+          "issue_date",
+          "payment_method"
+        ],
+        "properties": {
+          "company_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "事業所ID",
+            "example": 1
+          },
+          "title": {
+            "type": "string",
+            "description": "申請タイトル",
+            "example": "仕入代金支払い"
+          },
+          "application_date": {
+            "type": "string",
+            "description": "申請日 (yyyy-mm-dd)",
+            "example": "2020-01-01"
+          },
+          "description": {
+            "type": "string",
+            "description": "備考",
+            "example": "◯◯連携先ID: cx12345"
+          },
+          "payment_request_lines": {
+            "type": "array",
+            "description": "支払依頼の項目行一覧（配列）",
+            "items": {
+              "type": "object",
+              "required": [
+                "amount",
+                "tax_code"
+              ],
+              "properties": {
+                "line_type": {
+                  "type": "string",
+                  "description": "行の種類 (deal_line: 支払依頼, withholding_tax: 源泉徴収税)",
+                  "example": "deal_line",
+                  "enum": [
+                    "deal_line",
+                    "withholding_tax"
+                  ]
+                },
+                "description": {
+                  "type": "string",
+                  "description": "内容",
+                  "example": "原稿料"
+                },
+                "amount": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2147483647,
+                  "description": "金額",
+                  "example": 30000
+                },
+                "account_item_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "勘定科目ID",
+                  "example": 1
+                },
+                "tax_code": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2147483647,
+                  "description": "税区分コード",
+                  "example": 1
+                },
+                "item_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "品目ID",
+                  "example": 1
+                },
+                "section_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "部門ID",
+                  "example": 1
+                },
+                "tag_ids": {
+                  "type": "array",
+                  "description": "メモタグID",
+                  "example": [
+                    1,
+                    2,
+                    3
+                  ],
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2147483647
+                  }
+                },
+                "segment_1_tag_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 9223372036854775807,
+                  "description": "セグメント１ID<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+                  "example": 1
+                },
+                "segment_2_tag_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 9223372036854775807,
+                  "description": "セグメント２ID(法人向けエンタープライズプラン)<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+                  "example": 1
+                },
+                "segment_3_tag_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 9223372036854775807,
+                  "description": "セグメント３ID(法人向けエンタープライズプラン)<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+                  "example": 1
+                }
+              }
+            }
+          },
+          "approver_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "承認者のユーザーID<br>\n「承認者を指定」の経路を申請経路として使用する場合に指定してください。<br>\n指定する承認者のユーザーIDは、申請経路APIを利用して取得してください。\n",
+            "example": 1
+          },
+          "approval_flow_route_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "申請経路ID<br>\n<ul>\n    <li>支払依頼のステータスを申請中として作成する場合は、必ず指定してください。</li>\n    <li>指定する申請経路IDは、申請経路APIを利用して取得してください。</li>\n    <li>\n        未指定の場合は、基本経路を設定している事業所では基本経路が、基本経路を設定していない事業所では利用可能な申請経路の中から最初の申請経路が自動的に使用されます。\n        <ul>\n           <li>意図しない申請経路を持った支払依頼の作成を防ぐために、使用する申請経路IDを指定することを推奨します。</li>\n        </ul>\n    </li>\n</ul>\n",
+            "example": 1
+          },
+          "parent_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "親申請ID(法人向け エンタープライズプラン、プロフェッショナルプラン)<br>\n<ul>\n  <li>承認済みの既存各種申請IDのみ指定可能です。</li>\n  <li>各種申請一覧APIを利用して取得してください。</li>\n</ul>\n",
+            "example": 2
+          },
+          "draft": {
+            "type": "boolean",
+            "description": "支払依頼のステータス<br>\nfalseを指定した時は申請中（in_progress）で支払依頼を作成します。<br>\ntrueを指定した時は下書き（draft）で支払依頼を作成します。<br>\n未指定の時は下書きとみなして支払依頼を作成します。\n",
+            "example": true
+          },
+          "document_code": {
+            "type": "string",
+            "description": "請求書番号",
+            "example": "2"
+          },
+          "receipt_ids": {
+            "type": "array",
+            "description": "証憑ファイルID（配列）",
+            "items": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647,
+              "example": 1
+            }
+          },
+          "issue_date": {
+            "type": "string",
+            "description": "発生日 (yyyy-mm-dd)",
+            "example": "2020-01-01"
+          },
+          "payment_date": {
+            "type": "string",
+            "description": "支払期限 (yyyy-mm-dd)",
+            "example": "2020-01-01",
+            "nullable": true
+          },
+          "payment_method": {
+            "type": "string",
+            "description": "支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)",
+            "example": "none",
+            "enum": [
+              "none",
+              "domestic_bank_transfer",
+              "abroad_bank_transfer",
+              "account_transfer",
+              "credit_card"
+            ]
+          },
+          "partner_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "取引先ID",
+            "example": 201,
+            "nullable": true
+          },
+          "partner_code": {
+            "type": "string",
+            "description": "取引先コード",
+            "example": "code001",
+            "nullable": true
+          },
+          "bank_code": {
+            "type": "string",
+            "description": "銀行番号",
+            "example": "001"
+          },
+          "bank_name": {
+            "type": "string",
+            "description": "銀行名",
+            "example": "freee銀行"
+          },
+          "bank_name_kana": {
+            "type": "string",
+            "description": "銀行名（カナ）<br>\n支払先指定時には無効\n",
+            "example": "フリーギンコウ"
+          },
+          "branch_code": {
+            "type": "string",
+            "description": "支店番号<br>\n支払先指定時には無効\n",
+            "example": "101"
+          },
+          "branch_name": {
+            "type": "string",
+            "description": "支店名<br>\n支払先指定時には無効\n",
+            "example": "銀座支店"
+          },
+          "branch_kana": {
+            "type": "string",
+            "description": "支店名（カナ）<br>\n支払先指定時には無効\n",
+            "example": "ギンザシテン"
+          },
+          "account_name": {
+            "type": "string",
+            "description": "受取人名（カナ）<br>\n支払先指定時には無効\n",
+            "example": "フリータロウ"
+          },
+          "account_number": {
+            "type": "string",
+            "description": "口座番号<br>\n支払先指定時には無効\n",
+            "example": "1010101"
+          },
+          "account_type": {
+            "type": "string",
+            "description": "'口座種別(ordinary:普通、checking:当座、earmarked:納税準備預金、savings:貯蓄、other:その他)'<br>\n支払先指定時には無効<br>\n支払先未指定時には必須\n",
+            "example": "ordinary",
+            "enum": [
+              "ordinary",
+              "checking",
+              "earmarked",
+              "savings",
+              "other"
+            ]
+          }
+        }
+      },
       "partnerCreateParams": {
         "required": [
           "company_id",
@@ -15682,6 +15946,7 @@
                 "default_tax_code",
                 "id",
                 "name",
+                "tax_code",
                 "walletable_id"
               ],
               "type": "object",
@@ -15697,6 +15962,13 @@
                   "type": "string",
                   "description": "勘定科目名 (30文字以内)",
                   "example": "ソフトウェア"
+                },
+                "tax_code": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2147483647,
+                  "description": "税区分コード",
+                  "example": 1
                 },
                 "shortcut": {
                   "type": "string",
@@ -22678,12 +22950,12 @@
               "title": {
                 "type": "string",
                 "description": "申請タイトル",
-                "example": "大阪出張"
+                "example": "仕入代金支払い"
               },
               "application_date": {
                 "type": "string",
                 "description": "申請日 (yyyy-mm-dd)",
-                "example": "2018-07-19"
+                "example": "2020-01-01"
               },
               "description": {
                 "type": "string",
@@ -22744,7 +23016,7 @@
                     "description": {
                       "type": "string",
                       "description": "内容",
-                      "example": "交通費：新幹線往復（東京〜大阪）"
+                      "example": "原稿料"
                     },
                     "amount": {
                       "type": "integer",
@@ -23018,12 +23290,12 @@
               "issue_date": {
                 "type": "string",
                 "description": "発生日 (yyyy-mm-dd)",
-                "example": "2018-07-19"
+                "example": "2020-01-01"
               },
               "payment_date": {
                 "type": "string",
                 "description": "支払期限 (yyyy-mm-dd)",
-                "example": "2018-07-19",
+                "example": "2020-01-01",
                 "nullable": true
               },
               "payment_method": {
@@ -23061,12 +23333,12 @@
               "bank_name": {
                 "type": "string",
                 "description": "銀行名",
-                "example": "ＸＸ銀行"
+                "example": "freee銀行"
               },
               "bank_name_kana": {
                 "type": "string",
                 "description": "銀行名（カナ）",
-                "example": "ＸＸ"
+                "example": "フリーギンコウ"
               },
               "bank_code": {
                 "type": "string",
@@ -23081,7 +23353,7 @@
               "branch_kana": {
                 "type": "string",
                 "description": "支店名（カナ）",
-                "example": "ギンザ"
+                "example": "ギンザシテン"
               },
               "branch_code": {
                 "type": "string",
@@ -23162,12 +23434,12 @@
                 "title": {
                   "type": "string",
                   "description": "申請タイトル",
-                  "example": "大阪出張"
+                  "example": "仕入代金支払い"
                 },
                 "application_date": {
                   "type": "string",
                   "description": "申請日 (yyyy-mm-dd)",
-                  "example": "2018-07-19"
+                  "example": "2020-01-01"
                 },
                 "total_amount": {
                   "type": "integer",
@@ -23234,12 +23506,12 @@
                 "issue_date": {
                   "type": "string",
                   "description": "発生日 (yyyy-mm-dd)",
-                  "example": "2018-07-19"
+                  "example": "2020-01-01"
                 },
                 "payment_date": {
                   "type": "string",
                   "description": "支払期限 (yyyy-mm-dd)",
-                  "example": "2018-07-19",
+                  "example": "2020-01-01",
                   "nullable": true
                 },
                 "payment_method": {

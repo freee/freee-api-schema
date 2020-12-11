@@ -645,6 +645,10 @@ paths:
         href="https://developer.freee.co.jp/tips/accounting-approval-requests"
         target="_blank">会計freeeの各種申請APIの使い方</a>をご参照ください</p>
 
+        <p>経費精算APIの使い方については、<a
+        href="https://developer.freee.co.jp/tips/accounting-expense-applications"
+        target="_blank">会計freeeの経費精算APIの使い方</a>をご参照ください</p>
+
 
         <h2 id="">注意点</h2>
 
@@ -732,6 +736,10 @@ paths:
         <p>各種申請APIの使い方については、<a
         href="https://developer.freee.co.jp/tips/accounting-approval-requests"
         target="_blank">会計freeeの各種申請APIの使い方</a>をご参照ください</p>
+
+        <p>経費精算APIの使い方については、<a
+        href="https://developer.freee.co.jp/tips/accounting-expense-applications"
+        target="_blank">会計freeeの経費精算APIの使い方</a>をご参照ください</p>
 
 
         <h2 id="">注意点</h2>
@@ -12518,6 +12526,12 @@ components:
                 maxLength: 20
                 nullable: true
                 type: string
+              tax_code:
+                description: 税区分コード
+                example: 1
+                maximum: 2147483647
+                minimum: 0
+                type: integer
               walletable_id:
                 description: 口座ID
                 example: 1
@@ -12533,6 +12547,7 @@ components:
               - default_tax_code
               - id
               - name
+              - tax_code
               - walletable_id
             type: object
           type: array
