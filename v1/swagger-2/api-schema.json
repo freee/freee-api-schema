@@ -11775,12 +11775,12 @@
             },
             "name": {
               "description": "連携サービス名",
-              "example": "〇〇銀行",
+              "example": "freee銀行",
               "type": "string"
             },
             "name_kana": {
               "description": "連携サービス名(カナ)",
-              "example": "ギンコウ",
+              "example": "フリーギンコウ",
               "type": "string",
               "x-nullable": true
             },
@@ -17979,12 +17979,12 @@
             },
             "bank_name": {
               "description": "銀行名",
-              "example": "ＸＸ銀行",
+              "example": "freee銀行",
               "type": "string"
             },
             "bank_name_kana": {
               "description": "銀行名（カナ）",
-              "example": "ＸＸ",
+              "example": "フリーギンコウ",
               "type": "string"
             },
             "branch_code": {
@@ -17994,7 +17994,7 @@
             },
             "branch_kana": {
               "description": "支店名（カナ）",
-              "example": "ギンザ",
+              "example": "ギンザシテン",
               "type": "string"
             },
             "branch_name": {
@@ -18248,13 +18248,13 @@
             },
             "partner_bank_account_attributes[bank_name]": {
               "description": "銀行名",
-              "example": "ＸＸ銀行",
+              "example": "freee銀行",
               "type": "string",
               "x-nullable": true
             },
             "partner_bank_account_attributes[bank_name_kana]": {
               "description": "銀行名（カナ）",
-              "example": "ＸＸ",
+              "example": "フリーギンコウ",
               "type": "string",
               "x-nullable": true
             },
@@ -18266,7 +18266,7 @@
             },
             "partner_bank_account_attributes[branch_kana]": {
               "description": "支店名（カナ）",
-              "example": "ギンザ",
+              "example": "ギンザシテン",
               "type": "string",
               "x-nullable": true
             },
@@ -18512,12 +18512,12 @@
             },
             "bank_name": {
               "description": "銀行名",
-              "example": "ＸＸ銀行",
+              "example": "freee銀行",
               "type": "string"
             },
             "bank_name_kana": {
               "description": "銀行名（カナ）",
-              "example": "ＸＸ",
+              "example": "フリーギンコウ",
               "type": "string"
             },
             "branch_code": {
@@ -18527,7 +18527,7 @@
             },
             "branch_kana": {
               "description": "支店名（カナ）",
-              "example": "ギンザ",
+              "example": "ギンザシテン",
               "type": "string"
             },
             "branch_name": {
@@ -18758,13 +18758,13 @@
               },
               "partner_bank_account_attributes[bank_name]": {
                 "description": "銀行名",
-                "example": "ＸＸ銀行",
+                "example": "freee銀行",
                 "type": "string",
                 "x-nullable": true
               },
               "partner_bank_account_attributes[bank_name_kana]": {
                 "description": "銀行名（カナ）",
-                "example": "ＸＸ",
+                "example": "フリーギンコウ",
                 "type": "string",
                 "x-nullable": true
               },
@@ -18776,7 +18776,7 @@
               },
               "partner_bank_account_attributes[branch_kana]": {
                 "description": "支店名（カナ）",
-                "example": "ギンザ",
+                "example": "ギンザシテン",
                 "type": "string",
                 "x-nullable": true
               },
