@@ -13652,11 +13652,11 @@ components:
               type: integer
             name:
               description: 連携サービス名
-              example: 〇〇銀行
+              example: フリー銀行
               type: string
             name_kana:
               description: 連携サービス名(カナ)
-              example: ギンコウ
+              example: フリーギンコウ
               nullable: true
               type: string
             type:
@@ -19545,11 +19545,11 @@ components:
               type: string
             bank_name:
               description: 銀行名
-              example: ＸＸ銀行
+              example: freee銀行
               type: string
             bank_name_kana:
               description: 銀行名（カナ）
-              example: ＸＸ
+              example: フリーギンコウ
               type: string
             branch_code:
               description: 支店番号
@@ -19557,7 +19557,7 @@ components:
               type: string
             branch_kana:
               description: 支店名（カナ）
-              example: ギンザ
+              example: ギンザシテン
               type: string
             branch_name:
               description: 支店名
@@ -19768,12 +19768,12 @@ components:
               type: string
             'partner_bank_account_attributes[bank_name]':
               description: 銀行名
-              example: ＸＸ銀行
+              example: freee銀行
               nullable: true
               type: string
             'partner_bank_account_attributes[bank_name_kana]':
               description: 銀行名（カナ）
-              example: ＸＸ
+              example: フリーギンコウ
               nullable: true
               type: string
             'partner_bank_account_attributes[branch_code]':
@@ -19783,7 +19783,7 @@ components:
               type: string
             'partner_bank_account_attributes[branch_kana]':
               description: 支店名（カナ）
-              example: ギンザ
+              example: ギンザシテン
               nullable: true
               type: string
             'partner_bank_account_attributes[branch_name]':
@@ -19986,11 +19986,11 @@ components:
               type: string
             bank_name:
               description: 銀行名
-              example: ＸＸ銀行
+              example: freee銀行
               type: string
             bank_name_kana:
               description: 銀行名（カナ）
-              example: ＸＸ
+              example: フリーギンコウ
               type: string
             branch_code:
               description: 支店番号
@@ -19998,7 +19998,7 @@ components:
               type: string
             branch_kana:
               description: 支店名（カナ）
-              example: ギンザ
+              example: ギンザシテン
               type: string
             branch_name:
               description: 支店名
@@ -20189,12 +20189,12 @@ components:
                 type: string
               'partner_bank_account_attributes[bank_name]':
                 description: 銀行名
-                example: ＸＸ銀行
+                example: freee銀行
                 nullable: true
                 type: string
               'partner_bank_account_attributes[bank_name_kana]':
                 description: 銀行名（カナ）
-                example: ＸＸ
+                example: フリーギンコウ
                 nullable: true
                 type: string
               'partner_bank_account_attributes[branch_code]':
@@ -20204,7 +20204,7 @@ components:
                 type: string
               'partner_bank_account_attributes[branch_kana]':
                 description: 支店名（カナ）
-                example: ギンザ
+                example: ギンザシテン
                 nullable: true
                 type: string
               'partner_bank_account_attributes[branch_name]':

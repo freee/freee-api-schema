@@ -15395,12 +15395,12 @@
               "bank_name": {
                 "type": "string",
                 "description": "銀行名",
-                "example": "ＸＸ銀行"
+                "example": "freee銀行"
               },
               "bank_name_kana": {
                 "type": "string",
                 "description": "銀行名（カナ）",
-                "example": "ＸＸ"
+                "example": "フリーギンコウ"
               },
               "bank_code": {
                 "type": "string",
@@ -15415,7 +15415,7 @@
               "branch_kana": {
                 "type": "string",
                 "description": "支店名（カナ）",
-                "example": "ギンザ"
+                "example": "ギンザシテン"
               },
               "branch_code": {
                 "type": "string",
@@ -15651,12 +15651,12 @@
               "bank_name": {
                 "type": "string",
                 "description": "銀行名",
-                "example": "ＸＸ銀行"
+                "example": "freee銀行"
               },
               "bank_name_kana": {
                 "type": "string",
                 "description": "銀行名（カナ）",
-                "example": "ＸＸ"
+                "example": "フリーギンコウ"
               },
               "bank_code": {
                 "type": "string",
@@ -15671,7 +15671,7 @@
               "branch_kana": {
                 "type": "string",
                 "description": "支店名（カナ）",
-                "example": "ギンザ"
+                "example": "ギンザシテン"
               },
               "branch_code": {
                 "type": "string",
@@ -16272,7 +16272,7 @@
               "name": {
                 "type": "string",
                 "description": "連携サービス名",
-                "example": "〇〇銀行"
+                "example": "フリー銀行"
               },
               "type": {
                 "type": "string",
@@ -16287,7 +16287,7 @@
               "name_kana": {
                 "type": "string",
                 "description": "連携サービス名(カナ)",
-                "example": "ギンコウ",
+                "example": "フリーギンコウ",
                 "nullable": true
               }
             }
@@ -21161,13 +21161,13 @@
                 "partner_bank_account_attributes[bank_name]": {
                   "type": "string",
                   "description": "銀行名",
-                  "example": "ＸＸ銀行",
+                  "example": "freee銀行",
                   "nullable": true
                 },
                 "partner_bank_account_attributes[bank_name_kana]": {
                   "type": "string",
                   "description": "銀行名（カナ）",
-                  "example": "ＸＸ",
+                  "example": "フリーギンコウ",
                   "nullable": true
                 },
                 "partner_bank_account_attributes[bank_code]": {
@@ -21185,7 +21185,7 @@
                 "partner_bank_account_attributes[branch_kana]": {
                   "type": "string",
                   "description": "支店名（カナ）",
-                  "example": "ギンザ",
+                  "example": "ギンザシテン",
                   "nullable": true
                 },
                 "partner_bank_account_attributes[branch_code]": {
@@ -21391,13 +21391,13 @@
               "partner_bank_account_attributes[bank_name]": {
                 "type": "string",
                 "description": "銀行名",
-                "example": "ＸＸ銀行",
+                "example": "freee銀行",
                 "nullable": true
               },
               "partner_bank_account_attributes[bank_name_kana]": {
                 "type": "string",
                 "description": "銀行名（カナ）",
-                "example": "ＸＸ",
+                "example": "フリーギンコウ",
                 "nullable": true
               },
               "partner_bank_account_attributes[bank_code]": {
@@ -21415,7 +21415,7 @@
               "partner_bank_account_attributes[branch_kana]": {
                 "type": "string",
                 "description": "支店名（カナ）",
-                "example": "ギンザ",
+                "example": "ギンザシテン",
                 "nullable": true
               },
               "partner_bank_account_attributes[branch_code]": {
