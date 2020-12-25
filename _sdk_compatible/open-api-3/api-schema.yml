@@ -5040,21 +5040,21 @@ paths:
 
 
         <ul>
-          <li>download_type
-            <ul>
-              <li>generic(freee Webからダウンロードできるものと同じ)</li>
-              <li>csv (yayoi形式)</li>
-              <li>pdf</li>
-            </ul>
-          </li>
-          <li>visible_tags : 指定しない場合は従来の仕様の仕訳帳が出力されます
-            <ul>
-              <li>partner : 取引先タグ</li>
-              <li>item : 品目タグ</li>
-              <li>tag : メモタグ</li>
-              <li>section : 部門タグ</li>
-              <li>description : 備考欄</li>
-              <li>wallet_txn_description : 明細の備考欄</li>
+        <li>download_type
+        <ul>
+        <li>generic(freee Webからダウンロードできるものと同じ)</li>
+        <li>csv (yayoi形式)</li>
+        <li>pdf</li>
+        </ul>
+        </li>
+        <li>visible_tags : 指定しない場合は従来の仕様の仕訳帳が出力されます
+        <ul>
+        <li>partner : 取引先タグ</li>
+        <li>item : 品目タグ</li>
+        <li>tag : メモタグ</li>
+        <li>section : 部門タグ</li>
+        <li>description : 備考欄</li>
+        <li>wallet_txn_description : 明細の備考欄</li>
               <li>
                 segment_1_tag : セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン)<br>
                 segment_2_tag : セグメント2(法人向け エンタープライズプラン)<br>
@@ -5062,10 +5062,10 @@ paths:
                 <a href="https://support.freee.co.jp/hc/ja/articles/360020679611-%E3%82%BB%E3%82%B0%E3%83%A1%E3%83%B3%E3%83%88-%E5%88%86%E6%9E%90%E7%94%A8%E3%82%BF%E3%82%B0-%E3%81%AE%E8%A8%AD%E5%AE%9A" target="_blank">セグメント（分析用タグ）の設定</a><br>
               </li>
               <li>all : 指定された場合は上記の設定をすべて有効として扱いますが、セグメント1、セグメント2、セグメント3は含みません。セグメントが必要な場合はallではなく、segment_1_tag, segment_2_tag, segment_3_tagを指定してください。</li>
-            </ul>
-          </li>
+        </ul>
+        </li>
 
-          <li>id : 受け付けID</li>
+        <li>id : 受け付けID</li>
         </ul>
       operationId: get_journals
       summary: ダウンロード要求
@@ -12490,146 +12490,146 @@ components:
         - approval_request_form
       type: object
     approval_request_form:
-          properties:
-            company_id:
-              description: 事業所ID
-              example: 1
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            created_date:
-              description: 作成日時
-              example: '2018-09-10T13:47:24.000+09:00'
-              type: string
-            description:
-              description: 申請フォームの説明
-              example: 申請フォームの説明
-              type: string
-            form_order:
-              description: >-
-                表示順（申請者が選択する申請フォームの表示順を設定できます。小さい数ほど上位に表示されます。（0を除く整数のみ。マイナス不可）未入力の場合、表示順が後ろになります。同じ数字が入力された場合、登録順で表示されます。）
-              example: 1
-              maximum: 1000
-              minimum: 1
-              nullable: true
-              type: integer
-            id:
-              description: 申請フォームID
-              example: 1
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            name:
-              description: 申請フォームの名前
-              example: 申請フォームの名前
-              type: string
-            parts:
-              description: 申請フォームの項目
-              items:
-                properties:
-                  annotation:
-                    description: 追加説明
-                    example: 追加説明
-                    nullable: true
-                    type: string
-                  id:
-                    description: 項目ID
-                    example: 1
-                    maximum: 2147483647
-                    minimum: 1
-                    type: integer
-                  label:
-                    description: 項目名
-                    example: 項目名
-                    type: string
-                  max_amount:
-                    description: 上限金額
-                    example: 100000
-                    maximum: 2147483647
-                    minimum: 0
-                    nullable: true
-                    type: integer
-                  min_amount:
-                    description: 下限金額
-                    example: 1000
-                    maximum: 2147483647
-                    minimum: 0
-                    nullable: true
-                    type: integer
-                  order:
-                    description: 順序
-                    example: 1
-                    maximum: 2147483647
-                    minimum: 0
-                    type: integer
+      properties:
+        company_id:
+          description: 事業所ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        created_date:
+          description: 作成日時
+          example: '2018-09-10T13:47:24.000+09:00'
+          type: string
+        description:
+          description: 申請フォームの説明
+          example: 申請フォームの説明
+          type: string
+        form_order:
+          description: >-
+            表示順（申請者が選択する申請フォームの表示順を設定できます。小さい数ほど上位に表示されます。（0を除く整数のみ。マイナス不可）未入力の場合、表示順が後ろになります。同じ数字が入力された場合、登録順で表示されます。）
+          example: 1
+          maximum: 1000
+          minimum: 1
+          nullable: true
+          type: integer
+        id:
+          description: 申請フォームID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        name:
+          description: 申請フォームの名前
+          example: 申請フォームの名前
+          type: string
+        parts:
+          description: 申請フォームの項目
+          items:
+            properties:
+              annotation:
+                description: 追加説明
+                example: 追加説明
+                nullable: true
+                type: string
+              id:
+                description: 項目ID
+                example: 1
+                maximum: 2147483647
+                minimum: 1
+                type: integer
+              label:
+                description: 項目名
+                example: 項目名
+                type: string
+              max_amount:
+                description: 上限金額
+                example: 100000
+                maximum: 2147483647
+                minimum: 0
+                nullable: true
+                type: integer
+              min_amount:
+                description: 下限金額
+                example: 1000
+                maximum: 2147483647
+                minimum: 0
+                nullable: true
+                type: integer
+              order:
+                description: 順序
+                example: 1
+                maximum: 2147483647
+                minimum: 0
+                type: integer
+              required:
+                description: 必須かどうか
+                example: true
+                nullable: true
+                type: boolean
+              type:
+                description: >-
+                  項目種別 (title: 申請タイトル, single_line: 自由記述形式 1行, multi_line:
+                  自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt:
+                  添付ファイル)
+                enum:
+                  - title
+                  - single_line
+                  - multi_line
+                  - select
+                  - date
+                  - amount
+                  - receipt
+                example: single_line
+                type: string
+              values:
+                description: 選択項目
+                items:
+                  properties:
+                    name:
+                      description: 選択項目名
+                      example: 選択項目名
+                      type: string
+                    order:
+                      description: 順序
+                      example: 1
+                      maximum: 2147483647
+                      minimum: 1
+                      type: integer
                   required:
-                    description: 必須かどうか
-                    example: true
-                    nullable: true
-                    type: boolean
-                  type:
-                    description: >-
-                      項目種別 (title: 申請タイトル, single_line: 自由記述形式 1行, multi_line:
-                      自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt:
-                      添付ファイル)
-                    enum:
-                      - title
-                      - single_line
-                      - multi_line
-                      - select
-                      - date
-                      - amount
-                      - receipt
-                    example: single_line
-                    type: string
-                  values:
-                    description: 選択項目
-                    items:
-                      properties:
-                        name:
-                          description: 選択項目名
-                          example: 選択項目名
-                          type: string
-                        order:
-                          description: 順序
-                          example: 1
-                          maximum: 2147483647
-                          minimum: 1
-                          type: integer
-                      required:
-                        - name
-                        - order
-                      type: object
-                    nullable: true
-                    type: array
-                required:
-                  - id
-                type: object
-              type: array
-            route_setting_count:
-              description: 適用された経路数
-              example: 1
-              maximum: 2147483647
-              minimum: 0
-              type: integer
-            status:
-              description: 'ステータス(draft: 申請で使用しない、active: 申請で使用する、deleted: 削除済み)'
-              enum:
-                - draft
-                - active
-                - deleted
-              example: active
-              type: string
-          required:
-            - id
-            - company_id
-            - name
-            - description
-            - status
-            - created_date
-            - form_order
-            - route_setting_count
-          type: object
+                    - name
+                    - order
+                  type: object
+                nullable: true
+                type: array
+            required:
+              - id
+            type: object
+          type: array
+        route_setting_count:
+          description: 適用された経路数
+          example: 1
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        status:
+          description: 'ステータス(draft: 申請で使用しない、active: 申請で使用する、deleted: 削除済み)'
+          enum:
+            - draft
+            - active
+            - deleted
+          example: active
+          type: string
+      required:
+        - id
+        - company_id
+        - name
+        - description
+        - status
+        - created_date
+        - form_order
+        - route_setting_count
+      type: object
     approvalRequestResponse:
       properties:
         approval_request:
@@ -13218,35 +13218,35 @@ components:
         - bank
       type: object
     bank:
-          properties:
-            id:
-              description: 連携サービスID
-              example: 1
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            name:
-              description: 連携サービス名
-              example: 〇〇銀行
-              type: string
-            name_kana:
-              description: 連携サービス名(カナ)
-              example: ギンコウ
-              nullable: true
-              type: string
-            type:
-              description: >-
-                連携サービス種別: (銀行口座: bank_account, クレジットカード: credit_card, 現金:
-                wallet)
-              enum:
-                - bank_account
-                - credit_card
-                - wallet
-              example: bank_account
-              type: string
-          required:
-            - id
-          type: object
+      properties:
+        id:
+          description: 連携サービスID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        name:
+          description: 連携サービス名
+          example: 〇〇銀行
+          type: string
+        name_kana:
+          description: 連携サービス名(カナ)
+          example: ギンコウ
+          nullable: true
+          type: string
+        type:
+          description: >-
+            連携サービス種別: (銀行口座: bank_account, クレジットカード: credit_card, 現金:
+            wallet)
+          enum:
+            - bank_account
+            - credit_card
+            - wallet
+          example: bank_account
+          type: string
+      required:
+        - id
+      type: object
     companiesPlanResponse:
       properties:
         id:
@@ -14983,436 +14983,436 @@ components:
         - deal
       type: object
     deal:
-          properties:
-            amount:
-              description: 金額
-              example: 5250
+      properties:
+        amount:
+          description: 金額
+          example: 5250
           maximum: 9223372036854775807
           minimum: -9223372036854775808
-              type: integer
-            company_id:
-              description: 事業所ID
-              example: 1
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            details:
-              description: 取引の明細行
-              items:
-                properties:
-                  account_item_id:
-                    description: 勘定科目ID
-                    example: 803
-                    maximum: 2147483647
-                    minimum: 1
-                    type: integer
-                  amount:
-                    description: 取引金額
-                    example: 5250
+          type: integer
+        company_id:
+          description: 事業所ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        details:
+          description: 取引の明細行
+          items:
+            properties:
+              account_item_id:
+                description: 勘定科目ID
+                example: 803
+                maximum: 2147483647
+                minimum: 1
+                type: integer
+              amount:
+                description: 取引金額
+                example: 5250
                 maximum: 9223372036854775807
                 minimum: -9223372036854775808
-                    type: integer
-                  description:
-                    description: 備考
-                    example: 備考
+                type: integer
+              description:
+                description: 備考
+                example: 備考
+                type: string
+              entry_side:
+                description: '貸借（貸方: credit, 借方: debit）'
+                enum:
+                  - credit
+                  - debit
+                example: debit
+                type: string
+              id:
+                description: 取引行ID
+                example: 11
+                maximum: 2147483647
+                minimum: 1
+                type: integer
+              item_id:
+                description: 品目ID
+                example: 501
+                maximum: 2147483647
+                minimum: 1
+                nullable: true
+                type: integer
+              section_id:
+                description: 部門ID
+                example: 1
+                maximum: 2147483647
+                minimum: 1
+                nullable: true
+                type: integer
+              segment_1_tag_id:
+                description: セグメント１ID
+                example: 1
+                maximum: 9223372036854775807
+                minimum: 1
+                nullable: true
+                type: integer
+              segment_2_tag_id:
+                description: セグメント２ID
+                example: 1
+                maximum: 9223372036854775807
+                minimum: 1
+                nullable: true
+                type: integer
+              segment_3_tag_id:
+                description: セグメント３ID
+                example: 1
+                maximum: 9223372036854775807
+                minimum: 1
+                nullable: true
+                type: integer
+              tag_ids:
+                description: メモタグID
+                example:
+                  - 1
+                  - 2
+                  - 3
+                items:
+                  maximum: 2147483647
+                  minimum: 1
+                  type: integer
+                type: array
+              tax_code:
+                description: 税区分コード
+                example: 2
+                maximum: 2147483647
+                minimum: 0
+                type: integer
+              vat:
+                description: 消費税額
+                example: 250
+                type: integer
+            required:
+              - account_item_id
+              - amount
+              - entry_side
+              - id
+              - tax_code
+              - vat
+            type: object
+          type: array
+        due_amount:
+          description: 支払金額
+          example: 0
+          type: integer
+        due_date:
+          description: 支払期日 (yyyy-mm-dd)
+          example: '2013-02-28'
+          type: string
+        id:
+          description: 取引ID
+          example: 101
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        issue_date:
+          description: 発生日 (yyyy-mm-dd)
+          example: '2013-01-01'
+          type: string
+        partner_code:
+          description: 取引先コード
+          example: code001
+          nullable: true
+          type: string
+        partner_id:
+          description: 取引先ID
+          example: 201
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        payments:
+          description: 取引の支払行
+          items:
+            properties:
+              amount:
+                description: 支払金額
+                example: 5250
+                maximum: 9223372036854775807
+                minimum: -9223372036854775808
+                type: integer
+              date:
+                description: 支払日
+                example: '2013-01-28'
+                type: string
+              from_walletable_id:
+                description: 口座ID（from_walletable_typeがprivate_account_itemの場合は勘定科目ID）
+                example: 103
+                maximum: 2147483647
+                minimum: 1
+                type: integer
+              from_walletable_type:
+                description: >-
+                  口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金:
+                  wallet, プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）:
+                  private_account_item)
+                enum:
+                  - bank_account
+                  - credit_card
+                  - wallet
+                  - private_account_item
+                example: bank_account
+                type: string
+              id:
+                description: 取引行ID
+                example: 202
+                maximum: 2147483647
+                minimum: 1
+                type: integer
+            required:
+              - amount
+              - date
+              - id
+            type: object
+          type: array
+        receipts:
+          description: 証憑ファイル
+          items:
+            properties:
+              created_at:
+                description: 作成日時（ISO8601形式）
+                example: '2018-09-12T18:30:24+09:00'
+                type: string
+              description:
+                description: メモ
+                example: タクシー利用
+                type: string
+              file_src:
+                description: ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。）
+                example: >-
+                  https://www.freee.co.jp/api/p/receipts/revisions/1234xxxxx/download
+                type: string
+              id:
+                description: 証憑ID
+                example: 1
+                maximum: 2147483647
+                minimum: 1
+                type: integer
+              issue_date:
+                description: 発生日
+                example: '2019-01-01'
+                type: string
+              mime_type:
+                description: MIMEタイプ
+                example: image/png
+                type: string
+              origin:
+                description: アップロード元種別
+                enum:
+                  - unknown
+                  - web
+                  - mobile_camera
+                  - mobile_album
+                  - scansnap
+                  - scannable
+                  - dropbox
+                  - mail
+                  - safety_contact_file
+                  - public_api
+                example: public_api
+                type: string
+              status:
+                description: >-
+                  ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)
+                enum:
+                  - unconfirmed
+                  - confirmed
+                  - deleted
+                  - ignored
+                example: unconfirmed
+                type: string
+              user:
+                properties:
+                  display_name:
+                    description: 表示名
+                    example: フリー太郎
+                    nullable: true
                     type: string
-                  entry_side:
-                    description: '貸借（貸方: credit, 借方: debit）'
-                    enum:
-                      - credit
-                      - debit
-                    example: debit
+                  email:
+                    description: メールアドレス
+                    example: contact@example.com
                     type: string
                   id:
-                    description: 取引行ID
-                    example: 11
-                    maximum: 2147483647
-                    minimum: 1
-                    type: integer
-                  item_id:
-                    description: 品目ID
-                    example: 501
-                    maximum: 2147483647
-                    minimum: 1
-                    nullable: true
-                    type: integer
-                  section_id:
-                    description: 部門ID
+                    description: ユーザーID
                     example: 1
                     maximum: 2147483647
                     minimum: 1
-                    nullable: true
                     type: integer
-                  segment_1_tag_id:
-                    description: セグメント１ID
-                    example: 1
-                maximum: 9223372036854775807
-                    minimum: 1
-                    nullable: true
-                    type: integer
-                  segment_2_tag_id:
-                    description: セグメント２ID
-                    example: 1
-                maximum: 9223372036854775807
-                    minimum: 1
-                    nullable: true
-                    type: integer
-                  segment_3_tag_id:
-                    description: セグメント３ID
-                    example: 1
-                maximum: 9223372036854775807
-                    minimum: 1
-                    nullable: true
-                    type: integer
-                  tag_ids:
-                    description: メモタグID
-                    example:
-                      - 1
-                      - 2
-                      - 3
-                    items:
+                required:
+                  - email
+                  - id
+                type: object
+            required:
+              - created_at
+              - file_src
+              - id
+              - mime_type
+              - origin
+              - status
+              - user
+            type: object
+          type: array
+        ref_number:
+          description: 管理番号
+          example: 123-456
+          type: string
+        renews:
+          description: 取引の+更新行
+          items:
+            properties:
+              details:
+                description: +更新の明細行一覧（配列）
+                items:
+                  properties:
+                    account_item_id:
+                      description: 勘定科目ID
+                      example: 1
                       maximum: 2147483647
                       minimum: 1
                       type: integer
-                    type: array
-                  tax_code:
-                    description: 税区分コード
-                    example: 2
-                    maximum: 2147483647
-                    minimum: 0
-                    type: integer
-                  vat:
-                    description: 消費税額
-                    example: 250
-                    type: integer
-                required:
-                  - account_item_id
-                  - amount
-                  - entry_side
-                  - id
-                  - tax_code
-                  - vat
-                type: object
-              type: array
-            due_amount:
-              description: 支払金額
-              example: 0
-              type: integer
-            due_date:
-              description: 支払期日 (yyyy-mm-dd)
-              example: '2013-02-28'
-              type: string
-            id:
-              description: 取引ID
-              example: 101
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            issue_date:
-              description: 発生日 (yyyy-mm-dd)
-              example: '2013-01-01'
-              type: string
-            partner_code:
-              description: 取引先コード
-              example: code001
-              nullable: true
-              type: string
-            partner_id:
-              description: 取引先ID
-              example: 201
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            payments:
-              description: 取引の支払行
-              items:
-                properties:
-                  amount:
-                    description: 支払金額
-                    example: 5250
-                maximum: 9223372036854775807
-                minimum: -9223372036854775808
-                    type: integer
-                  date:
-                    description: 支払日
-                    example: '2013-01-28'
-                    type: string
-                  from_walletable_id:
-                    description: 口座ID（from_walletable_typeがprivate_account_itemの場合は勘定科目ID）
-                    example: 103
-                    maximum: 2147483647
-                    minimum: 1
-                    type: integer
-                  from_walletable_type:
-                    description: >-
-                      口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金:
-                      wallet, プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）:
-                      private_account_item)
-                    enum:
-                      - bank_account
-                      - credit_card
-                      - wallet
-                      - private_account_item
-                    example: bank_account
-                    type: string
-                  id:
-                    description: 取引行ID
-                    example: 202
-                    maximum: 2147483647
-                    minimum: 1
-                    type: integer
-                required:
-                  - amount
-                  - date
-                  - id
-                type: object
-              type: array
-            receipts:
-              description: 証憑ファイル
-              items:
-                properties:
-                  created_at:
-                    description: 作成日時（ISO8601形式）
-                    example: '2018-09-12T18:30:24+09:00'
-                    type: string
-                  description:
-                    description: メモ
-                    example: タクシー利用
-                    type: string
-                  file_src:
-                    description: ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。）
-                    example: >-
-                      https://www.freee.co.jp/api/p/receipts/revisions/1234xxxxx/download
-                    type: string
-                  id:
-                    description: 証憑ID
-                    example: 1
-                    maximum: 2147483647
-                    minimum: 1
-                    type: integer
-                  issue_date:
-                    description: 発生日
-                    example: '2019-01-01'
-                    type: string
-                  mime_type:
-                    description: MIMEタイプ
-                    example: image/png
-                    type: string
-                  origin:
-                    description: アップロード元種別
-                    enum:
-                      - unknown
-                      - web
-                      - mobile_camera
-                      - mobile_album
-                      - scansnap
-                      - scannable
-                      - dropbox
-                      - mail
-                      - safety_contact_file
-                      - public_api
-                    example: public_api
-                    type: string
-                  status:
-                    description: >-
-                      ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)
-                    enum:
-                      - unconfirmed
-                      - confirmed
-                      - deleted
-                      - ignored
-                    example: unconfirmed
-                    type: string
-                  user:
-                    properties:
-                      display_name:
-                        description: 表示名
-                        example: フリー太郎
-                        nullable: true
-                        type: string
-                      email:
-                        description: メールアドレス
-                        example: contact@example.com
-                        type: string
-                      id:
-                        description: ユーザーID
+                    amount:
+                      description: 金額（税込で指定してください）
+                      example: 108000
+                      maximum: 9223372036854775807
+                      minimum: -9223372036854775808
+                      type: integer
+                    description:
+                      description: 備考
+                      example: 備考
+                      nullable: true
+                      type: string
+                    entry_side:
+                      description: '貸借(貸方: credit, 借方: debit)'
+                      enum:
+                        - credit
+                        - debit
+                      example: debit
+                      type: string
+                    id:
+                      description: +更新の明細行ID
+                      example: 1
+                      maximum: 2147483647
+                      minimum: 1
+                      type: integer
+                    item_id:
+                      description: 品目ID
+                      example: 1
+                      maximum: 2147483647
+                      minimum: 1
+                      nullable: true
+                      type: integer
+                    section_id:
+                      description: 部門ID
+                      example: 1
+                      maximum: 2147483647
+                      minimum: 1
+                      nullable: true
+                      type: integer
+                    segment_1_tag_id:
+                      description: セグメント１ID
+                      example: 1
+                      maximum: 9223372036854775807
+                      minimum: 1
+                      nullable: true
+                      type: integer
+                    segment_2_tag_id:
+                      description: セグメント２ID
+                      example: 1
+                      maximum: 9223372036854775807
+                      minimum: 1
+                      nullable: true
+                      type: integer
+                    segment_3_tag_id:
+                      description: セグメント３ID
+                      example: 1
+                      maximum: 9223372036854775807
+                      minimum: 1
+                      nullable: true
+                      type: integer
+                    tag_ids:
+                      items:
+                        description: メモタグID
                         example: 1
                         maximum: 2147483647
                         minimum: 1
                         type: integer
-                    required:
-                      - email
-                      - id
-                    type: object
-                required:
-                  - created_at
-                  - file_src
-                  - id
-                  - mime_type
-                  - origin
-                  - status
-                  - user
-                type: object
-              type: array
-            ref_number:
-              description: 管理番号
-              example: 123-456
-              type: string
-            renews:
-              description: 取引の+更新行
-              items:
-                properties:
-                  details:
-                    description: +更新の明細行一覧（配列）
-                    items:
-                      properties:
-                        account_item_id:
-                          description: 勘定科目ID
-                          example: 1
-                          maximum: 2147483647
-                          minimum: 1
-                          type: integer
-                        amount:
-                          description: 金額（税込で指定してください）
-                          example: 108000
-                      maximum: 9223372036854775807
-                      minimum: -9223372036854775808
-                          type: integer
-                        description:
-                          description: 備考
-                          example: 備考
-                          nullable: true
-                          type: string
-                        entry_side:
-                          description: '貸借(貸方: credit, 借方: debit)'
-                          enum:
-                            - credit
-                            - debit
-                          example: debit
-                          type: string
-                        id:
-                          description: +更新の明細行ID
-                          example: 1
-                          maximum: 2147483647
-                          minimum: 1
-                          type: integer
-                        item_id:
-                          description: 品目ID
-                          example: 1
-                          maximum: 2147483647
-                          minimum: 1
-                          nullable: true
-                          type: integer
-                        section_id:
-                          description: 部門ID
-                          example: 1
-                          maximum: 2147483647
-                          minimum: 1
-                          nullable: true
-                          type: integer
-                        segment_1_tag_id:
-                          description: セグメント１ID
-                          example: 1
-                      maximum: 9223372036854775807
-                          minimum: 1
-                          nullable: true
-                          type: integer
-                        segment_2_tag_id:
-                          description: セグメント２ID
-                          example: 1
-                      maximum: 9223372036854775807
-                          minimum: 1
-                          nullable: true
-                          type: integer
-                        segment_3_tag_id:
-                          description: セグメント３ID
-                          example: 1
-                      maximum: 9223372036854775807
-                          minimum: 1
-                          nullable: true
-                          type: integer
-                        tag_ids:
-                          items:
-                            description: メモタグID
-                            example: 1
-                            maximum: 2147483647
-                            minimum: 1
-                            type: integer
-                          type: array
-                        tax_code:
-                          description: 税区分コード
-                          example: 1
-                          maximum: 2147483647
-                          minimum: 0
-                          type: integer
-                        vat:
-                          description: 消費税額（指定しない場合は自動で計算されます）
-                          example: 8000
-                          type: integer
-                      required:
-                        - account_item_id
-                        - amount
-                        - entry_side
-                        - id
-                        - tag_ids
-                        - tax_code
-                        - vat
-                      type: object
-                    type: array
-                  id:
-                    description: +更新行ID
-                    example: 11
-                    maximum: 2147483647
-                    minimum: 1
-                    type: integer
-                  renew_target_id:
-                    description: +更新の対象行ID
-                    example: 12
-                    maximum: 2147483647
-                    minimum: 1
-                    type: integer
-                  renew_target_type:
-                    description: +更新の対象行タイプ
-                    enum:
-                      - detail
-                      - accrual
-                      - renew
-                    example: detail
-                    type: string
-                  update_date:
-                    description: 更新日 (yyyy-mm-dd)
-                    example: '2014-01-01'
-                    type: string
-                required:
-                  - details
-                  - id
-                  - renew_target_id
-                  - renew_target_type
-                  - update_date
-                type: object
-              type: array
-            status:
-              description: '決済状況 (未決済: unsettled, 完了: settled)'
-              enum:
-                - unsettled
-                - settled
-              example: settled
-              type: string
-            type:
-              description: '収支区分 (収入: income, 支出: expense)'
-              enum:
-                - income
-                - expense
-              example: expense
-              type: string
-          required:
-            - amount
-            - company_id
-            - id
-            - issue_date
-            - partner_id
-            - status
-          type: object
+                      type: array
+                    tax_code:
+                      description: 税区分コード
+                      example: 1
+                      maximum: 2147483647
+                      minimum: 0
+                      type: integer
+                    vat:
+                      description: 消費税額（指定しない場合は自動で計算されます）
+                      example: 8000
+                      type: integer
+                  required:
+                    - account_item_id
+                    - amount
+                    - entry_side
+                    - id
+                    - tag_ids
+                    - tax_code
+                    - vat
+                  type: object
+                type: array
+              id:
+                description: +更新行ID
+                example: 11
+                maximum: 2147483647
+                minimum: 1
+                type: integer
+              renew_target_id:
+                description: +更新の対象行ID
+                example: 12
+                maximum: 2147483647
+                minimum: 1
+                type: integer
+              renew_target_type:
+                description: +更新の対象行タイプ
+                enum:
+                  - detail
+                  - accrual
+                  - renew
+                example: detail
+                type: string
+              update_date:
+                description: 更新日 (yyyy-mm-dd)
+                example: '2014-01-01'
+                type: string
+            required:
+              - details
+              - id
+              - renew_target_id
+              - renew_target_type
+              - update_date
+            type: object
+          type: array
+        status:
+          description: '決済状況 (未決済: unsettled, 完了: settled)'
+          enum:
+            - unsettled
+            - settled
+          example: settled
+          type: string
+        type:
+          description: '収支区分 (収入: income, 支出: expense)'
+          enum:
+            - income
+            - expense
+          example: expense
+          type: string
+      required:
+        - amount
+        - company_id
+        - id
+        - issue_date
+        - partner_id
+        - status
+      type: object
     dealUpdateParams:
       properties:
         company_id:
@@ -15833,50 +15833,50 @@ components:
         - expense_application_line_template
       type: object
     expense_application_line_template:
-          properties:
-            account_item_id:
-              description: 勘定科目ID
-              example: 1
-              maximum: 2147483647
-              type: integer
-            account_item_name:
-              description: 勘定科目名
-              example: 旅費交通費
-              type: string
-            description:
-              description: 経費科目の説明
-              example: 電車、バス、飛行機などの交通費
-              type: string
-            id:
-              description: 経費科目ID
-              example: 1
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            line_description:
-              description: 内容の補足
-              example: 移動区間
-              type: string
-            name:
-              description: 経費科目名
-              example: 交通費
-              type: string
-            tax_code:
-              description: 税区分コード
-              example: 1
-              maximum: 2147483647
-              minimum: 0
-              type: integer
-            tax_name:
-              description: 税区分名
-              example: 課対仕入
-              type: string
-          required:
-            - account_item_name
-            - id
-            - name
-            - tax_name
-          type: object
+      properties:
+        account_item_id:
+          description: 勘定科目ID
+          example: 1
+          maximum: 2147483647
+          type: integer
+        account_item_name:
+          description: 勘定科目名
+          example: 旅費交通費
+          type: string
+        description:
+          description: 経費科目の説明
+          example: 電車、バス、飛行機などの交通費
+          type: string
+        id:
+          description: 経費科目ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        line_description:
+          description: 内容の補足
+          example: 移動区間
+          type: string
+        name:
+          description: 経費科目名
+          example: 交通費
+          type: string
+        tax_code:
+          description: 税区分コード
+          example: 1
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        tax_name:
+          description: 税区分名
+          example: 課対仕入
+          type: string
+      required:
+        - account_item_name
+        - id
+        - name
+        - tax_name
+      type: object
     expenseApplicationResponse:
       properties:
         expense_application:
@@ -16641,499 +16641,500 @@ components:
         - invoice
       type: object
     invoice:
-          properties:
-            booking_date:
-              description: 売上計上日
-              example: '2013-01-01'
-              nullable: true
-              type: string
-            company_address1:
-              description: 市区町村・番地
-              example: ＸＸ区ＸＸ１−１−１
-              nullable: true
-              type: string
-            company_address2:
-              description: 建物名・部屋番号など
-              example: ビル1F
-              nullable: true
-              type: string
-            company_contact_info:
-              description: 事業所担当者名
-              example: 法人営業担当
-              nullable: true
-              type: string
-            company_id:
-              description: 事業所ID
-              example: 1
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            company_name:
-              description: 事業所名
-              example: freee株式会社
-              type: string
-            company_prefecture_code:
-              description: >-
-                都道府県コード（0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄
-              example: 12
-              maximum: 46
-              minimum: 0
-              nullable: true
-              type: integer
-            company_prefecture_name:
-              description: 都道府県
-              example: 東京都
-              nullable: true
-              type: string
-            company_zipcode:
-              description: 郵便番号
-              example: 000-0000
-              nullable: true
-              type: string
-            deal_id:
-              description: '取引ID (invoice_statusがsubmitted, unsubmittedの時IDが表示されます)'
-              maximum: 2147483647
-              minimum: 1
-              nullable: true
-              type: integer
-            description:
-              description: 概要
-              example: ８月分請求書
-              nullable: true
-              type: string
-            due_date:
-              description: 期日 (yyyy-mm-dd)
-              example: '2013-02-28'
-              nullable: true
-              type: string
-            id:
-              description: 請求書ID
-              example: 101
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            invoice_contents:
-              description: 請求内容
-              items:
-                properties:
-                  account_item_id:
-                    description: 勘定科目ID
-                    example: 1
-                    maximum: 2147483647
-                    minimum: 1
-                    nullable: true
-                    type: integer
-                  account_item_name:
-                    description: 勘定科目名
-                    example: 売上
-                    nullable: true
-                    type: string
-                  amount:
-                    description: 金額
-                    example: 108000
+      properties:
+        booking_date:
+          description: 売上計上日
+          example: '2013-01-01'
+          nullable: true
+          type: string
+        company_address1:
+          description: 市区町村・番地
+          example: ＸＸ区ＸＸ１−１−１
+          nullable: true
+          type: string
+        company_address2:
+          description: 建物名・部屋番号など
+          example: ビル1F
+          nullable: true
+          type: string
+        company_contact_info:
+          description: 事業所担当者名
+          example: 法人営業担当
+          nullable: true
+          type: string
+        company_id:
+          description: 事業所ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        company_name:
+          description: 事業所名
+          example: freee株式会社
+          type: string
+        company_prefecture_code:
+          description: >-
+            都道府県コード（0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄
+          example: 12
+          maximum: 46
+          minimum: 0
+          nullable: true
+          type: integer
+        company_prefecture_name:
+          description: 都道府県
+          example: 東京都
+          nullable: true
+          type: string
+        company_zipcode:
+          description: 郵便番号
+          example: 000-0000
+          nullable: true
+          type: string
+        deal_id:
+          description: '取引ID (invoice_statusがsubmitted, unsubmittedの時IDが表示されます)'
+          maximum: 2147483647
+          minimum: 1
+          nullable: true
+          type: integer
+        description:
+          description: 概要
+          example: ８月分請求書
+          nullable: true
+          type: string
+        due_date:
+          description: 期日 (yyyy-mm-dd)
+          example: '2013-02-28'
+          nullable: true
+          type: string
+        id:
+          description: 請求書ID
+          example: 101
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        invoice_contents:
+          description: 請求内容
+          items:
+            properties:
+              account_item_id:
+                description: 勘定科目ID
+                example: 1
+                maximum: 2147483647
+                minimum: 1
+                nullable: true
+                type: integer
+              account_item_name:
+                description: 勘定科目名
+                example: 売上
+                nullable: true
+                type: string
+              amount:
+                description: 金額
+                example: 108000
                 maximum: 9223372036854775807
                 minimum: -9223372036854775808
-                    type: integer
-                  description:
-                    description: 備考
-                    example: 備考
-                    nullable: true
-                    type: string
-                  id:
-                    description: 請求内容ID
-                    example: 1
-                    maximum: 2147483647
-                    minimum: 1
-                    type: integer
-                  item_id:
-                    description: 品目ID
-                    example: 1
-                    maximum: 2147483647
-                    minimum: 1
-                    nullable: true
-                    type: integer
-                  item_name:
-                    description: 品目
-                    example: 会計freee
-                    nullable: true
-                    type: string
-                  order:
-                    description: 順序
-                    example: 1
-                    maximum: 2147483647
-                    minimum: 0
-                    type: integer
-                  qty:
-                    description: 数量
-                    example: 1
-                    type: number
-                  reduced_vat:
-                    description: '軽減税率税区分（true: 対象、false: 対象外）'
-                    example: true
-                    type: boolean
-                  section_id:
-                    description: 部門ID
-                    example: 1
-                    maximum: 2147483647
-                    minimum: 1
-                    nullable: true
-                    type: integer
-                  section_name:
-                    description: 部門
-                    example: 開発部
-                    nullable: true
-                    type: string
-                  segment_1_tag_id:
-                    description: セグメント１ID
-                    example: 1
+                type: integer
+              description:
+                description: 備考
+                example: 備考
+                nullable: true
+                type: string
+              id:
+                description: 請求内容ID
+                example: 1
+                maximum: 2147483647
+                minimum: 1
+                type: integer
+              item_id:
+                description: 品目ID
+                example: 1
+                maximum: 2147483647
+                minimum: 1
+                nullable: true
+                type: integer
+              item_name:
+                description: 品目
+                example: 会計freee
+                nullable: true
+                type: string
+              order:
+                description: 順序
+                example: 1
+                maximum: 2147483647
+                minimum: 0
+                type: integer
+                nullable: true
+              qty:
+                description: 数量
+                example: 1
+                type: number
+              reduced_vat:
+                description: '軽減税率税区分（true: 対象、false: 対象外）'
+                example: true
+                type: boolean
+              section_id:
+                description: 部門ID
+                example: 1
+                maximum: 2147483647
+                minimum: 1
+                nullable: true
+                type: integer
+              section_name:
+                description: 部門
+                example: 開発部
+                nullable: true
+                type: string
+              segment_1_tag_id:
+                description: セグメント１ID
+                example: 1
                 maximum: 9223372036854775807
-                    minimum: 1
-                    nullable: true
-                    type: integer
-                  segment_1_tag_name:
-                    description: セグメント１ID
-                    example: セグメント１
-                    nullable: true
-                    type: string
-                  segment_2_tag_id:
-                    description: セグメント２ID
-                    example: 1
+                minimum: 1
+                nullable: true
+                type: integer
+              segment_1_tag_name:
+                description: セグメント１ID
+                example: セグメント１
+                nullable: true
+                type: string
+              segment_2_tag_id:
+                description: セグメント２ID
+                example: 1
                 maximum: 9223372036854775807
-                    minimum: 1
-                    nullable: true
-                    type: integer
-                  segment_2_tag_name:
-                    description: セグメント２
-                    example: セグメント２
-                    nullable: true
-                    type: string
-                  segment_3_tag_id:
-                    description: セグメント３ID
-                    example: 1
+                minimum: 1
+                nullable: true
+                type: integer
+              segment_2_tag_name:
+                description: セグメント２
+                example: セグメント２
+                nullable: true
+                type: string
+              segment_3_tag_id:
+                description: セグメント３ID
+                example: 1
                 maximum: 9223372036854775807
-                    minimum: 1
-                    nullable: true
-                    type: integer
-                  segment_3_tag_name:
-                    description: セグメント３
-                    example: セグメント３
-                    nullable: true
-                    type: string
-                  tag_ids:
-                    items:
-                      description: メモタグID
-                      example: 1
-                      maximum: 2147483647
-                      minimum: 1
-                      type: integer
-                    type: array
-                  tag_names:
-                    items:
-                      description: メモタグ
-                      example: メモタグ
-                      type: string
-                    type: array
-                  tax_code:
-                    description: 税区分コード
-                    example: 1
-                    maximum: 2147483647
-                    minimum: 0
-                    nullable: true
-                    type: integer
-                  type:
-                    description: 行の種類
-                    enum:
-                      - normal
-                      - discount
-                      - text
-                    example: normal
-                    type: string
-                  unit:
-                    description: 単位
-                    example: 個
-                    nullable: true
-                    type: string
-                  unit_price:
-                    description: 単価
-                    example: 1
-                    type: number
-                  vat:
-                    description: 消費税額
-                    example: 8000
-                    type: integer
-                required:
-                  - account_item_id
-                  - account_item_name
-                  - amount
-                  - description
-                  - id
-                  - item_id
-                  - item_name
-                  - order
-                  - qty
-                  - reduced_vat
-                  - section_id
-                  - section_name
-                  - tag_ids
-                  - tag_names
-                  - tax_code
-                  - type
-                  - unit
-                  - unit_price
-                  - vat
-                type: object
-              type: array
-            invoice_layout:
-              description: |-
-                請求書レイアウト
-                * `default_classic` - レイアウト１/クラシック (デフォルト)
+                minimum: 1
+                nullable: true
+                type: integer
+              segment_3_tag_name:
+                description: セグメント３
+                example: セグメント３
+                nullable: true
+                type: string
+              tag_ids:
+                items:
+                  description: メモタグID
+                  example: 1
+                  maximum: 2147483647
+                  minimum: 1
+                  type: integer
+                type: array
+              tag_names:
+                items:
+                  description: メモタグ
+                  example: メモタグ
+                  type: string
+                type: array
+              tax_code:
+                description: 税区分コード
+                example: 1
+                maximum: 2147483647
+                minimum: 0
+                nullable: true
+                type: integer
+              type:
+                description: 行の種類
+                enum:
+                  - normal
+                  - discount
+                  - text
+                example: normal
+                type: string
+              unit:
+                description: 単位
+                example: 個
+                nullable: true
+                type: string
+              unit_price:
+                description: 単価
+                example: 1
+                type: number
+              vat:
+                description: 消費税額
+                example: 8000
+                type: integer
+            required:
+              - account_item_id
+              - account_item_name
+              - amount
+              - description
+              - id
+              - item_id
+              - item_name
+              - order
+              - qty
+              - reduced_vat
+              - section_id
+              - section_name
+              - tag_ids
+              - tag_names
+              - tax_code
+              - type
+              - unit
+              - unit_price
+              - vat
+            type: object
+          type: array
+        invoice_layout:
+          description: |-
+            請求書レイアウト
+            * `default_classic` - レイアウト１/クラシック (デフォルト)
 
-                * `standard_classic` - レイアウト２/クラシック
+            * `standard_classic` - レイアウト２/クラシック
 
-                * `envelope_classic` - 封筒１/クラシック
+            * `envelope_classic` - 封筒１/クラシック
 
-                * `carried_forward_standard_classic` - レイアウト３（繰越金額欄あり）/クラシック
+            * `carried_forward_standard_classic` - レイアウト３（繰越金額欄あり）/クラシック
 
-                * `carried_forward_envelope_classic` - 封筒２（繰越金額欄あり）/クラシック
+            * `carried_forward_envelope_classic` - 封筒２（繰越金額欄あり）/クラシック
 
-                * `default_modern` - レイアウト１/モダン
+            * `default_modern` - レイアウト１/モダン
 
-                * `standard_modern` - レイアウト２/モダン
+            * `standard_modern` - レイアウト２/モダン
 
-                * `envelope_modern` - 封筒/モダン
-              enum:
-                - default_classic
-                - standard_classic
-                - envelope_classic
-                - carried_forward_standard_classic
-                - carried_forward_envelope_classic
-                - default_modern
-                - standard_modern
-                - envelope_modern
-              example: default_classic
-              type: string
-            invoice_number:
-              description: 請求書番号
-              example: A001
-              type: string
-            invoice_status:
-              description: >-
-                請求書ステータス  (draft: 下書き, applying: 申請中, remanded: 差し戻し, rejected:
-                却下, approved: 承認済み, submitted: 送付済み, unsubmitted:
-                請求書の承認フローが無効の場合のみ、unsubmitted（送付待ち）の値をとります)
-              enum:
-                - draft
-                - applying
-                - remanded
-                - rejected
-                - approved
-                - submitted
-                - unsubmitted
-              type: string
-            issue_date:
-              description: 請求日 (yyyy-mm-dd)
-              example: '2013-01-01'
-              type: string
-            mail_sent_at:
-              description: メール送信日時(最新)
-              example: '2013-03-01 10:00:00'
-              nullable: true
-              type: string
-            message:
-              description: メッセージ
-              example: 下記の通りご請求申し上げます。
-              nullable: true
-              type: string
-            notes:
-              description: 備考
-              example: 毎度ありがとうございます
-              nullable: true
-              type: string
-            partner_address1:
-              description: 市区町村・番地
-              example: 湯沢市
-              nullable: true
-              type: string
-            partner_address2:
-              description: 建物名・部屋番号など
-              example: Aビル
-              nullable: true
-              type: string
-            partner_code:
-              description: 取引先コード
-              example: code001
-              nullable: true
-              type: string
-            partner_contact_info:
-              description: 取引先担当者名
-              example: 営業担当
-              nullable: true
-              type: string
-            partner_display_name:
-              description: 請求書に表示する取引先名
-              example: 株式会社freeeパートナー
-              nullable: true
-              type: string
-            partner_id:
-              description: 取引先ID
-              example: 201
-              maximum: 2147483647
-              minimum: 1
-              nullable: true
+            * `envelope_modern` - 封筒/モダン
+          enum:
+            - default_classic
+            - standard_classic
+            - envelope_classic
+            - carried_forward_standard_classic
+            - carried_forward_envelope_classic
+            - default_modern
+            - standard_modern
+            - envelope_modern
+          example: default_classic
+          type: string
+        invoice_number:
+          description: 請求書番号
+          example: A001
+          type: string
+        invoice_status:
+          description: >-
+            請求書ステータス  (draft: 下書き, applying: 申請中, remanded: 差し戻し, rejected:
+            却下, approved: 承認済み, submitted: 送付済み, unsubmitted:
+            請求書の承認フローが無効の場合のみ、unsubmitted（送付待ち）の値をとります)
+          enum:
+            - draft
+            - applying
+            - remanded
+            - rejected
+            - approved
+            - submitted
+            - unsubmitted
+          type: string
+        issue_date:
+          description: 請求日 (yyyy-mm-dd)
+          example: '2013-01-01'
+          type: string
+        mail_sent_at:
+          description: メール送信日時(最新)
+          example: '2013-03-01 10:00:00'
+          nullable: true
+          type: string
+        message:
+          description: メッセージ
+          example: 下記の通りご請求申し上げます。
+          nullable: true
+          type: string
+        notes:
+          description: 備考
+          example: 毎度ありがとうございます
+          nullable: true
+          type: string
+        partner_address1:
+          description: 市区町村・番地
+          example: 湯沢市
+          nullable: true
+          type: string
+        partner_address2:
+          description: 建物名・部屋番号など
+          example: Aビル
+          nullable: true
+          type: string
+        partner_code:
+          description: 取引先コード
+          example: code001
+          nullable: true
+          type: string
+        partner_contact_info:
+          description: 取引先担当者名
+          example: 営業担当
+          nullable: true
+          type: string
+        partner_display_name:
+          description: 請求書に表示する取引先名
+          example: 株式会社freeeパートナー
+          nullable: true
+          type: string
+        partner_id:
+          description: 取引先ID
+          example: 201
+          maximum: 2147483647
+          minimum: 1
+          nullable: true
+          type: integer
+        partner_name:
+          description: 取引先名
+          example: freeeパートナー
+          nullable: true
+          type: string
+        partner_prefecture_code:
+          description: >-
+            都道府県コード（0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄
+          example: 4
+          maximum: 46
+          minimum: 0
+          nullable: true
+          type: integer
+        partner_prefecture_name:
+          description: 都道府県
+          example: 秋田県
+          nullable: true
+          type: string
+        partner_title:
+          description: 敬称（御中、様、(空白)の3つから選択）
+          example: 御中
+          nullable: true
+          type: string
+        partner_zipcode:
+          description: 郵便番号
+          example: 000-0000
+          nullable: true
+          type: string
+        payment_bank_info:
+          description: 支払口座
+          example: ＸＸ銀行ＹＹ支店1111111
+          nullable: true
+          type: string
+        payment_date:
+          description: 入金日
+          example: '2013-03-01'
+          nullable: true
+          type: string
+        payment_status:
+          description: '入金ステータス  (unsettled: 入金待ち, settled: 入金済み)'
+          enum:
+            - ''
+            - unsettled
+            - settled
+          type: string
+        payment_type:
+          description: '支払方法 (振込: transfer, 引き落とし: direct_debit)'
+          enum:
+            - ''
+            - transfer
+            - direct_debit
+          example: transfer
+          type: string
+        posting_status:
+          description: >-
+            郵送ステータス(unrequested: リクエスト前, preview_registered: プレビュー登録,
+            preview_failed: プレビュー登録失敗, ordered: 注文中, order_failed: 注文失敗,
+            printing: 印刷中, canceled: キャンセル, posted: 投函済み)
+          enum:
+            - ''
+            - unrequested
+            - preview_registered
+            - preview_failed
+            - ordered
+            - order_failed
+            - printing
+            - canceled
+            - posted
+          example: unrequested
+          type: string
+        sub_total:
+          description: 小計
+          example: 100000
+          type: integer
+        tax_entry_method:
+          description: '請求書の消費税計算方法(inclusive: 内税, exclusive: 外税)'
+          enum:
+            - ''
+            - inclusive
+            - exclusive
+          example: exclusive
+          type: string
+        title:
+          description: タイトル
+          example: 請求書
+          nullable: true
+          type: string
+        total_amount:
+          description: 合計金額
+          example: 108000
+          type: integer
+        total_amount_per_vat_rate:
+          properties:
+            reduced_vat_8:
+              description: 軽減税率8%の税込み金額合計
+              example: 0
+              maximum: 9223372036854775807
               type: integer
-            partner_name:
-              description: 取引先名
-              example: freeeパートナー
-              nullable: true
-              type: string
-            partner_prefecture_code:
-              description: >-
-                都道府県コード（0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄
-              example: 4
-              maximum: 46
-              minimum: 0
-              nullable: true
+            vat_10:
+              description: 税率10%の税込み金額合計
+              example: 0
+              maximum: 9223372036854775807
               type: integer
-            partner_prefecture_name:
-              description: 都道府県
-              example: 秋田県
-              nullable: true
-              type: string
-            partner_title:
-              description: 敬称（御中、様、(空白)の3つから選択）
-              example: 御中
-              nullable: true
-              type: string
-            partner_zipcode:
-              description: 郵便番号
-              example: 000-0000
-              nullable: true
-              type: string
-            payment_bank_info:
-              description: 支払口座
-              example: ＸＸ銀行ＹＹ支店1111111
-              nullable: true
-              type: string
-            payment_date:
-              description: 入金日
-              example: '2013-03-01'
-              nullable: true
-              type: string
-            payment_status:
-              description: '入金ステータス  (unsettled: 入金待ち, settled: 入金済み)'
-              enum:
-                - ''
-                - unsettled
-                - settled
-              type: string
-            payment_type:
-              description: '支払方法 (振込: transfer, 引き落とし: direct_debit)'
-              enum:
-                - ''
-                - transfer
-                - direct_debit
-              example: transfer
-              type: string
-            posting_status:
-              description: >-
-                郵送ステータス(unrequested: リクエスト前, preview_registered: プレビュー登録,
-                preview_failed: プレビュー登録失敗, ordered: 注文中, order_failed: 注文失敗,
-                printing: 印刷中, canceled: キャンセル, posted: 投函済み)
-              enum:
-                - ''
-                - unrequested
-                - preview_registered
-                - preview_failed
-                - ordered
-                - order_failed
-                - printing
-                - canceled
-                - posted
-              example: unrequested
-              type: string
-            sub_total:
-              description: 小計
-              example: 100000
+            vat_5:
+              description: 税率5%の税込み金額合計
+              example: 0
+              maximum: 9223372036854775807
               type: integer
-            tax_entry_method:
-              description: '請求書の消費税計算方法(inclusive: 内税, exclusive: 外税)'
-              enum:
-                - ''
-                - inclusive
-                - exclusive
-              example: exclusive
-              type: string
-            title:
-              description: タイトル
-              example: 請求書
-              nullable: true
-              type: string
-            total_amount:
-              description: 合計金額
+            vat_8:
+              description: 税率8%の税込み金額合計
               example: 108000
+              maximum: 9223372036854775807
               type: integer
-            total_amount_per_vat_rate:
-              properties:
-                reduced_vat_8:
-                  description: 軽減税率8%の税込み金額合計
-                  example: 0
-              maximum: 9223372036854775807
-                  type: integer
-                vat_10:
-                  description: 税率10%の税込み金額合計
-                  example: 0
-              maximum: 9223372036854775807
-                  type: integer
-                vat_5:
-                  description: 税率5%の税込み金額合計
-                  example: 0
-              maximum: 9223372036854775807
-                  type: integer
-                vat_8:
-                  description: 税率8%の税込み金額合計
-                  example: 108000
-              maximum: 9223372036854775807
-                  type: integer
-              required:
-                - reduced_vat_8
-                - vat_10
-                - vat_5
-                - vat_8
-              type: object
-            total_vat:
-              description: 合計金額
-              example: 8000
-              type: integer
-            web_confirmed_at:
-              description: Web共有取引先確認日時(最新)
-              example: '2013-03-01 10:00:00'
-              nullable: true
-              type: string
-            web_downloaded_at:
-              description: Web共有ダウンロード日時(最新)
-              example: '2013-03-01 10:00:00'
-              nullable: true
-              type: string
-            web_published_at:
-              description: Web共有日時(最新)
-              example: '2013-03-01 10:00:00'
-              nullable: true
-              type: string
           required:
-            - company_id
-            - company_name
-            - id
-            - invoice_layout
-            - invoice_number
-            - invoice_status
-            - issue_date
-            - partner_id
-            - payment_type
-            - posting_status
-            - tax_entry_method
-            - total_amount
-            - total_amount_per_vat_rate
+            - reduced_vat_8
+            - vat_10
+            - vat_5
+            - vat_8
           type: object
+        total_vat:
+          description: 合計金額
+          example: 8000
+          type: integer
+        web_confirmed_at:
+          description: Web共有取引先確認日時(最新)
+          example: '2013-03-01 10:00:00'
+          nullable: true
+          type: string
+        web_downloaded_at:
+          description: Web共有ダウンロード日時(最新)
+          example: '2013-03-01 10:00:00'
+          nullable: true
+          type: string
+        web_published_at:
+          description: Web共有日時(最新)
+          example: '2013-03-01 10:00:00'
+          nullable: true
+          type: string
+      required:
+        - company_id
+        - company_name
+        - id
+        - invoice_layout
+        - invoice_number
+        - invoice_status
+        - issue_date
+        - partner_id
+        - payment_type
+        - posting_status
+        - tax_entry_method
+        - total_amount
+        - total_amount_per_vat_rate
+      type: object
     invoiceUpdateParams:
       properties:
         booking_date:
@@ -17471,39 +17472,39 @@ components:
         - item
       type: object
     item:
-          properties:
-            company_id:
-              description: 事業所ID
-              example: 1
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            id:
-              description: 品目ID
-              example: 101
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            name:
-              description: 品目名 (30文字以内)
-              example: タクシー代
-              maxLength: 30
-              type: string
-            shortcut1:
-              description: ショートカット１ (20文字以内)
-              example: TAXI
-              nullable: true
-              type: string
-            shortcut2:
-              description: ショートカット２ (20文字以内)
-              example: 201
-              nullable: true
-              type: string
-          required:
-            - company_id
-            - id
-            - name
-          type: object
+      properties:
+        company_id:
+          description: 事業所ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        id:
+          description: 品目ID
+          example: 101
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        name:
+          description: 品目名 (30文字以内)
+          example: タクシー代
+          maxLength: 30
+          type: string
+        shortcut1:
+          description: ショートカット１ (20文字以内)
+          example: TAXI
+          nullable: true
+          type: string
+        shortcut2:
+          description: ショートカット２ (20文字以内)
+          example: 201
+          nullable: true
+          type: string
+      required:
+        - company_id
+        - id
+        - name
+      type: object
     journalStatusResponse:
       properties:
         journals:
@@ -17764,190 +17765,190 @@ components:
         - manual_journal
       type: object
     manual_journal:
-          properties:
-            adjustment:
-              description: '決算整理仕訳フラグ（falseまたは未指定の場合: 日常仕訳）'
-              example: false
-              type: boolean
-            company_id:
-              description: 事業所ID
-              example: 1
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            details:
-              description: '貸借行一覧（配列）: 貸借合わせて100行まで登録できます。'
-              items:
-                properties:
-                  account_item_id:
-                    description: 勘定科目ID
-                    example: 1
-                    maximum: 2147483647
-                    minimum: 1
-                    type: integer
-                  amount:
-                    description: 金額（税込で指定してください）
-                    example: 108000
-                    maximum: 2147483647
-                    minimum: 1
-                    type: integer
-                  description:
-                    description: 備考
-                    example: 備考
-                    type: string
-                  entry_side:
-                    description: '貸借(貸方: credit, 借方: debit)'
-                    enum:
-                      - credit
-                      - debit
-                    example: credit
-                    type: string
-                  id:
-                    description: 貸借行ID
-                    example: 1
-                    maximum: 2147483647
-                    minimum: 1
-                    type: integer
-                  item_id:
-                    description: 品目ID
-                    example: 1
-                    maximum: 2147483647
-                    minimum: 1
-                    nullable: true
-                    type: integer
-                  item_name:
-                    description: 品目
-                    example: 会計freee
-                    nullable: true
-                    type: string
-                  partner_code:
-                    description: 取引先コード
-                    example: code001
-                    nullable: true
-                    type: string
-                  partner_id:
-                    description: 取引先ID
-                    example: 1
-                    maximum: 2147483647
-                    minimum: 1
-                    nullable: true
-                    type: integer
-                  partner_long_name:
-                    description: 正式名称（255文字以内）
-                    example: freee株式会社
-                    maxLength: 255
-                    nullable: true
-                    type: string
-                  partner_name:
-                    description: 取引先名
-                    example: freee
-                    nullable: true
-                    type: string
-                  section_id:
-                    description: 部門ID
-                    example: 1
-                    maximum: 2147483647
-                    minimum: 1
-                    nullable: true
-                    type: integer
-                  section_name:
-                    description: 部門
-                    example: 開発部
-                    nullable: true
-                    type: string
-                  segment_1_tag_id:
-                    description: セグメント１ID
-                    example: 1
+      properties:
+        adjustment:
+          description: '決算整理仕訳フラグ（falseまたは未指定の場合: 日常仕訳）'
+          example: false
+          type: boolean
+        company_id:
+          description: 事業所ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        details:
+          description: '貸借行一覧（配列）: 貸借合わせて100行まで登録できます。'
+          items:
+            properties:
+              account_item_id:
+                description: 勘定科目ID
+                example: 1
+                maximum: 2147483647
+                minimum: 1
+                type: integer
+              amount:
+                description: 金額（税込で指定してください）
+                example: 108000
+                maximum: 2147483647
+                minimum: 1
+                type: integer
+              description:
+                description: 備考
+                example: 備考
+                type: string
+              entry_side:
+                description: '貸借(貸方: credit, 借方: debit)'
+                enum:
+                  - credit
+                  - debit
+                example: credit
+                type: string
+              id:
+                description: 貸借行ID
+                example: 1
+                maximum: 2147483647
+                minimum: 1
+                type: integer
+              item_id:
+                description: 品目ID
+                example: 1
+                maximum: 2147483647
+                minimum: 1
+                nullable: true
+                type: integer
+              item_name:
+                description: 品目
+                example: 会計freee
+                nullable: true
+                type: string
+              partner_code:
+                description: 取引先コード
+                example: code001
+                nullable: true
+                type: string
+              partner_id:
+                description: 取引先ID
+                example: 1
+                maximum: 2147483647
+                minimum: 1
+                nullable: true
+                type: integer
+              partner_long_name:
+                description: 正式名称（255文字以内）
+                example: freee株式会社
+                maxLength: 255
+                nullable: true
+                type: string
+              partner_name:
+                description: 取引先名
+                example: freee
+                nullable: true
+                type: string
+              section_id:
+                description: 部門ID
+                example: 1
+                maximum: 2147483647
+                minimum: 1
+                nullable: true
+                type: integer
+              section_name:
+                description: 部門
+                example: 開発部
+                nullable: true
+                type: string
+              segment_1_tag_id:
+                description: セグメント１ID
+                example: 1
                 maximum: 9223372036854775807
-                    minimum: 1
-                    type: integer
-                  segment_1_tag_name:
-                    description: セグメント１ID
-                    type: integer
-                  segment_2_tag_id:
-                    description: セグメント２ID
-                    example: 1
+                minimum: 1
+                type: integer
+              segment_1_tag_name:
+                description: セグメント１ID
+                type: integer
+              segment_2_tag_id:
+                description: セグメント２ID
+                example: 1
                 maximum: 9223372036854775807
-                    minimum: 1
-                    type: integer
-                  segment_2_tag_name:
-                    description: セグメント２
-                    type: integer
-                  segment_3_tag_id:
-                    description: セグメント３ID
-                    example: 1
+                minimum: 1
+                type: integer
+              segment_2_tag_name:
+                description: セグメント２
+                type: integer
+              segment_3_tag_id:
+                description: セグメント３ID
+                example: 1
                 maximum: 9223372036854775807
-                    minimum: 1
-                    type: integer
-                  segment_3_tag_name:
-                    description: セグメント３
-                    type: integer
-                  tag_ids:
-                    items:
-                      description: メモタグID
-                      example: 1
-                      maximum: 2147483647
-                      minimum: 1
-                      type: integer
-                    type: array
-                  tag_names:
-                    items:
-                      description: メモタグ
-                      example: メモタグ
-                      type: string
-                    type: array
-                  tax_code:
-                    description: 税区分コード
-                    example: 1
-                    maximum: 2147483647
-                    minimum: 0
-                    type: integer
-                  vat:
-                    description: 消費税額（指定しない場合は自動で計算されます）
-                    example: 8000
-                    type: integer
-                required:
-                  - account_item_id
-                  - amount
-                  - description
-                  - entry_side
-                  - id
-                  - item_id
-                  - item_name
-                  - partner_id
-                  - partner_long_name
-                  - partner_name
-                  - section_id
-                  - section_name
-                  - tag_ids
-                  - tag_names
-                  - tax_code
-                  - vat
-                type: object
-              type: array
-            id:
-              description: 振替伝票ID
-              example: 1
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            issue_date:
-              description: 発生日 (yyyy-mm-dd)
-              example: '2018-01-01'
-              type: string
-            txn_number:
-              description: 仕訳番号
-              example: 2CX05
-              nullable: true
-              type: string
-          required:
-            - adjustment
-            - company_id
-            - details
-            - id
-            - issue_date
-            - txn_number
-          type: object
+                minimum: 1
+                type: integer
+              segment_3_tag_name:
+                description: セグメント３
+                type: integer
+              tag_ids:
+                items:
+                  description: メモタグID
+                  example: 1
+                  maximum: 2147483647
+                  minimum: 1
+                  type: integer
+                type: array
+              tag_names:
+                items:
+                  description: メモタグ
+                  example: メモタグ
+                  type: string
+                type: array
+              tax_code:
+                description: 税区分コード
+                example: 1
+                maximum: 2147483647
+                minimum: 0
+                type: integer
+              vat:
+                description: 消費税額（指定しない場合は自動で計算されます）
+                example: 8000
+                type: integer
+            required:
+              - account_item_id
+              - amount
+              - description
+              - entry_side
+              - id
+              - item_id
+              - item_name
+              - partner_id
+              - partner_long_name
+              - partner_name
+              - section_id
+              - section_name
+              - tag_ids
+              - tag_names
+              - tax_code
+              - vat
+            type: object
+          type: array
+        id:
+          description: 振替伝票ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        issue_date:
+          description: 発生日 (yyyy-mm-dd)
+          example: '2018-01-01'
+          type: string
+        txn_number:
+          description: 仕訳番号
+          example: 2CX05
+          nullable: true
+          type: string
+      required:
+        - adjustment
+        - company_id
+        - details
+        - id
+        - issue_date
+        - txn_number
+      type: object
     manualJournalUpdateParams:
       properties:
         adjustment:
@@ -18366,27 +18367,27 @@ components:
               type: object
               properties:
                 prefecture_code:
-              description: >-
-                都道府県コード（0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄
-              example: 4
-              maximum: 46
-              minimum: 0
-              type: integer
+                  description: >-
+                    都道府県コード（0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄
+                  example: 4
+                  maximum: 46
+                  minimum: 0
+                  type: integer
                 street_name1:
-              description: 市区町村・番地
-              example: ＸＸ区ＹＹ１−１−１
-              nullable: true
-              type: string
+                  description: 市区町村・番地
+                  example: ＸＸ区ＹＹ１−１−１
+                  nullable: true
+                  type: string
                 street_name2:
-              description: 建物名・部屋番号など
-              example: ビル１Ｆ
-              nullable: true
-              type: string
+                  description: 建物名・部屋番号など
+                  example: ビル１Ｆ
+                  nullable: true
+                  type: string
                 zipcode:
-              description: 郵便番号
-              example: 000-0000
-              nullable: true
-              type: string
+                  description: 郵便番号
+                  example: 000-0000
+                  nullable: true
+                  type: string
             code:
               description: 取引先コード
               example: code001
@@ -18811,27 +18812,27 @@ components:
                 type: object
                 properties:
                   prefecture_code:
-                description: >-
-                  都道府県コード（0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄
-                example: 4
-                maximum: 46
-                minimum: 0
-                type: integer
+                    description: >-
+                      都道府県コード（0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄
+                    example: 4
+                    maximum: 46
+                    minimum: 0
+                    type: integer
                   street_name1:
-                description: 市区町村・番地
-                example: ＸＸ区ＹＹ１−１−１
-                nullable: true
-                type: string
+                    description: 市区町村・番地
+                    example: ＸＸ区ＹＹ１−１−１
+                    nullable: true
+                    type: string
                   street_name2:
-                description: 建物名・部屋番号など
-                example: ビル１Ｆ
-                nullable: true
-                type: string
+                    description: 建物名・部屋番号など
+                    example: ビル１Ｆ
+                    nullable: true
+                    type: string
                   zipcode:
-                description: 郵便番号
-                example: 000-0000
-                nullable: true
-                type: string
+                    description: 郵便番号
+                    example: 000-0000
+                    nullable: true
+                    type: string
               code:
                 description: 取引先コード
                 example: code001
@@ -19311,403 +19312,403 @@ components:
         - quotation
       type: object
     quotation:
+      properties:
+        company_address1:
+          description: 市区町村・番地
+          example: ＸＸ区ＸＸ１−１−１
+          nullable: true
+          type: string
+        company_address2:
+          description: 建物名・部屋番号など
+          example: ビル1F
+          nullable: true
+          type: string
+        company_contact_info:
+          description: 事業所担当者名
+          example: 法人営業担当
+          nullable: true
+          type: string
+        company_id:
+          description: 事業所ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        company_name:
+          description: 事業所名
+          example: freee株式会社
+          type: string
+        company_prefecture_code:
+          description: >-
+            都道府県コード（0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄
+          example: 12
+          maximum: 46
+          minimum: 0
+          nullable: true
+          type: integer
+        company_prefecture_name:
+          description: 都道府県
+          example: 東京都
+          nullable: true
+          type: string
+        company_zipcode:
+          description: 郵便番号
+          example: 000-0000
+          nullable: true
+          type: string
+        description:
+          description: 概要
+          example: ８月分見積書
+          nullable: true
+          type: string
+        id:
+          description: 見積書ID
+          example: 101
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        issue_date:
+          description: 見積日 (yyyy-mm-dd)
+          example: '2013-01-01'
+          type: string
+        mail_sent_at:
+          description: メール送信日時(最新)
+          example: '2013-03-01 10:00:00'
+          nullable: true
+          type: string
+        message:
+          description: メッセージ
+          example: 下記の通り御見積もり申し上げます。
+          nullable: true
+          type: string
+        notes:
+          description: 備考
+          example: 毎度お世話になっております。
+          nullable: true
+          type: string
+        partner_address1:
+          description: 市区町村・番地
+          example: 湯沢市
+          nullable: true
+          type: string
+        partner_address2:
+          description: 建物名・部屋番号など
+          example: Aビル
+          nullable: true
+          type: string
+        partner_code:
+          description: 取引先コード
+          example: code001
+          nullable: true
+          type: string
+        partner_contact_info:
+          description: 取引先担当者名
+          example: 営業担当
+          nullable: true
+          type: string
+        partner_display_name:
+          description: 見積書に表示する取引先名
+          example: 株式会社freeeパートナー
+          nullable: true
+          type: string
+        partner_id:
+          description: 取引先ID
+          example: 201
+          nullable: true
+          type: integer
+        partner_name:
+          description: 取引先名
+          example: freeeパートナー
+          nullable: true
+          type: string
+        partner_prefecture_code:
+          description: >-
+            都道府県コード（0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄
+          example: 4
+          maximum: 46
+          minimum: 0
+          nullable: true
+          type: integer
+        partner_prefecture_name:
+          description: 都道府県
+          example: 秋田県
+          nullable: true
+          type: string
+        partner_title:
+          description: 敬称（御中、様、(空白)の3つから選択）
+          example: 御中
+          nullable: true
+          type: string
+        partner_zipcode:
+          description: 郵便番号
+          example: 000-0000
+          nullable: true
+          type: string
+        quotation_contents:
+          description: 見積内容
+          items:
+            properties:
+              account_item_id:
+                description: 勘定科目ID
+                example: 1
+                nullable: true
+                type: integer
+              account_item_name:
+                description: 勘定科目名
+                example: 売上
+                nullable: true
+                type: string
+              amount:
+                description: 金額
+                example: 108000
+                type: integer
+              description:
+                description: 備考
+                example: 備考
+                nullable: true
+                type: string
+              id:
+                description: 見積内容ID
+                example: 1
+                type: integer
+              item_id:
+                description: 品目ID
+                example: 1
+                nullable: true
+                type: integer
+              item_name:
+                description: 品目
+                example: 会計freee
+                nullable: true
+                type: string
+              order:
+                description: 順序
+                example: 1
+                type: integer
+              qty:
+                description: 数量
+                example: 1
+                type: number
+              reduced_vat:
+                description: '軽減税率税区分（true: 対象、false: 対象外）'
+                example: true
+                type: boolean
+              section_id:
+                description: 部門ID
+                example: 1
+                nullable: true
+                type: integer
+              section_name:
+                description: 部門
+                example: 開発部
+                nullable: true
+                type: string
+              segment_1_tag_id:
+                description: セグメント１ID
+                example: 1
+                nullable: true
+                type: integer
+              segment_1_tag_name:
+                description: セグメント１ID
+                example: セグメント１
+                nullable: true
+                type: string
+              segment_2_tag_id:
+                description: セグメント２ID
+                example: 1
+                nullable: true
+                type: integer
+              segment_2_tag_name:
+                description: セグメント２
+                example: セグメント２
+                nullable: true
+                type: string
+              segment_3_tag_id:
+                description: セグメント３ID
+                example: 1
+                nullable: true
+                type: integer
+              segment_3_tag_name:
+                description: セグメント３
+                example: セグメント３
+                nullable: true
+                type: string
+              tag_ids:
+                items:
+                  description: メモタグID
+                  example: 1
+                  type: integer
+                type: array
+              tag_names:
+                items:
+                  description: メモタグ
+                  example: メモタグ
+                  type: string
+                type: array
+              tax_code:
+                description: 税区分コード
+                example: 1
+                nullable: true
+                type: integer
+              type:
+                description: 行の種類
+                enum:
+                  - normal
+                  - discount
+                  - text
+                example: normal
+                type: string
+              unit:
+                description: 単位
+                example: 個
+                nullable: true
+                type: string
+              unit_price:
+                description: 単価
+                example: 1
+                type: number
+              vat:
+                description: 消費税額
+                example: 8000
+                type: integer
+            required:
+              - account_item_id
+              - account_item_name
+              - amount
+              - description
+              - id
+              - item_id
+              - item_name
+              - order
+              - qty
+              - reduced_vat
+              - section_id
+              - section_name
+              - tag_ids
+              - tag_names
+              - tax_code
+              - type
+              - unit
+              - unit_price
+              - vat
+            type: object
+          type: array
+        quotation_layout:
+          description: |-
+            見積書レイアウト
+            * `default_classic` - レイアウト１/クラシック (デフォルト)
+
+            * `standard_classic` - レイアウト２/クラシック
+
+            * `envelope_classic` - 封筒１/クラシック
+
+            * `default_modern` - レイアウト１/モダン
+
+            * `standard_modern` - レイアウト２/モダン
+
+            * `envelope_modern` - 封筒/モダン
+          enum:
+            - default_classic
+            - standard_classic
+            - envelope_classic
+            - default_modern
+            - standard_modern
+            - envelope_modern
+          example: default_classic
+          type: string
+        quotation_number:
+          description: 見積書番号
+          example: A001
+          type: string
+        quotation_status:
+          description: '見積書ステータス  (unsubmitted: 送付待ち, submitted: 送付済み, all: 全て)'
+          enum:
+            - unsubmitted
+            - submitted
+            - all
+          type: string
+        sub_total:
+          description: 小計
+          example: 100000
+          type: integer
+        tax_entry_method:
+          description: '見積書の消費税計算方法(inclusive: 内税, exclusive: 外税)'
+          enum:
+            - ''
+            - inclusive
+            - exclusive
+          example: exclusive
+          type: string
+        title:
+          description: タイトル
+          example: 見積書
+          nullable: true
+          type: string
+        total_amount:
+          description: 合計金額
+          example: 108000
+          type: integer
+        total_amount_per_vat_rate:
           properties:
-            company_address1:
-              description: 市区町村・番地
-              example: ＸＸ区ＸＸ１−１−１
-              nullable: true
-              type: string
-            company_address2:
-              description: 建物名・部屋番号など
-              example: ビル1F
-              nullable: true
-              type: string
-            company_contact_info:
-              description: 事業所担当者名
-              example: 法人営業担当
-              nullable: true
-              type: string
-            company_id:
-              description: 事業所ID
-              example: 1
-              maximum: 2147483647
-              minimum: 1
+            reduced_vat_8:
+              description: 軽減税率8%の税込み金額合計
+              example: 0
+              maximum: 9223372036854775807
               type: integer
-            company_name:
-              description: 事業所名
-              example: freee株式会社
-              type: string
-            company_prefecture_code:
-              description: >-
-                都道府県コード（0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄
-              example: 12
-              maximum: 46
-              minimum: 0
-              nullable: true
+            vat_10:
+              description: 税率10%の税込み金額合計
+              example: 0
+              maximum: 9223372036854775807
               type: integer
-            company_prefecture_name:
-              description: 都道府県
-              example: 東京都
-              nullable: true
-              type: string
-            company_zipcode:
-              description: 郵便番号
-              example: 000-0000
-              nullable: true
-              type: string
-            description:
-              description: 概要
-              example: ８月分見積書
-              nullable: true
-              type: string
-            id:
-              description: 見積書ID
-              example: 101
-              maximum: 2147483647
-              minimum: 1
+            vat_5:
+              description: 税率5%の税込み金額合計
+              example: 0
+              maximum: 9223372036854775807
               type: integer
-            issue_date:
-              description: 見積日 (yyyy-mm-dd)
-              example: '2013-01-01'
-              type: string
-            mail_sent_at:
-              description: メール送信日時(最新)
-              example: '2013-03-01 10:00:00'
-              nullable: true
-              type: string
-            message:
-              description: メッセージ
-              example: 下記の通り御見積もり申し上げます。
-              nullable: true
-              type: string
-            notes:
-              description: 備考
-              example: 毎度お世話になっております。
-              nullable: true
-              type: string
-            partner_address1:
-              description: 市区町村・番地
-              example: 湯沢市
-              nullable: true
-              type: string
-            partner_address2:
-              description: 建物名・部屋番号など
-              example: Aビル
-              nullable: true
-              type: string
-            partner_code:
-              description: 取引先コード
-              example: code001
-              nullable: true
-              type: string
-            partner_contact_info:
-              description: 取引先担当者名
-              example: 営業担当
-              nullable: true
-              type: string
-            partner_display_name:
-              description: 見積書に表示する取引先名
-              example: 株式会社freeeパートナー
-              nullable: true
-              type: string
-            partner_id:
-              description: 取引先ID
-              example: 201
-              nullable: true
-              type: integer
-            partner_name:
-              description: 取引先名
-              example: freeeパートナー
-              nullable: true
-              type: string
-            partner_prefecture_code:
-              description: >-
-                都道府県コード（0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄
-              example: 4
-              maximum: 46
-              minimum: 0
-              nullable: true
-              type: integer
-            partner_prefecture_name:
-              description: 都道府県
-              example: 秋田県
-              nullable: true
-              type: string
-            partner_title:
-              description: 敬称（御中、様、(空白)の3つから選択）
-              example: 御中
-              nullable: true
-              type: string
-            partner_zipcode:
-              description: 郵便番号
-              example: 000-0000
-              nullable: true
-              type: string
-            quotation_contents:
-              description: 見積内容
-              items:
-                properties:
-                  account_item_id:
-                    description: 勘定科目ID
-                    example: 1
-                    nullable: true
-                    type: integer
-                  account_item_name:
-                    description: 勘定科目名
-                    example: 売上
-                    nullable: true
-                    type: string
-                  amount:
-                    description: 金額
-                    example: 108000
-                    type: integer
-                  description:
-                    description: 備考
-                    example: 備考
-                    nullable: true
-                    type: string
-                  id:
-                    description: 見積内容ID
-                    example: 1
-                    type: integer
-                  item_id:
-                    description: 品目ID
-                    example: 1
-                    nullable: true
-                    type: integer
-                  item_name:
-                    description: 品目
-                    example: 会計freee
-                    nullable: true
-                    type: string
-                  order:
-                    description: 順序
-                    example: 1
-                    type: integer
-                  qty:
-                    description: 数量
-                    example: 1
-                    type: number
-                  reduced_vat:
-                    description: '軽減税率税区分（true: 対象、false: 対象外）'
-                    example: true
-                    type: boolean
-                  section_id:
-                    description: 部門ID
-                    example: 1
-                    nullable: true
-                    type: integer
-                  section_name:
-                    description: 部門
-                    example: 開発部
-                    nullable: true
-                    type: string
-                  segment_1_tag_id:
-                    description: セグメント１ID
-                    example: 1
-                    nullable: true
-                    type: integer
-                  segment_1_tag_name:
-                    description: セグメント１ID
-                    example: セグメント１
-                    nullable: true
-                    type: string
-                  segment_2_tag_id:
-                    description: セグメント２ID
-                    example: 1
-                    nullable: true
-                    type: integer
-                  segment_2_tag_name:
-                    description: セグメント２
-                    example: セグメント２
-                    nullable: true
-                    type: string
-                  segment_3_tag_id:
-                    description: セグメント３ID
-                    example: 1
-                    nullable: true
-                    type: integer
-                  segment_3_tag_name:
-                    description: セグメント３
-                    example: セグメント３
-                    nullable: true
-                    type: string
-                  tag_ids:
-                    items:
-                      description: メモタグID
-                      example: 1
-                      type: integer
-                    type: array
-                  tag_names:
-                    items:
-                      description: メモタグ
-                      example: メモタグ
-                      type: string
-                    type: array
-                  tax_code:
-                    description: 税区分コード
-                    example: 1
-                    nullable: true
-                    type: integer
-                  type:
-                    description: 行の種類
-                    enum:
-                      - normal
-                      - discount
-                      - text
-                    example: normal
-                    type: string
-                  unit:
-                    description: 単位
-                    example: 個
-                    nullable: true
-                    type: string
-                  unit_price:
-                    description: 単価
-                    example: 1
-                    type: number
-                  vat:
-                    description: 消費税額
-                    example: 8000
-                    type: integer
-                required:
-                  - account_item_id
-                  - account_item_name
-                  - amount
-                  - description
-                  - id
-                  - item_id
-                  - item_name
-                  - order
-                  - qty
-                  - reduced_vat
-                  - section_id
-                  - section_name
-                  - tag_ids
-                  - tag_names
-                  - tax_code
-                  - type
-                  - unit
-                  - unit_price
-                  - vat
-                type: object
-              type: array
-            quotation_layout:
-              description: |-
-                見積書レイアウト
-                * `default_classic` - レイアウト１/クラシック (デフォルト)
-
-                * `standard_classic` - レイアウト２/クラシック
-
-                * `envelope_classic` - 封筒１/クラシック
-
-                * `default_modern` - レイアウト１/モダン
-
-                * `standard_modern` - レイアウト２/モダン
-
-                * `envelope_modern` - 封筒/モダン
-              enum:
-                - default_classic
-                - standard_classic
-                - envelope_classic
-                - default_modern
-                - standard_modern
-                - envelope_modern
-              example: default_classic
-              type: string
-            quotation_number:
-              description: 見積書番号
-              example: A001
-              type: string
-            quotation_status:
-              description: '見積書ステータス  (unsubmitted: 送付待ち, submitted: 送付済み, all: 全て)'
-              enum:
-                - unsubmitted
-                - submitted
-                - all
-              type: string
-            sub_total:
-              description: 小計
-              example: 100000
-              type: integer
-            tax_entry_method:
-              description: '見積書の消費税計算方法(inclusive: 内税, exclusive: 外税)'
-              enum:
-                - ''
-                - inclusive
-                - exclusive
-              example: exclusive
-              type: string
-            title:
-              description: タイトル
-              example: 見積書
-              nullable: true
-              type: string
-            total_amount:
-              description: 合計金額
+            vat_8:
+              description: 税率8%の税込み金額合計
               example: 108000
+              maximum: 9223372036854775807
               type: integer
-            total_amount_per_vat_rate:
-              properties:
-                reduced_vat_8:
-                  description: 軽減税率8%の税込み金額合計
-                  example: 0
-              maximum: 9223372036854775807
-                  type: integer
-                vat_10:
-                  description: 税率10%の税込み金額合計
-                  example: 0
-              maximum: 9223372036854775807
-                  type: integer
-                vat_5:
-                  description: 税率5%の税込み金額合計
-                  example: 0
-              maximum: 9223372036854775807
-                  type: integer
-                vat_8:
-                  description: 税率8%の税込み金額合計
-                  example: 108000
-              maximum: 9223372036854775807
-                  type: integer
-              required:
-                - reduced_vat_8
-                - vat_10
-                - vat_5
-                - vat_8
-              type: object
-            total_vat:
-              description: 消費税
-              example: 8000
-              type: integer
-            web_confirmed_at:
-              description: Web共有取引先確認日時(最新)
-              example: '2013-03-01 10:00:00'
-              nullable: true
-              type: string
-            web_downloaded_at:
-              description: Web共有ダウンロード日時(最新)
-              example: '2013-03-01 10:00:00'
-              nullable: true
-              type: string
-            web_published_at:
-              description: Web共有日時(最新)
-              example: '2013-03-01 10:00:00'
-              nullable: true
-              type: string
           required:
-            - company_id
-            - company_name
-            - id
-            - quotation_layout
-            - quotation_number
-            - quotation_status
-            - issue_date
-            - partner_id
-            - partner_title
-            - tax_entry_method
-            - total_amount
-            - total_amount_per_vat_rate
+            - reduced_vat_8
+            - vat_10
+            - vat_5
+            - vat_8
           type: object
+        total_vat:
+          description: 消費税
+          example: 8000
+          type: integer
+        web_confirmed_at:
+          description: Web共有取引先確認日時(最新)
+          example: '2013-03-01 10:00:00'
+          nullable: true
+          type: string
+        web_downloaded_at:
+          description: Web共有ダウンロード日時(最新)
+          example: '2013-03-01 10:00:00'
+          nullable: true
+          type: string
+        web_published_at:
+          description: Web共有日時(最新)
+          example: '2013-03-01 10:00:00'
+          nullable: true
+          type: string
+      required:
+        - company_id
+        - company_name
+        - id
+        - quotation_layout
+        - quotation_number
+        - quotation_status
+        - issue_date
+        - partner_id
+        - partner_title
+        - tax_entry_method
+        - total_amount
+        - total_amount_per_vat_rate
+      type: object
     quotationUpdateParams:
       properties:
         company_address1:
@@ -20006,88 +20007,88 @@ components:
         - receipt
       type: object
     receipt:
+      properties:
+        created_at:
+          description: 作成日時（ISO8601形式）
+          example: '2018-09-12T18:30:24+09:00'
+          type: string
+        description:
+          description: メモ
+          example: タクシー利用
+          type: string
+        file_src:
+          description: ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。）
+          example: >-
+            https://www.freee.co.jp/api/p/receipts/revisions/1234xxxxx/download
+          type: string
+        id:
+          description: 証憑ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        issue_date:
+          description: 発生日
+          example: '2019-01-01'
+          type: string
+        mime_type:
+          description: MIMEタイプ
+          example: image/png
+          type: string
+        origin:
+          description: アップロード元種別
+          enum:
+            - unknown
+            - web
+            - mobile_camera
+            - mobile_album
+            - scansnap
+            - scannable
+            - dropbox
+            - mail
+            - safety_contact_file
+            - public_api
+          example: public_api
+          type: string
+        status:
+          description: 'ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)'
+          enum:
+            - unconfirmed
+            - confirmed
+            - deleted
+            - ignored
+          example: unconfirmed
+          type: string
+        user:
           properties:
-            created_at:
-              description: 作成日時（ISO8601形式）
-              example: '2018-09-12T18:30:24+09:00'
+            display_name:
+              description: 表示名
+              example: フリー太郎
+              nullable: true
               type: string
-            description:
-              description: メモ
-              example: タクシー利用
-              type: string
-            file_src:
-              description: ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。）
-              example: >-
-                https://www.freee.co.jp/api/p/receipts/revisions/1234xxxxx/download
+            email:
+              description: メールアドレス
+              example: contact@example.com
               type: string
             id:
-              description: 証憑ID
+              description: ユーザーID
               example: 1
               maximum: 2147483647
               minimum: 1
               type: integer
-            issue_date:
-              description: 発生日
-              example: '2019-01-01'
-              type: string
-            mime_type:
-              description: MIMEタイプ
-              example: image/png
-              type: string
-            origin:
-              description: アップロード元種別
-              enum:
-                - unknown
-                - web
-                - mobile_camera
-                - mobile_album
-                - scansnap
-                - scannable
-                - dropbox
-                - mail
-                - safety_contact_file
-                - public_api
-              example: public_api
-              type: string
-            status:
-              description: 'ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)'
-              enum:
-                - unconfirmed
-                - confirmed
-                - deleted
-                - ignored
-              example: unconfirmed
-              type: string
-            user:
-              properties:
-                display_name:
-                  description: 表示名
-                  example: フリー太郎
-                  nullable: true
-                  type: string
-                email:
-                  description: メールアドレス
-                  example: contact@example.com
-                  type: string
-                id:
-                  description: ユーザーID
-                  example: 1
-                  maximum: 2147483647
-                  minimum: 1
-                  type: integer
-              required:
-                - email
-                - id
-              type: object
           required:
-            - created_at
-            - file_src
+            - email
             - id
-            - mime_type
-            - origin
-            - status
-            - user
           type: object
+      required:
+        - created_at
+        - file_src
+        - id
+        - mime_type
+        - origin
+        - status
+        - user
+      type: object
     receiptUpdateParams:
       properties:
         company_id:
@@ -20356,47 +20357,47 @@ components:
         - section
       type: object
     section:
-          properties:
-            company_id:
-              description: 事業所ID
-              example: 1
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            id:
-              description: 部門ID
-              example: 1
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            long_name:
-              description: 正式名称（255文字以内）
-              example: 開発部門
-              maxLength: 255
-              nullable: true
-              type: string
-            name:
-              description: 部門名 (30文字以内)
-              example: 開発部門
-              maxLength: 30
-              type: string
-            shortcut1:
-              description: ショートカット１ (20文字以内)
-              example: DEVELOPER
-              maxLength: 20
-              nullable: true
-              type: string
-            shortcut2:
-              description: ショートカット２ (20文字以内)
-              example: '123'
-              maxLength: 20
-              nullable: true
-              type: string
-          required:
-            - company_id
-            - id
-            - name
-          type: object
+      properties:
+        company_id:
+          description: 事業所ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        id:
+          description: 部門ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        long_name:
+          description: 正式名称（255文字以内）
+          example: 開発部門
+          maxLength: 255
+          nullable: true
+          type: string
+        name:
+          description: 部門名 (30文字以内)
+          example: 開発部門
+          maxLength: 30
+          type: string
+        shortcut1:
+          description: ショートカット１ (20文字以内)
+          example: DEVELOPER
+          maxLength: 20
+          nullable: true
+          type: string
+        shortcut2:
+          description: ショートカット２ (20文字以内)
+          example: '123'
+          maxLength: 20
+          nullable: true
+          type: string
+      required:
+        - company_id
+        - id
+        - name
+      type: object
     segmentTagParams:
       properties:
         company_id:
@@ -20437,41 +20438,41 @@ components:
         - segment_tag
       type: object
     segment_tag:
-          properties:
-            description:
-              description: 備考
-              example: 備考
-              nullable: true
-              type: string
-            id:
-              description: セグメントタグID
-              example: 1
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            name:
-              description: セグメントタグ名
-              example: プロジェクトA
-              type: string
-            shortcut1:
-              description: ショートカット１ (20文字以内)
-              example: A
-              maxLength: 20
-              nullable: true
-              type: string
-            shortcut2:
-              description: ショートカット２ (20文字以内)
-              example: '123'
-              maxLength: 20
-              nullable: true
-              type: string
-          required:
-            - description
-            - id
-            - name
-            - shortcut1
-            - shortcut2
-          type: object
+      properties:
+        description:
+          description: 備考
+          example: 備考
+          nullable: true
+          type: string
+        id:
+          description: セグメントタグID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        name:
+          description: セグメントタグ名
+          example: プロジェクトA
+          type: string
+        shortcut1:
+          description: ショートカット１ (20文字以内)
+          example: A
+          maxLength: 20
+          nullable: true
+          type: string
+        shortcut2:
+          description: ショートカット２ (20文字以内)
+          example: '123'
+          maxLength: 20
+          nullable: true
+          type: string
+      required:
+        - description
+        - id
+        - name
+        - shortcut1
+        - shortcut2
+      type: object
     selectablesIndexResponse:
       properties:
         account_categories:
@@ -20686,42 +20687,42 @@ components:
         - tag
       type: object
     tag:
-          properties:
-            company_id:
-              description: 事業所ID
-              example: 1
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            id:
-              description: タグID
-              example: 1
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            name:
-              description: 名前(30文字以内)
-              example: メモタグ
-              maxLength: 30
-              nullable: true
-              type: string
-            shortcut1:
-              description: ショートカット1 (255文字以内)
-              example: MEMOTAG
-              maxLength: 255
-              nullable: true
-              type: string
-            shortcut2:
-              description: ショートカット2 (255文字以内)
-              example: '123'
-              maxLength: 255
-              nullable: true
-              type: string
-          required:
-            - company_id
-            - id
-            - name
-          type: object
+      properties:
+        company_id:
+          description: 事業所ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        id:
+          description: タグID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        name:
+          description: 名前(30文字以内)
+          example: メモタグ
+          maxLength: 30
+          nullable: true
+          type: string
+        shortcut1:
+          description: ショートカット1 (255文字以内)
+          example: MEMOTAG
+          maxLength: 255
+          nullable: true
+          type: string
+        shortcut2:
+          description: ショートカット2 (255文字以内)
+          example: '123'
+          maxLength: 255
+          nullable: true
+          type: string
+      required:
+        - company_id
+        - id
+        - name
+      type: object
     taxResponse:
       properties:
         tax:
@@ -20730,26 +20731,26 @@ components:
         - tax
       type: object
     tax:
-          properties:
-            code:
-              description: 税区分コード
-              example: 21
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            name:
-              description: 税区分名
-              example: sales_with_tax
-              type: string
-            name_ja:
-              description: 税区分名（日本語表示用）
-              example: 課税売上
-              type: string
-          required:
-            - code
-            - name
-            - name_ja
-          type: object
+      properties:
+        code:
+          description: 税区分コード
+          example: 21
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        name:
+          description: 税区分名
+          example: sales_with_tax
+          type: string
+        name_ja:
+          description: 税区分名（日本語表示用）
+          example: 課税売上
+          type: string
+      required:
+        - code
+        - name
+        - name_ja
+      type: object
     tooManyRequestsError:
       properties:
         meta:
@@ -20849,74 +20850,74 @@ components:
         - transfer
       type: object
     transfer:
-          properties:
-            amount:
-              description: 金額
-              example: 5000
+      properties:
+        amount:
+          description: 金額
+          example: 5000
           maximum: 9223372036854775807
           minimum: -9223372036854775808
-              type: integer
-            company_id:
-              description: 事業所ID
-              example: 1
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            date:
-              description: 振替日 (yyyy-mm-dd)
-              example: '2019-11-01'
-              type: string
-            description:
-              description: 備考
-              example: 備考
-              type: string
-            from_walletable_id:
-              description: 振替元口座ID
-              example: 101
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            from_walletable_type:
-              description: '振替元口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)'
-              enum:
-                - bank_account
-                - wallet
-                - credit_card
-              example: credit_card
-              nullable: true
-              type: string
-            id:
-              description: 取引(振替)ID
-              example: 1
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            to_walletable_id:
-              description: 振替先口座ID
-              example: 201
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            to_walletable_type:
-              description: '振替先口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)'
-              enum:
-                - bank_account
-                - wallet
-                - credit_card
-              example: bank_account
-              nullable: true
-              type: string
-          required:
-            - amount
-            - company_id
-            - date
-            - description
-            - from_walletable_id
-            - from_walletable_type
-            - id
-            - to_walletable_id
-            - to_walletable_type
-          type: object
+          type: integer
+        company_id:
+          description: 事業所ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        date:
+          description: 振替日 (yyyy-mm-dd)
+          example: '2019-11-01'
+          type: string
+        description:
+          description: 備考
+          example: 備考
+          type: string
+        from_walletable_id:
+          description: 振替元口座ID
+          example: 101
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        from_walletable_type:
+          description: '振替元口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)'
+          enum:
+            - bank_account
+            - wallet
+            - credit_card
+          example: credit_card
+          nullable: true
+          type: string
+        id:
+          description: 取引(振替)ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        to_walletable_id:
+          description: 振替先口座ID
+          example: 201
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        to_walletable_type:
+          description: '振替先口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)'
+          enum:
+            - bank_account
+            - wallet
+            - credit_card
+          example: bank_account
+          nullable: true
+          type: string
+      required:
+        - amount
+        - company_id
+        - date
+        - description
+        - from_walletable_id
+        - from_walletable_type
+        - id
+        - to_walletable_id
+        - to_walletable_type
+      type: object
     trialBsResponse:
       properties:
         trial_bs:
@@ -22602,46 +22603,46 @@ components:
           $ref: '#/components/schemas/user'
       type: object
     user:
-          properties:
-            display_name:
-              description: 表示名
-              example: 山田太郎
-              nullable: true
-              type: string
-            email:
-              description: メールアドレス
-              example: example@freee.co.jp
-              type: string
-            first_name:
-              description: 氏名（名）
-              example: 太郎
-              nullable: true
-              type: string
-            first_name_kana:
-              description: 氏名（カナ・名）
-              example: タロウ
-              nullable: true
-              type: string
-            id:
-              description: ユーザーID
-              example: 1
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            last_name:
-              description: 氏名（姓）
-              example: 山田
-              nullable: true
-              type: string
-            last_name_kana:
-              description: 氏名（カナ・姓）
-              example: ヤマダ
-              nullable: true
-              type: string
-          required:
-            - email
-            - id
-          type: object
+      properties:
+        display_name:
+          description: 表示名
+          example: 山田太郎
+          nullable: true
+          type: string
+        email:
+          description: メールアドレス
+          example: example@freee.co.jp
+          type: string
+        first_name:
+          description: 氏名（名）
+          example: 太郎
+          nullable: true
+          type: string
+        first_name_kana:
+          description: 氏名（カナ・名）
+          example: タロウ
+          nullable: true
+          type: string
+        id:
+          description: ユーザーID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        last_name:
+          description: 氏名（姓）
+          example: 山田
+          nullable: true
+          type: string
+        last_name_kana:
+          description: 氏名（カナ・姓）
+          example: ヤマダ
+          nullable: true
+          type: string
+      required:
+        - email
+        - id
+      type: object
     walletTxnParams:
       properties:
         amount:
@@ -22707,80 +22708,80 @@ components:
         - wallet_txn
       type: object
     wallet_txn:
-          properties:
-            amount:
-              description: 取引金額
-              example: 5000
+      properties:
+        amount:
+          description: 取引金額
+          example: 5000
           maximum: 9223372036854775807
           minimum: -9223372036854775808
-              type: integer
-            balance:
-              description: 残高(銀行口座等)
-              example: 10000
-              type: integer
-            company_id:
-              description: 事業所ID
-              example: 1
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            date:
-              description: 取引日(yyyy-mm-dd)
-              example: '2018-01-01'
-              type: string
-            description:
-              description: 取引内容
-              example: 振込 カ）ABC
-              type: string
-            due_amount:
-              description: 未決済金額
-              example: 0
-              type: integer
-            entry_side:
-              description: '入金／出金 (入金: income, 出金: expense)'
-              enum:
-                - income
-                - expense
-              example: income
-              type: string
-            id:
-              description: 明細ID
-              example: 1
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            status:
-              description: '明細のステータス（消込待ち: 1, 消込済み: 2, 無視: 3, 消込中: 4）'
-              maximum: 4
-              minimum: 1
-              type: integer
-            walletable_id:
-              description: 口座ID
-              example: 1
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            walletable_type:
-              description: '口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)'
-              enum:
-                - bank_account
-                - credit_card
-                - wallet
-              example: bank_account
-              type: string
-          required:
-            - amount
-            - balance
-            - company_id
-            - date
-            - description
-            - due_amount
-            - entry_side
-            - id
-            - status
-            - walletable_id
-            - walletable_type
-          type: object
+          type: integer
+        balance:
+          description: 残高(銀行口座等)
+          example: 10000
+          type: integer
+        company_id:
+          description: 事業所ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        date:
+          description: 取引日(yyyy-mm-dd)
+          example: '2018-01-01'
+          type: string
+        description:
+          description: 取引内容
+          example: 振込 カ）ABC
+          type: string
+        due_amount:
+          description: 未決済金額
+          example: 0
+          type: integer
+        entry_side:
+          description: '入金／出金 (入金: income, 出金: expense)'
+          enum:
+            - income
+            - expense
+          example: income
+          type: string
+        id:
+          description: 明細ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        status:
+          description: '明細のステータス（消込待ち: 1, 消込済み: 2, 無視: 3, 消込中: 4）'
+          maximum: 4
+          minimum: 1
+          type: integer
+        walletable_id:
+          description: 口座ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        walletable_type:
+          description: '口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)'
+          enum:
+            - bank_account
+            - credit_card
+            - wallet
+          example: bank_account
+          type: string
+      required:
+        - amount
+        - balance
+        - company_id
+        - date
+        - description
+        - due_amount
+        - entry_side
+        - id
+        - status
+        - walletable_id
+        - walletable_type
+      type: object
     walletableCreateParams:
       properties:
         bank_id:
@@ -22862,47 +22863,47 @@ components:
         - walletable
       type: object
     walletable:
-          properties:
-            bank_id:
-              description: サービスID
-              example: 3
-              maximum: 2147483647
-              minimum: 1
-              nullable: true
-              type: integer
-            id:
-              description: 口座ID
-              example: 1
-              maximum: 2147483647
-              minimum: 1
-              type: integer
-            last_balance:
-              description: 同期残高
-              example: 1565583
-              type: integer
-            name:
-              description: 口座名 (255文字以内)
-              example: freee銀行
-              maxLength: 255
-              type: string
-            type:
-              description: '口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)'
-              enum:
-                - bank_account
-                - credit_card
-                - wallet
-              example: bank_account
-              type: string
-            walletable_balance:
-              description: 登録残高
-              example: 1340261
-              type: integer
-          required:
-            - bank_id
-            - id
-            - name
-            - type
-          type: object
+      properties:
+        bank_id:
+          description: サービスID
+          example: 3
+          maximum: 2147483647
+          minimum: 1
+          nullable: true
+          type: integer
+        id:
+          description: 口座ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        last_balance:
+          description: 同期残高
+          example: 1565583
+          type: integer
+        name:
+          description: 口座名 (255文字以内)
+          example: freee銀行
+          maxLength: 255
+          type: string
+        type:
+          description: '口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)'
+          enum:
+            - bank_account
+            - credit_card
+            - wallet
+          example: bank_account
+          type: string
+        walletable_balance:
+          description: 登録残高
+          example: 1340261
+          type: integer
+      required:
+        - bank_id
+        - id
+        - name
+        - type
+      type: object
     walletableUpdateParams:
       properties:
         company_id:
