@@ -1048,7 +1048,7 @@ paths:
                   approval_request_forms:
                     items:
                       $ref: >-
-                        #/components/schemas/approvalRequestFormResponse/properties/approval_request_form
+                        #/components/schemas/approval_request_form
                     type: array
                 required:
                   - approval_request_forms
@@ -1643,7 +1643,7 @@ paths:
                 properties:
                   banks:
                     items:
-                      $ref: '#/components/schemas/bankResponse/properties/bank'
+                      $ref: '#/components/schemas/bank'
                     type: array
                 required:
                   - banks
@@ -2124,7 +2124,7 @@ paths:
                 properties:
                   deals:
                     items:
-                      $ref: '#/components/schemas/dealResponse/properties/deal'
+                      $ref: '#/components/schemas/deal'
                     type: array
                   meta:
                     properties:
@@ -3556,7 +3556,7 @@ paths:
                   expense_application_line_templates:
                     items:
                       $ref: >-
-                        #/components/schemas/expenseApplicationLineTemplateResponse/properties/expense_application_line_template
+                        #/components/schemas/expense_application_line_template
                     type: array
                 required:
                   - expense_application_line_templates
@@ -4294,7 +4294,7 @@ paths:
                 properties:
                   invoices:
                     items:
-                      $ref: '#/components/schemas/invoiceResponse/properties/invoice'
+                      $ref: '#/components/schemas/invoice'
                     type: array
                 required:
                   - invoices
@@ -4663,7 +4663,7 @@ paths:
                 properties:
                   items:
                     items:
-                      $ref: '#/components/schemas/itemResponse/properties/item'
+                      $ref: '#/components/schemas/item'
                     type: array
                 required:
                   - items
@@ -5414,7 +5414,7 @@ paths:
                   manual_journals:
                     items:
                       $ref: >-
-                        #/components/schemas/manualJournalResponse/properties/manual_journal
+                        #/components/schemas/manual_journal
                     type: array
                 required:
                   - manual_journals
@@ -6451,7 +6451,7 @@ paths:
                   quotations:
                     items:
                       $ref: >-
-                        #/components/schemas/quotationResponse/properties/quotation
+                        #/components/schemas/quotation
                     type: array
                 required:
                   - quotations
@@ -6850,7 +6850,7 @@ paths:
                 properties:
                   receipts:
                     items:
-                      $ref: '#/components/schemas/receiptResponse/properties/receipt'
+                      $ref: '#/components/schemas/receipt'
                     type: array
                 required:
                   - receipts
@@ -8850,7 +8850,7 @@ paths:
                 properties:
                   sections:
                     items:
-                      $ref: '#/components/schemas/sectionResponse/properties/section'
+                      $ref: '#/components/schemas/section'
                     type: array
                 required:
                   - sections
@@ -9275,7 +9275,7 @@ paths:
                   segment_tags:
                     items:
                       $ref: >-
-                        #/components/schemas/segmentTagResponse/properties/segment_tag
+                        #/components/schemas/segment_tag
                     type: array
                 required:
                   - segment_tags
@@ -9603,7 +9603,7 @@ paths:
                 properties:
                   tags:
                     items:
-                      $ref: '#/components/schemas/tagResponse/properties/tag'
+                      $ref: '#/components/schemas/tag'
                     type: array
                 required:
                   - tags
@@ -9895,7 +9895,7 @@ paths:
                 properties:
                   taxes:
                     items:
-                      $ref: '#/components/schemas/taxResponse/properties/tax'
+                      $ref: '#/components/schemas/tax'
                     type: array
                 required:
                   - taxes
@@ -10123,7 +10123,7 @@ paths:
                   transfers:
                     items:
                       $ref: >-
-                        #/components/schemas/transferResponse/properties/transfer
+                        #/components/schemas/transfer
                     type: array
                 required:
                   - transfers
@@ -10511,7 +10511,7 @@ paths:
                 properties:
                   users:
                     items:
-                      $ref: '#/components/schemas/userResponse/properties/user'
+                      $ref: '#/components/schemas/user'
                     type: array
                 required:
                   - users
@@ -10978,7 +10978,7 @@ paths:
                   wallet_txns:
                     items:
                       $ref: >-
-                        #/components/schemas/walletTxnResponse/properties/wallet_txn
+                        #/components/schemas/wallet_txn
                     type: array
                 required:
                   - wallet_txns
@@ -11349,7 +11349,7 @@ paths:
                   walletables:
                     items:
                       $ref: >-
-                        #/components/schemas/walletableResponse/properties/walletable
+                        #/components/schemas/walletable
                     type: array
                 required:
                   - walletables
@@ -11634,7 +11634,7 @@ paths:
                     type: object
                   walletable:
                     $ref: >-
-                      #/components/schemas/walletableResponse/properties/walletable
+                      #/components/schemas/walletable
                 required:
                   - walletable
                 type: object
@@ -11730,7 +11730,7 @@ paths:
                     type: object
                   walletable:
                     $ref: >-
-                      #/components/schemas/walletableResponse/properties/walletable
+                      #/components/schemas/walletable
                 required:
                   - walletable
                 type: object
@@ -12485,6 +12485,11 @@ components:
     approvalRequestFormResponse:
       properties:
         approval_request_form:
+          $ref: '#/components/schemas/approval_request_form'
+      required:
+        - approval_request_form
+      type: object
+    approval_request_form:
           properties:
             company_id:
               description: 事業所ID
@@ -12625,9 +12630,6 @@ components:
             - form_order
             - route_setting_count
           type: object
-      required:
-        - approval_request_form
-      type: object
     approvalRequestResponse:
       properties:
         approval_request:
@@ -13211,6 +13213,11 @@ components:
     bankResponse:
       properties:
         bank:
+          $ref: '#/components/schemas/bank'
+      required:
+        - bank
+      type: object
+    bank:
           properties:
             id:
               description: 連携サービスID
@@ -13240,9 +13247,6 @@ components:
           required:
             - id
           type: object
-      required:
-        - bank
-      type: object
     companiesPlanResponse:
       properties:
         id:
@@ -14974,6 +14978,11 @@ components:
     dealResponse:
       properties:
         deal:
+          $ref: '#/components/schemas/deal' 
+      required:
+        - deal
+      type: object
+    deal:
           properties:
             amount:
               description: 金額
@@ -15404,9 +15413,6 @@ components:
             - partner_id
             - status
           type: object
-      required:
-        - deal
-      type: object
     dealUpdateParams:
       properties:
         company_id:
@@ -15822,6 +15828,11 @@ components:
     expenseApplicationLineTemplateResponse:
       properties:
         expense_application_line_template:
+          $ref: '#/components/schemas/expense_application_line_template'
+      required:
+        - expense_application_line_template
+      type: object
+    expense_application_line_template:
           properties:
             account_item_id:
               description: 勘定科目ID
@@ -15866,9 +15877,6 @@ components:
             - name
             - tax_name
           type: object
-      required:
-        - expense_application_line_template
-      type: object
     expenseApplicationResponse:
       properties:
         expense_application:
@@ -16628,6 +16636,11 @@ components:
     invoiceResponse:
       properties:
         invoice:
+          $ref: '#/components/schemas/invoice'
+      required:
+        - invoice
+      type: object
+    invoice:
           properties:
             booking_date:
               description: 売上計上日
@@ -17121,9 +17134,6 @@ components:
             - total_amount
             - total_amount_per_vat_rate
           type: object
-      required:
-        - invoice
-      type: object
     invoiceUpdateParams:
       properties:
         booking_date:
@@ -17456,6 +17466,11 @@ components:
     itemResponse:
       properties:
         item:
+          $ref: '#/components/schemas/item'
+      required:
+        - item
+      type: object
+    item:
           properties:
             company_id:
               description: 事業所ID
@@ -17489,9 +17504,6 @@ components:
             - id
             - name
           type: object
-      required:
-        - item
-      type: object
     journalStatusResponse:
       properties:
         journals:
@@ -17747,6 +17759,11 @@ components:
     manualJournalResponse:
       properties:
         manual_journal:
+          $ref: '#/components/schemas/manual_journal'
+      required:
+        - manual_journal
+      type: object
+    manual_journal:
           properties:
             adjustment:
               description: '決算整理仕訳フラグ（falseまたは未指定の場合: 日常仕訳）'
@@ -17931,9 +17948,6 @@ components:
             - issue_date
             - txn_number
           type: object
-      required:
-        - manual_journal
-      type: object
     manualJournalUpdateParams:
       properties:
         adjustment:
@@ -19286,6 +19300,11 @@ components:
     quotationResponse:
       properties:
         quotation:
+          $ref: '#/components/schemas/quotation'
+      required:
+        - quotation
+      type: object
+    quotation:
           properties:
             company_address1:
               description: 市区町村・番地
@@ -19683,9 +19702,6 @@ components:
             - total_amount
             - total_amount_per_vat_rate
           type: object
-      required:
-        - quotation
-      type: object
     quotationUpdateParams:
       properties:
         company_address1:
@@ -19979,6 +19995,11 @@ components:
     receiptResponse:
       properties:
         receipt:
+          $ref: '#/components/schemas/receipt'
+      required:
+        - receipt
+      type: object
+    receipt:
           properties:
             created_at:
               description: 作成日時（ISO8601形式）
@@ -20061,9 +20082,6 @@ components:
             - status
             - user
           type: object
-      required:
-        - receipt
-      type: object
     receiptUpdateParams:
       properties:
         company_id:
@@ -20327,6 +20345,11 @@ components:
     sectionResponse:
       properties:
         section:
+          $ref: '#/components/schemas/section'
+      required:
+        - section
+      type: object
+    section:
           properties:
             company_id:
               description: 事業所ID
@@ -20368,9 +20391,6 @@ components:
             - id
             - name
           type: object
-      required:
-        - section
-      type: object
     segmentTagParams:
       properties:
         company_id:
@@ -20406,6 +20426,11 @@ components:
     segmentTagResponse:
       properties:
         segment_tag:
+          $ref: '#/components/schemas/segment_tag'
+      required:
+        - segment_tag
+      type: object
+    segment_tag:
           properties:
             description:
               description: 備考
@@ -20441,9 +20466,6 @@ components:
             - shortcut1
             - shortcut2
           type: object
-      required:
-        - segment_tag
-      type: object
     selectablesIndexResponse:
       properties:
         account_categories:
@@ -20653,6 +20675,11 @@ components:
     tagResponse:
       properties:
         tag:
+          $ref: '#/components/schemas/tag'
+      required:
+        - tag
+      type: object
+    tag:
           properties:
             company_id:
               description: 事業所ID
@@ -20689,12 +20716,14 @@ components:
             - id
             - name
           type: object
-      required:
-        - tag
-      type: object
     taxResponse:
       properties:
         tax:
+          $ref: '#/components/schemas/tax'
+      required:
+        - tax
+      type: object
+    tax:
           properties:
             code:
               description: 税区分コード
@@ -20715,9 +20744,6 @@ components:
             - name
             - name_ja
           type: object
-      required:
-        - tax
-      type: object
     tooManyRequestsError:
       properties:
         meta:
@@ -20812,6 +20838,11 @@ components:
     transferResponse:
       properties:
         transfer:
+          $ref: '#/components/schemas/transfer'
+      required:
+        - transfer
+      type: object
+    transfer:
           properties:
             amount:
               description: 金額
@@ -20880,9 +20911,6 @@ components:
             - to_walletable_id
             - to_walletable_type
           type: object
-      required:
-        - transfer
-      type: object
     trialBsResponse:
       properties:
         trial_bs:
@@ -22565,6 +22593,9 @@ components:
     userResponse:
       properties:
         user:
+          $ref: '#/components/schemas/user'
+      type: object
+    user:
           properties:
             display_name:
               description: 表示名
@@ -22605,7 +22636,6 @@ components:
             - email
             - id
           type: object
-      type: object
     walletTxnParams:
       properties:
         amount:
@@ -22666,6 +22696,11 @@ components:
     walletTxnResponse:
       properties:
         wallet_txn:
+          $ref: '#/components/schemas/wallet_txn'
+      required:
+        - wallet_txn
+      type: object
+    wallet_txn:
           properties:
             amount:
               description: 取引金額
@@ -22740,9 +22775,6 @@ components:
             - walletable_id
             - walletable_type
           type: object
-      required:
-        - wallet_txn
-      type: object
     walletableCreateParams:
       properties:
         bank_id:
@@ -22819,6 +22851,11 @@ components:
     walletableResponse:
       properties:
         walletable:
+          $ref: '#/components/schemas/walletable'
+      required:
+        - walletable
+      type: object
+    walletable:
           properties:
             bank_id:
               description: サービスID
@@ -22860,9 +22897,6 @@ components:
             - name
             - type
           type: object
-      required:
-        - walletable
-      type: object
     walletableUpdateParams:
       properties:
         company_id:
