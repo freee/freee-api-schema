@@ -19,30 +19,6 @@ info:
     <h2 id="specification">仕様</h2>
 
 
-    <pre><code>【重要】会計freee APIの新バージョンについて
-
-    2020年12月まで、2つのバージョンが利用できる状態です。古いものは2020年12月に利用不可となります。<br>
-
-    新しいAPIを利用するにはリクエストヘッダーに以下を指定します。
-
-    X-Api-Version: 2020-06-15<br>
-
-    指定がない場合は2020年12月に廃止予定のAPIを利用することとなります。<br>
-
-    【重要】APIのバージョン指定をせずに利用し続ける場合
-
-    2020年12月に新しいバージョンのAPIに自動的に切り替わります。
-
-    詳細は、<a href="https://developer.freee.co.jp/release-note/2948"
-    target="_blank">リリースノート</a>をご覧ください。<br>
-
-    旧バージョンのAPIリファレンスを確認したい場合は、<a
-    href="https://freee.github.io/freee-api-schema/"
-    target="_blank">旧バージョンのAPIリファレンスページ</a>をご覧ください。
-
-    </code></pre>
-
-
     <h3 id="api_endpoint">APIエンドポイント</h3>
 
 
