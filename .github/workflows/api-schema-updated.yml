@@ -18,7 +18,7 @@ jobs:
       UPDATES_ARE_FOUND: ${{ 0 < steps.updates_under_sdk_compatible.outputs.COUNT }}
     steps:
       - name: check context
-        run: echo $CONTEXT | jq
+        run: echo $CONTEXT | jq .
         env:
           CONTEXT: ${{ toJson(github) }}
 
