@@ -128,7 +128,7 @@ info:
           },
           {
             &quot;type&quot; : &quot;validation&quot;,
-            &quot;messages&quot; : [&quot;Date は不正な日付フォーマットです。入力例：2013-01-01&quot;]
+            &quot;messages&quot; : [&quot;Date は不正な日付フォーマットです。入力例：2019-12-17&quot;]
           }
         ]
       }</code></pre>
@@ -894,7 +894,7 @@ paths:
               <li>部門および役職指定</li>
             </ul>
           </li>
-          <li>本APIはエンタープライズプランをご利用の事業所のみ利用可能です。</li>
+          <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>
         </ul>
       operationId: get_approval_requests
       summary: 各種申請の一覧
@@ -964,10 +964,10 @@ paths:
               <br>
               &nbsp;&nbsp;例)<br>
               &nbsp;&nbsp;予算に関する申請<br>
-              &nbsp;&nbsp;申請日 2020-01-01<br>
+              &nbsp;&nbsp;申請日 2019-12-17<br>
               </li>
               <li>プルダウン(select)： プルダウンの選択肢の名前(改行なし) 例)開発部</li>
-              <li>日付(date)： 日付形式 例)2020-01-01</li>
+              <li>日付(date)： 日付形式 例)2019-12-17</li>
               <li>金額(amount)： 数値(申請フォームで設定した上限・下限金額内の値, 改行なし) 例)10000</li>
               <li>添付ファイル(receipt)： ファイルボックスAPIのID 例)1</li>
             </ul>
@@ -1004,7 +1004,7 @@ paths:
             </ul>
           </li>
           <li>Web画面やAPIを通じて申請フォームが変更されると、本APIで使用する項目ID（request_itemsで指定するid）も変更されます。本API利用前に各種申請の取得APIを利用し、最新の申請フォームを取得することを推奨します。</li>
-          <li>本APIはエンタープライズプランをご利用の事業所のみ利用可能です。</li>
+          <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>
         </ul>
       operationId: create_approval_request
       requestBody:
@@ -1092,7 +1092,7 @@ paths:
         <h2 id="_2">注意点</h2>
 
         <ul>
-          <li>本APIはエンタープライズプランをご利用の事業所のみ利用可能です。</li>
+          <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>
         </ul>
       operationId: get_approval_request_forms
       summary: 各種申請の申請フォーム一覧の取得
@@ -1170,7 +1170,7 @@ paths:
         <h2 id="_2">注意点</h2>
 
         <ul>
-          <li>本APIはエンタープライズプランをご利用の事業所のみ利用可能です。</li>
+          <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>
         </ul>
       operationId: get_approval_request_form
       summary: 各種申請の申請フォームの取得
@@ -1268,7 +1268,7 @@ paths:
               <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>
             </ul>
           </li>
-          <li>本APIはエンタープライズプランをご利用の事業所のみ利用可能です。</li>
+          <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>
         </ul>
       operationId: destroy_approval_request
       summary: 各種申請の削除
@@ -1353,7 +1353,7 @@ paths:
               <li>部門および役職指定</li>
             </ul>
           </li>
-          <li>本APIはエンタープライズプランをご利用の事業所のみ利用可能です。</li>
+          <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>
         </ul>
       operationId: get_approval_request
       summary: 各種申請の取得
@@ -1432,10 +1432,10 @@ paths:
               <br>
               &nbsp;&nbsp;例)<br>
               &nbsp;&nbsp;予算に関する申請<br>
-              &nbsp;&nbsp;申請日 2020-01-01<br>
+              &nbsp;&nbsp;申請日 2019-12-17<br>
               </li>
               <li>プルダウン(select)： プルダウンの選択肢の名前(改行なし) 例)開発部</li>
-              <li>日付(date)： 日付形式 例)2020-01-01</li>
+              <li>日付(date)： 日付形式 例)2019-12-17</li>
               <li>金額(amount)： 数値(申請フォームで設定した上限・下限金額内の値, 改行なし) 例)10000</li>
               <li>添付ファイル(receipt)： ファイルボックスAPIのID 例)1</li>
             </ul>
@@ -1473,7 +1473,7 @@ paths:
             </ul>
           </li>
           <li>Web画面やAPIを通じて申請フォームが変更されると、本APIで使用する項目ID（request_itemsで指定するid）も変更されます。本APIで使用する項目IDは申請作成時点の項目IDです。本API利用前に各種申請の取得APIを利用し、申請作成時点の項目IDを取得することを推奨します。</li>
-          <li>本APIはエンタープライズプランをご利用の事業所のみ利用可能です。</li>
+          <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>
         </ul>
       operationId: update_approval_request
       requestBody:
@@ -1585,7 +1585,7 @@ paths:
               <li>部門および役職指定</li>
             </ul>
           </li>
-          <li>本APIはエンタープライズプランをご利用の事業所のみ利用可能です。</li>
+          <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>
         </ul>
       operationId: update_approval_request_action
       requestBody:
@@ -3841,13 +3841,13 @@ paths:
           schema:
             type: boolean
         - description: 発生日(経費申請項目の日付)で絞込：開始日(yyyy-mm-dd)
-          example: '2020-07-01'
+          example: '2019-12-17'
           in: query
           name: start_transaction_date
           schema:
             type: string
         - description: 発生日(経費申請項目の日付)で絞込：終了日(yyyy-mm-dd)
-          example: '2020-07-02'
+          example: '2019-12-17'
           in: query
           name: end_transaction_date
           schema:
@@ -3868,13 +3868,13 @@ paths:
             maxLength: 250
             type: string
         - description: 申請日で絞込：開始日(yyyy-mm-dd)
-          example: '2020-07-01'
+          example: '2019-12-17'
           in: query
           name: start_issue_date
           schema:
             type: string
         - description: 申請日で絞込：終了日(yyyy-mm-dd)
-          example: '2020-07-02'
+          example: '2019-12-17'
           in: query
           name: end_issue_date
           schema:
@@ -7753,7 +7753,7 @@ paths:
               &quot;company_id&quot; : 1,
               &quot;fiscal_year&quot; : 2017,
               &quot;breakdown_display_type&quot; : &quot;partner&quot;,
-              &quot;created_at&quot; : &quot;2018-05-01 12:00:50&quot
+              &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot
               &quot;balances&quot; : [{
                 &quot;account_item_id&quot; : 1000,
                 &quot;account_item_name&quot; : &quot;現金&quot;,
@@ -7995,7 +7995,7 @@ paths:
             {
               &quot;company_id&quot; : 1,
               &quot;fiscal_year&quot; : 2017,
-              &quot;created_at&quot; : &quot;2018-05-01 12:00:50&quot
+              &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot
               &quot;balances&quot; : [{
                 &quot;account_item_id&quot; : 1000,
                 &quot;account_item_name&quot; : &quot;現金&quot;,
@@ -8214,7 +8214,7 @@ paths:
             {
               &quot;company_id&quot; : 1,
               &quot;fiscal_year&quot; : 2017,
-              &quot;created_at&quot; : &quot;2018-05-01 12:00:50&quot
+              &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot
               &quot;balances&quot; : [{
                 &quot;account_item_id&quot; : 1000,
                 &quot;account_item_name&quot; : &quot;現金&quot;,
@@ -8468,7 +8468,7 @@ paths:
               &quot;company_id&quot; : 1,
               &quot;fiscal_year&quot; : 2017,
               &quot;breakdown_display_type&quot; : &quot;partner&quot;,
-              &quot;created_at&quot; : &quot;2018-05-01 12:00:50&quot
+              &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot
               &quot;balances&quot; : [{
                 &quot;account_item_id&quot; : 1500,
                 &quot;account_item_name&quot; : &quot;売上高&quot;,
@@ -8709,7 +8709,7 @@ paths:
               &quot;company_id&quot; : 1,
               &quot;section_ids&quot; : &quot;1,2,3&quot;,
               &quot;fiscal_year&quot; : 2017,
-              &quot;created_at&quot; : &quot;2018-05-01 12:00:50&quot
+              &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot
               &quot;balances&quot; : [{
                 &quot;account_item_id&quot; : 1500,
                 &quot;account_item_name&quot; : &quot;売上高&quot;,
@@ -8969,7 +8969,7 @@ paths:
             {
               &quot;company_id&quot; : 1,
               &quot;fiscal_year&quot; : 2017,
-              &quot;created_at&quot; : &quot;2018-05-01 12:00:50&quot
+              &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot
               &quot;balances&quot; : [{
                 &quot;account_item_id&quot; : 1500,
                 &quot;account_item_name&quot; : &quot;売上高&quot;,
@@ -9210,7 +9210,7 @@ paths:
             {
               &quot;company_id&quot; : 1,
               &quot;fiscal_year&quot; : 2017,
-              &quot;created_at&quot; : &quot;2018-05-01 12:00:50&quot
+              &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot
               &quot;balances&quot; : [{
                 &quot;account_item_id&quot; : 1500,
                 &quot;account_item_name&quot; : &quot;売上高&quot;,
@@ -12817,7 +12817,7 @@ components:
       properties:
         application_date:
           description: 申請日 (yyyy-mm-dd)
-          example: '2020-01-01'
+          example: '2019-12-17'
           type: string
         approval_flow_route_id:
           description: 申請経路ID
@@ -12902,7 +12902,7 @@ components:
               type: integer
             created_date:
               description: 作成日時
-              example: '2018-09-10T13:47:24.000+09:00'
+              example: '2019-12-17T13:47:24.000+09:00'
               type: string
             description:
               description: 申請フォームの説明
@@ -13048,7 +13048,7 @@ components:
               type: integer
             application_date:
               description: 申請日 (yyyy-mm-dd)
-              example: '2018-07-19'
+              example: '2019-12-17'
               type: string
             application_number:
               description: 申請No.
@@ -13073,7 +13073,7 @@ components:
                     type: string
                   updated_at:
                     description: 更新日時(ISO8601形式)
-                    example: '2018-09-12T18:30:24+09:00'
+                    example: '2019-12-17T18:30:24+09:00'
                     type: string
                   user_id:
                     description: ユーザーID
@@ -13265,7 +13265,7 @@ components:
                     type: string
                   posted_at:
                     description: コメント日時(ISO8601形式)
-                    example: '2018-09-12T18:30:24+09:00'
+                    example: '2019-12-17T18:30:24+09:00'
                     type: string
                   user_id:
                     description: ユーザーID
@@ -13386,7 +13386,7 @@ components:
       properties:
         application_date:
           description: 申請日 (yyyy-mm-dd)
-          example: '2020-01-01'
+          example: '2019-12-17'
           type: string
         approval_flow_route_id:
           description: 申請経路ID
@@ -13459,7 +13459,7 @@ components:
                 type: integer
               application_date:
                 description: 申請日 (yyyy-mm-dd)
-                example: '2018-07-19'
+                example: '2019-12-17'
                 type: string
               application_number:
                 description: 申請No.
@@ -13774,7 +13774,7 @@ components:
               type: integer
             end_date:
               description: 期末日（決算日）
-              example: '2018-12-31'
+              example: '2019-12-17'
               type: string
             indirect_write_off_method:
               description: |
@@ -13795,7 +13795,7 @@ components:
               type: integer
             start_date:
               description: 期首日
-              example: '2018-01-01'
+              example: '2019-12-17'
               type: string
             tax_fraction:
               description: '消費税端数処理方法（0: 切り上げ、1: 切り捨て, 2: 四捨五入）'
@@ -14571,7 +14571,7 @@ components:
                     type: integer
                   end_date:
                     description: 期末日
-                    example: '2018-12-31'
+                    example: '2019-12-17'
                     type: string
                   indirect_write_off_method:
                     description: '固定資産の控除法（true: 間接控除法、false: 直接控除法）'
@@ -14598,7 +14598,7 @@ components:
                     type: integer
                   start_date:
                     description: 期首日
-                    example: '2018-01-01'
+                    example: '2019-12-17'
                     type: string
                   tax_account_method:
                     description: '消費税経理処理方法（0: 税込経理、1: 旧税抜経理、2: 税抜経理）'
@@ -15085,11 +15085,11 @@ components:
           type: array
         due_date:
           description: 支払期日(yyyy-mm-dd)
-          example: '2018-12-31'
+          example: '2019-12-17'
           type: string
         issue_date:
           description: 発生日 (yyyy-mm-dd)
-          example: '2013-01-01'
+          example: '2019-12-17'
           type: string
         partner_code:
           description: 取引先コード
@@ -15113,7 +15113,7 @@ components:
                 type: integer
               date:
                 description: 支払日：payments指定時は必須
-                example: '2013-01-28'
+                example: '2019-12-17'
                 type: string
               from_walletable_id:
                 description: >-
@@ -15286,7 +15286,7 @@ components:
               type: integer
             due_date:
               description: 支払期日 (yyyy-mm-dd)
-              example: '2013-02-28'
+              example: '2019-12-17'
               type: string
             id:
               description: 取引ID
@@ -15296,7 +15296,7 @@ components:
               type: integer
             issue_date:
               description: 発生日 (yyyy-mm-dd)
-              example: '2013-01-01'
+              example: '2019-12-17'
               type: string
             partner_code:
               description: 取引先コード
@@ -15321,7 +15321,7 @@ components:
                     type: integer
                   date:
                     description: 支払日
-                    example: '2013-01-28'
+                    example: '2019-12-17'
                     type: string
                   from_walletable_id:
                     description: 口座ID（from_walletable_typeがprivate_account_itemの場合は勘定科目ID）
@@ -15502,7 +15502,7 @@ components:
               type: integer
             due_date:
               description: 支払期日 (yyyy-mm-dd)
-              example: '2013-02-28'
+              example: '2019-12-17'
               type: string
             id:
               description: 取引ID
@@ -15512,7 +15512,7 @@ components:
               type: integer
             issue_date:
               description: 発生日 (yyyy-mm-dd)
-              example: '2013-01-01'
+              example: '2019-12-17'
               type: string
             partner_code:
               description: 取引先コード
@@ -15537,7 +15537,7 @@ components:
                     type: integer
                   date:
                     description: 支払日
-                    example: '2013-01-28'
+                    example: '2019-12-17'
                     type: string
                   from_walletable_id:
                     description: 口座ID（from_walletable_typeがprivate_account_itemの場合は勘定科目ID）
@@ -15575,7 +15575,7 @@ components:
                 properties:
                   created_at:
                     description: 作成日時（ISO8601形式）
-                    example: '2018-09-12T18:30:24+09:00'
+                    example: '2019-12-17T18:30:24+09:00'
                     type: string
                   description:
                     description: メモ
@@ -15604,7 +15604,7 @@ components:
                     type: integer
                   issue_date:
                     description: 発生日
-                    example: '2019-01-01'
+                    example: '2019-12-17'
                     type: string
                   mime_type:
                     description: MIMEタイプ
@@ -15793,7 +15793,7 @@ components:
                     type: string
                   update_date:
                     description: 更新日 (yyyy-mm-dd)
-                    example: '2014-01-01'
+                    example: '2019-12-17'
                     type: string
                 required:
                   - details
@@ -15919,11 +15919,11 @@ components:
           type: array
         due_date:
           description: 支払期日(yyyy-mm-dd)
-          example: '2018-12-31'
+          example: '2019-12-17'
           type: string
         issue_date:
           description: 発生日 (yyyy-mm-dd)
-          example: '2013-01-01'
+          example: '2019-12-17'
           type: string
         partner_code:
           description: 取引先コード
@@ -16097,17 +16097,17 @@ components:
                 type: integer
               transaction_date:
                 description: 日付 (yyyy-mm-dd)
-                example: '2018-07-18'
+                example: '2019-12-17'
                 type: string
             type: object
           type: array
         issue_date:
           description: 申請日 (yyyy-mm-dd)
-          example: '2018-07-19'
+          example: '2019-12-17'
           type: string
         parent_id:
           description: |
-            親申請ID(法人向け エンタープライズプラン)<br>
+            親申請ID(法人向けプロフェッショナル, 法人向け エンタープライズプラン)<br>
             <ul>
               <li>承認済みの既存各種申請IDのみ指定可能です。</li>
               <li>各種申請一覧APIを利用して取得してください。</li>
@@ -16313,7 +16313,7 @@ components:
                     type: string
                   updated_at:
                     description: 更新日時(ISO8601形式)
-                    example: '2018-09-12T18:30:24+09:00'
+                    example: '2019-12-17T18:30:24+09:00'
                     type: string
                   user_id:
                     description: ユーザーID
@@ -16417,7 +16417,7 @@ components:
                     type: string
                   posted_at:
                     description: コメント日時(ISO8601形式)
-                    example: '2018-09-12T18:30:24+09:00'
+                    example: '2019-12-17T18:30:24+09:00'
                     type: string
                   user_id:
                     description: ユーザーID
@@ -16514,7 +16514,7 @@ components:
                     type: integer
                   transaction_date:
                     description: 日付 (yyyy-mm-dd)
-                    example: '2018-07-18'
+                    example: '2019-12-17'
                     nullable: true
                     type: string
                 required:
@@ -16529,7 +16529,7 @@ components:
               type: integer
             issue_date:
               description: 申請日 (yyyy-mm-dd)
-              example: '2018-07-19'
+              example: '2019-12-17'
               type: string
             section_id:
               description: 部門ID
@@ -16705,13 +16705,13 @@ components:
                 type: integer
               transaction_date:
                 description: 日付 (yyyy-mm-dd)
-                example: '2018-07-18'
+                example: '2019-12-17'
                 type: string
             type: object
           type: array
         issue_date:
           description: 申請日 (yyyy-mm-dd)
-          example: '2018-07-19'
+          example: '2019-12-17'
           type: string
         section_id:
           description: 部門ID
@@ -16871,7 +16871,7 @@ components:
                       type: integer
                     transaction_date:
                       description: 日付 (yyyy-mm-dd)
-                      example: '2018-07-18'
+                      example: '2019-12-17'
                       type: string
                   required:
                     - id
@@ -16885,7 +16885,7 @@ components:
                 type: integer
               issue_date:
                 description: 申請日 (yyyy-mm-dd)
-                example: '2018-07-19'
+                example: '2019-12-17'
                 type: string
               section_id:
                 description: 部門ID
@@ -16970,7 +16970,7 @@ components:
           type: integer
         end_date:
           description: 期末日
-          example: '2018-12-31'
+          example: '2019-12-17'
           type: string
         indirect_write_off_method:
           description: '固定資産の控除法（true: 間接控除法、false: 直接控除法）'
@@ -16992,7 +16992,7 @@ components:
           type: integer
         start_date:
           description: 期首日
-          example: '2018-01-01'
+          example: '2019-12-17'
           type: string
         tax_account_method:
           description: '消費税経理処理方法（0: 税込経理、1: 旧税抜経理、2: 税抜経理）'
@@ -17063,7 +17063,7 @@ components:
       properties:
         booking_date:
           description: 売上計上日
-          example: '2013-01-01'
+          example: '2019-12-17'
           type: string
         company_address1:
           description: 市区町村・番地 (デフォルトは事業所設定情報が補完されます)
@@ -17074,7 +17074,7 @@ components:
           example: ビル 1F
           type: string
         company_contact_info:
-          description: 事業所担当者名 (デフォルトは事業所設定情報が補完されます)
+          description: 事業所担当者名 (デフォルトは請求書テンプレート情報が補完されます)
           example: 法人営業担当
           type: string
         company_id:
@@ -17105,7 +17105,7 @@ components:
           type: string
         due_date:
           description: 期日 (yyyy-mm-dd)
-          example: '2013-02-28'
+          example: '2019-12-17'
           type: string
         invoice_contents:
           description: 請求内容
@@ -17267,7 +17267,7 @@ components:
           type: string
         issue_date:
           description: 請求日 (yyyy-mm-dd)
-          example: '2013-01-01'
+          example: '2019-12-17'
           type: string
         message:
           description: 'メッセージ (デフォルト: 下記の通りご請求申し上げます。)'
@@ -17368,7 +17368,7 @@ components:
             properties:
               booking_date:
                 description: 売上計上日
-                example: '2013-01-01'
+                example: '2019-12-17'
                 nullable: true
                 type: string
               company_address1:
@@ -17427,7 +17427,7 @@ components:
                 type: string
               due_date:
                 description: 期日 (yyyy-mm-dd)
-                example: '2013-02-28'
+                example: '2019-12-17'
                 nullable: true
                 type: string
               id:
@@ -17656,11 +17656,11 @@ components:
                 type: string
               issue_date:
                 description: 請求日 (yyyy-mm-dd)
-                example: '2013-01-01'
+                example: '2019-12-17'
                 type: string
               mail_sent_at:
                 description: メール送信日時(最新)
-                example: '2013-03-01 10:00:00'
+                example: '2019-12-17 10:00:00'
                 nullable: true
                 type: string
               message:
@@ -17740,7 +17740,7 @@ components:
                 type: string
               payment_date:
                 description: 入金日
-                example: '2013-03-01'
+                example: '2019-12-17'
                 nullable: true
                 type: string
               payment_status:
@@ -17830,17 +17830,17 @@ components:
                 type: integer
               web_confirmed_at:
                 description: Web共有取引先確認日時(最新)
-                example: '2013-03-01 10:00:00'
+                example: '2019-12-17 10:00:00'
                 nullable: true
                 type: string
               web_downloaded_at:
                 description: Web共有ダウンロード日時(最新)
-                example: '2013-03-01 10:00:00'
+                example: '2019-12-17 10:00:00'
                 nullable: true
                 type: string
               web_published_at:
                 description: Web共有日時(最新)
-                example: '2013-03-01 10:00:00'
+                example: '2019-12-17 10:00:00'
                 nullable: true
                 type: string
             required:
@@ -17868,7 +17868,7 @@ components:
           properties:
             booking_date:
               description: 売上計上日
-              example: '2013-01-01'
+              example: '2019-12-17'
               nullable: true
               type: string
             company_address1:
@@ -17927,7 +17927,7 @@ components:
               type: string
             due_date:
               description: 期日 (yyyy-mm-dd)
-              example: '2013-02-28'
+              example: '2019-12-17'
               nullable: true
               type: string
             id:
@@ -18156,11 +18156,11 @@ components:
               type: string
             issue_date:
               description: 請求日 (yyyy-mm-dd)
-              example: '2013-01-01'
+              example: '2019-12-17'
               type: string
             mail_sent_at:
               description: メール送信日時(最新)
-              example: '2013-03-01 10:00:00'
+              example: '2019-12-17 10:00:00'
               nullable: true
               type: string
             message:
@@ -18240,7 +18240,7 @@ components:
               type: string
             payment_date:
               description: 入金日
-              example: '2013-03-01'
+              example: '2019-12-17'
               nullable: true
               type: string
             payment_status:
@@ -18351,17 +18351,17 @@ components:
               type: integer
             web_confirmed_at:
               description: Web共有取引先確認日時(最新)
-              example: '2013-03-01 10:00:00'
+              example: '2019-12-17 10:00:00'
               nullable: true
               type: string
             web_downloaded_at:
               description: Web共有ダウンロード日時(最新)
-              example: '2013-03-01 10:00:00'
+              example: '2019-12-17 10:00:00'
               nullable: true
               type: string
             web_published_at:
               description: Web共有日時(最新)
-              example: '2013-03-01 10:00:00'
+              example: '2019-12-17 10:00:00'
               nullable: true
               type: string
           required:
@@ -18386,7 +18386,7 @@ components:
       properties:
         booking_date:
           description: 売上計上日
-          example: '2013-01-01'
+          example: '2019-12-17'
           type: string
         company_address1:
           description: 市区町村・番地 (デフォルトは事業所設定情報が補完されます)
@@ -18397,7 +18397,7 @@ components:
           example: ビル 1F
           type: string
         company_contact_info:
-          description: 事業所担当者名 (デフォルトは事業所設定情報が補完されます)
+          description: 事業所担当者名 (デフォルトは請求書テンプレート情報が補完されます)
           example: 法人営業担当
           type: string
         company_id:
@@ -18428,7 +18428,7 @@ components:
           type: string
         due_date:
           description: 期日 (yyyy-mm-dd)
-          example: '2013-02-28'
+          example: '2019-12-17'
           type: string
         invoice_contents:
           description: 請求内容
@@ -18597,7 +18597,7 @@ components:
           type: string
         issue_date:
           description: 請求日 (yyyy-mm-dd)
-          example: '2013-01-01'
+          example: '2019-12-17'
           type: string
         message:
           description: 'メッセージ (デフォルト: 下記の通りご請求申し上げます。)'
@@ -18781,7 +18781,7 @@ components:
               type: string
             end_date:
               description: 取得終了日 (yyyy-mm-dd)
-              example: '2017-05-31'
+              example: '2019-12-17'
               type: string
             id:
               description: 受け付けID
@@ -18791,7 +18791,7 @@ components:
               type: integer
             start_date:
               description: 取得開始日 (yyyy-mm-dd)
-              example: '2017-05-01'
+              example: '2019-12-17'
               type: string
             status:
               description: 事業所ID
@@ -18850,7 +18850,7 @@ components:
               type: string
             end_date:
               description: 取得終了日 (yyyy-mm-dd)
-              example: '2017-05-31'
+              example: '2019-12-17'
               type: string
             id:
               description: 受け付けID
@@ -18866,7 +18866,7 @@ components:
               type: array
             start_date:
               description: 取得開始日 (yyyy-mm-dd)
-              example: '2017-05-01'
+              example: '2019-12-17'
               type: string
             status_url:
               description: ステータス確認用URL
@@ -19002,7 +19002,7 @@ components:
           type: array
         issue_date:
           description: 発生日 (yyyy-mm-dd)
-          example: '2013-01-01'
+          example: '2019-12-17'
           type: string
       required:
         - company_id
@@ -19181,7 +19181,7 @@ components:
               type: integer
             issue_date:
               description: 発生日 (yyyy-mm-dd)
-              example: '2018-01-01'
+              example: '2019-12-17'
               type: string
             txn_number:
               description: 仕訳番号
@@ -19311,7 +19311,7 @@ components:
           type: array
         issue_date:
           description: 発生日 (yyyy-mm-dd)
-          example: '2013-01-01'
+          example: '2019-12-17'
           type: string
       required:
         - company_id
@@ -20259,7 +20259,7 @@ components:
           type: integer
         date:
           description: 支払日
-          example: '2018-01-01'
+          example: '2019-12-17'
           type: string
         from_walletable_id:
           description: >-
@@ -20278,7 +20278,7 @@ components:
             - credit_card
             - wallet
             - private_account_item
-          example: '2018-01-01'
+          example: '2019-12-17'
           type: string
       required:
         - amount
@@ -20365,7 +20365,7 @@ components:
           type: string
         application_date:
           description: 申請日 (yyyy-mm-dd)
-          example: '2020-01-01'
+          example: '2019-12-17'
           type: string
         approval_flow_route_id:
           description: |
@@ -20449,7 +20449,7 @@ components:
           type: boolean
         issue_date:
           description: 発生日 (yyyy-mm-dd)
-          example: '2020-01-01'
+          example: '2019-12-17'
           type: string
         parent_id:
           description: |
@@ -20476,7 +20476,7 @@ components:
           type: integer
         payment_date:
           description: 支払期限 (yyyy-mm-dd)
-          example: '2020-01-01'
+          example: '2019-12-17'
           nullable: true
           type: string
         payment_method:
@@ -20620,10 +20620,12 @@ components:
             account_name:
               description: 受取人名（カナ）
               example: フリータロウ
+              nullable: true
               type: string
             account_number:
               description: 口座番号
               example: '1010101'
+              nullable: true
               type: string
             account_type:
               description: >-
@@ -20644,7 +20646,7 @@ components:
               type: integer
             application_date:
               description: 申請日 (yyyy-mm-dd)
-              example: '2020-01-01'
+              example: '2019-12-17'
               type: string
             application_number:
               description: 申請No.
@@ -20669,7 +20671,7 @@ components:
                     type: string
                   updated_at:
                     description: 更新日時(ISO8601形式)
-                    example: '2018-09-12T18:30:24+09:00'
+                    example: '2019-12-17T18:30:24+09:00'
                     type: string
                   user_id:
                     description: ユーザーID
@@ -20766,26 +20768,32 @@ components:
             bank_code:
               description: 銀行コード
               example: '0001'
+              nullable: true
               type: string
             bank_name:
               description: 銀行名
               example: freee銀行
+              nullable: true
               type: string
             bank_name_kana:
               description: 銀行名（カナ）
               example: フリーギンコウ
+              nullable: true
               type: string
             branch_code:
               description: 支店番号
               example: '101'
+              nullable: true
               type: string
             branch_kana:
               description: 支店名（カナ）
               example: ギンザシテン
+              nullable: true
               type: string
             branch_name:
               description: 支店名
               example: 銀座支店
+              nullable: true
               type: string
             comments:
               description: 支払依頼のコメント一覧（配列）
@@ -20797,7 +20805,7 @@ components:
                     type: string
                   posted_at:
                     description: コメント日時(ISO8601形式)
-                    example: '2018-09-12T18:30:24+09:00'
+                    example: '2019-12-17T18:30:24+09:00'
                     type: string
                   user_id:
                     description: ユーザーID
@@ -20864,7 +20872,7 @@ components:
               type: integer
             issue_date:
               description: 発生日 (yyyy-mm-dd)
-              example: '2020-01-01'
+              example: '2019-12-17'
               type: string
             partner_code:
               description: 取引先コード
@@ -20885,7 +20893,7 @@ components:
               type: string
             payment_date:
               description: 支払期限 (yyyy-mm-dd)
-              example: '2020-01-01'
+              example: '2019-12-17'
               nullable: true
               type: string
             payment_method:
@@ -20910,6 +20918,7 @@ components:
                     example: 1
                     maximum: 2147483647
                     minimum: 1
+                    nullable: true
                     type: integer
                   amount:
                     description: 金額
@@ -20920,6 +20929,7 @@ components:
                   description:
                     description: 内容
                     example: 原稿料
+                    nullable: true
                     type: string
                   id:
                     description: 支払依頼の項目行ID
@@ -20932,6 +20942,7 @@ components:
                     example: 1
                     maximum: 2147483647
                     minimum: 1
+                    nullable: true
                     type: integer
                   line_type:
                     description: '行の種類 (deal_line: 支払依頼, withholding_tax: 源泉徴収税)'
@@ -20945,24 +20956,28 @@ components:
                     example: 1
                     maximum: 2147483647
                     minimum: 1
+                    nullable: true
                     type: integer
                   segment_1_tag_id:
-                    description: セグメント１ID
+                    description: セグメント１ID。セグメント１が使用可能なプランの時のみレスポンスに含まれます。
                     example: 1
                     maximum: 9223372036854776000
                     minimum: 1
+                    nullable: true
                     type: integer
                   segment_2_tag_id:
-                    description: セグメント２ID
+                    description: セグメント２ID。セグメント２が使用可能なプランの時のみレスポンスに含まれます。
                     example: 1
                     maximum: 9223372036854776000
                     minimum: 1
+                    nullable: true
                     type: integer
                   segment_3_tag_id:
-                    description: セグメント３ID
+                    description: セグメント３ID。セグメント３が使用可能なプランの時のみレスポンスに含まれます。
                     example: 1
                     maximum: 9223372036854776000
                     minimum: 1
+                    nullable: true
                     type: integer
                   tag_ids:
                     description: メモタグID
@@ -20980,6 +20995,7 @@ components:
                     example: 1
                     maximum: 2147483647
                     minimum: 0
+                    nullable: true
                     type: integer
                 required:
                   - id
@@ -20993,13 +21009,17 @@ components:
                   - tag_ids
                 type: object
               type: array
-            receipt_id:
+            receipt_ids:
               description: 証憑ID
-              example: 606
-              maximum: 2147483647
-              minimum: 1
-              nullable: true
-              type: integer
+              example:
+                - 1
+                - 2
+                - 3
+              items:
+                maximum: 2147483647
+                minimum: 1
+                type: integer
+              type: array
             status:
               description: >-
                 申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下,
@@ -21040,7 +21060,7 @@ components:
             - current_step_id
             - current_round
             - document_code
-            - recipt_id
+            - receipt_ids
             - issue_date
             - payment_date
             - payment_method
@@ -21090,7 +21110,7 @@ components:
           type: string
         application_date:
           description: 申請日 (yyyy-mm-dd)
-          example: '2020-01-01'
+          example: '2019-12-17'
           type: string
         approval_flow_route_id:
           description: |
@@ -21174,7 +21194,7 @@ components:
           type: boolean
         issue_date:
           description: 発生日 (yyyy-mm-dd)
-          example: '2020-01-01'
+          example: '2019-12-17'
           type: string
         partner_code:
           description: 取引先コード
@@ -21190,7 +21210,7 @@ components:
           type: integer
         payment_date:
           description: 支払期限 (yyyy-mm-dd)
-          example: '2020-01-01'
+          example: '2019-12-17'
           nullable: true
           type: string
         payment_method:
@@ -21347,7 +21367,7 @@ components:
                 type: integer
               application_date:
                 description: 申請日 (yyyy-mm-dd)
-                example: '2020-01-01'
+                example: '2019-12-17'
                 type: string
               application_number:
                 description: 申請No.
@@ -21397,7 +21417,7 @@ components:
                 type: integer
               issue_date:
                 description: 発生日 (yyyy-mm-dd)
-                example: '2020-01-01'
+                example: '2019-12-17'
                 type: string
               partner_code:
                 description: 取引先コード
@@ -21418,7 +21438,7 @@ components:
                 type: string
               payment_date:
                 description: 支払期限 (yyyy-mm-dd)
-                example: '2020-01-01'
+                example: '2019-12-17'
                 nullable: true
                 type: string
               payment_method:
@@ -21489,7 +21509,7 @@ components:
           example: ビル1F
           type: string
         company_contact_info:
-          description: 事業所担当者名 (デフォルトは事業所設定情報が補完されます)
+          description: 事業所担当者名 (デフォルトは見積書テンプレート情報が補完されます)
           example: 法人営業担当
           type: string
         company_id:
@@ -21520,7 +21540,7 @@ components:
           type: string
         issue_date:
           description: 見積日 (yyyy-mm-dd)
-          example: '2013-01-01'
+          example: '2019-12-17'
           type: string
         message:
           description: 'メッセージ (デフォルト: 下記の通り御見積申し上げます。)'
@@ -21798,11 +21818,11 @@ components:
                 type: integer
               issue_date:
                 description: 見積日 (yyyy-mm-dd)
-                example: '2013-01-01'
+                example: '2019-12-17'
                 type: string
               mail_sent_at:
                 description: メール送信日時(最新)
-                example: '2013-03-01 10:00:00'
+                example: '2019-12-17 10:00:00'
                 nullable: true
                 type: string
               message:
@@ -22111,17 +22131,17 @@ components:
                 type: integer
               web_confirmed_at:
                 description: Web共有取引先確認日時(最新)
-                example: '2013-03-01 10:00:00'
+                example: '2019-12-17 10:00:00'
                 nullable: true
                 type: string
               web_downloaded_at:
                 description: Web共有ダウンロード日時(最新)
-                example: '2013-03-01 10:00:00'
+                example: '2019-12-17 10:00:00'
                 nullable: true
                 type: string
               web_published_at:
                 description: Web共有日時(最新)
-                example: '2013-03-01 10:00:00'
+                example: '2019-12-17 10:00:00'
                 nullable: true
                 type: string
             required:
@@ -22202,11 +22222,11 @@ components:
               type: integer
             issue_date:
               description: 見積日 (yyyy-mm-dd)
-              example: '2013-01-01'
+              example: '2019-12-17'
               type: string
             mail_sent_at:
               description: メール送信日時(最新)
-              example: '2013-03-01 10:00:00'
+              example: '2019-12-17 10:00:00'
               nullable: true
               type: string
             message:
@@ -22554,17 +22574,17 @@ components:
               type: integer
             web_confirmed_at:
               description: Web共有取引先確認日時(最新)
-              example: '2013-03-01 10:00:00'
+              example: '2019-12-17 10:00:00'
               nullable: true
               type: string
             web_downloaded_at:
               description: Web共有ダウンロード日時(最新)
-              example: '2013-03-01 10:00:00'
+              example: '2019-12-17 10:00:00'
               nullable: true
               type: string
             web_published_at:
               description: Web共有日時(最新)
-              example: '2013-03-01 10:00:00'
+              example: '2019-12-17 10:00:00'
               nullable: true
               type: string
           required:
@@ -22595,7 +22615,7 @@ components:
           example: ビル1F
           type: string
         company_contact_info:
-          description: 事業所担当者名 (デフォルトは事業所設定情報が補完されます)
+          description: 事業所担当者名 (デフォルトは見積書テンプレート情報が補完されます)
           example: 法人営業担当
           type: string
         company_id:
@@ -22626,7 +22646,7 @@ components:
           type: string
         issue_date:
           description: 見積日 (yyyy-mm-dd)
-          example: '2013-01-01'
+          example: '2019-12-17'
           type: string
         message:
           description: 'メッセージ (デフォルト: 下記の通り御見積申し上げます。)'
@@ -22878,7 +22898,7 @@ components:
           properties:
             created_at:
               description: 作成日時（ISO8601形式）
-              example: '2018-09-12T18:30:24+09:00'
+              example: '2019-12-17T18:30:24+09:00'
               type: string
             description:
               description: メモ
@@ -22907,7 +22927,7 @@ components:
               type: integer
             issue_date:
               description: 発生日
-              example: '2019-01-01'
+              example: '2019-12-17'
               type: string
             mime_type:
               description: MIMEタイプ
@@ -22985,7 +23005,7 @@ components:
           type: string
         issue_date:
           description: 取引日 (yyyy-mm-dd)
-          example: '2018-01-01'
+          example: '2019-12-17'
           type: string
       required:
         - company_id
@@ -23088,7 +23108,7 @@ components:
           type: integer
         update_date:
           description: 更新日 (yyyy-mm-dd)
-          example: '2014-01-01'
+          example: '2019-12-17'
           type: string
       required:
         - company_id
@@ -23185,7 +23205,7 @@ components:
           type: array
         update_date:
           description: 更新日 (yyyy-mm-dd)
-          example: '2014-01-01'
+          example: '2019-12-17'
           type: string
       required:
         - company_id
@@ -23466,7 +23486,7 @@ components:
                 type: integer
               created_at:
                 description: 作成日時
-                example: '2018-09-10T13:47:24.000+09:00'
+                example: '2019-12-17T13:47:24.000+09:00'
                 type: string
               detail_type:
                 description: 詳細パラメータの種類
@@ -23490,7 +23510,7 @@ components:
                 type: string
               updated_at:
                 description: 更新日時
-                example: '2018-09-10T13:47:24.000+09:00'
+                example: '2019-12-17T13:47:24.000+09:00'
                 type: string
             required:
               - account_category_id
@@ -23642,7 +23662,7 @@ components:
               type: integer
             reset:
               description: （上限値に達した場合）使用回数がリセットされる時刻
-              example: '2018-09-12T18:30:24+09:00'
+              example: '2019-12-17T18:30:24+09:00'
               type: string
           required:
             - limit
@@ -23672,7 +23692,7 @@ components:
           type: integer
         date:
           description: 振替日 (yyyy-mm-dd)
-          example: '2018-01-01'
+          example: '2019-12-17'
           type: string
         description:
           description: 備考
@@ -23733,7 +23753,7 @@ components:
               type: integer
             date:
               description: 振替日 (yyyy-mm-dd)
-              example: '2019-11-01'
+              example: '2019-12-17'
               type: string
             description:
               description: 備考
@@ -23958,11 +23978,11 @@ components:
               type: integer
             created_at:
               description: 作成日時
-              example: '2018-09-10T13:47:24.000+09:00'
+              example: '2019-12-17T13:47:24.000+09:00'
               type: string
             end_date:
               description: 発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
-              example: '2019-12-31'
+              example: '2019-12-17'
               type: string
             end_month:
               description: 発生月で絞込：終了会計月(1-12)(条件に指定した時のみ含まれる）
@@ -23992,7 +24012,7 @@ components:
               type: integer
             start_date:
               description: 発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
-              example: '2019-01-01'
+              example: '2019-12-17'
               type: string
             start_month:
               description: 発生月で絞込：開始会計月(1-12)(条件に指定した時のみ含まれる）
@@ -24169,11 +24189,11 @@ components:
               type: integer
             created_at:
               description: 作成日時
-              example: '2018-09-10T13:47:24.000+09:00'
+              example: '2019-12-17T13:47:24.000+09:00'
               type: string
             end_date:
               description: 発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
-              example: '2019-12-31'
+              example: '2019-12-17'
               type: string
             end_month:
               description: 発生月で絞込：終了会計月(1-12)(条件に指定した時のみ含まれる）
@@ -24203,7 +24223,7 @@ components:
               type: integer
             start_date:
               description: 発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
-              example: '2019-01-01'
+              example: '2019-12-17'
               type: string
             start_month:
               description: 発生月で絞込：開始会計月(1-12)(条件に指定した時のみ含まれる）
@@ -24368,11 +24388,11 @@ components:
               type: integer
             created_at:
               description: 作成日時
-              example: '2018-09-10T13:47:24.000+09:00'
+              example: '2019-12-17T13:47:24.000+09:00'
               type: string
             end_date:
               description: 発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
-              example: '2019-12-31'
+              example: '2019-12-17'
               type: string
             end_month:
               description: 発生月で絞込：終了会計月(1-12)(条件に指定した時のみ含まれる）
@@ -24402,7 +24422,7 @@ components:
               type: integer
             start_date:
               description: 発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
-              example: '2019-01-01'
+              example: '2019-12-17'
               type: string
             start_month:
               description: 発生月で絞込：開始会計月(1-12)(条件に指定した時のみ含まれる）
@@ -24639,11 +24659,11 @@ components:
               type: string
             created_at:
               description: 作成日時
-              example: '2018-09-10T13:47:24.000+09:00'
+              example: '2019-12-17T13:47:24.000+09:00'
               type: string
             end_date:
               description: 発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
-              example: '2019-12-31'
+              example: '2019-12-17'
               type: string
             end_month:
               description: 発生月で絞込：終了会計月(1-12)(条件に指定した時のみ含まれる）
@@ -24679,7 +24699,7 @@ components:
               type: integer
             start_date:
               description: 発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
-              example: '2019-01-01'
+              example: '2019-12-17'
               type: string
             start_month:
               description: 発生月で絞込：開始会計月(1-12)(条件に指定した時のみ含まれる）
@@ -24849,11 +24869,11 @@ components:
               type: string
             created_at:
               description: 作成日時
-              example: '2018-09-10T13:47:24.000+09:00'
+              example: '2019-12-17T13:47:24.000+09:00'
               type: string
             end_date:
               description: 発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
-              example: '2019-12-31'
+              example: '2019-12-17'
               type: string
             end_month:
               description: 発生月で絞込：終了会計月(1-12)(条件に指定した時のみ含まれる）
@@ -24887,7 +24907,7 @@ components:
               type: string
             start_date:
               description: 発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
-              example: '2019-01-01'
+              example: '2019-12-17'
               type: string
             start_month:
               description: 発生月で絞込：開始会計月(1-12)(条件に指定した時のみ含まれる）
@@ -25109,11 +25129,11 @@ components:
               type: string
             created_at:
               description: 作成日時
-              example: '2018-09-10T13:47:24.000+09:00'
+              example: '2019-12-17T13:47:24.000+09:00'
               type: string
             end_date:
               description: 発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
-              example: '2019-12-31'
+              example: '2019-12-17'
               type: string
             end_month:
               description: 発生月で絞込：終了会計月(1-12)(条件に指定した時のみ含まれる）
@@ -25149,7 +25169,7 @@ components:
               type: integer
             start_date:
               description: 発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
-              example: '2019-01-01'
+              example: '2019-12-17'
               type: string
             start_month:
               description: 発生月で絞込：開始会計月(1-12)(条件に指定した時のみ含まれる）
@@ -25354,11 +25374,11 @@ components:
               type: string
             created_at:
               description: 作成日時
-              example: '2018-09-10T13:47:24.000+09:00'
+              example: '2019-12-17T13:47:24.000+09:00'
               type: string
             end_date:
               description: 発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
-              example: '2019-12-31'
+              example: '2019-12-17'
               type: string
             end_month:
               description: 発生月で絞込：終了会計月(1-12)(条件に指定した時のみ含まれる）
@@ -25394,7 +25414,7 @@ components:
               type: integer
             start_date:
               description: 発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
-              example: '2019-01-01'
+              example: '2019-12-17'
               type: string
             start_month:
               description: 発生月で絞込：開始会計月(1-12)(条件に指定した時のみ含まれる）
@@ -25534,7 +25554,7 @@ components:
           type: integer
         date:
           description: 取引日 (yyyy-mm-dd)
-          example: '2018-01-01'
+          example: '2019-12-17'
           type: string
         description:
           description: 取引内容
@@ -25591,7 +25611,7 @@ components:
               type: integer
             date:
               description: 取引日(yyyy-mm-dd)
-              example: '2018-01-01'
+              example: '2019-12-17'
               type: string
             description:
               description: 取引内容
