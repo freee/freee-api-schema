@@ -19179,7 +19179,7 @@
           "type": "string"
         },
         "account_type": {
-          "description": "'口座種別(ordinary:普通、checking:当座、earmarked:納税準備預金、savings:貯蓄、other:その他)'<br>\n支払先指定時には無効<br>\n支払先未指定時には必須\n",
+          "description": "'口座種別(ordinary: 普通、checking: 当座、earmarked: 納税準備預金、savings: 貯蓄、other: その他)'<br>\n'支払先指定時には無効'<br>\n'デフォルトは ordinary: 普通 です'\n",
           "enum": [
             "ordinary",
             "checking",
@@ -19271,16 +19271,17 @@
           "example": 2,
           "maximum": 2147483647,
           "minimum": 1,
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": true
         },
         "partner_code": {
-          "description": "取引先コード",
+          "description": "支払先の取引先コード<br>\n支払先の取引先ID指定時には無効\n",
           "example": "code001",
           "type": "string",
           "x-nullable": true
         },
         "partner_id": {
-          "description": "取引先ID",
+          "description": "支払先の取引先ID",
           "example": 201,
           "maximum": 2147483647,
           "minimum": 1,
@@ -19294,7 +19295,7 @@
           "x-nullable": true
         },
         "payment_method": {
-          "description": "支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)",
+          "description": "'支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)'<br>\n'デフォルトは none: 指定なし です'\n",
           "enum": [
             "none",
             "domestic_bank_transfer",
@@ -19314,7 +19315,8 @@
                 "example": 1,
                 "maximum": 2147483647,
                 "minimum": 1,
-                "type": "integer"
+                "type": "integer",
+                "x-nullable": true
               },
               "amount": {
                 "description": "金額",
@@ -19336,7 +19338,7 @@
                 "type": "integer"
               },
               "line_type": {
-                "description": "行の種類 (deal_line: 支払依頼, withholding_tax: 源泉徴収税)",
+                "description": "'行の種類 (deal_line: 支払依頼, withholding_tax: 源泉徴収税)'<br>\n'デフォルトは deal_line: 支払依頼 です'\n",
                 "enum": [
                   "deal_line",
                   "withholding_tax"
@@ -19395,8 +19397,7 @@
               }
             },
             "required": [
-              "amount",
-              "tax_code"
+              "amount"
             ],
             "type": "object"
           },
@@ -19437,14 +19438,12 @@
             "account_name": {
               "description": "受取人名（カナ）",
               "example": "フリータロウ",
-              "type": "string",
-              "x-nullable": true
+              "type": "string"
             },
             "account_number": {
               "description": "口座番号",
               "example": "1010101",
-              "type": "string",
-              "x-nullable": true
+              "type": "string"
             },
             "account_type": {
               "description": "口座種別(ordinary:普通、checking:当座、earmarked:納税準備預金、savings:貯蓄、other:その他)",
@@ -19585,38 +19584,32 @@
             "bank_code": {
               "description": "銀行コード",
               "example": "0001",
-              "type": "string",
-              "x-nullable": true
+              "type": "string"
             },
             "bank_name": {
               "description": "銀行名",
               "example": "freee銀行",
-              "type": "string",
-              "x-nullable": true
+              "type": "string"
             },
             "bank_name_kana": {
               "description": "銀行名（カナ）",
               "example": "フリーギンコウ",
-              "type": "string",
-              "x-nullable": true
+              "type": "string"
             },
             "branch_code": {
               "description": "支店番号",
               "example": "101",
-              "type": "string",
-              "x-nullable": true
+              "type": "string"
             },
             "branch_kana": {
               "description": "支店名（カナ）",
               "example": "ギンザシテン",
-              "type": "string",
-              "x-nullable": true
+              "type": "string"
             },
             "branch_name": {
               "description": "支店名",
               "example": "銀座支店",
-              "type": "string",
-              "x-nullable": true
+              "type": "string"
             },
             "comments": {
               "description": "支払依頼のコメント一覧（配列）",
@@ -19676,8 +19669,7 @@
               "example": 1,
               "maximum": 2147483647,
               "minimum": 1,
-              "type": "integer",
-              "x-nullable": true
+              "type": "integer"
             },
             "deal_status": {
               "description": "取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます settled:精算済み, unsettled:清算待ち)",
@@ -19686,14 +19678,12 @@
                 "unsettled"
               ],
               "example": "settled",
-              "type": "string",
-              "x-nullable": true
+              "type": "string"
             },
             "description": {
               "description": "備考",
               "example": "◯◯連携先ID: cx12345",
-              "type": "string",
-              "x-nullable": true
+              "type": "string"
             },
             "document_code": {
               "description": "請求書番号",
@@ -19772,8 +19762,7 @@
                   "description": {
                     "description": "内容",
                     "example": "原稿料",
-                    "type": "string",
-                    "x-nullable": true
+                    "type": "string"
                   },
                   "id": {
                     "description": "支払依頼の項目行ID",
@@ -19915,8 +19904,6 @@
             "total_amount",
             "status",
             "payment_request_lines",
-            "deal_id",
-            "deal_status",
             "applicant_id",
             "approvers",
             "application_number",
@@ -20091,7 +20078,8 @@
                 "example": 1,
                 "maximum": 2147483647,
                 "minimum": 1,
-                "type": "integer"
+                "type": "integer",
+                "x-nullable": true
               },
               "amount": {
                 "description": "金額",
@@ -20179,8 +20167,7 @@
               }
             },
             "required": [
-              "amount",
-              "tax_code"
+              "amount"
             ],
             "type": "object"
           },
