@@ -15014,13 +15014,12 @@
             "items": {
               "type": "object",
               "required": [
-                "amount",
-                "tax_code"
+                "amount"
               ],
               "properties": {
                 "line_type": {
                   "type": "string",
-                  "description": "行の種類 (deal_line: 支払依頼, withholding_tax: 源泉徴収税)",
+                  "description": "'行の種類 (deal_line: 支払依頼, withholding_tax: 源泉徴収税)'<br>\n'デフォルトは deal_line: 支払依頼 です'\n",
                   "example": "deal_line",
                   "enum": [
                     "deal_line",
@@ -15044,7 +15043,8 @@
                   "minimum": 1,
                   "maximum": 2147483647,
                   "description": "勘定科目ID",
-                  "example": 1
+                  "example": 1,
+                  "nullable": true
                 },
                 "tax_code": {
                   "type": "integer",
@@ -15124,7 +15124,8 @@
             "minimum": 1,
             "maximum": 2147483647,
             "description": "親申請ID(法人向け エンタープライズプラン、プロフェッショナルプラン)<br>\n<ul>\n  <li>承認済みの既存各種申請IDのみ指定可能です。</li>\n  <li>各種申請一覧APIを利用して取得してください。</li>\n</ul>\n",
-            "example": 2
+            "example": 2,
+            "nullable": true
           },
           "draft": {
             "type": "boolean",
@@ -15159,7 +15160,7 @@
           },
           "payment_method": {
             "type": "string",
-            "description": "支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)",
+            "description": "'支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)'<br>\n'デフォルトは none: 指定なし です'\n",
             "example": "none",
             "enum": [
               "none",
@@ -15173,13 +15174,13 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 2147483647,
-            "description": "取引先ID",
+            "description": "支払先の取引先ID",
             "example": 201,
             "nullable": true
           },
           "partner_code": {
             "type": "string",
-            "description": "取引先コード",
+            "description": "支払先の取引先コード<br>\n支払先の取引先ID指定時には無効\n",
             "example": "code001",
             "nullable": true
           },
@@ -15225,7 +15226,7 @@
           },
           "account_type": {
             "type": "string",
-            "description": "'口座種別(ordinary:普通、checking:当座、earmarked:納税準備預金、savings:貯蓄、other:その他)'<br>\n支払先指定時には無効<br>\n支払先未指定時には必須\n",
+            "description": "'口座種別(ordinary: 普通、checking: 当座、earmarked: 納税準備預金、savings: 貯蓄、other: その他)'<br>\n'支払先指定時には無効'<br>\n'デフォルトは ordinary: 普通 です'\n",
             "example": "ordinary",
             "enum": [
               "ordinary",
@@ -15277,8 +15278,7 @@
             "items": {
               "type": "object",
               "required": [
-                "amount",
-                "tax_code"
+                "amount"
               ],
               "properties": {
                 "id": {
@@ -15314,7 +15314,8 @@
                   "minimum": 1,
                   "maximum": 2147483647,
                   "description": "勘定科目ID",
-                  "example": 1
+                  "example": 1,
+                  "nullable": true
                 },
                 "tax_code": {
                   "type": "integer",
@@ -23168,8 +23169,6 @@
               "total_amount",
               "status",
               "payment_request_lines",
-              "deal_id",
-              "deal_status",
               "applicant_id",
               "approvers",
               "application_number",
@@ -23223,8 +23222,7 @@
               "description": {
                 "type": "string",
                 "description": "備考",
-                "example": "◯◯連携先ID: cx12345",
-                "nullable": true
+                "example": "◯◯連携先ID: cx12345"
               },
               "total_amount": {
                 "type": "integer",
@@ -23279,8 +23277,7 @@
                     "description": {
                       "type": "string",
                       "description": "内容",
-                      "example": "原稿料",
-                      "nullable": true
+                      "example": "原稿料"
                     },
                     "amount": {
                       "type": "integer",
@@ -23367,8 +23364,7 @@
                 "minimum": 1,
                 "maximum": 2147483647,
                 "description": "取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)",
-                "example": 1,
-                "nullable": true
+                "example": 1
               },
               "deal_status": {
                 "type": "string",
@@ -23377,8 +23373,7 @@
                 "enum": [
                   "settled",
                   "unsettled"
-                ],
-                "nullable": true
+                ]
               },
               "applicant_id": {
                 "type": "integer",
@@ -23610,38 +23605,32 @@
               "bank_name": {
                 "type": "string",
                 "description": "銀行名",
-                "example": "freee銀行",
-                "nullable": true
+                "example": "freee銀行"
               },
               "bank_name_kana": {
                 "type": "string",
                 "description": "銀行名（カナ）",
-                "example": "フリーギンコウ",
-                "nullable": true
+                "example": "フリーギンコウ"
               },
               "bank_code": {
                 "type": "string",
                 "description": "銀行コード",
-                "example": "0001",
-                "nullable": true
+                "example": "0001"
               },
               "branch_name": {
                 "type": "string",
                 "description": "支店名",
-                "example": "銀座支店",
-                "nullable": true
+                "example": "銀座支店"
               },
               "branch_kana": {
                 "type": "string",
                 "description": "支店名（カナ）",
-                "example": "ギンザシテン",
-                "nullable": true
+                "example": "ギンザシテン"
               },
               "branch_code": {
                 "type": "string",
                 "description": "支店番号",
-                "example": "101",
-                "nullable": true
+                "example": "101"
               },
               "account_type": {
                 "type": "string",
@@ -23658,14 +23647,12 @@
               "account_number": {
                 "type": "string",
                 "description": "口座番号",
-                "example": "1010101",
-                "nullable": true
+                "example": "1010101"
               },
               "account_name": {
                 "type": "string",
                 "description": "受取人名（カナ）",
-                "example": "フリータロウ",
-                "nullable": true
+                "example": "フリータロウ"
               }
             }
           }
