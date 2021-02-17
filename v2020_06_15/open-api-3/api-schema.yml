@@ -13298,6 +13298,23 @@ components:
               minimum: 1
               nullable: true
               type: integer
+            deal_id:
+              description: '取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)'
+              example: 1
+              maximum: 2147483647
+              minimum: 1
+              nullable: true
+              type: integer
+            deal_status:
+              description: >-
+                取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます
+                settled:精算済み, unsettled:清算待ち)
+              enum:
+                - settled
+                - unsettled
+              example: settled
+              nullable: true
+              type: string
             form_id:
               description: 申請フォームID
               example: 1
@@ -13378,6 +13395,8 @@ components:
             - current_step_id
             - current_round
             - approval_request_form
+            - deal_id
+            - deal_status
           type: object
       required:
         - approval_request
@@ -13484,6 +13503,23 @@ components:
                 minimum: 1
                 nullable: true
                 type: integer
+              deal_id:
+                description: '取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)'
+                example: 1
+                maximum: 2147483647
+                minimum: 1
+                nullable: true
+                type: integer
+              deal_status:
+                description: >-
+                  取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます
+                  settled:精算済み, unsettled:清算待ち)
+                enum:
+                  - settled
+                  - unsettled
+                example: settled
+                nullable: true
+                type: string
               form_id:
                 description: 申請フォームID
                 example: 1
@@ -13559,6 +13595,8 @@ components:
               - form_id
               - current_step_id
               - current_round
+              - deal_id
+              - deal_status
             type: object
           type: array
       required:
