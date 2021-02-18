@@ -719,18 +719,7 @@
           "200": {
             "description": "",
             "schema": {
-              "properties": {
-                "approval_request_forms": {
-                  "items": {
-                    "$ref": "#/definitions/approvalRequestFormResponse/properties/approval_request_form"
-                  },
-                  "type": "array"
-                }
-              },
-              "required": [
-                "approval_request_forms"
-              ],
-              "type": "object"
+              "$ref": "#/definitions/approvalRequestFormIndexResponse"
             }
           },
           "400": {
@@ -10949,6 +10938,86 @@
       ],
       "type": "object"
     },
+    "approvalRequestFormIndexResponse": {
+      "properties": {
+        "approval_request_forms": {
+          "items": {
+            "properties": {
+              "company_id": {
+                "description": "事業所ID",
+                "example": 1,
+                "maximum": 2147483647,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "created_date": {
+                "description": "作成日時",
+                "example": "2019-12-17T13:47:24.000+09:00",
+                "type": "string"
+              },
+              "description": {
+                "description": "申請フォームの説明",
+                "example": "申請フォームの説明",
+                "type": "string"
+              },
+              "form_order": {
+                "description": "表示順（申請者が選択する申請フォームの表示順を設定できます。小さい数ほど上位に表示されます。（0を除く整数のみ。マイナス不可）未入力の場合、表示順が後ろになります。同じ数字が入力された場合、登録順で表示されます。）",
+                "example": 1,
+                "maximum": 1000,
+                "minimum": 1,
+                "type": "integer",
+                "x-nullable": true
+              },
+              "id": {
+                "description": "申請フォームID",
+                "example": 1,
+                "maximum": 2147483647,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "name": {
+                "description": "申請フォームの名前",
+                "example": "申請フォームの名前",
+                "type": "string"
+              },
+              "route_setting_count": {
+                "description": "適用された経路数",
+                "example": 1,
+                "maximum": 2147483647,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "status": {
+                "description": "ステータス(draft: 申請で使用しない、active: 申請で使用する、deleted: 削除済み)",
+                "enum": [
+                  "draft",
+                  "active",
+                  "deleted"
+                ],
+                "example": "active",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "company_id",
+              "name",
+              "description",
+              "status",
+              "created_date",
+              "form_order",
+              "route_setting_count"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "approval_request_forms"
+      ],
+      "type": "object"
+    },
     "approvalRequestFormResponse": {
       "properties": {
         "approval_request_form": {
@@ -11042,7 +11111,7 @@
                     "x-nullable": true
                   },
                   "type": {
-                    "description": "項目種別 (title: 申請タイトル, single_line: 自由記述形式 1行, multi_line: 自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt: 添付ファイル)",
+                    "description": "項目種別 (title: 申請タイトル, single_line: 自由記述形式 1行, multi_line: 自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt: 添付ファイル, section: 部門タグID, partner: 取引先ID)",
                     "enum": [
                       "title",
                       "single_line",
@@ -11050,7 +11119,9 @@
                       "select",
                       "date",
                       "amount",
-                      "receipt"
+                      "receipt",
+                      "section",
+                      "partner"
                     ],
                     "example": "single_line",
                     "type": "string"
@@ -11246,7 +11317,7 @@
                         "x-nullable": true
                       },
                       "type": {
-                        "description": "項目種別 (title: 申請タイトル, single_line: 自由記述形式 1行, multi_line: 自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt: 添付ファイル)",
+                        "description": "項目種別 (title: 申請タイトル, single_line: 自由記述形式 1行, multi_line: 自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt: 添付ファイル, section: 部門タグID, partner: 取引先ID)",
                         "enum": [
                           "title",
                           "single_line",
@@ -11254,7 +11325,9 @@
                           "select",
                           "date",
                           "amount",
-                          "receipt"
+                          "receipt",
+                          "section",
+                          "partner"
                         ],
                         "example": "single_line",
                         "type": "string"
@@ -11457,7 +11530,7 @@
                     "type": "integer"
                   },
                   "type": {
-                    "description": "項目タイプ(title: 申請タイトル, single_line: 自由記述形式 1行, multi_line: 自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt: 添付ファイル)",
+                    "description": "項目タイプ(title: 申請タイトル, single_line: 自由記述形式 1行, multi_line: 自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt: 添付ファイル, section: 部門タグID, partner: 取引先ID)",
                     "enum": [
                       "title",
                       "single_line",
@@ -11465,7 +11538,9 @@
                       "select",
                       "date",
                       "amount",
-                      "receipt"
+                      "receipt",
+                      "section",
+                      "partner"
                     ],
                     "example": "single_line",
                     "type": "string"
@@ -11695,7 +11770,7 @@
                       "type": "integer"
                     },
                     "type": {
-                      "description": "項目タイプ(title: 申請タイトル, single_line: 自由記述形式 1行, multi_line: 自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt: 添付ファイル)",
+                      "description": "項目タイプ(title: 申請タイトル, single_line: 自由記述形式 1行, multi_line: 自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt: 添付ファイル, section: 部門タグID, partner: 取引先ID)",
                       "enum": [
                         "title",
                         "single_line",
@@ -11703,7 +11778,9 @@
                         "select",
                         "date",
                         "amount",
-                        "receipt"
+                        "receipt",
+                        "section",
+                        "partner"
                       ],
                       "example": "single_line",
                       "type": "string"
