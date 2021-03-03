@@ -12627,7 +12627,8 @@
               "example": 4,
               "maximum": 46,
               "minimum": -1,
-              "type": "integer"
+              "type": "integer",
+              "x-nullable": true
             },
             "private_settlement": {
               "description": "プライベート資金/役員資金（false: 使用しない、true: 使用する）",
@@ -13062,7 +13063,8 @@
               "example": 4,
               "maximum": 46,
               "minimum": -1,
-              "type": "integer"
+              "type": "integer",
+              "x-nullable": true
             },
             "private_settlement": {
               "description": "プライベート資金/役員資金（false: 使用しない、true: 使用する）",
@@ -18425,7 +18427,8 @@
               "example": 4,
               "maximum": 46,
               "minimum": -1,
-              "type": "integer"
+              "type": "integer",
+              "x-nullable": true
             },
             "address_attributes[street_name1]": {
               "description": "市区町村・番地",
@@ -18959,7 +18962,8 @@
                 "example": 4,
                 "maximum": 46,
                 "minimum": -1,
-                "type": "integer"
+                "type": "integer",
+                "x-nullable": true
               },
               "address_attributes[street_name1]": {
                 "description": "市区町村・番地",
