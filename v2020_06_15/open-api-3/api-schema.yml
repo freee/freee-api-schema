@@ -14598,6 +14598,7 @@ components:
               example: 4
               maximum: 46
               minimum: -1
+              nullable: true
               type: integer
             private_settlement:
               description: 'プライベート資金/役員資金（false: 使用しない、true: 使用する）'
@@ -15085,6 +15086,7 @@ components:
               example: 4
               maximum: 46
               minimum: -1
+              nullable: true
               type: integer
             private_settlement:
               description: 'プライベート資金/役員資金（false: 使用しない、true: 使用する）'
@@ -19785,6 +19787,7 @@ components:
               example: 4
               maximum: 46
               minimum: -1
+              nullable: true
               type: integer
             'address_attributes[street_name1]':
               description: 市区町村・番地
@@ -20228,6 +20231,7 @@ components:
                 example: 4
                 maximum: 46
                 minimum: -1
+                nullable: true
                 type: integer
               'address_attributes[street_name1]':
                 description: 市区町村・番地
