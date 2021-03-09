@@ -20657,6 +20657,8 @@ components:
             '支払方法(none: 指定なし, domestic_bank_transfer: 国内振込,
             abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card:
             クレジットカード)'<br>
+
+            'デフォルトは none: 指定なし です。'
           enum:
             - none
             - domestic_bank_transfer
@@ -20787,7 +20789,6 @@ components:
         - approval_flow_route_id
         - draft
         - issue_date
-        - payment_method
       type: object
     paymentRequestResponse:
       properties:
