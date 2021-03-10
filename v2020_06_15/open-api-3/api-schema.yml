@@ -11250,6 +11250,13 @@ paths:
             enum:
               - true
             type: boolean
+        - description: 取得情報に事業がアドバイザー事象所の場合は事業所毎の一意なプロフィールIDを含める
+          in: query
+          name: advisor
+          schema:
+            enum:
+              - true
+            type: boolean
       responses:
         '200':
           content:
@@ -19486,6 +19493,13 @@ components:
             companies:
               items:
                 properties:
+                  advisor_id:
+                    description: アドバイザープロファイルID（アドバイザー事業所で無い場合にnullになります）
+                    example: 1234
+                    maximum: 2147483647
+                    minimun: 1
+                    nullable: true
+                    type: integer
                   display_name:
                     description: 表示名
                     example: freee株式会社
@@ -20657,6 +20671,8 @@ components:
             '支払方法(none: 指定なし, domestic_bank_transfer: 国内振込,
             abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card:
             クレジットカード)'<br>
+
+            'デフォルトは none: 指定なし です。'
           enum:
             - none
             - domestic_bank_transfer
@@ -20787,7 +20803,6 @@ components:
         - approval_flow_route_id
         - draft
         - issue_date
-        - payment_method
       type: object
     paymentRequestResponse:
       properties:
