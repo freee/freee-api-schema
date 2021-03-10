@@ -5168,6 +5168,17 @@
                 true
               ]
             }
+          },
+          {
+            "name": "advisor",
+            "in": "query",
+            "description": "取得情報に事業がアドバイザー事象所の場合は事業所毎の一意なプロフィールIDを含める",
+            "schema": {
+              "type": "boolean",
+              "enum": [
+                true
+              ]
+            }
           }
         ],
         "responses": {
@@ -14971,8 +14982,7 @@
           "payment_request_lines",
           "approval_flow_route_id",
           "draft",
-          "issue_date",
-          "payment_method"
+          "issue_date"
         ],
         "properties": {
           "company_id": {
@@ -15149,7 +15159,7 @@
           },
           "payment_method": {
             "type": "string",
-            "description": "'支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)'<br>\n",
+            "description": "'支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)'<br>\n'デフォルトは none: 指定なし です。'\n",
             "example": "none",
             "enum": [
               "none",
@@ -22293,6 +22303,14 @@
                       "type": "boolean",
                       "description": "カスタム権限（true: 使用する、false: 使用しない）",
                       "example": false
+                    },
+                    "advisor_id": {
+                      "type": "integer",
+                      "nullable": true,
+                      "minimun": 1,
+                      "maximum": 2147483647,
+                      "description": "アドバイザープロファイルID（アドバイザー事業所で無い場合にnullになります）",
+                      "example": 1234
                     }
                   }
                 }

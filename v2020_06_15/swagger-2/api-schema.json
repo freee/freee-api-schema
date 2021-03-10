@@ -9267,6 +9267,15 @@
             "in": "query",
             "name": "companies",
             "type": "boolean"
+          },
+          {
+            "description": "取得情報に事業がアドバイザー事象所の場合は事業所毎の一意なプロフィールIDを含める",
+            "enum": [
+              true
+            ],
+            "in": "query",
+            "name": "advisor",
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -18063,6 +18072,14 @@
             "companies": {
               "items": {
                 "properties": {
+                  "advisor_id": {
+                    "description": "アドバイザープロファイルID（アドバイザー事業所で無い場合にnullになります）",
+                    "example": 1234,
+                    "maximum": 2147483647,
+                    "minimun": 1,
+                    "type": "integer",
+                    "x-nullable": true
+                  },
                   "display_name": {
                     "description": "表示名",
                     "example": "freee株式会社",
@@ -19416,7 +19433,7 @@
           "x-nullable": true
         },
         "payment_method": {
-          "description": "'支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)'<br>\n",
+          "description": "'支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)'<br>\n'デフォルトは none: 指定なし です。'\n",
           "enum": [
             "none",
             "domestic_bank_transfer",
@@ -19547,8 +19564,7 @@
         "payment_request_lines",
         "approval_flow_route_id",
         "draft",
-        "issue_date",
-        "payment_method"
+        "issue_date"
       ],
       "type": "object"
     },
