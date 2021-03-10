@@ -13418,7 +13418,7 @@
                   "id": {
                     "description": "取引行ID",
                     "example": 11,
-                    "maximum": 2147483647,
+                    "maximum": 9223372036854776000,
                     "minimum": 1,
                     "type": "integer"
                   },
@@ -13573,7 +13573,7 @@
                   "id": {
                     "description": "取引行ID",
                     "example": 202,
-                    "maximum": 2147483647,
+                    "maximum": 9223372036854776000,
                     "minimum": 1,
                     "type": "integer"
                   }
@@ -13680,7 +13680,7 @@
                   "id": {
                     "description": "取引行ID",
                     "example": 11,
-                    "maximum": 2147483647,
+                    "maximum": 9223372036854776000,
                     "minimum": 1,
                     "type": "integer"
                   },
@@ -13835,7 +13835,7 @@
                   "id": {
                     "description": "取引行ID",
                     "example": 202,
-                    "maximum": 2147483647,
+                    "maximum": 9223372036854776000,
                     "minimum": 1,
                     "type": "integer"
                   }
@@ -14000,7 +14000,7 @@
                         "id": {
                           "description": "+更新の明細行ID",
                           "example": 1,
-                          "maximum": 2147483647,
+                          "maximum": 9223372036854776000,
                           "minimum": 1,
                           "type": "integer"
                         },
@@ -14083,14 +14083,14 @@
                   "id": {
                     "description": "+更新行ID",
                     "example": 11,
-                    "maximum": 2147483647,
+                    "maximum": 9223372036854776000,
                     "minimum": 1,
                     "type": "integer"
                   },
                   "renew_target_id": {
                     "description": "+更新の対象行ID",
                     "example": 12,
-                    "maximum": 2147483647,
+                    "maximum": 9223372036854776000,
                     "minimum": 1,
                     "type": "integer"
                   },
@@ -14190,7 +14190,7 @@
               "id": {
                 "description": "取引行ID: 既存取引行を更新する場合に指定します。IDを指定しない取引行は、新規行として扱われ追加されます。また、detailsに含まれない既存の取引行は削除されます。更新後も残したい行は、必ず取引行IDを指定してdetailsに含めてください。",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
@@ -14868,7 +14868,7 @@
                   "id": {
                     "description": "経費申請の項目行ID",
                     "example": 1,
-                    "maximum": 2147483647,
+                    "maximum": 9223372036854776000,
                     "minimum": 1,
                     "type": "integer"
                   },
@@ -15063,7 +15063,7 @@
               "id": {
                 "description": "経費申請の項目行ID: 既存項目行を更新する場合に指定します。IDを指定しない項目行は、新規行として扱われ追加されます。また、expense_application_linesに含まれない既存の項目行は削除されます。更新後も残したい行は、必ず経費申請の項目行IDを指定してexpense_application_linesに含めてください。",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
@@ -15235,7 +15235,7 @@
                     "id": {
                       "description": "経費申請の項目行ID",
                       "example": 1,
-                      "maximum": 2147483647,
+                      "maximum": 9223372036854776000,
                       "minimum": 1,
                       "type": "integer"
                     },
@@ -17739,7 +17739,7 @@
                   "id": {
                     "description": "貸借行ID",
                     "example": 1,
-                    "maximum": 2147483647,
+                    "maximum": 9223372036854776000,
                     "minimum": 1,
                     "type": "integer"
                   },
@@ -17968,7 +17968,7 @@
               "id": {
                 "description": "貸借行ID: 既存貸借行を更新または削除する場合に指定します。IDを指定しない貸借行は、新規行として扱われ追加されます。",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
@@ -19904,7 +19904,7 @@
                   "id": {
                     "description": "支払依頼の項目行ID",
                     "example": 1,
-                    "maximum": 2147483647,
+                    "maximum": 9223372036854776000,
                     "minimum": 1,
                     "type": "integer"
                   },
@@ -20233,7 +20233,7 @@
               "id": {
                 "description": "支払依頼の項目行ID: 既存項目行を更新する場合に指定します。IDを指定しない項目行は、新規行として扱われ追加されます。また、payment_request_linesに含まれない既存の項目行は削除されます。更新後も残したい行は、必ず支払依頼の項目行IDを指定してpayment_request_linesに含めてください。",
                 "example": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854776000,
                 "minimum": 1,
                 "type": "integer"
               },
@@ -22320,7 +22320,7 @@
         "renew_target_id": {
           "description": "+更新対象行ID (details(取引の明細行), accruals(債権債務行), renewsのdetails(+更新の明細行)のIDを指定) ",
           "example": 1,
-          "maximum": 2147483647,
+          "maximum": 9223372036854776000,
           "minimum": 1,
           "type": "integer"
         },
