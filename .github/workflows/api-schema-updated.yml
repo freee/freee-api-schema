@@ -30,7 +30,7 @@ jobs:
       - name: Get updates under _sdk_compatible/
         id: updates_under_sdk_compatible
         run: |
-          COUNT=`git diff origin/master --name-only | grep -E -n '^_sdk_compatible/(.+)$' | wc -l`
+          COUNT=`git diff $(git tag --sort version:refname | tail -n 2 | head -n 1) $(git tag --sort version:refname | tail -n 1) | grep -n '_sdk_compatible' | wc -l`
           if [ $COUNT -gt 0 ]; then
             echo 'Updates are found under `_sdk_compatible/`.'
           else
