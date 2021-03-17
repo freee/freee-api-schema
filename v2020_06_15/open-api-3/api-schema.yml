@@ -21550,6 +21550,80 @@ components:
                 description: 申請No.
                 example: '2'
                 type: string
+              approvers:
+                description: |-
+                  承認者（配列）
+                    承認ステップのresource_typeがunspecified (指定なし)の場合はapproversはレスポンスに含まれません。
+                    しかし、resource_typeがunspecifiedの承認ステップにおいて誰かが承認・却下・差し戻しのいずれかのアクションを取った後は、
+                    approversはレスポンスに含まれるようになります。
+                    その場合approversにはアクションを行ったステップのIDとアクションを行ったユーザーのIDが含まれます。
+                items:
+                  properties:
+                    is_force_action:
+                      description: 代理承認済みかどうか
+                      example: true
+                      type: boolean
+                    resource_type:
+                      description: |-
+                        承認ステップの承認方法
+                        * ` predefined_user` - メンバー指定 (1人),
+                        * ` selected_user` - 申請時にメンバー指定
+                        * ` unspecified` - 指定なし
+                        * ` and_resource` - メンバー指定 (複数、全員の承認),
+                        * ` or_resource` - メンバー指定 (複数、1人の承認)
+                        * ` and_position` - 役職指定 (複数、全員の承認)
+                        * ` or_position` - 役職指定 (複数、1人の承認)
+                      enum:
+                        - predefined_user
+                        - selected_user
+                        - unspecified
+                        - and_resource
+                        - or_resource
+                        - and_position
+                        - or_position
+                      example: predefined_user
+                      type: string
+                    status:
+                      description: |-
+                        承認者の承認状態
+                        * `initial` - 初期状態
+                        * `approved` - 承認済
+                        * `rejected` - 却下
+                        * `feedback` - 差戻し
+                      enum:
+                        - initial
+                        - approved
+                        - rejected
+                        - feedback
+                      example: initial
+                      type: string
+                    step_id:
+                      description: 承認ステップID
+                      example: 1
+                      maximum: 2147483647
+                      minimum: 1
+                      type: integer
+                    user_id:
+                      description: |-
+                        承認者のユーザーID
+                        下記の場合はnullになります。
+                        <ul>
+                          <li>resource_type:selected_userの場合で承認者未指定時</li>
+                          <li>resource_type:or_positionで前stepで部門未指定の場合</li>
+                        </ul>
+                      example: 1
+                      maximum: 2147483647
+                      minimum: 1
+                      nullable: true
+                      type: integer
+                  required:
+                    - step_id
+                    - user_id
+                    - status
+                    - is_force_action
+                    - resource_type
+                  type: object
+                type: array
               company_id:
                 description: 事業所ID
                 example: 1
@@ -21579,12 +21653,16 @@ components:
               deal_status:
                 description: >-
                   取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます
-                  settled:精算済み, unsettled:清算待ち)
+                  settled:支払済み, unsettled:支払待ち)
                 enum:
                   - settled
                   - unsettled
                 example: settled
                 nullable: true
+                type: string
+              document_code:
+                description: 請求書番号
+                example: '2'
                 type: string
               id:
                 description: 支払依頼ID
@@ -21658,12 +21736,12 @@ components:
               - application_date
               - total_amount
               - status
-              - deal_id
-              - deal_status
               - applicant_id
+              - approvers
               - application_number
               - current_step_id
               - current_round
+              - document_code
               - issue_date
               - payment_date
               - payment_method
@@ -23766,12 +23844,12 @@ components:
           maxLength: 30
           type: string
         shortcut1:
-          description: メモタグ検索用 (20文字以内)
+          description: ショートカット1 (20文字以内)
           example: tag1
           maxLength: 20
           type: string
         shortcut2:
-          description: メモタグ検索用 (20文字以内)
+          description: ショートカット2 (20文字以内)
           example: t1
           maxLength: 20
           type: string
