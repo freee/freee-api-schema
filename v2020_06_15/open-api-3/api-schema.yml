@@ -970,6 +970,8 @@ paths:
               <li>日付(date)： 日付形式 例)2019-12-17</li>
               <li>金額(amount)： 数値(申請フォームで設定した上限・下限金額内の値, 改行なし) 例)10000</li>
               <li>添付ファイル(receipt)： ファイルボックスAPIのID 例)1</li>
+              <li>部門ID(section)： 部門APIのID 例)1</li>
+              <li>取引先ID(partner)： 取引先APIのID 例)1</li>
             </ul>
           </li>
           <li>
@@ -1430,6 +1432,8 @@ paths:
               <li>日付(date)： 日付形式 例)2019-12-17</li>
               <li>金額(amount)： 数値(申請フォームで設定した上限・下限金額内の値, 改行なし) 例)10000</li>
               <li>添付ファイル(receipt)： ファイルボックスAPIのID 例)1</li>
+              <li>部門ID(section)： 部門APIのID 例)1</li>
+              <li>取引先ID(partner)： 取引先APIのID 例)1</li>
             </ul>
           </li>
           <li>本APIでは、status(申請ステータス): draft:下書き, feedback:差戻しのみ更新可能です。</li>
@@ -2980,7 +2984,7 @@ paths:
           name: payment_id
           required: true
           schema:
-            maximum: 2147483647
+            maximum: 9223372036854776000
             minimum: 1
             type: integer
         - description: 事業所ID
@@ -3072,7 +3076,7 @@ paths:
           name: payment_id
           required: true
           schema:
-            maximum: 2147483647
+            maximum: 9223372036854776000
             minimum: 1
             type: integer
       responses:
@@ -7741,7 +7745,7 @@ paths:
         <blockquote>
 
         <p>GET
-        https://api.freee.co.jp/api/1/reports/trial_bs?company_id=1&amp;fiscal_year=2017&amp;breakdown_display_type=partner</p>
+        https://api.freee.co.jp/api/1/reports/trial_bs?company_id=1&amp;fiscal_year=2019&amp;breakdown_display_type=partner</p>
 
         </blockquote>
 
@@ -7750,7 +7754,7 @@ paths:
           &quot;trial_bs&quot; :
             {
               &quot;company_id&quot; : 1,
-              &quot;fiscal_year&quot; : 2017,
+              &quot;fiscal_year&quot; : 2019,
               &quot;breakdown_display_type&quot; : &quot;partner&quot;,
               &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot
               &quot;balances&quot; : [{
@@ -7991,7 +7995,7 @@ paths:
         <blockquote>
 
         <p>GET
-        https://api.freee.co.jp/api/1/reports/trial_bs_three_years?company_id=1&amp;fiscal_year=2017</p>
+        https://api.freee.co.jp/api/1/reports/trial_bs_three_years?company_id=1&amp;fiscal_year=2019</p>
 
         </blockquote>
 
@@ -8000,7 +8004,7 @@ paths:
           &quot;trial_bs_three_years&quot; :
             {
               &quot;company_id&quot; : 1,
-              &quot;fiscal_year&quot; : 2017,
+              &quot;fiscal_year&quot; : 2019,
               &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot
               &quot;balances&quot; : [{
                 &quot;account_item_id&quot; : 1000,
@@ -8217,7 +8221,7 @@ paths:
         <blockquote>
 
         <p>GET
-        https://api.freee.co.jp/api/1/reports/trial_bs_two_years?company_id=1&amp;fiscal_year=2017</p>
+        https://api.freee.co.jp/api/1/reports/trial_bs_two_years?company_id=1&amp;fiscal_year=2019</p>
 
         </blockquote>
 
@@ -8226,7 +8230,7 @@ paths:
           &quot;trial_bs_two_years&quot; :
             {
               &quot;company_id&quot; : 1,
-              &quot;fiscal_year&quot; : 2017,
+              &quot;fiscal_year&quot; : 2019,
               &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot
               &quot;balances&quot; : [{
                 &quot;account_item_id&quot; : 1000,
@@ -8479,7 +8483,7 @@ paths:
         <blockquote>
 
         <p>GET
-        https://api.freee.co.jp/api/1/reports/trial_pl?company_id=1&amp;fiscal_year=2017&amp;breakdown_display_type=partner</p>
+        https://api.freee.co.jp/api/1/reports/trial_pl?company_id=1&amp;fiscal_year=2019&amp;breakdown_display_type=partner</p>
 
         </blockquote>
 
@@ -8488,7 +8492,7 @@ paths:
           &quot;trial_pl&quot; :
             {
               &quot;company_id&quot; : 1,
-              &quot;fiscal_year&quot; : 2017,
+              &quot;fiscal_year&quot; : 2019,
               &quot;breakdown_display_type&quot; : &quot;partner&quot;,
               &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot
               &quot;balances&quot; : [{
@@ -8729,7 +8733,7 @@ paths:
         <blockquote>
 
         <p>GET
-        https://api.freee.co.jp/api/1/reports/trial_pl_sections?company_id=1&amp;section_ids=1,2,3&amp;fiscal_year=2017</p></p>
+        https://api.freee.co.jp/api/1/reports/trial_pl_sections?company_id=1&amp;section_ids=1,2,3&amp;fiscal_year=2019</p></p>
 
         </blockquote>
 
@@ -8739,7 +8743,7 @@ paths:
             {
               &quot;company_id&quot; : 1,
               &quot;section_ids&quot; : &quot;1,2,3&quot;,
-              &quot;fiscal_year&quot; : 2017,
+              &quot;fiscal_year&quot; : 2019,
               &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot
               &quot;balances&quot; : [{
                 &quot;account_item_id&quot; : 1500,
@@ -8999,7 +9003,7 @@ paths:
         <blockquote>
 
         <p>GET
-        https://api.freee.co.jp/api/1/reports/trial_pl_three_years?company_id=1&fiscal_year=2017</p>
+        https://api.freee.co.jp/api/1/reports/trial_pl_three_years?company_id=1&fiscal_year=2019</p>
 
         </blockquote>
 
@@ -9008,7 +9012,7 @@ paths:
           &quot;trial_pl_three_years&quot; :
             {
               &quot;company_id&quot; : 1,
-              &quot;fiscal_year&quot; : 2017,
+              &quot;fiscal_year&quot; : 2019,
               &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot
               &quot;balances&quot; : [{
                 &quot;account_item_id&quot; : 1500,
@@ -9249,7 +9253,7 @@ paths:
         <blockquote>
 
         <p>GET
-        https://api.freee.co.jp/api/1/reports/trial_pl_two_years?company_id=1&amp;fiscal_year=2017</p>
+        https://api.freee.co.jp/api/1/reports/trial_pl_two_years?company_id=1&amp;fiscal_year=2019</p>
 
         </blockquote>
 
@@ -9258,7 +9262,7 @@ paths:
           &quot;trial_pl_two_years&quot; :
             {
               &quot;company_id&quot; : 1,
-              &quot;fiscal_year&quot; : 2017,
+              &quot;fiscal_year&quot; : 2019,
               &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot
               &quot;balances&quot; : [{
                 &quot;account_item_id&quot; : 1500,
@@ -12922,7 +12926,7 @@ components:
                 description: >-
                   項目タイプ(title: 申請タイトル, single_line: 自由記述形式 1行, multi_line:
                   自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt:
-                  添付ファイル)
+                  添付ファイル, section: 部門ID, partner: 取引先ID)
                 enum:
                   - title
                   - single_line
@@ -12931,6 +12935,8 @@ components:
                   - date
                   - amount
                   - receipt
+                  - section
+                  - partner
                 type: string
               value:
                 description: 項目の値
@@ -13095,7 +13101,7 @@ components:
                     description: >-
                       項目種別 (title: 申請タイトル, single_line: 自由記述形式 1行, multi_line:
                       自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt:
-                      添付ファイル, section: 部門タグID, partner: 取引先ID)
+                      添付ファイル, section: 部門ID, partner: 取引先ID)
                     enum:
                       - title
                       - single_line
@@ -13266,7 +13272,7 @@ components:
                         description: >-
                           項目種別 (title: 申請タイトル, single_line: 自由記述形式 1行,
                           multi_line: 自由記述形式 複数行, select: プルダウン, date: 日付,
-                          amount: 金額, receipt: 添付ファイル, section: 部門タグID, partner:
+                          amount: 金額, receipt: 添付ファイル, section: 部門ID, partner:
                           取引先ID)
                         enum:
                           - title
@@ -13467,7 +13473,7 @@ components:
                     description: >-
                       項目タイプ(title: 申請タイトル, single_line: 自由記述形式 1行, multi_line:
                       自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt:
-                      添付ファイル, section: 部門タグID, partner: 取引先ID)
+                      添付ファイル, section: 部門ID, partner: 取引先ID)
                     enum:
                       - title
                       - single_line
@@ -13570,7 +13576,7 @@ components:
                 description: >-
                   項目タイプ(title: 申請タイトル, single_line: 自由記述形式 1行, multi_line:
                   自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt:
-                  添付ファイル)
+                  添付ファイル, section: 部門ID, partner: 取引先ID)
                 enum:
                   - title
                   - single_line
@@ -13579,6 +13585,8 @@ components:
                   - date
                   - amount
                   - receipt
+                  - section
+                  - partner
                 type: string
               value:
                 description: 項目の値
@@ -13674,7 +13682,7 @@ components:
                       description: >-
                         項目タイプ(title: 申請タイトル, single_line: 自由記述形式 1行, multi_line:
                         自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額,
-                        receipt: 添付ファイル, section: 部門タグID, partner: 取引先ID)
+                        receipt: 添付ファイル, section: 部門ID, partner: 取引先ID)
                       enum:
                         - title
                         - single_line
@@ -19497,7 +19505,7 @@ components:
                     description: アドバイザープロファイルID（アドバイザー事業所で無い場合にnullになります）
                     example: 1234
                     maximum: 2147483647
-                    minimun: 1
+                    minimum: 1
                     nullable: true
                     type: integer
                   display_name:
