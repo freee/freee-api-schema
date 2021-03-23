@@ -3000,9 +3000,10 @@ paths:
           name: payment_id
           required: true
           schema:
-            maximum: 2147483647
+            maximum: 9223372036854775807
             minimum: 1
             type: integer
+            format: int64
         - description: 事業所ID
           in: query
           name: company_id
@@ -3092,9 +3093,10 @@ paths:
           name: payment_id
           required: true
           schema:
-            maximum: 2147483647
+            maximum: 9223372036854775807
             minimum: 1
             type: integer
+            format: int64
       responses:
         '200':
           content:
