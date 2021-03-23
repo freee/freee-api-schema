@@ -19593,6 +19593,7 @@ components:
                 example: 1
                 nullable: true
                 type: integer
+                format: int64
               segment_1_tag_name:
                 description: セグメント１ID
                 example: セグメント１
@@ -19603,6 +19604,7 @@ components:
                 example: 1
                 nullable: true
                 type: integer
+                format: int64
               segment_2_tag_name:
                 description: セグメント２
                 example: セグメント２
@@ -19613,6 +19615,7 @@ components:
                 example: 1
                 nullable: true
                 type: integer
+                format: int64
               segment_3_tag_name:
                 description: セグメント３
                 example: セグメント３
