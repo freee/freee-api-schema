@@ -1619,6 +1619,7 @@ paths:
             maximum: 9223372036854775807
             minimum: 0
             type: integer
+            format: int64
         - description: '取得レコードの件数 (デフォルト: 20, 最小: 1, 最大: 500)'
           in: query
           name: limit
@@ -2094,6 +2095,7 @@ paths:
             maximum: 9223372036854775807
             minimum: 0
             type: integer
+            format: int64
         - description: '取得レコードの件数 (デフォルト: 20, 最大: 100) '
           in: query
           name: limit
@@ -2998,9 +3000,10 @@ paths:
           name: payment_id
           required: true
           schema:
-            maximum: 2147483647
+            maximum: 9223372036854775807
             minimum: 1
             type: integer
+            format: int64
         - description: 事業所ID
           in: query
           name: company_id
@@ -3090,9 +3093,10 @@ paths:
           name: payment_id
           required: true
           schema:
-            maximum: 2147483647
+            maximum: 9223372036854775807
             minimum: 1
             type: integer
+            format: int64
       responses:
         '200':
           content:
@@ -3540,6 +3544,7 @@ paths:
             maximum: 9223372036854775807
             minimum: 0
             type: integer
+            format: int64
         - description: '取得レコードの件数 (デフォルト: 20, 最小: 1, 最大: 100)'
           in: query
           name: limit
@@ -3836,6 +3841,7 @@ paths:
             maximum: 9223372036854775807
             minimum: 0
             type: integer
+            format: int64
         - description: '取得レコードの件数 (デフォルト: 50, 最小: 1, 最大: 500)'
           in: query
           name: limit
@@ -4279,6 +4285,7 @@ paths:
             maximum: 9223372036854775807
             minimum: 0
             type: integer
+            format: int64
         - description: '取得レコードの件数 (デフォルト: 20, 最大: 100) '
           in: query
           name: limit
@@ -5303,6 +5310,7 @@ paths:
             maximum: 9223372036854775807
             minimum: -9223372036854775808
             type: integer
+            format: int64
         - description: 金額で絞込：上限
           in: query
           name: max_amount
@@ -5310,6 +5318,7 @@ paths:
             maximum: 9223372036854775807
             minimum: -9223372036854775808
             type: integer
+            format: int64
         - description: 取引先IDで絞込（0を指定すると、取引先が未選択の貸借行を絞り込めます）
           in: query
           name: partner_id
@@ -5343,6 +5352,7 @@ paths:
             maximum: 9223372036854775807
             minimum: 0
             type: integer
+            format: int64
         - description: セグメント２IDで絞り込み（0を指定すると、セグメント２が未選択の貸借行を絞り込めます）
           in: query
           name: segment_2_tag_id
@@ -5350,6 +5360,7 @@ paths:
             maximum: 9223372036854775807
             minimum: 0
             type: integer
+            format: int64
         - description: セグメント３IDで絞り込み（0を指定すると、セグメント３が未選択の貸借行を絞り込めます）
           in: query
           name: segment_3_tag_id
@@ -5357,6 +5368,7 @@ paths:
             maximum: 9223372036854775807
             minimum: 0
             type: integer
+            format: int64
         - description: >-
             コメント状態で絞込（自分宛のコメント: posted_with_mention, 自分宛のコメント-未解決:
             raised_with_mention, 自分宛のコメント-解決済: resolved_with_mention, コメントあり:
@@ -5398,6 +5410,7 @@ paths:
             maximum: 9223372036854775807
             minimum: 0
             type: integer
+            format: int64
         - description: '取得レコードの件数 (デフォルト: 20, 最小: 1, 最大: 500) '
           in: query
           name: limit
@@ -5984,6 +5997,7 @@ paths:
             maximum: 9223372036854775807
             minimum: 0
             type: integer
+            format: int64
         - description: '取得レコードの件数 (デフォルト: 50, 最小: 1, 最大: 3000)'
           in: query
           name: limit
@@ -6435,6 +6449,7 @@ paths:
             maximum: 9223372036854775807
             minimum: 0
             type: integer
+            format: int64
         - description: '取得レコードの件数 (デフォルト: 20, 最大: 100) '
           in: query
           name: limit
@@ -6835,6 +6850,7 @@ paths:
             maximum: 9223372036854775807
             minimum: 0
             type: integer
+            format: int64
         - description: '取得レコードの件数 (デフォルト: 50, 最小: 1, 最大: 3000)'
           in: query
           name: limit
@@ -9259,6 +9275,7 @@ paths:
             maximum: 9223372036854775807
             minimum: 0
             type: integer
+            format: int64
         - description: '取得レコードの件数 (デフォルト: 20, 最小: 1, 最大: 500) '
           in: query
           name: limit
@@ -10107,6 +10124,7 @@ paths:
             maximum: 9223372036854775807
             minimum: 0
             type: integer
+            format: int64
         - description: '取得レコードの件数 (デフォルト: 20, 最小: 1, 最大: 100) '
           in: query
           name: limit
@@ -10962,6 +10980,7 @@ paths:
             maximum: 9223372036854775807
             minimum: 0
             type: integer
+            format: int64
         - description: '取得レコードの件数 (デフォルト: 20, 最小: 1, 最大: 100) '
           in: query
           name: limit
@@ -14620,6 +14639,7 @@ components:
                 maximum: 9223372036854775807
                 minimum: -9223372036854775808
                 type: integer
+                format: int64
               description:
                 description: 備考
                 example: 備考
@@ -14642,18 +14662,21 @@ components:
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 1
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 1
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               tag_ids:
                 description: メモタグID
                 items:
@@ -14706,6 +14729,7 @@ components:
                 maximum: 9223372036854775807
                 minimum: -9223372036854775808
                 type: integer
+                format: int64
               date:
                 description: 支払日：payments指定時は必須
                 example: '2013-01-28'
@@ -14771,6 +14795,7 @@ components:
               maximum: 9223372036854775807
               minimum: -9223372036854775808
               type: integer
+              format: int64
             company_id:
               description: 事業所ID
               example: 1
@@ -14793,6 +14818,7 @@ components:
                     maximum: 9223372036854775807
                     minimum: -9223372036854775808
                     type: integer
+                    format: int64
                   description:
                     description: 備考
                     example: 備考
@@ -14810,6 +14836,7 @@ components:
                     maximum: 9223372036854775807
                     minimum: 1
                     type: integer
+                    format: int64
                   item_id:
                     description: 品目ID
                     example: 501
@@ -14831,6 +14858,7 @@ components:
                     minimum: 1
                     nullable: true
                     type: integer
+                    format: int64
                   segment_2_tag_id:
                     description: セグメント２ID
                     example: 1
@@ -14838,6 +14866,7 @@ components:
                     minimum: 1
                     nullable: true
                     type: integer
+                    format: int64
                   segment_3_tag_id:
                     description: セグメント３ID
                     example: 1
@@ -14845,6 +14874,7 @@ components:
                     minimum: 1
                     nullable: true
                     type: integer
+                    format: int64
                   tag_ids:
                     description: メモタグID
                     example:
@@ -14914,6 +14944,7 @@ components:
                     maximum: 9223372036854775807
                     minimum: -9223372036854775808
                     type: integer
+                    format: int64
                   date:
                     description: 支払日
                     example: '2013-01-28'
@@ -14942,6 +14973,7 @@ components:
                     maximum: 9223372036854775807
                     minimum: 1
                     type: integer
+                    format: int64
                 required:
                   - amount
                   - date
@@ -14992,6 +15024,7 @@ components:
           maximum: 9223372036854775807
           minimum: -9223372036854775808
           type: integer
+          format: int64
         company_id:
           description: 事業所ID
           example: 1
@@ -15014,6 +15047,7 @@ components:
                 maximum: 9223372036854775807
                 minimum: -9223372036854775808
                 type: integer
+                format: int64
               description:
                 description: 備考
                 example: 備考
@@ -15031,6 +15065,7 @@ components:
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               item_id:
                 description: 品目ID
                 example: 501
@@ -15052,6 +15087,7 @@ components:
                 minimum: 1
                 nullable: true
                 type: integer
+                format: int64
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 1
@@ -15059,6 +15095,7 @@ components:
                 minimum: 1
                 nullable: true
                 type: integer
+                format: int64
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 1
@@ -15066,6 +15103,7 @@ components:
                 minimum: 1
                 nullable: true
                 type: integer
+                format: int64
               tag_ids:
                 description: メモタグID
                 example:
@@ -15135,6 +15173,7 @@ components:
                 maximum: 9223372036854775807
                 minimum: -9223372036854775808
                 type: integer
+                format: int64
               date:
                 description: 支払日
                 example: '2013-01-28'
@@ -15163,6 +15202,7 @@ components:
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
             required:
               - amount
               - date
@@ -15280,6 +15320,7 @@ components:
                       maximum: 9223372036854775807
                       minimum: -9223372036854775808
                       type: integer
+                      format: int64
                     description:
                       description: 備考
                       example: 備考
@@ -15298,6 +15339,7 @@ components:
                       maximum: 9223372036854775807
                       minimum: 1
                       type: integer
+                      format: int64
                     item_id:
                       description: 品目ID
                       example: 1
@@ -15319,6 +15361,7 @@ components:
                       minimum: 1
                       nullable: true
                       type: integer
+                      format: int64
                     segment_2_tag_id:
                       description: セグメント２ID
                       example: 1
@@ -15326,6 +15369,7 @@ components:
                       minimum: 1
                       nullable: true
                       type: integer
+                      format: int64
                     segment_3_tag_id:
                       description: セグメント３ID
                       example: 1
@@ -15333,6 +15377,7 @@ components:
                       minimum: 1
                       nullable: true
                       type: integer
+                      format: int64
                     tag_ids:
                       items:
                         description: メモタグID
@@ -15367,12 +15412,14 @@ components:
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               renew_target_id:
                 description: +更新の対象行ID
                 example: 12
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               renew_target_type:
                 description: +更新の対象行タイプ
                 enum:
@@ -15438,6 +15485,7 @@ components:
                 maximum: 9223372036854775807
                 minimum: -9223372036854775808
                 type: integer
+                format: int64
               description:
                 description: 備考
                 example: 備考
@@ -15450,6 +15498,7 @@ components:
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               item_id:
                 description: 品目ID
                 example: 1
@@ -15468,18 +15517,21 @@ components:
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 1
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 1
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               tag_ids:
                 description: メモタグID
                 items:
@@ -15941,6 +15993,7 @@ components:
                     maximum: 9223372036854775807
                     minimum: 1
                     type: integer
+                    format: int64
                   receipt_id:
                     description: 証憑ID
                     example: 606
@@ -16061,6 +16114,7 @@ components:
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               receipt_id:
                 description: 証憑ID
                 example: 606
@@ -16165,6 +16219,7 @@ components:
                       maximum: 9223372036854775807
                       minimum: 1
                       type: integer
+                      format: int64
                     receipt_id:
                       description: 証憑ID
                       example: 606
@@ -16431,18 +16486,21 @@ components:
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 1
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 1
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               tag_ids:
                 items:
                   description: メモタグID
@@ -16735,6 +16793,7 @@ components:
                 maximum: 9223372036854775807
                 minimum: -9223372036854775808
                 type: integer
+                format: int64
               description:
                 description: 備考
                 example: 備考
@@ -16792,6 +16851,7 @@ components:
                 minimum: 1
                 nullable: true
                 type: integer
+                format: int64
               segment_1_tag_name:
                 description: セグメント１ID
                 example: セグメント１
@@ -16804,6 +16864,7 @@ components:
                 minimum: 1
                 nullable: true
                 type: integer
+                format: int64
               segment_2_tag_name:
                 description: セグメント２
                 example: セグメント２
@@ -16816,6 +16877,7 @@ components:
                 minimum: 1
                 nullable: true
                 type: integer
+                format: int64
               segment_3_tag_name:
                 description: セグメント３
                 example: セグメント３
@@ -17081,21 +17143,25 @@ components:
               example: 0
               maximum: 9223372036854775807
               type: integer
+              format: int64
             vat_10:
               description: 税率10%の税込み金額合計
               example: 0
               maximum: 9223372036854775807
               type: integer
+              format: int64
             vat_5:
               description: 税率5%の税込み金額合計
               example: 0
               maximum: 9223372036854775807
               type: integer
+              format: int64
             vat_8:
               description: 税率8%の税込み金額合計
               example: 108000
               maximum: 9223372036854775807
               type: integer
+              format: int64
           required:
             - reduced_vat_8
             - vat_10
@@ -17234,18 +17300,21 @@ components:
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 1
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 1
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               tag_ids:
                 items:
                   description: メモタグID
@@ -17672,6 +17741,7 @@ components:
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               description:
                 description: 備考
                 example: 備考
@@ -17711,18 +17781,21 @@ components:
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 1
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 1
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               tag_ids:
                 description: メモタグID
                 items:
@@ -17809,6 +17882,7 @@ components:
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               item_id:
                 description: 品目ID
                 example: 1
@@ -17862,6 +17936,7 @@ components:
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               segment_1_tag_name:
                 description: セグメント１ID
                 type: integer
@@ -17871,6 +17946,7 @@ components:
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               segment_2_tag_name:
                 description: セグメント２
                 type: integer
@@ -17880,6 +17956,7 @@ components:
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               segment_3_tag_name:
                 description: セグメント３
                 type: integer
@@ -17977,6 +18054,7 @@ components:
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               description:
                 description: 備考
                 example: 備考
@@ -17994,6 +18072,7 @@ components:
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               item_id:
                 description: 品目ID
                 example: 1
@@ -18022,18 +18101,21 @@ components:
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 1
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 1
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               tag_ids:
                 description: メモタグID
                 items:
@@ -19009,6 +19091,7 @@ components:
           maximum: 9223372036854775807
           minimum: 1
           type: integer
+          format: int64
         company_id:
           description: 事業所ID
           example: 1
@@ -19191,18 +19274,21 @@ components:
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 1
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 1
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               tag_ids:
                 items:
                   description: メモタグID
@@ -19509,6 +19595,7 @@ components:
                 example: 1
                 nullable: true
                 type: integer
+                format: int64
               segment_1_tag_name:
                 description: セグメント１ID
                 example: セグメント１
@@ -19519,6 +19606,7 @@ components:
                 example: 1
                 nullable: true
                 type: integer
+                format: int64
               segment_2_tag_name:
                 description: セグメント２
                 example: セグメント２
@@ -19529,6 +19617,7 @@ components:
                 example: 1
                 nullable: true
                 type: integer
+                format: int64
               segment_3_tag_name:
                 description: セグメント３
                 example: セグメント３
@@ -19656,21 +19745,25 @@ components:
               example: 0
               maximum: 9223372036854775807
               type: integer
+              format: int64
             vat_10:
               description: 税率10%の税込み金額合計
               example: 0
               maximum: 9223372036854775807
               type: integer
+              format: int64
             vat_5:
               description: 税率5%の税込み金額合計
               example: 0
               maximum: 9223372036854775807
               type: integer
+              format: int64
             vat_8:
               description: 税率8%の税込み金額合計
               example: 108000
               maximum: 9223372036854775807
               type: integer
+              format: int64
           required:
             - reduced_vat_8
             - vat_10
@@ -19862,18 +19955,21 @@ components:
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 1
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 1
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               tag_ids:
                 items:
                   description: メモタグID
@@ -20134,6 +20230,7 @@ components:
                 maximum: 9223372036854775807
                 minimum: -9223372036854775808
                 type: integer
+                format: int64
               description:
                 description: 備考
                 example: 備考
@@ -20156,18 +20253,21 @@ components:
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 1
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 1
                 maximum: 9223372036854775807
                 minimum: 1
                 type: integer
+                format: int64
               tag_ids:
                 description: メモタグID
                 example:
@@ -20191,6 +20291,7 @@ components:
                 maximum: 9223372036854775807
                 minimum: -9223372036854775808
                 type: integer
+                format: int64
             required:
               - account_item_id
               - amount
@@ -20205,6 +20306,7 @@ components:
           maximum: 9223372036854775807
           minimum: 1
           type: integer
+          format: int64
         update_date:
           description: 更新日 (yyyy-mm-dd)
           example: '2014-01-01'
@@ -20239,6 +20341,7 @@ components:
                 maximum: 9223372036854775807
                 minimum: -9223372036854775808
                 type: integer
+                format: int64
               description:
                 description: 備考
                 example: 備考
@@ -20261,18 +20364,21 @@ components:
                 maximum: 9223372036854775807
                 minimum: 0
                 type: integer
+                format: int64
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 1
                 maximum: 9223372036854775807
                 minimum: 0
                 type: integer
+                format: int64
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 1
                 maximum: 9223372036854775807
                 minimum: 0
                 type: integer
+                format: int64
               tag_ids:
                 description: メモタグID
                 example:
@@ -20296,6 +20402,7 @@ components:
                 maximum: 9223372036854775807
                 minimum: -9223372036854775808
                 type: integer
+                format: int64
             required:
               - account_item_id
               - amount
@@ -20791,6 +20898,7 @@ components:
           maximum: 9223372036854775807
           minimum: -9223372036854775808
           type: integer
+          format: int64
         company_id:
           description: 事業所ID
           example: 1
@@ -20857,6 +20965,7 @@ components:
           maximum: 9223372036854775807
           minimum: -9223372036854775808
           type: integer
+          format: int64
         company_id:
           description: 事業所ID
           example: 1
@@ -22651,12 +22760,14 @@ components:
           maximum: 9223372036854775807
           minimum: -9223372036854775808
           type: integer
+          format: int64
         balance:
           description: 残高 (銀行口座等)
           example: 10000
           maximum: 9223372036854775807
           minimum: -9223372036854775808
           type: integer
+          format: int64
         company_id:
           description: 事業所ID
           example: 1
@@ -22715,6 +22826,7 @@ components:
           maximum: 9223372036854775807
           minimum: -9223372036854775808
           type: integer
+          format: int64
         balance:
           description: 残高(銀行口座等)
           example: 10000
