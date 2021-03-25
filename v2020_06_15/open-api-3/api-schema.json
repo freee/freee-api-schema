@@ -3432,7 +3432,7 @@
           "Deals"
         ],
         "summary": "取引（収入／支出）の作成",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入／支出）を作成する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>ref_number : 管理番号</p>\n</li>\n<li>\n<p>details : 取引の明細行(最大40行)</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>receipt_ids : 証憑ファイルID</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n    <li><p>本APIでは+更新行(renews)の操作ができません。+更新行の作成APIをご利用ください。</p></li>\n    <li><p>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</p></li>\n    <li>\n        <p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</p></li>\n    <li>\n        <p>本APIでは取引の明細行(details)は、最大40行までになります。</p>\n    </li>\n</ul>\n",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入／支出）を作成する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>ref_number : 管理番号</p>\n</li>\n<li>\n<p>details : 取引の明細行(最大40行)</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>receipt_ids : 証憑ファイルID（ファイルボックスのファイルID）</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n    <li><p>本APIでは+更新行(renews)の操作ができません。+更新行の作成APIをご利用ください。</p></li>\n    <li><p>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</p></li>\n    <li>\n        <p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</p></li>\n    <li>\n        <p>本APIでは取引の明細行(details)は、最大40行までになります。</p>\n    </li>\n</ul>\n",
         "operationId": "create_deal",
         "requestBody": {
           "description": "取引（収入／支出）の作成",
@@ -3625,7 +3625,7 @@
           "Deals"
         ],
         "summary": "取引（収入／支出）の更新",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入／支出）を更新する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>details : 取引の明細行(最大40行)</p>\n</li>\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n<li>\n<p>receipt_ids : 証憑ファイルID</p>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n    <li><p>本APIでは支払行(payments)の操作ができません。支払行の作成・更新・削除APIをご利用ください。</p></li>\n    <li><p>本APIでは+更新行(renews)の操作ができません。+更新行の作成・更新・削除APIをご利用ください。</p></li>\n    <li><p>本APIでは収入／支出の切替えができません。既存の取引を削除後、再度作成してください。</p></li>\n    <li><p>本APIで取引を更新すると、消費税の計算方法は必ず内税方式が選択されます。</p></li>\n    <li><p>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</p></li>\n    <li><p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</p></li>\n    <li>\n        <p>本APIでは取引の明細行(details)は、最大40行までになります。</p>\n    </li>\n</ul>",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入／支出）を更新する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>details : 取引の明細行(最大40行)</p>\n</li>\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n<li>\n<p>receipt_ids : 証憑ファイルID（ファイルボックスのファイルID）</p>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n    <li><p>本APIでは支払行(payments)の操作ができません。支払行の作成・更新・削除APIをご利用ください。</p></li>\n    <li><p>本APIでは+更新行(renews)の操作ができません。+更新行の作成・更新・削除APIをご利用ください。</p></li>\n    <li><p>本APIでは収入／支出の切替えができません。既存の取引を削除後、再度作成してください。</p></li>\n    <li><p>本APIで取引を更新すると、消費税の計算方法は必ず内税方式が選択されます。</p></li>\n    <li><p>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</p></li>\n    <li><p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</p></li>\n    <li>\n        <p>本APIでは取引の明細行(details)は、最大40行までになります。</p>\n    </li>\n</ul>",
         "operationId": "update_deal",
         "parameters": [
           {
@@ -10398,7 +10398,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "証憑ID",
+            "description": "証憑ファイルID",
             "required": true,
             "schema": {
               "type": "integer",
@@ -10492,7 +10492,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "証憑ID",
+            "description": "証憑ファイルID",
             "required": true,
             "schema": {
               "type": "integer",
@@ -10591,7 +10591,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "証憑ID",
+            "description": "証憑ファイルID",
             "required": true,
             "schema": {
               "type": "integer",
@@ -10682,7 +10682,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "証憑ID",
+            "description": "証憑ファイルID",
             "required": true,
             "schema": {
               "type": "integer",
@@ -13617,7 +13617,7 @@
           },
           "receipt_ids": {
             "type": "array",
-            "description": "証憑ファイルID（配列）",
+            "description": "証憑ファイルID（ファイルボックスのファイルID）（配列）",
             "items": {
               "type": "integer",
               "minimum": 1,
@@ -13778,7 +13778,7 @@
           "receipt_ids": {
             "type": "array",
             "nullable": true,
-            "description": "証憑ファイルID（配列）",
+            "description": "証憑ファイルID（ファイルボックスのファイルID）（配列）",
             "items": {
               "type": "integer",
               "minimum": 1,
@@ -14722,7 +14722,7 @@
                   "type": "integer",
                   "minimum": 1,
                   "maximum": 2147483647,
-                  "description": "証憑ID",
+                  "description": "証憑ファイルID（ファイルボックスのファイルID）",
                   "example": 606
                 }
               }
@@ -14873,7 +14873,7 @@
                   "type": "integer",
                   "minimum": 1,
                   "maximum": 2147483647,
-                  "description": "証憑ID",
+                  "description": "証憑ファイルID（ファイルボックスのファイルID）",
                   "example": 606
                 }
               }
@@ -15139,7 +15139,7 @@
           },
           "receipt_ids": {
             "type": "array",
-            "description": "証憑ファイルID（配列）",
+            "description": "証憑ファイルID（ファイルボックスのファイルID）（配列）",
             "items": {
               "type": "integer",
               "minimum": 1,
@@ -15402,7 +15402,7 @@
           },
           "receipt_ids": {
             "type": "array",
-            "description": "証憑ファイルID（配列）",
+            "description": "証憑ファイルID（ファイルボックスのファイルID）（配列）",
             "items": {
               "type": "integer",
               "minimum": 1,
@@ -19550,7 +19550,7 @@
               },
               "receipts": {
                 "type": "array",
-                "description": "証憑ファイル",
+                "description": "証憑ファイル（ファイルボックスのファイル）",
                 "items": {
                   "type": "object",
                   "required": [
@@ -19567,7 +19567,7 @@
                       "type": "integer",
                       "minimum": 1,
                       "maximum": 2147483647,
-                      "description": "証憑ID",
+                      "description": "証憑ファイルID（ファイルボックスのファイルID）",
                       "example": 1
                     },
                     "status": {
@@ -19620,7 +19620,7 @@
                     },
                     "file_src": {
                       "type": "string",
-                      "description": "ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。）\n<br>\n<br>\nfile_srcは廃止予定の属性になります。<br>\nfile_srcに替わり、証憑ファイルのダウンロード APIをご利用ください。<br>\n証憑ファイルのダウンロードAPIを利用することで、以下のようになります。\n<ul>\n  <li>アプリケーション利用者はfreee APIアプリケーションにログインしていれば、証憑ダウンロード毎にfreeeに改めてログインすることなくファイルが参照できるようになります。</li>\n</ul>",
+                      "description": "ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。）\n<br>\n<br>\nfile_srcは廃止予定の属性になります。<br>\nfile_srcに替わり、証憑ファイル（ファイルボックスのファイル）のダウンロード APIをご利用ください。<br>\n証憑ファイル（ファイルボックスのファイル）のダウンロードAPIを利用することで、以下のようになります。\n<ul>\n  <li>アプリケーション利用者はfreee APIアプリケーションにログインしていれば、証憑ダウンロード毎にfreeeに改めてログインすることなくファイルが参照できるようになります。</li>\n</ul>",
                       "example": "https://www.freee.co.jp/api/p/receipts/revisions/1234xxxxx/download",
                       "deprecated": true
                     },
@@ -22367,7 +22367,7 @@
                 "type": "integer",
                 "minimum": 1,
                 "maximum": 2147483647,
-                "description": "証憑ID",
+                "description": "証憑ファイルID",
                 "example": 1
               },
               "status": {
@@ -22669,7 +22669,7 @@
                         "type": "integer",
                         "minimum": 1,
                         "maximum": 2147483647,
-                        "description": "証憑ID",
+                        "description": "証憑ファイルID（ファイルボックスのファイルID）",
                         "example": 606
                       }
                     }
@@ -22894,7 +22894,7 @@
                       "type": "integer",
                       "minimum": 1,
                       "maximum": 2147483647,
-                      "description": "証憑ID",
+                      "description": "証憑ファイルID（ファイルボックスのファイルID）",
                       "example": 606,
                       "nullable": true
                     }
@@ -23193,6 +23193,8 @@
               "total_amount",
               "status",
               "payment_request_lines",
+              "deal_id",
+              "deal_status",
               "applicant_id",
               "approvers",
               "application_number",
@@ -23388,7 +23390,8 @@
                 "minimum": 1,
                 "maximum": 2147483647,
                 "description": "取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)",
-                "example": 1
+                "example": 1,
+                "nullable": true
               },
               "deal_status": {
                 "type": "string",
@@ -23397,7 +23400,8 @@
                 "enum": [
                   "settled",
                   "unsettled"
-                ]
+                ],
+                "nullable": true
               },
               "applicant_id": {
                 "type": "integer",
@@ -23571,7 +23575,7 @@
               },
               "receipt_ids": {
                 "type": "array",
-                "description": "証憑ID",
+                "description": "証憑ファイルID（ファイルボックスのファイルID）",
                 "example": [
                   1,
                   2,
