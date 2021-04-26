@@ -156,6 +156,7 @@
             "description": "取得レコードのオフセット (デフォルト: 0)",
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 0,
               "maximum": 9223372036854775807
             }
@@ -2189,6 +2190,7 @@
             "description": "取得レコードのオフセット (デフォルト: 0)",
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 0,
               "maximum": 9223372036854775807
             }
@@ -2726,6 +2728,7 @@
             "description": "取得レコードのオフセット (デフォルト: 0)",
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 0,
               "maximum": 9223372036854775807
             }
@@ -3300,6 +3303,7 @@
             "description": "取得レコードのオフセット (デフォルト: 0)",
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 0,
               "maximum": 9223372036854775807
             }
@@ -4224,6 +4228,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 1,
               "maximum": 9223372036854775807
             }
@@ -4334,6 +4339,7 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 1,
               "maximum": 9223372036854775807
             }
@@ -4473,6 +4479,7 @@
             "description": "金額で絞込：下限",
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": -9223372036854775808,
               "maximum": 9223372036854775807
             }
@@ -4483,6 +4490,7 @@
             "description": "金額で絞込：上限",
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": -9223372036854775808,
               "maximum": 9223372036854775807
             }
@@ -4531,6 +4539,7 @@
             "description": "セグメント１IDで絞込（0を指定すると、セグメント１が未選択の貸借行を絞り込めます）",
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 0,
               "maximum": 9223372036854775807
             }
@@ -4541,6 +4550,7 @@
             "description": "セグメント２IDで絞込（0を指定すると、セグメント２が未選択の貸借行を絞り込めます）",
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 0,
               "maximum": 9223372036854775807
             }
@@ -4551,6 +4561,7 @@
             "description": "セグメント３IDで絞込（0を指定すると、セグメント３が未選択の貸借行を絞り込めます）",
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 0,
               "maximum": 9223372036854775807
             }
@@ -4606,6 +4617,7 @@
             "description": "取得レコードのオフセット (デフォルト: 0)",
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 0,
               "maximum": 9223372036854775807
             }
@@ -7283,6 +7295,7 @@
             "description": "取得レコードのオフセット (デフォルト: 0)",
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 0,
               "maximum": 9223372036854775807
             }
@@ -7503,6 +7516,7 @@
             "description": "取得レコードのオフセット (デフォルト: 0)",
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 0,
               "maximum": 9223372036854775807
             }
@@ -8020,6 +8034,7 @@
             "description": "取得レコードのオフセット (デフォルト: 0)",
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 0,
               "maximum": 9223372036854775807
             }
@@ -10236,6 +10251,7 @@
             "description": "取得レコードのオフセット (デフォルト: 0)",
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 0,
               "maximum": 9223372036854775807
             }
@@ -10931,6 +10947,7 @@
             "description": "取得レコードのオフセット (デフォルト: 0)",
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 0,
               "maximum": 9223372036854775807
             }
@@ -11487,6 +11504,7 @@
             "description": "取得レコードのオフセット (デフォルト: 0)",
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 0,
               "maximum": 9223372036854775807
             }
@@ -13016,6 +13034,7 @@
             "description": "取得レコードのオフセット (デフォルト: 0)",
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 0,
               "maximum": 9223372036854775807
             }
@@ -13422,6 +13441,7 @@
           },
           "amount": {
             "type": "integer",
+            "format": "int64",
             "minimum": 1,
             "maximum": 9223372036854775807,
             "description": "金額",
@@ -13507,6 +13527,7 @@
                 },
                 "amount": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": -9223372036854775808,
                   "maximum": 9223372036854775807,
                   "description": "取引金額（税込で指定してください）",
@@ -13538,6 +13559,7 @@
                 },
                 "segment_1_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント１ID",
@@ -13545,6 +13567,7 @@
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント２ID",
@@ -13552,6 +13575,7 @@
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント３ID",
@@ -13584,6 +13608,7 @@
               "properties": {
                 "amount": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": -9223372036854775808,
                   "maximum": 9223372036854775807,
                   "description": "支払金額：payments指定時は必須",
@@ -13691,6 +13716,7 @@
               "properties": {
                 "id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "取引行ID: 既存取引行を更新する場合に指定します。IDを指定しない取引行は、新規行として扱われ追加されます。また、detailsに含まれない既存の取引行は削除されます。更新後も残したい行は、必ず取引行IDを指定してdetailsに含めてください。",
@@ -13712,6 +13738,7 @@
                 },
                 "amount": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": -9223372036854775808,
                   "maximum": 9223372036854775807,
                   "description": "取引金額（税込で指定してください）",
@@ -13743,6 +13770,7 @@
                 },
                 "segment_1_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント１ID",
@@ -13750,6 +13778,7 @@
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント２ID",
@@ -13757,6 +13786,7 @@
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント３ID",
@@ -13849,6 +13879,7 @@
                 },
                 "amount": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "取引金額（税込で指定してください）",
@@ -13897,6 +13928,7 @@
                 },
                 "segment_1_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント１ID",
@@ -13904,6 +13936,7 @@
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント２ID",
@@ -13911,6 +13944,7 @@
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント３ID",
@@ -13965,6 +13999,7 @@
               "properties": {
                 "id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "貸借行ID: 既存貸借行を更新または削除する場合に指定します。IDを指定しない貸借行は、新規行として扱われ追加されます。",
@@ -13995,6 +14030,7 @@
                 },
                 "amount": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "取引金額（税込で指定してください）",
@@ -14043,6 +14079,7 @@
                 },
                 "segment_1_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント１ID",
@@ -14050,6 +14087,7 @@
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント２ID",
@@ -14057,6 +14095,7 @@
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント３ID",
@@ -14539,6 +14578,7 @@
           },
           "amount": {
             "type": "integer",
+            "format": "int64",
             "minimum": -9223372036854775808,
             "maximum": 9223372036854775807,
             "description": "金額",
@@ -14590,6 +14630,7 @@
           },
           "amount": {
             "type": "integer",
+            "format": "int64",
             "minimum": -9223372036854775808,
             "maximum": 9223372036854775807,
             "description": "取引金額",
@@ -14626,6 +14667,7 @@
           },
           "balance": {
             "type": "integer",
+            "format": "int64",
             "minimum": -9223372036854775808,
             "maximum": 9223372036854775807,
             "description": "残高 (銀行口座等)",
@@ -14756,6 +14798,7 @@
           },
           "segment_1_tag_id": {
             "type": "integer",
+            "format": "int64",
             "minimum": 1,
             "maximum": 9223372036854775807,
             "description": "セグメント１ID(法人向けプロフェッショナル, 法人向けエンタープライズプラン)<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
@@ -14763,6 +14806,7 @@
           },
           "segment_2_tag_id": {
             "type": "integer",
+            "format": "int64",
             "minimum": 1,
             "maximum": 9223372036854775807,
             "description": "セグメント２ID(法人向け エンタープライズプラン)<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
@@ -14770,6 +14814,7 @@
           },
           "segment_3_tag_id": {
             "type": "integer",
+            "format": "int64",
             "minimum": 1,
             "maximum": 9223372036854775807,
             "description": "セグメント３ID(法人向け エンタープライズプラン)<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
@@ -14839,6 +14884,7 @@
               "properties": {
                 "id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "経費申請の項目行ID: 既存項目行を更新する場合に指定します。IDを指定しない項目行は、新規行として扱われ追加されます。また、expense_application_linesに含まれない既存の項目行は削除されます。更新後も残したい行は、必ず経費申請の項目行IDを指定してexpense_application_linesに含めてください。",
@@ -14900,6 +14946,7 @@
           },
           "segment_1_tag_id": {
             "type": "integer",
+            "format": "int64",
             "minimum": 1,
             "maximum": 9223372036854775807,
             "description": "セグメント１ID(法人向けプロフェッショナル, 法人向けエンタープライズプラン)<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
@@ -14907,6 +14954,7 @@
           },
           "segment_2_tag_id": {
             "type": "integer",
+            "format": "int64",
             "minimum": 1,
             "maximum": 9223372036854775807,
             "description": "セグメント２ID(法人向け エンタープライズプラン)<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
@@ -14914,6 +14962,7 @@
           },
           "segment_3_tag_id": {
             "type": "integer",
+            "format": "int64",
             "minimum": 1,
             "maximum": 9223372036854775807,
             "description": "セグメント３ID(法人向け エンタープライズプラン)<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
@@ -15083,6 +15132,7 @@
                 },
                 "segment_1_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント１ID<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
@@ -15090,6 +15140,7 @@
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント２ID(法人向けエンタープライズプラン)<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
@@ -15097,6 +15148,7 @@
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント３ID(法人向けエンタープライズプラン)<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
@@ -15116,7 +15168,7 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 2147483647,
-            "description": "申請経路ID<br>\n<ul>\n    <li>支払依頼のステータスを申請中として作成する場合は、必ず指定してください。</li>\n    <li>指定する申請経路IDは、申請経路APIを利用して取得してください。</li>\n    <li>\n        未指定の場合は、基本経路を設定している事業所では基本経路が、基本経路を設定していない事業所では利用可能な申請経路の中から最初の申請経路が自動的に使用されます。\n        <ul>\n           <li>意図しない申請経路を持った支払依頼の作成を防ぐために、使用する申請経路IDを指定することを推奨します。</li>\n        </ul>\n    </li>\n</ul>\n",
+            "description": "申請経路ID<br>\n指定する申請経路IDは、申請経路APIを利用して取得してください。\n",
             "example": 1
           },
           "parent_id": {
@@ -15134,7 +15186,8 @@
           },
           "document_code": {
             "type": "string",
-            "description": "請求書番号",
+            "maxLength": 255,
+            "description": "請求書番号（255文字以内）",
             "example": "2"
           },
           "receipt_ids": {
@@ -15186,42 +15239,50 @@
           },
           "bank_code": {
             "type": "string",
-            "description": "銀行コード<br>\n支払先指定時には無効\n",
+            "maxLength": 4,
+            "description": "銀行コード（半角数字1桁〜4桁）<br>\n支払先指定時には無効\n",
             "example": "0001"
           },
           "bank_name": {
             "type": "string",
-            "description": "銀行名<br>\n支払先指定時には無効\n",
+            "maxLength": 255,
+            "description": "銀行名（255文字以内）<br>\n支払先指定時には無効\n",
             "example": "freee銀行"
           },
           "bank_name_kana": {
             "type": "string",
-            "description": "銀行名（カナ）<br>\n支払先指定時には無効\n",
+            "maxLength": 15,
+            "description": "銀行名（カナ）（15文字以内）<br>\n支払先指定時には無効\n",
             "example": "フリーギンコウ"
           },
           "branch_code": {
             "type": "string",
-            "description": "支店番号<br>\n支払先指定時には無効\n",
+            "maxLength": 3,
+            "description": "支店番号（半角数字1桁〜3桁）<br>\n支払先指定時には無効\n",
             "example": "101"
           },
           "branch_name": {
             "type": "string",
-            "description": "支店名<br>\n支払先指定時には無効\n",
+            "maxLength": 255,
+            "description": "支店名（255文字以内）<br>\n支払先指定時には無効\n",
             "example": "銀座支店"
           },
           "branch_kana": {
             "type": "string",
-            "description": "支店名（カナ）<br>\n支払先指定時には無効\n",
+            "maxLength": 15,
+            "description": "支店名（カナ）（15文字以内）<br>\n指定可能な文字は、英数・カナ・丸括弧・ハイフン・スペースのみです。<br>\n支払先指定時には無効\n",
             "example": "ギンザシテン"
           },
           "account_name": {
             "type": "string",
-            "description": "受取人名（カナ）<br>\n支払先指定時には無効\n",
+            "maxLength": 48,
+            "description": "受取人名（カナ）（48文字以内）<br>\n支払先指定時には無効\n",
             "example": "フリータロウ"
           },
           "account_number": {
             "type": "string",
-            "description": "口座番号<br>\n支払先指定時には無効\n",
+            "maxLength": 7,
+            "description": "口座番号（半角数字1桁〜7桁）<br>\n支払先指定時には無効\n",
             "example": "1010101"
           },
           "account_type": {
@@ -15244,10 +15305,10 @@
           "company_id",
           "title",
           "application_date",
+          "payment_request_lines",
           "approval_flow_route_id",
           "draft",
-          "issue_date",
-          "payment_method"
+          "issue_date"
         ],
         "properties": {
           "company_id": {
@@ -15259,12 +15320,12 @@
           },
           "title": {
             "type": "string",
-            "description": "申請タイトル",
+            "description": "申請タイトル<br>\n申請者が、下書き状態もしくは差戻し状態の支払依頼に対して指定する場合のみ有効\n",
             "example": "仕入代金支払い"
           },
           "application_date": {
             "type": "string",
-            "description": "申請日 (yyyy-mm-dd)",
+            "description": "申請日 (yyyy-mm-dd)<br>\n申請者が、下書き状態もしくは差戻し状態の支払依頼に対して指定する場合のみ有効\n",
             "example": "2019-12-17"
           },
           "description": {
@@ -15283,6 +15344,7 @@
               "properties": {
                 "id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "支払依頼の項目行ID: 既存項目行を更新する場合に指定します。IDを指定しない項目行は、新規行として扱われ追加されます。また、payment_request_linesに含まれない既存の項目行は削除されます。更新後も残したい行は、必ず支払依頼の項目行IDを指定してpayment_request_linesに含めてください。",
@@ -15290,7 +15352,7 @@
                 },
                 "line_type": {
                   "type": "string",
-                  "description": "行の種類 (deal_line: 支払依頼, withholding_tax: 源泉徴収税)",
+                  "description": "'行の種類 (deal_line: 支払依頼, withholding_tax: 源泉徴収税)'<br>\n'デフォルトは deal_line: 支払依頼 です'\n",
                   "example": "deal_line",
                   "enum": [
                     "deal_line",
@@ -15354,6 +15416,7 @@
                 },
                 "segment_1_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント１ID<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
@@ -15361,6 +15424,7 @@
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント２ID(法人向けエンタープライズプラン)<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
@@ -15368,6 +15432,7 @@
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント３ID(法人向けエンタープライズプラン)<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
@@ -15387,17 +15452,18 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 2147483647,
-            "description": "申請経路ID<br>\n<ul>\n    <li>支払依頼のステータスを申請中として作成する場合は、必ず指定してください。</li>\n    <li>指定する申請経路IDは、申請経路APIを利用して取得してください。</li>\n    <li>\n        未指定の場合は、基本経路を設定している事業所では基本経路が、基本経路を設定していない事業所では利用可能な申請経路の中から最初の申請経路が自動的に使用されます。\n        <ul>\n           <li>意図しない申請経路を持った支払依頼の作成を防ぐために、使用する申請経路IDを指定することを推奨します。</li>\n        </ul>\n    </li>\n</ul>\n",
+            "description": "申請経路ID<br>\n指定する申請経路IDは、申請経路APIを利用して取得してください。\n",
             "example": 1
           },
           "draft": {
             "type": "boolean",
-            "description": "支払依頼のステータス<br>\nfalseを指定した時は申請中（in_progress）で支払依頼を作成します。<br>\ntrueを指定した時は下書き（draft）で支払依頼を作成します。<br>\n未指定の時は下書きとみなして支払依頼を作成します。\n",
+            "description": "支払依頼のステータス<br>\nfalseを指定した時は申請中（in_progress）で支払依頼を更新します。<br>\ntrueを指定した時は下書き（draft）で支払依頼を更新します。<br>\n未指定の時は下書きとみなして支払依頼を更新します。\n",
             "example": true
           },
           "document_code": {
             "type": "string",
-            "description": "請求書番号",
+            "maxLength": 255,
+            "description": "請求書番号（255文字以内）",
             "example": "2"
           },
           "receipt_ids": {
@@ -15423,7 +15489,7 @@
           },
           "payment_method": {
             "type": "string",
-            "description": "支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)",
+            "description": "'支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)'<br>\n'デフォルトは none: 指定なし です。'\n",
             "example": "none",
             "enum": [
               "none",
@@ -15437,59 +15503,67 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 2147483647,
-            "description": "取引先ID",
+            "description": "支払先の取引先ID",
             "example": 201,
             "nullable": true
           },
           "partner_code": {
             "type": "string",
-            "description": "取引先コード",
+            "description": "支払先の取引先コード<br>\n支払先の取引先ID指定時には無効\n",
             "example": "code001",
             "nullable": true
           },
           "bank_code": {
             "type": "string",
-            "description": "銀行コード",
+            "maxLength": 4,
+            "description": "銀行コード（半角数字1桁〜4桁）<br>\n支払先指定時には無効\n",
             "example": "0001"
           },
           "bank_name": {
             "type": "string",
-            "description": "銀行名",
+            "maxLength": 255,
+            "description": "銀行名（255文字以内）<br>\n支払先指定時には無効\n",
             "example": "freee銀行"
           },
           "bank_name_kana": {
             "type": "string",
-            "description": "銀行名（カナ）<br>\n支払先指定時には無効\n",
+            "maxLength": 15,
+            "description": "銀行名（カナ）（15文字以内）<br>\n支払先指定時には無効\n",
             "example": "フリーギンコウ"
           },
           "branch_code": {
             "type": "string",
-            "description": "支店番号<br>\n支払先指定時には無効\n",
+            "maxLength": 3,
+            "description": "支店番号（半角数字1桁〜3桁）<br>\n支払先指定時には無効\n",
             "example": "101"
           },
           "branch_name": {
             "type": "string",
-            "description": "支店名<br>\n支払先指定時には無効\n",
+            "maxLength": 255,
+            "description": "支店名（255文字以内）<br>\n支払先指定時には無効\n",
             "example": "銀座支店"
           },
           "branch_kana": {
             "type": "string",
-            "description": "支店名（カナ）<br>\n支払先指定時には無効\n",
+            "maxLength": 15,
+            "description": "支店名（カナ）（15文字以内）<br>\n指定可能な文字は、英数・カナ・丸括弧・ハイフン・スペースのみです。<br>\n支払先指定時には無効\n",
             "example": "ギンザシテン"
           },
           "account_name": {
             "type": "string",
-            "description": "受取人名（カナ）<br>\n支払先指定時には無効\n",
+            "maxLength": 48,
+            "description": "受取人名（カナ）（48文字以内）<br>\n支払先指定時には無効\n",
             "example": "フリータロウ"
           },
           "account_number": {
             "type": "string",
-            "description": "口座番号<br>\n支払先指定時には無効\n",
+            "maxLength": 7,
+            "description": "口座番号（半角数字1桁〜7桁）<br>\n支払先指定時には無効\n",
             "example": "1010101"
           },
           "account_type": {
             "type": "string",
-            "description": "'口座種別(ordinary:普通、checking:当座、earmarked:納税準備預金、savings:貯蓄、other:その他)'<br>\n支払先指定時には無効<br>\n支払先未指定時には必須\n",
+            "description": "'口座種別(ordinary: 普通、checking: 当座、earmarked: 納税準備預金、savings: 貯蓄、other: その他)'<br>\n'支払先指定時には無効'<br>\n'デフォルトは ordinary: 普通 です'\n",
             "example": "ordinary",
             "enum": [
               "ordinary",
@@ -18910,6 +18984,7 @@
               },
               "amount": {
                 "type": "integer",
+                "format": "int64",
                 "minimum": -9223372036854775808,
                 "maximum": 9223372036854775807,
                 "description": "金額",
@@ -18972,6 +19047,7 @@
                   "properties": {
                     "id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "取引行ID",
@@ -19023,6 +19099,7 @@
                     },
                     "segment_1_tag_id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "セグメント１ID",
@@ -19031,6 +19108,7 @@
                     },
                     "segment_2_tag_id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "セグメント２ID",
@@ -19039,6 +19117,7 @@
                     },
                     "segment_3_tag_id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "セグメント３ID",
@@ -19047,6 +19126,7 @@
                     },
                     "amount": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": -9223372036854775808,
                       "maximum": 9223372036854775807,
                       "description": "取引金額",
@@ -19087,6 +19167,7 @@
                   "properties": {
                     "id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "取引行ID",
@@ -19117,6 +19198,7 @@
                     },
                     "amount": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": -9223372036854775808,
                       "maximum": 9223372036854775807,
                       "description": "支払金額",
@@ -19172,6 +19254,7 @@
               },
               "amount": {
                 "type": "integer",
+                "format": "int64",
                 "minimum": -9223372036854775808,
                 "maximum": 9223372036854775807,
                 "description": "金額",
@@ -19234,6 +19317,7 @@
                   "properties": {
                     "id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "取引行ID",
@@ -19285,6 +19369,7 @@
                     },
                     "segment_1_tag_id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "セグメント１ID",
@@ -19293,6 +19378,7 @@
                     },
                     "segment_2_tag_id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "セグメント２ID",
@@ -19301,6 +19387,7 @@
                     },
                     "segment_3_tag_id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "セグメント３ID",
@@ -19309,6 +19396,7 @@
                     },
                     "amount": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": -9223372036854775808,
                       "maximum": 9223372036854775807,
                       "description": "取引金額",
@@ -19351,6 +19439,7 @@
                   "properties": {
                     "id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "+更新行ID",
@@ -19363,6 +19452,7 @@
                     },
                     "renew_target_id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "+更新の対象行ID",
@@ -19395,6 +19485,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
+                            "format": "int64",
                             "minimum": 1,
                             "maximum": 9223372036854775807,
                             "description": "+更新の明細行ID",
@@ -19451,6 +19542,7 @@
                           },
                           "segment_1_tag_id": {
                             "type": "integer",
+                            "format": "int64",
                             "minimum": 1,
                             "maximum": 9223372036854775807,
                             "description": "セグメント１ID",
@@ -19459,6 +19551,7 @@
                           },
                           "segment_2_tag_id": {
                             "type": "integer",
+                            "format": "int64",
                             "minimum": 1,
                             "maximum": 9223372036854775807,
                             "description": "セグメント２ID",
@@ -19467,6 +19560,7 @@
                           },
                           "segment_3_tag_id": {
                             "type": "integer",
+                            "format": "int64",
                             "minimum": 1,
                             "maximum": 9223372036854775807,
                             "description": "セグメント３ID",
@@ -19475,6 +19569,7 @@
                           },
                           "amount": {
                             "type": "integer",
+                            "format": "int64",
                             "minimum": -9223372036854775808,
                             "maximum": 9223372036854775807,
                             "description": "金額（税込で指定してください）",
@@ -19510,6 +19605,7 @@
                   "properties": {
                     "id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "取引行ID",
@@ -19540,6 +19636,7 @@
                     },
                     "amount": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": -9223372036854775808,
                       "maximum": 9223372036854775807,
                       "description": "支払金額",
@@ -19976,6 +20073,7 @@
                   "properties": {
                     "id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "貸借行ID",
@@ -20079,6 +20177,7 @@
                     },
                     "segment_1_tag_id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "セグメント１ID",
@@ -20090,6 +20189,7 @@
                     },
                     "segment_2_tag_id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "セグメント２ID",
@@ -20101,6 +20201,7 @@
                     },
                     "segment_3_tag_id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "セグメント３ID",
@@ -21973,6 +22074,7 @@
               },
               "amount": {
                 "type": "integer",
+                "format": "int64",
                 "minimum": -9223372036854775808,
                 "maximum": 9223372036854775807,
                 "description": "取引金額",
@@ -22065,6 +22167,7 @@
               },
               "amount": {
                 "type": "integer",
+                "format": "int64",
                 "minimum": -9223372036854775808,
                 "maximum": 9223372036854775807,
                 "description": "金額",
@@ -22636,6 +22739,7 @@
                     "properties": {
                       "id": {
                         "type": "integer",
+                        "format": "int64",
                         "minimum": 1,
                         "maximum": 9223372036854775807,
                         "description": "経費申請の項目行ID",
@@ -22722,6 +22826,7 @@
                 },
                 "segment_1_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント１ID",
@@ -22730,6 +22835,7 @@
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント２ID",
@@ -22738,6 +22844,7 @@
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント３ID",
@@ -22858,6 +22965,7 @@
                   "properties": {
                     "id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "経費申請の項目行ID",
@@ -23086,6 +23194,7 @@
               },
               "segment_1_tag_id": {
                 "type": "integer",
+                "format": "int64",
                 "minimum": 1,
                 "maximum": 9223372036854775807,
                 "description": "セグメント１ID。セグメント１が使用可能なプランの時のみレスポンスに含まれます。",
@@ -23094,6 +23203,7 @@
               },
               "segment_2_tag_id": {
                 "type": "integer",
+                "format": "int64",
                 "minimum": 1,
                 "maximum": 9223372036854775807,
                 "description": "セグメント２ID。セグメント２が使用可能なプランの時のみレスポンスに含まれます。",
@@ -23102,6 +23212,7 @@
               },
               "segment_3_tag_id": {
                 "type": "integer",
+                "format": "int64",
                 "minimum": 1,
                 "maximum": 9223372036854775807,
                 "description": "セグメント３ID。セグメント３が使用可能なプランの時のみレスポンスに含まれます。",
@@ -23171,6 +23282,11 @@
                 "type": "string",
                 "description": "内容の補足",
                 "example": "移動区間"
+              },
+              "required_receipt": {
+                "type": "boolean",
+                "description": "添付ファイルの必須/任意",
+                "example": true
               }
             }
           }
@@ -23286,6 +23402,7 @@
                   "properties": {
                     "id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "支払依頼の項目行ID",
@@ -23360,6 +23477,7 @@
                     },
                     "segment_1_tag_id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "セグメント１ID。セグメント１が使用可能なプランの時のみレスポンスに含まれます。",
@@ -23368,6 +23486,7 @@
                     },
                     "segment_2_tag_id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "セグメント２ID。セグメント２が使用可能なプランの時のみレスポンスに含まれます。",
@@ -23376,6 +23495,7 @@
                     },
                     "segment_3_tag_id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "セグメント３ID。セグメント３が使用可能なプランの時のみレスポンスに含まれます。",
@@ -24217,6 +24337,7 @@
           },
           "renew_target_id": {
             "type": "integer",
+            "format": "int64",
             "minimum": 1,
             "maximum": 9223372036854775807,
             "description": "+更新対象行ID (details(取引の明細行), accruals(債権債務行), renewsのdetails(+更新の明細行)のIDを指定) ",
@@ -24249,6 +24370,7 @@
                 },
                 "amount": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": -9223372036854775808,
                   "maximum": 9223372036854775807,
                   "description": "取引金額（税込で指定してください）",
@@ -24256,6 +24378,7 @@
                 },
                 "vat": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": -9223372036854775808,
                   "maximum": 9223372036854775807,
                   "description": "消費税額（指定しない場合は自動で計算されます）",
@@ -24291,6 +24414,7 @@
                 },
                 "segment_1_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント１ID",
@@ -24298,6 +24422,7 @@
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント２ID",
@@ -24305,6 +24430,7 @@
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント３ID",
@@ -24367,6 +24493,7 @@
                 },
                 "amount": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": -9223372036854775808,
                   "maximum": 9223372036854775807,
                   "description": "取引金額（税込で指定してください）",
@@ -24374,6 +24501,7 @@
                 },
                 "vat": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": -9223372036854775808,
                   "maximum": 9223372036854775807,
                   "description": "消費税額（指定しない場合は自動で計算されます）",
@@ -24409,6 +24537,7 @@
                 },
                 "segment_1_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 0,
                   "maximum": 9223372036854775807,
                   "description": "セグメント１ID",
@@ -24416,6 +24545,7 @@
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 0,
                   "maximum": 9223372036854775807,
                   "description": "セグメント２ID",
@@ -24423,6 +24553,7 @@
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 0,
                   "maximum": 9223372036854775807,
                   "description": "セグメント３ID",
@@ -24492,6 +24623,11 @@
             "maxLength": 1000,
             "description": "内容の補足 (1000文字以内)",
             "example": "移動区間"
+          },
+          "required_receipt": {
+            "type": "boolean",
+            "description": "添付ファイルの必須/任意",
+            "example": "true<br>\nfalseを指定した時は申請時の領収書の添付を任意とします。<br>\ntrueを指定した時は申請時の領収書の添付を必須とします。<br>\n未指定の時は申請時の領収書の添付を任意とします。\n"
           }
         }
       },
@@ -26037,6 +26173,7 @@
                       },
                       "amount": {
                         "type": "integer",
+                        "format": "int64",
                         "minimum": -9223372036854775808,
                         "maximum": 9223372036854775807,
                         "description": "金額",
@@ -26128,6 +26265,7 @@
                       },
                       "segment_1_tag_id": {
                         "type": "integer",
+                        "format": "int64",
                         "minimum": 1,
                         "maximum": 9223372036854775807,
                         "description": "セグメント１ID",
@@ -26142,6 +26280,7 @@
                       },
                       "segment_2_tag_id": {
                         "type": "integer",
+                        "format": "int64",
                         "minimum": 1,
                         "maximum": 9223372036854775807,
                         "description": "セグメント２ID",
@@ -26156,6 +26295,7 @@
                       },
                       "segment_3_tag_id": {
                         "type": "integer",
+                        "format": "int64",
                         "minimum": 1,
                         "maximum": 9223372036854775807,
                         "description": "セグメント３ID",
@@ -26182,24 +26322,28 @@
                   "properties": {
                     "vat_5": {
                       "type": "integer",
+                      "format": "int64",
                       "maximum": 9223372036854775807,
                       "description": "税率5%の税込み金額合計",
                       "example": 0
                     },
                     "vat_8": {
                       "type": "integer",
+                      "format": "int64",
                       "maximum": 9223372036854775807,
                       "description": "税率8%の税込み金額合計",
                       "example": 108000
                     },
                     "reduced_vat_8": {
                       "type": "integer",
+                      "format": "int64",
                       "maximum": 9223372036854775807,
                       "description": "軽減税率8%の税込み金額合計",
                       "example": 0
                     },
                     "vat_10": {
                       "type": "integer",
+                      "format": "int64",
                       "maximum": 9223372036854775807,
                       "description": "税率10%の税込み金額合計",
                       "example": 0
@@ -26608,6 +26752,7 @@
                     },
                     "amount": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": -9223372036854775808,
                       "maximum": 9223372036854775807,
                       "description": "金額",
@@ -26699,6 +26844,7 @@
                     },
                     "segment_1_tag_id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "セグメント１ID",
@@ -26713,6 +26859,7 @@
                     },
                     "segment_2_tag_id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "セグメント２ID",
@@ -26727,6 +26874,7 @@
                     },
                     "segment_3_tag_id": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 1,
                       "maximum": 9223372036854775807,
                       "description": "セグメント３ID",
@@ -26753,24 +26901,28 @@
                 "properties": {
                   "vat_5": {
                     "type": "integer",
+                    "format": "int64",
                     "maximum": 9223372036854775807,
                     "description": "税率5%の税込み金額合計",
                     "example": 0
                   },
                   "vat_8": {
                     "type": "integer",
+                    "format": "int64",
                     "maximum": 9223372036854775807,
                     "description": "税率8%の税込み金額合計",
                     "example": 108000
                   },
                   "reduced_vat_8": {
                     "type": "integer",
+                    "format": "int64",
                     "maximum": 9223372036854775807,
                     "description": "軽減税率8%の税込み金額合計",
                     "example": 0
                   },
                   "vat_10": {
                     "type": "integer",
+                    "format": "int64",
                     "maximum": 9223372036854775807,
                     "description": "税率10%の税込み金額合計",
                     "example": 0
@@ -27023,7 +27175,7 @@
                 },
                 "qty": {
                   "type": "number",
-                  "minimum": 1,
+                  "minimum": 0.0,
                   "maximum": 99999999,
                   "description": "数量",
                   "example": 1
@@ -27091,6 +27243,7 @@
                 },
                 "segment_1_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント１ID",
@@ -27098,6 +27251,7 @@
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント２ID",
@@ -27105,6 +27259,7 @@
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント３ID",
@@ -27352,7 +27507,7 @@
                 },
                 "qty": {
                   "type": "number",
-                  "minimum": 1,
+                  "minimum": 0.0,
                   "maximum": 99999999,
                   "description": "数量",
                   "example": 1
@@ -27420,6 +27575,7 @@
                 },
                 "segment_1_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント１ID",
@@ -27427,6 +27583,7 @@
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント２ID",
@@ -27434,6 +27591,7 @@
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント３ID",
@@ -27843,6 +28001,7 @@
                       },
                       "segment_1_tag_id": {
                         "type": "integer",
+                        "format": "int64",
                         "description": "セグメント１ID",
                         "example": 1,
                         "nullable": true
@@ -27855,6 +28014,7 @@
                       },
                       "segment_2_tag_id": {
                         "type": "integer",
+                        "format": "int64",
                         "description": "セグメント２ID",
                         "example": 1,
                         "nullable": true
@@ -27867,6 +28027,7 @@
                       },
                       "segment_3_tag_id": {
                         "type": "integer",
+                        "format": "int64",
                         "description": "セグメント３ID",
                         "example": 1,
                         "nullable": true
@@ -27891,24 +28052,28 @@
                   "properties": {
                     "vat_5": {
                       "type": "integer",
+                      "format": "int64",
                       "maximum": 9223372036854775807,
                       "description": "税率5%の税込み金額合計",
                       "example": 0
                     },
                     "vat_8": {
                       "type": "integer",
+                      "format": "int64",
                       "maximum": 9223372036854775807,
                       "description": "税率8%の税込み金額合計",
                       "example": 108000
                     },
                     "reduced_vat_8": {
                       "type": "integer",
+                      "format": "int64",
                       "maximum": 9223372036854775807,
                       "description": "軽減税率8%の税込み金額合計",
                       "example": 0
                     },
                     "vat_10": {
                       "type": "integer",
+                      "format": "int64",
                       "maximum": 9223372036854775807,
                       "description": "税率10%の税込み金額合計",
                       "example": 0
@@ -28317,6 +28482,7 @@
                     },
                     "segment_1_tag_id": {
                       "type": "integer",
+                      "format": "int64",
                       "description": "セグメント１ID",
                       "example": 1,
                       "nullable": true
@@ -28329,6 +28495,7 @@
                     },
                     "segment_2_tag_id": {
                       "type": "integer",
+                      "format": "int64",
                       "description": "セグメント２ID",
                       "example": 1,
                       "nullable": true
@@ -28341,6 +28508,7 @@
                     },
                     "segment_3_tag_id": {
                       "type": "integer",
+                      "format": "int64",
                       "description": "セグメント３ID",
                       "example": 1,
                       "nullable": true
@@ -28365,24 +28533,28 @@
                 "properties": {
                   "vat_5": {
                     "type": "integer",
+                    "format": "int64",
                     "maximum": 9223372036854775807,
                     "description": "税率5%の税込み金額合計",
                     "example": 0
                   },
                   "vat_8": {
                     "type": "integer",
+                    "format": "int64",
                     "maximum": 9223372036854775807,
                     "description": "税率8%の税込み金額合計",
                     "example": 108000
                   },
                   "reduced_vat_8": {
                     "type": "integer",
+                    "format": "int64",
                     "maximum": 9223372036854775807,
                     "description": "軽減税率8%の税込み金額合計",
                     "example": 0
                   },
                   "vat_10": {
                     "type": "integer",
+                    "format": "int64",
                     "maximum": 9223372036854775807,
                     "description": "税率10%の税込み金額合計",
                     "example": 0
@@ -28605,7 +28777,7 @@
                 },
                 "qty": {
                   "type": "number",
-                  "minimum": 1,
+                  "minimum": 0.0,
                   "maximum": 99999999,
                   "description": "数量",
                   "example": 1
@@ -28673,6 +28845,7 @@
                 },
                 "segment_1_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント１ID",
@@ -28680,6 +28853,7 @@
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント２ID",
@@ -28687,6 +28861,7 @@
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント３ID",
@@ -28896,7 +29071,7 @@
                 },
                 "qty": {
                   "type": "number",
-                  "minimum": 1,
+                  "minimum": 0.0,
                   "maximum": 99999999,
                   "description": "数量",
                   "example": 1
@@ -28964,6 +29139,7 @@
                 },
                 "segment_1_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント１ID",
@@ -28971,6 +29147,7 @@
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント２ID",
@@ -28978,6 +29155,7 @@
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント３ID",

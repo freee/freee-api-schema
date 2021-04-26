@@ -1602,6 +1602,7 @@ paths:
           in: query
           name: offset
           schema:
+            format: int64
             maximum: 9223372036854776000
             minimum: 0
             type: integer
@@ -2081,6 +2082,7 @@ paths:
           in: query
           name: offset
           schema:
+            format: int64
             maximum: 9223372036854776000
             minimum: 0
             type: integer
@@ -2988,6 +2990,7 @@ paths:
           name: payment_id
           required: true
           schema:
+            format: int64
             maximum: 9223372036854776000
             minimum: 1
             type: integer
@@ -3080,6 +3083,7 @@ paths:
           name: payment_id
           required: true
           schema:
+            format: int64
             maximum: 9223372036854776000
             minimum: 1
             type: integer
@@ -3527,6 +3531,7 @@ paths:
           in: query
           name: offset
           schema:
+            format: int64
             maximum: 9223372036854776000
             minimum: 0
             type: integer
@@ -3915,6 +3920,7 @@ paths:
           in: query
           name: offset
           schema:
+            format: int64
             maximum: 9223372036854776000
             minimum: 0
             type: integer
@@ -4641,6 +4647,7 @@ paths:
           in: query
           name: offset
           schema:
+            format: int64
             maximum: 9223372036854776000
             minimum: 0
             type: integer
@@ -5631,6 +5638,7 @@ paths:
           in: query
           name: min_amount
           schema:
+            format: int64
             maximum: 9223372036854776000
             minimum: -9223372036854776000
             type: integer
@@ -5638,6 +5646,7 @@ paths:
           in: query
           name: max_amount
           schema:
+            format: int64
             maximum: 9223372036854776000
             minimum: -9223372036854776000
             type: integer
@@ -5671,6 +5680,7 @@ paths:
           in: query
           name: segment_1_tag_id
           schema:
+            format: int64
             maximum: 9223372036854776000
             minimum: 0
             type: integer
@@ -5678,6 +5688,7 @@ paths:
           in: query
           name: segment_2_tag_id
           schema:
+            format: int64
             maximum: 9223372036854776000
             minimum: 0
             type: integer
@@ -5685,6 +5696,7 @@ paths:
           in: query
           name: segment_3_tag_id
           schema:
+            format: int64
             maximum: 9223372036854776000
             minimum: 0
             type: integer
@@ -5726,6 +5738,7 @@ paths:
           in: query
           name: offset
           schema:
+            format: int64
             maximum: 9223372036854776000
             minimum: 0
             type: integer
@@ -6312,6 +6325,7 @@ paths:
           in: query
           name: offset
           schema:
+            format: int64
             maximum: 9223372036854776000
             minimum: 0
             type: integer
@@ -6763,6 +6777,7 @@ paths:
           in: query
           name: offset
           schema:
+            format: int64
             maximum: 9223372036854776000
             minimum: 0
             type: integer
@@ -7155,6 +7170,7 @@ paths:
           in: query
           name: offset
           schema:
+            format: int64
             maximum: 9223372036854776000
             minimum: 0
             type: integer
@@ -9709,6 +9725,7 @@ paths:
           in: query
           name: offset
           schema:
+            format: int64
             maximum: 9223372036854776000
             minimum: 0
             type: integer
@@ -10557,6 +10574,7 @@ paths:
           in: query
           name: offset
           schema:
+            format: int64
             maximum: 9223372036854776000
             minimum: 0
             type: integer
@@ -11419,6 +11437,7 @@ paths:
           in: query
           name: offset
           schema:
+            format: int64
             maximum: 9223372036854776000
             minimum: 0
             type: integer
@@ -15204,6 +15223,7 @@ components:
               amount:
                 description: 取引金額（税込で指定してください）
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: -9223372036854776000
                 type: integer
@@ -15226,18 +15246,21 @@ components:
               segment_1_tag_id:
                 description: セグメント１ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
@@ -15290,6 +15313,7 @@ components:
               amount:
                 description: 支払金額：payments指定時は必須
                 example: 5250
+                format: int64
                 maximum: 9223372036854776000
                 minimum: -9223372036854776000
                 type: integer
@@ -15355,6 +15379,7 @@ components:
             amount:
               description: 金額
               example: 5250
+              format: int64
               maximum: 9223372036854776000
               minimum: -9223372036854776000
               type: integer
@@ -15377,6 +15402,7 @@ components:
                   amount:
                     description: 取引金額
                     example: 5250
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: -9223372036854776000
                     type: integer
@@ -15394,6 +15420,7 @@ components:
                   id:
                     description: 取引行ID
                     example: 11
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     type: integer
@@ -15414,6 +15441,7 @@ components:
                   segment_1_tag_id:
                     description: セグメント１ID
                     example: 1
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     nullable: true
@@ -15421,6 +15449,7 @@ components:
                   segment_2_tag_id:
                     description: セグメント２ID
                     example: 1
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     nullable: true
@@ -15428,6 +15457,7 @@ components:
                   segment_3_tag_id:
                     description: セグメント３ID
                     example: 1
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     nullable: true
@@ -15498,6 +15528,7 @@ components:
                   amount:
                     description: 支払金額
                     example: 5250
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: -9223372036854776000
                     type: integer
@@ -15526,6 +15557,7 @@ components:
                   id:
                     description: 取引行ID
                     example: 202
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     type: integer
@@ -15571,6 +15603,7 @@ components:
             amount:
               description: 金額
               example: 5250
+              format: int64
               maximum: 9223372036854776000
               minimum: -9223372036854776000
               type: integer
@@ -15593,6 +15626,7 @@ components:
                   amount:
                     description: 取引金額
                     example: 5250
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: -9223372036854776000
                     type: integer
@@ -15610,6 +15644,7 @@ components:
                   id:
                     description: 取引行ID
                     example: 11
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     type: integer
@@ -15630,6 +15665,7 @@ components:
                   segment_1_tag_id:
                     description: セグメント１ID
                     example: 1
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     nullable: true
@@ -15637,6 +15673,7 @@ components:
                   segment_2_tag_id:
                     description: セグメント２ID
                     example: 1
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     nullable: true
@@ -15644,6 +15681,7 @@ components:
                   segment_3_tag_id:
                     description: セグメント３ID
                     example: 1
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     nullable: true
@@ -15714,6 +15752,7 @@ components:
                   amount:
                     description: 支払金額
                     example: 5250
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: -9223372036854776000
                     type: integer
@@ -15742,6 +15781,7 @@ components:
                   id:
                     description: 取引行ID
                     example: 202
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     type: integer
@@ -15869,6 +15909,7 @@ components:
                         amount:
                           description: 金額（税込で指定してください）
                           example: 108000
+                          format: int64
                           maximum: 9223372036854776000
                           minimum: -9223372036854776000
                           type: integer
@@ -15887,6 +15928,7 @@ components:
                         id:
                           description: +更新の明細行ID
                           example: 1
+                          format: int64
                           maximum: 9223372036854776000
                           minimum: 1
                           type: integer
@@ -15907,6 +15949,7 @@ components:
                         segment_1_tag_id:
                           description: セグメント１ID
                           example: 1
+                          format: int64
                           maximum: 9223372036854776000
                           minimum: 1
                           nullable: true
@@ -15914,6 +15957,7 @@ components:
                         segment_2_tag_id:
                           description: セグメント２ID
                           example: 1
+                          format: int64
                           maximum: 9223372036854776000
                           minimum: 1
                           nullable: true
@@ -15921,6 +15965,7 @@ components:
                         segment_3_tag_id:
                           description: セグメント３ID
                           example: 1
+                          format: int64
                           maximum: 9223372036854776000
                           minimum: 1
                           nullable: true
@@ -15956,12 +16001,14 @@ components:
                   id:
                     description: +更新行ID
                     example: 11
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     type: integer
                   renew_target_id:
                     description: +更新の対象行ID
                     example: 12
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     type: integer
@@ -16030,6 +16077,7 @@ components:
               amount:
                 description: 取引金額（税込で指定してください）
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: -9223372036854776000
                 type: integer
@@ -16042,6 +16090,7 @@ components:
                   取引行ID:
                   既存取引行を更新する場合に指定します。IDを指定しない取引行は、新規行として扱われ追加されます。また、detailsに含まれない既存の取引行は削除されます。更新後も残したい行は、必ず取引行IDを指定してdetailsに含めてください。
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
@@ -16060,18 +16109,21 @@ components:
               segment_1_tag_id:
                 description: セグメント１ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
@@ -16313,6 +16365,7 @@ components:
             <a href="https://support.freee.co.jp/hc/ja/articles/360020679611"
             target="_blank">セグメント（分析用タグ）の設定</a><br>
           example: 1
+          format: int64
           maximum: 9223372036854776000
           minimum: 1
           type: integer
@@ -16325,6 +16378,7 @@ components:
             <a href="https://support.freee.co.jp/hc/ja/articles/360020679611"
             target="_blank">セグメント（分析用タグ）の設定</a><br>
           example: 2
+          format: int64
           maximum: 9223372036854776000
           minimum: 1
           type: integer
@@ -16337,6 +16391,7 @@ components:
             <a href="https://support.freee.co.jp/hc/ja/articles/360020679611"
             target="_blank">セグメント（分析用タグ）の設定</a><br>
           example: 3
+          format: int64
           maximum: 9223372036854776000
           minimum: 1
           type: integer
@@ -16394,6 +16449,14 @@ components:
           example: 交通費
           maxLength: 1000
           type: string
+        required_receipt:
+          description: 添付ファイルの必須/任意
+          example: |
+            true<br>
+            falseを指定した時は申請時の領収書の添付を任意とします。<br>
+            trueを指定した時は申請時の領収書の添付を必須とします。<br>
+            未指定の時は申請時の領収書の添付を任意とします。
+          type: boolean
         tax_code:
           description: >-
             税区分コード（税区分のdisplay_categoryがtax_5: 5%表示の税区分, tax_r8:
@@ -16440,6 +16503,10 @@ components:
               description: 経費科目名
               example: 交通費
               type: string
+            required_receipt:
+              description: 添付ファイルの必須/任意
+              example: true
+              type: boolean
             tax_code:
               description: 税区分コード
               example: 1
@@ -16681,6 +16748,7 @@ components:
                   id:
                     description: 経費申請の項目行ID
                     example: 1
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     type: integer
@@ -16720,6 +16788,7 @@ components:
             segment_1_tag_id:
               description: セグメント１ID。セグメント１が使用可能なプランの時のみレスポンスに含まれます。
               example: 1
+              format: int64
               maximum: 9223372036854776000
               minimum: 1
               nullable: true
@@ -16727,6 +16796,7 @@ components:
             segment_2_tag_id:
               description: セグメント２ID。セグメント２が使用可能なプランの時のみレスポンスに含まれます。
               example: 2
+              format: int64
               maximum: 9223372036854776000
               minimum: 1
               nullable: true
@@ -16734,6 +16804,7 @@ components:
             segment_3_tag_id:
               description: セグメント３ID。セグメント３が使用可能なプランの時のみレスポンスに含まれます。
               example: 3
+              format: int64
               maximum: 9223372036854776000
               minimum: 1
               nullable: true
@@ -16873,6 +16944,7 @@ components:
                   経費申請の項目行ID:
                   既存項目行を更新する場合に指定します。IDを指定しない項目行は、新規行として扱われ追加されます。また、expense_application_linesに含まれない既存の項目行は削除されます。更新後も残したい行は、必ず経費申請の項目行IDを指定してexpense_application_linesに含めてください。
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
@@ -16907,6 +16979,7 @@ components:
             <a href="https://support.freee.co.jp/hc/ja/articles/360020679611"
             target="_blank">セグメント（分析用タグ）の設定</a><br>
           example: 1
+          format: int64
           maximum: 9223372036854776000
           minimum: 1
           type: integer
@@ -16919,6 +16992,7 @@ components:
             <a href="https://support.freee.co.jp/hc/ja/articles/360020679611"
             target="_blank">セグメント（分析用タグ）の設定</a><br>
           example: 2
+          format: int64
           maximum: 9223372036854776000
           minimum: 1
           type: integer
@@ -16931,6 +17005,7 @@ components:
             <a href="https://support.freee.co.jp/hc/ja/articles/360020679611"
             target="_blank">セグメント（分析用タグ）の設定</a><br>
           example: 3
+          format: int64
           maximum: 9223372036854776000
           minimum: 1
           type: integer
@@ -17036,6 +17111,7 @@ components:
                     id:
                       description: 経費申請の項目行ID
                       example: 1
+                      format: int64
                       maximum: 9223372036854776000
                       minimum: 1
                       type: integer
@@ -17073,6 +17149,7 @@ components:
               segment_1_tag_id:
                 description: セグメント１ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 nullable: true
@@ -17080,6 +17157,7 @@ components:
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 2
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 nullable: true
@@ -17087,6 +17165,7 @@ components:
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 3
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 nullable: true
@@ -17313,7 +17392,7 @@ components:
                 description: 数量
                 example: 1
                 maximum: 99999999
-                minimum: 1
+                minimum: 0
                 type: number
               section_id:
                 description: 部門ID
@@ -17324,18 +17403,21 @@ components:
               segment_1_tag_id:
                 description: セグメント１ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
@@ -17632,6 +17714,7 @@ components:
                     amount:
                       description: 金額
                       example: 108000
+                      format: int64
                       maximum: 9223372036854776000
                       minimum: -9223372036854776000
                       type: integer
@@ -17687,6 +17770,7 @@ components:
                     segment_1_tag_id:
                       description: セグメント１ID
                       example: 1
+                      format: int64
                       maximum: 9223372036854776000
                       minimum: 1
                       nullable: true
@@ -17699,6 +17783,7 @@ components:
                     segment_2_tag_id:
                       description: セグメント２ID
                       example: 1
+                      format: int64
                       maximum: 9223372036854776000
                       minimum: 1
                       nullable: true
@@ -17711,6 +17796,7 @@ components:
                     segment_3_tag_id:
                       description: セグメント３ID
                       example: 1
+                      format: int64
                       maximum: 9223372036854776000
                       minimum: 1
                       nullable: true
@@ -17979,21 +18065,25 @@ components:
                   reduced_vat_8:
                     description: 軽減税率8%の税込み金額合計
                     example: 0
+                    format: int64
                     maximum: 9223372036854776000
                     type: integer
                   vat_10:
                     description: 税率10%の税込み金額合計
                     example: 0
+                    format: int64
                     maximum: 9223372036854776000
                     type: integer
                   vat_5:
                     description: 税率5%の税込み金額合計
                     example: 0
+                    format: int64
                     maximum: 9223372036854776000
                     type: integer
                   vat_8:
                     description: 税率8%の税込み金額合計
                     example: 108000
+                    format: int64
                     maximum: 9223372036854776000
                     type: integer
                 required:
@@ -18134,6 +18224,7 @@ components:
                   amount:
                     description: 金額
                     example: 108000
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: -9223372036854776000
                     type: integer
@@ -18189,6 +18280,7 @@ components:
                   segment_1_tag_id:
                     description: セグメント１ID
                     example: 1
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     nullable: true
@@ -18201,6 +18293,7 @@ components:
                   segment_2_tag_id:
                     description: セグメント２ID
                     example: 1
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     nullable: true
@@ -18213,6 +18306,7 @@ components:
                   segment_3_tag_id:
                     description: セグメント３ID
                     example: 1
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     nullable: true
@@ -18502,21 +18596,25 @@ components:
                 reduced_vat_8:
                   description: 軽減税率8%の税込み金額合計
                   example: 0
+                  format: int64
                   maximum: 9223372036854776000
                   type: integer
                 vat_10:
                   description: 税率10%の税込み金額合計
                   example: 0
+                  format: int64
                   maximum: 9223372036854776000
                   type: integer
                 vat_5:
                   description: 税率5%の税込み金額合計
                   example: 0
+                  format: int64
                   maximum: 9223372036854776000
                   type: integer
                 vat_8:
                   description: 税率8%の税込み金額合計
                   example: 108000
+                  format: int64
                   maximum: 9223372036854776000
                   type: integer
               required:
@@ -18646,7 +18744,7 @@ components:
                 description: 数量
                 example: 1
                 maximum: 99999999
-                minimum: 1
+                minimum: 0
                 type: number
               section_id:
                 description: 部門ID
@@ -18657,18 +18755,21 @@ components:
               segment_1_tag_id:
                 description: セグメント１ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
@@ -19101,6 +19202,7 @@ components:
               amount:
                 description: 取引金額（税込で指定してください）
                 example: 10800
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
@@ -19140,18 +19242,21 @@ components:
               segment_1_tag_id:
                 description: セグメント１ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
@@ -19233,6 +19338,7 @@ components:
                   id:
                     description: 貸借行ID
                     example: 1
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     type: integer
@@ -19286,6 +19392,7 @@ components:
                   segment_1_tag_id:
                     description: セグメント１ID
                     example: 1
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     type: integer
@@ -19295,6 +19402,7 @@ components:
                   segment_2_tag_id:
                     description: セグメント２ID
                     example: 1
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     type: integer
@@ -19304,6 +19412,7 @@ components:
                   segment_3_tag_id:
                     description: セグメント３ID
                     example: 1
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     type: integer
@@ -19404,6 +19513,7 @@ components:
               amount:
                 description: 取引金額（税込で指定してください）
                 example: 10800
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
@@ -19421,6 +19531,7 @@ components:
               id:
                 description: '貸借行ID: 既存貸借行を更新または削除する場合に指定します。IDを指定しない貸借行は、新規行として扱われ追加されます。'
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
@@ -19449,18 +19560,21 @@ components:
               segment_1_tag_id:
                 description: セグメント１ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
@@ -20439,6 +20553,7 @@ components:
         amount:
           description: 金額
           example: 10000
+          format: int64
           maximum: 9223372036854776000
           minimum: 1
           type: integer
@@ -20529,15 +20644,17 @@ components:
       properties:
         account_name:
           description: |
-            受取人名（カナ）<br>
+            受取人名（カナ）（48文字以内）<br>
             支払先指定時には無効
           example: フリータロウ
+          maxLength: 48
           type: string
         account_number:
           description: |
-            口座番号<br>
+            口座番号（半角数字1桁〜7桁）<br>
             支払先指定時には無効
           example: '1010101'
+          maxLength: 7
           type: string
         account_type:
           description: >
@@ -20562,16 +20679,7 @@ components:
         approval_flow_route_id:
           description: |
             申請経路ID<br>
-            <ul>
-                <li>支払依頼のステータスを申請中として作成する場合は、必ず指定してください。</li>
-                <li>指定する申請経路IDは、申請経路APIを利用して取得してください。</li>
-                <li>
-                    未指定の場合は、基本経路を設定している事業所では基本経路が、基本経路を設定していない事業所では利用可能な申請経路の中から最初の申請経路が自動的に使用されます。
-                    <ul>
-                       <li>意図しない申請経路を持った支払依頼の作成を防ぐために、使用する申請経路IDを指定することを推奨します。</li>
-                    </ul>
-                </li>
-            </ul>
+            指定する申請経路IDは、申請経路APIを利用して取得してください。
           example: 1
           maximum: 2147483647
           minimum: 1
@@ -20587,39 +20695,46 @@ components:
           type: integer
         bank_code:
           description: |
-            銀行コード<br>
+            銀行コード（半角数字1桁〜4桁）<br>
             支払先指定時には無効
           example: '0001'
+          maxLength: 4
           type: string
         bank_name:
           description: |
-            銀行名<br>
+            銀行名（255文字以内）<br>
             支払先指定時には無効
           example: freee銀行
+          maxLength: 255
           type: string
         bank_name_kana:
           description: |
-            銀行名（カナ）<br>
+            銀行名（カナ）（15文字以内）<br>
             支払先指定時には無効
           example: フリーギンコウ
+          maxLength: 15
           type: string
         branch_code:
           description: |
-            支店番号<br>
+            支店番号（半角数字1桁〜3桁）<br>
             支払先指定時には無効
           example: '101'
+          maxLength: 3
           type: string
         branch_kana:
           description: |
-            支店名（カナ）<br>
+            支店名（カナ）（15文字以内）<br>
+            指定可能な文字は、英数・カナ・丸括弧・ハイフン・スペースのみです。<br>
             支払先指定時には無効
           example: ギンザシテン
+          maxLength: 15
           type: string
         branch_name:
           description: |
-            支店名<br>
+            支店名（255文字以内）<br>
             支払先指定時には無効
           example: 銀座支店
+          maxLength: 255
           type: string
         company_id:
           description: 事業所ID
@@ -20632,8 +20747,9 @@ components:
           example: '◯◯連携先ID: cx12345'
           type: string
         document_code:
-          description: 請求書番号
+          description: 請求書番号（255文字以内）
           example: '2'
+          maxLength: 255
           type: string
         draft:
           description: |
@@ -20745,6 +20861,7 @@ components:
                   href="https://support.freee.co.jp/hc/ja/articles/360020679611"
                   target="_blank">セグメント（分析用タグ）の設定</a><br>
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
@@ -20758,6 +20875,7 @@ components:
                   href="https://support.freee.co.jp/hc/ja/articles/360020679611"
                   target="_blank">セグメント（分析用タグ）の設定</a><br>
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
@@ -20771,6 +20889,7 @@ components:
                   href="https://support.freee.co.jp/hc/ja/articles/360020679611"
                   target="_blank">セグメント（分析用タグ）の設定</a><br>
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
@@ -21127,6 +21246,7 @@ components:
                   id:
                     description: 支払依頼の項目行ID
                     example: 1
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     type: integer
@@ -21154,6 +21274,7 @@ components:
                   segment_1_tag_id:
                     description: セグメント１ID。セグメント１が使用可能なプランの時のみレスポンスに含まれます。
                     example: 1
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     nullable: true
@@ -21161,6 +21282,7 @@ components:
                   segment_2_tag_id:
                     description: セグメント２ID。セグメント２が使用可能なプランの時のみレスポンスに含まれます。
                     example: 1
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     nullable: true
@@ -21168,6 +21290,7 @@ components:
                   segment_3_tag_id:
                     description: セグメント３ID。セグメント３が使用可能なプランの時のみレスポンスに含まれます。
                     example: 1
+                    format: int64
                     maximum: 9223372036854776000
                     minimum: 1
                     nullable: true
@@ -21276,23 +21399,26 @@ components:
       properties:
         account_name:
           description: |
-            受取人名（カナ）<br>
+            受取人名（カナ）（48文字以内）<br>
             支払先指定時には無効
           example: フリータロウ
+          maxLength: 48
           type: string
         account_number:
           description: |
-            口座番号<br>
+            口座番号（半角数字1桁〜7桁）<br>
             支払先指定時には無効
           example: '1010101'
+          maxLength: 7
           type: string
         account_type:
           description: >
-            '口座種別(ordinary:普通、checking:当座、earmarked:納税準備預金、savings:貯蓄、other:その他)'<br>
+            '口座種別(ordinary: 普通、checking: 当座、earmarked: 納税準備預金、savings: 貯蓄、other:
+            その他)'<br>
 
-            支払先指定時には無効<br>
+            '支払先指定時には無効'<br>
 
-            支払先未指定時には必須
+            'デフォルトは ordinary: 普通 です'
           enum:
             - ordinary
             - checking
@@ -21302,22 +21428,15 @@ components:
           example: ordinary
           type: string
         application_date:
-          description: 申請日 (yyyy-mm-dd)
+          description: |
+            申請日 (yyyy-mm-dd)<br>
+            申請者が、下書き状態もしくは差戻し状態の支払依頼に対して指定する場合のみ有効
           example: '2019-12-17'
           type: string
         approval_flow_route_id:
           description: |
             申請経路ID<br>
-            <ul>
-                <li>支払依頼のステータスを申請中として作成する場合は、必ず指定してください。</li>
-                <li>指定する申請経路IDは、申請経路APIを利用して取得してください。</li>
-                <li>
-                    未指定の場合は、基本経路を設定している事業所では基本経路が、基本経路を設定していない事業所では利用可能な申請経路の中から最初の申請経路が自動的に使用されます。
-                    <ul>
-                       <li>意図しない申請経路を持った支払依頼の作成を防ぐために、使用する申請経路IDを指定することを推奨します。</li>
-                    </ul>
-                </li>
-            </ul>
+            指定する申請経路IDは、申請経路APIを利用して取得してください。
           example: 1
           maximum: 2147483647
           minimum: 1
@@ -21332,36 +21451,47 @@ components:
           minimum: 1
           type: integer
         bank_code:
-          description: 銀行コード
+          description: |
+            銀行コード（半角数字1桁〜4桁）<br>
+            支払先指定時には無効
           example: '0001'
+          maxLength: 4
           type: string
         bank_name:
-          description: 銀行名
+          description: |
+            銀行名（255文字以内）<br>
+            支払先指定時には無効
           example: freee銀行
+          maxLength: 255
           type: string
         bank_name_kana:
           description: |
-            銀行名（カナ）<br>
+            銀行名（カナ）（15文字以内）<br>
             支払先指定時には無効
           example: フリーギンコウ
+          maxLength: 15
           type: string
         branch_code:
           description: |
-            支店番号<br>
+            支店番号（半角数字1桁〜3桁）<br>
             支払先指定時には無効
           example: '101'
+          maxLength: 3
           type: string
         branch_kana:
           description: |
-            支店名（カナ）<br>
+            支店名（カナ）（15文字以内）<br>
+            指定可能な文字は、英数・カナ・丸括弧・ハイフン・スペースのみです。<br>
             支払先指定時には無効
           example: ギンザシテン
+          maxLength: 15
           type: string
         branch_name:
           description: |
-            支店名<br>
+            支店名（255文字以内）<br>
             支払先指定時には無効
           example: 銀座支店
+          maxLength: 255
           type: string
         company_id:
           description: 事業所ID
@@ -21374,15 +21504,16 @@ components:
           example: '◯◯連携先ID: cx12345'
           type: string
         document_code:
-          description: 請求書番号
+          description: 請求書番号（255文字以内）
           example: '2'
+          maxLength: 255
           type: string
         draft:
           description: |
             支払依頼のステータス<br>
-            falseを指定した時は申請中（in_progress）で支払依頼を作成します。<br>
-            trueを指定した時は下書き（draft）で支払依頼を作成します。<br>
-            未指定の時は下書きとみなして支払依頼を作成します。
+            falseを指定した時は申請中（in_progress）で支払依頼を更新します。<br>
+            trueを指定した時は下書き（draft）で支払依頼を更新します。<br>
+            未指定の時は下書きとみなして支払依頼を更新します。
           example: true
           type: boolean
         issue_date:
@@ -21390,12 +21521,14 @@ components:
           example: '2019-12-17'
           type: string
         partner_code:
-          description: 取引先コード
+          description: |
+            支払先の取引先コード<br>
+            支払先の取引先ID指定時には無効
           example: code001
           nullable: true
           type: string
         partner_id:
-          description: 取引先ID
+          description: 支払先の取引先ID
           example: 201
           maximum: 2147483647
           minimum: 1
@@ -21407,9 +21540,12 @@ components:
           nullable: true
           type: string
         payment_method:
-          description: >-
-            支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer:
-            国外振込, account_transfer: 口座振替, credit_card: クレジットカード)
+          description: >
+            '支払方法(none: 指定なし, domestic_bank_transfer: 国内振込,
+            abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card:
+            クレジットカード)'<br>
+
+            'デフォルトは none: 指定なし です。'
           enum:
             - none
             - domestic_bank_transfer
@@ -21444,6 +21580,7 @@ components:
                   支払依頼の項目行ID:
                   既存項目行を更新する場合に指定します。IDを指定しない項目行は、新規行として扱われ追加されます。また、payment_request_linesに含まれない既存の項目行は削除されます。更新後も残したい行は、必ず支払依頼の項目行IDを指定してpayment_request_linesに含めてください。
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
@@ -21454,7 +21591,9 @@ components:
                 minimum: 1
                 type: integer
               line_type:
-                description: '行の種類 (deal_line: 支払依頼, withholding_tax: 源泉徴収税)'
+                description: |
+                  '行の種類 (deal_line: 支払依頼, withholding_tax: 源泉徴収税)'<br>
+                  'デフォルトは deal_line: 支払依頼 です'
                 enum:
                   - deal_line
                   - withholding_tax
@@ -21476,6 +21615,7 @@ components:
                   href="https://support.freee.co.jp/hc/ja/articles/360020679611"
                   target="_blank">セグメント（分析用タグ）の設定</a><br>
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
@@ -21489,6 +21629,7 @@ components:
                   href="https://support.freee.co.jp/hc/ja/articles/360020679611"
                   target="_blank">セグメント（分析用タグ）の設定</a><br>
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
@@ -21502,6 +21643,7 @@ components:
                   href="https://support.freee.co.jp/hc/ja/articles/360020679611"
                   target="_blank">セグメント（分析用タグ）の設定</a><br>
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
@@ -21535,17 +21677,19 @@ components:
             type: integer
           type: array
         title:
-          description: 申請タイトル
+          description: |
+            申請タイトル<br>
+            申請者が、下書き状態もしくは差戻し状態の支払依頼に対して指定する場合のみ有効
           example: 仕入代金支払い
           type: string
       required:
         - company_id
         - title
         - application_date
+        - payment_request_lines
         - approval_flow_route_id
         - draft
         - issue_date
-        - payment_method
       type: object
     paymentRequestsIndexResponse:
       properties:
@@ -21900,7 +22044,7 @@ components:
                 description: 数量
                 example: 1
                 maximum: 99999999
-                minimum: 1
+                minimum: 0
                 type: number
               section_id:
                 description: 部門ID
@@ -21911,18 +22055,21 @@ components:
               segment_1_tag_id:
                 description: セグメント１ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
@@ -22228,6 +22375,7 @@ components:
                     segment_1_tag_id:
                       description: セグメント１ID
                       example: 1
+                      format: int64
                       nullable: true
                       type: integer
                     segment_1_tag_name:
@@ -22238,6 +22386,7 @@ components:
                     segment_2_tag_id:
                       description: セグメント２ID
                       example: 1
+                      format: int64
                       nullable: true
                       type: integer
                     segment_2_tag_name:
@@ -22248,6 +22397,7 @@ components:
                     segment_3_tag_id:
                       description: セグメント３ID
                       example: 1
+                      format: int64
                       nullable: true
                       type: integer
                     segment_3_tag_name:
@@ -22375,21 +22525,25 @@ components:
                   reduced_vat_8:
                     description: 軽減税率8%の税込み金額合計
                     example: 0
+                    format: int64
                     maximum: 9223372036854776000
                     type: integer
                   vat_10:
                     description: 税率10%の税込み金額合計
                     example: 0
+                    format: int64
                     maximum: 9223372036854776000
                     type: integer
                   vat_5:
                     description: 税率5%の税込み金額合計
                     example: 0
+                    format: int64
                     maximum: 9223372036854776000
                     type: integer
                   vat_8:
                     description: 税率8%の税込み金額合計
                     example: 108000
+                    format: int64
                     maximum: 9223372036854776000
                     type: integer
                 required:
@@ -22634,6 +22788,7 @@ components:
                   segment_1_tag_id:
                     description: セグメント１ID
                     example: 1
+                    format: int64
                     nullable: true
                     type: integer
                   segment_1_tag_name:
@@ -22644,6 +22799,7 @@ components:
                   segment_2_tag_id:
                     description: セグメント２ID
                     example: 1
+                    format: int64
                     nullable: true
                     type: integer
                   segment_2_tag_name:
@@ -22654,6 +22810,7 @@ components:
                   segment_3_tag_id:
                     description: セグメント３ID
                     example: 1
+                    format: int64
                     nullable: true
                     type: integer
                   segment_3_tag_name:
@@ -22820,21 +22977,25 @@ components:
                 reduced_vat_8:
                   description: 軽減税率8%の税込み金額合計
                   example: 0
+                  format: int64
                   maximum: 9223372036854776000
                   type: integer
                 vat_10:
                   description: 税率10%の税込み金額合計
                   example: 0
+                  format: int64
                   maximum: 9223372036854776000
                   type: integer
                 vat_5:
                   description: 税率5%の税込み金額合計
                   example: 0
+                  format: int64
                   maximum: 9223372036854776000
                   type: integer
                 vat_8:
                   description: 税率8%の税込み金額合計
                   example: 108000
+                  format: int64
                   maximum: 9223372036854776000
                   type: integer
               required:
@@ -23016,7 +23177,7 @@ components:
                 description: 数量
                 example: 1
                 maximum: 99999999
-                minimum: 1
+                minimum: 0
                 type: number
               section_id:
                 description: 部門ID
@@ -23027,18 +23188,21 @@ components:
               segment_1_tag_id:
                 description: セグメント１ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
@@ -23307,6 +23471,7 @@ components:
               amount:
                 description: 取引金額（税込で指定してください）
                 example: 1080
+                format: int64
                 maximum: 9223372036854776000
                 minimum: -9223372036854776000
                 type: integer
@@ -23329,18 +23494,21 @@ components:
               segment_1_tag_id:
                 description: セグメント１ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 1
                 type: integer
@@ -23364,6 +23532,7 @@ components:
               vat:
                 description: 消費税額（指定しない場合は自動で計算されます）
                 example: 80
+                format: int64
                 maximum: 9223372036854776000
                 minimum: -9223372036854776000
                 type: integer
@@ -23378,6 +23547,7 @@ components:
             +更新対象行ID (details(取引の明細行), accruals(債権債務行),
             renewsのdetails(+更新の明細行)のIDを指定) 
           example: 1
+          format: int64
           maximum: 9223372036854776000
           minimum: 1
           type: integer
@@ -23412,6 +23582,7 @@ components:
               amount:
                 description: 取引金額（税込で指定してください）
                 example: 1080
+                format: int64
                 maximum: 9223372036854776000
                 minimum: -9223372036854776000
                 type: integer
@@ -23434,18 +23605,21 @@ components:
               segment_1_tag_id:
                 description: セグメント１ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 0
                 type: integer
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 0
                 type: integer
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 1
+                format: int64
                 maximum: 9223372036854776000
                 minimum: 0
                 type: integer
@@ -23469,6 +23643,7 @@ components:
               vat:
                 description: 消費税額（指定しない場合は自動で計算されます）
                 example: 80
+                format: int64
                 maximum: 9223372036854776000
                 minimum: -9223372036854776000
                 type: integer
@@ -23978,6 +24153,7 @@ components:
         amount:
           description: 金額
           example: 5000
+          format: int64
           maximum: 9223372036854776000
           minimum: -9223372036854776000
           type: integer
@@ -24039,6 +24215,7 @@ components:
             amount:
               description: 金額
               example: 5000
+              format: int64
               maximum: 9223372036854776000
               minimum: -9223372036854776000
               type: integer
@@ -25834,12 +26011,14 @@ components:
         amount:
           description: 取引金額
           example: 5000
+          format: int64
           maximum: 9223372036854776000
           minimum: -9223372036854776000
           type: integer
         balance:
           description: 残高 (銀行口座等)
           example: 10000
+          format: int64
           maximum: 9223372036854776000
           minimum: -9223372036854776000
           type: integer
@@ -25893,6 +26072,7 @@ components:
             amount:
               description: 取引金額
               example: 5000
+              format: int64
               maximum: 9223372036854776000
               minimum: -9223372036854776000
               type: integer
