@@ -14929,7 +14929,7 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 2147483647,
-            "description": "申請経路ID<br>\n<ul>\n    <li>経費申請のステータスを申請中として作成する場合は、必ず指定してください。</li>\n    <li>指定する申請経路IDは、申請経路APIを利用して取得してください。</li>\n    <li>\n        未指定の場合は、基本経路を設定している事業所では基本経路が、基本経路を設定していない事業所では利用可能な申請経路の中から最初の申請経路が自動的に使用されます。\n        <ul>\n           <li>意図しない申請経路を持った経費申請の作成を防ぐために、使用する申請経路IDを指定することを推奨します。</li>\n        </ul>\n    </li>\n    <li>\n        ベーシックプランの事業所では以下のデフォルトで用意された申請経路のみ指定できます\n        <ul>\n        <li>指定なし</li>\n        <li>承認者を指定</li>\n        </ul>\n    </li>\n</ul>\n",
+            "description": "申請経路ID<br>\n<ul>\n    <li>経費申請のステータスを申請中として作成する場合は、必ず指定してください。</li>\n    <li>指定する申請経路IDは、申請経路APIを利用して取得してください。</li>\n    <li>\n        未指定の場合は、基本経路を設定している事業所では基本経路が、基本経路を設定していない事業所では利用可能な申請経路の中から最初の申請経路が自動的に使用されます。\n        <ul>\n          <li>意図しない申請経路を持った経費申請の作成を防ぐために、使用する申請経路IDを指定することを推奨します。</li>\n        </ul>\n    </li>\n    <li>\n        ベーシックプランの事業所では以下のデフォルトで用意された申請経路のみ指定できます\n        <ul>\n        <li>指定なし</li>\n        <li>承認者を指定</li>\n        </ul>\n    </li>\n</ul>\n",
             "example": 1
           },
           "approver_id": {
@@ -15099,7 +15099,7 @@
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 2147483647,
-                  "description": "税区分コード",
+                  "description": "税区分コード<br>\n勘定科目IDを指定する場合は必須です。\n",
                   "example": 1
                 },
                 "item_id": {
@@ -15383,7 +15383,7 @@
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 2147483647,
-                  "description": "税区分コード",
+                  "description": "税区分コード<br>\n勘定科目IDを指定する場合は必須です。\n",
                   "example": 1
                 },
                 "item_id": {
@@ -23036,7 +23036,7 @@
               },
               "approvers": {
                 "type": "array",
-                "description": "承認者（配列）\n  承認ステップのresource_typeがunspecified (指定なし)の場合はapproversはレスポンスに含まれません。\n  しかし、resource_typeがunspecifiedの承認ステップにおいて誰かが承認・却下・差し戻しのいずれかのアクションを取った後は、\n   approversはレスポンスに含まれるようになります。\n   その場合approversにはアクションを行ったステップのIDとアクションを行ったユーザーのIDが含まれます。",
+                "description": "承認者（配列）\n  承認ステップのresource_typeがunspecified (指定なし)の場合はapproversはレスポンスに含まれません。\n  しかし、resource_typeがunspecifiedの承認ステップにおいて誰かが承認・却下・差し戻しのいずれかのアクションを取った後は、\n  approversはレスポンスに含まれるようになります。\n  その場合approversにはアクションを行ったステップのIDとアクションを行ったユーザーのIDが含まれます。",
                 "items": {
                   "type": "object",
                   "required": [
@@ -23532,7 +23532,7 @@
               },
               "approvers": {
                 "type": "array",
-                "description": "承認者（配列）\n  承認ステップのresource_typeがunspecified (指定なし)の場合はapproversはレスポンスに含まれません。\n  しかし、resource_typeがunspecifiedの承認ステップにおいて誰かが承認・却下・差し戻しのいずれかのアクションを取った後は、\n   approversはレスポンスに含まれるようになります。\n   その場合approversにはアクションを行ったステップのIDとアクションを行ったユーザーのIDが含まれます。",
+                "description": "承認者（配列）\n  承認ステップのresource_typeがunspecified (指定なし)の場合はapproversはレスポンスに含まれません。\n  しかし、resource_typeがunspecifiedの承認ステップにおいて誰かが承認・却下・差し戻しのいずれかのアクションを取った後は、\n  approversはレスポンスに含まれるようになります。\n  その場合approversにはアクションを行ったステップのIDとアクションを行ったユーザーのIDが含まれます。",
                 "items": {
                   "type": "object",
                   "required": [
@@ -24654,6 +24654,7 @@
                 "current_step_id",
                 "current_round",
                 "deal_id",
+                "manual_journal_id",
                 "deal_status"
               ],
               "properties": {
@@ -24777,6 +24778,14 @@
                   "example": 1,
                   "nullable": true
                 },
+                "manual_journal_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "振替伝票のID (申請ステータス:statusがapprovedで、関連する振替伝票が存在する時のみmanual_journal_idが表示されます)\n\n<a href=\"https://support.freee.co.jp/hc/ja/articles/115003827683-#5\" target=\"_blank\">承認された各種申請から支払依頼等を作成する</a>\n",
+                  "example": 1,
+                  "nullable": true
+                },
                 "deal_status": {
                   "type": "string",
                   "description": "取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます settled:精算済み, unsettled:清算待ち)",
@@ -24818,6 +24827,7 @@
               "current_round",
               "approval_request_form",
               "deal_id",
+              "manual_journal_id",
               "deal_status"
             ],
             "properties": {
@@ -24854,7 +24864,7 @@
               },
               "approvers": {
                 "type": "array",
-                "description": "承認者（配列）\n  承認ステップのresource_typeがunspecified (指定なし)の場合はapproversはレスポンスに含まれません。\n  しかし、resource_typeがunspecifiedの承認ステップにおいて誰かが承認・却下・差し戻しのいずれかのアクションを取った後は、\n   approversはレスポンスに含まれるようになります。\n   その場合approversにはアクションを行ったステップのIDとアクションを行ったユーザーのIDが含まれます。",
+                "description": "承認者（配列）\n  承認ステップのresource_typeがunspecified (指定なし)の場合はapproversはレスポンスに含まれません。\n  しかし、resource_typeがunspecifiedの承認ステップにおいて誰かが承認・却下・差し戻しのいずれかのアクションを取った後は、\n  approversはレスポンスに含まれるようになります。\n  その場合approversにはアクションを行ったステップのIDとアクションを行ったユーザーのIDが含まれます。",
                 "items": {
                   "type": "object",
                   "required": [
@@ -25185,6 +25195,14 @@
                 "minimum": 1,
                 "maximum": 2147483647,
                 "description": "取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)",
+                "example": 1,
+                "nullable": true
+              },
+              "manual_journal_id": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 2147483647,
+                "description": "振替伝票のID (申請ステータス:statusがapprovedで、関連する振替伝票が存在する時のみmanual_journal_idが表示されます)\n\n<a href=\"https://support.freee.co.jp/hc/ja/articles/115003827683-#5\" target=\"_blank\">承認された各種申請から支払依頼等を作成する</a>\n",
                 "example": 1,
                 "nullable": true
               },
