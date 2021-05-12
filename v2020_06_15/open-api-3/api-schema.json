@@ -12172,22 +12172,22 @@
               }
             }
           },
-          "403": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/forbiddenError"
-                }
-              }
-            }
-          },
           "401": {
             "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
                 }
               }
             }
@@ -12748,22 +12748,22 @@
               }
             }
           },
-          "404": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/badRequestNotFoundError"
-                }
-              }
-            }
-          },
           "403": {
             "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/forbiddenError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
                 }
               }
             }
@@ -16657,7 +16657,7 @@
                 "items": {
                   "type": "string",
                   "description": "受け付けメッセージ",
-                  "example": ":id でリクエストを受け付けました。"
+                  "example": "id でリクエストを受け付けました。"
                 }
               },
               "company_id": {
@@ -16905,7 +16905,7 @@
               "created_at": {
                 "type": "string",
                 "description": "作成日時",
-                "example": "2019-12-17T13:47:24.000+09:00"
+                "example": "2019-12-17T13:47:24+09:00"
               },
               "balances": {
                 "type": "array",
@@ -17182,7 +17182,7 @@
               "created_at": {
                 "type": "string",
                 "description": "作成日時",
-                "example": "2019-12-17T13:47:24.000+09:00"
+                "example": "2019-12-17T13:47:24+09:00"
               },
               "balances": {
                 "type": "array",
@@ -17429,7 +17429,7 @@
               "created_at": {
                 "type": "string",
                 "description": "作成日時",
-                "example": "2019-12-17T13:47:24.000+09:00"
+                "example": "2019-12-17T13:47:24+09:00"
               },
               "balances": {
                 "type": "array",
@@ -17708,7 +17708,7 @@
               "created_at": {
                 "type": "string",
                 "description": "作成日時",
-                "example": "2019-12-17T13:47:24.000+09:00"
+                "example": "2019-12-17T13:47:24+09:00"
               },
               "balances": {
                 "type": "array",
@@ -18051,7 +18051,7 @@
               "created_at": {
                 "type": "string",
                 "description": "作成日時",
-                "example": "2019-12-17T13:47:24.000+09:00"
+                "example": "2019-12-17T13:47:24+09:00"
               },
               "balances": {
                 "type": "array",
@@ -18354,7 +18354,7 @@
               "created_at": {
                 "type": "string",
                 "description": "作成日時",
-                "example": "2019-12-17T13:47:24.000+09:00"
+                "example": "2019-12-17T13:47:24+09:00"
               },
               "balances": {
                 "type": "array",
@@ -18675,7 +18675,7 @@
               "created_at": {
                 "type": "string",
                 "description": "作成日時",
-                "example": "2019-12-17T13:47:24.000+09:00"
+                "example": "2019-12-17T13:47:24+09:00"
               },
               "balances": {
                 "type": "array",
@@ -19938,12 +19938,12 @@
                 "created_at": {
                   "type": "string",
                   "description": "作成日時",
-                  "example": "2019-12-17T13:47:24.000+09:00"
+                  "example": "2019-12-17T13:47:24+09:00"
                 },
                 "updated_at": {
                   "type": "string",
                   "description": "更新日時",
-                  "example": "2019-12-17T13:47:24.000+09:00"
+                  "example": "2019-12-17T13:47:24+09:00"
                 }
               }
             }
@@ -25278,7 +25278,7 @@
                 "created_date": {
                   "type": "string",
                   "description": "作成日時",
-                  "example": "2019-12-17T13:47:24.000+09:00"
+                  "example": "2019-12-17T13:47:24+09:00"
                 },
                 "form_order": {
                   "type": "integer",
@@ -25356,7 +25356,7 @@
               "created_date": {
                 "type": "string",
                 "description": "作成日時",
-                "example": "2019-12-17T13:47:24.000+09:00"
+                "example": "2019-12-17T13:47:24+09:00"
               },
               "form_order": {
                 "type": "integer",
@@ -25926,25 +25926,25 @@
                 "web_published_at": {
                   "type": "string",
                   "description": "Web共有日時(最新)",
-                  "example": "2019-12-17 10:00:00",
+                  "example": "2019-12-17T19:00:00+09:00",
                   "nullable": true
                 },
                 "web_downloaded_at": {
                   "type": "string",
                   "description": "Web共有ダウンロード日時(最新)",
-                  "example": "2019-12-17 10:00:00",
+                  "example": "2019-12-17T19:00:00+09:00",
                   "nullable": true
                 },
                 "web_confirmed_at": {
                   "type": "string",
                   "description": "Web共有取引先確認日時(最新)",
-                  "example": "2019-12-17 10:00:00",
+                  "example": "2019-12-17T19:00:00+09:00",
                   "nullable": true
                 },
                 "mail_sent_at": {
                   "type": "string",
                   "description": "メール送信日時(最新)",
-                  "example": "2019-12-17 10:00:00",
+                  "example": "2019-12-17T19:00:00+09:00",
                   "nullable": true
                 },
                 "posting_status": {
@@ -26505,25 +26505,25 @@
               "web_published_at": {
                 "type": "string",
                 "description": "Web共有日時(最新)",
-                "example": "2019-12-17 10:00:00",
+                "example": "2019-12-17T19:00:00+09:00",
                 "nullable": true
               },
               "web_downloaded_at": {
                 "type": "string",
                 "description": "Web共有ダウンロード日時(最新)",
-                "example": "2019-12-17 10:00:00",
+                "example": "2019-12-17T19:00:00+09:00",
                 "nullable": true
               },
               "web_confirmed_at": {
                 "type": "string",
                 "description": "Web共有取引先確認日時(最新)",
-                "example": "2019-12-17 10:00:00",
+                "example": "2019-12-17T19:00:00+09:00",
                 "nullable": true
               },
               "mail_sent_at": {
                 "type": "string",
                 "description": "メール送信日時(最新)",
-                "example": "2019-12-17 10:00:00",
+                "example": "2019-12-17T19:00:00+09:00",
                 "nullable": true
               },
               "posting_status": {
@@ -27193,7 +27193,7 @@
                 },
                 "qty": {
                   "type": "number",
-                  "minimum": 0.0,
+                  "minimum": 0,
                   "maximum": 99999999,
                   "description": "数量",
                   "example": 1
@@ -27525,7 +27525,7 @@
                 },
                 "qty": {
                   "type": "number",
-                  "minimum": 0.0,
+                  "minimum": 0,
                   "maximum": 99999999,
                   "description": "数量",
                   "example": 1
@@ -27720,25 +27720,25 @@
                 "web_published_at": {
                   "type": "string",
                   "description": "Web共有日時(最新)",
-                  "example": "2019-12-17 10:00:00",
+                  "example": "2019-12-17T19:00:00+09:00",
                   "nullable": true
                 },
                 "web_downloaded_at": {
                   "type": "string",
                   "description": "Web共有ダウンロード日時(最新)",
-                  "example": "2019-12-17 10:00:00",
+                  "example": "2019-12-17T19:00:00+09:00",
                   "nullable": true
                 },
                 "web_confirmed_at": {
                   "type": "string",
                   "description": "Web共有取引先確認日時(最新)",
-                  "example": "2019-12-17 10:00:00",
+                  "example": "2019-12-17T19:00:00+09:00",
                   "nullable": true
                 },
                 "mail_sent_at": {
                   "type": "string",
                   "description": "メール送信日時(最新)",
-                  "example": "2019-12-17 10:00:00",
+                  "example": "2019-12-17T19:00:00+09:00",
                   "nullable": true
                 },
                 "partner_name": {
@@ -28201,25 +28201,25 @@
               "web_published_at": {
                 "type": "string",
                 "description": "Web共有日時(最新)",
-                "example": "2019-12-17 10:00:00",
+                "example": "2019-12-17T19:00:00+09:00",
                 "nullable": true
               },
               "web_downloaded_at": {
                 "type": "string",
                 "description": "Web共有ダウンロード日時(最新)",
-                "example": "2019-12-17 10:00:00",
+                "example": "2019-12-17T19:00:00+09:00",
                 "nullable": true
               },
               "web_confirmed_at": {
                 "type": "string",
                 "description": "Web共有取引先確認日時(最新)",
-                "example": "2019-12-17 10:00:00",
+                "example": "2019-12-17T19:00:00+09:00",
                 "nullable": true
               },
               "mail_sent_at": {
                 "type": "string",
                 "description": "メール送信日時(最新)",
-                "example": "2019-12-17 10:00:00",
+                "example": "2019-12-17T19:00:00+09:00",
                 "nullable": true
               },
               "partner_name": {
@@ -28795,7 +28795,7 @@
                 },
                 "qty": {
                   "type": "number",
-                  "minimum": 0.0,
+                  "minimum": 0,
                   "maximum": 99999999,
                   "description": "数量",
                   "example": 1
@@ -29089,7 +29089,7 @@
                 },
                 "qty": {
                   "type": "number",
-                  "minimum": 0.0,
+                  "minimum": 0,
                   "maximum": 99999999,
                   "description": "数量",
                   "example": 1
