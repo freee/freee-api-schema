@@ -13341,8 +13341,8 @@ components:
                 承認者（配列）
                   承認ステップのresource_typeがunspecified (指定なし)の場合はapproversはレスポンスに含まれません。
                   しかし、resource_typeがunspecifiedの承認ステップにおいて誰かが承認・却下・差し戻しのいずれかのアクションを取った後は、
-                   approversはレスポンスに含まれるようになります。
-                   その場合approversにはアクションを行ったステップのIDとアクションを行ったユーザーのIDが含まれます。
+                  approversはレスポンスに含まれるようになります。
+                  その場合approversにはアクションを行ったステップのIDとアクションを行ったユーザーのIDが含まれます。
               items:
                 properties:
                   is_force_action:
@@ -13482,6 +13482,20 @@ components:
               maximum: 2147483647
               minimum: 1
               type: integer
+            manual_journal_id:
+              description: >
+                振替伝票のID
+                (申請ステータス:statusがapprovedで、関連する振替伝票が存在する時のみmanual_journal_idが表示されます)
+
+
+                <a
+                href="https://support.freee.co.jp/hc/ja/articles/115003827683-#5"
+                target="_blank">承認された各種申請から支払依頼等を作成する</a>
+              example: 1
+              maximum: 2147483647
+              minimum: 1
+              nullable: true
+              type: integer
             request_items:
               description: 各種申請の項目一覧（配列）
               items:
@@ -13553,6 +13567,7 @@ components:
             - current_round
             - approval_request_form
             - deal_id
+            - manual_journal_id
             - deal_status
           type: object
       required:
@@ -13691,6 +13706,20 @@ components:
                 maximum: 2147483647
                 minimum: 1
                 type: integer
+              manual_journal_id:
+                description: >
+                  振替伝票のID
+                  (申請ステータス:statusがapprovedで、関連する振替伝票が存在する時のみmanual_journal_idが表示されます)
+
+
+                  <a
+                  href="https://support.freee.co.jp/hc/ja/articles/115003827683-#5"
+                  target="_blank">承認された各種申請から支払依頼等を作成する</a>
+                example: 1
+                maximum: 2147483647
+                minimum: 1
+                nullable: true
+                type: integer
               request_items:
                 description: 各種申請の項目一覧（配列）
                 items:
@@ -13757,6 +13786,7 @@ components:
               - current_step_id
               - current_round
               - deal_id
+              - manual_journal_id
               - deal_status
             type: object
           type: array
@@ -16584,8 +16614,8 @@ components:
                 承認者（配列）
                   承認ステップのresource_typeがunspecified (指定なし)の場合はapproversはレスポンスに含まれません。
                   しかし、resource_typeがunspecifiedの承認ステップにおいて誰かが承認・却下・差し戻しのいずれかのアクションを取った後は、
-                   approversはレスポンスに含まれるようになります。
-                   その場合approversにはアクションを行ったステップのIDとアクションを行ったユーザーのIDが含まれます。
+                  approversはレスポンスに含まれるようになります。
+                  その場合approversにはアクションを行ったステップのIDとアクションを行ったユーザーのIDが含まれます。
               items:
                 properties:
                   is_force_action:
@@ -16870,7 +16900,7 @@ components:
                 <li>
                     未指定の場合は、基本経路を設定している事業所では基本経路が、基本経路を設定していない事業所では利用可能な申請経路の中から最初の申請経路が自動的に使用されます。
                     <ul>
-                       <li>意図しない申請経路を持った経費申請の作成を防ぐために、使用する申請経路IDを指定することを推奨します。</li>
+                      <li>意図しない申請経路を持った経費申請の作成を防ぐために、使用する申請経路IDを指定することを推奨します。</li>
                     </ul>
                 </li>
                 <li>
@@ -20905,7 +20935,9 @@ components:
                   type: integer
                 type: array
               tax_code:
-                description: 税区分コード
+                description: |
+                  税区分コード<br>
+                  勘定科目IDを指定する場合は必須です。
                 example: 1
                 maximum: 2147483647
                 minimum: 0
@@ -21016,8 +21048,8 @@ components:
                 承認者（配列）
                   承認ステップのresource_typeがunspecified (指定なし)の場合はapproversはレスポンスに含まれません。
                   しかし、resource_typeがunspecifiedの承認ステップにおいて誰かが承認・却下・差し戻しのいずれかのアクションを取った後は、
-                   approversはレスポンスに含まれるようになります。
-                   その場合approversにはアクションを行ったステップのIDとアクションを行ったユーザーのIDが含まれます。
+                  approversはレスポンスに含まれるようになります。
+                  その場合approversにはアクションを行ったステップのIDとアクションを行ったユーザーのIDが含まれます。
               items:
                 properties:
                   is_force_action:
@@ -21659,7 +21691,9 @@ components:
                   type: integer
                 type: array
               tax_code:
-                description: 税区分コード
+                description: |
+                  税区分コード<br>
+                  勘定科目IDを指定する場合は必須です。
                 example: 1
                 maximum: 2147483647
                 minimum: 0
