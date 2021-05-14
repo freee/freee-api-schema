@@ -6721,6 +6721,759 @@ paths:
         description: 取引先の更新
         required: true
       summary: 取引先の更新
+  /api/1/payment_requests:
+    get:
+      parameters:
+        - description: 事業所ID
+          in: query
+          name: company_id
+          required: true
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+        - description: >
+            '申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下,
+            feedback:差戻し)、 取引ステータス(unsettled:支払待ち, settled:支払済み)'<br>
+
+            approver_id を指定した場合は無効です。
+          in: query
+          name: status
+          schema:
+            enum:
+              - draft
+              - in_progress
+              - approved
+              - rejected
+              - feedback
+              - unsettled
+              - settled
+            type: string
+        - description: 申請日で絞込：開始日(yyyy-mm-dd)
+          example: '2019-12-17'
+          in: query
+          name: start_application_date
+          schema:
+            type: string
+        - description: 申請日で絞込：終了日(yyyy-mm-dd)
+          example: '2019-12-17'
+          in: query
+          name: end_application_date
+          schema:
+            type: string
+        - description: 発生日で絞込：開始日(yyyy-mm-dd)
+          example: '2019-12-17'
+          in: query
+          name: start_issue_date
+          schema:
+            type: string
+        - description: 発生日で絞込：終了日(yyyy-mm-dd)
+          example: '2019-12-17'
+          in: query
+          name: end_issue_date
+          schema:
+            type: string
+        - description: 申請No.
+          example: 2
+          in: query
+          name: application_number
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+        - description: 申請タイトル
+          example: 大阪出張
+          in: query
+          name: title
+          schema:
+            maxLength: 250
+            type: string
+        - description: 申請者のユーザーID
+          example: 1
+          in: query
+          name: applicant_id
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+        - description: |
+            承認者のユーザーID<br>
+            'approver_id を指定した場合は、 in_progress: 申請中 の支払依頼のみを返します。'
+          example: 1
+          in: query
+          name: approver_id
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+        - description: 金額で絞込 (下限金額)
+          example: 5000
+          in: query
+          name: min_amount
+          schema:
+            maximum: 2147483647
+            minimum: 0
+            type: integer
+        - description: 金額で絞込 (上限金額)
+          example: 10000
+          in: query
+          name: max_amount
+          schema:
+            maximum: 2147483647
+            minimum: 0
+            type: integer
+        - description: 取引先IDで絞込
+          in: query
+          name: partner_id
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+        - description: 取引先コードで絞込
+          in: query
+          name: partner_code
+          schema:
+            type: string
+        - description: >-
+            支払方法で絞込 (none: 指定なし, domestic_bank_transfer: 国内振込,
+            abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card:
+            クレジットカード)
+          example: credit_card
+          in: query
+          name: payment_method
+          schema:
+            enum:
+              - none
+              - domestic_bank_transfer
+              - abroad_bank_transfer
+              - account_transfer
+              - credit_card
+            type: string
+        - description: 支払期限で絞込：開始日(yyyy-mm-dd)
+          example: '2019-12-17'
+          in: query
+          name: start_payment_date
+          schema:
+            type: string
+        - description: 支払期限で絞込：終了日(yyyy-mm-dd)
+          example: '2019-12-17'
+          in: query
+          name: end_payment_date
+          schema:
+            type: string
+        - description: 請求書番号で絞込
+          example: '2'
+          in: query
+          name: document_code
+          schema:
+            type: string
+        - description: '取得レコードのオフセット (デフォルト: 0)'
+          in: query
+          name: offset
+          schema:
+            format: int64
+            maximum: 9223372036854776000
+            minimum: 0
+            type: integer
+        - description: '取得レコードの件数 (デフォルト: 50, 最小: 1, 最大: 500)'
+          in: query
+          name: limit
+          schema:
+            maximum: 500
+            minimum: 1
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paymentRequestsIndexResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestError'
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedError'
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenError'
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestNotFoundError'
+          description: ''
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerError'
+          description: ''
+      tags:
+        - Payment requests
+      description: >-
+
+        <h2 id="_1">概要</h2>
+
+
+        <p>指定した事業所の支払依頼一覧を取得する</p>
+
+
+        <p>支払依頼APIの使い方については、<a
+        href="https://support.freee.co.jp/hc/ja/articles/115002105403"
+        target="_blank">会計freeeの支払依頼APIの使い方</a>をご参照ください</p>
+
+
+        <h2 id="_2">注意点</h2>
+
+        <ul>
+          <li>本APIでは、支払依頼の一覧を取得することができます。</li>
+          <li>
+            申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している支払依頼と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。
+            <ul>
+              <li>役職指定（申請者の所属部門）</li>
+              <li>役職指定（申請時に部門指定）</li>
+              <li>部門および役職指定</li>
+            </ul>
+          </li>
+          <li>個人アカウントの場合は、ご利用になれません。</li>
+          <li>法人アカウントの場合は、プロフェッショナルプラン、エンタープライズプランでご利用いただけます。</li>
+        </ul>
+      operationId: get_payment_requests
+      summary: 支払依頼一覧の取得
+    post:
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paymentRequestResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestError'
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedError'
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenError'
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestNotFoundError'
+          description: ''
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerError'
+          description: ''
+      tags:
+        - Payment requests
+      description: >-
+
+        <h2 id="_1">概要</h2>
+
+
+        <p>指定した事業所の支払依頼を作成する</p>
+
+
+        <p>支払依頼APIの使い方については、<a
+        href="https://support.freee.co.jp/hc/ja/articles/115002105403"
+        target="_blank">会計freeeの支払依頼APIの使い方</a>をご参照ください</p>
+
+
+        <h2 id="_2">注意点</h2>
+
+        <ul>
+          <li>
+            申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。
+            <ul>
+              <li>
+                承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。
+                <ul>
+                  <li>
+                    初回申請の場合
+                    <ul><li>申請の作成（POST）</li></ul>
+                  </li>
+                  <li>
+                    作成済みの申請の申請ステータス変更・更新する場合
+                    <ul><li>申請の更新（PUT）</li></ul>
+                  </li>
+                  <li>
+                    申請中、承認済み、却下の申請の承認操作を行う場合
+                    <ul><li>承認操作の実行（POST）</li></ul>
+                  </li>
+                </ul>
+              </li>
+              <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>
+            </ul>
+          </li>
+          <li>
+            申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している支払依頼は本API経由で作成ができません。
+            <ul>
+              <li>役職指定（申請者の所属部門）</li>
+              <li>役職指定（申請時に部門指定）</li>
+              <li>部門および役職指定</li>
+            </ul>
+          </li>
+          <li>個人アカウントの場合は、ご利用になれません。</li>
+          <li>法人アカウントの場合は、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>
+        </ul>
+      operationId: create_payment_request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/paymentRequestCreateParams'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/paymentRequestCreateParams'
+        description: 支払依頼の作成
+        required: false
+      summary: 支払依頼の作成
+  '/api/1/payment_requests/{id}':
+    delete:
+      parameters:
+        - description: 支払依頼ID
+          in: path
+          name: id
+          required: true
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+        - description: 事業所ID
+          in: query
+          name: company_id
+          required: true
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+      responses:
+        '204':
+          content: {}
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestError'
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedError'
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenError'
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestNotFoundError'
+          description: ''
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerError'
+          description: ''
+      tags:
+        - Payment requests
+      description: >-
+
+        <h2 id="_1">概要</h2>
+
+
+        <p>指定した事業所の支払依頼を削除する</p>
+
+
+        <p>支払依頼APIの使い方については、<a
+        href="https://support.freee.co.jp/hc/ja/articles/115002105403"
+        target="_blank">会計freeeの支払依頼APIの使い方</a>をご参照ください</p>
+
+
+        <h2 id="_2">注意点</h2>
+
+        <ul>
+          <li>本APIでは、支払依頼の承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）を行うことができます。</li>
+          <li>
+            申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。
+            <ul>
+              <li>
+                承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。
+                <ul>
+                  <li>
+                    初回申請の場合
+                    <ul><li>申請の作成（POST）</li></ul>
+                  </li>
+                  <li>
+                    作成済みの申請の申請ステータス変更・更新する場合
+                    <ul><li>申請の更新（PUT）</li></ul>
+                  </li>
+                  <li>
+                    申請中、承認済み、却下の申請の承認操作を行う場合
+                    <ul><li>承認操作の実行（POST）</li></ul>
+                  </li>
+                </ul>
+              </li>
+              <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>
+            </ul>
+          </li>
+        　<li>
+            申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している支払依頼はAPI経由で承認ステータスの変更ができません。
+            <ul>
+              <li>役職指定（申請者の所属部門）</li>
+              <li>役職指定（申請時に部門指定）</li>
+              <li>部門および役職指定</li>
+            </ul>
+          </li>
+          <li>個人アカウントの場合は、ご利用になれません。</li>
+          <li>法人アカウントの場合は、プロフェッショナルプラン、エンタープライズプランでご利用いただけます。</li>
+        </ul>
+      operationId: destroy_payment_request
+      summary: 支払依頼の削除
+    get:
+      parameters:
+        - description: 支払依頼ID
+          in: path
+          name: id
+          required: true
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+        - description: 事業所ID
+          in: query
+          name: company_id
+          required: true
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paymentRequestResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestError'
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedError'
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenError'
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestNotFoundError'
+          description: ''
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerError'
+          description: ''
+      tags:
+        - Payment requests
+      description: >-
+
+        <h2 id="_1">概要</h2>
+
+
+        <p>指定した事業所の支払依頼を取得する</p>
+
+
+        <p>支払依頼APIの使い方については、<a
+        href="https://support.freee.co.jp/hc/ja/articles/115002105403"
+        target="_blank">会計freeeの支払依頼APIの使い方</a>をご参照ください</p>
+
+
+        <h2 id="_2">注意点</h2>
+
+        <ul>
+          <li>
+            申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している支払依頼と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。
+            <ul>
+              <li>役職指定（申請者の所属部門）</li>
+              <li>役職指定（申請時に部門指定）</li>
+              <li>部門および役職指定</li>
+            </ul>
+          </li>
+          <li>個人アカウントの場合は、ご利用になれません。</li>
+          <li>法人アカウントの場合は、プロフェッショナルプラン、エンタープライズプランでご利用いただけます。</li>
+        </ul>
+      operationId: get_payment_request
+      summary: 支払依頼詳細の取得
+    put:
+      parameters:
+        - description: 支払依頼ID
+          in: path
+          name: id
+          required: true
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paymentRequestResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestError'
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedError'
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenError'
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestNotFoundError'
+          description: ''
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerError'
+          description: ''
+      tags:
+        - Payment requests
+      description: >-
+
+        <h2 id="_1">概要</h2>
+
+
+        <p>指定した事業所の支払依頼を更新する</p>
+
+
+        <p>支払依頼APIの使い方については、<a
+        href="https://support.freee.co.jp/hc/ja/articles/115002105403"
+        target="_blank">会計freeeの支払依頼APIの使い方</a>をご参照ください</p>
+
+
+        <h2 id="_2">注意点</h2>
+
+        <ul>
+          <li>本APIでは、支払依頼を更新することができます。</li>
+          <li>本APIでは、status(申請ステータス): draft:下書き, in_progress:申請中, feedback:差戻しのみ更新可能です。</li>
+          <li>
+            申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。
+            <ul>
+              <li>
+                承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。
+                <ul>
+                  <li>
+                    初回申請の場合
+                    <ul><li>申請の作成（POST）</li></ul>
+                  </li>
+                  <li>
+                    作成済みの申請の申請ステータス変更・更新する場合
+                    <ul><li>申請の更新（PUT）</li></ul>
+                  </li>
+                  <li>
+                    申請中、承認済み、却下の申請の承認操作を行う場合
+                    <ul><li>承認操作の実行（POST）</li></ul>
+                  </li>
+                </ul>
+              </li>
+              <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>
+            </ul>
+          </li>
+          <li>
+            申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している支払依頼は本API経由で更新ができません。
+            <ul>
+              <li>役職指定（申請者の所属部門）</li>
+              <li>役職指定（申請時に部門指定）</li>
+              <li>部門および役職指定</li>
+            </ul>
+          </li>
+          <li>申請ステータスが申請中の場合には、申請タイトル(title)、申請日(application_date)、申請経路ID(approval_flow_route_id)、承認者のユーザーID(approver_id)は更新ができません。</li>
+          <li>個人アカウントの場合は、ご利用になれません。</li>
+          <li>法人アカウントの場合は、プロフェッショナルプラン、エンタープライズプランでご利用いただけます。</li>
+        </ul>
+      operationId: update_payment_request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/paymentRequestUpdateParams'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/paymentRequestUpdateParams'
+        description: 支払依頼の更新
+        required: false
+      summary: 支払依頼の更新
+  '/api/1/payment_requests/{id}/actions':
+    post:
+      parameters:
+        - description: 支払依頼ID
+          in: path
+          name: id
+          required: true
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paymentRequestResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestError'
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorizedError'
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbiddenError'
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequestNotFoundError'
+          description: ''
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internalServerError'
+          description: ''
+      tags:
+        - Payment requests
+      description: >-
+
+        <h2 id="_1">概要</h2>
+
+
+        <p>指定した事業所の支払依頼の承認操作を行う</p>
+
+
+        <p>支払依頼APIの使い方については、<a
+        href="https://support.freee.co.jp/hc/ja/articles/115002105403"
+        target="_blank">会計freeeの支払依頼APIの使い方</a>をご参照ください</p>
+
+
+        <h2 id="_2">注意点</h2>
+
+        <ul>
+          <li>本APIでは、支払依頼の承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）を行うことができます。</li>
+          <li>
+            申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。
+            <ul>
+              <li>
+                承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。
+                <ul>
+                  <li>
+                    初回申請の場合
+                    <ul><li>申請の作成（POST）</li></ul>
+                  </li>
+                  <li>
+                    作成済みの申請の申請ステータス変更・更新する場合
+                    <ul><li>申請の更新（PUT）</li></ul>
+                  </li>
+                  <li>
+                    申請中、承認済み、却下の申請の承認操作を行う場合
+                    <ul><li>承認操作の実行（POST）</li></ul>
+                  </li>
+                </ul>
+              </li>
+              <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>
+            </ul>
+          </li>
+        　<li>
+            申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している支払依頼はAPI経由で承認ステータスの変更ができません。
+            <ul>
+              <li>役職指定（申請者の所属部門）</li>
+              <li>役職指定（申請時に部門指定）</li>
+              <li>部門および役職指定</li>
+            </ul>
+          </li>
+          <li>個人アカウントの場合は、ご利用になれません。</li>
+          <li>法人アカウントの場合は、プロフェッショナルプラン、エンタープライズプランでご利用いただけます。</li>
+        </ul>
+      operationId: update_payment_request_action
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/paymentRequestActionCreateParams'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/paymentRequestActionCreateParams'
+        description: 支払依頼の承認操作
+        required: true
+      summary: 支払依頼の承認操作
   /api/1/quotations:
     get:
       parameters:
@@ -26424,6 +27177,10 @@ tags:
 
       <p>経費科目</p>
     name: Expense application line templates
+  - description: |
+
+      <p>支払依頼</p>
+    name: Payment requests
   - description: |
 
       <p>各種申請</p>
