@@ -504,6 +504,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/internalServerError'
           description: ''
+        '503':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/serviceUnavailableError'
+          description: ''
       tags:
         - Account items
       description: >-
@@ -1977,6 +1983,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/internalServerError'
+          description: ''
+        '503':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/serviceUnavailableError'
           description: ''
       tags:
         - Companies
@@ -19936,6 +19948,31 @@ components:
               description: ステータス確認用URL
               example: 'https://api.freee.co.jp/api/1/journals/reports/4/status'
               type: string
+            up_to_date:
+              description: 集計結果が最新かどうか
+              example: true
+              type: boolean
+            up_to_date_reasons:
+              description: 集計が最新でない場合の要因情報
+              items:
+                properties:
+                  code:
+                    description: コード
+                    enum:
+                      - depreciation_creating
+                      - depreciation_create_error
+                    example: depreciation_creating
+                    type: string
+                  message:
+                    description: 集計が最新でない理由
+                    example: >-
+                      当期の固定資産の償却作成が完了していないため、正しい集計結果でない可能性があります。しばらく時間をおいてからもう一度お試しください。
+                    type: string
+                required:
+                  - code
+                  - message
+                type: object
+              type: array
             visible_tags:
               items:
                 description: 補助科目やコメントとして出力する項目
@@ -25289,6 +25326,27 @@ components:
           description: 集計結果が最新かどうか
           example: true
           type: boolean
+        up_to_date_reasons:
+          description: 集計が最新でない場合の要因情報
+          items:
+            properties:
+              code:
+                description: コード
+                enum:
+                  - depreciation_creating
+                  - depreciation_create_error
+                example: depreciation_creating
+                type: string
+              message:
+                description: 集計が最新でない理由
+                example: >-
+                  当期の固定資産の償却作成が完了していないため、正しい集計結果でない可能性があります。しばらく時間をおいてからもう一度お試しください。
+                type: string
+            required:
+              - code
+              - message
+            type: object
+          type: array
       required:
         - trial_bs
         - up_to_date
@@ -25500,6 +25558,27 @@ components:
           description: 集計結果が最新かどうか
           example: true
           type: boolean
+        up_to_date_reasons:
+          description: 集計が最新でない場合の要因情報
+          items:
+            properties:
+              code:
+                description: コード
+                enum:
+                  - depreciation_creating
+                  - depreciation_create_error
+                example: depreciation_creating
+                type: string
+              message:
+                description: 集計が最新でない理由
+                example: >-
+                  当期の固定資産の償却作成が完了していないため、正しい集計結果でない可能性があります。しばらく時間をおいてからもう一度お試しください。
+                type: string
+            required:
+              - code
+              - message
+            type: object
+          type: array
       required:
         - trial_bs_three_years
         - up_to_date
@@ -25699,6 +25778,27 @@ components:
           description: 集計結果が最新かどうか
           example: true
           type: boolean
+        up_to_date_reasons:
+          description: 集計が最新でない場合の要因情報
+          items:
+            properties:
+              code:
+                description: コード
+                enum:
+                  - depreciation_creating
+                  - depreciation_create_error
+                example: depreciation_creating
+                type: string
+              message:
+                description: 集計が最新でない理由
+                example: >-
+                  当期の固定資産の償却作成が完了していないため、正しい集計結果でない可能性があります。しばらく時間をおいてからもう一度お試しください。
+                type: string
+            required:
+              - code
+              - message
+            type: object
+          type: array
       required:
         - trial_bs_two_years
         - up_to_date
@@ -25976,6 +26076,27 @@ components:
           description: 集計結果が最新かどうか
           example: true
           type: boolean
+        up_to_date_reasons:
+          description: 集計が最新でない場合の要因情報
+          items:
+            properties:
+              code:
+                description: コード
+                enum:
+                  - depreciation_creating
+                  - depreciation_create_error
+                example: depreciation_creating
+                type: string
+              message:
+                description: 集計が最新でない理由
+                example: >-
+                  当期の固定資産の償却作成が完了していないため、正しい集計結果でない可能性があります。しばらく時間をおいてからもう一度お試しください。
+                type: string
+            required:
+              - code
+              - message
+            type: object
+          type: array
       required:
         - trial_pl
         - up_to_date
@@ -26185,6 +26306,27 @@ components:
           description: 集計結果が最新かどうか
           example: true
           type: boolean
+        up_to_date_reasons:
+          description: 集計が最新でない場合の要因情報
+          items:
+            properties:
+              code:
+                description: コード
+                enum:
+                  - depreciation_creating
+                  - depreciation_create_error
+                example: depreciation_creating
+                type: string
+              message:
+                description: 集計が最新でない理由
+                example: >-
+                  当期の固定資産の償却作成が完了していないため、正しい集計結果でない可能性があります。しばらく時間をおいてからもう一度お試しください。
+                type: string
+            required:
+              - code
+              - message
+            type: object
+          type: array
       required:
         - trial_pl_sections
         - up_to_date
@@ -26446,6 +26588,27 @@ components:
           description: 集計結果が最新かどうか
           example: true
           type: boolean
+        up_to_date_reasons:
+          description: 集計が最新でない場合の要因情報
+          items:
+            properties:
+              code:
+                description: コード
+                enum:
+                  - depreciation_creating
+                  - depreciation_create_error
+                example: depreciation_creating
+                type: string
+              message:
+                description: 集計が最新でない理由
+                example: >-
+                  当期の固定資産の償却作成が完了していないため、正しい集計結果でない可能性があります。しばらく時間をおいてからもう一度お試しください。
+                type: string
+            required:
+              - code
+              - message
+            type: object
+          type: array
       required:
         - trial_pl_three_years
         - up_to_date
@@ -26691,6 +26854,27 @@ components:
           description: 集計結果が最新かどうか
           example: true
           type: boolean
+        up_to_date_reasons:
+          description: 集計が最新でない場合の要因情報
+          items:
+            properties:
+              code:
+                description: コード
+                enum:
+                  - depreciation_creating
+                  - depreciation_create_error
+                example: depreciation_creating
+                type: string
+              message:
+                description: 集計が最新でない理由
+                example: >-
+                  当期の固定資産の償却作成が完了していないため、正しい集計結果でない可能性があります。しばらく時間をおいてからもう一度お試しください。
+                type: string
+            required:
+              - code
+              - message
+            type: object
+          type: array
       required:
         - trial_pl_two_years
         - up_to_date
