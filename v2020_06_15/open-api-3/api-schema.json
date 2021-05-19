@@ -943,6 +943,16 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/serviceUnavailableError"
+                }
+              }
+            }
           }
         }
       },
@@ -5983,6 +5993,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/serviceUnavailableError"
                 }
               }
             }
@@ -17471,6 +17491,38 @@
                 "type": "string",
                 "description": "ステータス確認用URL",
                 "example": "https://api.freee.co.jp/api/1/journals/reports/4/status"
+              },
+              "up_to_date": {
+                "type": "boolean",
+                "description": "集計結果が最新かどうか",
+                "example": true
+              },
+              "up_to_date_reasons": {
+                "type": "array",
+                "description": "集計が最新でない場合の要因情報",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "コード",
+                      "example": "depreciation_creating",
+                      "enum": [
+                        "depreciation_creating",
+                        "depreciation_create_error"
+                      ]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "集計が最新でない理由",
+                      "example": "当期の固定資産の償却作成が完了していないため、正しい集計結果でない可能性があります。しばらく時間をおいてからもう一度お試しください。"
+                    }
+                  }
+                }
               }
             }
           }
@@ -17841,6 +17893,33 @@
             "type": "boolean",
             "description": "集計結果が最新かどうか",
             "example": true
+          },
+          "up_to_date_reasons": {
+            "type": "array",
+            "description": "集計が最新でない場合の要因情報",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "コード",
+                  "example": "depreciation_creating",
+                  "enum": [
+                    "depreciation_creating",
+                    "depreciation_create_error"
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "description": "集計が最新でない理由",
+                  "example": "当期の固定資産の償却作成が完了していないため、正しい集計結果でない可能性があります。しばらく時間をおいてからもう一度お試しください。"
+                }
+              }
+            }
           }
         }
       },
@@ -18088,6 +18167,33 @@
             "type": "boolean",
             "description": "集計結果が最新かどうか",
             "example": true
+          },
+          "up_to_date_reasons": {
+            "type": "array",
+            "description": "集計が最新でない場合の要因情報",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "コード",
+                  "example": "depreciation_creating",
+                  "enum": [
+                    "depreciation_creating",
+                    "depreciation_create_error"
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "description": "集計が最新でない理由",
+                  "example": "当期の固定資産の償却作成が完了していないため、正しい集計結果でない可能性があります。しばらく時間をおいてからもう一度お試しください。"
+                }
+              }
+            }
           }
         }
       },
@@ -18350,6 +18456,33 @@
             "type": "boolean",
             "description": "集計結果が最新かどうか",
             "example": true
+          },
+          "up_to_date_reasons": {
+            "type": "array",
+            "description": "集計が最新でない場合の要因情報",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "コード",
+                  "example": "depreciation_creating",
+                  "enum": [
+                    "depreciation_creating",
+                    "depreciation_create_error"
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "description": "集計が最新でない理由",
+                  "example": "当期の固定資産の償却作成が完了していないため、正しい集計結果でない可能性があります。しばらく時間をおいてからもう一度お試しください。"
+                }
+              }
+            }
           }
         }
       },
@@ -18693,6 +18826,33 @@
             "type": "boolean",
             "description": "集計結果が最新かどうか",
             "example": true
+          },
+          "up_to_date_reasons": {
+            "type": "array",
+            "description": "集計が最新でない場合の要因情報",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "コード",
+                  "example": "depreciation_creating",
+                  "enum": [
+                    "depreciation_creating",
+                    "depreciation_create_error"
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "description": "集計が最新でない理由",
+                  "example": "当期の固定資産の償却作成が完了していないため、正しい集計結果でない可能性があります。しばらく時間をおいてからもう一度お試しください。"
+                }
+              }
+            }
           }
         }
       },
@@ -18996,6 +19156,33 @@
             "type": "boolean",
             "description": "集計結果が最新かどうか",
             "example": true
+          },
+          "up_to_date_reasons": {
+            "type": "array",
+            "description": "集計が最新でない場合の要因情報",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "コード",
+                  "example": "depreciation_creating",
+                  "enum": [
+                    "depreciation_creating",
+                    "depreciation_create_error"
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "description": "集計が最新でない理由",
+                  "example": "当期の固定資産の償却作成が完了していないため、正しい集計結果でない可能性があります。しばらく時間をおいてからもう一度お試しください。"
+                }
+              }
+            }
           }
         }
       },
@@ -19319,6 +19506,33 @@
             "type": "boolean",
             "description": "集計結果が最新かどうか",
             "example": true
+          },
+          "up_to_date_reasons": {
+            "type": "array",
+            "description": "集計が最新でない場合の要因情報",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "コード",
+                  "example": "depreciation_creating",
+                  "enum": [
+                    "depreciation_creating",
+                    "depreciation_create_error"
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "description": "集計が最新でない理由",
+                  "example": "当期の固定資産の償却作成が完了していないため、正しい集計結果でない可能性があります。しばらく時間をおいてからもう一度お試しください。"
+                }
+              }
+            }
           }
         }
       },
@@ -19580,6 +19794,33 @@
             "type": "boolean",
             "description": "集計結果が最新かどうか",
             "example": true
+          },
+          "up_to_date_reasons": {
+            "type": "array",
+            "description": "集計が最新でない場合の要因情報",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "コード",
+                  "example": "depreciation_creating",
+                  "enum": [
+                    "depreciation_creating",
+                    "depreciation_create_error"
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "description": "集計が最新でない理由",
+                  "example": "当期の固定資産の償却作成が完了していないため、正しい集計結果でない可能性があります。しばらく時間をおいてからもう一度お試しください。"
+                }
+              }
+            }
           }
         }
       },
