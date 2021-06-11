@@ -814,6 +814,22 @@ paths:
             maximum: 2147483647
             minimum: 1
             type: integer
+        - description: 金額で絞込：以上
+          in: query
+          name: min_amount
+          schema:
+            format: int64
+            maximum: 9223372036854776000
+            minimum: -9223372036854776000
+            type: integer
+        - description: 金額で絞込：以下
+          in: query
+          name: max_amount
+          schema:
+            format: int64
+            maximum: 9223372036854776000
+            minimum: -9223372036854776000
+            type: integer
         - description: 承認者のユーザーID
           example: 1
           in: query
@@ -14777,8 +14793,7 @@ components:
               example: true
               type: boolean
             indirect_write_off_method_type:
-              description: |
-                間接控除時の累計額(法人のみ)（true: 資産分類別、false: 共通）'
+              description: '間接控除時の累計額(法人のみ)（true: 資産分類別、false: 共通）'
               example: false
               type: boolean
             return_code:

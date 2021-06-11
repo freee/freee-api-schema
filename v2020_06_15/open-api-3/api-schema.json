@@ -12814,6 +12814,28 @@
             "description": "申請者のユーザーID"
           },
           {
+            "name": "min_amount",
+            "in": "query",
+            "description": "金額で絞込：以上",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "minimum": -9223372036854775808,
+              "maximum": 9223372036854775807
+            }
+          },
+          {
+            "name": "max_amount",
+            "in": "query",
+            "description": "金額で絞込：以下",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "minimum": -9223372036854775808,
+              "maximum": 9223372036854775807
+            }
+          },
+          {
             "name": "approver_id",
             "in": "query",
             "schema": {
@@ -15166,7 +15188,7 @@
               },
               "indirect_write_off_method_type": {
                 "type": "boolean",
-                "description": "間接控除時の累計額(法人のみ)（true: 資産分類別、false: 共通）'\n",
+                "description": "間接控除時の累計額(法人のみ)（true: 資産分類別、false: 共通）",
                 "example": false
               },
               "start_date": {
