@@ -16177,13 +16177,6 @@ components:
             未指定の時は下書きとみなして経費申請を作成します。
           example: true
           type: boolean
-        editable_on_web:
-          description: |
-            会計freeeのWeb画面で申請内容を編集可能にするかどうか<br>
-            falseの場合は、Web画面での項目行の追加／削除・金額の編集が出来なくなりますが、APIでの編集は可能です。<br>
-            デフォルトはfalseです。
-          example: false
-          type: boolean
         expense_application_lines:
           items:
             properties:
@@ -16599,11 +16592,6 @@ components:
               example: '◯◯連携先ID: cx12345'
               nullable: true
               type: string
-            editable_on_web:
-              description: >-
-                会計freeeのWeb画面から申請内容を編集可能：falseの場合、Web上からの項目行の追加／削除・金額の編集が出来なくなります。APIでの編集は可能です。
-              example: false
-              type: boolean
             expense_application_lines:
               description: 経費申請の項目行一覧（配列）
               items:
@@ -16723,7 +16711,6 @@ components:
             - application_number
             - approvers
             - company_id
-            - editable_on_web
             - expense_application_lines
             - id
             - issue_date
@@ -16792,13 +16779,6 @@ components:
             trueを指定した時は下書き（draft）で経費申請を更新します。<br>
             未指定の時は下書きとみなして経費申請を更新します。
           example: true
-          type: boolean
-        editable_on_web:
-          description: |
-            会計freeeのWeb画面で申請内容を編集可能にするかどうか<br>
-            falseの場合は、Web画面での項目行の追加／削除・金額の編集が出来なくなりますが、APIでの編集は可能です。<br>
-            デフォルトはfalseです。
-          example: false
           type: boolean
         expense_application_lines:
           items:
@@ -16964,11 +16944,6 @@ components:
                 description: 備考
                 example: '◯◯連携先ID: cx12345'
                 type: string
-              editable_on_web:
-                description: >-
-                  会計freeeのWeb画面から申請内容を編集可能：falseの場合、Web上からの項目行の追加／削除・金額の編集が出来なくなります。APIでの編集は可能です。
-                example: false
-                type: boolean
               expense_application_lines:
                 description: 経費申請の項目行一覧（配列）
                 items:
@@ -17083,7 +17058,6 @@ components:
               - applicant_id
               - application_number
               - company_id
-              - editable_on_web
               - expense_application_lines
               - id
               - issue_date
