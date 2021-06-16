@@ -15094,11 +15094,6 @@
             "description": "備考 (10000文字以内)",
             "example": "◯◯連携先ID: cx12345"
           },
-          "editable_on_web": {
-            "type": "boolean",
-            "description": "会計freeeのWeb画面で申請内容を編集可能にするかどうか<br>\nfalseの場合は、Web画面での項目行の追加／削除・金額の編集が出来なくなりますが、APIでの編集は可能です。<br>\nデフォルトはfalseです。\n",
-            "example": false
-          },
           "section_id": {
             "type": "integer",
             "minimum": 1,
@@ -15240,11 +15235,6 @@
             "maxLength": 10000,
             "description": "備考 (10000文字以内)",
             "example": "◯◯連携先ID: cx12345"
-          },
-          "editable_on_web": {
-            "type": "boolean",
-            "description": "会計freeeのWeb画面で申請内容を編集可能にするかどうか<br>\nfalseの場合は、Web画面での項目行の追加／削除・金額の編集が出来なくなりますが、APIでの編集は可能です。<br>\nデフォルトはfalseです。\n",
-            "example": false
           },
           "section_id": {
             "type": "integer",
@@ -22827,7 +22817,6 @@
                 "applicant_id",
                 "application_number",
                 "company_id",
-                "editable_on_web",
                 "expense_application_lines",
                 "id",
                 "issue_date",
@@ -22865,11 +22854,6 @@
                   "type": "string",
                   "description": "備考",
                   "example": "◯◯連携先ID: cx12345"
-                },
-                "editable_on_web": {
-                  "type": "boolean",
-                  "description": "会計freeeのWeb画面から申請内容を編集可能：falseの場合、Web上からの項目行の追加／削除・金額の編集が出来なくなります。APIでの編集は可能です。",
-                  "example": false
                 },
                 "total_amount": {
                   "type": "integer",
@@ -23047,7 +23031,6 @@
               "application_number",
               "approvers",
               "company_id",
-              "editable_on_web",
               "expense_application_lines",
               "id",
               "issue_date",
@@ -23091,11 +23074,6 @@
                 "description": "備考",
                 "example": "◯◯連携先ID: cx12345",
                 "nullable": true
-              },
-              "editable_on_web": {
-                "type": "boolean",
-                "description": "会計freeeのWeb画面から申請内容を編集可能：falseの場合、Web上からの項目行の追加／削除・金額の編集が出来なくなります。APIでの編集は可能です。",
-                "example": false
               },
               "total_amount": {
                 "type": "integer",
