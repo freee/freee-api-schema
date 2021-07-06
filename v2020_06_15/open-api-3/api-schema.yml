@@ -3863,7 +3863,7 @@ paths:
           name: min_amount
           schema:
             maximum: 2147483647
-            minimum: 1
+            minimum: 0
             type: integer
         - description: 金額で絞込 (上限金額)
           example: 10000
@@ -3871,7 +3871,7 @@ paths:
           name: max_amount
           schema:
             maximum: 2147483647
-            minimum: 1
+            minimum: 0
             type: integer
         - description: '取得レコードのオフセット (デフォルト: 0)'
           in: query
@@ -6995,6 +6995,7 @@ paths:
               <li>部門および役職指定</li>
             </ul>
           </li>
+          <li>本APIでは支払依頼の項目行一覧(payment_request_lines)は、最大100行までになります。</li>
           <li>個人アカウントの場合は、ご利用になれません。</li>
           <li>法人アカウントの場合は、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>
         </ul>
@@ -7303,6 +7304,7 @@ paths:
             </ul>
           </li>
           <li>申請ステータスが申請中の場合には、申請タイトル(title)、申請日(application_date)、申請経路ID(approval_flow_route_id)、承認者のユーザーID(approver_id)は更新ができません。</li>
+          <li>本APIでは支払依頼の項目行一覧(payment_request_lines)は、最大100行までになります。</li>
           <li>個人アカウントの場合は、ご利用になれません。</li>
           <li>法人アカウントの場合は、プロフェッショナルプラン、エンタープライズプランでご利用いただけます。</li>
         </ul>
