@@ -1215,6 +1215,22 @@
             }
           },
           {
+            "name": "start_update_date",
+            "in": "query",
+            "description": "更新日で絞り込み：開始日(yyyy-mm-dd)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "end_update_date",
+            "in": "query",
+            "description": "更新日で絞り込み：終了日(yyyy-mm-dd)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "offset",
             "in": "query",
             "description": "取得レコードのオフセット (デフォルト: 0)",
@@ -5932,6 +5948,22 @@
             }
           },
           {
+            "name": "start_update_date",
+            "in": "query",
+            "description": "更新日で絞り込み：開始日(yyyy-mm-dd)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "end_update_date",
+            "in": "query",
+            "description": "更新日で絞り込み：終了日(yyyy-mm-dd)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "offset",
             "in": "query",
             "description": "取得レコードのオフセット (デフォルト: 0)",
@@ -8307,7 +8339,7 @@
           "Journals"
         ],
         "summary": "ダウンロード要求",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ユーザーが所属する事業所の仕訳帳のダウンロードをリクエストします 生成されるファイルに関しては、<a href=\"https://support.freee.co.jp/hc/ja/articles/204599604#2\">ヘルプページ</a>をご参照ください</p>\n\n<p>＊このAPIは無料プランのアカウントではご利用になれません</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n  <li>download_type\n    <ul>\n      <li>generic(freee Webからダウンロードできるものと同じ)</li>\n      <li>csv (yayoi形式)</li>\n      <li>pdf</li>\n    </ul>\n  </li>\n  <li>visible_tags : 指定しない場合は従来の仕様の仕訳帳が出力されます\n    <ul>\n      <li>partner : 取引先タグ</li>\n      <li>item : 品目タグ</li>\n      <li>tag : メモタグ</li>\n      <li>section : 部門タグ</li>\n      <li>description : 備考欄</li>\n      <li>wallet_txn_description : 明細の備考欄</li>\n      <li>\n        segment_1_tag : セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン)<br>\n        segment_2_tag : セグメント2(法人向け エンタープライズプラン)<br>\n        segment_3_tag : セグメント3(法人向け エンタープライズプラン)<br><br>\n        <a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n      </li>\n      <li>all : 指定された場合は上記の設定をすべて有効として扱いますが、セグメント1、セグメント2、セグメント3は含みません。セグメントが必要な場合はallではなく、segment_1_tag, segment_2_tag, segment_3_tagを指定してください。</li>\n    </ul>\n  </li>\n\n  <li>id : 受け付けID</li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ユーザーが所属する事業所の仕訳帳のダウンロードをリクエストします 生成されるファイルに関しては、<a href=\"https://support.freee.co.jp/hc/ja/articles/204599604#2\">ヘルプページ</a>をご参照ください</p>\n\n<p>＊このAPIは無料プランのアカウントではご利用になれません</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n  <li>download_type\n    <ul>\n      <li>generic(freee Webからダウンロードできるものと同じ)</li>\n      <li>csv (yayoi形式)</li>\n      <li>pdf</li>\n    </ul>\n  </li>\n  <li>visible_tags : 指定しない場合は従来の仕様の仕訳帳が出力されます\n    <ul>\n      <li>partner : 取引先タグ</li>\n      <li>item : 品目タグ</li>\n      <li>tag : メモタグ</li>\n      <li>section : 部門タグ</li>\n      <li>description : 備考欄</li>\n      <li>wallet_txn_description : 明細の備考欄</li>\n      <li>\n        segment_1_tag : セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン)<br>\n        segment_2_tag : セグメント2(法人向け エンタープライズプラン)<br>\n        segment_3_tag : セグメント3(法人向け エンタープライズプラン)<br><br>\n        <a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n      </li>\n      <li>all : 指定された場合は上記の設定をすべて有効として扱いますが、セグメント1、セグメント2、セグメント3は含みません。セグメントが必要な場合はallではなく、segment_1_tag, segment_2_tag, segment_3_tagを指定してください。</li>\n    </ul>\n  </li>\n  <li>visible_ids : download_typeがgenericの場合のみ利用可能です\n    <ul>\n      <li>deal_id : 取引ID</li>\n      <li>transfer_id : 取引(振替)ID</li>\n      <li>manual_journal_id : 振替伝票ID</li>\n    </ul>\n  </li>\n\n  <li>id : 受け付けID</li>\n</ul>",
         "operationId": "get_journals",
         "parameters": [
           {
@@ -8357,6 +8389,24 @@
                   "segment_2_tag",
                   "segment_3_tag",
                   "all"
+                ]
+              }
+            }
+          },
+          {
+            "name": "visible_ids[]",
+            "in": "query",
+            "description": "追加出力するID項目",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "deal_id",
+                  "transfer_id",
+                  "manual_journal_id"
                 ]
               }
             }
@@ -8636,7 +8686,7 @@
           "Trial balance"
         ],
         "summary": "貸借対照表の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の貸借対照表を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>opening_balance : 期首残高 </p>\n</li>\n\n<li>\n<p>debit_amount : 借方金額 </p>\n</li>\n<li>\n<p>credit_amount:  貸方金額 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>composition_ratio : 構成比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>取引先、品目、部門はそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_bs?company_id=1&amp;fiscal_year=2019&amp;breakdown_display_type=partner</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_bs&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;breakdown_display_type&quot; : &quot;partner&quot;,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1000,\n        &quot;account_item_name&quot; : &quot;現金&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;流動資産&quot;,\n        &quot;opening_balance&quot; : 100000,\n        &quot;debit_amount&quot; : 50000,\n        &quot;credit_amount&quot; : 20000,\n        &quot;closing_balance&quot; : 130000,\n        &quot;composition_ratio&quot; : 0.25\n        &quot;partners&quot; : [{\n          &quot;id&quot; : 123,\n          &quot;name&quot; : &quot;freee&quot;,\n          &quot;opening_balance&quot; : 100000,\n          &quot;debit_amount&quot; : 50000,\n          &quot;credit_amount&quot; : 20000,\n          &quot;closing_balance&quot; : 130000,\n          &quot;composition_ratio&quot; : 0.25\n          },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の貸借対照表を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>opening_balance : 期首残高 </p>\n</li>\n\n<li>\n<p>debit_amount : 借方金額 </p>\n</li>\n<li>\n<p>credit_amount:  貸方金額 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>composition_ratio : 構成比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_bs?company_id=1&amp;fiscal_year=2019&amp;breakdown_display_type=partner</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_bs&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;breakdown_display_type&quot; : &quot;partner&quot;,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1000,\n        &quot;account_item_name&quot; : &quot;現金&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;流動資産&quot;,\n        &quot;opening_balance&quot; : 100000,\n        &quot;debit_amount&quot; : 50000,\n        &quot;credit_amount&quot; : 20000,\n        &quot;closing_balance&quot; : 130000,\n        &quot;composition_ratio&quot; : 0.25\n        &quot;partners&quot; : [{\n          &quot;id&quot; : 123,\n          &quot;name&quot; : &quot;freee&quot;,\n          &quot;opening_balance&quot; : 100000,\n          &quot;debit_amount&quot; : 50000,\n          &quot;credit_amount&quot; : 20000,\n          &quot;closing_balance&quot; : 130000,\n          &quot;composition_ratio&quot; : 0.25\n          },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
         "operationId": "get_trial_bs",
         "parameters": [
           {
@@ -8709,13 +8759,16 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
             "schema": {
               "type": "string",
               "enum": [
                 "partner",
                 "item",
-                "account_item"
+                "account_item",
+                "segment_1_tag",
+                "segment_2_tag",
+                "segment_3_tag"
               ]
             }
           },
@@ -8830,7 +8883,7 @@
           "Trial balance"
         ],
         "summary": "貸借対照表(前年比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の貸借対照表(前年比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>取引先、品目、部門はそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_bs_two_years?company_id=1&amp;fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_bs_two_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1000,\n        &quot;account_item_name&quot; : &quot;現金&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;流動資産&quot;,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の貸借対照表(前年比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_bs_two_years?company_id=1&amp;fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_bs_two_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1000,\n        &quot;account_item_name&quot; : &quot;現金&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;流動資産&quot;,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
         "operationId": "get_trial_bs_two_years",
         "parameters": [
           {
@@ -8903,13 +8956,16 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
             "schema": {
               "type": "string",
               "enum": [
                 "partner",
                 "item",
-                "account_item"
+                "account_item",
+                "segment_1_tag",
+                "segment_2_tag",
+                "segment_3_tag"
               ]
             }
           },
@@ -9024,7 +9080,7 @@
           "Trial balance"
         ],
         "summary": "貸借対照表(３期間比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の貸借対照表(３期間比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>two_years_before_closing_balance:  前々年度期末残高 </p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>year_on_year : 前年比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>取引先、品目、部門はそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_bs_three_years?company_id=1&amp;fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_bs_three_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1000,\n        &quot;account_item_name&quot; : &quot;現金&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;流動資産&quot;,\n        &quot;two_year_before_closing_balance&quot; : 50000,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の貸借対照表(３期間比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>two_years_before_closing_balance:  前々年度期末残高 </p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>year_on_year : 前年比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_bs_three_years?company_id=1&amp;fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_bs_three_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1000,\n        &quot;account_item_name&quot; : &quot;現金&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;流動資産&quot;,\n        &quot;two_year_before_closing_balance&quot; : 50000,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
         "operationId": "get_trial_bs_three_years",
         "parameters": [
           {
@@ -9097,13 +9153,16 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
             "schema": {
               "type": "string",
               "enum": [
                 "partner",
                 "item",
-                "account_item"
+                "account_item",
+                "segment_1_tag",
+                "segment_2_tag",
+                "segment_3_tag"
               ]
             }
           },
@@ -9218,7 +9277,7 @@
           "Trial balance"
         ],
         "summary": "損益計算書の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>opening_balance : 期首残高 </p>\n</li>\n\n<li>\n<p>debit_amount : 借方金額 </p>\n</li>\n<li>\n<p>credit_amount:  貸方金額 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>composition_ratio : 構成比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>\n<li>取引先、品目、部門はそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl?company_id=1&amp;fiscal_year=2019&amp;breakdown_display_type=partner</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;breakdown_display_type&quot; : &quot;partner&quot;,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;opening_balance&quot; : 100000,\n        &quot;debit_amount&quot; : 50000,\n        &quot;credit_amount&quot; : 20000,\n        &quot;closing_balance&quot; : 130000,\n        &quot;composition_ratio&quot; : 0.25\n        &quot;partners&quot; : [{\n          &quot;id&quot; : 123,\n          &quot;name&quot; : &quot;freee&quot;,\n          &quot;opening_balance&quot; : 100000,\n          &quot;debit_amount&quot; : 50000,\n          &quot;credit_amount&quot; : 20000,\n          &quot;closing_balance&quot; : 130000,\n          &quot;composition_ratio&quot; : 0.25\n          },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>opening_balance : 期首残高 </p>\n</li>\n\n<li>\n<p>debit_amount : 借方金額 </p>\n</li>\n<li>\n<p>credit_amount:  貸方金額 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>composition_ratio : 構成比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl?company_id=1&amp;fiscal_year=2019&amp;breakdown_display_type=partner</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;breakdown_display_type&quot; : &quot;partner&quot;,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;opening_balance&quot; : 100000,\n        &quot;debit_amount&quot; : 50000,\n        &quot;credit_amount&quot; : 20000,\n        &quot;closing_balance&quot; : 130000,\n        &quot;composition_ratio&quot; : 0.25\n        &quot;partners&quot; : [{\n          &quot;id&quot; : 123,\n          &quot;name&quot; : &quot;freee&quot;,\n          &quot;opening_balance&quot; : 100000,\n          &quot;debit_amount&quot; : 50000,\n          &quot;credit_amount&quot; : 20000,\n          &quot;closing_balance&quot; : 130000,\n          &quot;composition_ratio&quot; : 0.25\n          },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
         "operationId": "get_trial_pl",
         "parameters": [
           {
@@ -9291,14 +9350,17 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
             "schema": {
               "type": "string",
               "enum": [
                 "partner",
                 "item",
                 "section",
-                "account_item"
+                "account_item",
+                "segment_1_tag",
+                "segment_2_tag",
+                "segment_3_tag"
               ]
             }
           },
@@ -9435,7 +9497,7 @@
           "Trial balance"
         ],
         "summary": "損益計算書(前年比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書(前年比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>year_on_year : 前年比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>\n<li>取引先、品目、部門はそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_two_years?company_id=1&amp;fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_two_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書(前年比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>year_on_year : 前年比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_two_years?company_id=1&amp;fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_two_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
         "operationId": "get_trial_pl_two_years",
         "parameters": [
           {
@@ -9508,14 +9570,17 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
             "schema": {
               "type": "string",
               "enum": [
                 "partner",
                 "item",
                 "section",
-                "account_item"
+                "account_item",
+                "segment_1_tag",
+                "segment_2_tag",
+                "segment_3_tag"
               ]
             }
           },
@@ -9652,7 +9717,7 @@
           "Trial balance"
         ],
         "summary": "損益計算書(３期間比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書(３期間比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>two_years_before_closing_balance:  前々年度期末残高 </p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>year_on_year : 前年比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>\n<li>取引先、品目、部門はそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_three_years?company_id=1&fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_three_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;two_year_before_closing_balance&quot; : 50000,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書(３期間比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>two_years_before_closing_balance:  前々年度期末残高 </p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>year_on_year : 前年比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_three_years?company_id=1&fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_three_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;two_year_before_closing_balance&quot; : 50000,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
         "operationId": "get_trial_pl_three_years",
         "parameters": [
           {
@@ -9725,14 +9790,17 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
             "schema": {
               "type": "string",
               "enum": [
                 "partner",
                 "item",
                 "section",
-                "account_item"
+                "account_item",
+                "segment_1_tag",
+                "segment_2_tag",
+                "segment_3_tag"
               ]
             }
           },
@@ -9869,7 +9937,7 @@
           "Trial balance"
         ],
         "summary": "損益計算書(部門比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書(部門比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>個人向けのプレミアムプラン、法人向けのベーシックプラン以上で利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>\n<li>取引先、品目、部門はそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_sections?company_id=1&amp;section_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_sections&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;section_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;sections&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;営業部&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;広報部&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;人事部&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書(部門比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>個人向けのプレミアムプラン、法人向けのベーシックプラン以上で利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_sections?company_id=1&amp;section_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_sections&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;section_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;sections&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;営業部&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;広報部&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;人事部&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
         "operationId": "get_trial_pl_sections",
         "parameters": [
           {
@@ -9951,13 +10019,16 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
             "schema": {
               "type": "string",
               "enum": [
                 "partner",
                 "item",
-                "account_item"
+                "account_item",
+                "segment_1_tag",
+                "segment_2_tag",
+                "segment_3_tag"
               ]
             }
           },
@@ -17083,6 +17154,19 @@
                   ]
                 }
               },
+              "visible_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "追加出力するID項目",
+                  "example": "deal_id",
+                  "enum": [
+                    "deal_id",
+                    "transfer_id",
+                    "manual_journal_id"
+                  ]
+                }
+              },
               "status_url": {
                 "type": "string",
                 "description": "ステータス確認用URL",
@@ -17206,6 +17290,19 @@
                   ]
                 }
               },
+              "visible_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "追加出力するID項目",
+                  "example": "deal_id",
+                  "enum": [
+                    "deal_id",
+                    "transfer_id",
+                    "manual_journal_id"
+                  ]
+                }
+              },
               "download_url": {
                 "type": "string",
                 "description": "ダウンロードURL",
@@ -17275,11 +17372,14 @@
               },
               "breakdown_display_type": {
                 "type": "string",
-                "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item）(条件に指定した時のみ含まれる）",
+                "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag）(条件に指定した時のみ含まれる）",
                 "enum": [
                   "partner",
                   "item",
-                  "account_item"
+                  "account_item",
+                  "segment_1_tag",
+                  "segment_2_tag",
+                  "segment_3_tag"
                 ]
               },
               "partner_id": {
@@ -17406,6 +17506,153 @@
                             "type": "string",
                             "description": "品目",
                             "example": "源泉所得税"
+                          },
+                          "opening_balance": {
+                            "type": "integer",
+                            "description": "期首残高",
+                            "example": 0
+                          },
+                          "debit_amount": {
+                            "type": "integer",
+                            "description": "借方金額",
+                            "example": 0
+                          },
+                          "credit_amount": {
+                            "type": "integer",
+                            "description": "貸方金額",
+                            "example": 2592
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "composition_ratio": {
+                            "type": "number",
+                            "description": "構成比",
+                            "example": 0.85
+                          }
+                        }
+                      }
+                    },
+                    "segment_1_tags": {
+                      "type": "array",
+                      "description": "breakdown_display_type:segment_1_tag, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2147483647,
+                            "description": "セグメント1タグID",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "セグメント1タグ名",
+                            "example": "プロジェクトA"
+                          },
+                          "opening_balance": {
+                            "type": "integer",
+                            "description": "期首残高",
+                            "example": 0
+                          },
+                          "debit_amount": {
+                            "type": "integer",
+                            "description": "借方金額",
+                            "example": 0
+                          },
+                          "credit_amount": {
+                            "type": "integer",
+                            "description": "貸方金額",
+                            "example": 2592
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "composition_ratio": {
+                            "type": "number",
+                            "description": "構成比",
+                            "example": 0.85
+                          }
+                        }
+                      }
+                    },
+                    "segment_2_tags": {
+                      "type": "array",
+                      "description": "breakdown_display_type:segment_2_tag, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2147483647,
+                            "description": "セグメント2タグID",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "セグメント2タグ名",
+                            "example": "プロジェクトA"
+                          },
+                          "opening_balance": {
+                            "type": "integer",
+                            "description": "期首残高",
+                            "example": 0
+                          },
+                          "debit_amount": {
+                            "type": "integer",
+                            "description": "借方金額",
+                            "example": 0
+                          },
+                          "credit_amount": {
+                            "type": "integer",
+                            "description": "貸方金額",
+                            "example": 2592
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "composition_ratio": {
+                            "type": "number",
+                            "description": "構成比",
+                            "example": 0.85
+                          }
+                        }
+                      }
+                    },
+                    "segment_3_tags": {
+                      "type": "array",
+                      "description": "breakdown_display_type:segment_3_tag, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2147483647,
+                            "description": "セグメント3タグID",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "セグメント3タグ名",
+                            "example": "プロジェクトA"
                           },
                           "opening_balance": {
                             "type": "integer",
@@ -17579,11 +17826,14 @@
               },
               "breakdown_display_type": {
                 "type": "string",
-                "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item）(条件に指定した時のみ含まれる）",
+                "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag）(条件に指定した時のみ含まれる）",
                 "enum": [
                   "partner",
                   "item",
-                  "account_item"
+                  "account_item",
+                  "segment_1_tag",
+                  "segment_2_tag",
+                  "segment_3_tag"
                 ]
               },
               "partner_id": {
@@ -17700,6 +17950,123 @@
                             "type": "string",
                             "description": "品目",
                             "example": "源泉所得税"
+                          },
+                          "last_year_closing_balance": {
+                            "type": "integer",
+                            "description": "前年度期末残高",
+                            "example": 0
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "year_on_year": {
+                            "type": "number",
+                            "description": "前年比",
+                            "example": 0.12
+                          }
+                        }
+                      }
+                    },
+                    "segment_1_tags": {
+                      "type": "array",
+                      "description": "breakdown_display_type:segment_1_tag, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2147483647,
+                            "description": "セグメント1タグID",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "セグメント1タグ名",
+                            "example": "プロジェクトA"
+                          },
+                          "last_year_closing_balance": {
+                            "type": "integer",
+                            "description": "前年度期末残高",
+                            "example": 0
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "year_on_year": {
+                            "type": "number",
+                            "description": "前年比",
+                            "example": 0.12
+                          }
+                        }
+                      }
+                    },
+                    "segment_2_tags": {
+                      "type": "array",
+                      "description": "breakdown_display_type:segment_2_tag, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2147483647,
+                            "description": "セグメント2タグID",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "セグメント2タグ名",
+                            "example": "プロジェクトA"
+                          },
+                          "last_year_closing_balance": {
+                            "type": "integer",
+                            "description": "前年度期末残高",
+                            "example": 0
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "year_on_year": {
+                            "type": "number",
+                            "description": "前年比",
+                            "example": 0.12
+                          }
+                        }
+                      }
+                    },
+                    "segment_3_tags": {
+                      "type": "array",
+                      "description": "breakdown_display_type:segment_3_tag, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2147483647,
+                            "description": "セグメント3タグID",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "セグメント3タグ名",
+                            "example": "プロジェクトA"
                           },
                           "last_year_closing_balance": {
                             "type": "integer",
@@ -17853,11 +18220,14 @@
               },
               "breakdown_display_type": {
                 "type": "string",
-                "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item）(条件に指定した時のみ含まれる）",
+                "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag）(条件に指定した時のみ含まれる）",
                 "enum": [
                   "partner",
                   "item",
-                  "account_item"
+                  "account_item",
+                  "segment_1_tag",
+                  "segment_2_tag",
+                  "segment_3_tag"
                 ]
               },
               "partner_id": {
@@ -17979,6 +18349,138 @@
                             "type": "string",
                             "description": "品目",
                             "example": "源泉所得税"
+                          },
+                          "two_years_before_closing_balance": {
+                            "type": "integer",
+                            "description": "前々年度期末残高",
+                            "example": 0
+                          },
+                          "last_year_closing_balance": {
+                            "type": "integer",
+                            "description": "前年度期末残高",
+                            "example": 0
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "year_on_year": {
+                            "type": "number",
+                            "description": "前年比",
+                            "example": 0.12
+                          }
+                        }
+                      }
+                    },
+                    "segment_1_tags": {
+                      "type": "array",
+                      "description": "breakdown_display_type:segment_1_tag, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2147483647,
+                            "description": "セグメント1タグID",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "セグメント1タグ名",
+                            "example": "プロジェクトA"
+                          },
+                          "two_years_before_closing_balance": {
+                            "type": "integer",
+                            "description": "前々年度期末残高",
+                            "example": 0
+                          },
+                          "last_year_closing_balance": {
+                            "type": "integer",
+                            "description": "前年度期末残高",
+                            "example": 0
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "year_on_year": {
+                            "type": "number",
+                            "description": "前年比",
+                            "example": 0.12
+                          }
+                        }
+                      }
+                    },
+                    "segment_2_tags": {
+                      "type": "array",
+                      "description": "breakdown_display_type:segment_2_tag, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2147483647,
+                            "description": "セグメント2タグID",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "セグメント2タグ名",
+                            "example": "プロジェクトA"
+                          },
+                          "two_years_before_closing_balance": {
+                            "type": "integer",
+                            "description": "前々年度期末残高",
+                            "example": 0
+                          },
+                          "last_year_closing_balance": {
+                            "type": "integer",
+                            "description": "前年度期末残高",
+                            "example": 0
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "year_on_year": {
+                            "type": "number",
+                            "description": "前年比",
+                            "example": 0.12
+                          }
+                        }
+                      }
+                    },
+                    "segment_3_tags": {
+                      "type": "array",
+                      "description": "breakdown_display_type:segment_3_tag, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2147483647,
+                            "description": "セグメント3タグID",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "セグメント3タグ名",
+                            "example": "プロジェクトA"
                           },
                           "two_years_before_closing_balance": {
                             "type": "integer",
@@ -18142,12 +18644,15 @@
               },
               "breakdown_display_type": {
                 "type": "string",
-                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）(条件に指定した時のみ含まれる）",
+                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag）(条件に指定した時のみ含まれる）",
                 "enum": [
                   "partner",
                   "item",
                   "section",
-                  "account_item"
+                  "account_item",
+                  "segment_1_tag",
+                  "segment_2_tag",
+                  "segment_3_tag"
                 ]
               },
               "partner_id": {
@@ -18339,6 +18844,153 @@
                             "type": "string",
                             "description": "部門名",
                             "example": "開発部門"
+                          },
+                          "opening_balance": {
+                            "type": "integer",
+                            "description": "期首残高",
+                            "example": 0
+                          },
+                          "debit_amount": {
+                            "type": "integer",
+                            "description": "借方金額",
+                            "example": 0
+                          },
+                          "credit_amount": {
+                            "type": "integer",
+                            "description": "貸方金額",
+                            "example": 2592
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "composition_ratio": {
+                            "type": "number",
+                            "description": "構成比",
+                            "example": 0.85
+                          }
+                        }
+                      }
+                    },
+                    "segment_1_tags": {
+                      "type": "array",
+                      "description": "breakdown_display_type:segment_1_tag, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2147483647,
+                            "description": "セグメント1タグID",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "セグメント1タグ名",
+                            "example": "プロジェクトA"
+                          },
+                          "opening_balance": {
+                            "type": "integer",
+                            "description": "期首残高",
+                            "example": 0
+                          },
+                          "debit_amount": {
+                            "type": "integer",
+                            "description": "借方金額",
+                            "example": 0
+                          },
+                          "credit_amount": {
+                            "type": "integer",
+                            "description": "貸方金額",
+                            "example": 2592
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "composition_ratio": {
+                            "type": "number",
+                            "description": "構成比",
+                            "example": 0.85
+                          }
+                        }
+                      }
+                    },
+                    "segment_2_tags": {
+                      "type": "array",
+                      "description": "breakdown_display_type:segment_2_tag, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2147483647,
+                            "description": "セグメント2タグID",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "セグメント2タグ名",
+                            "example": "プロジェクトA"
+                          },
+                          "opening_balance": {
+                            "type": "integer",
+                            "description": "期首残高",
+                            "example": 0
+                          },
+                          "debit_amount": {
+                            "type": "integer",
+                            "description": "借方金額",
+                            "example": 0
+                          },
+                          "credit_amount": {
+                            "type": "integer",
+                            "description": "貸方金額",
+                            "example": 2592
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "composition_ratio": {
+                            "type": "number",
+                            "description": "構成比",
+                            "example": 0.85
+                          }
+                        }
+                      }
+                    },
+                    "segment_3_tags": {
+                      "type": "array",
+                      "description": "breakdown_display_type:segment_3_tag, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2147483647,
+                            "description": "セグメント3タグID",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "セグメント3タグ名",
+                            "example": "プロジェクトA"
                           },
                           "opening_balance": {
                             "type": "integer",
@@ -18512,12 +19164,15 @@
               },
               "breakdown_display_type": {
                 "type": "string",
-                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）(条件に指定した時のみ含まれる）",
+                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag）(条件に指定した時のみ含まれる）",
                 "enum": [
                   "partner",
                   "item",
                   "section",
-                  "account_item"
+                  "account_item",
+                  "segment_1_tag",
+                  "segment_2_tag",
+                  "segment_3_tag"
                 ]
               },
               "partner_id": {
@@ -18689,6 +19344,123 @@
                             "type": "string",
                             "description": "部門名",
                             "example": "開発部門"
+                          },
+                          "last_year_closing_balance": {
+                            "type": "integer",
+                            "description": "前年度期末残高",
+                            "example": 0
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "year_on_year": {
+                            "type": "number",
+                            "description": "前年比",
+                            "example": 0.12
+                          }
+                        }
+                      }
+                    },
+                    "segment_1_tags": {
+                      "type": "array",
+                      "description": "breakdown_display_type:segment_1_tag, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2147483647,
+                            "description": "セグメント1タグID",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "セグメント1タグ名",
+                            "example": "プロジェクトA"
+                          },
+                          "last_year_closing_balance": {
+                            "type": "integer",
+                            "description": "前年度期末残高",
+                            "example": 0
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "year_on_year": {
+                            "type": "number",
+                            "description": "前年比",
+                            "example": 0.12
+                          }
+                        }
+                      }
+                    },
+                    "segment_2_tags": {
+                      "type": "array",
+                      "description": "breakdown_display_type:segment_2_tag, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2147483647,
+                            "description": "セグメント2タグID",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "セグメント2タグ名",
+                            "example": "プロジェクトA"
+                          },
+                          "last_year_closing_balance": {
+                            "type": "integer",
+                            "description": "前年度期末残高",
+                            "example": 0
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "year_on_year": {
+                            "type": "number",
+                            "description": "前年比",
+                            "example": 0.12
+                          }
+                        }
+                      }
+                    },
+                    "segment_3_tags": {
+                      "type": "array",
+                      "description": "breakdown_display_type:segment_3_tag, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2147483647,
+                            "description": "セグメント3タグID",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "セグメント3タグ名",
+                            "example": "プロジェクトA"
                           },
                           "last_year_closing_balance": {
                             "type": "integer",
@@ -18842,12 +19614,15 @@
               },
               "breakdown_display_type": {
                 "type": "string",
-                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）(条件に指定した時のみ含まれる）",
+                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag）(条件に指定した時のみ含まれる）",
                 "enum": [
                   "partner",
                   "item",
                   "section",
-                  "account_item"
+                  "account_item",
+                  "segment_1_tag",
+                  "segment_2_tag",
+                  "segment_3_tag"
                 ]
               },
               "partner_id": {
@@ -19029,6 +19804,138 @@
                             "type": "string",
                             "description": "部門名",
                             "example": "開発部門"
+                          },
+                          "two_years_before_closing_balance": {
+                            "type": "integer",
+                            "description": "前々年度期末残高",
+                            "example": 0
+                          },
+                          "last_year_closing_balance": {
+                            "type": "integer",
+                            "description": "前年度期末残高",
+                            "example": 0
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "year_on_year": {
+                            "type": "number",
+                            "description": "前年比",
+                            "example": 0.12
+                          }
+                        }
+                      }
+                    },
+                    "segment_1_tags": {
+                      "type": "array",
+                      "description": "breakdown_display_type:segment_1_tag, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2147483647,
+                            "description": "セグメント1タグID",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "セグメント1タグ名",
+                            "example": "プロジェクトA"
+                          },
+                          "two_years_before_closing_balance": {
+                            "type": "integer",
+                            "description": "前々年度期末残高",
+                            "example": 0
+                          },
+                          "last_year_closing_balance": {
+                            "type": "integer",
+                            "description": "前年度期末残高",
+                            "example": 0
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "year_on_year": {
+                            "type": "number",
+                            "description": "前年比",
+                            "example": 0.12
+                          }
+                        }
+                      }
+                    },
+                    "segment_2_tags": {
+                      "type": "array",
+                      "description": "breakdown_display_type:segment_2_tag, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2147483647,
+                            "description": "セグメント2タグID",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "セグメント2タグ名",
+                            "example": "プロジェクトA"
+                          },
+                          "two_years_before_closing_balance": {
+                            "type": "integer",
+                            "description": "前々年度期末残高",
+                            "example": 0
+                          },
+                          "last_year_closing_balance": {
+                            "type": "integer",
+                            "description": "前年度期末残高",
+                            "example": 0
+                          },
+                          "closing_balance": {
+                            "type": "integer",
+                            "description": "期末残高",
+                            "example": -25920
+                          },
+                          "year_on_year": {
+                            "type": "number",
+                            "description": "前年比",
+                            "example": 0.12
+                          }
+                        }
+                      }
+                    },
+                    "segment_3_tags": {
+                      "type": "array",
+                      "description": "breakdown_display_type:segment_3_tag, account_item_display_type:account_item指定時のみ含まれる",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2147483647,
+                            "description": "セグメント3タグID",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "セグメント3タグ名",
+                            "example": "プロジェクトA"
                           },
                           "two_years_before_closing_balance": {
                             "type": "integer",
@@ -19198,11 +20105,14 @@
               },
               "breakdown_display_type": {
                 "type": "string",
-                "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item）(条件に指定した時のみ含まれる）",
+                "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag）(条件に指定した時のみ含まれる）",
                 "enum": [
                   "partner",
                   "item",
-                  "account_item"
+                  "account_item",
+                  "segment_1_tag",
+                  "segment_2_tag",
+                  "segment_3_tag"
                 ]
               },
               "partner_id": {
@@ -19344,6 +20254,93 @@
                                   "type": "string",
                                   "description": "品目",
                                   "example": "源泉所得税"
+                                },
+                                "closing_balance": {
+                                  "type": "integer",
+                                  "description": "期末残高",
+                                  "example": -25920
+                                }
+                              }
+                            }
+                          },
+                          "segment_1_tags": {
+                            "type": "array",
+                            "description": "breakdown_display_type:segment_1_tag, account_item_display_type:account_item指定時のみ含まれる",
+                            "items": {
+                              "type": "object",
+                              "required": [
+                                "id"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "minimum": 1,
+                                  "maximum": 2147483647,
+                                  "description": "セグメント1タグID",
+                                  "example": 1
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "description": "セグメント1タグ名",
+                                  "example": "プロジェクトA"
+                                },
+                                "closing_balance": {
+                                  "type": "integer",
+                                  "description": "期末残高",
+                                  "example": -25920
+                                }
+                              }
+                            }
+                          },
+                          "segment_2_tags": {
+                            "type": "array",
+                            "description": "breakdown_display_type:segment_2_tag, account_item_display_type:account_item指定時のみ含まれる",
+                            "items": {
+                              "type": "object",
+                              "required": [
+                                "id"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "minimum": 1,
+                                  "maximum": 2147483647,
+                                  "description": "セグメント2タグID",
+                                  "example": 1
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "description": "セグメント2タグ名",
+                                  "example": "プロジェクトA"
+                                },
+                                "closing_balance": {
+                                  "type": "integer",
+                                  "description": "期末残高",
+                                  "example": -25920
+                                }
+                              }
+                            }
+                          },
+                          "segment_3_tags": {
+                            "type": "array",
+                            "description": "breakdown_display_type:segment_3_tag, account_item_display_type:account_item指定時のみ含まれる",
+                            "items": {
+                              "type": "object",
+                              "required": [
+                                "id"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "minimum": 1,
+                                  "maximum": 2147483647,
+                                  "description": "セグメント3タグID",
+                                  "example": 1
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "description": "セグメント3タグ名",
+                                  "example": "プロジェクトA"
                                 },
                                 "closing_balance": {
                                   "type": "integer",
@@ -19531,7 +20528,7 @@
               "parent_id": {
                 "type": "integer",
                 "description": "<a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/209093566\">親部門ID</a>\n<br>\n※ parent_id が null のときは第一階層の親部門です。\n",
-                "example": null,
+                "example": 1,
                 "nullable": true
               }
             }
@@ -20557,7 +21554,8 @@
             "required": [
               "company_id",
               "id",
-              "name"
+              "name",
+              "update_date"
             ],
             "type": "object",
             "properties": {
@@ -20580,6 +21578,11 @@
                 "maxLength": 30,
                 "description": "品目名 (30文字以内)",
                 "example": "タクシー代"
+              },
+              "update_date": {
+                "type": "string",
+                "description": "更新日(yyyy-mm-dd)",
+                "example": "2019-12-17"
               },
               "shortcut1": {
                 "type": "string",
@@ -20877,7 +21880,8 @@
             "required": [
               "company_id",
               "id",
-              "name"
+              "name",
+              "update_date"
             ],
             "properties": {
               "id": {
@@ -20898,8 +21902,12 @@
                 "type": "string",
                 "maxLength": 30,
                 "description": "名前(30文字以内)",
-                "example": "メモタグ",
-                "nullable": true
+                "example": "メモタグ"
+              },
+              "update_date": {
+                "type": "string",
+                "description": "更新日(yyyy-mm-dd)",
+                "example": "2019-12-17"
               },
               "shortcut1": {
                 "type": "string",
@@ -21559,7 +22567,8 @@
                 "code",
                 "company_id",
                 "id",
-                "name"
+                "name",
+                "update_date"
               ],
               "properties": {
                 "id": {
@@ -21586,6 +22595,11 @@
                   "type": "string",
                   "description": "取引先名",
                   "example": "ABC商店"
+                },
+                "update_date": {
+                  "type": "string",
+                  "description": "更新日 (yyyy-mm-dd)",
+                  "example": "2019-12-17"
                 },
                 "shortcut1": {
                   "type": "string",
@@ -21790,7 +22804,8 @@
               "code",
               "company_id",
               "id",
-              "name"
+              "name",
+              "update_date"
             ],
             "properties": {
               "id": {
@@ -21817,6 +22832,11 @@
                 "type": "string",
                 "description": "取引先名",
                 "example": "ABC商店"
+              },
+              "update_date": {
+                "type": "string",
+                "description": "更新日 (yyyy-mm-dd)",
+                "example": "2019-12-17"
               },
               "shortcut1": {
                 "type": "string",
