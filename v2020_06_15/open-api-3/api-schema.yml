@@ -5632,6 +5632,16 @@ paths:
           maximum: 2147483647
           minimum: 1
           type: integer
+      - description: 更新日で絞り込み：開始日(yyyy-mm-dd)
+        in: query
+        name: start_update_date
+        schema:
+          type: string
+      - description: 更新日で絞り込み：終了日(yyyy-mm-dd)
+        in: query
+        name: end_update_date
+        schema:
+          type: string
       - description: '取得レコードのオフセット (デフォルト: 0)'
         in: query
         name: offset
