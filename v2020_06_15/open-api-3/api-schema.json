@@ -155,6 +155,22 @@
             }
           },
           {
+            "name": "start_update_date",
+            "in": "query",
+            "description": "更新日で絞り込み：開始日(yyyy-mm-dd)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "end_update_date",
+            "in": "query",
+            "description": "更新日で絞り込み：終了日(yyyy-mm-dd)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "offset",
             "in": "query",
             "description": "取得レコードのオフセット (デフォルト: 0)",
