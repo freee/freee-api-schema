@@ -5632,16 +5632,6 @@ paths:
           maximum: 2147483647
           minimum: 1
           type: integer
-      - description: 更新日で絞り込み：開始日(yyyy-mm-dd)
-        in: query
-        name: start_update_date
-        schema:
-          type: string
-      - description: 更新日で絞り込み：終了日(yyyy-mm-dd)
-        in: query
-        name: end_update_date
-        schema:
-          type: string
       - description: '取得レコードのオフセット (デフォルト: 0)'
         in: query
         name: offset
@@ -13131,7 +13121,7 @@ components:
               type: integer
             deal_status:
               description: 取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます
-                settled:精算済み, unsettled:清算待ち)
+                settled:決済済み, unsettled:未決済)
               enum:
               - settled
               - unsettled
@@ -13347,7 +13337,7 @@ components:
                 type: integer
               deal_status:
                 description: 取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます
-                  settled:精算済み, unsettled:清算待ち)
+                  settled:決済済み, unsettled:未決済)
                 enum:
                 - settled
                 - unsettled
@@ -22358,6 +22348,26 @@ components:
       properties:
         section:
           properties:
+            available:
+              description: |-
+                部門の使用設定（true: 使用する、false: 使用しない）
+                <br>
+                <ul>
+                  <li>
+                    本APIでsectionを作成した場合はtrueになります。
+                  </li>
+                  <li>
+                    falseにする場合はWeb画面から変更できます。
+                  </li>
+                  <li>
+                    trueの場合、Web画面での取引登録時などに入力候補として表示されます。
+                  </li>
+                  <li>
+                    falseの場合、部門自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの部門をパラメータに指定すれば、取引などにfalseの部門を設定できます。
+                  </li>
+                </ul>
+              example: true
+              type: boolean
             company_id:
               description: 事業所ID
               example: 1
@@ -22413,6 +22423,7 @@ components:
           - company_id
           - id
           - name
+          - available
           type: object
       required:
       - section

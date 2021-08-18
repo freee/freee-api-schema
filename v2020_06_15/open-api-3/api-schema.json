@@ -155,22 +155,6 @@
             }
           },
           {
-            "name": "start_update_date",
-            "in": "query",
-            "description": "更新日で絞り込み：開始日(yyyy-mm-dd)",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "end_update_date",
-            "in": "query",
-            "description": "更新日で絞り込み：終了日(yyyy-mm-dd)",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "offset",
             "in": "query",
             "description": "取得レコードのオフセット (デフォルト: 0)",
@@ -20491,7 +20475,8 @@
             "required": [
               "company_id",
               "id",
-              "name"
+              "name",
+              "available"
             ],
             "properties": {
               "id": {
@@ -20506,6 +20491,11 @@
                 "maxLength": 30,
                 "description": "部門名 (30文字以内)",
                 "example": "開発部門"
+              },
+              "available": {
+                "type": "boolean",
+                "description": "部門の使用設定（true: 使用する、false: 使用しない）\n<br>\n<ul>\n  <li>\n    本APIでsectionを作成した場合はtrueになります。\n  </li>\n  <li>\n    falseにする場合はWeb画面から変更できます。\n  </li>\n  <li>\n    trueの場合、Web画面での取引登録時などに入力候補として表示されます。\n  </li>\n  <li>\n    falseの場合、部門自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの部門をパラメータに指定すれば、取引などにfalseの部門を設定できます。\n  </li>\n</ul>",
+                "example": true
               },
               "long_name": {
                 "type": "string",
@@ -25980,7 +25970,7 @@
                 },
                 "deal_status": {
                   "type": "string",
-                  "description": "取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます settled:精算済み, unsettled:清算待ち)",
+                  "description": "取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます settled:決済済み, unsettled:未決済)",
                   "example": "settled",
                   "enum": [
                     "settled",
@@ -26400,7 +26390,7 @@
               },
               "deal_status": {
                 "type": "string",
-                "description": "取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます settled:精算済み, unsettled:清算待ち)",
+                "description": "取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます settled:決済済み, unsettled:未決済)",
                 "example": "settled",
                 "enum": [
                   "settled",
