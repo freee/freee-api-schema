@@ -5207,7 +5207,8 @@
             "schema": {
               "type": "boolean",
               "enum": [
-                true
+                true,
+                false
               ]
             }
           },
@@ -5218,7 +5219,8 @@
             "schema": {
               "type": "boolean",
               "enum": [
-                true
+                true,
+                false
               ]
             }
           }
@@ -21561,7 +21563,8 @@
               "company_id",
               "id",
               "name",
-              "update_date"
+              "update_date",
+              "available"
             ],
             "type": "object",
             "properties": {
@@ -21589,6 +21592,10 @@
                 "type": "string",
                 "description": "更新日(yyyy-mm-dd)",
                 "example": "2019-12-17"
+              },
+              "available": {
+                "type": "boolean",
+                "description": "品目の使用設定（true: 使用する、false: 使用しない）\n<br>\n<ul>\n  <li>\n    本APIでitemを作成した場合はtrueになります。\n  </li>\n  <li>\n    falseにする場合はWeb画面から変更できます。\n  </li>\n  <li>\n    trueの場合、Web画面での取引登録時などに入力候補として表示されます。\n  </li>\n  <li>\n    falseの場合、品目自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの品目をパラメータに指定すれば、取引などにfalseの品目を設定できます。\n  </li>\n</ul>"
               },
               "shortcut1": {
                 "type": "string",
