@@ -8803,6 +8803,16 @@
             }
           },
           {
+            "name": "section_id",
+            "in": "query",
+            "description": "部門IDで絞込（0を指定すると、部門が未選択で絞り込めます）",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            }
+          },
+          {
             "name": "adjustment",
             "in": "query",
             "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）",
@@ -9000,6 +9010,16 @@
             }
           },
           {
+            "name": "section_id",
+            "in": "query",
+            "description": "部門IDで絞込（0を指定すると、部門が未選択で絞り込めます）",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            }
+          },
+          {
             "name": "adjustment",
             "in": "query",
             "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）",
@@ -9190,6 +9210,16 @@
             "name": "item_id",
             "in": "query",
             "description": "品目IDで絞込（0を指定すると、品目が未選択で絞り込めます）",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "name": "section_id",
+            "in": "query",
+            "description": "部門IDで絞込（0を指定すると、部門が未選択で絞り込めます）",
             "schema": {
               "type": "integer",
               "minimum": 0,
@@ -17403,6 +17433,13 @@
                 "description": "品目ID(条件に指定した時のみ含まれる）",
                 "example": 1
               },
+              "section_id": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647,
+                "description": "部門ID(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
               "adjustment": {
                 "type": "string",
                 "description": "決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）",
@@ -17857,6 +17894,13 @@
                 "description": "品目ID(条件に指定した時のみ含まれる）",
                 "example": 1
               },
+              "section_id": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647,
+                "description": "部門ID(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
               "adjustment": {
                 "type": "string",
                 "description": "決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）",
@@ -18249,6 +18293,13 @@
                 "minimum": 1,
                 "maximum": 2147483647,
                 "description": "品目ID(条件に指定した時のみ含まれる）",
+                "example": 1
+              },
+              "section_id": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647,
+                "description": "部門ID(条件に指定した時のみ含まれる）",
                 "example": 1
               },
               "adjustment": {

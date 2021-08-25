@@ -7617,6 +7617,13 @@ paths:
           maximum: 2147483647
           minimum: 0
           type: integer
+      - description: 部門IDで絞込（0を指定すると、部門が未選択で絞り込めます）
+        in: query
+        name: section_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
       - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
         in: query
         name: adjustment
@@ -7834,6 +7841,13 @@ paths:
           maximum: 2147483647
           minimum: 0
           type: integer
+      - description: 部門IDで絞込（0を指定すると、部門が未選択で絞り込めます）
+        in: query
+        name: section_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
       - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
         in: query
         name: adjustment
@@ -8030,6 +8044,13 @@ paths:
       - description: 品目IDで絞込（0を指定すると、品目が未選択で絞り込めます）
         in: query
         name: item_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: 部門IDで絞込（0を指定すると、部門が未選択で絞り込めます）
+        in: query
+        name: section_id
         schema:
           maximum: 2147483647
           minimum: 0
@@ -23284,6 +23305,12 @@ components:
               maximum: 2147483647
               minimum: 1
               type: integer
+            section_id:
+              description: 部門ID(条件に指定した時のみ含まれる）
+              example: 1
+              maximum: 2147483647
+              minimum: 0
+              type: integer
             start_date:
               description: 発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
               example: '2019-12-17'
@@ -23616,6 +23643,12 @@ components:
               maximum: 2147483647
               minimum: 1
               type: integer
+            section_id:
+              description: 部門ID(条件に指定した時のみ含まれる）
+              example: 1
+              maximum: 2147483647
+              minimum: 0
+              type: integer
             start_date:
               description: 発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
               example: '2019-12-17'
@@ -23923,6 +23956,12 @@ components:
               example: 1
               maximum: 2147483647
               minimum: 1
+              type: integer
+            section_id:
+              description: 部門ID(条件に指定した時のみ含まれる）
+              example: 1
+              maximum: 2147483647
+              minimum: 0
               type: integer
             start_date:
               description: 発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
