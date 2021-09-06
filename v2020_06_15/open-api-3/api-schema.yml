@@ -18495,7 +18495,7 @@ components:
               example: '2019-12-17'
               type: string
             status:
-              description: 事業所ID
+              description: ダウンロードリクエストのステータス
               enum:
               - enqueued
               - working
