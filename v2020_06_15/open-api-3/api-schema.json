@@ -17980,7 +17980,7 @@
               },
               "status": {
                 "type": "string",
-                "description": "事業所ID",
+                "description": "ダウンロードリクエストのステータス",
                 "example": "csv",
                 "enum": [
                   "enqueued",
