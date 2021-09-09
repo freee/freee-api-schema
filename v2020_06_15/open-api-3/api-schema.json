@@ -8840,6 +8840,18 @@
                 "without"
               ]
             }
+          },
+          {
+            "name": "approval_flow_status",
+            "in": "query",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\n個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "without_in_progress",
+                "all"
+              ]
+            }
           }
         ],
         "responses": {
@@ -9048,6 +9060,18 @@
                 "without"
               ]
             }
+          },
+          {
+            "name": "approval_flow_status",
+            "in": "query",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\n個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "without_in_progress",
+                "all"
+              ]
+            }
           }
         ],
         "responses": {
@@ -9254,6 +9278,18 @@
               "enum": [
                 "only",
                 "without"
+              ]
+            }
+          },
+          {
+            "name": "approval_flow_status",
+            "in": "query",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\n個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "without_in_progress",
+                "all"
               ]
             }
           }
@@ -9476,6 +9512,18 @@
                 "without"
               ]
             }
+          },
+          {
+            "name": "approval_flow_status",
+            "in": "query",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\n個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "without_in_progress",
+                "all"
+              ]
+            }
           }
         ],
         "responses": {
@@ -9694,6 +9742,18 @@
               "enum": [
                 "only",
                 "without"
+              ]
+            }
+          },
+          {
+            "name": "approval_flow_status",
+            "in": "query",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\n個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "without_in_progress",
+                "all"
               ]
             }
           }
@@ -9916,6 +9976,18 @@
                 "without"
               ]
             }
+          },
+          {
+            "name": "approval_flow_status",
+            "in": "query",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\n個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "without_in_progress",
+                "all"
+              ]
+            }
           }
         ],
         "responses": {
@@ -10132,6 +10204,18 @@
               "enum": [
                 "only",
                 "without"
+              ]
+            }
+          },
+          {
+            "name": "approval_flow_status",
+            "in": "query",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\n個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "without_in_progress",
+                "all"
               ]
             }
           }
@@ -10360,6 +10444,18 @@
                 "without"
               ]
             }
+          },
+          {
+            "name": "approval_flow_status",
+            "in": "query",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\n個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "without_in_progress",
+                "all"
+              ]
+            }
           }
         ],
         "responses": {
@@ -10586,6 +10682,18 @@
                 "without"
               ]
             }
+          },
+          {
+            "name": "approval_flow_status",
+            "in": "query",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\n個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "without_in_progress",
+                "all"
+              ]
+            }
           }
         ],
         "responses": {
@@ -10810,6 +10918,18 @@
               "enum": [
                 "only",
                 "without"
+              ]
+            }
+          },
+          {
+            "name": "approval_flow_status",
+            "in": "query",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\n個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "without_in_progress",
+                "all"
               ]
             }
           }
@@ -18147,6 +18267,15 @@
                   "without"
                 ]
               },
+              "approval_flow_status": {
+                "type": "string",
+                "description": "未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）",
+                "example": "without_in_progress",
+                "enum": [
+                  "without_in_progress",
+                  "all"
+                ]
+              },
               "created_at": {
                 "type": "string",
                 "description": "作成日時",
@@ -18658,6 +18787,15 @@
                   "without"
                 ]
               },
+              "approval_flow_status": {
+                "type": "string",
+                "description": "未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）",
+                "example": "without_in_progress",
+                "enum": [
+                  "without_in_progress",
+                  "all"
+                ]
+              },
               "created_at": {
                 "type": "string",
                 "description": "作成日時",
@@ -19097,6 +19235,15 @@
                 "enum": [
                   "only",
                   "without"
+                ]
+              },
+              "approval_flow_status": {
+                "type": "string",
+                "description": "未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）",
+                "example": "without_in_progress",
+                "enum": [
+                  "without_in_progress",
+                  "all"
                 ]
               },
               "created_at": {
@@ -19582,6 +19729,15 @@
                 "enum": [
                   "only",
                   "without"
+                ]
+              },
+              "approval_flow_status": {
+                "type": "string",
+                "description": "未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）",
+                "example": "without_in_progress",
+                "enum": [
+                  "without_in_progress",
+                  "all"
                 ]
               },
               "created_at": {
@@ -20104,6 +20260,15 @@
                   "without"
                 ]
               },
+              "approval_flow_status": {
+                "type": "string",
+                "description": "未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）",
+                "example": "without_in_progress",
+                "enum": [
+                  "without_in_progress",
+                  "all"
+                ]
+              },
               "created_at": {
                 "type": "string",
                 "description": "作成日時",
@@ -20552,6 +20717,15 @@
                 "enum": [
                   "only",
                   "without"
+                ]
+              },
+              "approval_flow_status": {
+                "type": "string",
+                "description": "未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）",
+                "example": "without_in_progress",
+                "enum": [
+                  "without_in_progress",
+                  "all"
                 ]
               },
               "created_at": {
@@ -21037,6 +21211,15 @@
                   "without"
                 ]
               },
+              "approval_flow_status": {
+                "type": "string",
+                "description": "未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）",
+                "example": "without_in_progress",
+                "enum": [
+                  "without_in_progress",
+                  "all"
+                ]
+              },
               "created_at": {
                 "type": "string",
                 "description": "作成日時",
@@ -21420,6 +21603,15 @@
                   "without"
                 ]
               },
+              "approval_flow_status": {
+                "type": "string",
+                "description": "未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）",
+                "example": "without_in_progress",
+                "enum": [
+                  "without_in_progress",
+                  "all"
+                ]
+              },
               "created_at": {
                 "type": "string",
                 "description": "作成日時",
@@ -21745,6 +21937,15 @@
                   "without"
                 ]
               },
+              "approval_flow_status": {
+                "type": "string",
+                "description": "未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）",
+                "example": "without_in_progress",
+                "enum": [
+                  "without_in_progress",
+                  "all"
+                ]
+              },
               "created_at": {
                 "type": "string",
                 "description": "作成日時",
@@ -22068,6 +22269,15 @@
                 "enum": [
                   "only",
                   "without"
+                ]
+              },
+              "approval_flow_status": {
+                "type": "string",
+                "description": "未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）",
+                "example": "without_in_progress",
+                "enum": [
+                  "without_in_progress",
+                  "all"
                 ]
               },
               "created_at": {
@@ -24439,7 +24649,8 @@
                 "company_id",
                 "id",
                 "name",
-                "update_date"
+                "update_date",
+                "available"
               ],
               "properties": {
                 "id": {
@@ -24471,6 +24682,10 @@
                   "type": "string",
                   "description": "更新日 (yyyy-mm-dd)",
                   "example": "2019-12-17"
+                },
+                "available": {
+                  "type": "boolean",
+                  "description": "取引先の使用設定（true: 使用する、false: 使用しない）\n<br>\n<ul>\n  <li>\n    本APIでpartnerを作成した場合はtrueになります。\n  </li>\n  <li>\n    falseにする場合はWeb画面から変更できます。\n  </li>\n  <li>\n    trueの場合、Web画面での取引登録時などに入力候補として表示されます。\n  </li>\n  <li>\n    falseの場合、取引先自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの取引先をパラメータに指定すれば、取引などにfalseの取引先を設定できます。\n  </li>\n</ul>"
                 },
                 "shortcut1": {
                   "type": "string",
@@ -24676,7 +24891,8 @@
               "company_id",
               "id",
               "name",
-              "update_date"
+              "update_date",
+              "available"
             ],
             "properties": {
               "id": {
@@ -24708,6 +24924,10 @@
                 "type": "string",
                 "description": "更新日 (yyyy-mm-dd)",
                 "example": "2019-12-17"
+              },
+              "available": {
+                "type": "boolean",
+                "description": "取引先の使用設定（true: 使用する、false: 使用しない）\n<br>\n<ul>\n  <li>\n    本APIでpartnerを作成した場合はtrueになります。\n  </li>\n  <li>\n    falseにする場合はWeb画面から変更できます。\n  </li>\n  <li>\n    trueの場合、Web画面での取引登録時などに入力候補として表示されます。\n  </li>\n  <li>\n    falseの場合、取引先自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの取引先をパラメータに指定すれば、取引などにfalseの取引先を設定できます。\n  </li>\n</ul>"
               },
               "shortcut1": {
                 "type": "string",

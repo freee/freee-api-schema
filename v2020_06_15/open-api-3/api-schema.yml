@@ -7643,6 +7643,17 @@ paths:
           - only
           - without
           type: string
+      - description: |
+          承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>
+          個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>
+          事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。
+        in: query
+        name: approval_flow_status
+        schema:
+          enum:
+          - without_in_progress
+          - all
+          type: string
       responses:
         '200':
           content:
@@ -7868,6 +7879,17 @@ paths:
           - only
           - without
           type: string
+      - description: |
+          承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>
+          個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>
+          事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。
+        in: query
+        name: approval_flow_status
+        schema:
+          enum:
+          - without_in_progress
+          - all
+          type: string
       responses:
         '200':
           content:
@@ -8075,6 +8097,17 @@ paths:
           enum:
           - only
           - without
+          type: string
+      - description: |
+          承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>
+          個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>
+          事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。
+        in: query
+        name: approval_flow_status
+        schema:
+          enum:
+          - without_in_progress
+          - all
           type: string
       responses:
         '200':
@@ -8286,6 +8319,17 @@ paths:
           enum:
           - only
           - without
+          type: string
+      - description: |
+          承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>
+          個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>
+          事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。
+        in: query
+        name: approval_flow_status
+        schema:
+          enum:
+          - without_in_progress
+          - all
           type: string
       responses:
         '200':
@@ -8519,6 +8563,17 @@ paths:
           - only
           - without
           type: string
+      - description: |
+          承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>
+          個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>
+          事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。
+        in: query
+        name: approval_flow_status
+        schema:
+          enum:
+          - without_in_progress
+          - all
+          type: string
       responses:
         '200':
           content:
@@ -8745,6 +8800,17 @@ paths:
           - only
           - without
           type: string
+      - description: |
+          承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>
+          個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>
+          事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。
+        in: query
+        name: approval_flow_status
+        schema:
+          enum:
+          - without_in_progress
+          - all
+          type: string
       responses:
         '200':
           content:
@@ -8969,6 +9035,17 @@ paths:
           enum:
           - only
           - without
+          type: string
+      - description: |
+          承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>
+          個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>
+          事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。
+        in: query
+        name: approval_flow_status
+        schema:
+          enum:
+          - without_in_progress
+          - all
           type: string
       responses:
         '200':
@@ -9195,6 +9272,17 @@ paths:
           - only
           - without
           type: string
+      - description: |
+          承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>
+          個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>
+          事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。
+        in: query
+        name: approval_flow_status
+        schema:
+          enum:
+          - without_in_progress
+          - all
+          type: string
       responses:
         '200':
           content:
@@ -9418,6 +9506,17 @@ paths:
           - only
           - without
           type: string
+      - description: |
+          承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>
+          個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>
+          事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。
+        in: query
+        name: approval_flow_status
+        schema:
+          enum:
+          - without_in_progress
+          - all
+          type: string
       responses:
         '200':
           content:
@@ -9634,6 +9733,17 @@ paths:
           enum:
           - only
           - without
+          type: string
+      - description: |
+          承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>
+          個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>
+          事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。
+        in: query
+        name: approval_flow_status
+        schema:
+          enum:
+          - without_in_progress
+          - all
           type: string
       responses:
         '200':
@@ -19396,6 +19506,25 @@ components:
               example: 000-0000
               nullable: true
               type: string
+            available:
+              description: |-
+                取引先の使用設定（true: 使用する、false: 使用しない）
+                <br>
+                <ul>
+                  <li>
+                    本APIでpartnerを作成した場合はtrueになります。
+                  </li>
+                  <li>
+                    falseにする場合はWeb画面から変更できます。
+                  </li>
+                  <li>
+                    trueの場合、Web画面での取引登録時などに入力候補として表示されます。
+                  </li>
+                  <li>
+                    falseの場合、取引先自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの取引先をパラメータに指定すれば、取引などにfalseの取引先を設定できます。
+                  </li>
+                </ul>
+              type: boolean
             code:
               description: 取引先コード
               example: code001
@@ -19603,6 +19732,7 @@ components:
           - id
           - name
           - update_date
+          - available
           type: object
       required:
       - partner
@@ -19838,6 +19968,25 @@ components:
                 example: 000-0000
                 nullable: true
                 type: string
+              available:
+                description: |-
+                  取引先の使用設定（true: 使用する、false: 使用しない）
+                  <br>
+                  <ul>
+                    <li>
+                      本APIでpartnerを作成した場合はtrueになります。
+                    </li>
+                    <li>
+                      falseにする場合はWeb画面から変更できます。
+                    </li>
+                    <li>
+                      trueの場合、Web画面での取引登録時などに入力候補として表示されます。
+                    </li>
+                    <li>
+                      falseの場合、取引先自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの取引先をパラメータに指定すれば、取引などにfalseの取引先を設定できます。
+                    </li>
+                  </ul>
+                type: boolean
               code:
                 description: 取引先コード
                 example: code001
@@ -20003,6 +20152,7 @@ components:
             - id
             - name
             - update_date
+            - available
             type: object
           type: array
       required:
@@ -23696,6 +23846,13 @@ components:
               - without
               example: only
               type: string
+            approval_flow_status:
+              description: '未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）'
+              enum:
+              - without_in_progress
+              - all
+              example: without_in_progress
+              type: string
             balances:
               items:
                 properties:
@@ -24097,6 +24254,13 @@ components:
               - without
               example: only
               type: string
+            approval_flow_status:
+              description: '未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）'
+              enum:
+              - without_in_progress
+              - all
+              example: without_in_progress
+              type: string
             balances:
               items:
                 properties:
@@ -24470,6 +24634,13 @@ components:
               - without
               example: only
               type: string
+            approval_flow_status:
+              description: '未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）'
+              enum:
+              - without_in_progress
+              - all
+              example: without_in_progress
+              type: string
             balances:
               items:
                 properties:
@@ -24814,6 +24985,13 @@ components:
               - only
               - without
               example: only
+              type: string
+            approval_flow_status:
+              description: '未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）'
+              enum:
+              - without_in_progress
+              - all
+              example: without_in_progress
               type: string
             balances:
               items:
@@ -25223,6 +25401,13 @@ components:
               - without
               example: only
               type: string
+            approval_flow_status:
+              description: '未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）'
+              enum:
+              - without_in_progress
+              - all
+              example: without_in_progress
+              type: string
             balances:
               items:
                 properties:
@@ -25517,6 +25702,13 @@ components:
               - without
               example: only
               type: string
+            approval_flow_status:
+              description: '未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）'
+              enum:
+              - without_in_progress
+              - all
+              example: without_in_progress
+              type: string
             balances:
               items:
                 properties:
@@ -25768,6 +25960,13 @@ components:
               - only
               - without
               example: only
+              type: string
+            approval_flow_status:
+              description: '未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）'
+              enum:
+              - without_in_progress
+              - all
+              example: without_in_progress
               type: string
             balances:
               items:
@@ -26021,6 +26220,13 @@ components:
               - without
               example: only
               type: string
+            approval_flow_status:
+              description: '未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）'
+              enum:
+              - without_in_progress
+              - all
+              example: without_in_progress
+              type: string
             balances:
               items:
                 properties:
@@ -26272,6 +26478,13 @@ components:
               - only
               - without
               example: only
+              type: string
+            approval_flow_status:
+              description: '未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）'
+              enum:
+              - without_in_progress
+              - all
+              example: without_in_progress
               type: string
             balances:
               items:
@@ -26652,6 +26865,13 @@ components:
               - only
               - without
               example: only
+              type: string
+            approval_flow_status:
+              description: '未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）'
+              enum:
+              - without_in_progress
+              - all
+              example: without_in_progress
               type: string
             balances:
               items:
