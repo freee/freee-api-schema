@@ -24969,6 +24969,1084 @@ components:
       - trial_bs_two_years
       - up_to_date
       type: object
+    trialCrSectionsResponse:
+      properties:
+        trial_cr_sections:
+          properties:
+            account_item_display_type:
+              description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）(条件に指定した時のみ含まれる）'
+              enum:
+              - account_item
+              - group
+              type: string
+            adjustment:
+              description: '決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）'
+              enum:
+              - only
+              - without
+              example: only
+              type: string
+            approval_flow_status:
+              description: '未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）'
+              enum:
+              - without_in_progress
+              - all
+              example: without_in_progress
+              type: string
+            balances:
+              items:
+                properties:
+                  account_category_name:
+                    description: 勘定科目カテゴリー名
+                    example: 販売管理費
+                    type: string
+                  account_group_name:
+                    description: 決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)
+                    example: 現金及び預金
+                    type: string
+                  account_item_id:
+                    description: 勘定科目ID(勘定科目の時のみ含まれる)
+                    example: 192
+                    maximum: 2147483647
+                    minimum: 1
+                    type: integer
+                  account_item_name:
+                    description: 勘定科目名(勘定科目の時のみ含まれる)
+                    example: 現金
+                    type: string
+                  closing_balance:
+                    description: 期末残高
+                    example: -25920
+                    type: integer
+                  hierarchy_level:
+                    description: 階層レベル
+                    example: 3
+                    type: integer
+                  parent_account_category_name:
+                    description: 上位勘定科目カテゴリー名(勘定科目カテゴリーの時のみ、上層が存在する場合含まれる)
+                    example: 他流動資産
+                    type: string
+                  sections:
+                    description: 部門
+                    items:
+                      properties:
+                        closing_balance:
+                          description: 期末残高
+                          example: -25920
+                          type: integer
+                        id:
+                          description: 部門ID
+                          example: 1
+                          maximum: 2147483647
+                          minimum: 0
+                          type: integer
+                        items:
+                          description: breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる
+                          items:
+                            properties:
+                              closing_balance:
+                                description: 期末残高
+                                example: -25920
+                                type: integer
+                              id:
+                                description: 品目ID
+                                example: 1
+                                maximum: 2147483647
+                                minimum: 0
+                                type: integer
+                              name:
+                                description: 品目
+                                example: 源泉所得税
+                                type: string
+                            required:
+                            - id
+                            type: object
+                          type: array
+                        name:
+                          description: 部門名
+                          example: 開発部門
+                          type: string
+                        partners:
+                          description: breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる
+                          items:
+                            properties:
+                              closing_balance:
+                                description: 期末残高
+                                example: -25920
+                                type: integer
+                              id:
+                                description: 取引先ID
+                                example: 22
+                                maximum: 2147483647
+                                minimum: 0
+                                type: integer
+                              name:
+                                description: 取引先名
+                                example: freee
+                                type: string
+                            required:
+                            - id
+                            type: object
+                          type: array
+                        segment_1_tags:
+                          description: breakdown_display_type:segment_1_tag, account_item_display_type:account_item指定時のみ含まれる
+                          items:
+                            properties:
+                              closing_balance:
+                                description: 期末残高
+                                example: -25920
+                                type: integer
+                              id:
+                                description: セグメント1タグID
+                                example: 1
+                                maximum: 2147483647
+                                minimum: 0
+                                type: integer
+                              name:
+                                description: セグメント1タグ名
+                                example: プロジェクトA
+                                type: string
+                            required:
+                            - id
+                            type: object
+                          type: array
+                        segment_2_tags:
+                          description: breakdown_display_type:segment_2_tag, account_item_display_type:account_item指定時のみ含まれる
+                          items:
+                            properties:
+                              closing_balance:
+                                description: 期末残高
+                                example: -25920
+                                type: integer
+                              id:
+                                description: セグメント2タグID
+                                example: 1
+                                maximum: 2147483647
+                                minimum: 0
+                                type: integer
+                              name:
+                                description: セグメント2タグ名
+                                example: プロジェクトA
+                                type: string
+                            required:
+                            - id
+                            type: object
+                          type: array
+                        segment_3_tags:
+                          description: breakdown_display_type:segment_3_tag, account_item_display_type:account_item指定時のみ含まれる
+                          items:
+                            properties:
+                              closing_balance:
+                                description: 期末残高
+                                example: -25920
+                                type: integer
+                              id:
+                                description: セグメント3タグID
+                                example: 1
+                                maximum: 2147483647
+                                minimum: 0
+                                type: integer
+                              name:
+                                description: セグメント3タグ名
+                                example: プロジェクトA
+                                type: string
+                            required:
+                            - id
+                            type: object
+                          type: array
+                      required:
+                      - id
+                      type: object
+                    type: array
+                  total_line:
+                    description: 合計行(勘定科目カテゴリーの時のみ含まれる)
+                    example: true
+                    type: boolean
+                type: object
+              type: array
+            breakdown_display_type:
+              description: '内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル,
+                法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
+                セグメント3(法人向け エンタープライズプラン): segment_3_tag）(条件に指定した時のみ含まれる）'
+              enum:
+              - partner
+              - item
+              - account_item
+              - segment_1_tag
+              - segment_2_tag
+              - segment_3_tag
+              type: string
+            company_id:
+              description: 事業所ID
+              example: 1
+              maximum: 2147483647
+              minimum: 1
+              type: integer
+            cost_allocation:
+              description: 配賦仕訳のみ：only,配賦仕訳以外：without(条件に指定した時のみ含まれる）
+              enum:
+              - only
+              - without
+              example: only
+              type: string
+            created_at:
+              description: 作成日時
+              example: '2019-12-17T13:47:24+09:00'
+              type: string
+            end_date:
+              description: 発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
+              example: '2019-12-17'
+              type: string
+            end_month:
+              description: 発生月で絞込：終了会計月(1-12)(条件に指定した時のみ含まれる）
+              example: 12
+              maximum: 12
+              minimum: 1
+              type: integer
+            fiscal_year:
+              description: 会計年度(条件に指定した時、または条件に月、日条件がない時のみ含まれる）
+              example: 2019
+              type: integer
+            item_id:
+              description: 品目ID(条件に指定した時のみ含まれる）
+              example: 1
+              maximum: 2147483647
+              minimum: 0
+              type: integer
+            partner_code:
+              description: 取引先コード(条件に指定した時のみ含まれる）
+              example: code001
+              type: string
+            partner_id:
+              description: 取引先ID(条件に指定した時のみ含まれる）
+              example: 1
+              maximum: 2147483647
+              minimum: 0
+              type: integer
+            section_ids:
+              description: 出力する部門の指定
+              example: '123'
+              type: string
+            start_date:
+              description: 発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
+              example: '2019-12-17'
+              type: string
+            start_month:
+              description: 発生月で絞込：開始会計月(1-12)(条件に指定した時のみ含まれる）
+              example: 1
+              maximum: 12
+              minimum: 1
+              type: integer
+          required:
+          - balances
+          - company_id
+          - section_ids
+          type: object
+        up_to_date:
+          description: 集計結果が最新かどうか
+          example: true
+          type: boolean
+        up_to_date_reasons:
+          description: 集計が最新でない場合の要因情報
+          items:
+            properties:
+              code:
+                description: コード
+                enum:
+                - depreciation_creating
+                - depreciation_create_error
+                example: depreciation_creating
+                type: string
+              message:
+                description: 集計が最新でない理由
+                example: 当期の固定資産の償却作成が完了していないため、正しい集計結果でない可能性があります。しばらく時間をおいてからもう一度お試しください。
+                type: string
+            required:
+            - code
+            - message
+            type: object
+          type: array
+      required:
+      - trial_cr_sections
+      - up_to_date
+      type: object
+    trialCrSegment_1TagsResponse:
+      properties:
+        trial_cr_segment_1_tags:
+          properties:
+            account_item_display_type:
+              description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）(条件に指定した時のみ含まれる）'
+              enum:
+              - account_item
+              - group
+              type: string
+            adjustment:
+              description: '決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）'
+              enum:
+              - only
+              - without
+              example: only
+              type: string
+            approval_flow_status:
+              description: '未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）'
+              enum:
+              - without_in_progress
+              - all
+              example: without_in_progress
+              type: string
+            balances:
+              items:
+                properties:
+                  account_category_name:
+                    description: 勘定科目カテゴリー名
+                    example: 販売管理費
+                    type: string
+                  account_group_name:
+                    description: 決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)
+                    example: 現金及び預金
+                    type: string
+                  account_item_id:
+                    description: 勘定科目ID(勘定科目の時のみ含まれる)
+                    example: 192
+                    maximum: 2147483647
+                    minimum: 1
+                    type: integer
+                  account_item_name:
+                    description: 勘定科目名(勘定科目の時のみ含まれる)
+                    example: 現金
+                    type: string
+                  closing_balance:
+                    description: 期末残高
+                    example: -25920
+                    type: integer
+                  hierarchy_level:
+                    description: 階層レベル
+                    example: 3
+                    type: integer
+                  parent_account_category_name:
+                    description: 上位勘定科目カテゴリー名(勘定科目カテゴリーの時のみ、上層が存在する場合含まれる)
+                    example: 他流動資産
+                    type: string
+                  segment_1_tags:
+                    description: セグメント1タグ
+                    items:
+                      properties:
+                        closing_balance:
+                          description: 期末残高
+                          example: -25920
+                          type: integer
+                        id:
+                          description: セグメント1タグID
+                          example: 1
+                          maximum: 2147483647
+                          minimum: 0
+                          type: integer
+                        items:
+                          description: breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる
+                          items:
+                            properties:
+                              closing_balance:
+                                description: 期末残高
+                                example: -25920
+                                type: integer
+                              id:
+                                description: 品目ID
+                                example: 1
+                                maximum: 2147483647
+                                minimum: 0
+                                type: integer
+                              name:
+                                description: 品目
+                                example: 源泉所得税
+                                type: string
+                            required:
+                            - id
+                            type: object
+                          type: array
+                        name:
+                          description: セグメント1タグ名
+                          example: プロジェクトA
+                          type: string
+                        partners:
+                          description: breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる
+                          items:
+                            properties:
+                              closing_balance:
+                                description: 期末残高
+                                example: -25920
+                                type: integer
+                              id:
+                                description: 取引先ID
+                                example: 22
+                                maximum: 2147483647
+                                minimum: 0
+                                type: integer
+                              name:
+                                description: 取引先名
+                                example: freee
+                                type: string
+                            required:
+                            - id
+                            type: object
+                          type: array
+                        sections:
+                          description: breakdown_display_type:section, account_item_display_type:account_item指定時のみ含まれる
+                          items:
+                            properties:
+                              closing_balance:
+                                description: 期末残高
+                                example: -25920
+                                type: integer
+                              id:
+                                description: 部門ID
+                                example: 1
+                                maximum: 2147483647
+                                minimum: 0
+                                type: integer
+                              name:
+                                description: 部門名
+                                example: 開発部門
+                                type: string
+                            required:
+                            - id
+                            type: object
+                          type: array
+                      required:
+                      - id
+                      type: object
+                    type: array
+                  total_line:
+                    description: 合計行(勘定科目カテゴリーの時のみ含まれる)
+                    example: true
+                    type: boolean
+                type: object
+              type: array
+            breakdown_display_type:
+              description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）(条件に指定した時のみ含まれる）'
+              enum:
+              - partner
+              - item
+              - section
+              - account_item
+              type: string
+            company_id:
+              description: 事業所ID
+              example: 1
+              maximum: 2147483647
+              minimum: 1
+              type: integer
+            cost_allocation:
+              description: 配賦仕訳のみ：only,配賦仕訳以外：without(条件に指定した時のみ含まれる）
+              enum:
+              - only
+              - without
+              example: only
+              type: string
+            created_at:
+              description: 作成日時
+              example: '2019-12-17T13:47:24+09:00'
+              type: string
+            end_date:
+              description: 発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
+              example: '2019-12-17'
+              type: string
+            end_month:
+              description: 発生月で絞込：終了会計月(1-12)(条件に指定した時のみ含まれる）
+              example: 12
+              maximum: 12
+              minimum: 1
+              type: integer
+            fiscal_year:
+              description: 会計年度(条件に指定した時、または条件に月、日条件がない時のみ含まれる）
+              example: 2019
+              type: integer
+            item_id:
+              description: 品目ID(条件に指定した時のみ含まれる）
+              example: 1
+              maximum: 2147483647
+              minimum: 0
+              type: integer
+            partner_code:
+              description: 取引先コード(条件に指定した時のみ含まれる）
+              example: code001
+              type: string
+            partner_id:
+              description: 取引先ID(条件に指定した時のみ含まれる）
+              example: 1
+              maximum: 2147483647
+              minimum: 0
+              type: integer
+            section_id:
+              description: 部門ID(条件に指定した時のみ含まれる）
+              example: 1
+              maximum: 2147483647
+              minimum: 0
+              type: integer
+            segment_1_tag_ids:
+              description: 出力するセグメント1の指定
+              example: '123'
+              type: string
+            start_date:
+              description: 発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
+              example: '2019-12-17'
+              type: string
+            start_month:
+              description: 発生月で絞込：開始会計月(1-12)(条件に指定した時のみ含まれる）
+              example: 1
+              maximum: 12
+              minimum: 1
+              type: integer
+          required:
+          - balances
+          - company_id
+          - segment_1_tag_ids
+          type: object
+        up_to_date:
+          description: 集計結果が最新かどうか
+          example: true
+          type: boolean
+        up_to_date_reasons:
+          description: 集計が最新でない場合の要因情報
+          items:
+            properties:
+              code:
+                description: コード
+                enum:
+                - depreciation_creating
+                - depreciation_create_error
+                example: depreciation_creating
+                type: string
+              message:
+                description: 集計が最新でない理由
+                example: 当期の固定資産の償却作成が完了していないため、正しい集計結果でない可能性があります。しばらく時間をおいてからもう一度お試しください。
+                type: string
+            required:
+            - code
+            - message
+            type: object
+          type: array
+      required:
+      - trial_cr_segment_1_tags
+      - up_to_date
+      type: object
+    trialCrSegment_2TagsResponse:
+      properties:
+        trial_cr_segment_2_tags:
+          properties:
+            account_item_display_type:
+              description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）(条件に指定した時のみ含まれる）'
+              enum:
+              - account_item
+              - group
+              type: string
+            adjustment:
+              description: '決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）'
+              enum:
+              - only
+              - without
+              example: only
+              type: string
+            approval_flow_status:
+              description: '未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）'
+              enum:
+              - without_in_progress
+              - all
+              example: without_in_progress
+              type: string
+            balances:
+              items:
+                properties:
+                  account_category_name:
+                    description: 勘定科目カテゴリー名
+                    example: 販売管理費
+                    type: string
+                  account_group_name:
+                    description: 決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)
+                    example: 現金及び預金
+                    type: string
+                  account_item_id:
+                    description: 勘定科目ID(勘定科目の時のみ含まれる)
+                    example: 192
+                    maximum: 2147483647
+                    minimum: 1
+                    type: integer
+                  account_item_name:
+                    description: 勘定科目名(勘定科目の時のみ含まれる)
+                    example: 現金
+                    type: string
+                  closing_balance:
+                    description: 期末残高
+                    example: -25920
+                    type: integer
+                  hierarchy_level:
+                    description: 階層レベル
+                    example: 3
+                    type: integer
+                  parent_account_category_name:
+                    description: 上位勘定科目カテゴリー名(勘定科目カテゴリーの時のみ、上層が存在する場合含まれる)
+                    example: 他流動資産
+                    type: string
+                  segment_2_tags:
+                    description: セグメント2タグ
+                    items:
+                      properties:
+                        closing_balance:
+                          description: 期末残高
+                          example: -25920
+                          type: integer
+                        id:
+                          description: セグメント2タグID
+                          example: 1
+                          maximum: 2147483647
+                          minimum: 0
+                          type: integer
+                        items:
+                          description: breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる
+                          items:
+                            properties:
+                              closing_balance:
+                                description: 期末残高
+                                example: -25920
+                                type: integer
+                              id:
+                                description: 品目ID
+                                example: 1
+                                maximum: 2147483647
+                                minimum: 0
+                                type: integer
+                              name:
+                                description: 品目
+                                example: 源泉所得税
+                                type: string
+                            required:
+                            - id
+                            type: object
+                          type: array
+                        name:
+                          description: セグメント2タグ名
+                          example: プロジェクトA
+                          type: string
+                        partners:
+                          description: breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる
+                          items:
+                            properties:
+                              closing_balance:
+                                description: 期末残高
+                                example: -25920
+                                type: integer
+                              id:
+                                description: 取引先ID
+                                example: 22
+                                maximum: 2147483647
+                                minimum: 0
+                                type: integer
+                              name:
+                                description: 取引先名
+                                example: freee
+                                type: string
+                            required:
+                            - id
+                            type: object
+                          type: array
+                        sections:
+                          description: breakdown_display_type:section, account_item_display_type:account_item指定時のみ含まれる
+                          items:
+                            properties:
+                              closing_balance:
+                                description: 期末残高
+                                example: -25920
+                                type: integer
+                              id:
+                                description: 部門ID
+                                example: 1
+                                maximum: 2147483647
+                                minimum: 0
+                                type: integer
+                              name:
+                                description: 部門名
+                                example: 開発部門
+                                type: string
+                            required:
+                            - id
+                            type: object
+                          type: array
+                      required:
+                      - id
+                      type: object
+                    type: array
+                  total_line:
+                    description: 合計行(勘定科目カテゴリーの時のみ含まれる)
+                    example: true
+                    type: boolean
+                type: object
+              type: array
+            breakdown_display_type:
+              description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）(条件に指定した時のみ含まれる）'
+              enum:
+              - partner
+              - item
+              - section
+              - account_item
+              type: string
+            company_id:
+              description: 事業所ID
+              example: 1
+              maximum: 2147483647
+              minimum: 1
+              type: integer
+            cost_allocation:
+              description: 配賦仕訳のみ：only,配賦仕訳以外：without(条件に指定した時のみ含まれる）
+              enum:
+              - only
+              - without
+              example: only
+              type: string
+            created_at:
+              description: 作成日時
+              example: '2019-12-17T13:47:24+09:00'
+              type: string
+            end_date:
+              description: 発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
+              example: '2019-12-17'
+              type: string
+            end_month:
+              description: 発生月で絞込：終了会計月(1-12)(条件に指定した時のみ含まれる）
+              example: 12
+              maximum: 12
+              minimum: 1
+              type: integer
+            fiscal_year:
+              description: 会計年度(条件に指定した時、または条件に月、日条件がない時のみ含まれる）
+              example: 2019
+              type: integer
+            item_id:
+              description: 品目ID(条件に指定した時のみ含まれる）
+              example: 1
+              maximum: 2147483647
+              minimum: 0
+              type: integer
+            partner_code:
+              description: 取引先コード(条件に指定した時のみ含まれる）
+              example: code001
+              type: string
+            partner_id:
+              description: 取引先ID(条件に指定した時のみ含まれる）
+              example: 1
+              maximum: 2147483647
+              minimum: 0
+              type: integer
+            section_id:
+              description: 部門ID(条件に指定した時のみ含まれる）
+              example: 1
+              maximum: 2147483647
+              minimum: 0
+              type: integer
+            segment_2_tag_ids:
+              description: 出力するセグメント2の指定
+              example: '123'
+              type: string
+            start_date:
+              description: 発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
+              example: '2019-12-17'
+              type: string
+            start_month:
+              description: 発生月で絞込：開始会計月(1-12)(条件に指定した時のみ含まれる）
+              example: 1
+              maximum: 12
+              minimum: 1
+              type: integer
+          required:
+          - balances
+          - company_id
+          - segment_2_tag_ids
+          type: object
+        up_to_date:
+          description: 集計結果が最新かどうか
+          example: true
+          type: boolean
+        up_to_date_reasons:
+          description: 集計が最新でない場合の要因情報
+          items:
+            properties:
+              code:
+                description: コード
+                enum:
+                - depreciation_creating
+                - depreciation_create_error
+                example: depreciation_creating
+                type: string
+              message:
+                description: 集計が最新でない理由
+                example: 当期の固定資産の償却作成が完了していないため、正しい集計結果でない可能性があります。しばらく時間をおいてからもう一度お試しください。
+                type: string
+            required:
+            - code
+            - message
+            type: object
+          type: array
+      required:
+      - trial_cr_segment_2_tags
+      - up_to_date
+      type: object
+    trialCrSegment_3TagsResponse:
+      properties:
+        trial_cr_segment_3_tags:
+          properties:
+            account_item_display_type:
+              description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）(条件に指定した時のみ含まれる）'
+              enum:
+              - account_item
+              - group
+              type: string
+            adjustment:
+              description: '決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）'
+              enum:
+              - only
+              - without
+              example: only
+              type: string
+            approval_flow_status:
+              description: '未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）'
+              enum:
+              - without_in_progress
+              - all
+              example: without_in_progress
+              type: string
+            balances:
+              items:
+                properties:
+                  account_category_name:
+                    description: 勘定科目カテゴリー名
+                    example: 販売管理費
+                    type: string
+                  account_group_name:
+                    description: 決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)
+                    example: 現金及び預金
+                    type: string
+                  account_item_id:
+                    description: 勘定科目ID(勘定科目の時のみ含まれる)
+                    example: 192
+                    maximum: 2147483647
+                    minimum: 1
+                    type: integer
+                  account_item_name:
+                    description: 勘定科目名(勘定科目の時のみ含まれる)
+                    example: 現金
+                    type: string
+                  closing_balance:
+                    description: 期末残高
+                    example: -25920
+                    type: integer
+                  hierarchy_level:
+                    description: 階層レベル
+                    example: 3
+                    type: integer
+                  parent_account_category_name:
+                    description: 上位勘定科目カテゴリー名(勘定科目カテゴリーの時のみ、上層が存在する場合含まれる)
+                    example: 他流動資産
+                    type: string
+                  segment_3_tags:
+                    description: セグメント3タグ
+                    items:
+                      properties:
+                        closing_balance:
+                          description: 期末残高
+                          example: -25920
+                          type: integer
+                        id:
+                          description: セグメント3タグID
+                          example: 1
+                          maximum: 2147483647
+                          minimum: 0
+                          type: integer
+                        items:
+                          description: breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる
+                          items:
+                            properties:
+                              closing_balance:
+                                description: 期末残高
+                                example: -25920
+                                type: integer
+                              id:
+                                description: 品目ID
+                                example: 1
+                                maximum: 2147483647
+                                minimum: 0
+                                type: integer
+                              name:
+                                description: 品目
+                                example: 源泉所得税
+                                type: string
+                            required:
+                            - id
+                            type: object
+                          type: array
+                        name:
+                          description: セグメント3タグ名
+                          example: プロジェクトA
+                          type: string
+                        partners:
+                          description: breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる
+                          items:
+                            properties:
+                              closing_balance:
+                                description: 期末残高
+                                example: -25920
+                                type: integer
+                              id:
+                                description: 取引先ID
+                                example: 22
+                                maximum: 2147483647
+                                minimum: 0
+                                type: integer
+                              name:
+                                description: 取引先名
+                                example: freee
+                                type: string
+                            required:
+                            - id
+                            type: object
+                          type: array
+                        sections:
+                          description: breakdown_display_type:section, account_item_display_type:account_item指定時のみ含まれる
+                          items:
+                            properties:
+                              closing_balance:
+                                description: 期末残高
+                                example: -25920
+                                type: integer
+                              id:
+                                description: 部門ID
+                                example: 1
+                                maximum: 2147483647
+                                minimum: 0
+                                type: integer
+                              name:
+                                description: 部門名
+                                example: 開発部門
+                                type: string
+                            required:
+                            - id
+                            type: object
+                          type: array
+                      required:
+                      - id
+                      type: object
+                    type: array
+                  total_line:
+                    description: 合計行(勘定科目カテゴリーの時のみ含まれる)
+                    example: true
+                    type: boolean
+                type: object
+              type: array
+            breakdown_display_type:
+              description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）(条件に指定した時のみ含まれる）'
+              enum:
+              - partner
+              - item
+              - section
+              - account_item
+              type: string
+            company_id:
+              description: 事業所ID
+              example: 1
+              maximum: 2147483647
+              minimum: 1
+              type: integer
+            cost_allocation:
+              description: 配賦仕訳のみ：only,配賦仕訳以外：without(条件に指定した時のみ含まれる）
+              enum:
+              - only
+              - without
+              example: only
+              type: string
+            created_at:
+              description: 作成日時
+              example: '2019-12-17T13:47:24+09:00'
+              type: string
+            end_date:
+              description: 発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
+              example: '2019-12-17'
+              type: string
+            end_month:
+              description: 発生月で絞込：終了会計月(1-12)(条件に指定した時のみ含まれる）
+              example: 12
+              maximum: 12
+              minimum: 1
+              type: integer
+            fiscal_year:
+              description: 会計年度(条件に指定した時、または条件に月、日条件がない時のみ含まれる）
+              example: 2019
+              type: integer
+            item_id:
+              description: 品目ID(条件に指定した時のみ含まれる）
+              example: 1
+              maximum: 2147483647
+              minimum: 0
+              type: integer
+            partner_code:
+              description: 取引先コード(条件に指定した時のみ含まれる）
+              example: code001
+              type: string
+            partner_id:
+              description: 取引先ID(条件に指定した時のみ含まれる）
+              example: 1
+              maximum: 2147483647
+              minimum: 0
+              type: integer
+            section_id:
+              description: 部門ID(条件に指定した時のみ含まれる）
+              example: 1
+              maximum: 2147483647
+              minimum: 0
+              type: integer
+            segment_3_tag_ids:
+              description: 出力するセグメント3の指定
+              example: '123'
+              type: string
+            start_date:
+              description: 発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
+              example: '2019-12-17'
+              type: string
+            start_month:
+              description: 発生月で絞込：開始会計月(1-12)(条件に指定した時のみ含まれる）
+              example: 1
+              maximum: 12
+              minimum: 1
+              type: integer
+          required:
+          - balances
+          - company_id
+          - segment_3_tag_ids
+          type: object
+        up_to_date:
+          description: 集計結果が最新かどうか
+          example: true
+          type: boolean
+        up_to_date_reasons:
+          description: 集計が最新でない場合の要因情報
+          items:
+            properties:
+              code:
+                description: コード
+                enum:
+                - depreciation_creating
+                - depreciation_create_error
+                example: depreciation_creating
+                type: string
+              message:
+                description: 集計が最新でない理由
+                example: 当期の固定資産の償却作成が完了していないため、正しい集計結果でない可能性があります。しばらく時間をおいてからもう一度お試しください。
+                type: string
+            required:
+            - code
+            - message
+            type: object
+          type: array
+      required:
+      - trial_cr_segment_3_tags
+      - up_to_date
+      type: object
     trialPlResponse:
       properties:
         trial_pl:
