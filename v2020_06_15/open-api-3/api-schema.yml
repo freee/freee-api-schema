@@ -811,6 +811,9 @@ paths:
               <li>部門および役職指定</li>
             </ul>
           </li>
+          <li>
+            申請フォームの項目に契約書（NINJA SIGN連携）が利用されている各種申請については、API経由で参照は可能ですが、作成と更新ができません。
+          </li>
           <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>
         </ul>
       operationId: get_approval_requests
@@ -915,6 +918,9 @@ paths:
               <li>役職指定（申請時に部門指定）</li>
               <li>部門および役職指定</li>
             </ul>
+          </li>
+          <li>
+            申請フォームの項目に契約書（NINJA SIGN連携）が利用されている各種申請については、API経由で参照は可能ですが、作成と更新ができません。
           </li>
           <li>Web画面やAPIを通じて申請フォームが変更されると、本APIで使用する項目ID（request_itemsで指定するid）も変更されます。本API利用前に各種申請の取得APIを利用し、最新の申請フォームを取得することを推奨します。</li>
           <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>
@@ -1234,6 +1240,9 @@ paths:
               <li>部門および役職指定</li>
             </ul>
           </li>
+          <li>
+            申請フォームの項目に契約書（NINJA SIGN連携）が利用されている各種申請については、API経由で参照は可能ですが、作成と更新ができません。
+          </li>
           <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>
         </ul>
       operationId: get_approval_request
@@ -1349,6 +1358,9 @@ paths:
               <li>部門および役職指定</li>
             </ul>
           </li>
+          <li>
+            申請フォームの項目に契約書（NINJA SIGN連携）が利用されている各種申請については、API経由で参照は可能ですが、作成と更新ができません。
+          </li>
           <li>Web画面やAPIを通じて申請フォームが変更されると、本APIで使用する項目ID（request_itemsで指定するid）も変更されます。本APIで使用する項目IDは申請作成時点の項目IDです。本API利用前に各種申請の取得APIを利用し、申請作成時点の項目IDを取得することを推奨します。</li>
           <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>
         </ul>
@@ -1455,6 +1467,9 @@ paths:
               <li>役職指定（申請時に部門指定）</li>
               <li>部門および役職指定</li>
             </ul>
+          </li>
+          <li>
+            申請フォームの項目に契約書（NINJA SIGN連携）が利用されている各種申請については、API経由で参照は可能ですが、作成と更新ができません。
           </li>
           <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>
         </ul>
@@ -8215,6 +8230,1638 @@ paths:
         }</code></pre>
       operationId: get_trial_bs_two_years
       summary: 貸借対照表(前年比較)の取得
+  "/api/1/reports/trial_cr":
+    get:
+      parameters:
+      - description: 事業所ID
+        in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 会計年度
+        in: query
+        name: fiscal_year
+        schema:
+          type: integer
+      - description: 発生月で絞込：開始会計月(1-12)
+        in: query
+        name: start_month
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: 発生月で絞込：終了会計月(1-12)
+        in: query
+        name: end_month
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: 発生日で絞込：開始日(yyyy-mm-dd)
+        in: query
+        name: start_date
+        schema:
+          type: string
+      - description: 発生日で絞込：終了日(yyyy-mm-dd)
+        in: query
+        name: end_date
+        schema:
+          type: string
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+        in: query
+        name: account_item_display_type
+        schema:
+          enum:
+          - account_item
+          - group
+          type: string
+      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
+          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
+          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+        in: query
+        name: breakdown_display_type
+        schema:
+          enum:
+          - partner
+          - item
+          - section
+          - account_item
+          - segment_1_tag
+          - segment_2_tag
+          - segment_3_tag
+          type: string
+      - description: 取引先IDで絞込（0を指定すると、取引先が未選択で絞り込めます）
+        in: query
+        name: partner_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: 取引先コードで絞込（事業所設定で取引先コードの利用を有効にしている場合のみ利用可能です）
+        in: query
+        name: partner_code
+        schema:
+          type: string
+      - description: 品目IDで絞込（0を指定すると、品目が未選択で絞り込めます）
+        in: query
+        name: item_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: 部門IDで絞込（0を指定すると、部門が未選択で絞り込めます）
+        in: query
+        name: section_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+        in: query
+        name: adjustment
+        schema:
+          enum:
+          - only
+          - without
+          type: string
+      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）
+        in: query
+        name: cost_allocation
+        schema:
+          enum:
+          - only
+          - without
+          type: string
+      - description: |
+          承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト), 全てのステータス: all)<br>
+          個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>
+          事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。
+        in: query
+        name: approval_flow_status
+        schema:
+          enum:
+          - without_in_progress
+          - all
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/trialCrResponse"
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/badRequestError"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '429':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/tooManyRequestsError"
+          description: ''
+        '500':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - Trial balance
+      description: |
+        <h2 id="">概要</h2>
+        <p>指定した事業所の製造原価報告書を取得する</p>
+        <h2 id="_2">定義</h2>
+        <ul>
+        <li>
+        <p>created_at : 作成日時</p>
+        </li>
+        <li>
+        <p>account_item_name : 勘定科目名</p>
+        </li>
+        <li>
+        <p>hierarchy_level: 階層レベル</p>
+        </li>
+        <li>
+        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
+        </li>
+        <li>
+        <p>opening_balance : 期首残高 </p>
+        </li>
+        <li>
+        <p>debit_amount : 借方金額 </p>
+        </li>
+        <li>
+        <p>credit_amount:  貸方金額 </p>
+        </li>
+        <li>
+        <p>closing_balance : 期末残高 </p>
+        </li>
+        <li>
+        <p>composition_ratio : 構成比</p>
+        </li>
+        <h2 id="_3">注意点</h2>
+        <ul>
+        <li>法人向けのプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
+        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+        <li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>
+        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+        <li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>
+        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
+        </ul>
+        <h2 id="_4">レスポンスの例</h2>
+        <blockquote>
+        <p>GET https://api.freee.co.jp/api/1/reports/trial_cr?company_id=1&amp;fiscal_year=2019&amp;breakdown_display_type=partner</p>
+        </blockquote>
+        <pre><code>{
+          &quot;trial_cr&quot; :
+            {
+              &quot;company_id&quot; : 1,
+              &quot;fiscal_year&quot; : 2019,
+              &quot;breakdown_display_type&quot; : &quot;partner&quot;,
+              &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot
+              &quot;balances&quot; : [{
+                &quot;account_item_id&quot; : 1500,
+                &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,
+                &quot;hierarchy_level&quot; : 2,
+                &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,
+                &quot;opening_balance&quot; : 100000,
+                &quot;debit_amount&quot; : 50000,
+                &quot;credit_amount&quot; : 20000,
+                &quot;closing_balance&quot; : 130000,
+                &quot;composition_ratio&quot; : 0.25
+                &quot;partners&quot; : [{
+                  &quot;id&quot; : 123,
+                  &quot;name&quot; : &quot;freee&quot;,
+                  &quot;opening_balance&quot; : 100000,
+                  &quot;debit_amount&quot; : 50000,
+                  &quot;credit_amount&quot; : 20000,
+                  &quot;closing_balance&quot; : 130000,
+                  &quot;composition_ratio&quot; : 0.25
+                  },
+                ...
+                ]
+              },
+              ...
+              ]
+            }
+        }</code></pre>
+      operationId: get_trial_cr
+      summary: 製造原価報告書の取得
+  "/api/1/reports/trial_cr_sections":
+    get:
+      parameters:
+      - description: 事業所ID
+        in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 出力する部門の指定（半角数字のidを半角カンマ区切りスペースなしで指定してください）
+        in: query
+        name: section_ids
+        required: true
+        schema:
+          type: string
+      - description: 会計年度
+        in: query
+        name: fiscal_year
+        schema:
+          type: integer
+      - description: 発生月で絞込：開始会計月(1-12)
+        in: query
+        name: start_month
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: 発生月で絞込：終了会計月(1-12)
+        in: query
+        name: end_month
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: 発生日で絞込：開始日(yyyy-mm-dd)
+        in: query
+        name: start_date
+        schema:
+          type: string
+      - description: 発生日で絞込：終了日(yyyy-mm-dd)
+        in: query
+        name: end_date
+        schema:
+          type: string
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+        in: query
+        name: account_item_display_type
+        schema:
+          enum:
+          - account_item
+          - group
+          type: string
+      - description: '内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル,
+          法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
+          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+        in: query
+        name: breakdown_display_type
+        schema:
+          enum:
+          - partner
+          - item
+          - account_item
+          - segment_1_tag
+          - segment_2_tag
+          - segment_3_tag
+          type: string
+      - description: 取引先IDで絞込（0を指定すると、取引先が未選択で絞り込めます）
+        in: query
+        name: partner_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: 取引先コードで絞込（事業所設定で取引先コードの利用を有効にしている場合のみ利用可能です）
+        in: query
+        name: partner_code
+        schema:
+          type: string
+      - description: 品目IDで絞込（0を指定すると、品目が未選択で絞り込めます）
+        in: query
+        name: item_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+        in: query
+        name: adjustment
+        schema:
+          enum:
+          - only
+          - without
+          type: string
+      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）
+        in: query
+        name: cost_allocation
+        schema:
+          enum:
+          - only
+          - without
+          type: string
+      - description: |
+          承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>
+          個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>
+          事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。
+        in: query
+        name: approval_flow_status
+        schema:
+          enum:
+          - without_in_progress
+          - all
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/trialCrSectionsResponse"
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/badRequestError"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '429':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/tooManyRequestsError"
+          description: ''
+        '500':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - Trial balance
+      description: |2
+
+        <h2 id="">概要</h2>
+
+        <p>指定した事業所の製造原価報告書(部門比較)を取得する</p>
+
+        <h2 id="_2">定義</h2>
+
+        <ul>
+
+        <li>
+        <p>created_at : 作成日時</p>
+        </li>
+
+        <li>
+        <p>account_item_name : 勘定科目名</p>
+        </li>
+
+        <li>
+        <p>hierarchy_level: 階層レベル</p>
+        </li>
+
+        <li>
+        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
+        </li>
+        <li>
+        <p>closing_balance : 期末残高 </p>
+        </li>
+        <h2 id="_3">注意点</h2>
+        <ul>
+        <li>法人向けのベーシックプラン以上で利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
+        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+        <li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>
+        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+        <li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>
+        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
+        </ul>
+        <h2 id="_4">レスポンスの例</h2>
+
+        <blockquote>
+        <p>GET https://api.freee.co.jp/api/1/reports/trial_cr_sections?company_id=1&amp;section_ids=1,2,3&amp;fiscal_year=2019</p></p>
+        </blockquote>
+
+        <pre><code>{
+          &quot;trial_cr_sections&quot; :
+            {
+              &quot;company_id&quot; : 1,
+              &quot;section_ids&quot; : &quot;1,2,3&quot;,
+              &quot;fiscal_year&quot; : 2019,
+              &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot
+              &quot;balances&quot; : [{
+                &quot;account_item_id&quot; : 1500,
+                &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,
+                &quot;hierarchy_level&quot; : 2,
+                &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,
+                &quot;closing_balance&quot; : 1000000,
+                &quot;sections&quot; : [{
+                  &quot;id&quot;: 1
+                  &quot;name&quot;: &quot;営業部&quot;,
+                  &quot;closing_balance&quot; : 100000
+                },
+                {
+                  &quot;id&quot;: 2
+                  &quot;name&quot;: &quot;広報部&quot;,
+                  &quot;closing_balance&quot; : 200000
+                },
+                {
+                  &quot;id&quot;: 3
+                  &quot;name&quot;: &quot;人事部&quot;,
+                  &quot;closing_balance&quot; : 300000
+                },
+                ...
+                ]
+              },
+              ...
+              ]
+            }
+        }</code></pre>
+      operationId: get_trial_cr_sections
+      summary: 製造原価報告書(部門比較)の取得
+  "/api/1/reports/trial_cr_segment_1_tags":
+    get:
+      parameters:
+      - description: 事業所ID
+        in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 出力するセグメント1タグの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択のセグメントで比較できます）
+        in: query
+        name: segment_1_tag_ids
+        required: true
+        schema:
+          type: string
+      - description: 会計年度
+        in: query
+        name: fiscal_year
+        schema:
+          type: integer
+      - description: 発生月で絞込：開始会計月(1-12)
+        in: query
+        name: start_month
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: 発生月で絞込：終了会計月(1-12)
+        in: query
+        name: end_month
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: 発生日で絞込：開始日(yyyy-mm-dd)
+        in: query
+        name: start_date
+        schema:
+          type: string
+      - description: 発生日で絞込：終了日(yyyy-mm-dd)
+        in: query
+        name: end_date
+        schema:
+          type: string
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+        in: query
+        name: account_item_display_type
+        schema:
+          enum:
+          - account_item
+          - group
+          type: string
+      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）
+          ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+        in: query
+        name: breakdown_display_type
+        schema:
+          enum:
+          - partner
+          - item
+          - section
+          - account_item
+          type: string
+      - description: 取引先IDで絞込（0を指定すると、取引先が未選択で絞り込めます）
+        in: query
+        name: partner_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: 取引先コードで絞込（事業所設定で取引先コードの利用を有効にしている場合のみ利用可能です）
+        in: query
+        name: partner_code
+        schema:
+          type: string
+      - description: 品目IDで絞込（0を指定すると、品目が未選択で絞り込めます）
+        in: query
+        name: item_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: 部門IDで絞込（0を指定すると、部門が未選択で絞り込めます）
+        in: query
+        name: section_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+        in: query
+        name: adjustment
+        schema:
+          enum:
+          - only
+          - without
+          type: string
+      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）
+        in: query
+        name: cost_allocation
+        schema:
+          enum:
+          - only
+          - without
+          type: string
+      - description: |
+          承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>
+          個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>
+          事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。
+        in: query
+        name: approval_flow_status
+        schema:
+          enum:
+          - without_in_progress
+          - all
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/trialCrSegment_1TagsResponse"
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/badRequestError"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '429':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/tooManyRequestsError"
+          description: ''
+        '500':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - Trial balance
+      description: |2
+
+        <h2 id="">概要</h2>
+
+        <p>指定した事業所の製造原価報告書(セグメント1比較)を取得する</p>
+
+        <h2 id="_2">定義</h2>
+
+        <ul>
+
+        <li>
+        <p>created_at : 作成日時</p>
+        </li>
+
+        <li>
+        <p>account_item_name : 勘定科目名</p>
+        </li>
+
+        <li>
+        <p>hierarchy_level: 階層レベル</p>
+        </li>
+
+        <li>
+        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
+        </li>
+        <li>
+        <p>closing_balance : 期末残高 </p>
+        </li>
+        <h2 id="_3">注意点</h2>
+        <ul>
+        <li>法人向けのプロフェッショナルプラン以上で利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
+        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+        <li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>
+        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
+        </ul>
+        <h2 id="_4">レスポンスの例</h2>
+
+        <blockquote>
+        <p>GET https://api.freee.co.jp/api/1/reports/trial_cr_segment_1_tags?company_id=1&amp;segment_1_tag_ids=1,2,3&amp;fiscal_year=2019</p></p>
+        </blockquote>
+
+        <pre><code>{
+          &quot;trial_cr_segment_1_tags&quot; :
+            {
+              &quot;company_id&quot; : 1,
+              &quot;segment_1_tag_ids&quot; : &quot;1,2,3&quot;,
+              &quot;fiscal_year&quot; : 2019,
+              &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot
+              &quot;balances&quot; : [{
+                &quot;account_item_id&quot; : 1500,
+                &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,
+                &quot;hierarchy_level&quot; : 2,
+                &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,
+                &quot;closing_balance&quot; : 1000000,
+                &quot;segment_1_tags&quot; : [{
+                  &quot;id&quot;: 1
+                  &quot;name&quot;: &quot;プロジェクトA&quot;,
+                  &quot;closing_balance&quot; : 100000
+                },
+                {
+                  &quot;id&quot;: 2
+                  &quot;name&quot;: &quot;プロジェクトB&quot;,
+                  &quot;closing_balance&quot; : 200000
+                },
+                {
+                  &quot;id&quot;: 3
+                  &quot;name&quot;: &quot;プロジェクトC&quot;,
+                  &quot;closing_balance&quot; : 300000
+                },
+                ...
+                ]
+              },
+              ...
+              ]
+            }
+        }</code></pre>
+      operationId: get_trial_cr_segment_1_tags
+      summary: 製造原価報告書(セグメント1比較)の取得
+  "/api/1/reports/trial_cr_segment_2_tags":
+    get:
+      parameters:
+      - description: 事業所ID
+        in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 出力するセグメント2タグの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択のセグメントで比較できます）
+        in: query
+        name: segment_2_tag_ids
+        required: true
+        schema:
+          type: string
+      - description: 会計年度
+        in: query
+        name: fiscal_year
+        schema:
+          type: integer
+      - description: 発生月で絞込：開始会計月(1-12)
+        in: query
+        name: start_month
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: 発生月で絞込：終了会計月(1-12)
+        in: query
+        name: end_month
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: 発生日で絞込：開始日(yyyy-mm-dd)
+        in: query
+        name: start_date
+        schema:
+          type: string
+      - description: 発生日で絞込：終了日(yyyy-mm-dd)
+        in: query
+        name: end_date
+        schema:
+          type: string
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+        in: query
+        name: account_item_display_type
+        schema:
+          enum:
+          - account_item
+          - group
+          type: string
+      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）
+          ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+        in: query
+        name: breakdown_display_type
+        schema:
+          enum:
+          - partner
+          - item
+          - section
+          - account_item
+          type: string
+      - description: 取引先IDで絞込（0を指定すると、取引先が未選択で絞り込めます）
+        in: query
+        name: partner_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: 取引先コードで絞込（事業所設定で取引先コードの利用を有効にしている場合のみ利用可能です）
+        in: query
+        name: partner_code
+        schema:
+          type: string
+      - description: 品目IDで絞込（0を指定すると、品目が未選択で絞り込めます）
+        in: query
+        name: item_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: 部門IDで絞込（0を指定すると、部門が未選択で絞り込めます）
+        in: query
+        name: section_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+        in: query
+        name: adjustment
+        schema:
+          enum:
+          - only
+          - without
+          type: string
+      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）
+        in: query
+        name: cost_allocation
+        schema:
+          enum:
+          - only
+          - without
+          type: string
+      - description: |
+          承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>
+          個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>
+          事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。
+        in: query
+        name: approval_flow_status
+        schema:
+          enum:
+          - without_in_progress
+          - all
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/trialCrSegment_2TagsResponse"
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/badRequestError"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '429':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/tooManyRequestsError"
+          description: ''
+        '500':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - Trial balance
+      description: |2
+
+        <h2 id="">概要</h2>
+
+        <p>指定した事業所の製造原価報告書(セグメント2比較)を取得する</p>
+
+        <h2 id="_2">定義</h2>
+
+        <ul>
+
+        <li>
+        <p>created_at : 作成日時</p>
+        </li>
+
+        <li>
+        <p>account_item_name : 勘定科目名</p>
+        </li>
+
+        <li>
+        <p>hierarchy_level: 階層レベル</p>
+        </li>
+
+        <li>
+        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
+        </li>
+        <li>
+        <p>closing_balance : 期末残高 </p>
+        </li>
+        <h2 id="_3">注意点</h2>
+        <ul>
+        <li>法人向けのエンタープライズプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
+        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+        <li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>
+        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
+        </ul>
+        <h2 id="_4">レスポンスの例</h2>
+
+        <blockquote>
+        <p>GET https://api.freee.co.jp/api/1/reports/trial_cr_segment_2_tags?company_id=1&amp;segment_2_tag_ids=1,2,3&amp;fiscal_year=2019</p></p>
+        </blockquote>
+
+        <pre><code>{
+          &quot;trial_cr_segment_2_tags&quot; :
+            {
+              &quot;company_id&quot; : 1,
+              &quot;segment_2_tag_ids&quot; : &quot;1,2,3&quot;,
+              &quot;fiscal_year&quot; : 2019,
+              &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot
+              &quot;balances&quot; : [{
+                &quot;account_item_id&quot; : 1500,
+                &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,
+                &quot;hierarchy_level&quot; : 2,
+                &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,
+                &quot;closing_balance&quot; : 1000000,
+                &quot;segment_2_tags&quot; : [{
+                  &quot;id&quot;: 1
+                  &quot;name&quot;: &quot;プロジェクトA&quot;,
+                  &quot;closing_balance&quot; : 100000
+                },
+                {
+                  &quot;id&quot;: 2
+                  &quot;name&quot;: &quot;プロジェクトB&quot;,
+                  &quot;closing_balance&quot; : 200000
+                },
+                {
+                  &quot;id&quot;: 3
+                  &quot;name&quot;: &quot;プロジェクトC&quot;,
+                  &quot;closing_balance&quot; : 300000
+                },
+                ...
+                ]
+              },
+              ...
+              ]
+            }
+        }</code></pre>
+      operationId: get_trial_cr_segment_2_tags
+      summary: 製造原価報告書(セグメント2比較)の取得
+  "/api/1/reports/trial_cr_segment_3_tags":
+    get:
+      parameters:
+      - description: 事業所ID
+        in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 出力するセグメント3タグの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択のセグメントで比較できます）
+        in: query
+        name: segment_3_tag_ids
+        required: true
+        schema:
+          type: string
+      - description: 会計年度
+        in: query
+        name: fiscal_year
+        schema:
+          type: integer
+      - description: 発生月で絞込：開始会計月(1-12)
+        in: query
+        name: start_month
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: 発生月で絞込：終了会計月(1-12)
+        in: query
+        name: end_month
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: 発生日で絞込：開始日(yyyy-mm-dd)
+        in: query
+        name: start_date
+        schema:
+          type: string
+      - description: 発生日で絞込：終了日(yyyy-mm-dd)
+        in: query
+        name: end_date
+        schema:
+          type: string
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+        in: query
+        name: account_item_display_type
+        schema:
+          enum:
+          - account_item
+          - group
+          type: string
+      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）
+          ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+        in: query
+        name: breakdown_display_type
+        schema:
+          enum:
+          - partner
+          - item
+          - section
+          - account_item
+          type: string
+      - description: 取引先IDで絞込（0を指定すると、取引先が未選択で絞り込めます）
+        in: query
+        name: partner_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: 取引先コードで絞込（事業所設定で取引先コードの利用を有効にしている場合のみ利用可能です）
+        in: query
+        name: partner_code
+        schema:
+          type: string
+      - description: 品目IDで絞込（0を指定すると、品目が未選択で絞り込めます）
+        in: query
+        name: item_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: 部門IDで絞込（0を指定すると、部門が未選択で絞り込めます）
+        in: query
+        name: section_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+        in: query
+        name: adjustment
+        schema:
+          enum:
+          - only
+          - without
+          type: string
+      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）
+        in: query
+        name: cost_allocation
+        schema:
+          enum:
+          - only
+          - without
+          type: string
+      - description: |
+          承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>
+          個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>
+          事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。
+        in: query
+        name: approval_flow_status
+        schema:
+          enum:
+          - without_in_progress
+          - all
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/trialCrSegment_3TagsResponse"
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/badRequestError"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '429':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/tooManyRequestsError"
+          description: ''
+        '500':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - Trial balance
+      description: |2
+
+        <h2 id="">概要</h2>
+
+        <p>指定した事業所の製造原価報告書(セグメント3比較)を取得する</p>
+
+        <h2 id="_2">定義</h2>
+
+        <ul>
+
+        <li>
+        <p>created_at : 作成日時</p>
+        </li>
+
+        <li>
+        <p>account_item_name : 勘定科目名</p>
+        </li>
+
+        <li>
+        <p>hierarchy_level: 階層レベル</p>
+        </li>
+
+        <li>
+        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
+        </li>
+        <li>
+        <p>closing_balance : 期末残高 </p>
+        </li>
+        <h2 id="_3">注意点</h2>
+        <ul>
+        <li>法人向けのエンタープライズプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
+        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+        <li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>
+        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
+        </ul>
+        <h2 id="_4">レスポンスの例</h2>
+
+        <blockquote>
+        <p>GET https://api.freee.co.jp/api/1/reports/trial_cr_segment_3_tags?company_id=1&amp;segment_3_tag_ids=1,2,3&amp;fiscal_year=2019</p></p>
+        </blockquote>
+
+        <pre><code>{
+          &quot;trial_cr_segment_3_tags&quot; :
+            {
+              &quot;company_id&quot; : 1,
+              &quot;segment_3_tag_ids&quot; : &quot;1,2,3&quot;,
+              &quot;fiscal_year&quot; : 2019,
+              &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot
+              &quot;balances&quot; : [{
+                &quot;account_item_id&quot; : 1500,
+                &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,
+                &quot;hierarchy_level&quot; : 2,
+                &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,
+                &quot;closing_balance&quot; : 1000000,
+                &quot;segment_3_tags&quot; : [{
+                  &quot;id&quot;: 1
+                  &quot;name&quot;: &quot;プロジェクトA&quot;,
+                  &quot;closing_balance&quot; : 100000
+                },
+                {
+                  &quot;id&quot;: 2
+                  &quot;name&quot;: &quot;プロジェクトB&quot;,
+                  &quot;closing_balance&quot; : 200000
+                },
+                {
+                  &quot;id&quot;: 3
+                  &quot;name&quot;: &quot;プロジェクトC&quot;,
+                  &quot;closing_balance&quot; : 300000
+                },
+                ...
+                ]
+              },
+              ...
+              ]
+            }
+        }</code></pre>
+      operationId: get_trial_cr_segment_3_tags
+      summary: 製造原価報告書(セグメント3比較)の取得
+  "/api/1/reports/trial_cr_three_years":
+    get:
+      parameters:
+      - description: 事業所ID
+        in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 会計年度
+        in: query
+        name: fiscal_year
+        schema:
+          type: integer
+      - description: 発生月で絞込：開始会計月(1-12)
+        in: query
+        name: start_month
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: 発生月で絞込：終了会計月(1-12)
+        in: query
+        name: end_month
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: 発生日で絞込：開始日(yyyy-mm-dd)
+        in: query
+        name: start_date
+        schema:
+          type: string
+      - description: 発生日で絞込：終了日(yyyy-mm-dd)
+        in: query
+        name: end_date
+        schema:
+          type: string
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+        in: query
+        name: account_item_display_type
+        schema:
+          enum:
+          - account_item
+          - group
+          type: string
+      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
+          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
+          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+        in: query
+        name: breakdown_display_type
+        schema:
+          enum:
+          - partner
+          - item
+          - section
+          - account_item
+          - segment_1_tag
+          - segment_2_tag
+          - segment_3_tag
+          type: string
+      - description: 取引先IDで絞込（0を指定すると、取引先が未選択で絞り込めます）
+        in: query
+        name: partner_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: 取引先コードで絞込（事業所設定で取引先コードの利用を有効にしている場合のみ利用可能です）
+        in: query
+        name: partner_code
+        schema:
+          type: string
+      - description: 品目IDで絞込（0を指定すると、品目が未選択で絞り込めます）
+        in: query
+        name: item_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: 部門IDで絞込（0を指定すると、部門が未選択で絞り込めます）
+        in: query
+        name: section_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+        in: query
+        name: adjustment
+        schema:
+          enum:
+          - only
+          - without
+          type: string
+      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）
+        in: query
+        name: cost_allocation
+        schema:
+          enum:
+          - only
+          - without
+          type: string
+      - description: |
+          承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト), 全てのステータス: all)<br>
+          個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>
+          事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。
+        in: query
+        name: approval_flow_status
+        schema:
+          enum:
+          - without_in_progress
+          - all
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/trialCrThreeYearsResponse"
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/badRequestError"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '429':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/tooManyRequestsError"
+          description: ''
+        '500':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - Trial balance
+      description: |2
+
+        <h2 id="">概要</h2>
+
+        <p>指定した事業所の製造原価報告書(３期間比較)を取得する</p>
+
+        <h2 id="_2">定義</h2>
+
+        <ul>
+
+        <li>
+        <p>created_at : 作成日時</p>
+        </li>
+
+        <li>
+        <p>account_item_name : 勘定科目名</p>
+        </li>
+
+        <li>
+        <p>hierarchy_level: 階層レベル</p>
+        </li>
+
+        <li>
+        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
+        </li>
+        <li>
+        <p>two_years_before_closing_balance:  前々年度期末残高 </p>
+        </li>
+        <li>
+        <p>last_year_closing_balance:  前年度期末残高 </p>
+        </li>
+        <li>
+        <p>closing_balance : 期末残高 </p>
+        </li>
+        <li>
+        <p>year_on_year : 前年比</p>
+        </li>
+        <h2 id="_3">注意点</h2>
+        <ul>
+        <li>法人向けのプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
+        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+        <li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>
+        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+        <li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>
+        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
+        </ul>
+        <h2 id="_4">レスポンスの例</h2>
+
+        <blockquote>
+        <p>GET https://api.freee.co.jp/api/1/reports/trial_cr_three_years?company_id=1&fiscal_year=2019</p>
+        </blockquote>
+
+        <pre><code>{
+          &quot;trial_cr_three_years&quot; :
+            {
+              &quot;company_id&quot; : 1,
+              &quot;fiscal_year&quot; : 2019,
+              &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot
+              &quot;balances&quot; : [{
+                &quot;account_item_id&quot; : 1500,
+                &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,
+                &quot;hierarchy_level&quot; : 2,
+                &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,
+                &quot;two_year_before_closing_balance&quot; : 50000,
+                &quot;last_year_closing_balance&quot; : 25000,
+                &quot;closing_balance&quot; : 100000,
+                &quot;year_on_year&quot; : 0.85
+              },
+              ...
+              ]
+            }
+        }</code></pre>
+      operationId: get_trial_cr_three_years
+      summary: 製造原価報告書(３期間比較)の取得
+  "/api/1/reports/trial_cr_two_years":
+    get:
+      parameters:
+      - description: 事業所ID
+        in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 会計年度
+        in: query
+        name: fiscal_year
+        schema:
+          type: integer
+      - description: 発生月で絞込：開始会計月(1-12)
+        in: query
+        name: start_month
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: 発生月で絞込：終了会計月(1-12)
+        in: query
+        name: end_month
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: 発生日で絞込：開始日(yyyy-mm-dd)
+        in: query
+        name: start_date
+        schema:
+          type: string
+      - description: 発生日で絞込：終了日(yyyy-mm-dd)
+        in: query
+        name: end_date
+        schema:
+          type: string
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+        in: query
+        name: account_item_display_type
+        schema:
+          enum:
+          - account_item
+          - group
+          type: string
+      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
+          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
+          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+        in: query
+        name: breakdown_display_type
+        schema:
+          enum:
+          - partner
+          - item
+          - section
+          - account_item
+          - segment_1_tag
+          - segment_2_tag
+          - segment_3_tag
+          type: string
+      - description: 取引先IDで絞込（0を指定すると、取引先が未選択で絞り込めます）
+        in: query
+        name: partner_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: 取引先コードで絞込（事業所設定で取引先コードの利用を有効にしている場合のみ利用可能です）
+        in: query
+        name: partner_code
+        schema:
+          type: string
+      - description: 品目IDで絞込（0を指定すると、品目が未選択で絞り込めます）
+        in: query
+        name: item_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: 部門IDで絞込（0を指定すると、部門が未選択で絞り込めます）
+        in: query
+        name: section_id
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+        in: query
+        name: adjustment
+        schema:
+          enum:
+          - only
+          - without
+          type: string
+      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）
+        in: query
+        name: cost_allocation
+        schema:
+          enum:
+          - only
+          - without
+          type: string
+      - description: |
+          承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト), 全てのステータス: all)<br>
+          個人: プレミアムプラン、法人: プロフェッショナルプラン以上で指定可能です。<br>
+          事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。
+        in: query
+        name: approval_flow_status
+        schema:
+          enum:
+          - without_in_progress
+          - all
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/trialCrTwoYearsResponse"
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/badRequestError"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '429':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/tooManyRequestsError"
+          description: ''
+        '500':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - Trial balance
+      description: |2
+
+        <h2 id="">概要</h2>
+
+        <p>指定した事業所の製造原価報告書(前年比較)を取得する</p>
+
+        <h2 id="_2">定義</h2>
+
+        <ul>
+
+        <li>
+        <p>created_at : 作成日時</p>
+        </li>
+
+        <li>
+        <p>account_item_name : 勘定科目名</p>
+        </li>
+
+        <li>
+        <p>hierarchy_level: 階層レベル</p>
+        </li>
+
+        <li>
+        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
+        </li>
+        <li>
+        <p>last_year_closing_balance:  前年度期末残高 </p>
+        </li>
+        <li>
+        <p>closing_balance : 期末残高 </p>
+        </li>
+        <li>
+        <p>year_on_year : 前年比</p>
+        </li>
+        <h2 id="_3">注意点</h2>
+        <ul>
+        <li>法人向けのプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
+        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+        <li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>
+        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+        <li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>
+        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
+        </ul>
+
+        <h2 id="_4">レスポンスの例</h2>
+
+        <blockquote>
+        <p>GET https://api.freee.co.jp/api/1/reports/trial_cr_two_years?company_id=1&amp;fiscal_year=2019</p>
+        </blockquote>
+
+        <pre><code>{
+          &quot;trial_cr_two_years&quot; :
+            {
+              &quot;company_id&quot; : 1,
+              &quot;fiscal_year&quot; : 2019,
+              &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot
+              &quot;balances&quot; : [{
+                &quot;account_item_id&quot; : 1500,
+                &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,
+                &quot;hierarchy_level&quot; : 2,
+                &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,
+                &quot;last_year_closing_balance&quot; : 25000,
+                &quot;closing_balance&quot; : 100000,
+                &quot;year_on_year&quot; : 0.85
+
+              },
+              ...
+              ]
+            }
+        }</code></pre>
+      operationId: get_trial_cr_two_years
+      summary: 製造原価報告書(前年比較)の取得
   "/api/1/reports/trial_pl":
     get:
       parameters:
@@ -13607,7 +15254,8 @@ components:
                   type:
                     description: '項目種別 (title: 申請タイトル, single_line: 自由記述形式 1行, multi_line:
                       自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt: 添付ファイル,
-                      section: 部門ID, partner: 取引先ID)'
+                      section: 部門ID, partner: 取引先ID, ninja_sign_document: 契約書（NINJA
+                      SIGN連携）)'
                     enum:
                     - title
                     - single_line
@@ -13618,6 +15266,7 @@ components:
                     - receipt
                     - section
                     - partner
+                    - ninja_sign_document
                     example: single_line
                     type: string
                   values:
@@ -13776,7 +15425,8 @@ components:
                       type:
                         description: '項目種別 (title: 申請タイトル, single_line: 自由記述形式 1行,
                           multi_line: 自由記述形式 複数行, select: プルダウン, date: 日付, amount:
-                          金額, receipt: 添付ファイル, section: 部門ID, partner: 取引先ID)'
+                          金額, receipt: 添付ファイル, section: 部門ID, partner: 取引先ID, ninja_sign_document:
+                          契約書（NINJA SIGN連携）)'
                         enum:
                         - title
                         - single_line
@@ -13787,6 +15437,7 @@ components:
                         - receipt
                         - section
                         - partner
+                        - ninja_sign_document
                         example: single_line
                         type: string
                       values:
@@ -13984,7 +15635,8 @@ components:
                   type:
                     description: '項目タイプ(title: 申請タイトル, single_line: 自由記述形式 1行, multi_line:
                       自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt: 添付ファイル,
-                      section: 部門ID, partner: 取引先ID)'
+                      section: 部門ID, partner: 取引先ID, ninja_sign_document: 契約書（NINJA
+                      SIGN連携）)'
                     enum:
                     - title
                     - single_line
@@ -13995,6 +15647,7 @@ components:
                     - receipt
                     - section
                     - partner
+                    - ninja_sign_document
                     example: single_line
                     type: string
                   value:
@@ -14200,7 +15853,8 @@ components:
                     type:
                       description: '項目タイプ(title: 申請タイトル, single_line: 自由記述形式 1行, multi_line:
                         自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt:
-                        添付ファイル, section: 部門ID, partner: 取引先ID)'
+                        添付ファイル, section: 部門ID, partner: 取引先ID, ninja_sign_document:
+                        契約書（NINJA SIGN連携）)'
                       enum:
                       - title
                       - single_line
@@ -14211,6 +15865,7 @@ components:
                       - receipt
                       - section
                       - partner
+                      - ninja_sign_document
                       example: single_line
                       type: string
                     value:
