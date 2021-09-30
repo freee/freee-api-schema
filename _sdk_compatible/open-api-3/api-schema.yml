@@ -16789,7 +16789,7 @@ components:
                 type: string
               amount:
                 description: 金額
-                example: 108000
+                example: 100000
                 maximum: 9223372036854775807
                 minimum: -9223372036854775808
                 type: integer
@@ -16923,7 +16923,7 @@ components:
                 type: number
               vat:
                 description: 消費税額
-                example: 8000
+                example: 10000
                 type: integer
             required:
               - account_item_id

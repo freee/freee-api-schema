@@ -34556,12 +34556,12 @@
                       "minimum": -9223372036854775808,
                       "maximum": 9223372036854775807,
                       "description": "金額",
-                      "example": 108000
+                      "example": 100000
                     },
                     "vat": {
                       "type": "integer",
                       "description": "消費税額",
-                      "example": 8000
+                      "example": 10000
                     },
                     "reduced_vat": {
                       "type": "boolean",
