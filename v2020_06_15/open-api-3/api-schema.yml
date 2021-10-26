@@ -8194,6 +8194,9 @@ paths:
         <li>
         <p>closing_balance : 期末残高 </p>
         </li>
+        <li>
+        <p>year_on_year : 前年比</p>
+        </li>
         <h2 id="_3">注意点</h2>
         <ul>
         <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
@@ -8476,7 +8479,7 @@ paths:
           maximum: 2147483647
           minimum: 1
           type: integer
-      - description: 出力する部門の指定（半角数字のidを半角カンマ区切りスペースなしで指定してください）
+      - description: 出力する部門の指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択の部門で比較できます）
         in: query
         name: section_ids
         required: true
@@ -10118,7 +10121,7 @@ paths:
           maximum: 2147483647
           minimum: 1
           type: integer
-      - description: 出力する部門の指定（半角数字のidを半角カンマ区切りスペースなしで指定してください）
+      - description: 出力する部門の指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択の部門で比較できます。）
         in: query
         name: section_ids
         required: true
@@ -21139,28 +21142,31 @@ components:
       properties:
         partner:
           properties:
-            address_attributes[prefecture_code]:
-              description: '都道府県コード（-1: 設定しない、0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄'
-              example: 4
-              maximum: 46
-              minimum: -1
-              nullable: true
-              type: integer
-            address_attributes[street_name1]:
-              description: 市区町村・番地
-              example: ＸＸ区ＹＹ１−１−１
-              nullable: true
-              type: string
-            address_attributes[street_name2]:
-              description: 建物名・部屋番号など
-              example: ビル１Ｆ
-              nullable: true
-              type: string
-            address_attributes[zipcode]:
-              description: 郵便番号
-              example: 000-0000
-              nullable: true
-              type: string
+            address_attributes:
+              properties:
+                prefecture_codes:
+                  description: '都道府県コード（-1: 設定しない、0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄'
+                  example: 4
+                  maximum: 46
+                  minimum: -1
+                  nullable: true
+                  type: integer
+                street_name1:
+                  description: 市区町村・番地
+                  example: ＸＸ区ＹＹ１−１−１
+                  nullable: true
+                  type: string
+                street_name2:
+                  description: 建物名・部屋番号など
+                  example: ビル１Ｆ
+                  nullable: true
+                  type: string
+                zipcode:
+                  description: 郵便番号
+                  example: 000-0000
+                  nullable: true
+                  type: string
+              type: object
             available:
               description: |-
                 取引先の使用設定（true: 使用する、false: 使用しない）
@@ -21216,27 +21222,30 @@ components:
               maximum: 2147483647
               minimum: 1
               type: integer
-            invoice_payment_term_attributes[additional_months]:
-              description: 支払月
-              example: 1
-              maximum: 6
-              minimum: 1
-              nullable: true
-              type: integer
-            invoice_payment_term_attributes[cutoff_day]:
-              description: 締め日（29, 30, 31日の末日を指定する場合は、32。）
-              example: 15
-              maximum: 32
-              minimum: 1
-              nullable: true
-              type: integer
-            invoice_payment_term_attributes[fixed_day]:
-              description: 支払日（29, 30, 31日の末日を指定する場合は、32。）
-              example: 32
-              maximum: 32
-              minimum: 1
-              nullable: true
-              type: integer
+            invoice_payment_term_attributes:
+              properties:
+                additional_months:
+                  description: 支払月
+                  example: 1
+                  maximum: 6
+                  minimum: 1
+                  nullable: true
+                  type: integer
+                cutoff_day:
+                  description: 締め日（29, 30, 31日の末日を指定する場合は、32。）
+                  example: 15
+                  maximum: 32
+                  minimum: 1
+                  nullable: true
+                  type: integer
+                fixed_day:
+                  description: 支払日（29, 30, 31日の末日を指定する場合は、32。）
+                  example: 32
+                  maximum: 32
+                  minimum: 1
+                  nullable: true
+                  type: integer
+              type: object
             long_name:
               description: 正式名称（255文字以内）
               example: 新しい取引先正式名称
@@ -21260,71 +21269,77 @@ components:
               minimum: 1
               nullable: true
               type: integer
-            partner_bank_account_attributes[account_name]:
-              description: 受取人名（カナ）
-              example: フリータロウ
-              nullable: true
-              type: string
-            partner_bank_account_attributes[account_number]:
-              description: 口座番号
-              example: '1010101'
-              nullable: true
-              type: string
-            partner_bank_account_attributes[account_type]:
-              description: 口座種別(ordinary:普通、checking:当座、earmarked:納税準備預金、savings:貯蓄、other:その他)
-              enum:
-              - ordinary
-              - checking
-              - earmarked
-              - savings
-              - other
-              example: ordinary
-              nullable: true
-              type: string
-            partner_bank_account_attributes[bank_code]:
-              description: 銀行コード
-              example: '0001'
-              nullable: true
-              type: string
-            partner_bank_account_attributes[bank_name]:
-              description: 銀行名
-              example: freee銀行
-              nullable: true
-              type: string
-            partner_bank_account_attributes[bank_name_kana]:
-              description: 銀行名（カナ）
-              example: フリーギンコウ
-              nullable: true
-              type: string
-            partner_bank_account_attributes[branch_code]:
-              description: 支店番号
-              example: '999'
-              nullable: true
-              type: string
-            partner_bank_account_attributes[branch_kana]:
-              description: 支店名（カナ）
-              example: ギンザシテン
-              nullable: true
-              type: string
-            partner_bank_account_attributes[branch_name]:
-              description: 支店名
-              example: 銀座支店
-              nullable: true
-              type: string
-            partner_bank_account_attributes[long_account_name]:
-              description: 受取人名
-              example: freee太郎
-              nullable: true
-              type: string
-            partner_doc_setting_attributes[sending_method]:
-              description: 請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送)
-              enum:
-              - email
-              - posting
-              - email_and_posting
-              example: posting
-              nullable: true
-              type: string
+            partner_bank_account_attributes:
+              properties:
+                account_name:
+                  description: 受取人名（カナ）
+                  example: フリータロウ
+                  nullable: true
+                  type: string
+                account_number:
+                  description: 口座番号
+                  example: '1010101'
+                  nullable: true
+                  type: string
+                account_type:
+                  description: 口座種別(ordinary:普通、checking:当座、earmarked:納税準備預金、savings:貯蓄、other:その他)
+                  enum:
+                  - ordinary
+                  - checking
+                  - earmarked
+                  - savings
+                  - other
+                  example: ordinary
+                  nullable: true
+                  type: string
+                bank_code:
+                  description: 銀行コード
+                  example: '0001'
+                  nullable: true
+                  type: string
+                bank_name:
+                  description: 銀行名
+                  example: freee銀行
+                  nullable: true
+                  type: string
+                bank_name_kana:
+                  description: 銀行名（カナ）
+                  example: フリーギンコウ
+                  nullable: true
+                  type: string
+                branch_code:
+                  description: 支店番号
+                  example: '999'
+                  nullable: true
+                  type: string
+                branch_kana:
+                  description: 支店名（カナ）
+                  example: ギンザシテン
+                  nullable: true
+                  type: string
+                branch_name:
+                  description: 支店名
+                  example: 銀座支店
+                  nullable: true
+                  type: string
+                long_account_name:
+                  description: 受取人名
+                  example: freee太郎
+                  nullable: true
+                  type: string
+              type: object
+            partner_doc_setting_attributes:
+              properties:
+                sending_method:
+                  description: 請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送)
+                  enum:
+                  - email
+                  - posting
+                  - email_and_posting
+                  example: posting
+                  nullable: true
+                  type: string
+              type: object
             payer_walletable_id:
               description: 振込元口座ID（一括振込ファイル用）:（未設定の場合は、nullです。）
               example: 1
@@ -21332,27 +21347,30 @@ components:
               minimum: 1
               nullable: true
               type: integer
-            payment_term_attributes[additional_months]:
-              description: 支払月
-              example: 1
-              maximum: 6
-              minimum: 1
-              nullable: true
-              type: integer
-            payment_term_attributes[cutoff_day]:
-              description: 締め日（29, 30, 31日の末日を指定する場合は、32。）
-              example: 15
-              maximum: 32
-              minimum: 1
-              nullable: true
-              type: integer
-            payment_term_attributes[fixed_day]:
-              description: 支払日（29, 30, 31日の末日を指定する場合は、32。）
-              example: 32
-              maximum: 32
-              minimum: 1
-              nullable: true
-              type: integer
+            payment_term_attributes:
+              properties:
+                additional_months:
+                  description: 支払月
+                  example: 1
+                  maximum: 6
+                  minimum: 1
+                  nullable: true
+                  type: integer
+                cutoff_day:
+                  description: 締め日（29, 30, 31日の末日を指定する場合は、32。）
+                  example: 15
+                  maximum: 32
+                  minimum: 1
+                  nullable: true
+                  type: integer
+                fixed_day:
+                  description: 支払日（29, 30, 31日の末日を指定する場合は、32。）
+                  example: 32
+                  maximum: 32
+                  minimum: 1
+                  nullable: true
+                  type: integer
+              type: object
             phone:
               description: 電話番号
               example: 03-1234-xxxx
@@ -21601,28 +21619,31 @@ components:
         partners:
           items:
             properties:
-              address_attributes[prefecture_code]:
-                description: '都道府県コード（-1: 設定しない、0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄'
-                example: 4
-                maximum: 46
-                minimum: -1
-                nullable: true
-                type: integer
-              address_attributes[street_name1]:
-                description: 市区町村・番地
-                example: ＸＸ区ＹＹ１−１−１
-                nullable: true
-                type: string
-              address_attributes[street_name2]:
-                description: 建物名・部屋番号など
-                example: ビル１Ｆ
-                nullable: true
-                type: string
-              address_attributes[zipcode]:
-                description: 郵便番号
-                example: 000-0000
-                nullable: true
-                type: string
+              address_attributes:
+                properties:
+                  prefecture_code:
+                    description: '都道府県コード（-1: 設定しない、0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄'
+                    example: 4
+                    maximum: 46
+                    minimum: -1
+                    nullable: true
+                    type: integer
+                  street_name1:
+                    description: 市区町村・番地
+                    example: ＸＸ区ＹＹ１−１−１
+                    nullable: true
+                    type: string
+                  street_name2:
+                    description: 建物名・部屋番号など
+                    example: ビル１Ｆ
+                    nullable: true
+                    type: string
+                  zipcode:
+                    description: 郵便番号
+                    example: 000-0000
+                    nullable: true
+                    type: string
+                type: object
               available:
                 description: |-
                   取引先の使用設定（true: 使用する、false: 使用しない）
@@ -21701,71 +21722,77 @@ components:
                 minimum: 1
                 nullable: true
                 type: integer
-              partner_bank_account_attributes[account_name]:
-                description: 受取人名（カナ）
-                example: フリータロウ
-                nullable: true
-                type: string
-              partner_bank_account_attributes[account_number]:
-                description: 口座番号
-                example: '1010101'
-                nullable: true
-                type: string
-              partner_bank_account_attributes[account_type]:
-                description: 口座種別(ordinary:普通、checking:当座、earmarked:納税準備預金、savings:貯蓄、other:その他)
-                enum:
-                - ordinary
-                - checking
-                - earmarked
-                - savings
-                - other
-                example: ordinary
-                nullable: true
-                type: string
-              partner_bank_account_attributes[bank_code]:
-                description: 銀行コード
-                example: '0001'
-                nullable: true
-                type: string
-              partner_bank_account_attributes[bank_name]:
-                description: 銀行名
-                example: freee銀行
-                nullable: true
-                type: string
-              partner_bank_account_attributes[bank_name_kana]:
-                description: 銀行名（カナ）
-                example: フリーギンコウ
-                nullable: true
-                type: string
-              partner_bank_account_attributes[branch_code]:
-                description: 支店番号
-                example: '999'
-                nullable: true
-                type: string
-              partner_bank_account_attributes[branch_kana]:
-                description: 支店名（カナ）
-                example: ギンザシテン
-                nullable: true
-                type: string
-              partner_bank_account_attributes[branch_name]:
-                description: 支店名
-                example: 銀座支店
-                nullable: true
-                type: string
-              partner_bank_account_attributes[long_account_name]:
-                description: 受取人名
-                example: freee太郎
-                nullable: true
-                type: string
-              partner_doc_setting_attributes[sending_method]:
-                description: 請求書送付方法(mail:メール、posting:郵送、mail_and_posting:メールと郵送)
-                enum:
-                - mail
-                - posting
-                - main_and_posting
-                example: posting
-                nullable: true
-                type: string
+              partner_bank_account_attributes:
+                properties:
+                  account_name:
+                    description: 受取人名（カナ）
+                    example: フリータロウ
+                    nullable: true
+                    type: string
+                  account_number:
+                    description: 口座番号
+                    example: '1010101'
+                    nullable: true
+                    type: string
+                  account_type:
+                    description: 口座種別(ordinary:普通、checking:当座、earmarked:納税準備預金、savings:貯蓄、other:その他)
+                    enum:
+                    - ordinary
+                    - checking
+                    - earmarked
+                    - savings
+                    - other
+                    example: ordinary
+                    nullable: true
+                    type: string
+                  bank_code:
+                    description: 銀行コード
+                    example: '0001'
+                    nullable: true
+                    type: string
+                  bank_name:
+                    description: 銀行名
+                    example: freee銀行
+                    nullable: true
+                    type: string
+                  bank_name_kana:
+                    description: 銀行名（カナ）
+                    example: フリーギンコウ
+                    nullable: true
+                    type: string
+                  branch_code:
+                    description: 支店番号
+                    example: '999'
+                    nullable: true
+                    type: string
+                  branch_kana:
+                    description: 支店名（カナ）
+                    example: ギンザシテン
+                    nullable: true
+                    type: string
+                  branch_name:
+                    description: 支店名
+                    example: 銀座支店
+                    nullable: true
+                    type: string
+                  long_account_name:
+                    description: 受取人名
+                    example: freee太郎
+                    nullable: true
+                    type: string
+                type: object
+              partner_doc_setting_attributes:
+                properties:
+                  sending_method:
+                    description: 請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送)
+                    enum:
+                    - email
+                    - posting
+                    - email_and_posting
+                    example: posting
+                    nullable: true
+                    type: string
+                type: object
               payer_walletable_id:
                 description: 振込元口座ID（一括振込ファイル用）:（未設定の場合は、nullです。）
                 example: 1

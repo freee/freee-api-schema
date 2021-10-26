@@ -8924,7 +8924,7 @@
           "Trial balance"
         ],
         "summary": "貸借対照表(前年比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の貸借対照表(前年比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_bs_two_years?company_id=1&amp;fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_bs_two_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1000,\n        &quot;account_item_name&quot; : &quot;現金&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;流動資産&quot;,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の貸借対照表(前年比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>year_on_year : 前年比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>絞り込み条件の日付と、月または年度は同時に指定することはできません。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_bs_two_years?company_id=1&amp;fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_bs_two_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1000,\n        &quot;account_item_name&quot; : &quot;現金&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;流動資産&quot;,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
         "operationId": "get_trial_bs_two_years",
         "parameters": [
           {
@@ -10077,7 +10077,7 @@
           {
             "name": "section_ids",
             "in": "query",
-            "description": "出力する部門の指定（半角数字のidを半角カンマ区切りスペースなしで指定してください）",
+            "description": "出力する部門の指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択の部門で比較できます。）",
             "required": true,
             "schema": {
               "type": "string"
@@ -11717,7 +11717,7 @@
           {
             "name": "section_ids",
             "in": "query",
-            "description": "出力する部門の指定（半角数字のidを半角カンマ区切りスペースなしで指定してください）",
+            "description": "出力する部門の指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択の部門で比較できます）",
             "required": true,
             "schema": {
               "type": "string"
@@ -29280,109 +29280,124 @@
                     "payee"
                   ]
                 },
-                "address_attributes[zipcode]": {
-                  "type": "string",
-                  "description": "郵便番号",
-                  "example": "000-0000",
-                  "nullable": true
+                "address_attributes": {
+                  "type": "object",
+                  "properties": {
+                    "zipcode": {
+                      "type": "string",
+                      "description": "郵便番号",
+                      "example": "000-0000",
+                      "nullable": true
+                    },
+                    "prefecture_code": {
+                      "type": "integer",
+                      "minimum": -1,
+                      "maximum": 46,
+                      "description": "都道府県コード（-1: 設定しない、0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
+                      "example": 4,
+                      "nullable": true
+                    },
+                    "street_name1": {
+                      "type": "string",
+                      "description": "市区町村・番地",
+                      "example": "ＸＸ区ＹＹ１−１−１",
+                      "nullable": true
+                    },
+                    "street_name2": {
+                      "type": "string",
+                      "description": "建物名・部屋番号など",
+                      "example": "ビル１Ｆ",
+                      "nullable": true
+                    }
+                  }
                 },
-                "address_attributes[prefecture_code]": {
-                  "type": "integer",
-                  "minimum": -1,
-                  "maximum": 46,
-                  "description": "都道府県コード（-1: 設定しない、0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
-                  "example": 4,
-                  "nullable": true
+                "partner_doc_setting_attributes": {
+                  "type": "object",
+                  "properties": {
+                    "sending_method": {
+                      "type": "string",
+                      "description": "請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送)",
+                      "example": "posting",
+                      "enum": [
+                        "email",
+                        "posting",
+                        "email_and_posting"
+                      ],
+                      "nullable": true
+                    }
+                  }
                 },
-                "address_attributes[street_name1]": {
-                  "type": "string",
-                  "description": "市区町村・番地",
-                  "example": "ＸＸ区ＹＹ１−１−１",
-                  "nullable": true
-                },
-                "address_attributes[street_name2]": {
-                  "type": "string",
-                  "description": "建物名・部屋番号など",
-                  "example": "ビル１Ｆ",
-                  "nullable": true
-                },
-                "partner_doc_setting_attributes[sending_method]": {
-                  "type": "string",
-                  "description": "請求書送付方法(mail:メール、posting:郵送、mail_and_posting:メールと郵送)",
-                  "example": "posting",
-                  "enum": [
-                    "mail",
-                    "posting",
-                    "main_and_posting"
-                  ],
-                  "nullable": true
-                },
-                "partner_bank_account_attributes[bank_name]": {
-                  "type": "string",
-                  "description": "銀行名",
-                  "example": "freee銀行",
-                  "nullable": true
-                },
-                "partner_bank_account_attributes[bank_name_kana]": {
-                  "type": "string",
-                  "description": "銀行名（カナ）",
-                  "example": "フリーギンコウ",
-                  "nullable": true
-                },
-                "partner_bank_account_attributes[bank_code]": {
-                  "type": "string",
-                  "description": "銀行コード",
-                  "example": "0001",
-                  "nullable": true
-                },
-                "partner_bank_account_attributes[branch_name]": {
-                  "type": "string",
-                  "description": "支店名",
-                  "example": "銀座支店",
-                  "nullable": true
-                },
-                "partner_bank_account_attributes[branch_kana]": {
-                  "type": "string",
-                  "description": "支店名（カナ）",
-                  "example": "ギンザシテン",
-                  "nullable": true
-                },
-                "partner_bank_account_attributes[branch_code]": {
-                  "type": "string",
-                  "description": "支店番号",
-                  "example": "999",
-                  "nullable": true
-                },
-                "partner_bank_account_attributes[account_type]": {
-                  "type": "string",
-                  "description": "口座種別(ordinary:普通、checking:当座、earmarked:納税準備預金、savings:貯蓄、other:その他)",
-                  "example": "ordinary",
-                  "enum": [
-                    "ordinary",
-                    "checking",
-                    "earmarked",
-                    "savings",
-                    "other"
-                  ],
-                  "nullable": true
-                },
-                "partner_bank_account_attributes[account_number]": {
-                  "type": "string",
-                  "description": "口座番号",
-                  "example": "1010101",
-                  "nullable": true
-                },
-                "partner_bank_account_attributes[account_name]": {
-                  "type": "string",
-                  "description": "受取人名（カナ）",
-                  "example": "フリータロウ",
-                  "nullable": true
-                },
-                "partner_bank_account_attributes[long_account_name]": {
-                  "type": "string",
-                  "description": "受取人名",
-                  "example": "freee太郎",
-                  "nullable": true
+                "partner_bank_account_attributes": {
+                  "type": "object",
+                  "properties": {
+                    "bank_name": {
+                      "type": "string",
+                      "description": "銀行名",
+                      "example": "freee銀行",
+                      "nullable": true
+                    },
+                    "bank_name_kana": {
+                      "type": "string",
+                      "description": "銀行名（カナ）",
+                      "example": "フリーギンコウ",
+                      "nullable": true
+                    },
+                    "bank_code": {
+                      "type": "string",
+                      "description": "銀行コード",
+                      "example": "0001",
+                      "nullable": true
+                    },
+                    "branch_name": {
+                      "type": "string",
+                      "description": "支店名",
+                      "example": "銀座支店",
+                      "nullable": true
+                    },
+                    "branch_kana": {
+                      "type": "string",
+                      "description": "支店名（カナ）",
+                      "example": "ギンザシテン",
+                      "nullable": true
+                    },
+                    "branch_code": {
+                      "type": "string",
+                      "description": "支店番号",
+                      "example": "999",
+                      "nullable": true
+                    },
+                    "account_type": {
+                      "type": "string",
+                      "description": "口座種別(ordinary:普通、checking:当座、earmarked:納税準備預金、savings:貯蓄、other:その他)",
+                      "example": "ordinary",
+                      "enum": [
+                        "ordinary",
+                        "checking",
+                        "earmarked",
+                        "savings",
+                        "other"
+                      ],
+                      "nullable": true
+                    },
+                    "account_number": {
+                      "type": "string",
+                      "description": "口座番号",
+                      "example": "1010101",
+                      "nullable": true
+                    },
+                    "account_name": {
+                      "type": "string",
+                      "description": "受取人名（カナ）",
+                      "example": "フリータロウ",
+                      "nullable": true
+                    },
+                    "long_account_name": {
+                      "type": "string",
+                      "description": "受取人名",
+                      "example": "freee太郎",
+                      "nullable": true
+                    }
+                  }
                 }
               }
             }
@@ -29522,157 +29537,182 @@
                   "payee"
                 ]
               },
-              "address_attributes[zipcode]": {
-                "type": "string",
-                "description": "郵便番号",
-                "example": "000-0000",
-                "nullable": true
+              "address_attributes": {
+                "type": "object",
+                "properties": {
+                  "zipcode": {
+                    "type": "string",
+                    "description": "郵便番号",
+                    "example": "000-0000",
+                    "nullable": true
+                  },
+                  "prefecture_codes": {
+                    "type": "integer",
+                    "minimum": -1,
+                    "maximum": 46,
+                    "description": "都道府県コード（-1: 設定しない、0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
+                    "example": 4,
+                    "nullable": true
+                  },
+                  "street_name1": {
+                    "type": "string",
+                    "description": "市区町村・番地",
+                    "example": "ＸＸ区ＹＹ１−１−１",
+                    "nullable": true
+                  },
+                  "street_name2": {
+                    "type": "string",
+                    "description": "建物名・部屋番号など",
+                    "example": "ビル１Ｆ",
+                    "nullable": true
+                  }
+                }
               },
-              "address_attributes[prefecture_code]": {
-                "type": "integer",
-                "minimum": -1,
-                "maximum": 46,
-                "description": "都道府県コード（-1: 設定しない、0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
-                "example": 4,
-                "nullable": true
+              "partner_doc_setting_attributes": {
+                "type": "object",
+                "properties": {
+                  "sending_method": {
+                    "type": "string",
+                    "description": "請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送)",
+                    "example": "posting",
+                    "enum": [
+                      "email",
+                      "posting",
+                      "email_and_posting"
+                    ],
+                    "nullable": true
+                  }
+                }
               },
-              "address_attributes[street_name1]": {
-                "type": "string",
-                "description": "市区町村・番地",
-                "example": "ＸＸ区ＹＹ１−１−１",
-                "nullable": true
+              "partner_bank_account_attributes": {
+                "type": "object",
+                "properties": {
+                  "bank_name": {
+                    "type": "string",
+                    "description": "銀行名",
+                    "example": "freee銀行",
+                    "nullable": true
+                  },
+                  "bank_name_kana": {
+                    "type": "string",
+                    "description": "銀行名（カナ）",
+                    "example": "フリーギンコウ",
+                    "nullable": true
+                  },
+                  "bank_code": {
+                    "type": "string",
+                    "description": "銀行コード",
+                    "example": "0001",
+                    "nullable": true
+                  },
+                  "branch_name": {
+                    "type": "string",
+                    "description": "支店名",
+                    "example": "銀座支店",
+                    "nullable": true
+                  },
+                  "branch_kana": {
+                    "type": "string",
+                    "description": "支店名（カナ）",
+                    "example": "ギンザシテン",
+                    "nullable": true
+                  },
+                  "branch_code": {
+                    "type": "string",
+                    "description": "支店番号",
+                    "example": "999",
+                    "nullable": true
+                  },
+                  "account_type": {
+                    "type": "string",
+                    "description": "口座種別(ordinary:普通、checking:当座、earmarked:納税準備預金、savings:貯蓄、other:その他)",
+                    "example": "ordinary",
+                    "enum": [
+                      "ordinary",
+                      "checking",
+                      "earmarked",
+                      "savings",
+                      "other"
+                    ],
+                    "nullable": true
+                  },
+                  "account_number": {
+                    "type": "string",
+                    "description": "口座番号",
+                    "example": "1010101",
+                    "nullable": true
+                  },
+                  "account_name": {
+                    "type": "string",
+                    "description": "受取人名（カナ）",
+                    "example": "フリータロウ",
+                    "nullable": true
+                  },
+                  "long_account_name": {
+                    "type": "string",
+                    "description": "受取人名",
+                    "example": "freee太郎",
+                    "nullable": true
+                  }
+                }
               },
-              "address_attributes[street_name2]": {
-                "type": "string",
-                "description": "建物名・部屋番号など",
-                "example": "ビル１Ｆ",
-                "nullable": true
+              "payment_term_attributes": {
+                "type": "object",
+                "properties": {
+                  "cutoff_day": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 32,
+                    "description": "締め日（29, 30, 31日の末日を指定する場合は、32。）",
+                    "example": 15,
+                    "nullable": true
+                  },
+                  "additional_months": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 6,
+                    "description": "支払月",
+                    "example": 1,
+                    "nullable": true
+                  },
+                  "fixed_day": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 32,
+                    "description": "支払日（29, 30, 31日の末日を指定する場合は、32。）",
+                    "example": 32,
+                    "nullable": true
+                  }
+                }
               },
-              "partner_doc_setting_attributes[sending_method]": {
-                "type": "string",
-                "description": "請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送)",
-                "example": "posting",
-                "enum": [
-                  "email",
-                  "posting",
-                  "email_and_posting"
-                ],
-                "nullable": true
-              },
-              "partner_bank_account_attributes[bank_name]": {
-                "type": "string",
-                "description": "銀行名",
-                "example": "freee銀行",
-                "nullable": true
-              },
-              "partner_bank_account_attributes[bank_name_kana]": {
-                "type": "string",
-                "description": "銀行名（カナ）",
-                "example": "フリーギンコウ",
-                "nullable": true
-              },
-              "partner_bank_account_attributes[bank_code]": {
-                "type": "string",
-                "description": "銀行コード",
-                "example": "0001",
-                "nullable": true
-              },
-              "partner_bank_account_attributes[branch_name]": {
-                "type": "string",
-                "description": "支店名",
-                "example": "銀座支店",
-                "nullable": true
-              },
-              "partner_bank_account_attributes[branch_kana]": {
-                "type": "string",
-                "description": "支店名（カナ）",
-                "example": "ギンザシテン",
-                "nullable": true
-              },
-              "partner_bank_account_attributes[branch_code]": {
-                "type": "string",
-                "description": "支店番号",
-                "example": "999",
-                "nullable": true
-              },
-              "partner_bank_account_attributes[account_type]": {
-                "type": "string",
-                "description": "口座種別(ordinary:普通、checking:当座、earmarked:納税準備預金、savings:貯蓄、other:その他)",
-                "example": "ordinary",
-                "enum": [
-                  "ordinary",
-                  "checking",
-                  "earmarked",
-                  "savings",
-                  "other"
-                ],
-                "nullable": true
-              },
-              "partner_bank_account_attributes[account_number]": {
-                "type": "string",
-                "description": "口座番号",
-                "example": "1010101",
-                "nullable": true
-              },
-              "partner_bank_account_attributes[account_name]": {
-                "type": "string",
-                "description": "受取人名（カナ）",
-                "example": "フリータロウ",
-                "nullable": true
-              },
-              "partner_bank_account_attributes[long_account_name]": {
-                "type": "string",
-                "description": "受取人名",
-                "example": "freee太郎",
-                "nullable": true
-              },
-              "payment_term_attributes[cutoff_day]": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 32,
-                "description": "締め日（29, 30, 31日の末日を指定する場合は、32。）",
-                "example": 15,
-                "nullable": true
-              },
-              "payment_term_attributes[additional_months]": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 6,
-                "description": "支払月",
-                "example": 1,
-                "nullable": true
-              },
-              "payment_term_attributes[fixed_day]": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 32,
-                "description": "支払日（29, 30, 31日の末日を指定する場合は、32。）",
-                "example": 32,
-                "nullable": true
-              },
-              "invoice_payment_term_attributes[cutoff_day]": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 32,
-                "description": "締め日（29, 30, 31日の末日を指定する場合は、32。）",
-                "example": 15,
-                "nullable": true
-              },
-              "invoice_payment_term_attributes[additional_months]": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 6,
-                "description": "支払月",
-                "example": 1,
-                "nullable": true
-              },
-              "invoice_payment_term_attributes[fixed_day]": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 32,
-                "description": "支払日（29, 30, 31日の末日を指定する場合は、32。）",
-                "example": 32,
-                "nullable": true
+              "invoice_payment_term_attributes": {
+                "type": "object",
+                "properties": {
+                  "cutoff_day": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 32,
+                    "description": "締め日（29, 30, 31日の末日を指定する場合は、32。）",
+                    "example": 15,
+                    "nullable": true
+                  },
+                  "additional_months": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 6,
+                    "description": "支払月",
+                    "example": 1,
+                    "nullable": true
+                  },
+                  "fixed_day": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 32,
+                    "description": "支払日（29, 30, 31日の末日を指定する場合は、32。）",
+                    "example": 32,
+                    "nullable": true
+                  }
+                }
               }
             }
           }
