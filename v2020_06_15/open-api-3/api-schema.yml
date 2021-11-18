@@ -19002,7 +19002,20 @@ components:
                       nullable: true
                       type: string
                     amount:
-                      description: 金額
+                      description: |
+                        内税/外税の判別とamountの税込み、税抜きについて
+                        <ul>
+                        <li>tax_entry_methodがexclusive (外税)の場合</li>
+                        <ul>
+                        <li>amount: 消費税抜きの金額</li>
+                        <li>vat: 消費税の金額</li>
+                        </ul>
+                        <li>tax_entry_methodがinclusive (内税)の場合</li>
+                        <ul>
+                        <li>amount: 消費税込みの金額</li>
+                        <li>vat: 消費税の金額</li>
+                        </ul>
+                        </ul>
                       example: 108000
                       format: int64
                       maximum: 9223372036854775807
@@ -19506,7 +19519,20 @@ components:
                     nullable: true
                     type: string
                   amount:
-                    description: 金額
+                    description: |
+                      内税/外税の判別とamountの税込み、税抜きについて
+                      <ul>
+                      <li>tax_entry_methodがexclusive (外税)の場合</li>
+                      <ul>
+                      <li>amount: 消費税抜きの金額</li>
+                      <li>vat: 消費税の金額</li>
+                      </ul>
+                      <li>tax_entry_methodがinclusive (内税)の場合</li>
+                      <ul>
+                      <li>amount: 消費税込みの金額</li>
+                      <li>vat: 消費税の金額</li>
+                      </ul>
+                      </ul>
                     example: 108000
                     format: int64
                     maximum: 9223372036854775807
@@ -23664,7 +23690,20 @@ components:
                       nullable: true
                       type: string
                     amount:
-                      description: 金額
+                      description: |
+                        内税/外税の判別とamountの税込み、税抜きについて
+                        <ul>
+                        <li>tax_entry_methodがexclusive (外税)の場合</li>
+                        <ul>
+                        <li>amount: 消費税抜きの金額</li>
+                        <li>vat: 消費税の金額</li>
+                        </ul>
+                        <li>tax_entry_methodがinclusive (内税)の場合</li>
+                        <ul>
+                        <li>amount: 消費税込みの金額</li>
+                        <li>vat: 消費税の金額</li>
+                        </ul>
+                        </ul>
                       example: 108000
                       type: integer
                     description:
@@ -24074,7 +24113,20 @@ components:
                     nullable: true
                     type: string
                   amount:
-                    description: 金額
+                    description: |
+                      内税/外税の判別とamountの税込み、税抜きについて
+                      <ul>
+                      <li>tax_entry_methodがexclusive (外税)の場合</li>
+                      <ul>
+                      <li>amount: 消費税抜きの金額</li>
+                      <li>vat: 消費税の金額</li>
+                      </ul>
+                      <li>tax_entry_methodがinclusive (内税)の場合</li>
+                      <ul>
+                      <li>amount: 消費税込みの金額</li>
+                      <li>vat: 消費税の金額</li>
+                      </ul>
+                      </ul>
                     example: 108000
                     type: integer
                   description:

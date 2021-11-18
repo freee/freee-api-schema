@@ -34017,7 +34017,7 @@
                         "format": "int64",
                         "minimum": -9223372036854775808,
                         "maximum": 9223372036854775807,
-                        "description": "金額",
+                        "description": "内税/外税の判別とamountの税込み、税抜きについて\n<ul>\n<li>tax_entry_methodがexclusive (外税)の場合</li>\n<ul>\n<li>amount: 消費税抜きの金額</li>\n<li>vat: 消費税の金額</li>\n</ul>\n<li>tax_entry_methodがinclusive (内税)の場合</li>\n<ul>\n<li>amount: 消費税込みの金額</li>\n<li>vat: 消費税の金額</li>\n</ul>\n</ul>\n",
                         "example": 108000
                       },
                       "vat": {
@@ -34597,7 +34597,7 @@
                       "format": "int64",
                       "minimum": -9223372036854775808,
                       "maximum": 9223372036854775807,
-                      "description": "金額",
+                      "description": "内税/外税の判別とamountの税込み、税抜きについて\n<ul>\n<li>tax_entry_methodがexclusive (外税)の場合</li>\n<ul>\n<li>amount: 消費税抜きの金額</li>\n<li>vat: 消費税の金額</li>\n</ul>\n<li>tax_entry_methodがinclusive (内税)の場合</li>\n<ul>\n<li>amount: 消費税込みの金額</li>\n<li>vat: 消費税の金額</li>\n</ul>\n</ul>\n",
                       "example": 108000
                     },
                     "vat": {
@@ -35764,7 +35764,7 @@
                       },
                       "amount": {
                         "type": "integer",
-                        "description": "金額",
+                        "description": "内税/外税の判別とamountの税込み、税抜きについて\n<ul>\n<li>tax_entry_methodがexclusive (外税)の場合</li>\n<ul>\n<li>amount: 消費税抜きの金額</li>\n<li>vat: 消費税の金額</li>\n</ul>\n<li>tax_entry_methodがinclusive (内税)の場合</li>\n<ul>\n<li>amount: 消費税込みの金額</li>\n<li>vat: 消費税の金額</li>\n</ul>\n</ul>\n",
                         "example": 108000
                       },
                       "vat": {
@@ -36245,7 +36245,7 @@
                     },
                     "amount": {
                       "type": "integer",
-                      "description": "金額",
+                      "description": "内税/外税の判別とamountの税込み、税抜きについて\n<ul>\n<li>tax_entry_methodがexclusive (外税)の場合</li>\n<ul>\n<li>amount: 消費税抜きの金額</li>\n<li>vat: 消費税の金額</li>\n</ul>\n<li>tax_entry_methodがinclusive (内税)の場合</li>\n<ul>\n<li>amount: 消費税込みの金額</li>\n<li>vat: 消費税の金額</li>\n</ul>\n</ul>\n",
                       "example": 108000
                     },
                     "vat": {
