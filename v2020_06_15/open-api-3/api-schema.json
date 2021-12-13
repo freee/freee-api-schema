@@ -3403,7 +3403,7 @@
                     "deals": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/dealResponse/properties/deal"
+                        "$ref": "#/components/schemas/deal"
                       }
                     },
                     "meta": {
@@ -7313,7 +7313,7 @@
                     "banks": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/bankResponse/properties/bank"
+                        "$ref": "#/components/schemas/bank"
                       }
                     }
                   }
@@ -14019,7 +14019,7 @@
                     "expense_application_line_templates": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/expenseApplicationLineTemplateResponse/properties/expense_application_line_template"
+                        "$ref": "#/components/schemas/expense_application_line_template"
                       }
                     }
                   }
@@ -19524,6 +19524,42 @@
           }
         }
       },
+      "bank": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "連携サービスID",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "連携サービス名",
+            "example": "フリー銀行"
+          },
+          "type": {
+            "type": "string",
+            "description": "連携サービス種別: (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
+            "example": "bank_account",
+            "enum": [
+              "bank_account",
+              "credit_card",
+              "wallet"
+            ]
+          },
+          "name_kana": {
+            "type": "string",
+            "description": "連携サービス名(カナ)",
+            "example": "フリーギンコウ",
+            "nullable": true
+          }
+        }
+      },
       "bankResponse": {
         "type": "object",
         "required": [
@@ -19531,40 +19567,7 @@
         ],
         "properties": {
           "bank": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "連携サービスID",
-                "example": 1
-              },
-              "name": {
-                "type": "string",
-                "description": "連携サービス名",
-                "example": "フリー銀行"
-              },
-              "type": {
-                "type": "string",
-                "description": "連携サービス種別: (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
-                "example": "bank_account",
-                "enum": [
-                  "bank_account",
-                  "credit_card",
-                  "wallet"
-                ]
-              },
-              "name_kana": {
-                "type": "string",
-                "description": "連携サービス名(カナ)",
-                "example": "フリーギンコウ",
-                "nullable": true
-              }
-            }
+            "$ref": "#/components/schemas/bank"
           }
         }
       },
@@ -27392,6 +27395,542 @@
           }
         }
       },
+      "deal": {
+        "type": "object",
+        "required": [
+          "amount",
+          "company_id",
+          "id",
+          "issue_date",
+          "partner_id",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "取引ID",
+            "example": 101
+          },
+          "company_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "事業所ID",
+            "example": 1
+          },
+          "issue_date": {
+            "type": "string",
+            "description": "発生日 (yyyy-mm-dd)",
+            "example": "2019-12-17"
+          },
+          "due_date": {
+            "type": "string",
+            "description": "支払期日 (yyyy-mm-dd)",
+            "example": "2019-12-17"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": -9223372036854775808,
+            "maximum": 9223372036854775807,
+            "description": "金額",
+            "example": 5250
+          },
+          "due_amount": {
+            "type": "integer",
+            "description": "支払金額",
+            "example": 0
+          },
+          "type": {
+            "type": "string",
+            "description": "収支区分 (収入: income, 支出: expense)",
+            "example": "expense",
+            "enum": [
+              "income",
+              "expense"
+            ]
+          },
+          "partner_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "取引先ID",
+            "example": 201
+          },
+          "partner_code": {
+            "type": "string",
+            "description": "取引先コード",
+            "example": "code001",
+            "nullable": true
+          },
+          "ref_number": {
+            "type": "string",
+            "description": "管理番号",
+            "example": "123-456"
+          },
+          "status": {
+            "type": "string",
+            "description": "決済状況 (未決済: unsettled, 完了: settled)",
+            "example": "settled",
+            "enum": [
+              "unsettled",
+              "settled"
+            ]
+          },
+          "details": {
+            "type": "array",
+            "description": "取引の明細行",
+            "items": {
+              "type": "object",
+              "required": [
+                "account_item_id",
+                "amount",
+                "entry_side",
+                "id",
+                "tax_code",
+                "vat"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
+                  "maximum": 9223372036854775807,
+                  "description": "取引行ID",
+                  "example": 11
+                },
+                "account_item_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "勘定科目ID",
+                  "example": 803
+                },
+                "tax_code": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2147483647,
+                  "description": "税区分コード",
+                  "example": 2
+                },
+                "item_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "品目ID",
+                  "example": 501,
+                  "nullable": true
+                },
+                "section_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "部門ID",
+                  "example": 1,
+                  "nullable": true
+                },
+                "tag_ids": {
+                  "type": "array",
+                  "description": "メモタグID",
+                  "example": [
+                    1,
+                    2,
+                    3
+                  ],
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2147483647
+                  }
+                },
+                "segment_1_tag_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
+                  "maximum": 9223372036854775807,
+                  "description": "セグメント１ID",
+                  "example": 1,
+                  "nullable": true
+                },
+                "segment_2_tag_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
+                  "maximum": 9223372036854775807,
+                  "description": "セグメント２ID",
+                  "example": 1,
+                  "nullable": true
+                },
+                "segment_3_tag_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
+                  "maximum": 9223372036854775807,
+                  "description": "セグメント３ID",
+                  "example": 1,
+                  "nullable": true
+                },
+                "amount": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": -9223372036854775808,
+                  "maximum": 9223372036854775807,
+                  "description": "取引金額",
+                  "example": 5250
+                },
+                "vat": {
+                  "type": "integer",
+                  "description": "消費税額",
+                  "example": 250
+                },
+                "description": {
+                  "type": "string",
+                  "description": "備考",
+                  "example": "備考"
+                },
+                "entry_side": {
+                  "type": "string",
+                  "description": "貸借（貸方: credit, 借方: debit）",
+                  "example": "debit",
+                  "enum": [
+                    "credit",
+                    "debit"
+                  ]
+                }
+              }
+            }
+          },
+          "renews": {
+            "type": "array",
+            "description": "取引の+更新行",
+            "items": {
+              "type": "object",
+              "required": [
+                "details",
+                "id",
+                "renew_target_id",
+                "renew_target_type",
+                "update_date"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
+                  "maximum": 9223372036854775807,
+                  "description": "+更新行ID",
+                  "example": 11
+                },
+                "update_date": {
+                  "type": "string",
+                  "description": "更新日 (yyyy-mm-dd)",
+                  "example": "2019-12-17"
+                },
+                "renew_target_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
+                  "maximum": 9223372036854775807,
+                  "description": "+更新の対象行ID",
+                  "example": 12
+                },
+                "renew_target_type": {
+                  "type": "string",
+                  "description": "+更新の対象行タイプ",
+                  "example": "detail",
+                  "enum": [
+                    "detail",
+                    "accrual",
+                    "renew"
+                  ]
+                },
+                "details": {
+                  "type": "array",
+                  "description": "+更新の明細行一覧（配列）",
+                  "items": {
+                    "required": [
+                      "account_item_id",
+                      "amount",
+                      "entry_side",
+                      "id",
+                      "tag_ids",
+                      "tax_code",
+                      "vat"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 1,
+                        "maximum": 9223372036854775807,
+                        "description": "+更新の明細行ID",
+                        "example": 1
+                      },
+                      "entry_side": {
+                        "type": "string",
+                        "description": "貸借(貸方: credit, 借方: debit)",
+                        "example": "debit",
+                        "enum": [
+                          "credit",
+                          "debit"
+                        ]
+                      },
+                      "account_item_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 2147483647,
+                        "description": "勘定科目ID",
+                        "example": 1
+                      },
+                      "tax_code": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 2147483647,
+                        "description": "税区分コード",
+                        "example": 1
+                      },
+                      "item_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 2147483647,
+                        "description": "品目ID",
+                        "example": 1,
+                        "nullable": true
+                      },
+                      "section_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 2147483647,
+                        "description": "部門ID",
+                        "example": 1,
+                        "nullable": true
+                      },
+                      "tag_ids": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 2147483647,
+                          "description": "メモタグID",
+                          "example": 1
+                        }
+                      },
+                      "segment_1_tag_id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 1,
+                        "maximum": 9223372036854775807,
+                        "description": "セグメント１ID",
+                        "example": 1,
+                        "nullable": true
+                      },
+                      "segment_2_tag_id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 1,
+                        "maximum": 9223372036854775807,
+                        "description": "セグメント２ID",
+                        "example": 1,
+                        "nullable": true
+                      },
+                      "segment_3_tag_id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 1,
+                        "maximum": 9223372036854775807,
+                        "description": "セグメント３ID",
+                        "example": 1,
+                        "nullable": true
+                      },
+                      "amount": {
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": -9223372036854775808,
+                        "maximum": 9223372036854775807,
+                        "description": "金額（税込で指定してください）",
+                        "example": 108000
+                      },
+                      "vat": {
+                        "type": "integer",
+                        "description": "消費税額（指定しない場合は自動で計算されます）",
+                        "example": 8000
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "備考",
+                        "example": "備考",
+                        "nullable": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "payments": {
+            "type": "array",
+            "description": "取引の支払行",
+            "items": {
+              "type": "object",
+              "required": [
+                "amount",
+                "date",
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
+                  "maximum": 9223372036854775807,
+                  "description": "取引行ID",
+                  "example": 202
+                },
+                "date": {
+                  "type": "string",
+                  "description": "支払日",
+                  "example": "2019-12-17"
+                },
+                "from_walletable_type": {
+                  "type": "string",
+                  "description": "口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet, プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）: private_account_item)",
+                  "example": "bank_account",
+                  "enum": [
+                    "bank_account",
+                    "credit_card",
+                    "wallet",
+                    "private_account_item"
+                  ]
+                },
+                "from_walletable_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "口座ID（from_walletable_typeがprivate_account_itemの場合は勘定科目ID）",
+                  "example": 103
+                },
+                "amount": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": -9223372036854775808,
+                  "maximum": 9223372036854775807,
+                  "description": "支払金額",
+                  "example": 5250
+                }
+              }
+            }
+          },
+          "receipts": {
+            "type": "array",
+            "description": "証憑ファイル（ファイルボックスのファイル）",
+            "items": {
+              "type": "object",
+              "required": [
+                "created_at",
+                "file_src",
+                "id",
+                "mime_type",
+                "origin",
+                "status",
+                "user"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "証憑ファイルID（ファイルボックスのファイルID）",
+                  "example": 1
+                },
+                "status": {
+                  "type": "string",
+                  "description": "ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)",
+                  "example": "unconfirmed",
+                  "enum": [
+                    "unconfirmed",
+                    "confirmed",
+                    "deleted",
+                    "ignored"
+                  ]
+                },
+                "description": {
+                  "type": "string",
+                  "description": "メモ",
+                  "example": "タクシー利用"
+                },
+                "mime_type": {
+                  "type": "string",
+                  "description": "MIMEタイプ",
+                  "example": "image/png"
+                },
+                "issue_date": {
+                  "type": "string",
+                  "description": "発生日",
+                  "example": "2019-12-17"
+                },
+                "origin": {
+                  "type": "string",
+                  "description": "アップロード元種別",
+                  "example": "public_api",
+                  "enum": [
+                    "unknown",
+                    "web",
+                    "mobile_camera",
+                    "mobile_album",
+                    "scansnap",
+                    "scannable",
+                    "dropbox",
+                    "mail",
+                    "safety_contact_file",
+                    "public_api"
+                  ]
+                },
+                "created_at": {
+                  "type": "string",
+                  "description": "作成日時（ISO8601形式）",
+                  "example": "2019-12-17T18:30:24+09:00"
+                },
+                "file_src": {
+                  "type": "string",
+                  "description": "ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。）\n<br>\n<br>\nfile_srcは廃止予定の属性になります。<br>\nfile_srcに替わり、証憑ファイル（ファイルボックスのファイル）のダウンロード APIをご利用ください。<br>\n証憑ファイル（ファイルボックスのファイル）のダウンロードAPIを利用することで、以下のようになります。\n<ul>\n  <li>アプリケーション利用者はfreee APIアプリケーションにログインしていれば、証憑ダウンロード毎にfreeeに改めてログインすることなくファイルが参照できるようになります。</li>\n</ul>",
+                  "example": "https://www.freee.co.jp/api/p/receipts/revisions/1234xxxxx/download",
+                  "deprecated": true
+                },
+                "user": {
+                  "required": [
+                    "email",
+                    "id"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 2147483647,
+                      "description": "ユーザーID",
+                      "example": 1
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "メールアドレス",
+                      "example": "contact@example.com"
+                    },
+                    "display_name": {
+                      "type": "string",
+                      "description": "表示名",
+                      "example": "フリー太郎",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "dealResponse": {
         "type": "object",
         "required": [
@@ -27399,540 +27938,7 @@
         ],
         "properties": {
           "deal": {
-            "type": "object",
-            "required": [
-              "amount",
-              "company_id",
-              "id",
-              "issue_date",
-              "partner_id",
-              "status"
-            ],
-            "properties": {
-              "id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "取引ID",
-                "example": 101
-              },
-              "company_id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "事業所ID",
-                "example": 1
-              },
-              "issue_date": {
-                "type": "string",
-                "description": "発生日 (yyyy-mm-dd)",
-                "example": "2019-12-17"
-              },
-              "due_date": {
-                "type": "string",
-                "description": "支払期日 (yyyy-mm-dd)",
-                "example": "2019-12-17"
-              },
-              "amount": {
-                "type": "integer",
-                "format": "int64",
-                "minimum": -9223372036854775808,
-                "maximum": 9223372036854775807,
-                "description": "金額",
-                "example": 5250
-              },
-              "due_amount": {
-                "type": "integer",
-                "description": "支払金額",
-                "example": 0
-              },
-              "type": {
-                "type": "string",
-                "description": "収支区分 (収入: income, 支出: expense)",
-                "example": "expense",
-                "enum": [
-                  "income",
-                  "expense"
-                ]
-              },
-              "partner_id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "取引先ID",
-                "example": 201
-              },
-              "partner_code": {
-                "type": "string",
-                "description": "取引先コード",
-                "example": "code001",
-                "nullable": true
-              },
-              "ref_number": {
-                "type": "string",
-                "description": "管理番号",
-                "example": "123-456"
-              },
-              "status": {
-                "type": "string",
-                "description": "決済状況 (未決済: unsettled, 完了: settled)",
-                "example": "settled",
-                "enum": [
-                  "unsettled",
-                  "settled"
-                ]
-              },
-              "details": {
-                "type": "array",
-                "description": "取引の明細行",
-                "items": {
-                  "type": "object",
-                  "required": [
-                    "account_item_id",
-                    "amount",
-                    "entry_side",
-                    "id",
-                    "tax_code",
-                    "vat"
-                  ],
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "minimum": 1,
-                      "maximum": 9223372036854775807,
-                      "description": "取引行ID",
-                      "example": 11
-                    },
-                    "account_item_id": {
-                      "type": "integer",
-                      "minimum": 1,
-                      "maximum": 2147483647,
-                      "description": "勘定科目ID",
-                      "example": 803
-                    },
-                    "tax_code": {
-                      "type": "integer",
-                      "minimum": 0,
-                      "maximum": 2147483647,
-                      "description": "税区分コード",
-                      "example": 2
-                    },
-                    "item_id": {
-                      "type": "integer",
-                      "minimum": 1,
-                      "maximum": 2147483647,
-                      "description": "品目ID",
-                      "example": 501,
-                      "nullable": true
-                    },
-                    "section_id": {
-                      "type": "integer",
-                      "minimum": 1,
-                      "maximum": 2147483647,
-                      "description": "部門ID",
-                      "example": 1,
-                      "nullable": true
-                    },
-                    "tag_ids": {
-                      "type": "array",
-                      "description": "メモタグID",
-                      "example": [
-                        1,
-                        2,
-                        3
-                      ],
-                      "items": {
-                        "type": "integer",
-                        "minimum": 1,
-                        "maximum": 2147483647
-                      }
-                    },
-                    "segment_1_tag_id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "minimum": 1,
-                      "maximum": 9223372036854775807,
-                      "description": "セグメント１ID",
-                      "example": 1,
-                      "nullable": true
-                    },
-                    "segment_2_tag_id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "minimum": 1,
-                      "maximum": 9223372036854775807,
-                      "description": "セグメント２ID",
-                      "example": 1,
-                      "nullable": true
-                    },
-                    "segment_3_tag_id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "minimum": 1,
-                      "maximum": 9223372036854775807,
-                      "description": "セグメント３ID",
-                      "example": 1,
-                      "nullable": true
-                    },
-                    "amount": {
-                      "type": "integer",
-                      "format": "int64",
-                      "minimum": -9223372036854775808,
-                      "maximum": 9223372036854775807,
-                      "description": "取引金額",
-                      "example": 5250
-                    },
-                    "vat": {
-                      "type": "integer",
-                      "description": "消費税額",
-                      "example": 250
-                    },
-                    "description": {
-                      "type": "string",
-                      "description": "備考",
-                      "example": "備考"
-                    },
-                    "entry_side": {
-                      "type": "string",
-                      "description": "貸借（貸方: credit, 借方: debit）",
-                      "example": "debit",
-                      "enum": [
-                        "credit",
-                        "debit"
-                      ]
-                    }
-                  }
-                }
-              },
-              "renews": {
-                "type": "array",
-                "description": "取引の+更新行",
-                "items": {
-                  "type": "object",
-                  "required": [
-                    "details",
-                    "id",
-                    "renew_target_id",
-                    "renew_target_type",
-                    "update_date"
-                  ],
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "minimum": 1,
-                      "maximum": 9223372036854775807,
-                      "description": "+更新行ID",
-                      "example": 11
-                    },
-                    "update_date": {
-                      "type": "string",
-                      "description": "更新日 (yyyy-mm-dd)",
-                      "example": "2019-12-17"
-                    },
-                    "renew_target_id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "minimum": 1,
-                      "maximum": 9223372036854775807,
-                      "description": "+更新の対象行ID",
-                      "example": 12
-                    },
-                    "renew_target_type": {
-                      "type": "string",
-                      "description": "+更新の対象行タイプ",
-                      "example": "detail",
-                      "enum": [
-                        "detail",
-                        "accrual",
-                        "renew"
-                      ]
-                    },
-                    "details": {
-                      "type": "array",
-                      "description": "+更新の明細行一覧（配列）",
-                      "items": {
-                        "required": [
-                          "account_item_id",
-                          "amount",
-                          "entry_side",
-                          "id",
-                          "tag_ids",
-                          "tax_code",
-                          "vat"
-                        ],
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer",
-                            "format": "int64",
-                            "minimum": 1,
-                            "maximum": 9223372036854775807,
-                            "description": "+更新の明細行ID",
-                            "example": 1
-                          },
-                          "entry_side": {
-                            "type": "string",
-                            "description": "貸借(貸方: credit, 借方: debit)",
-                            "example": "debit",
-                            "enum": [
-                              "credit",
-                              "debit"
-                            ]
-                          },
-                          "account_item_id": {
-                            "type": "integer",
-                            "minimum": 1,
-                            "maximum": 2147483647,
-                            "description": "勘定科目ID",
-                            "example": 1
-                          },
-                          "tax_code": {
-                            "type": "integer",
-                            "minimum": 0,
-                            "maximum": 2147483647,
-                            "description": "税区分コード",
-                            "example": 1
-                          },
-                          "item_id": {
-                            "type": "integer",
-                            "minimum": 1,
-                            "maximum": 2147483647,
-                            "description": "品目ID",
-                            "example": 1,
-                            "nullable": true
-                          },
-                          "section_id": {
-                            "type": "integer",
-                            "minimum": 1,
-                            "maximum": 2147483647,
-                            "description": "部門ID",
-                            "example": 1,
-                            "nullable": true
-                          },
-                          "tag_ids": {
-                            "type": "array",
-                            "items": {
-                              "type": "integer",
-                              "minimum": 1,
-                              "maximum": 2147483647,
-                              "description": "メモタグID",
-                              "example": 1
-                            }
-                          },
-                          "segment_1_tag_id": {
-                            "type": "integer",
-                            "format": "int64",
-                            "minimum": 1,
-                            "maximum": 9223372036854775807,
-                            "description": "セグメント１ID",
-                            "example": 1,
-                            "nullable": true
-                          },
-                          "segment_2_tag_id": {
-                            "type": "integer",
-                            "format": "int64",
-                            "minimum": 1,
-                            "maximum": 9223372036854775807,
-                            "description": "セグメント２ID",
-                            "example": 1,
-                            "nullable": true
-                          },
-                          "segment_3_tag_id": {
-                            "type": "integer",
-                            "format": "int64",
-                            "minimum": 1,
-                            "maximum": 9223372036854775807,
-                            "description": "セグメント３ID",
-                            "example": 1,
-                            "nullable": true
-                          },
-                          "amount": {
-                            "type": "integer",
-                            "format": "int64",
-                            "minimum": -9223372036854775808,
-                            "maximum": 9223372036854775807,
-                            "description": "金額（税込で指定してください）",
-                            "example": 108000
-                          },
-                          "vat": {
-                            "type": "integer",
-                            "description": "消費税額（指定しない場合は自動で計算されます）",
-                            "example": 8000
-                          },
-                          "description": {
-                            "type": "string",
-                            "description": "備考",
-                            "example": "備考",
-                            "nullable": true
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "payments": {
-                "type": "array",
-                "description": "取引の支払行",
-                "items": {
-                  "type": "object",
-                  "required": [
-                    "amount",
-                    "date",
-                    "id"
-                  ],
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "minimum": 1,
-                      "maximum": 9223372036854775807,
-                      "description": "取引行ID",
-                      "example": 202
-                    },
-                    "date": {
-                      "type": "string",
-                      "description": "支払日",
-                      "example": "2019-12-17"
-                    },
-                    "from_walletable_type": {
-                      "type": "string",
-                      "description": "口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet, プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）: private_account_item)",
-                      "example": "bank_account",
-                      "enum": [
-                        "bank_account",
-                        "credit_card",
-                        "wallet",
-                        "private_account_item"
-                      ]
-                    },
-                    "from_walletable_id": {
-                      "type": "integer",
-                      "minimum": 1,
-                      "maximum": 2147483647,
-                      "description": "口座ID（from_walletable_typeがprivate_account_itemの場合は勘定科目ID）",
-                      "example": 103
-                    },
-                    "amount": {
-                      "type": "integer",
-                      "format": "int64",
-                      "minimum": -9223372036854775808,
-                      "maximum": 9223372036854775807,
-                      "description": "支払金額",
-                      "example": 5250
-                    }
-                  }
-                }
-              },
-              "receipts": {
-                "type": "array",
-                "description": "証憑ファイル（ファイルボックスのファイル）",
-                "items": {
-                  "type": "object",
-                  "required": [
-                    "created_at",
-                    "file_src",
-                    "id",
-                    "mime_type",
-                    "origin",
-                    "status",
-                    "user"
-                  ],
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "minimum": 1,
-                      "maximum": 2147483647,
-                      "description": "証憑ファイルID（ファイルボックスのファイルID）",
-                      "example": 1
-                    },
-                    "status": {
-                      "type": "string",
-                      "description": "ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)",
-                      "example": "unconfirmed",
-                      "enum": [
-                        "unconfirmed",
-                        "confirmed",
-                        "deleted",
-                        "ignored"
-                      ]
-                    },
-                    "description": {
-                      "type": "string",
-                      "description": "メモ",
-                      "example": "タクシー利用"
-                    },
-                    "mime_type": {
-                      "type": "string",
-                      "description": "MIMEタイプ",
-                      "example": "image/png"
-                    },
-                    "issue_date": {
-                      "type": "string",
-                      "description": "発生日",
-                      "example": "2019-12-17"
-                    },
-                    "origin": {
-                      "type": "string",
-                      "description": "アップロード元種別",
-                      "example": "public_api",
-                      "enum": [
-                        "unknown",
-                        "web",
-                        "mobile_camera",
-                        "mobile_album",
-                        "scansnap",
-                        "scannable",
-                        "dropbox",
-                        "mail",
-                        "safety_contact_file",
-                        "public_api"
-                      ]
-                    },
-                    "created_at": {
-                      "type": "string",
-                      "description": "作成日時（ISO8601形式）",
-                      "example": "2019-12-17T18:30:24+09:00"
-                    },
-                    "file_src": {
-                      "type": "string",
-                      "description": "ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。）\n<br>\n<br>\nfile_srcは廃止予定の属性になります。<br>\nfile_srcに替わり、証憑ファイル（ファイルボックスのファイル）のダウンロード APIをご利用ください。<br>\n証憑ファイル（ファイルボックスのファイル）のダウンロードAPIを利用することで、以下のようになります。\n<ul>\n  <li>アプリケーション利用者はfreee APIアプリケーションにログインしていれば、証憑ダウンロード毎にfreeeに改めてログインすることなくファイルが参照できるようになります。</li>\n</ul>",
-                      "example": "https://www.freee.co.jp/api/p/receipts/revisions/1234xxxxx/download",
-                      "deprecated": true
-                    },
-                    "user": {
-                      "required": [
-                        "email",
-                        "id"
-                      ],
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "integer",
-                          "minimum": 1,
-                          "maximum": 2147483647,
-                          "description": "ユーザーID",
-                          "example": 1
-                        },
-                        "email": {
-                          "type": "string",
-                          "description": "メールアドレス",
-                          "example": "contact@example.com"
-                        },
-                        "display_name": {
-                          "type": "string",
-                          "description": "表示名",
-                          "example": "フリー太郎",
-                          "nullable": true
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/schemas/deal"
           }
         }
       },
@@ -31041,6 +31047,67 @@
           }
         }
       },
+      "expense_application_line_template": {
+        "type": "object",
+        "required": [
+          "account_item_name",
+          "id",
+          "name",
+          "tax_name"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "経費科目ID",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "経費科目名",
+            "example": "交通費"
+          },
+          "account_item_id": {
+            "type": "integer",
+            "maximum": 2147483647,
+            "description": "勘定科目ID",
+            "example": 1
+          },
+          "account_item_name": {
+            "type": "string",
+            "description": "勘定科目名",
+            "example": "旅費交通費"
+          },
+          "tax_code": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "description": "税区分コード",
+            "example": 1
+          },
+          "tax_name": {
+            "type": "string",
+            "description": "税区分名",
+            "example": "課対仕入"
+          },
+          "description": {
+            "type": "string",
+            "description": "経費科目の説明",
+            "example": "電車、バス、飛行機などの交通費"
+          },
+          "line_description": {
+            "type": "string",
+            "description": "内容の補足",
+            "example": "移動区間"
+          },
+          "required_receipt": {
+            "type": "boolean",
+            "description": "添付ファイルの必須/任意",
+            "example": true
+          }
+        }
+      },
       "expenseApplicationLineTemplateResponse": {
         "type": "object",
         "required": [
@@ -31048,65 +31115,7 @@
         ],
         "properties": {
           "expense_application_line_template": {
-            "type": "object",
-            "required": [
-              "account_item_name",
-              "id",
-              "name",
-              "tax_name"
-            ],
-            "properties": {
-              "id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "経費科目ID",
-                "example": 1
-              },
-              "name": {
-                "type": "string",
-                "description": "経費科目名",
-                "example": "交通費"
-              },
-              "account_item_id": {
-                "type": "integer",
-                "maximum": 2147483647,
-                "description": "勘定科目ID",
-                "example": 1
-              },
-              "account_item_name": {
-                "type": "string",
-                "description": "勘定科目名",
-                "example": "旅費交通費"
-              },
-              "tax_code": {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 2147483647,
-                "description": "税区分コード",
-                "example": 1
-              },
-              "tax_name": {
-                "type": "string",
-                "description": "税区分名",
-                "example": "課対仕入"
-              },
-              "description": {
-                "type": "string",
-                "description": "経費科目の説明",
-                "example": "電車、バス、飛行機などの交通費"
-              },
-              "line_description": {
-                "type": "string",
-                "description": "内容の補足",
-                "example": "移動区間"
-              },
-              "required_receipt": {
-                "type": "boolean",
-                "description": "添付ファイルの必須/任意",
-                "example": true
-              }
-            }
+            "$ref": "#/components/schemas/expense_application_line_template"
           }
         }
       },
