@@ -7584,7 +7584,8 @@ paths:
           maximum: 12
           minimum: 1
           type: integer
-      - description: 発生月で絞込：終了会計月(1-12)
+      - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
+          9のいずれかを指定する。)
         in: query
         name: end_month
         schema:
@@ -7826,7 +7827,8 @@ paths:
           maximum: 12
           minimum: 1
           type: integer
-      - description: 発生月で絞込：終了会計月(1-12)
+      - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
+          9のいずれかを指定する。)
         in: query
         name: end_month
         schema:
@@ -8051,7 +8053,8 @@ paths:
           maximum: 12
           minimum: 1
           type: integer
-      - description: 発生月で絞込：終了会計月(1-12)
+      - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
+          9のいずれかを指定する。)
         in: query
         name: end_month
         schema:
@@ -8274,7 +8277,8 @@ paths:
           maximum: 12
           minimum: 1
           type: integer
-      - description: 発生月で絞込：終了会計月(1-12)
+      - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
+          9のいずれかを指定する。)
         in: query
         name: end_month
         schema:
@@ -8521,7 +8525,8 @@ paths:
           maximum: 12
           minimum: 1
           type: integer
-      - description: 発生月で絞込：終了会計月(1-12)
+      - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
+          9のいずれかを指定する。)
         in: query
         name: end_month
         schema:
@@ -8760,7 +8765,8 @@ paths:
           maximum: 12
           minimum: 1
           type: integer
-      - description: 発生月で絞込：終了会計月(1-12)
+      - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
+          9のいずれかを指定する。)
         in: query
         name: end_month
         schema:
@@ -9002,7 +9008,8 @@ paths:
           maximum: 12
           minimum: 1
           type: integer
-      - description: 発生月で絞込：終了会計月(1-12)
+      - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
+          9のいずれかを指定する。)
         in: query
         name: end_month
         schema:
@@ -9244,7 +9251,8 @@ paths:
           maximum: 12
           minimum: 1
           type: integer
-      - description: 発生月で絞込：終了会計月(1-12)
+      - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
+          9のいずれかを指定する。)
         in: query
         name: end_month
         schema:
@@ -9480,7 +9488,8 @@ paths:
           maximum: 12
           minimum: 1
           type: integer
-      - description: 発生月で絞込：終了会計月(1-12)
+      - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
+          9のいずれかを指定する。)
         in: query
         name: end_month
         schema:
@@ -9715,7 +9724,8 @@ paths:
           maximum: 12
           minimum: 1
           type: integer
-      - description: 発生月で絞込：終了会計月(1-12)
+      - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
+          9のいずれかを指定する。)
         in: query
         name: end_month
         schema:
@@ -9948,7 +9958,8 @@ paths:
           maximum: 12
           minimum: 1
           type: integer
-      - description: 発生月で絞込：終了会計月(1-12)
+      - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
+          9のいずれかを指定する。)
         in: query
         name: end_month
         schema:
@@ -10205,7 +10216,8 @@ paths:
           maximum: 12
           minimum: 1
           type: integer
-      - description: 発生月で絞込：終了会計月(1-12)
+      - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
+          9のいずれかを指定する。)
         in: query
         name: end_month
         schema:
@@ -10444,7 +10456,8 @@ paths:
           maximum: 12
           minimum: 1
           type: integer
-      - description: 発生月で絞込：終了会計月(1-12)
+      - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
+          9のいずれかを指定する。)
         in: query
         name: end_month
         schema:
@@ -10686,7 +10699,8 @@ paths:
           maximum: 12
           minimum: 1
           type: integer
-      - description: 発生月で絞込：終了会計月(1-12)
+      - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
+          9のいずれかを指定する。)
         in: query
         name: end_month
         schema:
@@ -10928,7 +10942,8 @@ paths:
           maximum: 12
           minimum: 1
           type: integer
-      - description: 発生月で絞込：終了会計月(1-12)
+      - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
+          9のいずれかを指定する。)
         in: query
         name: end_month
         schema:
@@ -11164,7 +11179,8 @@ paths:
           maximum: 12
           minimum: 1
           type: integer
-      - description: 発生月で絞込：終了会計月(1-12)
+      - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
+          9のいずれかを指定する。)
         in: query
         name: end_month
         schema:
@@ -11398,7 +11414,8 @@ paths:
           maximum: 12
           minimum: 1
           type: integer
-      - description: 発生月で絞込：終了会計月(1-12)
+      - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
+          9のいずれかを指定する。)
         in: query
         name: end_month
         schema:
