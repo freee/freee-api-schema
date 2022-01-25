@@ -1281,7 +1281,7 @@
                     "tags": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/tagResponse/properties/tag"
+                        "$ref": "#/components/schemas/tag"
                       }
                     }
                   }
@@ -1727,7 +1727,7 @@
                     "sections": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/sectionResponse/properties/section"
+                        "$ref": "#/components/schemas/section"
                       }
                     }
                   }
@@ -4693,7 +4693,7 @@
                     "manual_journals": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/manualJournalResponse/properties/manual_journal"
+                        "$ref": "#/components/schemas/manual_journal"
                       }
                     }
                   }
@@ -5146,7 +5146,7 @@
                     "users": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/userResponse/properties/user"
+                        "$ref": "#/components/schemas/user"
                       }
                     }
                   }
@@ -6016,7 +6016,7 @@
                     "items": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/itemResponse/properties/item"
+                        "$ref": "#/components/schemas/item"
                       }
                     }
                   }
@@ -6439,7 +6439,7 @@
                     "taxes": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/taxResponse/properties/tax"
+                        "$ref": "#/components/schemas/tax"
                       }
                     }
                   }
@@ -6757,7 +6757,7 @@
                     "walletables": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/walletableResponse/properties/walletable"
+                        "$ref": "#/components/schemas/walletable"
                       }
                     },
                     "meta": {
@@ -6952,7 +6952,7 @@
                   ],
                   "properties": {
                     "walletable": {
-                      "$ref": "#/components/schemas/walletableResponse/properties/walletable"
+                      "$ref": "#/components/schemas/walletable"
                     },
                     "meta": {
                       "type": "object",
@@ -7082,7 +7082,7 @@
                   ],
                   "properties": {
                     "walletable": {
-                      "$ref": "#/components/schemas/walletableResponse/properties/walletable"
+                      "$ref": "#/components/schemas/walletable"
                     },
                     "meta": {
                       "type": "object",
@@ -7521,7 +7521,7 @@
                     "transfers": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/transferResponse/properties/transfer"
+                        "$ref": "#/components/schemas/transfer"
                       }
                     }
                   }
@@ -8039,7 +8039,7 @@
                     "wallet_txns": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/walletTxnResponse/properties/wallet_txn"
+                        "$ref": "#/components/schemas/wallet_txn"
                       }
                     }
                   }
@@ -12766,7 +12766,7 @@
                     "receipts": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/receiptResponse/properties/receipt"
+                        "$ref": "#/components/schemas/receipt"
                       }
                     }
                   }
@@ -16327,7 +16327,7 @@
                     "segment_tags": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/segmentTagResponse/properties/segment_tag"
+                        "$ref": "#/components/schemas/segment_tag"
                       }
                     }
                   }
@@ -27048,6 +27048,75 @@
           }
         }
       },
+      "section": {
+        "type": "object",
+        "required": [
+          "company_id",
+          "id",
+          "name",
+          "available"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "部門ID",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 30,
+            "description": "部門名 (30文字以内)",
+            "example": "開発部門"
+          },
+          "available": {
+            "type": "boolean",
+            "description": "部門の使用設定（true: 使用する、false: 使用しない）\n<br>\n<ul>\n  <li>\n    本APIでsectionを作成した場合はtrueになります。\n  </li>\n  <li>\n    falseにする場合はWeb画面から変更できます。\n  </li>\n  <li>\n    trueの場合、Web画面での取引登録時などに入力候補として表示されます。\n  </li>\n  <li>\n    falseの場合、部門自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの部門をパラメータに指定すれば、取引などにfalseの部門を設定できます。\n  </li>\n</ul>",
+            "example": true
+          },
+          "long_name": {
+            "type": "string",
+            "maxLength": 255,
+            "description": "正式名称（255文字以内）",
+            "example": "開発部門",
+            "nullable": true
+          },
+          "company_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "事業所ID",
+            "example": 1
+          },
+          "shortcut1": {
+            "type": "string",
+            "maxLength": 20,
+            "description": "ショートカット１ (20文字以内)",
+            "example": "DEVELOPER",
+            "nullable": true
+          },
+          "shortcut2": {
+            "type": "string",
+            "maxLength": 20,
+            "description": "ショートカット２ (20文字以内)",
+            "example": "123",
+            "nullable": true
+          },
+          "indent_count": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "<a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/209093566\">部門階層</a>\n<br>\n※ indent_count が 0 のときは第一階層の親部門です。\n",
+            "example": 0
+          },
+          "parent_id": {
+            "type": "integer",
+            "description": "<a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/209093566\">親部門ID</a>\n<br>\n※ parent_id が null のときは第一階層の親部門です。\n",
+            "example": 1,
+            "nullable": true
+          }
+        }
+      },
       "sectionResponse": {
         "type": "object",
         "required": [
@@ -27055,73 +27124,7 @@
         ],
         "properties": {
           "section": {
-            "type": "object",
-            "required": [
-              "company_id",
-              "id",
-              "name",
-              "available"
-            ],
-            "properties": {
-              "id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "部門ID",
-                "example": 1
-              },
-              "name": {
-                "type": "string",
-                "maxLength": 30,
-                "description": "部門名 (30文字以内)",
-                "example": "開発部門"
-              },
-              "available": {
-                "type": "boolean",
-                "description": "部門の使用設定（true: 使用する、false: 使用しない）\n<br>\n<ul>\n  <li>\n    本APIでsectionを作成した場合はtrueになります。\n  </li>\n  <li>\n    falseにする場合はWeb画面から変更できます。\n  </li>\n  <li>\n    trueの場合、Web画面での取引登録時などに入力候補として表示されます。\n  </li>\n  <li>\n    falseの場合、部門自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの部門をパラメータに指定すれば、取引などにfalseの部門を設定できます。\n  </li>\n</ul>",
-                "example": true
-              },
-              "long_name": {
-                "type": "string",
-                "maxLength": 255,
-                "description": "正式名称（255文字以内）",
-                "example": "開発部門",
-                "nullable": true
-              },
-              "company_id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "事業所ID",
-                "example": 1
-              },
-              "shortcut1": {
-                "type": "string",
-                "maxLength": 20,
-                "description": "ショートカット１ (20文字以内)",
-                "example": "DEVELOPER",
-                "nullable": true
-              },
-              "shortcut2": {
-                "type": "string",
-                "maxLength": 20,
-                "description": "ショートカット２ (20文字以内)",
-                "example": "123",
-                "nullable": true
-              },
-              "indent_count": {
-                "type": "integer",
-                "minimum": 0,
-                "description": "<a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/209093566\">部門階層</a>\n<br>\n※ indent_count が 0 のときは第一階層の親部門です。\n",
-                "example": 0
-              },
-              "parent_id": {
-                "type": "integer",
-                "description": "<a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/209093566\">親部門ID</a>\n<br>\n※ parent_id が null のときは第一階層の親部門です。\n",
-                "example": 1,
-                "nullable": true
-              }
-            }
+            "$ref": "#/components/schemas/section"
           }
         }
       },
@@ -28137,6 +28140,59 @@
           }
         }
       },
+      "item": {
+        "required": [
+          "company_id",
+          "id",
+          "name",
+          "update_date",
+          "available"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "品目ID",
+            "example": 101
+          },
+          "company_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "事業所ID",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 30,
+            "description": "品目名 (30文字以内)",
+            "example": "タクシー代"
+          },
+          "update_date": {
+            "type": "string",
+            "description": "更新日(yyyy-mm-dd)",
+            "example": "2019-12-17"
+          },
+          "available": {
+            "type": "boolean",
+            "description": "品目の使用設定（true: 使用する、false: 使用しない）\n<br>\n<ul>\n  <li>\n    本APIでitemを作成した場合はtrueになります。\n  </li>\n  <li>\n    falseにする場合はWeb画面から変更できます。\n  </li>\n  <li>\n    trueの場合、Web画面での取引登録時などに入力候補として表示されます。\n  </li>\n  <li>\n    falseの場合、品目自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの品目をパラメータに指定すれば、取引などにfalseの品目を設定できます。\n  </li>\n</ul>"
+          },
+          "shortcut1": {
+            "type": "string",
+            "description": "ショートカット１ (20文字以内)",
+            "example": "TAXI",
+            "nullable": true
+          },
+          "shortcut2": {
+            "type": "string",
+            "description": "ショートカット２ (20文字以内)",
+            "example": 201,
+            "nullable": true
+          }
+        }
+      },
       "itemResponse": {
         "required": [
           "item"
@@ -28144,55 +28200,232 @@
         "type": "object",
         "properties": {
           "item": {
-            "required": [
-              "company_id",
-              "id",
-              "name",
-              "update_date",
-              "available"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "品目ID",
-                "example": 101
-              },
-              "company_id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "事業所ID",
-                "example": 1
-              },
-              "name": {
-                "type": "string",
-                "maxLength": 30,
-                "description": "品目名 (30文字以内)",
-                "example": "タクシー代"
-              },
-              "update_date": {
-                "type": "string",
-                "description": "更新日(yyyy-mm-dd)",
-                "example": "2019-12-17"
-              },
-              "available": {
-                "type": "boolean",
-                "description": "品目の使用設定（true: 使用する、false: 使用しない）\n<br>\n<ul>\n  <li>\n    本APIでitemを作成した場合はtrueになります。\n  </li>\n  <li>\n    falseにする場合はWeb画面から変更できます。\n  </li>\n  <li>\n    trueの場合、Web画面での取引登録時などに入力候補として表示されます。\n  </li>\n  <li>\n    falseの場合、品目自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの品目をパラメータに指定すれば、取引などにfalseの品目を設定できます。\n  </li>\n</ul>"
-              },
-              "shortcut1": {
-                "type": "string",
-                "description": "ショートカット１ (20文字以内)",
-                "example": "TAXI",
-                "nullable": true
-              },
-              "shortcut2": {
-                "type": "string",
-                "description": "ショートカット２ (20文字以内)",
-                "example": 201,
-                "nullable": true
+            "$ref": "#/components/schemas/item"
+          }
+        }
+      },
+      "manual_journal": {
+        "type": "object",
+        "required": [
+          "adjustment",
+          "company_id",
+          "details",
+          "id",
+          "issue_date",
+          "txn_number"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "振替伝票ID",
+            "example": 1
+          },
+          "company_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "事業所ID",
+            "example": 1
+          },
+          "issue_date": {
+            "type": "string",
+            "description": "発生日 (yyyy-mm-dd)",
+            "example": "2019-12-17"
+          },
+          "adjustment": {
+            "type": "boolean",
+            "description": "決算整理仕訳フラグ（falseまたは未指定の場合: 日常仕訳）",
+            "example": false
+          },
+          "txn_number": {
+            "type": "string",
+            "description": "仕訳番号",
+            "example": "2CX05",
+            "nullable": true
+          },
+          "details": {
+            "type": "array",
+            "description": "貸借行一覧（配列）: 貸借合わせて100行まで登録できます。",
+            "items": {
+              "type": "object",
+              "required": [
+                "account_item_id",
+                "amount",
+                "description",
+                "entry_side",
+                "id",
+                "item_id",
+                "item_name",
+                "partner_id",
+                "partner_long_name",
+                "partner_name",
+                "section_id",
+                "section_name",
+                "tag_ids",
+                "tag_names",
+                "tax_code",
+                "vat"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
+                  "maximum": 9223372036854775807,
+                  "description": "貸借行ID",
+                  "example": 1
+                },
+                "entry_side": {
+                  "type": "string",
+                  "description": "貸借(貸方: credit, 借方: debit)",
+                  "example": "credit",
+                  "enum": [
+                    "credit",
+                    "debit"
+                  ]
+                },
+                "account_item_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "勘定科目ID",
+                  "example": 1
+                },
+                "tax_code": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 2147483647,
+                  "description": "税区分コード",
+                  "example": 1
+                },
+                "partner_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "取引先ID",
+                  "example": 1,
+                  "nullable": true
+                },
+                "partner_name": {
+                  "type": "string",
+                  "description": "取引先名",
+                  "example": "freee",
+                  "nullable": true
+                },
+                "partner_code": {
+                  "type": "string",
+                  "description": "取引先コード",
+                  "example": "code001",
+                  "nullable": true
+                },
+                "partner_long_name": {
+                  "type": "string",
+                  "maxLength": 255,
+                  "description": "正式名称（255文字以内）",
+                  "example": "freee株式会社",
+                  "nullable": true
+                },
+                "item_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "品目ID",
+                  "example": 1,
+                  "nullable": true
+                },
+                "item_name": {
+                  "type": "string",
+                  "description": "品目",
+                  "example": "freee会計",
+                  "nullable": true
+                },
+                "section_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "部門ID",
+                  "example": 1,
+                  "nullable": true
+                },
+                "section_name": {
+                  "type": "string",
+                  "description": "部門",
+                  "example": "開発部",
+                  "nullable": true
+                },
+                "tag_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2147483647,
+                    "description": "メモタグID",
+                    "example": 1
+                  }
+                },
+                "tag_names": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "description": "メモタグ",
+                    "example": "メモタグ"
+                  }
+                },
+                "segment_1_tag_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
+                  "maximum": 9223372036854775807,
+                  "description": "セグメント１ID",
+                  "example": 1
+                },
+                "segment_1_tag_name": {
+                  "type": "integer",
+                  "description": "セグメント１ID"
+                },
+                "segment_2_tag_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
+                  "maximum": 9223372036854775807,
+                  "description": "セグメント２ID",
+                  "example": 1
+                },
+                "segment_2_tag_name": {
+                  "type": "integer",
+                  "description": "セグメント２"
+                },
+                "segment_3_tag_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
+                  "maximum": 9223372036854775807,
+                  "description": "セグメント３ID",
+                  "example": 1
+                },
+                "segment_3_tag_name": {
+                  "type": "integer",
+                  "description": "セグメント３"
+                },
+                "amount": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "金額（税込で指定してください）",
+                  "example": 108000
+                },
+                "vat": {
+                  "type": "integer",
+                  "description": "消費税額（指定しない場合は自動で計算されます）",
+                  "example": 8000
+                },
+                "description": {
+                  "type": "string",
+                  "description": "備考",
+                  "example": "備考"
+                }
               }
             }
           }
@@ -28205,231 +28438,7 @@
         ],
         "properties": {
           "manual_journal": {
-            "type": "object",
-            "required": [
-              "adjustment",
-              "company_id",
-              "details",
-              "id",
-              "issue_date",
-              "txn_number"
-            ],
-            "properties": {
-              "id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "振替伝票ID",
-                "example": 1
-              },
-              "company_id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "事業所ID",
-                "example": 1
-              },
-              "issue_date": {
-                "type": "string",
-                "description": "発生日 (yyyy-mm-dd)",
-                "example": "2019-12-17"
-              },
-              "adjustment": {
-                "type": "boolean",
-                "description": "決算整理仕訳フラグ（falseまたは未指定の場合: 日常仕訳）",
-                "example": false
-              },
-              "txn_number": {
-                "type": "string",
-                "description": "仕訳番号",
-                "example": "2CX05",
-                "nullable": true
-              },
-              "details": {
-                "type": "array",
-                "description": "貸借行一覧（配列）: 貸借合わせて100行まで登録できます。",
-                "items": {
-                  "type": "object",
-                  "required": [
-                    "account_item_id",
-                    "amount",
-                    "description",
-                    "entry_side",
-                    "id",
-                    "item_id",
-                    "item_name",
-                    "partner_id",
-                    "partner_long_name",
-                    "partner_name",
-                    "section_id",
-                    "section_name",
-                    "tag_ids",
-                    "tag_names",
-                    "tax_code",
-                    "vat"
-                  ],
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "minimum": 1,
-                      "maximum": 9223372036854775807,
-                      "description": "貸借行ID",
-                      "example": 1
-                    },
-                    "entry_side": {
-                      "type": "string",
-                      "description": "貸借(貸方: credit, 借方: debit)",
-                      "example": "credit",
-                      "enum": [
-                        "credit",
-                        "debit"
-                      ]
-                    },
-                    "account_item_id": {
-                      "type": "integer",
-                      "minimum": 1,
-                      "maximum": 2147483647,
-                      "description": "勘定科目ID",
-                      "example": 1
-                    },
-                    "tax_code": {
-                      "type": "integer",
-                      "minimum": 0,
-                      "maximum": 2147483647,
-                      "description": "税区分コード",
-                      "example": 1
-                    },
-                    "partner_id": {
-                      "type": "integer",
-                      "minimum": 1,
-                      "maximum": 2147483647,
-                      "description": "取引先ID",
-                      "example": 1,
-                      "nullable": true
-                    },
-                    "partner_name": {
-                      "type": "string",
-                      "description": "取引先名",
-                      "example": "freee",
-                      "nullable": true
-                    },
-                    "partner_code": {
-                      "type": "string",
-                      "description": "取引先コード",
-                      "example": "code001",
-                      "nullable": true
-                    },
-                    "partner_long_name": {
-                      "type": "string",
-                      "maxLength": 255,
-                      "description": "正式名称（255文字以内）",
-                      "example": "freee株式会社",
-                      "nullable": true
-                    },
-                    "item_id": {
-                      "type": "integer",
-                      "minimum": 1,
-                      "maximum": 2147483647,
-                      "description": "品目ID",
-                      "example": 1,
-                      "nullable": true
-                    },
-                    "item_name": {
-                      "type": "string",
-                      "description": "品目",
-                      "example": "freee会計",
-                      "nullable": true
-                    },
-                    "section_id": {
-                      "type": "integer",
-                      "minimum": 1,
-                      "maximum": 2147483647,
-                      "description": "部門ID",
-                      "example": 1,
-                      "nullable": true
-                    },
-                    "section_name": {
-                      "type": "string",
-                      "description": "部門",
-                      "example": "開発部",
-                      "nullable": true
-                    },
-                    "tag_ids": {
-                      "type": "array",
-                      "items": {
-                        "type": "integer",
-                        "minimum": 1,
-                        "maximum": 2147483647,
-                        "description": "メモタグID",
-                        "example": 1
-                      }
-                    },
-                    "tag_names": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "description": "メモタグ",
-                        "example": "メモタグ"
-                      }
-                    },
-                    "segment_1_tag_id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "minimum": 1,
-                      "maximum": 9223372036854775807,
-                      "description": "セグメント１ID",
-                      "example": 1
-                    },
-                    "segment_1_tag_name": {
-                      "type": "integer",
-                      "description": "セグメント１ID"
-                    },
-                    "segment_2_tag_id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "minimum": 1,
-                      "maximum": 9223372036854775807,
-                      "description": "セグメント２ID",
-                      "example": 1
-                    },
-                    "segment_2_tag_name": {
-                      "type": "integer",
-                      "description": "セグメント２"
-                    },
-                    "segment_3_tag_id": {
-                      "type": "integer",
-                      "format": "int64",
-                      "minimum": 1,
-                      "maximum": 9223372036854775807,
-                      "description": "セグメント３ID",
-                      "example": 1
-                    },
-                    "segment_3_tag_name": {
-                      "type": "integer",
-                      "description": "セグメント３"
-                    },
-                    "amount": {
-                      "type": "integer",
-                      "minimum": 1,
-                      "maximum": 2147483647,
-                      "description": "金額（税込で指定してください）",
-                      "example": 108000
-                    },
-                    "vat": {
-                      "type": "integer",
-                      "description": "消費税額（指定しない場合は自動で計算されます）",
-                      "example": 8000
-                    },
-                    "description": {
-                      "type": "string",
-                      "description": "備考",
-                      "example": "備考"
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/schemas/manual_journal"
           }
         }
       },
@@ -28467,6 +28476,56 @@
           }
         }
       },
+      "tag": {
+        "type": "object",
+        "required": [
+          "company_id",
+          "id",
+          "name",
+          "update_date"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "タグID",
+            "example": 1
+          },
+          "company_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "事業所ID",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 30,
+            "description": "名前(30文字以内)",
+            "example": "メモタグ"
+          },
+          "update_date": {
+            "type": "string",
+            "description": "更新日(yyyy-mm-dd)",
+            "example": "2019-12-17"
+          },
+          "shortcut1": {
+            "type": "string",
+            "maxLength": 255,
+            "description": "ショートカット1 (255文字以内)",
+            "example": "MEMOTAG",
+            "nullable": true
+          },
+          "shortcut2": {
+            "type": "string",
+            "maxLength": 255,
+            "description": "ショートカット2 (255文字以内)",
+            "example": "123",
+            "nullable": true
+          }
+        }
+      },
       "tagResponse": {
         "type": "object",
         "required": [
@@ -28474,54 +28533,7 @@
         ],
         "properties": {
           "tag": {
-            "type": "object",
-            "required": [
-              "company_id",
-              "id",
-              "name",
-              "update_date"
-            ],
-            "properties": {
-              "id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "タグID",
-                "example": 1
-              },
-              "company_id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "事業所ID",
-                "example": 1
-              },
-              "name": {
-                "type": "string",
-                "maxLength": 30,
-                "description": "名前(30文字以内)",
-                "example": "メモタグ"
-              },
-              "update_date": {
-                "type": "string",
-                "description": "更新日(yyyy-mm-dd)",
-                "example": "2019-12-17"
-              },
-              "shortcut1": {
-                "type": "string",
-                "maxLength": 255,
-                "description": "ショートカット1 (255文字以内)",
-                "example": "MEMOTAG",
-                "nullable": true
-              },
-              "shortcut2": {
-                "type": "string",
-                "maxLength": 255,
-                "description": "ショートカット2 (255文字以内)",
-                "example": "123",
-                "nullable": true
-              }
-            }
+            "$ref": "#/components/schemas/tag"
           }
         }
       },
@@ -29724,6 +29736,33 @@
           }
         }
       },
+      "tax": {
+        "type": "object",
+        "required": [
+          "code",
+          "name",
+          "name_ja"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "税区分コード",
+            "example": 21
+          },
+          "name": {
+            "type": "string",
+            "description": "税区分名",
+            "example": "sales_with_tax"
+          },
+          "name_ja": {
+            "type": "string",
+            "description": "税区分名（日本語表示用）",
+            "example": "課税売上"
+          }
+        }
+      },
       "taxResponse": {
         "type": "object",
         "required": [
@@ -29731,91 +29770,59 @@
         ],
         "properties": {
           "tax": {
-            "type": "object",
-            "required": [
-              "code",
-              "name",
-              "name_ja"
-            ],
-            "properties": {
-              "code": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "税区分コード",
-                "example": 21
-              },
-              "name": {
-                "type": "string",
-                "description": "税区分名",
-                "example": "sales_with_tax"
-              },
-              "name_ja": {
-                "type": "string",
-                "description": "税区分名（日本語表示用）",
-                "example": "課税売上"
-              }
-            }
+            "$ref": "#/components/schemas/tax"
           }
         }
       },
-      "walletableResponse": {
+      "walletable": {
         "type": "object",
         "required": [
-          "walletable"
+          "bank_id",
+          "id",
+          "name",
+          "type"
         ],
         "properties": {
-          "walletable": {
-            "type": "object",
-            "required": [
-              "bank_id",
-              "id",
-              "name",
-              "type"
-            ],
-            "properties": {
-              "id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "口座ID",
-                "example": 1
-              },
-              "name": {
-                "type": "string",
-                "maxLength": 255,
-                "description": "口座名 (255文字以内)",
-                "example": "freee銀行"
-              },
-              "bank_id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "サービスID",
-                "example": 3,
-                "nullable": true
-              },
-              "type": {
-                "type": "string",
-                "description": "口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
-                "example": "bank_account",
-                "enum": [
-                  "bank_account",
-                  "credit_card",
-                  "wallet"
-                ]
-              },
-              "last_balance": {
-                "type": "integer",
-                "description": "同期残高",
-                "example": 1565583
-              },
-              "walletable_balance": {
-                "type": "integer",
-                "description": "登録残高",
-                "example": 1340261
-              }
-            }
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "口座ID",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255,
+            "description": "口座名 (255文字以内)",
+            "example": "freee銀行"
+          },
+          "bank_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "サービスID",
+            "example": 3,
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "description": "口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
+            "example": "bank_account",
+            "enum": [
+              "bank_account",
+              "credit_card",
+              "wallet"
+            ]
+          },
+          "last_balance": {
+            "type": "integer",
+            "description": "同期残高",
+            "example": 1565583
+          },
+          "walletable_balance": {
+            "type": "integer",
+            "description": "登録残高",
+            "example": 1340261
           }
         }
       },
@@ -29867,6 +29874,98 @@
           }
         }
       },
+      "wallet_txn": {
+        "type": "object",
+        "required": [
+          "amount",
+          "balance",
+          "company_id",
+          "date",
+          "description",
+          "due_amount",
+          "entry_side",
+          "id",
+          "status",
+          "walletable_id",
+          "walletable_type"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "明細ID",
+            "example": 1
+          },
+          "company_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "事業所ID",
+            "example": 1
+          },
+          "date": {
+            "type": "string",
+            "description": "取引日(yyyy-mm-dd)",
+            "example": "2019-12-17"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": -9223372036854775808,
+            "maximum": 9223372036854775807,
+            "description": "取引金額",
+            "example": 5000
+          },
+          "due_amount": {
+            "type": "integer",
+            "description": "未決済金額",
+            "example": 0
+          },
+          "balance": {
+            "type": "integer",
+            "description": "残高(銀行口座等)",
+            "example": 10000
+          },
+          "entry_side": {
+            "type": "string",
+            "description": "入金／出金 (入金: income, 出金: expense)",
+            "example": "income",
+            "enum": [
+              "income",
+              "expense"
+            ]
+          },
+          "walletable_type": {
+            "type": "string",
+            "description": "口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
+            "example": "bank_account",
+            "enum": [
+              "bank_account",
+              "credit_card",
+              "wallet"
+            ]
+          },
+          "walletable_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "口座ID",
+            "example": 1
+          },
+          "description": {
+            "type": "string",
+            "description": "取引内容",
+            "example": "振込 カ）ABC"
+          },
+          "status": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4,
+            "description": "明細のステータス（消込待ち: 1, 消込済み: 2, 無視: 3, 消込中: 4）"
+          }
+        }
+      },
       "walletTxnResponse": {
         "type": "object",
         "required": [
@@ -29874,96 +29973,91 @@
         ],
         "properties": {
           "wallet_txn": {
-            "type": "object",
-            "required": [
-              "amount",
-              "balance",
-              "company_id",
-              "date",
-              "description",
-              "due_amount",
-              "entry_side",
-              "id",
-              "status",
-              "walletable_id",
-              "walletable_type"
+            "$ref": "#/components/schemas/wallet_txn"
+          }
+        }
+      },
+      "transfer": {
+        "type": "object",
+        "required": [
+          "amount",
+          "company_id",
+          "date",
+          "description",
+          "from_walletable_id",
+          "from_walletable_type",
+          "id",
+          "to_walletable_id",
+          "to_walletable_type"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "取引(振替)ID",
+            "example": 1
+          },
+          "company_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "事業所ID",
+            "example": 1
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": -9223372036854775808,
+            "maximum": 9223372036854775807,
+            "description": "金額",
+            "example": 5000
+          },
+          "date": {
+            "type": "string",
+            "description": "振替日 (yyyy-mm-dd)",
+            "example": "2019-12-17"
+          },
+          "from_walletable_type": {
+            "type": "string",
+            "description": "振替元口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
+            "example": "credit_card",
+            "enum": [
+              "bank_account",
+              "wallet",
+              "credit_card"
             ],
-            "properties": {
-              "id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "明細ID",
-                "example": 1
-              },
-              "company_id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "事業所ID",
-                "example": 1
-              },
-              "date": {
-                "type": "string",
-                "description": "取引日(yyyy-mm-dd)",
-                "example": "2019-12-17"
-              },
-              "amount": {
-                "type": "integer",
-                "format": "int64",
-                "minimum": -9223372036854775808,
-                "maximum": 9223372036854775807,
-                "description": "取引金額",
-                "example": 5000
-              },
-              "due_amount": {
-                "type": "integer",
-                "description": "未決済金額",
-                "example": 0
-              },
-              "balance": {
-                "type": "integer",
-                "description": "残高(銀行口座等)",
-                "example": 10000
-              },
-              "entry_side": {
-                "type": "string",
-                "description": "入金／出金 (入金: income, 出金: expense)",
-                "example": "income",
-                "enum": [
-                  "income",
-                  "expense"
-                ]
-              },
-              "walletable_type": {
-                "type": "string",
-                "description": "口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
-                "example": "bank_account",
-                "enum": [
-                  "bank_account",
-                  "credit_card",
-                  "wallet"
-                ]
-              },
-              "walletable_id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "口座ID",
-                "example": 1
-              },
-              "description": {
-                "type": "string",
-                "description": "取引内容",
-                "example": "振込 カ）ABC"
-              },
-              "status": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 4,
-                "description": "明細のステータス（消込待ち: 1, 消込済み: 2, 無視: 3, 消込中: 4）"
-              }
-            }
+            "nullable": true
+          },
+          "from_walletable_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "振替元口座ID",
+            "example": 101
+          },
+          "to_walletable_type": {
+            "type": "string",
+            "description": "振替先口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
+            "example": "bank_account",
+            "enum": [
+              "bank_account",
+              "wallet",
+              "credit_card"
+            ],
+            "nullable": true
+          },
+          "to_walletable_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "振替先口座ID",
+            "example": 201
+          },
+          "description": {
+            "type": "string",
+            "description": "備考",
+            "example": "備考"
           }
         }
       },
@@ -29974,88 +30068,7 @@
         ],
         "properties": {
           "transfer": {
-            "type": "object",
-            "required": [
-              "amount",
-              "company_id",
-              "date",
-              "description",
-              "from_walletable_id",
-              "from_walletable_type",
-              "id",
-              "to_walletable_id",
-              "to_walletable_type"
-            ],
-            "properties": {
-              "id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "取引(振替)ID",
-                "example": 1
-              },
-              "company_id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "事業所ID",
-                "example": 1
-              },
-              "amount": {
-                "type": "integer",
-                "format": "int64",
-                "minimum": -9223372036854775808,
-                "maximum": 9223372036854775807,
-                "description": "金額",
-                "example": 5000
-              },
-              "date": {
-                "type": "string",
-                "description": "振替日 (yyyy-mm-dd)",
-                "example": "2019-12-17"
-              },
-              "from_walletable_type": {
-                "type": "string",
-                "description": "振替元口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
-                "example": "credit_card",
-                "enum": [
-                  "bank_account",
-                  "wallet",
-                  "credit_card"
-                ],
-                "nullable": true
-              },
-              "from_walletable_id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "振替元口座ID",
-                "example": 101
-              },
-              "to_walletable_type": {
-                "type": "string",
-                "description": "振替先口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
-                "example": "bank_account",
-                "enum": [
-                  "bank_account",
-                  "wallet",
-                  "credit_card"
-                ],
-                "nullable": true
-              },
-              "to_walletable_id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "振替先口座ID",
-                "example": 201
-              },
-              "description": {
-                "type": "string",
-                "description": "備考",
-                "example": "備考"
-              }
-            }
+            "$ref": "#/components/schemas/transfer"
           }
         }
       },
@@ -30094,59 +30107,62 @@
           }
         }
       },
+      "user": {
+        "type": "object",
+        "required": [
+          "email",
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "ユーザーID",
+            "example": 1
+          },
+          "email": {
+            "type": "string",
+            "description": "メールアドレス",
+            "example": "example@freee.co.jp"
+          },
+          "display_name": {
+            "type": "string",
+            "description": "表示名",
+            "example": "山田太郎",
+            "nullable": true
+          },
+          "first_name": {
+            "type": "string",
+            "description": "氏名（名）",
+            "example": "太郎",
+            "nullable": true
+          },
+          "last_name": {
+            "type": "string",
+            "description": "氏名（姓）",
+            "example": "山田",
+            "nullable": true
+          },
+          "first_name_kana": {
+            "type": "string",
+            "description": "氏名（カナ・名）",
+            "example": "タロウ",
+            "nullable": true
+          },
+          "last_name_kana": {
+            "type": "string",
+            "description": "氏名（カナ・姓）",
+            "example": "ヤマダ",
+            "nullable": true
+          }
+        }
+      },
       "userResponse": {
         "type": "object",
         "properties": {
           "user": {
-            "type": "object",
-            "required": [
-              "email",
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "ユーザーID",
-                "example": 1
-              },
-              "email": {
-                "type": "string",
-                "description": "メールアドレス",
-                "example": "example@freee.co.jp"
-              },
-              "display_name": {
-                "type": "string",
-                "description": "表示名",
-                "example": "山田太郎",
-                "nullable": true
-              },
-              "first_name": {
-                "type": "string",
-                "description": "氏名（名）",
-                "example": "太郎",
-                "nullable": true
-              },
-              "last_name": {
-                "type": "string",
-                "description": "氏名（姓）",
-                "example": "山田",
-                "nullable": true
-              },
-              "first_name_kana": {
-                "type": "string",
-                "description": "氏名（カナ・名）",
-                "example": "タロウ",
-                "nullable": true
-              },
-              "last_name_kana": {
-                "type": "string",
-                "description": "氏名（カナ・姓）",
-                "example": "ヤマダ",
-                "nullable": true
-              }
-            }
+            "$ref": "#/components/schemas/user"
           }
         }
       },
@@ -30284,6 +30300,108 @@
           }
         }
       },
+      "receipt": {
+        "type": "object",
+        "required": [
+          "created_at",
+          "file_src",
+          "id",
+          "mime_type",
+          "origin",
+          "status",
+          "user"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "証憑ファイルID",
+            "example": 1
+          },
+          "status": {
+            "type": "string",
+            "description": "ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)",
+            "example": "unconfirmed",
+            "enum": [
+              "unconfirmed",
+              "confirmed",
+              "deleted",
+              "ignored"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "description": "メモ",
+            "example": "タクシー利用"
+          },
+          "mime_type": {
+            "type": "string",
+            "description": "MIMEタイプ",
+            "example": "image/png"
+          },
+          "issue_date": {
+            "type": "string",
+            "description": "発生日",
+            "example": "2019-12-17"
+          },
+          "origin": {
+            "type": "string",
+            "description": "アップロード元種別",
+            "example": "public_api",
+            "enum": [
+              "unknown",
+              "web",
+              "mobile_camera",
+              "mobile_album",
+              "scansnap",
+              "scannable",
+              "dropbox",
+              "mail",
+              "safety_contact_file",
+              "public_api"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "description": "作成日時（ISO8601形式）",
+            "example": "2019-12-17T18:30:24+09:00"
+          },
+          "file_src": {
+            "type": "string",
+            "description": "ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。）\n<br>\n<br>\nfile_srcは廃止予定の属性になります。<br>\nfile_srcに替わり、証憑ファイルのダウンロード APIをご利用ください。<br>\n証憑ファイルのダウンロードAPIを利用することで、以下のようになります。\n<ul>\n  <li>アプリケーション利用者はfreee APIアプリケーションにログインしていれば、証憑ダウンロード毎にfreeeに改めてログインすることなくファイルが参照できるようになります。</li>\n</ul>",
+            "example": "https://www.freee.co.jp/api/p/receipts/revisions/1234xxxxx/download",
+            "deprecated": true
+          },
+          "user": {
+            "type": "object",
+            "required": [
+              "email",
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 2147483647,
+                "description": "ユーザーID",
+                "example": 1
+              },
+              "email": {
+                "type": "string",
+                "description": "メールアドレス",
+                "example": "contact@example.com"
+              },
+              "display_name": {
+                "type": "string",
+                "description": "表示名",
+                "example": "フリー太郎",
+                "nullable": true
+              }
+            }
+          }
+        }
+      },
       "receiptResponse": {
         "type": "object",
         "required": [
@@ -30291,106 +30409,7 @@
         ],
         "properties": {
           "receipt": {
-            "type": "object",
-            "required": [
-              "created_at",
-              "file_src",
-              "id",
-              "mime_type",
-              "origin",
-              "status",
-              "user"
-            ],
-            "properties": {
-              "id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "証憑ファイルID",
-                "example": 1
-              },
-              "status": {
-                "type": "string",
-                "description": "ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)",
-                "example": "unconfirmed",
-                "enum": [
-                  "unconfirmed",
-                  "confirmed",
-                  "deleted",
-                  "ignored"
-                ]
-              },
-              "description": {
-                "type": "string",
-                "description": "メモ",
-                "example": "タクシー利用"
-              },
-              "mime_type": {
-                "type": "string",
-                "description": "MIMEタイプ",
-                "example": "image/png"
-              },
-              "issue_date": {
-                "type": "string",
-                "description": "発生日",
-                "example": "2019-12-17"
-              },
-              "origin": {
-                "type": "string",
-                "description": "アップロード元種別",
-                "example": "public_api",
-                "enum": [
-                  "unknown",
-                  "web",
-                  "mobile_camera",
-                  "mobile_album",
-                  "scansnap",
-                  "scannable",
-                  "dropbox",
-                  "mail",
-                  "safety_contact_file",
-                  "public_api"
-                ]
-              },
-              "created_at": {
-                "type": "string",
-                "description": "作成日時（ISO8601形式）",
-                "example": "2019-12-17T18:30:24+09:00"
-              },
-              "file_src": {
-                "type": "string",
-                "description": "ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。）\n<br>\n<br>\nfile_srcは廃止予定の属性になります。<br>\nfile_srcに替わり、証憑ファイルのダウンロード APIをご利用ください。<br>\n証憑ファイルのダウンロードAPIを利用することで、以下のようになります。\n<ul>\n  <li>アプリケーション利用者はfreee APIアプリケーションにログインしていれば、証憑ダウンロード毎にfreeeに改めてログインすることなくファイルが参照できるようになります。</li>\n</ul>",
-                "example": "https://www.freee.co.jp/api/p/receipts/revisions/1234xxxxx/download",
-                "deprecated": true
-              },
-              "user": {
-                "type": "object",
-                "required": [
-                  "email",
-                  "id"
-                ],
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "minimum": 1,
-                    "maximum": 2147483647,
-                    "description": "ユーザーID",
-                    "example": 1
-                  },
-                  "email": {
-                    "type": "string",
-                    "description": "メールアドレス",
-                    "example": "contact@example.com"
-                  },
-                  "display_name": {
-                    "type": "string",
-                    "description": "表示名",
-                    "example": "フリー太郎",
-                    "nullable": true
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/schemas/receipt"
           }
         }
       },
@@ -33531,6 +33550,50 @@
           }
         }
       },
+      "segment_tag": {
+        "type": "object",
+        "required": [
+          "description",
+          "id",
+          "name",
+          "shortcut1",
+          "shortcut2"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "セグメントタグID",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "セグメントタグ名",
+            "example": "プロジェクトA"
+          },
+          "description": {
+            "type": "string",
+            "description": "備考",
+            "example": "備考",
+            "nullable": true
+          },
+          "shortcut1": {
+            "type": "string",
+            "maxLength": 20,
+            "description": "ショートカット１ (20文字以内)",
+            "example": "A",
+            "nullable": true
+          },
+          "shortcut2": {
+            "type": "string",
+            "maxLength": 20,
+            "description": "ショートカット２ (20文字以内)",
+            "example": "123",
+            "nullable": true
+          }
+        }
+      },
       "segmentTagResponse": {
         "type": "object",
         "required": [
@@ -33538,48 +33601,7 @@
         ],
         "properties": {
           "segment_tag": {
-            "type": "object",
-            "required": [
-              "description",
-              "id",
-              "name",
-              "shortcut1",
-              "shortcut2"
-            ],
-            "properties": {
-              "id": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 2147483647,
-                "description": "セグメントタグID",
-                "example": 1
-              },
-              "name": {
-                "type": "string",
-                "description": "セグメントタグ名",
-                "example": "プロジェクトA"
-              },
-              "description": {
-                "type": "string",
-                "description": "備考",
-                "example": "備考",
-                "nullable": true
-              },
-              "shortcut1": {
-                "type": "string",
-                "maxLength": 20,
-                "description": "ショートカット１ (20文字以内)",
-                "example": "A",
-                "nullable": true
-              },
-              "shortcut2": {
-                "type": "string",
-                "maxLength": 20,
-                "description": "ショートカット２ (20文字以内)",
-                "example": "123",
-                "nullable": true
-              }
-            }
+            "$ref": "#/components/schemas/segment_tag"
           }
         }
       },
