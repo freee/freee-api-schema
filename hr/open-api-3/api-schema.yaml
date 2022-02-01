@@ -1,0 +1,5200 @@
+---
+openapi: 3.0.1
+info:
+  contact:
+    name: ''
+    url: https://support.freee.co.jp/hc/ja/requests/new
+  description: |+
+    freee人事労務のAPI仕様です。
+
+    ## [重要] freee人事労務 APIの新バージョンについて
+
+    このリファレンスはfreee人事労務 APIの新バージョンのリファレンスです。
+
+    2022年7月まで[旧バージョン](https://developer.freee.co.jp/docs/hr/pre-reference)と合わせて2つのバージョンが利用できる状態です。
+
+    新しいAPIを利用するにはリクエストヘッダーに以下を指定します。
+
+    ```
+    FREEE-VERSION: 2022-02-01
+    ```
+
+    指定がない場合には2022年7月に廃止予定のAPIを利用することになります。
+
+    詳細な変更やスケジュールは[【重要】freee人事労務APIの仕様変更について](https://developer.freee.co.jp/news/5418)をご覧ください。
+
+    ## 認証について
+
+    OAuth2.0を利用します。詳細は[ドキュメントの認証](https://developer.freee.co.jp/docs)パートを参照してください。
+
+    ## エンドポイント
+
+    https://api.freee.co.jp/hr
+
+    ## 後方互換性ありの変更
+
+    freeeでは、APIを改善していくために以下のような変更は後方互換性ありとして通知なく変更を入れることがあります。アプリケーション実装者は以下を踏まえて開発を行ってください。
+
+    - 新しいAPIリソース・エンドポイントの追加
+    - 既存のAPIに対して必須ではない新しいリクエストパラメータの追加
+    - 既存のAPIレスポンスに対する新しいプロパティの追加
+    - 既存のAPIレスポンスに対するプロパティの順番の入れ変え
+    - keyとなっているidやcodeの長さの変更（長くする）
+
+    ## エラーレスポンス
+
+    APIリクエストでエラーが発生した場合は、エラー原因に応じたステータスコードおよびメッセージを返します。
+
+    |ステータスコード|原因|
+    |---|---|
+    |400|リクエストパラメータが不正|
+    |401|アクセストークンが無効|
+    |403|アクセス権限がない|
+    |404|リソースが存在しない|
+    |429|リクエスト回数制限を越えた|
+    |503|システム内で予期しないエラーが発生|
+
+    メッセージボディ内の `messages` にはエラー内容を説明する文字列が入ります。
+
+    ```
+    {
+        "status_code": 400,
+        "errors": [
+            {
+                "type": "bad_request",
+                "messages": [
+                    "リクエストの形式が不正です。"
+                ]
+            }
+        ]
+    }
+    ```
+
+    ## API使用制限
+
+    APIリクエストは1時間で5000回を上限としています。API使用ステータスはレスポンスヘッダに付与されます。
+
+    ```
+    X-Ratelimit-Limit:5000
+    X-Ratelimit-Remaining:4998
+    X-Ratelimit-Reset:2018-01-01T12:00:00.000000Z
+    ```
+
+    各ヘッダの意味は次のとおりです。
+
+    |ヘッダ名|説明|
+    |---|---|
+    |X-Ratelimit-Limit|使用回数の上限|
+    |X-Ratelimit-Remaining|残り使用回数|
+    |X-Ratelimit-Reset|使用回数がリセットされる時刻|
+
+    上記に加え、freeeは一定期間に過度のアクセスを検知した場合、APIアクセスをコントロールする場合があります。
+    その際のhttp status codeは403となります。制限がかかってから10分程度が過ぎると再度使用することができるようになります。
+
+  license:
+    name: ''
+  termsOfService: ''
+  title: freee人事労務 API
+  version: v2022-02-01
+servers:
+- url: https://api.freee.co.jp/hr
+paths:
+  "/api/v1/bonuses/employee_payroll_statements":
+    get:
+      parameters:
+      - in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - in: query
+        name: year
+        required: true
+        schema:
+          maximum: 2100
+          minimum: 2000
+          type: integer
+      - in: query
+        name: month
+        required: true
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: '取得レコードの件数 (デフォルト: 50, 最小: 1, 最大: 100)'
+        in: query
+        name: limit
+        schema:
+          example: 50
+          maximum: 100
+          minimum: 1
+          type: integer
+      - description: '取得レコードのオフセット (デフォルト: 0)'
+        in: query
+        name: offset
+        schema:
+          example: 0
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1BonusesEmployeePayrollStatementsIndexSerializer"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '404':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/notfoundError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 賞与明細
+      description: |2-
+
+        指定した事業所に所属する従業員の賞与明細をリストで返します。
+        指定した年月に支払いのある賞与明細が返されます。
+        - 管理者権限を持ったユーザのみ実行可能です。
+      operationId: get_bonuses_employee_payroll_statements
+      summary: '一覧の取得
+
+        '
+  "/api/v1/bonuses/employee_payroll_statements/{employee_id}":
+    get:
+      parameters:
+      - in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - in: query
+        name: year
+        required: true
+        schema:
+          maximum: 2100
+          minimum: 2000
+          type: integer
+      - in: query
+        name: month
+        required: true
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: 従業員ID
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1BonusesEmployeePayrollStatementsController.show_response"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '404':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/notfoundError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 賞与明細
+      description: |2-
+
+        指定した従業員ID、年月の賞与明細を返します。
+        指定した年月に支払いのある賞与明細が返されます。
+        - 管理者権限を持ったユーザのみ実行可能です。
+
+        # examples
+        ```
+        {
+         "employee_payroll_statement": {
+           "id": 1,
+           "company_id": 1,
+           "employee_id": 1,
+           "employee_name": "給与 太郎",
+           "employee_display_name": "給与 太郎",
+           "employee_num": "001",
+           "closing_date": "2018-03-31",
+           "pay_date": "2018-03-31",
+           "fixed": true,
+           "calc_status": "calculated",
+           "calculated_at": "2018-09-27T05:06:45.315Z",
+           "bonus_amount": "300000.0",
+           "total_allowance_amount": "0.0",
+           "total_deduction_amount": "23830.0",
+           "net_payment_amount": "268000.0",
+           "gross_payment_amount": "330000.0",
+           "total_taxable_payment_amount": "330000.0",
+           "allowances": [{"name": "地域手当", "amount": "30000.0"}],
+           "deductions": [{"name": "所得税", "amount": "46000.0"}, {"name": "健康保険料", "amount": "16000.0"}],
+           "remark": "備考"
+         }
+        }
+        ```
+      operationId: get_bonuses_employee_payroll_statement
+      summary: '取得
+
+        '
+  "/api/v1/companies/{company_id}/employees":
+    get:
+      parameters:
+      - description: '取得レコードの件数 (デフォルト: 50, 最小: 1, 最大: 100)'
+        in: query
+        name: limit
+        schema:
+          example: 50
+          maximum: 100
+          minimum: 1
+          type: integer
+      - description: '取得レコードのオフセット (デフォルト: 0)'
+        in: query
+        name: offset
+        schema:
+          example: 0
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: 事業所ID
+        example: 1
+        in: path
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  "$ref": "#/components/schemas/ApiV1CompaniesEmployeeSerializer"
+                type: array
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 従業員
+      description: |2-
+
+        指定した事業所に所属する従業員をリストで返します。
+        - 管理者権限を持ったユーザのみ実行可能です。
+        - 退職ユーザも含めて取得可能です。
+      operationId: get_company_employees
+      summary: '一覧の取得
+
+        '
+  "/api/v1/employee_group_memberships":
+    get:
+      parameters:
+      - example: 1
+        in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 指定日。指定日付時点における所属情報をリストで返します。(YYYY-MM-DD)(例:2018-07-31)
+        example: '2018-07-31'
+        in: query
+        name: base_date
+        required: true
+        schema:
+          format: date
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+      - description: '取得レコードの件数 (デフォルト: 50, 最小: 1, 最大: 100)'
+        in: query
+        name: limit
+        schema:
+          example: 50
+          maximum: 100
+          minimum: 1
+          type: integer
+      - description: '取得レコードのオフセット (デフォルト: 0)'
+        in: query
+        name: offset
+        schema:
+          example: 0
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeeGroupMembershipsIndexSerializer"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 所属
+      description: |2-
+
+        指定した事業所の指定日付時点における所属情報をリストで返します。
+        - 管理者権限を持ったユーザのみ実行可能です。
+      operationId: get_employee_group_memberships
+      summary: '一覧の取得
+
+        '
+  "/api/v1/employees":
+    get:
+      parameters:
+      - description: 事業所ID
+        example: 1
+        in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 対象年月（年）
+        example: 2021
+        in: query
+        name: year
+        required: true
+        schema:
+          maximum: 2100
+          minimum: 2000
+          type: integer
+      - description: 対象年月（月）
+        example: 1
+        in: query
+        name: month
+        required: true
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: '取得レコードの件数 (デフォルト: 50, 最小: 1, 最大: 100)'
+        in: query
+        name: limit
+        schema:
+          example: 50
+          maximum: 100
+          minimum: 1
+          type: integer
+      - description: '取得レコードのオフセット (デフォルト: 0)'
+        in: query
+        name: offset
+        schema:
+          example: 0
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesIndexSerializer"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 従業員
+      description: |2-
+
+        指定した対象年月に事業所に所属する従業員をリストで返します。
+        - 管理者権限を持ったユーザのみ実行可能です。
+        - 指定した年月に退職済みユーザは取得できません。
+      operationId: get_employees
+      summary: '一覧の取得
+
+        '
+    post:
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesController.create_response"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 従業員
+      description: |2-
+
+        従業員を新規作成します。
+        - 管理者権限を持ったユーザのみ実行可能です。
+      operationId: create_employee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ApiV1EmployeesController.create_body"
+        required: false
+      summary: '作成
+
+        '
+      x-codegen-request-body-name: body
+  "/api/v1/employees/{employee_id}/bank_account_rule":
+    get:
+      parameters:
+      - description: 事業所ID
+        in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 対象年
+        in: query
+        name: year
+        required: true
+        schema:
+          maximum: 2100
+          minimum: 2000
+          type: integer
+      - description: 対象月
+        in: query
+        name: month
+        required: true
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: 従業員ID
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesBankAccountRulesController.show_response"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 従業員の銀行口座
+      description: |2-
+
+        指定した従業員・日付の銀行口座情報を返します。
+      operationId: get_employee_bank_account_rule
+      summary: '取得
+
+        '
+    put:
+      parameters:
+      - description: 従業員ID
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesBankAccountRulesController.update_response"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 従業員の銀行口座
+      description: |2-
+
+        指定した従業員の銀行口座1の情報を更新します。
+      operationId: update_employee_bank_account_rule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ApiV1EmployeesBankAccountRulesController.update_body"
+        required: false
+      summary: '更新
+
+        '
+      x-codegen-request-body-name: body
+  "/api/v1/employees/{employee_id}/basic_pay_rule":
+    get:
+      parameters:
+      - description: 事業所ID
+        in: query
+        name: company_id
+        required: true
+        schema:
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 対象年
+        in: query
+        name: year
+        required: true
+        schema:
+          example: 2021
+          maximum: 2100
+          minimum: 2000
+          type: integer
+      - description: 対象月
+        in: query
+        name: month
+        required: true
+        schema:
+          example: 1
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: 従業員ID
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesBasicPayRulesController.show_response"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 従業員の基本給
+      description: |2-
+
+        指定した従業員・日付の基本給情報を返します。
+        - 管理者権限を持ったユーザのみ実行可能です。
+      operationId: get_employee_basic_pay_rule
+      summary: '取得
+
+        '
+    put:
+      parameters:
+      - description: 従業員ID
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesBasicPayRulesController.update_response"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 従業員の基本給
+      description: |2-
+
+        指定した従業員の基本給情報を更新します。
+        - 管理者権限を持ったユーザのみ実行可能です。
+      operationId: update_employee_basic_pay_rule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ApiV1EmployeesBasicPayRulesController.update_body"
+        required: false
+      summary: '更新
+
+        '
+      x-codegen-request-body-name: body
+  "/api/v1/employees/{employee_id}/dependent_rules":
+    get:
+      parameters:
+      - description: 事業所ID
+        in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 対象年
+        in: query
+        name: year
+        required: true
+        schema:
+          maximum: 2100
+          minimum: 2000
+          type: integer
+      - description: 対象月
+        in: query
+        name: month
+        required: true
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: 従業員ID
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesDependentRulesController.index_response"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 従業員の扶養親族
+      description: |2-
+
+        指定した従業員・日付の扶養親族情報を返します。
+      operationId: get_employee_dependent_rules
+      summary: '取得
+
+        '
+  "/api/v1/employees/{employee_id}/dependent_rules/bulk_update":
+    put:
+      parameters:
+      - description: 従業員ID
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesDependentRulesController.bulk_update_response"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 従業員の扶養親族
+      description: |2-
+
+        指定した従業員の扶養親族情報を更新します。
+        idがない場合は新規作成、destroyがtrueの場合は削除になります。
+      operationId: bulk_update_employee_dependent_rules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ApiV1EmployeesDependentRulesController.bulk_update_body"
+        required: false
+      summary: '更新
+
+        '
+      x-codegen-request-body-name: body
+  "/api/v1/employees/{employee_id}/health_insurance_rule":
+    get:
+      parameters:
+      - description: 事業所ID
+        in: query
+        name: company_id
+        required: true
+        schema:
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 対象年
+        in: query
+        name: year
+        required: true
+        schema:
+          example: 2021
+          maximum: 2100
+          minimum: 2000
+          type: integer
+      - description: 対象月
+        in: query
+        name: month
+        required: true
+        schema:
+          example: 1
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: 従業員ID
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesHealthInsuranceRulesController.show_response"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 従業員の健康保険
+      description: |2-
+
+        指定した従業員・日付の健康保険情報を返します。
+        - 管理者権限を持ったユーザのみ実行可能です。
+      operationId: get_employee_health_insurance_rule
+      summary: '取得
+
+        '
+    put:
+      parameters:
+      - description: 従業員ID
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesHealthInsuranceRulesController.update_response"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 従業員の健康保険
+      description: |2-
+
+        指定した従業員の健康保険情報を更新します。
+        - 管理者権限を持ったユーザのみ実行可能です。
+      operationId: update_employee_health_insurance_rule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ApiV1EmployeesHealthInsuranceRulesController.update_body"
+        required: false
+      summary: '更新
+
+        '
+      x-codegen-request-body-name: body
+  "/api/v1/employees/{employee_id}/profile_rule":
+    get:
+      parameters:
+      - description: 事業所ID
+        in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 対象年
+        in: query
+        name: year
+        required: true
+        schema:
+          maximum: 2100
+          minimum: 2000
+          type: integer
+      - description: 対象月
+        in: query
+        name: month
+        required: true
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: 従業員ID
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesProfileRulesController.show_response"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 従業員の姓名・住所など
+      description: |2-
+
+        指定した従業員・日付の姓名などの情報を返します。
+      operationId: get_employee_profile_rule
+      summary: '取得
+
+        '
+    put:
+      parameters:
+      - description: 従業員ID
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesProfileRulesController.update_response"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 従業員の姓名・住所など
+      description: |2-
+
+        指定した従業員の姓名・住所などを更新します。
+      operationId: update_employee_profile_rule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ApiV1EmployeesProfileRulesController.update_body"
+        required: false
+      summary: '更新
+
+        '
+      x-codegen-request-body-name: body
+  "/api/v1/employees/{employee_id}/time_clocks":
+    get:
+      parameters:
+      - description: 事業所ID
+        in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: '取得する打刻期間の開始日(YYYY-MM-DD)(例:2018-08-01)(デフォルト: 当月の打刻開始日)'
+        in: query
+        name: from_date
+        schema:
+          format: date
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+      - description: '取得する打刻期間の終了日(YYYY-MM-DD)(例:2018-08-31)(デフォルト: 当日)'
+        in: query
+        name: to_date
+        schema:
+          format: date
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+      - description: '取得レコードの件数 (デフォルト: 50, 最小: 1, 最大: 100)'
+        in: query
+        name: limit
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+      - description: '取得レコードのオフセット (デフォルト: 0)'
+        in: query
+        name: offset
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      - description: 従業員ID
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesTimeClocksController.index_response"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - タイムレコーダー(打刻)
+      description: |2-
+
+        指定した従業員・期間の打刻情報を返します。
+        デフォルトでは従業員の当月の打刻開始日から当日までの値が返ります。
+      operationId: get_employee_time_clocks
+      summary: '打刻情報の一覧取得
+
+        '
+    post:
+      parameters:
+      - description: 従業員ID
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesTimeClocksController.create_response"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - タイムレコーダー(打刻)
+      description: |2-
+
+        指定した従業員の打刻情報を登録します。
+        休憩開始の連続や退勤のみなど、整合性の取れていない打刻は登録できません。
+        退勤の打刻は、すでに登録されている退勤打刻よりも後の時刻であれば上書き登録することができます。
+        打刻可能種別の取得APIを呼ぶことで、その従業員がその時点で登録可能な打刻種別が取得できます。
+        打刻が日をまたぐ場合は、base_date(打刻日)に前日の日付を指定してください。
+        datetime(打刻日時)を指定できるのは管理者か事務担当者の権限を持ったユーザのみです。
+
+        ## 操作可能な打刻種別
+        - clock_in：出勤
+        - break_begin：休憩開始
+        - break_end：休憩終了
+        - clock_out：退勤
+      operationId: create_employee_time_clock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ApiV1EmployeesTimeClocksController.create_body"
+        required: false
+      summary: '打刻情報の登録
+
+        '
+      x-codegen-request-body-name: body
+  "/api/v1/employees/{employee_id}/time_clocks/available_types":
+    get:
+      parameters:
+      - description: 事業所ID
+        in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 対象日(YYYY-MM-DD)(例:2018-08-01)(デフォルト：当日)
+        in: query
+        name: date
+        schema:
+          format: date
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+      - description: 従業員ID
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesTimeClocksController.available_types_response"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - タイムレコーダー(打刻)
+      description: |2-
+
+        指定した従業員・日付の打刻可能種別と打刻基準日を返します。
+        例: すでに出勤した状態だと、休憩開始、退勤が配列で返ります。
+
+        ## 返却される打刻種別
+        - clock_in：出勤
+        - break_begin：休憩開始
+        - break_end：休憩終了
+        - clock_out：退勤
+        ## 返却される日付
+        - base_date：打刻基準日
+      operationId: get_employee_time_clocks_available_types
+      summary: '打刻可能種別の取得
+
+        '
+  "/api/v1/employees/{employee_id}/time_clocks/{id}":
+    get:
+      parameters:
+      - description: 事業所ID
+        in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 従業員ID
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 打刻ID
+        in: path
+        name: id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesTimeClocksController.show_response"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '404':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/notfoundError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - タイムレコーダー(打刻)
+      description: |2-
+
+        指定した従業員・指定した打刻の詳細情報を返します。
+        打刻情報の一覧取得APIにて取得した打刻IDを利用することができます。
+      operationId: get_employee_time_clock
+      summary: '打刻情報の詳細取得
+
+        '
+  "/api/v1/employees/{employee_id}/welfare_pension_insurance_rule":
+    get:
+      parameters:
+      - description: 事業所ID
+        in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 対象年
+        in: query
+        name: year
+        required: true
+        schema:
+          maximum: 2100
+          minimum: 2000
+          type: integer
+      - description: 対象月
+        in: query
+        name: month
+        required: true
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: 従業員ID
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesWelfarePensionInsuranceRulesController.show_response"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 従業員の厚生年金保険
+      description: |2-
+
+        指定した従業員・日付の厚生年金保険情報を返します。
+        - 管理者権限を持ったユーザのみ実行可能です。
+      operationId: get_employee_welfare_pension_insurance_rule
+      summary: '取得
+
+        '
+    put:
+      parameters:
+      - description: 従業員ID
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesWelfarePensionInsuranceRulesController.update_response"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 従業員の厚生年金保険
+      description: |2-
+
+        指定した従業員の厚生年金保険情報を更新します。
+      operationId: update_employee_welfare_pension_insurance_rule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ApiV1EmployeesWelfarePensionInsuranceRulesController.update_body"
+        required: false
+      summary: '更新
+
+        '
+      x-codegen-request-body-name: body
+  "/api/v1/employees/{employee_id}/work_record_summaries/{year}/{month}":
+    get:
+      parameters:
+      - description: 事業所ID
+        in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 'サマリ情報に日次の勤怠情報を含める(true/false)(デフォルト: false)'
+        in: query
+        name: work_records
+        schema:
+          type: boolean
+      - description: 従業員ID
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 対象年
+        in: path
+        name: year
+        required: true
+        schema:
+          example: 2021
+          maximum: 2100
+          minimum: 2000
+          type: integer
+      - description: 対象月
+        in: path
+        name: month
+        required: true
+        schema:
+          example: 1
+          maximum: 12
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesWorkRecordSummarySerializer"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 勤怠情報サマリ
+      description: |2-
+
+        指定した従業員、月の勤怠情報のサマリを返します。
+        work_recordsオプションにtrueを指定することで、明細となる日次の勤怠情報もあわせて返却します。
+      operationId: get_employee_work_record_summary
+      summary: '勤怠情報月次サマリの取得
+
+        '
+    put:
+      parameters:
+      - description: 従業員ID
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 対象年
+        in: path
+        name: year
+        required: true
+        schema:
+          example: 2021
+          maximum: 2100
+          minimum: 2000
+          type: integer
+      - description: 対象月
+        in: path
+        name: month
+        required: true
+        schema:
+          example: 1
+          maximum: 12
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesWorkRecordSummarySerializer"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 勤怠情報サマリ
+      description: |2-
+
+        指定した従業員、月の勤怠情報のサマリを更新します。勤怠データが存在しない場合は新規作成、既に存在する場合は上書き更新されます。
+        ※日毎の勤怠の更新はこのAPIではできません。日毎の勤怠の操作には勤怠APIを使用して下さい。
+        ※管理者権限を持ったユーザのみ実行可能です。
+
+        ## 更新可能な項目
+        ※値が設定された項目のみ更新されます。新規作成で値が設定されなかった場合は自動的に0が設定されます。
+        - work_days：総勤務日数
+        - work_days_on_weekdays：所定労働日の勤務日数
+        - work_days_on_prescribed_holidays：所定休日の勤務日数
+        - work_days_on_legal_holidays：法定休日の勤務日数
+        - total_work_mins：労働時間（分）
+        - total_normal_work_mins：所定労働時間（分）
+        - total_excess_statutory_work_mins：給与計算に用いられる法定内残業時間（分）
+        - total_holiday_work_mins：法定休日労働時間（分）
+        - total_latenight_work_mins：深夜労働時間（分）
+        - total_actual_excess_statutory_work_mins：実労働時間ベースの法定内残業時間（分）
+        - total_overtime_work_mins：時間外労働時間（分）
+        - num_absences：欠勤日数
+        - num_absences_for_deduction：控除対象の欠勤日数
+        - total_lateness_mins：遅刻時間（分）
+        - total_lateness_mins_for_deduction：控除対象の遅刻時間（分）
+        - total_early_leaving_mins：早退時間（分）
+        - total_early_leaving_mins_for_deduction：控除対象の早退時間（分）
+        - num_paid_holidays：有給取得日数
+        - total_shortage_work_mins：不足時間（分）（フレックスタイム制でのみ使用）
+        - total_deemed_paid_excess_statutory_work_mins：支給対象の法定内残業時間（分）（裁量労働制でのみ使用）
+        - total_deemed_paid_overtime_except_normal_work_mins：支給対象の時間外労働時間（分）（裁量労働制でのみ使用）
+
+        # examples
+
+        勤怠情報を更新する場合は以下のようなパラメータをリクエストします。
+
+        ```
+        {
+          "work_days": 20,
+          "work_days_on_weekdays": 20,
+          "work_days_on_prescribed_holidays": 0,
+          "work_days_on_legal_holidays": 0,
+          "total_work_mins": 9600,
+          "total_normal_work_mins": 9000,
+          "total_excess_statutory_work_mins": 600,
+          "total_holiday_work_mins": 0,
+          "total_latenight_work_mins": 0,
+          "total_actual_excess_statutory_work_mins": 0,
+          "total_overtime_work_mins": 600,
+          "num_absences": 0,
+          "num_absences_for_deduction": 0,
+          "total_lateness_mins": 60,
+          "total_lateness_mins_for_deduction": 60,
+          "total_early_leaving_mins": 60,
+          "total_early_leaving_mins_for_deduction": 60,
+          "num_paid_holidays": 2
+        }
+        ```
+      operationId: update_employee_work_record_summary
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ApiV1EmployeesWorkRecordSummaryController.update_body"
+        required: false
+      summary: '勤怠情報月次サマリの更新
+
+        '
+  "/api/v1/employees/{employee_id}/work_records/{date}":
+    delete:
+      parameters:
+      - description: 従業員ID
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 対象日(YYYY-MM-DD)(例:2018-08-01)
+        in: path
+        name: date
+        required: true
+        schema:
+          format: date
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+      - description: 事業所ID
+        in: query
+        name: company_id
+        required: true
+        schema:
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '204':
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '404':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/notfoundError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 勤怠
+      description: |2-
+
+        指定した従業員の勤怠情報を削除します。
+      operationId: destroy_employee_work_record
+      summary: '削除
+
+        '
+      x-codegen-request-body-name: body
+    get:
+      parameters:
+      - description: 事業所ID
+        in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 従業員ID
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 対象日(YYYY-MM-DD)(例:2018-08-01)
+        in: path
+        name: date
+        required: true
+        schema:
+          format: date
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesWorkRecordSerializer"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 勤怠
+      description: |2-
+
+        指定した従業員・日付の勤怠情報を返します。
+      operationId: get_employee_work_record
+      summary: '取得
+
+        '
+    put:
+      parameters:
+      - description: 従業員ID
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 対象日(YYYY-MM-DD)(例:2018-08-01)
+        in: path
+        name: date
+        required: true
+        schema:
+          format: date
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesWorkRecordSerializer"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 勤怠
+      description: |2-
+
+        指定した従業員の勤怠情報を更新します。
+        ※振替出勤・振替休日の登録はAPIでは行うことができません。
+
+        # examples
+
+        出勤日について出退勤時刻および休憩時間を更新する場合は以下のようなパラメータをリクエストします。
+
+        ```
+        {
+          "work_record": {
+            "company_id": 1,
+            "break_records": [
+              {
+                "clock_in_at": "2017-05-25 12:00:00",
+                "clock_out_at": "2017-05-25 13:00:00"
+              }
+            ],
+            "clock_in_at": "2017-05-25 09:10:00",
+            "clock_out_at": "2017-05-25 18:20:00"
+          }
+        }
+        ```
+
+        勤務パターンや既定の所定労働時間を変更する場合は use_default_work_pattern に false を指定するとともに、各設定を上書きするパラメータをリクエストします。
+
+        ```
+        {
+          "work_record": {
+            "company_id": 1,
+            "break_records": [
+              {
+                "clock_in_at": "2017-05-25 12:00:00",
+                "clock_out_at": "2017-05-25 13:00:00"
+              }
+            ],
+            "clock_in_at": "2017-05-25 09:10:00",
+            "clock_out_at": "2017-05-25 18:20:00",
+            "day_pattern": "normal_day",
+            "normal_work_clock_in_at": "2017-05-25 11:00:00",
+            "normal_work_clock_out_at": "2017-12-20 20:00:00",
+            "normal_work_mins": 0,
+            "use_default_work_pattern": false
+          }
+        }
+        ```
+
+        有給取得時の連携について
+        半休の場合は通常勤務のように勤務開始・終了時間を指定しつつ、加えて以下の２つの要素を指定することで API での勤怠をつけることができます。
+            - paid_holiday (半休の場合は 0.5 とします)
+            - normal_work_mins_by_paid_holiday (半休により計上される所定労働時間を分で指定します)
+
+        ```
+        {
+          "work_record": {
+            "company_id": 1,
+            "break_records": [
+              {
+                "clock_in_at": "2017-05-25 12:00:00",
+                "clock_out_at": "2017-05-25 13:00:00"
+              }
+            ],
+            "clock_in_at": "2017-05-25 09:10:00",
+            "clock_out_at": "2017-05-25 18:20:00",
+            "paid_holiday": 0.5,
+            "normal_work_mins_by_paid_holiday": 240
+          }
+        }
+        ```
+
+        欠勤を付ける場合は company_idとis_absence 以外のパラメータは必要ありません。
+
+        ```
+        {
+          "work_record": {
+            "company_id": 1,
+            "is_absence": true
+          }
+        }
+        ```
+      operationId: update_employee_work_record
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ApiV1EmployeesWorkRecordsController.update_body"
+        required: false
+      summary: '更新
+
+        '
+      x-codegen-request-body-name: body
+  "/api/v1/employees/{id}":
+    delete:
+      parameters:
+      - description: Scope response to id
+        example: 1
+        in: path
+        name: id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 事業所ID
+        example: 1
+        in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '204':
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '404':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/notfoundError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 従業員
+      description: |2-
+
+        指定したIDの従業員を削除します。
+        - 管理者権限を持ったユーザのみ実行可能です。
+      operationId: destroy_employee
+      summary: '削除
+
+        '
+      x-codegen-request-body-name: body
+    get:
+      parameters:
+      - description: 事業所ID
+        example: 1
+        in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - description: 対象年月（年）
+        example: 2021
+        in: query
+        name: year
+        required: true
+        schema:
+          maximum: 2100
+          minimum: 2000
+          type: integer
+      - description: 対象年月（月）
+        example: 1
+        in: query
+        name: month
+        required: true
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: Scope response to id
+        example: 1
+        in: path
+        name: id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesController.show_response"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '404':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/notfoundError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 従業員
+      description: |2-
+
+        指定したIDの従業員を返します。
+        - 管理者権限を持ったユーザのみ実行可能です。
+        - 指定した対象年月に退職済みユーザは取得できません。
+      operationId: get_employee
+      summary: '取得
+
+        '
+    put:
+      parameters:
+      - description: Scope response to id
+        in: path
+        name: id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1EmployeesController.update_response"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '404':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/notfoundError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 従業員
+      description: |2-
+
+        指定した従業員の情報を更新します。
+        - 管理者権限を持ったユーザのみ実行可能です。
+      operationId: update_employee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ApiV1EmployeesController.update_body"
+        required: false
+      summary: '更新
+
+        '
+      x-codegen-request-body-name: body
+  "/api/v1/salaries/employee_payroll_statements":
+    get:
+      parameters:
+      - in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - in: query
+        name: year
+        required: true
+        schema:
+          maximum: 2100
+          minimum: 2000
+          type: integer
+      - in: query
+        name: month
+        required: true
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: '取得レコードの件数 (デフォルト: 50, 最小: 1, 最大: 100)'
+        in: query
+        name: limit
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+      - description: '取得レコードのオフセット (デフォルト: 0)'
+        in: query
+        name: offset
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1SalariesEmployeePayrollStatementsController.index_response"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 給与明細
+      description: |2-
+
+        指定した事業所に所属する従業員の給与明細をリストで返します。
+        指定した年月に支払いのある給与明細が返されます。
+        - 複数時給を設定している場合はpaymentsに内訳が返されます。
+        - 管理者権限を持ったユーザのみ実行可能です。
+      operationId: get_salaries_employee_payroll_statements
+      summary: '一覧の取得
+
+        '
+  "/api/v1/salaries/employee_payroll_statements/{employee_id}":
+    get:
+      parameters:
+      - in: query
+        name: company_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      - in: query
+        name: year
+        required: true
+        schema:
+          maximum: 2100
+          minimum: 2000
+          type: integer
+      - in: query
+        name: month
+        required: true
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+      - description: Scope response to employee_id
+        in: path
+        name: employee_id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1SalariesEmployeePayrollStatementsController.show_response"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '404':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/notfoundError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - 給与明細
+      description: |2-
+
+        指定した従業員ID、年月の給与明細を返します。
+        指定した年月に支払いのある給与明細が返されます。
+        - 複数時給を設定している場合はpaymentsに内訳が返されます。
+        - 管理者権限を持ったユーザのみ実行可能です。
+
+        # examples
+        ```
+        {
+         "employee_payroll_statement": {
+           "id": 1,
+           "company_id": 1,
+           "employee_id": 1,
+           "employee_name": "給与 太郎",
+           "employee_display_name": "給与 太郎",
+           "employee_num": "001",
+           "pay_date": "2018-02-25",
+           "start_date": "2018-02-01",
+           "closing_date": "2018-02-28",
+           "variable_pay_start_date": "2018-01-01",
+           "variable_pay_closing_date": "2018-01-31",
+           "fixed": true,
+           "calc_status": "calculated",
+           "calculated_at": "2018-09-27T05:06:45.315Z",
+           "pay_calc_type": "monthly",
+           "basic_pay_amount": "300000.0",
+           "work_days": "21.0",
+           "normal_work_time": "8.0",
+           "normal_work_days": "21.0",
+           "work_mins_by_paid_holiday": "480.0",
+           "num_paid_holidays": "1.0",
+           "is_board_member": true,
+           "total_attendance_deduction_amount": "0.0",
+           "total_allowance_amount": "0.0",
+           "total_deduction_amount": "23830.0",
+           "net_payment_amount": "277170.0",
+           "gross_payment_amount": "301000.0",
+           "total_worked_days_count": "21.0",
+           "total_taxable_payment_amount": "301000.0",
+           "total_expense_amount": "0.0",
+           "total_transfer_amount": "277170.0",
+           "total_annual_payment_amount": "600000.0",
+           "payments": [{ "name": "基本給", "amount": "300000.0"},{ "name": "残業代", "amount": "1000.0"}],
+           "deductions": [{"name": "所得税", "amount": "7000.0"}, {"name": "健康保険料", "amount": "16830.0"}],
+           "attendances": [{"name": "遅刻・早退", "time": "0.0", "amount": "0.0"}],
+           "overtime_pays": [{ "name": "時間外労働", "time": "60.0", "amount": "1000.0", "code": null }, { "name": "カスタム固定残業代", "time": null, "amount": "10000.0", "code": "a001" }],
+           "remark": "備考"
+         }
+        }
+        ```
+      operationId: get_salaries_employee_payroll_statement
+      summary: '取得
+
+        '
+  "/api/v1/users/me":
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiV1UsersMeSerializer"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/error"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      tags:
+      - ログインユーザ
+      description: |2-
+
+        このリクエストの認可セッションにおけるログインユーザの情報を返します。
+        freee人事労務では一人のログインユーザを複数の事業所に関連付けられるため、このユーザと関連のあるすべての事業所の情報をリストで返します。
+        他のAPIのパラメータとして `company_id` が求められる場合は、このAPIで取得した `company_id` を使用します。
+        給与計算対象外の従業員の `employee_id` は取得できません。
+      operationId: get_users_me
+      summary: '取得
+
+        '
+components:
+  schemas:
+    ApiV1BonusesEmployeePayrollStatementSerializer:
+      properties:
+        allowances:
+          description: 手当
+          items:
+            "$ref": "#/components/schemas/ApiV1EmployeePayrollStatementsEmployeePayrollStatementItemSerializer"
+          type: array
+        bonus_amount:
+          description: 賞与額
+          nullable: true
+          type: string
+        calc_status:
+          description: '計算状況ステータス calculating: 計算中, calculated: 計算完了, error: エラー'
+          type: string
+        calculated_at:
+          description: 計算状況ステータスの更新日
+          format: date-time
+          nullable: true
+          type: string
+        closing_date:
+          description: 確定日
+          format: date
+          type: string
+        company_id:
+          description: 事業所ID
+          format: int32
+          type: integer
+        deductions:
+          description: 控除項目（所得税、社会保険料等）
+          items:
+            "$ref": "#/components/schemas/ApiV1EmployeePayrollStatementsEmployeePayrollStatementItemSerializer"
+          type: array
+        employee_display_name:
+          description: 従業員の表示名
+          type: string
+        employee_id:
+          description: 従業員ID
+          format: int32
+          type: integer
+        employee_name:
+          description: 従業員の姓名
+          type: string
+        employee_num:
+          description: 従業員番号
+          nullable: true
+          type: string
+        fixed:
+          description: 賞与明細が確定されているかどうか
+          type: boolean
+        gross_payment_amount:
+          description: 総支給額(額面)
+          nullable: true
+          type: string
+        id:
+          description: 賞与明細ID
+          format: int32
+          type: integer
+        net_payment_amount:
+          description: 差引支給額(手取り額)
+          nullable: true
+          type: string
+        pay_date:
+          description: 支払日
+          format: date
+          type: string
+        remark:
+          description: 備考
+          type: string
+        total_allowance_amount:
+          description: 手当額合計
+          nullable: true
+          type: string
+        total_deduction_amount:
+          description: 控除額合計
+          nullable: true
+          type: string
+        total_taxable_payment_amount:
+          description: 課税対象支給額
+          nullable: true
+          type: string
+      type: object
+    ApiV1BonusesEmployeePayrollStatementsController.show_response:
+      properties:
+        employee_payroll_statement:
+          "$ref": "#/components/schemas/ApiV1BonusesEmployeePayrollStatementSerializer"
+      type: object
+    ApiV1BonusesEmployeePayrollStatementsIndexSerializer:
+      properties:
+        employee_payroll_statements:
+          items:
+            "$ref": "#/components/schemas/ApiV1BonusesEmployeePayrollStatementSerializer"
+          type: array
+        total_count:
+          format: int32
+          type: integer
+      type: object
+    ApiV1CompaniesEmployeeSerializer:
+      properties:
+        display_name:
+          description: 従業員名（表示名）
+          type: string
+        email:
+          description: ログイン用メールアドレス(従業員詳細未設定の場合、nullになります。)
+          nullable: true
+          type: string
+        entry_date:
+          description: 入社日
+          format: date-time
+          type: string
+        id:
+          description: 従業員ID
+          format: int32
+          type: integer
+        num:
+          description: 従業員番号(従業員詳細未設定の場合、nullになります。)
+          nullable: true
+          type: string
+        retire_date:
+          description: 退職日
+          format: date-time
+          nullable: true
+          type: string
+        user_id:
+          description: ユーザーID(従業員詳細未設定の場合、nullになります。)
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    ApiV1EmployeeCreateRequestSerializer:
+      properties:
+        birth_date:
+          description: 生年月日（必須）
+          example: '2000-01-01'
+          format: date
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+        company_reference_date_rule_name:
+          description: |-
+            <a href="https://support.freee.co.jp/hc/ja/articles/360000666303-締め日支払い日を変更する方法は-" target="_blank">締め日支払い日グループ名</a>
+            で設定した締め日支払い日を指定してください。
+            - 未指定の際は、最初に登録したデータが利用されます。
+          example: 15日締め（当月25日払い）
+          maxLength: 15
+          type: string
+        entry_date:
+          description: 入社日（必須）
+          example: '2021-04-01'
+          format: date
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+        first_name:
+          description: 名（必須）
+          example: 太郎
+          maxLength: 255
+          type: string
+        first_name_kana:
+          description: 名カナ（必須）
+          example: タロウ
+          maxLength: 255
+          type: string
+        gender:
+          description: '性別　unselected: 未選択, male: 男性, female: 女性（デフォルト: unselected:
+            未選択）'
+          enum:
+          - unselected
+          - male
+          - female
+          example: male
+          type: string
+        last_name:
+          description: 姓（必須）
+          example: 山田
+          maxLength: 255
+          type: string
+        last_name_kana:
+          description: 姓カナ（必須）
+          example: ヤマダ
+          maxLength: 255
+          type: string
+        married:
+          description: '配偶者の有無（デフォルト: false）'
+          type: boolean
+        num:
+          description: |-
+            従業員番号<br>
+            従業員を判別しやすいよう管理することができます。（例: 1人目の正社員を A-001 と入力）
+          example: A-001
+          maxLength: 255
+          type: string
+        pay_amount:
+          description: 基本給（必須）
+          example: 220000
+          format: int32
+          maximum: 99999999
+          minimum: 0
+          type: integer
+        pay_calc_type:
+          description: |-
+            給与方式（必須） monthly: 月給, daily: 日給, hourly: 時給
+            - フレックスタイム制を使用している場合はmonthly以外指定できません。
+          enum:
+          - monthly
+          - daily
+          - hourly
+          example: 15日締め（当月25日払い）
+          type: string
+        working_hours_system_name:
+          description: |-
+            <a href="https://support.freee.co.jp/hc/ja/articles/360000562403-労働時間制度と勤務-賃金設定について" target="_blank">勤務・賃金設定名</a>
+            で設定した名称を指定してください。
+            - 未指定の際は、最初に登録したデータが利用されます。
+          example: 固定
+          maxLength: 30
+          type: string
+      required:
+      - last_name
+      - first_name
+      - last_name_kana
+      - first_name_kana
+      - entry_date
+      - birth_date
+      - pay_calc_type
+      - pay_amount
+      type: object
+    ApiV1EmployeeGroupMembershipSerializer:
+      properties:
+        display_name:
+          description: 従業員名（表示名）
+          example: 山田 太郎
+          type: string
+        entry_date:
+          description: 入社日
+          example: '2021-04-01'
+          format: date
+          type: string
+        group_memberships:
+          items:
+            "$ref": "#/components/schemas/ApiV1GroupMembershipSerializer"
+          type: array
+        id:
+          description: 従業員ID
+          example: 1
+          format: int32
+          type: integer
+        login_email:
+          description: ログイン用メールアドレス(従業員詳細未設定の場合、nullになります。)
+          example: example@example.com
+          nullable: true
+          type: string
+        num:
+          description: 従業員番号
+          example: A-001
+          nullable: true
+          type: string
+        retire_date:
+          description: 退職日
+          example:
+          format: date
+          nullable: true
+          type: string
+        user_id:
+          description: ユーザーID(従業員詳細未設定の場合、nullになります。)
+          example: 1
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    ApiV1EmployeeGroupMembershipsIndexSerializer:
+      properties:
+        employee_group_memberships:
+          items:
+            "$ref": "#/components/schemas/ApiV1EmployeeGroupMembershipSerializer"
+          type: array
+        total_count:
+          example: 1
+          format: int32
+          type: integer
+      type: object
+    ApiV1EmployeePayrollStatementsEmployeeAttendanceItemSerializer:
+      properties:
+        amount:
+          description: 控除額
+          type: string
+        name:
+          description: 項目名
+          type: string
+        time:
+          description: 時間
+          type: string
+      type: object
+    ApiV1EmployeePayrollStatementsEmployeeOvertimePayItemSerializer:
+      properties:
+        amount:
+          description: 手当金額
+          example: '1000.0'
+          type: string
+        code:
+          description: コード（事業所毎に設定可能な小文字英数最大10桁のコード）
+          example:
+          nullable: true
+          type: string
+        name:
+          description: 項目名
+          example: 時間外労働
+          type: string
+        time:
+          description: '時間(単位: 分)。固定残業代の場合、nullになります。'
+          example: '60.0'
+          nullable: true
+          type: string
+      type: object
+    ApiV1EmployeePayrollStatementsEmployeePayrollStatementItemSerializer:
+      properties:
+        amount:
+          description: 金額
+          type: string
+        name:
+          description: 項目名
+          type: string
+      type: object
+    ApiV1EmployeeSerializer:
+      properties:
+        bank_account_rule:
+          "$ref": "#/components/schemas/ApiV1EmployeesBankAccountRuleSerializer"
+        base_pension_num:
+          description: 基礎年金番号
+          nullable: true
+          type: string
+        basic_pay_rule:
+          "$ref": "#/components/schemas/ApiV1EmployeesBasicPayRuleSerializer"
+        birth_date:
+          description: 生年月日
+          format: date
+          type: string
+        company_id:
+          description: 事業所ID
+          format: int32
+          type: integer
+        dependent_rules:
+          description: 扶養親族
+          items:
+            "$ref": "#/components/schemas/ApiV1EmployeesDependentRuleSerializer"
+          type: array
+        display_name:
+          description: 従業員名（表示名）
+          type: string
+        employment_insurance_reference_number:
+          description: 被保険者番号（雇用保険）
+          type: string
+        entry_date:
+          description: 入社日
+          format: date
+          type: string
+        health_insurance_rule:
+          "$ref": "#/components/schemas/ApiV1EmployeesHealthInsuranceRuleSerializer"
+        id:
+          description: 従業員ID
+          format: int32
+          type: integer
+        num:
+          description: 従業員番号
+          nullable: true
+          type: string
+        profile_rule:
+          "$ref": "#/components/schemas/ApiV1EmployeesProfileRuleSerializer"
+        retire_date:
+          description: 退職日
+          format: date
+          nullable: true
+          type: string
+        user_id:
+          format: int32
+          nullable: true
+          type: integer
+        welfare_pension_insurance_rule:
+          "$ref": "#/components/schemas/ApiV1EmployeesWelfarePensionInsuranceRuleSerializer"
+      type: object
+    ApiV1EmployeeUpdateRequestSerializer:
+      properties:
+        base_pension_num:
+          description: '基礎年金番号 数値文字列10桁固定長 例: 1111111111'
+          example: '1111111111'
+          maxLength: 10
+          type: string
+        birth_date:
+          description: 生年月日 null不可
+          example: '2000-01-01'
+          format: date
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+        display_name:
+          description: 従業員名（freee人事労務上での表示にのみ使用される名前です。出力書類には姓名が使用されます。）
+          example: 山田 太郎
+          maxLength: 255
+          type: string
+        employment_insurance_reference_number:
+          description: '被保険者番号（雇用保険） 数値文字列11桁固定長 例: 11111111111'
+          example: '11111111111'
+          maxLength: 11
+          type: string
+        entry_date:
+          description: 入社日 null不可
+          example: '2021-04-01'
+          format: date
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+        num:
+          description: |-
+            従業員番号<br>
+            従業員を判別しやすいよう管理することができます。（例: 1人目の正社員を A-001 と入力）
+          example: A-001
+          maxLength: 255
+          type: string
+        retire_date:
+          description: |-
+            退職日
+            - 退職していない場合は指定不要です。
+            - 指定する場合はentry_date以降の日付を指定してください。
+            - retire_dateをクリアする場合、nullを指定してください。
+          format: date
+          nullable: true
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+      required:
+      - entry_date
+      - birth_date
+      type: object
+    ApiV1EmployeesBankAccountRuleSerializer:
+      nullable: true
+      properties:
+        account_name:
+          description: 口座名義カナ
+          nullable: true
+          type: string
+        account_number:
+          description: 口座番号
+          nullable: true
+          type: string
+        account_type:
+          description: '預金種類 ordinary: 普通預金, current: 当座預金, saving: 貯蓄預金'
+          nullable: true
+          type: string
+        bank_code:
+          description: 金融機関コード
+          nullable: true
+          type: string
+        bank_name:
+          description: 金融機関名
+          nullable: true
+          type: string
+        bank_name_kana:
+          description: 金融機関名カナ
+          nullable: true
+          type: string
+        branch_code:
+          description: 支店コード
+          nullable: true
+          type: string
+        branch_name:
+          description: 支店名
+          nullable: true
+          type: string
+        branch_name_kana:
+          description: 支店名カナ
+          nullable: true
+          type: string
+        company_id:
+          description: 事業所ID
+          format: int32
+          type: integer
+        employee_id:
+          description: 従業員ID
+          format: int32
+          type: integer
+        id:
+          description: 銀行口座ルールID
+          format: int32
+          type: integer
+      type: object
+    ApiV1EmployeesBankAccountRuleUpdateRequestSerializer:
+      properties:
+        account_name:
+          description: 口座名義カナ　英字カナのみ
+          maxLength: 50
+          type: string
+        account_number:
+          description: 口座番号 数値文字列7桁
+          maxLength: 7
+          type: string
+        account_type:
+          description: '預金種類 ordinary: 普通預金, current: 当座預金, saving: 貯蓄預金'
+          enum:
+          - ordinary
+          - current
+          - saving
+          type: string
+        bank_code:
+          description: 金融機関コード 数値文字列4桁
+          maxLength: 4
+          type: string
+        bank_name:
+          description: 金融機関名
+          maxLength: 255
+          type: string
+        bank_name_kana:
+          description: 金融機関名カナ 英字カナのみ
+          maxLength: 255
+          type: string
+        branch_code:
+          description: 支店コード 数値文字列3桁
+          maxLength: 3
+          type: string
+        branch_name:
+          description: 支店名
+          maxLength: 255
+          type: string
+        branch_name_kana:
+          description: 支店名カナ　英字カナのみ
+          maxLength: 255
+          type: string
+      type: object
+    ApiV1EmployeesBankAccountRulesController.show_response:
+      properties:
+        employee_bank_account_rule:
+          "$ref": "#/components/schemas/ApiV1EmployeesBankAccountRuleSerializer"
+      type: object
+    ApiV1EmployeesBankAccountRulesController.update_body:
+      properties:
+        company_id:
+          description: 更新対象事業所ID（必須）
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        employee_bank_account_rule:
+          "$ref": "#/components/schemas/ApiV1EmployeesBankAccountRuleUpdateRequestSerializer"
+        month:
+          description: 更新対象月（必須）
+          format: int32
+          maximum: 12
+          minimum: 1
+          type: integer
+        year:
+          description: 更新対象年（必須）
+          format: int32
+          maximum: 2100
+          minimum: 2000
+          type: integer
+      required:
+      - company_id
+      - year
+      - month
+      - employee_bank_account_rule
+      type: object
+    ApiV1EmployeesBankAccountRulesController.update_response:
+      properties:
+        employee_bank_account_rule:
+          "$ref": "#/components/schemas/ApiV1EmployeesBankAccountRuleSerializer"
+      type: object
+    ApiV1EmployeesBasicPayRuleSerializer:
+      nullable: true
+      properties:
+        company_id:
+          description: 事業所ID
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        employee_id:
+          description: 従業員ID
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        id:
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        pay_amount:
+          description: 基本給
+          format: int32
+          maximum: 99999999
+          minimum: 0
+          type: integer
+        pay_calc_type:
+          description: '給与方式 monthly: 月給, daily: 日給, hourly: 時給'
+          enum:
+          - monthly
+          - daily
+          - hourly
+          type: string
+      type: object
+    ApiV1EmployeesBasicPayRuleUpdateRequestSerializer:
+      properties:
+        pay_amount:
+          description: 基本給 null不可
+          example: 220000
+          format: int32
+          maximum: 99999999
+          minimum: 0
+          type: integer
+        pay_calc_type:
+          description: '給与方式 null不可 monthly: 月給, daily: 日給, hourly: 時給'
+          enum:
+          - monthly
+          - daily
+          - hourly
+          example: monthly
+          type: string
+      required:
+      - pay_calc_type
+      - pay_amount
+      type: object
+    ApiV1EmployeesBasicPayRulesController.show_response:
+      properties:
+        employee_basic_pay_rule:
+          "$ref": "#/components/schemas/ApiV1EmployeesBasicPayRuleSerializer"
+      type: object
+    ApiV1EmployeesBasicPayRulesController.update_body:
+      properties:
+        company_id:
+          description: 更新対象事業所ID（必須）
+          example: 1
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        employee_basic_pay_rule:
+          "$ref": "#/components/schemas/ApiV1EmployeesBasicPayRuleUpdateRequestSerializer"
+        month:
+          description: 更新対象月（必須）
+          example: 1
+          format: int32
+          maximum: 12
+          minimum: 1
+          type: integer
+        year:
+          description: 更新対象年（必須）
+          example: 2021
+          format: int32
+          maximum: 2100
+          minimum: 2000
+          type: integer
+      required:
+      - company_id
+      - year
+      - month
+      - employee_basic_pay_rule
+      type: object
+    ApiV1EmployeesBasicPayRulesController.update_response:
+      properties:
+        employee_basic_pay_rule:
+          "$ref": "#/components/schemas/ApiV1EmployeesBasicPayRuleSerializer"
+      type: object
+    ApiV1EmployeesController.create_body:
+      properties:
+        company_id:
+          description: 作成対象事業所ID（必須）
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        employee:
+          "$ref": "#/components/schemas/ApiV1EmployeeCreateRequestSerializer"
+      required:
+      - company_id
+      - employee
+      type: object
+    ApiV1EmployeesController.create_response:
+      properties:
+        employee:
+          "$ref": "#/components/schemas/ApiV1EmployeeSerializer"
+      type: object
+    ApiV1EmployeesController.show_response:
+      properties:
+        employee:
+          "$ref": "#/components/schemas/ApiV1EmployeeSerializer"
+      type: object
+    ApiV1EmployeesController.update_body:
+      properties:
+        company_id:
+          description: 更新対象事業所ID（必須）
+          example: 1
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        employee:
+          "$ref": "#/components/schemas/ApiV1EmployeeUpdateRequestSerializer"
+        month:
+          description: 更新対象月（必須）
+          example: 1
+          format: int32
+          maximum: 12
+          minimum: 1
+          type: integer
+        year:
+          description: 更新対象年（必須）
+          example: 2021
+          format: int32
+          maximum: 2100
+          minimum: 2000
+          type: integer
+      required:
+      - company_id
+      - year
+      - month
+      - employee
+      type: object
+    ApiV1EmployeesController.update_response:
+      properties:
+        employee:
+          "$ref": "#/components/schemas/ApiV1EmployeeSerializer"
+      type: object
+    ApiV1EmployeesDependentRuleSerializer:
+      properties:
+        address:
+          description: 住民票住所の市区町村以降の住所
+          nullable: true
+          type: string
+        address_kana:
+          description: 住民票住所の市区町村以降の住所カナ
+          nullable: true
+          type: string
+        annual_remittance_amount:
+          description: 一年間の送金額
+          format: int32
+          type: integer
+        annual_revenue:
+          description: 年間収入
+          format: int32
+          type: integer
+        base_pension_num:
+          description: 基礎年金番号
+          nullable: true
+          type: string
+        birth_date:
+          description: 生年月日
+          format: date
+          type: string
+        company_id:
+          description: 事業所ID
+          format: int32
+          type: integer
+        disability_type:
+          description: '障害に該当するか na: 障害なし, general: 一般の障害者, heavy: 特別障害者'
+          type: string
+        employee_id:
+          description: 従業員ID
+          format: int32
+          type: integer
+        first_name:
+          description: 名
+          type: string
+        first_name_kana:
+          description: 名カナ
+          nullable: true
+          type: string
+        gender:
+          description: '性別　unselected: 未選択, male: 男性, female: 女性'
+          enum:
+          - unselected
+          - male
+          - female
+          type: string
+        id:
+          description: 扶養親族ルールID
+          format: int32
+          type: integer
+        income:
+          description: 年間所得
+          format: int32
+          type: integer
+        last_name:
+          description: 姓
+          type: string
+        last_name_kana:
+          description: 姓カナ
+          nullable: true
+          type: string
+        occupation:
+          description: 職業
+          nullable: true
+          type: string
+        prefecture_code:
+          description: '住民票住所の都道府県コード（-1: 設定しない、0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄)'
+          example: 4
+          maximum: 46
+          minimum: -1
+          nullable: true
+          type: integer
+        relationship:
+          description: '続柄 spouse: 配偶者, father: 父, mother: 母, child: 子, senior_brother:
+            兄, junior_brother: 弟, senior_sister: 姉, junior_sister: 妹, grandchild:
+            孫, grandfather: 祖父, grandmother: 祖母, father_in_law: 義父, mother_in_law:
+            義母, grandfather_in_law: 義祖父, grandmother_in_law: 義祖母, other: その他, great_grandfather:
+            曽祖父, great_grandmother: 曽祖母, spouses_child: 配偶者の連れ子'
+          type: string
+        residence_type:
+          description: '同居・別居 live_in: 同居, resident: 別居(国内), non_resident: 別居(国外)'
+          type: string
+        social_insurance_and_tax_dependent:
+          description: '扶養状況 social_insurance_and_tax: 所得税・住民税と社会保険, tax_only: 所得税・住民税のみ,
+            social_insurance_only: 社会保険のみ'
+          type: string
+        zipcode1:
+          description: 住民票住所の郵便番号1
+          nullable: true
+          type: string
+        zipcode2:
+          description: 住民票住所の郵便番号2
+          nullable: true
+          type: string
+      type: object
+    ApiV1EmployeesDependentRuleUpdateRequestSerializer:
+      properties:
+        address:
+          description: 住民票住所の市区町村以降の住所
+          maxLength: 255
+          type: string
+        address_kana:
+          description: 住民票住所の市区町村以降の住所カナ
+          maxLength: 255
+          type: string
+        annual_remittance_amount:
+          description: 一年間の送金額
+          format: int32
+          maximum: 999999999
+          minimum: 0
+          type: integer
+        annual_revenue:
+          description: 年間収入 null不可
+          format: int32
+          maximum: 999999999
+          minimum: 0
+          type: integer
+        base_pension_num:
+          description: 基礎年金番号
+          maxLength: 10
+          type: string
+        birth_date:
+          description: 生年月日 null不可
+          format: date
+          maxLength: 10
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+        destroy:
+          description: 扶養親族を削除するか
+          type: boolean
+        disability_type:
+          description: '障害に該当するか null不可 na: 障害なし, general: 一般の障害者, heavy: 特別障害者'
+          enum:
+          - na
+          - general
+          - heavy
+          type: string
+        first_name:
+          description: 名 null不可
+          maxLength: 255
+          type: string
+        first_name_kana:
+          description: 名カナ
+          maxLength: 255
+          type: string
+        gender:
+          description: '性別　unselected: 未選択, male: 男性, female: 女性（デフォルト: unselected:
+            未選択）'
+          enum:
+          - unselected
+          - male
+          - female
+          example: male
+          type: string
+        id:
+          description: 扶養親族ID（idがない場合は新規作成になる)
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        income:
+          description: 年間所得 null不可
+          format: int32
+          maximum: 999999999
+          minimum: 0
+          type: integer
+        last_name:
+          description: 姓 null不可
+          maxLength: 255
+          type: string
+        last_name_kana:
+          description: 姓カナ
+          maxLength: 255
+          type: string
+        occupation:
+          description: 職業
+          maxLength: 255
+          type: string
+        prefecture_code:
+          description: '住民票住所の都道府県コード（-1: 設定しない、0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄)'
+          example: 4
+          maximum: 46
+          minimum: -1
+          type: integer
+        relationship:
+          description: '続柄 null不可 spouse: 配偶者, father: 父, mother: 母, child: 子, senior_brother:
+            兄, junior_brother: 弟, senior_sister: 姉, junior_sister: 妹, grandchild:
+            孫, grandfather: 祖父, grandmother: 祖母, father_in_law: 義父, mother_in_law:
+            義母, grandfather_in_law: 義祖父, grandmother_in_law: 義祖母, other: その他, great_grandfather:
+            曽祖父, great_grandmother: 曽祖母, spouses_child: 配偶者の連れ子'
+          enum:
+          - spouse
+          - father
+          - mother
+          - child
+          - senior_brother
+          - junior_brother
+          - senior_sister
+          - junior_sister
+          - grandchild
+          - grandfather
+          - grandmother
+          - father_in_law
+          - mother_in_law
+          - grandfather_in_law
+          - grandmother_in_law
+          - other
+          - great_grandfather
+          - great_grandmother
+          - spouses_child
+          type: string
+        residence_type:
+          description: '同居・別居 null不可 live_in: 同居, resident: 別居(国内), non_resident:
+            別居(国外)'
+          enum:
+          - live_in
+          - resident
+          - non_resident
+          type: string
+        social_insurance_and_tax_dependent:
+          description: '扶養状況 social_insurance_and_tax: 所得税・住民税と社会保険, tax_only: 所得税・住民税のみ,
+            social_insurance_only: 社会保険のみ, not_dependent: 扶養していない'
+          enum:
+          - social_insurance_and_tax
+          - tax_only
+          - social_insurance_only
+          - not_dependent
+          type: string
+        zipcode1:
+          description: 住民票住所の郵便番号1
+          maxLength: 3
+          type: string
+        zipcode2:
+          description: 住民票住所の郵便番号2
+          maxLength: 4
+          type: string
+      required:
+      - last_name
+      - first_name
+      - gender
+      - relationship
+      - birth_date
+      - residence_type
+      - income
+      - annual_revenue
+      - disability_type
+      - social_insurance_and_tax_dependent
+      type: object
+    ApiV1EmployeesDependentRulesController.bulk_update_body:
+      properties:
+        company_id:
+          description: 更新対象事業所ID（必須）
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        employee_dependent_rules:
+          description: 扶養親族ルール
+          items:
+            "$ref": "#/components/schemas/ApiV1EmployeesDependentRuleUpdateRequestSerializer"
+          type: array
+        month:
+          description: 更新対象月（必須）
+          format: int32
+          maximum: 12
+          minimum: 1
+          type: integer
+        year:
+          description: 更新対象年（必須）
+          format: int32
+          maximum: 2100
+          minimum: 2000
+          type: integer
+      required:
+      - company_id
+      - year
+      - month
+      - employee_dependent_rules
+      type: object
+    ApiV1EmployeesDependentRulesController.bulk_update_response:
+      properties:
+        employee_dependent_rules:
+          items:
+            "$ref": "#/components/schemas/ApiV1EmployeesDependentRuleSerializer"
+          type: array
+      type: object
+    ApiV1EmployeesDependentRulesController.index_response:
+      properties:
+        employee_dependent_rules:
+          items:
+            "$ref": "#/components/schemas/ApiV1EmployeesDependentRuleSerializer"
+          type: array
+      type: object
+    ApiV1EmployeesEmployeeMultiHourlyWageWorkRecordSummarySerializer:
+      properties:
+        name:
+          description: 時給名
+          type: string
+        total_normal_time_mins:
+          description: 所定内労働時間（分）
+          format: int32
+          type: integer
+      type: object
+    ApiV1EmployeesHealthInsuranceRuleSerializer:
+      nullable: true
+      properties:
+        company_id:
+          description: 事業所ID
+          format: int32
+          type: integer
+        employee_id:
+          description: 従業員ID
+          format: int32
+          type: integer
+        entried:
+          description: 健康保険に加入しているかどうか
+          type: boolean
+        id:
+          description: 健康保険ルールID
+          format: int32
+          type: integer
+        reference_num:
+          description: 健康保険の被保険者整理番号
+          nullable: true
+          type: string
+        standard_monthly_remuneration:
+          description: 標準報酬月額
+          format: int32
+          type: integer
+      type: object
+    ApiV1EmployeesHealthInsuranceRuleUpdateRequestSerializer:
+      properties:
+        entried:
+          description: 健康保険に加入しているかどうか null不可
+          type: boolean
+        reference_num:
+          description: 健康保険の被保険者整理番号
+          example: 1
+          maxLength: 255
+          type: string
+        standard_monthly_remuneration:
+          description: 標準報酬月額 null不可
+          example: 58000
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      required:
+      - standard_monthly_remuneration
+      type: object
+    ApiV1EmployeesHealthInsuranceRulesController.show_response:
+      properties:
+        employee_health_insurance_rule:
+          "$ref": "#/components/schemas/ApiV1EmployeesHealthInsuranceRuleSerializer"
+      type: object
+    ApiV1EmployeesHealthInsuranceRulesController.update_body:
+      properties:
+        company_id:
+          description: 更新対象事業所ID（必須）
+          example: 1
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        employee_health_insurance_rule:
+          "$ref": "#/components/schemas/ApiV1EmployeesHealthInsuranceRuleUpdateRequestSerializer"
+        month:
+          description: 更新対象月（必須）
+          example: 1
+          format: int32
+          maximum: 12
+          minimum: 1
+          type: integer
+        year:
+          description: 更新対象年（必須）
+          example: 2021
+          format: int32
+          maximum: 2100
+          minimum: 2000
+          type: integer
+      required:
+      - company_id
+      - year
+      - month
+      - employee_health_insurance_rule
+      type: object
+    ApiV1EmployeesHealthInsuranceRulesController.update_response:
+      properties:
+        employee_health_insurance_rule:
+          "$ref": "#/components/schemas/ApiV1EmployeesHealthInsuranceRuleSerializer"
+      type: object
+    ApiV1EmployeesIndexSerializer:
+      properties:
+        employees:
+          items:
+            "$ref": "#/components/schemas/ApiV1EmployeeSerializer"
+          type: array
+        total_count:
+          format: int32
+          type: integer
+      type: object
+    ApiV1EmployeesProfileRuleSerializer:
+      nullable: true
+      properties:
+        address:
+          description: 住民票住所の市区町村以降の住所
+          nullable: true
+          type: string
+        address_kana:
+          description: 住民票住所の市区町村以降の住所カナ
+          type: string
+        company_id:
+          description: 事業所ID
+          format: int32
+          type: integer
+        disability_type:
+          description: '障害者かどうか na: 空白, general: 障害者, heavy: 特別障害者'
+          type: string
+        employee_id:
+          description: 従業員ID
+          format: int32
+          type: integer
+        employment_type:
+          description: '雇用形態 board-member: 役員, (空文字列): 役員以外'
+          nullable: true
+          type: string
+        first_name:
+          description: 名
+          type: string
+        first_name_kana:
+          description: 名カナ
+          type: string
+        gender:
+          description: '性別　unselected: 未選択, male: 男性, female: 女性'
+          enum:
+          - unselected
+          - male
+          - female
+          example: male
+          type: string
+        id:
+          format: int32
+          type: integer
+        is_working_student:
+          description: 勤労学生かどうか
+          type: boolean
+        last_name:
+          description: 姓
+          type: string
+        last_name_kana:
+          description: 姓カナ
+          type: string
+        married:
+          description: 配偶者の有無
+          type: boolean
+        phone1:
+          description: 電話番号1
+          nullable: true
+          type: string
+        phone2:
+          description: 電話番号2
+          nullable: true
+          type: string
+        phone3:
+          description: 電話番号3
+          nullable: true
+          type: string
+        prefecture_code:
+          description: '住民票住所の都道府県コード（-1: 設定しない、0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄)'
+          example: 4
+          maximum: 46
+          minimum: -1
+          nullable: true
+          type: integer
+        residential_address:
+          description: 現住所の住所
+          nullable: true
+          type: string
+        residential_address_kana:
+          description: 現住所の住所カナ
+          nullable: true
+          type: string
+        residential_prefecture_code:
+          description: '現住所の都道府県コード（-1: 設定しない、0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄)'
+          example: 4
+          maximum: 46
+          minimum: -1
+          nullable: true
+          type: integer
+        residential_zipcode1:
+          description: 現住所の郵便番号１
+          nullable: true
+          type: string
+        residential_zipcode2:
+          description: 現住所の郵便番号２
+          nullable: true
+          type: string
+        title:
+          description: 肩書
+          nullable: true
+          type: string
+        widow_type:
+          description: '寡夫／寡婦かどうか na: 空白, widower: 寡夫, widow: 寡婦, special_widow: 特別寡婦'
+          type: string
+        zipcode1:
+          description: 住民票住所の郵便番号1
+          nullable: true
+          type: string
+        zipcode2:
+          description: 住民票住所の郵便番号2
+          nullable: true
+          type: string
+      type: object
+    ApiV1EmployeesProfileRuleUpdateRequestSerializer:
+      properties:
+        address:
+          description: 住民票住所の市区町村以降の住所
+          maxLength: 255
+          type: string
+        address_kana:
+          description: 住民票住所の市区町村以降の住所カナ
+          maxLength: 255
+          type: string
+        disability_type:
+          description: '障害者かどうか null不可 na: 空白, general: 障害者, heavy: 特別障害者'
+          enum:
+          - na
+          - general
+          - heavy
+          type: string
+        employment_type:
+          description: '雇用形態 board-member: 役員, (空文字列): 役員以外'
+          enum:
+          - board-member
+          - ''
+          type: string
+        first_name:
+          description: 名 null不可
+          maxLength: 255
+          type: string
+        first_name_kana:
+          description: 名カナ
+          maxLength: 255
+          type: string
+        gender:
+          description: '性別　unselected: 未選択, male: 男性, female: 女性（デフォルト: unselected:
+            未選択）'
+          enum:
+          - unselected
+          - male
+          - female
+          example: male
+          type: string
+        is_working_student:
+          description: null不可 勤労学生かどうか
+          type: boolean
+        last_name:
+          description: 姓 null不可
+          maxLength: 255
+          type: string
+        last_name_kana:
+          description: 姓カナ
+          maxLength: 255
+          type: string
+        married:
+          description: null不可 配偶者の有無
+          type: boolean
+        phone1:
+          description: 電話番号1
+          maxLength: 5
+          type: string
+        phone2:
+          description: 電話番号2
+          maxLength: 4
+          type: string
+        phone3:
+          description: 電話番号3
+          maxLength: 4
+          type: string
+        prefecture_code:
+          description: '住民票住所の都道府県コード（-1: 設定しない、0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄)'
+          example: 4
+          maximum: 46
+          minimum: -1
+          type: integer
+        residential_address:
+          description: 現住所の住所
+          maxLength: 255
+          type: string
+        residential_address_kana:
+          description: 現住所の住所カナ
+          maxLength: 255
+          type: string
+        residential_prefecture_code:
+          description: '現住所の都道府県コード（-1: 設定しない、0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄)'
+          example: 4
+          maximum: 46
+          minimum: -1
+          type: integer
+        residential_zipcode1:
+          description: 現住所の郵便番号１
+          maxLength: 3
+          type: string
+        residential_zipcode2:
+          description: 現住所の郵便番号２
+          maxLength: 4
+          type: string
+        title:
+          description: 肩書
+          maxLength: 255
+          type: string
+        widow_type:
+          description: '寡夫／寡婦かどうか null不可 na: 空白, widower: 寡夫, widow: 寡婦, special_widow:
+            特別寡婦, one_parent: ひとり親'
+          enum:
+          - na
+          - widower
+          - widow
+          - special_widow
+          - one_parent
+          type: string
+        zipcode1:
+          description: 住民票住所の郵便番号1
+          maxLength: 3
+          type: string
+        zipcode2:
+          description: 住民票住所の郵便番号2
+          maxLength: 4
+          type: string
+      required:
+      - last_name
+      - first_name
+      - last_name_kana
+      - first_name_kana
+      type: object
+    ApiV1EmployeesProfileRulesController.show_response:
+      properties:
+        employee_profile_rule:
+          "$ref": "#/components/schemas/ApiV1EmployeesProfileRuleSerializer"
+      type: object
+    ApiV1EmployeesProfileRulesController.update_body:
+      properties:
+        company_id:
+          description: 更新対象事業所ID（必須）
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        employee_profile_rule:
+          "$ref": "#/components/schemas/ApiV1EmployeesProfileRuleUpdateRequestSerializer"
+        month:
+          description: 更新対象月（必須）
+          format: int32
+          maximum: 12
+          minimum: 1
+          type: integer
+        year:
+          description: 更新対象年（必須）
+          format: int32
+          maximum: 2100
+          minimum: 2000
+          type: integer
+      required:
+      - company_id
+      - year
+      - month
+      - employee_profile_rule
+      type: object
+    ApiV1EmployeesProfileRulesController.update_response:
+      properties:
+        employee_profile_rule:
+          "$ref": "#/components/schemas/ApiV1EmployeesProfileRuleSerializer"
+      type: object
+    ApiV1EmployeesTimeClockSerializer:
+      properties:
+        date:
+          description: 打刻日
+          format: date
+          type: string
+        datetime:
+          description: 打刻時刻
+          format: date-time
+          type: string
+        id:
+          description: 打刻ID
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        note:
+          description: 打刻メモ
+          maxLength: 255
+          type: string
+        original_datetime:
+          description: オリジナルの打刻時間
+          format: date-time
+          type: string
+        type:
+          description: 打刻種別
+          enum:
+          - clock_in
+          - break_begin
+          - break_end
+          - clock_out
+          type: string
+      type: object
+    ApiV1EmployeesTimeClocksController.available_types_response:
+      properties:
+        available_types:
+          items:
+            enum:
+            - clock_in
+            - break_begin
+            - break_end
+            - clock_out
+            type: string
+          type: array
+      type: object
+    ApiV1EmployeesTimeClocksController.create_body:
+      properties:
+        base_date:
+          description: 打刻日。打刻が日をまたぐ場合に、前日の日付を指定します。(YYYY-MM-DD)(例:2018-07-31)
+          format: date
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+        company_id:
+          description: "(required)"
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        datetime:
+          description: 打刻時刻。(YYYY-MM-DD&nbsp;HH:MM:SS)(例:2018-07-31&nbsp;08:00:00)
+          example: '2018-07-31 08:00:00'
+          format: date-time
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$"
+          type: string
+        type:
+          description: 打刻種別（required）['clock_in','break_begin','break_end','clock_out']の何れか
+          enum:
+          - clock_in
+          - break_begin
+          - break_end
+          - clock_out
+          type: string
+      required:
+      - company_id
+      - type
+      type: object
+    ApiV1EmployeesTimeClocksController.create_response:
+      properties:
+        employee_time_clock:
+          "$ref": "#/components/schemas/ApiV1EmployeesTimeClockSerializer"
+      type: object
+    ApiV1EmployeesTimeClocksController.index_response:
+      items:
+        "$ref": "#/components/schemas/ApiV1EmployeesTimeClockSerializer"
+      type: array
+    ApiV1EmployeesTimeClocksController.show_response:
+      properties:
+        employee_time_clock:
+          "$ref": "#/components/schemas/ApiV1EmployeesTimeClockSerializer"
+      type: object
+    ApiV1EmployeesWelfarePensionInsuranceRuleSerializer:
+      nullable: true
+      properties:
+        company_id:
+          description: 事業所ID
+          format: int32
+          type: integer
+        employee_id:
+          description: 従業員ID
+          format: int32
+          type: integer
+        entried:
+          description: 厚生年金保険に加入しているかどうか
+          type: boolean
+        id:
+          format: int32
+          type: integer
+        reference_num:
+          description: 厚生年金保険の被保険者整理番号
+          nullable: true
+          type: string
+        standard_monthly_remuneration:
+          description: 標準報酬月額
+          format: int32
+          type: integer
+      type: object
+    ApiV1EmployeesWelfarePensionInsuranceRuleUpdateRequestSerializer:
+      properties:
+        entried:
+          description: 厚生年金保険に加入しているかどうか null不可
+          type: boolean
+        reference_num:
+          description: 厚生年金保険の被保険者整理番号
+          maxLength: 255
+          type: string
+        standard_monthly_remuneration:
+          description: 標準報酬月額 null不可
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      required:
+      - standard_monthly_remuneration
+      type: object
+    ApiV1EmployeesWelfarePensionInsuranceRulesController.show_response:
+      properties:
+        employee_welfare_pension_insurance_rule:
+          "$ref": "#/components/schemas/ApiV1EmployeesWelfarePensionInsuranceRuleSerializer"
+      type: object
+    ApiV1EmployeesWelfarePensionInsuranceRulesController.update_body:
+      properties:
+        company_id:
+          description: 更新対象事業所ID（必須）
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        employee_welfare_pension_insurance_rule:
+          "$ref": "#/components/schemas/ApiV1EmployeesWelfarePensionInsuranceRuleUpdateRequestSerializer"
+        month:
+          description: 更新対象月（必須）
+          format: int32
+          maximum: 12
+          minimum: 1
+          type: integer
+        year:
+          description: 更新対象年（必須）
+          format: int32
+          maximum: 2100
+          minimum: 2000
+          type: integer
+      required:
+      - company_id
+      - year
+      - month
+      - employee_welfare_pension_insurance_rule
+      type: object
+    ApiV1EmployeesWelfarePensionInsuranceRulesController.update_response:
+      properties:
+        employee_welfare_pension_insurance_rule:
+          "$ref": "#/components/schemas/ApiV1EmployeesWelfarePensionInsuranceRuleSerializer"
+      type: object
+    ApiV1EmployeesWorkRecordSerializer:
+      properties:
+        break_records:
+          description: 休憩時間のリスト
+          items:
+            "$ref": "#/components/schemas/ApiV1EmployeesWorkRecordTimeRangeResponseSerializer"
+          type: array
+        clock_in_at:
+          description: 出勤時間
+          format: date-time
+          nullable: true
+          type: string
+        clock_out_at:
+          description: 退勤時間
+          format: date-time
+          nullable: true
+          type: string
+        date:
+          description: 対象日付
+          format: date-time
+          type: string
+        day_pattern:
+          description: |-
+            勤務パターン
+            - normal_day: 所定労働日
+            - prescribed_holiday: 所定休日
+            - legal_holiday: 法定休日
+          enum:
+          - normal_day
+          - prescribed_holiday
+          - legal_holiday
+          type: string
+        early_leaving_mins:
+          description: 早退分の時間（分単位）
+          format: int32
+          type: integer
+        hourly_paid_holiday_mins:
+          description: 時間休を利用した時間（分単位）
+          format: int32
+          type: integer
+        is_absence:
+          description: 欠勤かどうか
+          example: false
+          type: boolean
+        is_editable:
+          description: 勤怠データが編集可能かどうか
+          type: boolean
+        lateness_mins:
+          description: 遅刻分の時間（分単位）
+          format: int32
+          type: integer
+        normal_work_clock_in_at:
+          description: 所定労働開始時刻
+          format: date-time
+          nullable: true
+          type: string
+        normal_work_clock_out_at:
+          description: 所定労働終了時刻
+          format: date-time
+          nullable: true
+          type: string
+        normal_work_mins:
+          description: 所定労働時間
+          format: int32
+          type: integer
+        normal_work_mins_by_paid_holiday:
+          description: 有給によって計上される所定労働時間（分）
+          format: int32
+          type: integer
+        note:
+          description: 勤怠メモ
+          maxLength: 255
+          type: string
+        paid_holiday:
+          description: この日に対する有給取得日数。半休の場合は0.5が入ります。時間休の場合はhourly_paid_holiday_minsを所定労働時間で割った値が入るため、実際の時間を確認するにはhourly_paid_holiday_minsを参照してください。
+          format: float
+          type: number
+        schedule_pattern:
+          description: |-
+            スケジュールパターン
+            - substitute_holiday_work: 振替出勤
+            - substitute_holiday: 振替休日
+            - compensatory_holiday_work: 代休出勤
+            - compensatory_holiday: 代休
+            - special_holiday: 特別休暇
+          enum:
+          - ''
+          - substitute_holiday_work
+          - substitute_holiday
+          - compensatory_holiday_work
+          - compensatory_holiday
+          - special_holiday
+          type: string
+        total_holiday_work_mins:
+          description: 休日労働時間（分）
+          format: int32
+          type: integer
+        total_latenight_work_mins:
+          description: 深夜労働時間（分）
+          format: int32
+          type: integer
+        total_overtime_work_mins:
+          description: 時間外労働時間（分）
+          format: int32
+          type: integer
+        use_attendance_deduction:
+          description: 欠勤・遅刻・早退を控除対象時間に算入するかどうか
+          type: boolean
+        use_default_work_pattern:
+          description: デフォルトの勤務時間設定を使っているかどうか
+          type: boolean
+      type: object
+    ApiV1EmployeesWorkRecordSummaryController.update_body:
+      properties:
+        company_id:
+          description: 事業所ID（必須）
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        num_absences:
+          description: 欠勤日数
+          format: float
+          maximum: 31
+          minimum: 0
+          type: number
+        num_absences_for_deduction:
+          description: 控除対象の欠勤日数
+          format: float
+          maximum: 9999.999
+          minimum: 0
+          type: number
+        num_paid_holidays:
+          description: 有給取得日数
+          format: float
+          maximum: 31
+          minimum: 0
+          type: number
+        total_actual_excess_statutory_work_mins:
+          description: 実労働時間ベースの法定内残業時間（分）
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        total_deemed_paid_excess_statutory_work_mins:
+          description: 支給対象の法定内残業時間（分）（裁量労働制でのみ使用）
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        total_deemed_paid_overtime_except_normal_work_mins:
+          description: 支給対象の法定内残業時間（分）（裁量労働制でのみ使用）
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        total_early_leaving_mins:
+          description: 早退時間（分）
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        total_early_leaving_mins_for_deduction:
+          description: 控除対象の早退時間（分）
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        total_excess_statutory_work_mins:
+          description: 給与計算に用いられる法定内残業時間（分）
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        total_holiday_work_mins:
+          description: 法定休日労働時間（分）
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        total_lateness_mins:
+          description: 遅刻時間（分）
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        total_lateness_mins_for_deduction:
+          description: 控除対象の遅刻時間（分）
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        total_latenight_work_mins:
+          description: 深夜労働時間（分）
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        total_normal_work_mins:
+          description: 所定労働時間（分）
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        total_overtime_work_mins:
+          description: 時間外労働時間（分）
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        total_shortage_work_mins:
+          description: 不足時間（分）（フレックスタイム制でのみ使用）
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        total_work_mins:
+          description: 労働時間（分）
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        work_days:
+          description: 総勤務日数
+          format: float
+          maximum: 31
+          minimum: 0
+          type: number
+        work_days_on_legal_holidays:
+          description: 法定休日の勤務日数
+          format: float
+          maximum: 31
+          minimum: 0
+          type: number
+        work_days_on_prescribed_holidays:
+          description: 所定休日の勤務日数
+          format: float
+          maximum: 31
+          minimum: 0
+          type: number
+        work_days_on_weekdays:
+          description: 所定労働日の勤務日数
+          format: float
+          maximum: 31
+          minimum: 0
+          type: number
+      required:
+      - company_id
+      type: object
+    ApiV1EmployeesWorkRecordSummarySerializer:
+      properties:
+        end_date:
+          description: 集計終了日
+          format: date
+          type: string
+        month:
+          description: 給与支払い月
+          format: int32
+          maximum: 12
+          minimum: 1
+          type: integer
+        multi_hourly_wages:
+          description: 複数時給の労働時間の内訳（複数時給を設定している従業員のみ）
+          items:
+            "$ref": "#/components/schemas/ApiV1EmployeesEmployeeMultiHourlyWageWorkRecordSummarySerializer"
+          type: array
+        num_absences:
+          description: 欠勤日数
+          format: float
+          type: number
+        num_compensatory_holidays_used:
+          description: 代休の使用日数
+          format: float
+          type: number
+        num_paid_holidays:
+          description: 有給取得日数
+          format: float
+          type: number
+        num_paid_holidays_and_hours:
+          "$ref": "#/components/schemas/ApiV1HolidaysAndHoursSerializer"
+        num_paid_holidays_and_hours_left:
+          "$ref": "#/components/schemas/ApiV1HolidaysAndHoursSerializer"
+        num_paid_holidays_left:
+          description: 有給残日数
+          format: float
+          type: number
+        num_special_holidays_and_hours_used:
+          "$ref": "#/components/schemas/ApiV1HolidaysAndHoursSerializer"
+        num_special_holidays_used:
+          description: 特別休暇の使用日数
+          format: float
+          type: number
+        num_substitute_holidays_used:
+          description: 振替休日の使用日数
+          format: float
+          type: number
+        start_date:
+          description: 集計開始日
+          format: date
+          type: string
+        total_deemed_paid_excess_statutory_work_mins:
+          description: 支給対象の法定内残業時間（分）
+          format: int32
+          nullable: true
+          type: integer
+        total_deemed_paid_overtime_except_normal_work_mins:
+          description: 支給対象の時間外労働時間（分）
+          format: int32
+          nullable: true
+          type: integer
+        total_excess_statutory_work_mins:
+          description: 給与計算に用いられる法定内残業時間（分）
+          format: int32
+          type: integer
+        total_holiday_work_mins:
+          description: 法定休日労働時間（分）
+          format: int32
+          type: integer
+        total_lateness_and_early_leaving_mins:
+          description: 遅刻早退時間（分）
+          format: int32
+          type: integer
+        total_latenight_work_mins:
+          description: 深夜労働allow(company)時間（分）
+          format: int32
+          type: integer
+        total_normal_work_mins:
+          description: 所定内労働時間（分）
+          format: int32
+          type: integer
+        total_overtime_except_normal_work_mins:
+          description: 所定外法定外労働時間
+          format: int32
+          type: integer
+        total_overtime_within_normal_work_mins:
+          description: 所定内法定外労働時間（裁量労働制の場合はみなしベース）
+          format: int32
+          type: integer
+        total_shortage_work_mins:
+          description: 不足時間（分）
+          format: int32
+          nullable: true
+          type: integer
+        total_work_mins:
+          description: 総勤務時間（分）
+          format: int32
+          type: integer
+        work_days:
+          description: 労働日数
+          format: float
+          type: number
+        work_records:
+          description: 日々の勤怠情報
+          items:
+            "$ref": "#/components/schemas/ApiV1EmployeesWorkRecordSerializer"
+          type: array
+        year:
+          description: 給与支払い年
+          format: int32
+          type: integer
+      type: object
+    ApiV1EmployeesWorkRecordTimeRangeResponseSerializer:
+      properties:
+        clock_in_at:
+          description: 開始時刻
+          format: date-time
+          type: string
+        clock_out_at:
+          description: 終了時刻
+          format: date-time
+          type: string
+      type: object
+    ApiV1EmployeesWorkRecordTimeRangeSerializer:
+      properties:
+        clock_in_at:
+          description: 開始時刻
+          example: '2018-07-31 08:00:00'
+          format: date-time
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$"
+          type: string
+        clock_out_at:
+          description: 終了時刻
+          example: '2018-07-31 08:00:00'
+          format: date-time
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$"
+          type: string
+      required:
+      - clock_in_at
+      - clock_out_at
+      type: object
+    ApiV1EmployeesWorkRecordsController.update_body:
+      properties:
+        break_records:
+          description: 休憩時間のリスト
+          items:
+            "$ref": "#/components/schemas/ApiV1EmployeesWorkRecordTimeRangeSerializer"
+          type: array
+        clock_in_at:
+          description: 出勤時刻
+          example: '2018-07-31 08:00:00'
+          format: date-time
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$"
+          type: string
+        clock_out_at:
+          description: 退勤時刻
+          example: '2018-07-31 08:00:00'
+          format: date-time
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$"
+          type: string
+        company_id:
+          description: 事業所ID（必須）
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        day_pattern:
+          description: '勤務パターン（所定労働日: normal_day, 所定休日: prescribed_holiday, 法定休日:
+            legal_holiday）'
+          enum:
+          - normal_day
+          - prescribed_holiday
+          - legal_holiday
+          type: string
+        early_leaving_mins:
+          description: 早退分の時間（分単位）
+          format: int32
+          maximum: 1440
+          minimum: 0
+          type: integer
+        is_absence:
+          description: 欠勤かどうか
+          type: boolean
+        lateness_mins:
+          description: 遅刻分の時間（分単位）
+          format: int32
+          maximum: 1440
+          minimum: 0
+          type: integer
+        normal_work_clock_in_at:
+          description: 所定労働開始時刻。指定しない場合はデフォルト設定が使用されます。
+          example: '2018-07-31 08:00:00'
+          format: date-time
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$"
+          type: string
+        normal_work_clock_out_at:
+          description: 所定労働終了時刻。指定しない場合はデフォルト設定が使用されます。
+          example: '2018-07-31 08:00:00'
+          format: date-time
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$"
+          type: string
+        normal_work_mins:
+          description: 所定労働時間。指定しない場合はデフォルト設定が使用されます。
+          format: int32
+          maximum: 1440
+          minimum: 0
+          type: integer
+        normal_work_mins_by_paid_holiday:
+          description: 有給によって計上される所定労働時間（分）
+          format: int32
+          maximum: 1440
+          minimum: 0
+          type: integer
+        note:
+          description: 勤怠メモ
+          maxLength: 255
+          type: string
+        paid_holiday:
+          description: この日の有休取得数。0.5日単位で指定します。
+          format: float
+          maximum: 1
+          minimum: 0
+          type: number
+        use_attendance_deduction:
+          description: 欠勤・遅刻・早退を控除対象時間に算入するかどうか
+          type: boolean
+        use_default_work_pattern:
+          description: デフォルトの勤務設定を使うかどうか。
+          type: boolean
+      required:
+      - company_id
+      type: object
+    ApiV1GroupMembershipSerializer:
+      properties:
+        end_date:
+          description: 終了日
+          example: '2020-01-01'
+          format: date
+          type: string
+        group_code:
+          description: 部門コード
+          example: group2
+          type: string
+        group_id:
+          description: 部門ID
+          example: 10
+          format: int32
+          type: integer
+        group_name:
+          description: 部門名称
+          example: 営業部
+          type: string
+        level:
+          description: 部門階層レベル
+          example: 2
+          format: int32
+          type: integer
+        parent_group_code:
+          description: 親部門コード
+          example: group1
+          nullable: true
+          type: string
+        parent_group_id:
+          description: 親部門ID
+          example: 1
+          format: int32
+          nullable: true
+          type: integer
+        parent_group_name:
+          description: 親部門名称
+          example: 営業統括
+          nullable: true
+          type: string
+        position_code:
+          description: 役職コード
+          example: position1
+          type: string
+        position_id:
+          description: 役職ID
+          example: 1
+          format: int32
+          type: integer
+        position_name:
+          description: 役職名称
+          example: 部長
+          type: string
+        start_date:
+          description: 開始日
+          example: '2000-01-01'
+          format: date
+          type: string
+      type: object
+    ApiV1HolidaysAndHoursSerializer:
+      properties:
+        days:
+          description: 日数 0.5は半休を表す
+          format: float
+          type: number
+        hours:
+          description: 時間数
+          format: int32
+          type: integer
+      type: object
+    ApiV1SalariesEmployeePayrollStatementSerializer:
+      properties:
+        attendances:
+          description: 勤怠控除項目（遅刻早退控除、欠勤控除等）
+          items:
+            "$ref": "#/components/schemas/ApiV1EmployeePayrollStatementsEmployeeAttendanceItemSerializer"
+          type: array
+        basic_pay_amount:
+          description: 基本給
+          nullable: true
+          type: string
+        calc_status:
+          description: '計算状況ステータス calculating: 計算中, calculated: 計算完了, overwritten:
+            直接編集, imported: インポート, error: エラー'
+          type: string
+        calculated_at:
+          description: 計算状況ステータスの更新日
+          format: date-time
+          nullable: true
+          type: string
+        closing_date:
+          description: 給与計算締日（固定給）
+          format: date
+          type: string
+        company_id:
+          description: 事業所ID
+          format: int32
+          type: integer
+        deductions:
+          description: 控除項目（所得税、住民税、社会保険料等）
+          items:
+            "$ref": "#/components/schemas/ApiV1EmployeePayrollStatementsEmployeePayrollStatementItemSerializer"
+          type: array
+        employee_display_name:
+          description: 従業員の表示名
+          type: string
+        employee_id:
+          description: 従業員ID
+          format: int32
+          type: integer
+        employee_name:
+          description: 従業員の姓名
+          type: string
+        employee_num:
+          description: 従業員番号
+          nullable: true
+          type: string
+        fixed:
+          description: 給与明細が確定されているかどうか
+          type: boolean
+        gross_payment_amount:
+          description: 総支給額(額面)
+          nullable: true
+          type: string
+        id:
+          description: 給与明細ID
+          format: int32
+          type: integer
+        is_board_member:
+          description: 役員かどうか
+          type: boolean
+        net_payment_amount:
+          description: 差引支給額(手取り額)
+          nullable: true
+          type: string
+        normal_work_days:
+          description: 所定労働出勤日数
+          nullable: true
+          type: string
+        normal_work_time:
+          description: 労働時間のうち、所定労働時間に該当するもの
+          nullable: true
+          type: string
+        num_paid_holidays:
+          description: 有給日数
+          nullable: true
+          type: string
+        overtime_pays:
+          description: 時間外労働項目(法定内残業、時間外労働、休日労働、深夜労働等)
+          items:
+            "$ref": "#/components/schemas/ApiV1EmployeePayrollStatementsEmployeeOvertimePayItemSerializer"
+          nullable: true
+          type: array
+        pay_calc_type:
+          description: '給与形態 monthly: 月給, daily: 日給, hourly: 時給, (空文字列): 計算中'
+          enum:
+          - monthly
+          - daily
+          - hourly
+          - ''
+          example: monthly
+          type: string
+        pay_date:
+          description: 支払日
+          format: date
+          type: string
+        payments:
+          description: 支給項目（基本給、残業代、通勤手当等）
+          items:
+            "$ref": "#/components/schemas/ApiV1EmployeePayrollStatementsEmployeePayrollStatementItemSerializer"
+          type: array
+        remark:
+          description: 備考
+          nullable: true
+          type: string
+        start_date:
+          description: 給与計算開始日（固定給）
+          format: date
+          type: string
+        total_allowance_amount:
+          description: 支給手当額合計
+          nullable: true
+          type: string
+        total_annual_payment_amount:
+          description: 課税支給累計額
+          nullable: true
+          type: string
+        total_attendance_deduction_amount:
+          description: 勤怠控除額合計
+          nullable: true
+          type: string
+        total_deduction_amount:
+          description: 控除額合計
+          nullable: true
+          type: string
+        total_expense_amount:
+          description: 総経費精算額
+          nullable: true
+          type: string
+        total_taxable_payment_amount:
+          description: 課税対象支給額
+          nullable: true
+          type: string
+        total_transfer_amount:
+          description: 総振込額
+          nullable: true
+          type: string
+        total_worked_days_count:
+          description: 平日と休日の合計労働日数（日給用）
+          nullable: true
+          type: string
+        variable_pay_closing_date:
+          description: 給与計算締日（変動給）
+          format: date
+          type: string
+        variable_pay_start_date:
+          description: 給与計算開始日（変動給） 残業手当、遅刻早退・欠勤などの計算に使われる期間
+          format: date
+          type: string
+        work_days:
+          description: 労働日数
+          nullable: true
+          type: string
+        work_mins_by_paid_holiday:
+          description: 有給休暇時間数
+          nullable: true
+          type: string
+      type: object
+    ApiV1SalariesEmployeePayrollStatementsController.index_response:
+      properties:
+        employee_payroll_statements:
+          items:
+            "$ref": "#/components/schemas/ApiV1SalariesEmployeePayrollStatementSerializer"
+          type: array
+      type: object
+    ApiV1SalariesEmployeePayrollStatementsController.show_response:
+      properties:
+        employee_payroll_statement:
+          "$ref": "#/components/schemas/ApiV1SalariesEmployeePayrollStatementSerializer"
+      type: object
+    ApiV1UsersCompanySerializer:
+      properties:
+        display_name:
+          description: 事業所に所属する従業員の表示名
+          nullable: true
+          type: string
+        employee_id:
+          description: 事業所に所属する従業員としての従業員ID、従業員情報が未登録の場合はnullになります。
+          format: int32
+          nullable: true
+          type: integer
+        external_cid:
+          description: 事業所番号(半角数字10桁)
+          type: string
+        id:
+          description: 事業所ID
+          format: int32
+          type: integer
+        name:
+          description: 事業所名
+          type: string
+        role:
+          description: |-
+            事業所におけるロール。
+            - `company_admin`: 管理者ユーザ
+            - `self_only`: 一般ユーザ
+          type: string
+      type: object
+    ApiV1UsersMeSerializer:
+      properties:
+        companies:
+          description: ユーザが属する事業所の一覧
+          items:
+            "$ref": "#/components/schemas/ApiV1UsersCompanySerializer"
+          type: array
+        id:
+          description: ユーザID
+          format: int32
+          type: integer
+      type: object
+    accessDeniedError:
+      properties:
+        code:
+          example: expired_access_token
+          type: string
+        error:
+          example: access_denied
+          type: string
+        message:
+          example: アクセスする権限がありません
+          type: string
+      type: object
+    error:
+      properties:
+        errors:
+          items:
+            properties:
+              messages:
+                items:
+                  example: リクエストの形式が不正です。
+                  type: string
+                type: array
+              type:
+                type: string
+            type: object
+          type: array
+        status_code:
+          example: 400
+          type: integer
+      type: object
+    forbiddenError:
+      properties:
+        errors:
+          items:
+            properties:
+              messages:
+                items:
+                  example: アクセス権限がありません。
+                  type: string
+                type: array
+              type:
+                type: string
+            type: object
+          type: array
+        status_code:
+          example: 403
+          type: integer
+      type: object
+    internalServerError:
+      properties:
+        errors:
+          items:
+            properties:
+              messages:
+                items:
+                  example: エラーが発生しました。再試行しても解消しない場合は、サポートセンターまでご連絡ください。
+                  type: string
+                type: array
+              type:
+                example: internal_server_error
+                type: string
+            type: object
+          type: array
+        status_code:
+          example: 500
+          type: integer
+      type: object
+    notfoundError:
+      properties:
+        errors:
+          items:
+            properties:
+              messages:
+                items:
+                  example: この月に在籍していない従業員の情報は取得できません。
+                  type: string
+                type: array
+              type:
+                example: not_found
+                type: string
+            type: object
+          type: array
+        status_code:
+          example: 404
+          type: integer
+      type: object
+    unauthorizedError:
+      properties:
+        message:
+          example: ログインをしてください。
+          type: string
+        messages:
+          type: string
+      type: object
+  securitySchemes:
+    bearer:
+      in: header
+      name: Authorization
+      type: apiKey
+security:
+- bearer: []
+tags:
+- description: ログインユーザの取得
+  name: ログインユーザ
+- description: 従業員の操作
+  name: 従業員
+- description: 従業員の姓名・住所などの操作
+  name: 従業員の姓名・住所など
+- description: 従業員の健康保険の操作
+  name: 従業員の健康保険
+- description: 従業員の厚生年金保険の操作
+  name: 従業員の厚生年金保険
+- description: 従業員の扶養親族の操作
+  name: 従業員の扶養親族
+- description: 従業員の銀行口座の操作
+  name: 従業員の銀行口座
+- description: 従業員の基本給の操作
+  name: 従業員の基本給
+- description: 勤怠の操作
+  name: 勤怠
+- description: 勤怠情報の月次サマリの操作
+  name: 勤怠情報サマリ
+- description: タイムレコーダー(打刻)機能の操作
+  name: タイムレコーダー(打刻)
+- description: 給与明細の操作
+  name: 給与明細
+- description: 賞与明細の操作
+  name: 賞与明細
+- description: 所属の操作
+  name: 所属
