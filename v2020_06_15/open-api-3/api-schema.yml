@@ -22029,7 +22029,7 @@ components:
           - credit_card
           - wallet
           - private_account_item
-          example: '2019-12-17'
+          example: bank_account
           type: string
       required:
       - amount
@@ -31531,6 +31531,12 @@ components:
           maximum: 2147483647
           minimum: 1
           type: integer
+        rule_matched:
+          description: |
+            登録時に<a href="https://support.freee.co.jp/hc/ja/articles/202848350-明細の自動登録ルールを設定する" target="_blank">自動登録ルールの設定</a>が適用され、登録処理が実行された場合、
+            trueになります。〜を推測する、〜の消込をするの条件の場合は一致してもfalseになります。
+          example: true
+          type: boolean
         status:
           description: '明細のステータス（消込待ち: 1, 消込済み: 2, 無視: 3, 消込中: 4）'
           maximum: 4
@@ -31562,6 +31568,7 @@ components:
       - status
       - walletable_id
       - walletable_type
+      - rule_matched
       type: object
     walletable:
       properties:
