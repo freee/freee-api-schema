@@ -16687,7 +16687,7 @@
           "from_walletable_type": {
             "type": "string",
             "description": "口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet, プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）: private_account_item)：payments指定時は必須",
-            "example": "2019-12-17",
+            "example": "bank_account",
             "enum": [
               "bank_account",
               "credit_card",
@@ -29887,7 +29887,8 @@
           "id",
           "status",
           "walletable_id",
-          "walletable_type"
+          "walletable_type",
+          "rule_matched"
         ],
         "properties": {
           "id": {
@@ -29963,6 +29964,11 @@
             "minimum": 1,
             "maximum": 4,
             "description": "明細のステータス（消込待ち: 1, 消込済み: 2, 無視: 3, 消込中: 4）"
+          },
+          "rule_matched": {
+            "type": "boolean",
+            "description": "登録時に<a href=\"https://support.freee.co.jp/hc/ja/articles/202848350-明細の自動登録ルールを設定する\" target=\"_blank\">自動登録ルールの設定</a>が適用され、登録処理が実行された場合、\ntrueになります。〜を推測する、〜の消込をするの条件の場合は一致してもfalseになります。\n",
+            "example": true
           }
         }
       },
