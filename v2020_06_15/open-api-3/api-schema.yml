@@ -7762,6 +7762,13 @@ paths:
           <li>start_month</li>
           <li>end_month</li>
           </ul>
+        <li>0を指定すると未選択で絞り込めます</li>
+          <ul>
+          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <ul>
+            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+            </ul>
+          </ul>
         </ul>
         <h2 id="_4">レスポンスの例</h2>
 
@@ -8001,6 +8008,13 @@ paths:
           <li>start_month</li>
           <li>end_month</li>
           </ul>
+        <li>0を指定すると未選択で絞り込めます</li>
+          <ul>
+          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <ul>
+            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+            </ul>
+          </ul>
         </ul>
         <h2 id="_4">レスポンスの例</h2>
 
@@ -8223,6 +8237,13 @@ paths:
           <li>fiscal_year</li>
           <li>start_month</li>
           <li>end_month</li>
+          </ul>
+        <li>0を指定すると未選択で絞り込めます</li>
+          <ul>
+          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <ul>
+            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+            </ul>
           </ul>
         </ul>
 
@@ -8455,6 +8476,13 @@ paths:
           <li>fiscal_year</li>
           <li>start_month</li>
           <li>end_month</li>
+          </ul>
+        <li>0を指定すると未選択で絞り込めます</li>
+          <ul>
+          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <ul>
+            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+            </ul>
           </ul>
         </ul>
         <h2 id="_4">レスポンスの例</h2>
@@ -8691,6 +8719,13 @@ paths:
           <li>fiscal_year</li>
           <li>start_month</li>
           <li>end_month</li>
+          </ul>
+        <li>0を指定すると未選択で絞り込めます</li>
+          <ul>
+          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <ul>
+            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+            </ul>
           </ul>
         </ul>
         <h2 id="_4">レスポンスの例</h2>
@@ -8935,6 +8970,13 @@ paths:
           <li>start_month</li>
           <li>end_month</li>
           </ul>
+        <li>0を指定すると未選択で絞り込めます</li>
+          <ul>
+          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <ul>
+            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+            </ul>
+          </ul>
         </ul>
         <h2 id="_4">レスポンスの例</h2>
 
@@ -9178,6 +9220,13 @@ paths:
           <li>start_month</li>
           <li>end_month</li>
           </ul>
+        <li>0を指定すると未選択で絞り込めます</li>
+          <ul>
+          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <ul>
+            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+            </ul>
+          </ul>
         </ul>
         <h2 id="_4">レスポンスの例</h2>
 
@@ -9420,6 +9469,13 @@ paths:
           <li>fiscal_year</li>
           <li>start_month</li>
           <li>end_month</li>
+          </ul>
+        <li>0を指定すると未選択で絞り込めます</li>
+          <ul>
+          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <ul>
+            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+            </ul>
           </ul>
         </ul>
         <h2 id="_4">レスポンスの例</h2>
@@ -9672,6 +9728,13 @@ paths:
           <li>start_month</li>
           <li>end_month</li>
           </ul>
+        <li>0を指定すると未選択で絞り込めます</li>
+          <ul>
+          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <ul>
+            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+            </ul>
+          </ul>
         </ul>
         <h2 id="_4">レスポンスの例</h2>
 
@@ -9904,6 +9967,13 @@ paths:
           <li>fiscal_year</li>
           <li>start_month</li>
           <li>end_month</li>
+          </ul>
+        <li>0を指定すると未選択で絞り込めます</li>
+          <ul>
+          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <ul>
+            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+            </ul>
           </ul>
         </ul>
 
@@ -10145,6 +10215,13 @@ paths:
           <li>start_month</li>
           <li>end_month</li>
           </ul>
+        <li>0を指定すると未選択で絞り込めます</li>
+          <ul>
+          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <ul>
+            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+            </ul>
+          </ul>
         </ul>
         <h2 id="_4">レスポンスの例</h2>
 
@@ -10382,6 +10459,13 @@ paths:
           <li>fiscal_year</li>
           <li>start_month</li>
           <li>end_month</li>
+          </ul>
+        <li>0を指定すると未選択で絞り込めます</li>
+          <ul>
+          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <ul>
+            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+            </ul>
           </ul>
         </ul>
         <h2 id="_4">レスポンスの例</h2>
@@ -10626,6 +10710,13 @@ paths:
           <li>start_month</li>
           <li>end_month</li>
           </ul>
+        <li>0を指定すると未選択で絞り込めます</li>
+          <ul>
+          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <ul>
+            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+            </ul>
+          </ul>
         </ul>
         <h2 id="_4">レスポンスの例</h2>
 
@@ -10869,6 +10960,13 @@ paths:
           <li>start_month</li>
           <li>end_month</li>
           </ul>
+        <li>0を指定すると未選択で絞り込めます</li>
+          <ul>
+          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <ul>
+            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+            </ul>
+          </ul>
         </ul>
         <h2 id="_4">レスポンスの例</h2>
 
@@ -11111,6 +11209,13 @@ paths:
           <li>fiscal_year</li>
           <li>start_month</li>
           <li>end_month</li>
+          </ul>
+        <li>0を指定すると未選択で絞り込めます</li>
+          <ul>
+          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <ul>
+            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+            </ul>
           </ul>
         </ul>
         <h2 id="_4">レスポンスの例</h2>
@@ -11362,6 +11467,13 @@ paths:
           <li>start_month</li>
           <li>end_month</li>
           </ul>
+        <li>0を指定すると未選択で絞り込めます</li>
+          <ul>
+          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <ul>
+            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+            </ul>
+          </ul>
         </ul>
         <h2 id="_4">レスポンスの例</h2>
 
@@ -11593,6 +11705,13 @@ paths:
           <li>fiscal_year</li>
           <li>start_month</li>
           <li>end_month</li>
+          </ul>
+        <li>0を指定すると未選択で絞り込めます</li>
+          <ul>
+          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <ul>
+            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+            </ul>
           </ul>
         </ul>
 
