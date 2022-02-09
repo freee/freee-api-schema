@@ -29962,8 +29962,8 @@
           "status": {
             "type": "integer",
             "minimum": 1,
-            "maximum": 4,
-            "description": "明細のステータス（消込待ち: 1, 消込済み: 2, 無視: 3, 消込中: 4）"
+            "maximum": 6,
+            "description": "明細のステータス（消込待ち: 1, 消込済み: 2, 無視: 3, 消込中: 4, 対象外: 6）"
           },
           "rule_matched": {
             "type": "boolean",
