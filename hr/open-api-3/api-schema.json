@@ -3585,6 +3585,168 @@
           }
         }
       }
+    },
+    "/api/v1/groups": {
+      "get": {
+        "tags": [
+          "部門"
+        ],
+        "summary": "部門情報の一覧取得\n",
+        "description": "\n指定した事業所の指定日付時点における部門情報をリストで返します。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "operationId": "get_groups",
+        "parameters": [
+          {
+            "name": "company_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "description": "事業所ID",
+            "example": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiV1GroupsIndexResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/positions": {
+      "get": {
+        "tags": [
+          "役職"
+        ],
+        "summary": "役職情報の一覧取得\n",
+        "description": "\n指定した事業所の指定日付時点における役職情報をリストで返します。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "operationId": "get_positions",
+        "parameters": [
+          {
+            "name": "company_id",
+            "in": "query",
+            "required": true,
+            "description": "事業所ID",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "example": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiV1PositionIndexResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -4105,6 +4267,216 @@
           "total_count": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "ApiV1GroupsIndexResponse": {
+        "type": "object",
+        "required": [
+          "groups",
+          "total_count"
+        ],
+        "properties": {
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1GroupResponseParams"
+            }
+          },
+          "total_count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "example": 1
+          }
+        }
+      },
+      "ApiV1GroupResponseParams": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "level"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "部門ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 3
+          },
+          "code": {
+            "type": "string",
+            "description": "部門コード",
+            "maxLength": 255,
+            "example": "group2",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "部門名称",
+            "maxLength": 255,
+            "example": "営業部門"
+          },
+          "level": {
+            "type": "integer",
+            "description": "部門階層レベル（数字が大きいほど階層が深いです。）",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 2
+          },
+          "parent_group_id": {
+            "type": "integer",
+            "description": "親部門ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 2,
+            "nullable": true
+          },
+          "parent_group_code": {
+            "type": "string",
+            "description": "親部門コード",
+            "maxLength": 255,
+            "example": "group1",
+            "nullable": true
+          },
+          "parent_group_name": {
+            "type": "string",
+            "description": "親部門名称",
+            "maxLength": 255,
+            "example": "営業統括",
+            "nullable": true
+          }
+        }
+      },
+      "ApiV1GroupCreateRequestParams": {
+        "type": "object",
+        "required": [
+          "name",
+          "group"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "部門コード",
+            "maxLength": 255,
+            "default": null,
+            "example": "group2"
+          },
+          "name": {
+            "type": "string",
+            "description": "部門名称（必須）",
+            "maxLength": 255,
+            "example": "営業部門"
+          },
+          "parent_group_id": {
+            "type": "integer",
+            "description": "親部門ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true,
+            "default": null,
+            "example": 2
+          }
+        }
+      },
+      "ApiV1GroupUpdateRequestParams": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "部門コード",
+            "maxLength": 255,
+            "default": null,
+            "example": "group2"
+          },
+          "name": {
+            "type": "string",
+            "description": "部門名称",
+            "maxLength": 255,
+            "example": "営業部門"
+          }
+        }
+      },
+      "ApiV1PositionIndexResponse": {
+        "type": "object",
+        "required": [
+          "positions",
+          "total_count"
+        ],
+        "properties": {
+          "positions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1PositionResponseParams"
+            }
+          },
+          "total_count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "example": 1
+          }
+        }
+      },
+      "ApiV1PositionResponseParams": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "役職ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "code": {
+            "type": "string",
+            "description": "役職コード",
+            "maxLength": 255,
+            "example": "position1",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "役職名称",
+            "maxLength": 255,
+            "example": "部長"
+          }
+        }
+      },
+      "ApiV1PositionRequestParams": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "役職コード",
+            "maxLength": 255,
+            "default": null,
+            "example": "position1"
+          },
+          "name": {
+            "type": "string",
+            "description": "役職名称（必須）",
+            "maxLength": 255,
+            "example": "部長"
           }
         }
       },
@@ -6493,6 +6865,88 @@
         "properties": {
           "employee_payroll_statement": {
             "$ref": "#/components/schemas/ApiV1BonusesEmployeePayrollStatementSerializer"
+          }
+        }
+      },
+      "ApiV1GroupCreateRequest": {
+        "type": "object",
+        "required": [
+          "company_id",
+          "group"
+        ],
+        "properties": {
+          "company_id": {
+            "type": "integer",
+            "description": "作成対象事業所ID（必須）",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "group": {
+            "$ref": "#/components/schemas/ApiV1GroupCreateRequestParams"
+          }
+        }
+      },
+      "ApiV1GroupResponse": {
+        "type": "object",
+        "required": [
+          "group"
+        ],
+        "properties": {
+          "group": {
+            "$ref": "#/components/schemas/ApiV1GroupResponseParams"
+          }
+        }
+      },
+      "ApiV1GroupUpdateRequest": {
+        "type": "object",
+        "required": [
+          "company_id",
+          "group"
+        ],
+        "properties": {
+          "company_id": {
+            "type": "integer",
+            "description": "作成対象事業所ID（必須）",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "group": {
+            "$ref": "#/components/schemas/ApiV1GroupUpdateRequestParams"
+          }
+        }
+      },
+      "ApiV1PositionResponse": {
+        "type": "object",
+        "required": [
+          "position"
+        ],
+        "properties": {
+          "position": {
+            "$ref": "#/components/schemas/ApiV1PositionResponseParams"
+          }
+        }
+      },
+      "ApiV1PositionRequest": {
+        "type": "object",
+        "required": [
+          "company_id",
+          "position"
+        ],
+        "properties": {
+          "company_id": {
+            "type": "integer",
+            "description": "作成対象事業所ID（必須）",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "position": {
+            "$ref": "#/components/schemas/ApiV1PositionRequestParams"
           }
         }
       },
