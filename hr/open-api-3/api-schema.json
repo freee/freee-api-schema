@@ -6789,8 +6789,15 @@
                 "break_begin",
                 "break_end",
                 "clock_out"
-              ]
+              ],
+              "example": "clock_in"
             }
+          },
+          "base_date": {
+            "type": "string",
+            "description": "打刻基準日",
+            "format": "date",
+            "example": "2018-07-31"
           }
         }
       },
@@ -7053,7 +7060,7 @@
                   "type": "array",
                   "items": {
                     "type": "string",
-                    "example": "この月に在籍していない従業員の情報は取得できません。"
+                    "example": "存在しないか既に削除されたレコードです。"
                   }
                 }
               }
