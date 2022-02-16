@@ -8729,7 +8729,7 @@
           {
             "name": "start_month",
             "in": "query",
-            "description": "発生月で絞込：開始会計月(1-12)",
+            "description": "発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -8739,7 +8739,7 @@
           {
             "name": "end_month",
             "in": "query",
-            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する。)",
+            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -8765,7 +8765,7 @@
           {
             "name": "account_item_display_type",
             "in": "query",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）",
+            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -8832,7 +8832,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -8949,7 +8949,7 @@
           {
             "name": "start_month",
             "in": "query",
-            "description": "発生月で絞込：開始会計月(1-12)",
+            "description": "発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -8959,7 +8959,7 @@
           {
             "name": "end_month",
             "in": "query",
-            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する。)",
+            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -8985,7 +8985,7 @@
           {
             "name": "account_item_display_type",
             "in": "query",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）",
+            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -9052,7 +9052,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -9169,7 +9169,7 @@
           {
             "name": "start_month",
             "in": "query",
-            "description": "発生月で絞込：開始会計月(1-12)",
+            "description": "発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -9179,7 +9179,7 @@
           {
             "name": "end_month",
             "in": "query",
-            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する。)",
+            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -9205,7 +9205,7 @@
           {
             "name": "account_item_display_type",
             "in": "query",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）",
+            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -9272,7 +9272,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -9389,7 +9389,7 @@
           {
             "name": "start_month",
             "in": "query",
-            "description": "発生月で絞込：開始会計月(1-12)",
+            "description": "発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -9399,7 +9399,7 @@
           {
             "name": "end_month",
             "in": "query",
-            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する。)",
+            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -9425,7 +9425,7 @@
           {
             "name": "account_item_display_type",
             "in": "query",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）",
+            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -9492,7 +9492,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -9504,7 +9504,7 @@
           {
             "name": "cost_allocation",
             "in": "query",
-            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）",
+            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -9621,7 +9621,7 @@
           {
             "name": "start_month",
             "in": "query",
-            "description": "発生月で絞込：開始会計月(1-12)",
+            "description": "発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -9631,7 +9631,7 @@
           {
             "name": "end_month",
             "in": "query",
-            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する。)",
+            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -9657,7 +9657,7 @@
           {
             "name": "account_item_display_type",
             "in": "query",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）",
+            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -9724,7 +9724,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -9736,7 +9736,7 @@
           {
             "name": "cost_allocation",
             "in": "query",
-            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）",
+            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -9853,7 +9853,7 @@
           {
             "name": "start_month",
             "in": "query",
-            "description": "発生月で絞込：開始会計月(1-12)",
+            "description": "発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -9863,7 +9863,7 @@
           {
             "name": "end_month",
             "in": "query",
-            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する。)",
+            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -9889,7 +9889,7 @@
           {
             "name": "account_item_display_type",
             "in": "query",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）",
+            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -9956,7 +9956,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -9968,7 +9968,7 @@
           {
             "name": "cost_allocation",
             "in": "query",
-            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）",
+            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -10094,7 +10094,7 @@
           {
             "name": "start_month",
             "in": "query",
-            "description": "発生月で絞込：開始会計月(1-12)",
+            "description": "発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -10104,7 +10104,7 @@
           {
             "name": "end_month",
             "in": "query",
-            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する。)",
+            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -10130,7 +10130,7 @@
           {
             "name": "account_item_display_type",
             "in": "query",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）",
+            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -10186,7 +10186,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -10198,7 +10198,7 @@
           {
             "name": "cost_allocation",
             "in": "query",
-            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）",
+            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -10324,7 +10324,7 @@
           {
             "name": "start_month",
             "in": "query",
-            "description": "発生月で絞込：開始会計月(1-12)",
+            "description": "発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -10334,7 +10334,7 @@
           {
             "name": "end_month",
             "in": "query",
-            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する。)",
+            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -10360,7 +10360,7 @@
           {
             "name": "account_item_display_type",
             "in": "query",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）",
+            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -10424,7 +10424,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -10436,7 +10436,7 @@
           {
             "name": "cost_allocation",
             "in": "query",
-            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）",
+            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -10562,7 +10562,7 @@
           {
             "name": "start_month",
             "in": "query",
-            "description": "発生月で絞込：開始会計月(1-12)",
+            "description": "発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -10572,7 +10572,7 @@
           {
             "name": "end_month",
             "in": "query",
-            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する。)",
+            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -10598,7 +10598,7 @@
           {
             "name": "account_item_display_type",
             "in": "query",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）",
+            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -10662,7 +10662,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -10674,7 +10674,7 @@
           {
             "name": "cost_allocation",
             "in": "query",
-            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）",
+            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -10800,7 +10800,7 @@
           {
             "name": "start_month",
             "in": "query",
-            "description": "発生月で絞込：開始会計月(1-12)",
+            "description": "発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -10810,7 +10810,7 @@
           {
             "name": "end_month",
             "in": "query",
-            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する。)",
+            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -10836,7 +10836,7 @@
           {
             "name": "account_item_display_type",
             "in": "query",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）",
+            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -10900,7 +10900,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -10912,7 +10912,7 @@
           {
             "name": "cost_allocation",
             "in": "query",
-            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）",
+            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -11029,7 +11029,7 @@
           {
             "name": "start_month",
             "in": "query",
-            "description": "発生月で絞込：開始会計月(1-12)",
+            "description": "発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -11039,7 +11039,7 @@
           {
             "name": "end_month",
             "in": "query",
-            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する。)",
+            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -11065,7 +11065,7 @@
           {
             "name": "account_item_display_type",
             "in": "query",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）",
+            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -11132,7 +11132,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -11144,7 +11144,7 @@
           {
             "name": "cost_allocation",
             "in": "query",
-            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）",
+            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -11261,7 +11261,7 @@
           {
             "name": "start_month",
             "in": "query",
-            "description": "発生月で絞込：開始会計月(1-12)",
+            "description": "発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -11271,7 +11271,7 @@
           {
             "name": "end_month",
             "in": "query",
-            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する。)",
+            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -11297,7 +11297,7 @@
           {
             "name": "account_item_display_type",
             "in": "query",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）",
+            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -11364,7 +11364,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -11376,7 +11376,7 @@
           {
             "name": "cost_allocation",
             "in": "query",
-            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）",
+            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -11493,7 +11493,7 @@
           {
             "name": "start_month",
             "in": "query",
-            "description": "発生月で絞込：開始会計月(1-12)",
+            "description": "発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -11503,7 +11503,7 @@
           {
             "name": "end_month",
             "in": "query",
-            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する。)",
+            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -11529,7 +11529,7 @@
           {
             "name": "account_item_display_type",
             "in": "query",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）",
+            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -11596,7 +11596,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -11608,7 +11608,7 @@
           {
             "name": "cost_allocation",
             "in": "query",
-            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）",
+            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -11734,7 +11734,7 @@
           {
             "name": "start_month",
             "in": "query",
-            "description": "発生月で絞込：開始会計月(1-12)",
+            "description": "発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -11744,7 +11744,7 @@
           {
             "name": "end_month",
             "in": "query",
-            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する。)",
+            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -11770,7 +11770,7 @@
           {
             "name": "account_item_display_type",
             "in": "query",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）",
+            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -11826,7 +11826,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -11838,7 +11838,7 @@
           {
             "name": "cost_allocation",
             "in": "query",
-            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）",
+            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -11964,7 +11964,7 @@
           {
             "name": "start_month",
             "in": "query",
-            "description": "発生月で絞込：開始会計月(1-12)",
+            "description": "発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -11974,7 +11974,7 @@
           {
             "name": "end_month",
             "in": "query",
-            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する。)",
+            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -12000,7 +12000,7 @@
           {
             "name": "account_item_display_type",
             "in": "query",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）",
+            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -12064,7 +12064,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -12076,7 +12076,7 @@
           {
             "name": "cost_allocation",
             "in": "query",
-            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）",
+            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -12202,7 +12202,7 @@
           {
             "name": "start_month",
             "in": "query",
-            "description": "発生月で絞込：開始会計月(1-12)",
+            "description": "発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -12212,7 +12212,7 @@
           {
             "name": "end_month",
             "in": "query",
-            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する。)",
+            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -12238,7 +12238,7 @@
           {
             "name": "account_item_display_type",
             "in": "query",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）",
+            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -12302,7 +12302,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -12314,7 +12314,7 @@
           {
             "name": "cost_allocation",
             "in": "query",
-            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）",
+            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -12440,7 +12440,7 @@
           {
             "name": "start_month",
             "in": "query",
-            "description": "発生月で絞込：開始会計月(1-12)",
+            "description": "発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -12450,7 +12450,7 @@
           {
             "name": "end_month",
             "in": "query",
-            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する。)",
+            "description": "発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ... 9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -12476,7 +12476,7 @@
           {
             "name": "account_item_display_type",
             "in": "query",
-            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）",
+            "description": "勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -12540,7 +12540,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -12552,7 +12552,7 @@
           {
             "name": "cost_allocation",
             "in": "query",
-            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）",
+            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
