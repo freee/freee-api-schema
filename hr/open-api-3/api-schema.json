@@ -3505,6 +3505,16 @@
             "example": "2018-07-31"
           },
           {
+            "name": "with_no_payroll_calculation",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "trueを指定すると給与計算対象外の従業員情報をレスポンスに含めます。",
+            "example": true
+          },
+          {
             "name": "limit",
             "in": "query",
             "description": "取得レコードの件数 (デフォルト: 50, 最小: 1, 最大: 100)",
@@ -4526,6 +4536,27 @@
             "nullable": true,
             "example": "example@example.com"
           },
+          "birth_date": {
+            "type": "string",
+            "description": "生年月日",
+            "format": "date",
+            "example": "2000-01-01"
+          },
+          "gender": {
+            "type": "string",
+            "description": "性別　unselected: 未選択, male: 男性, female: 女性",
+            "enum": [
+              "unselected",
+              "male",
+              "female"
+            ],
+            "example": "male"
+          },
+          "payroll_calculation": {
+            "type": "boolean",
+            "description": "給与計算対象従業員の場合trueを返します",
+            "example": true
+          },
           "group_memberships": {
             "type": "array",
             "items": {
@@ -4624,7 +4655,11 @@
           },
           "role": {
             "type": "string",
-            "description": "事業所におけるロール。\n- `company_admin`: 管理者ユーザ\n- `self_only`: 一般ユーザ"
+            "description": "事業所におけるロール。\n- `company_admin`: 管理者ユーザ\n- `self_only`: 一般ユーザ",
+            "enum": [
+              "company_admin",
+              "self_only"
+            ]
           },
           "external_cid": {
             "type": "string",
