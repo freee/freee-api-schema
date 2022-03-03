@@ -16127,7 +16127,6 @@ components:
 
                 <a href="https://support.freee.co.jp/hc/ja/articles/203318410#1-2" target="_blank">見積書・納品書を納品書・請求書に変換する</a><br>
                 <a href="https://support.freee.co.jp/hc/ja/articles/209076226" target="_blank">複数の見積書・納品書から合算請求書を作成する</a><br>
-              example: 1
               items:
                 description: 関連する見積書ID
                 example: 3
