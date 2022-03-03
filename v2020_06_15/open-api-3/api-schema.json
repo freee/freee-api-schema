@@ -34559,6 +34559,7 @@
                 "minimum": 1,
                 "maximum": 2147483647,
                 "description": "取引ID (invoice_statusがsubmitted, unsubmittedの時IDが表示されます)",
+                "example": 1,
                 "nullable": true
               },
               "invoice_contents": {

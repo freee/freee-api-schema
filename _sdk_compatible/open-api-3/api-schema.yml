@@ -15746,6 +15746,7 @@ components:
               type: string
             deal_id:
               description: 取引ID (invoice_statusがsubmitted, unsubmittedの時IDが表示されます)
+              example: 1
               maximum: 2147483647
               minimum: 1
               nullable: true
