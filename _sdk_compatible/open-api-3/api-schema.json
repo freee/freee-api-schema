@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "freee API",
-    "description": "\n<h1 id=\"freee_api\">freee API</h1>\n<hr />\n<h2 id=\"start_guide\">スタートガイド</h2>\n\n<p>freee API開発がはじめての方は<a href=\"https://developer.freee.co.jp/getting-started\">freee API スタートガイド</a>を参照してください。</p>\n\n<hr />\n<h2 id=\"specification\">仕様</h2>\n\n<h3 id=\"api_endpoint\">APIエンドポイント</h3>\n\n<p>https://api.freee.co.jp/ (httpsのみ)</p>\n\n<h3 id=\"about_authorize\">認証について</h3>\n<p>OAuth2.0を利用します。詳細は<a href=\"https://developer.freee.co.jp/docs\" target=\"_blank\">ドキュメントの認証</a>パートを参照してください。</p>\n\n<h3 id=\"data_format\">データフォーマット</h3>\n\n<p>リクエスト、レスポンスともにJSON形式をサポートしていますが、詳細は、API毎の説明欄（application/jsonなど）を確認してください。</p>\n\n<h3 id=\"compatibility\">後方互換性ありの変更</h3>\n\n<p>freeeでは、APIを改善していくために以下のような変更は後方互換性ありとして通知なく変更を入れることがあります。アプリケーション実装者は以下を踏まえて開発を行ってください。</p>\n\n<ul>\n<li>新しいAPIリソース・エンドポイントの追加</li>\n<li>既存のAPIに対して必須ではない新しいリクエストパラメータの追加</li>\n<li>既存のAPIレスポンスに対する新しいプロパティの追加</li>\n<li>既存のAPIレスポンスに対するプロパティの順番の入れ変え</li>\n<li>keyとなっているidやcodeの長さの変更（長くする）</li>\n</ul>\n\n<h3 id=\"common_response_header\">共通レスポンスヘッダー</h3>\n\n<p>すべてのAPIのレスポンスには以下のHTTPヘッダーが含まれます。</p>\n\n<ul>\n<li>\n<p>X-Freee-Request-ID</p>\n<ul>\n<li>各リクエスト毎に発行されるID</li>\n</ul>\n</li>\n</ul>\n\n<h3 id=\"common_error_response\">共通エラーレスポンス</h3>\n\n<ul>\n<li>\n<p>ステータスコードはレスポンス内のJSONに含まれる他、HTTPヘッダにも含まれる</p>\n</li>\n<li>\n<p>一部のエラーレスポンスにはエラーコードが含まれます。<br>詳細は、<a href=\"https://developer.freee.co.jp/tips/faq/40x-checkpoint\">HTTPステータスコード400台エラー時のチェックポイント</a>を参照してください</p>\n</li>\n<p>type</p>\n\n<ul>\n<li>status : HTTPステータスコードの説明</li>\n\n<li>validation : エラーの詳細の説明（開発者向け）</li>\n</ul>\n</li>\n</ul>\n\n<p>レスポンスの例</p>\n\n<pre><code>  {\n    &quot;status_code&quot; : 400,\n    &quot;errors&quot; : [\n      {\n        &quot;type&quot; : &quot;status&quot;,\n        &quot;messages&quot; : [&quot;不正なリクエストです。&quot;]\n      },\n      {\n        &quot;type&quot; : &quot;validation&quot;,\n        &quot;messages&quot; : [&quot;Date は不正な日付フォーマットです。入力例：2019-12-17&quot;]\n      }\n    ]\n  }</code></pre>\n\n</br>\n\n<h3 id=\"api_rate_limit\">API使用制限</h3>\n\n  <p>freeeは一定期間に過度のアクセスを検知した場合、APIアクセスをコントロールする場合があります。</p>\n  <p>その際のhttp status codeは403となります。制限がかかってから10分程度が過ぎると再度使用することができるようになります。</p>\n\n<h4 id=\"reports_api_endpoint\">/reportsと/receipts/{id}/downloadエンドポイント</h4>\n\n<p>freeeはエンドポイント毎に一定頻度以上のアクセスを検知した場合、APIアクセスをコントロールする場合があります。その際のhttp status codeは429（too many requests）となります。</p>\n\n<ul>\n  <li>/reports:1秒に10回まで</li>\n  <li>/receipts/{id}/download:1秒に3回まで</li>\n</ul>\n\n<p>レスポンスボディのmetaプロパティに以下を含めます。</p>\n\n<ul>\n  <li>設定されている上限値</li>\n  <li>上限に達するまでの使用可能回数</li>\n  <li>（上限値に達した場合）使用回数がリセットされる時刻</li>\n</ul>\n\n<h3 id=\"plan_api_rate_limit\">プラン別のAPI Rate Limit</h3>\n  <table border=\"1\">\n    <tbody>\n      <tr>\n        <th style=\"padding: 10px\"><strong>freee会計プラン名</strong></th>\n        <th style=\"padding: 10px\"><strong>事業所とアプリケーション毎に1日でのAPIコール数</strong></th>\n      </tr>\n      <tr>\n        <td style=\"padding: 10px\">エンタープライズ</td>\n        <td style=\"padding: 10px\">10,000</td>\n      </tr>\n      <tr>\n        <td style=\"padding: 10px\">プロフェッショナル</td>\n        <td style=\"padding: 10px\">5,000</td>\n      </tr>\n      <tr>\n        <td style=\"padding: 10px\">ベーシック</td>\n        <td style=\"padding: 10px\">3,000</td>\n      </tr>\n      <tr>\n        <td style=\"padding: 10px\">ミニマム</td>\n        <td style=\"padding: 10px\">3,000</td>\n      </tr>\n      <tr>\n        <td style=\"padding: 10px\">上記以外</td>\n        <td style=\"padding: 10px\">3,000</td>\n      </tr>\n    </tbody>\n  </table>\n\n<h3 id=\"webhook\">Webhookについて</h3>\n\n<p>詳細は<a href=\"https://developer.freee.co.jp/docs/accounting/webhook\" target=\"_blank\">会計Webhook概要</a>を参照してください。</p>\n\n<hr />\n<h2 id=\"contact\">連絡先</h2>\n\n<p>ご不明点、ご要望等は <a href=\"https://support.freee.co.jp/hc/ja/requests/new\">freee サポートデスクへのお問い合わせフォーム</a> からご連絡ください。</p>\n<hr />&copy; Since 2013 freee K.K.",
+    "description": "",
     "version": "v1.0",
     "x-copyright": "&copy; Since 2013 freee K.K."
   },
@@ -140,7 +140,7 @@
           "Partners"
         ],
         "summary": "取引先一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引先一覧を取得する</p>\n<ul>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）は法人向けのプロフェッショナルプラン以上で利用可能です。</li></ul>",
+        "description": "",
         "operationId": "get_partners",
         "parameters": [
           {
@@ -258,7 +258,7 @@
           "Partners"
         ],
         "summary": "取引先の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引先を作成する</p>\n<ul>\n<li>codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</li>\n<li>取引先コードの利用を有効にしている場合は、codeの指定は必須です。</li>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li></ul>",
+        "description": "",
         "operationId": "create_partner",
         "requestBody": {
           "description": "取引先の作成",
@@ -336,7 +336,7 @@
           "Partners"
         ],
         "summary": "取引先の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引先を取得する</p>\n<ul>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li></ul>",
+        "description": "",
         "operationId": "get_partner",
         "parameters": [
           {
@@ -430,7 +430,7 @@
           "Partners"
         ],
         "summary": "取引先の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した取引先の情報を更新する</p>\n<ul>\n<li>codeを指定、更新することはできません。</li>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li></ul>",
+        "description": "",
         "operationId": "update_partner",
         "parameters": [
           {
@@ -519,7 +519,7 @@
           "Partners"
         ],
         "summary": "取引先の削除",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引先を削除する</p>",
+        "description": "",
         "operationId": "destroy_partner",
         "parameters": [
           {
@@ -610,7 +610,7 @@
           "Partners"
         ],
         "summary": "取引先の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>取引先コードをキーに、指定した取引先の情報を更新する</p>\n<ul>\n<li>このAPIを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</li>\n<li>コードを日本語に設定している場合は、URLエンコードしてURLに含めるようにしてください。</li>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li></ul>",
+        "description": "",
         "operationId": "update_partner_by_code",
         "parameters": [
           {
@@ -699,7 +699,7 @@
           "Selectables"
         ],
         "summary": "フォーム用選択項目情報の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のフォーム用選択項目情報を取得する</p>",
+        "description": "",
         "operationId": "get_forms_selectables",
         "parameters": [
           {
@@ -785,7 +785,7 @@
           "Account items"
         ],
         "summary": "勘定科目の詳細情報の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した勘定科目の詳細を取得する</p>",
+        "description": "",
         "operationId": "get_account_item",
         "parameters": [
           {
@@ -879,7 +879,7 @@
           "Account items"
         ],
         "summary": "勘定科目の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>勘定科目を更新する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<p>tax_codeは、api/1/taxes/companies/{company_id} で該当事業所の税区分の一覧を取得して、availableの値がtrue、かつ”name_ja”に”税率%”を含んでいない税区分を確認して、そのcodeを指定して勘定科目の更新をしてください</p>",
+        "description": "",
         "operationId": "update_account_item",
         "parameters": [
           {
@@ -977,7 +977,7 @@
           "Account items"
         ],
         "summary": "勘定科目の削除",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した勘定科目を削除する</p>\n<h2 id=\"\">注意点</h2>\n<ul>\n<li>削除できる勘定科目は、追加で作成したカスタム勘定項目のみです。</li>\n<li>デフォルトで存在する勘定科目や口座の勘定科目は削除できません。</li></ul>",
+        "description": "",
         "operationId": "destroy_account_item",
         "parameters": [
           {
@@ -1057,7 +1057,7 @@
           "Account items"
         ],
         "summary": "勘定科目一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の勘定科目一覧を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>default_tax_id : デフォルト設定がされている税区分ID</li>\n\n<li>default_tax_code : リクエストした日時を基準とした税区分コード</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<p>default_tax_code は勘定科目作成・更新時に利用するものではありません</p>",
+        "description": "",
         "operationId": "get_account_items",
         "parameters": [
           {
@@ -1138,7 +1138,7 @@
           "Account items"
         ],
         "summary": "勘定科目の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の勘定科目を作成する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<p>tax_nameは、api/1/taxes/companies/{company_id} で該当事業所の税区分の一覧を取得して、availableの値がtrue、かつ”name_ja”に”税率%”を含んでいない税区分を確認して、そのnameを指定して勘定科目の作成をしてください</p>",
+        "description": "",
         "operationId": "create_account_item",
         "requestBody": {
           "description": "勘定科目の作成",
@@ -1216,7 +1216,7 @@
           "Tags"
         ],
         "summary": "メモタグ一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のメモタグ一覧を取得する</p>",
+        "description": "",
         "operationId": "get_tags",
         "parameters": [
           {
@@ -1336,7 +1336,7 @@
           "Tags"
         ],
         "summary": "メモタグの作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のメモタグを作成する</p>",
+        "description": "",
         "operationId": "create_tag",
         "requestBody": {
           "description": "メモタグの作成",
@@ -1414,7 +1414,7 @@
           "Tags"
         ],
         "summary": "メモタグの詳細情報の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のメモタグを取得する</p>",
+        "description": "",
         "operationId": "get_tag",
         "parameters": [
           {
@@ -1508,7 +1508,7 @@
           "Tags"
         ],
         "summary": "メモタグの更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のメモタグを更新する</p>",
+        "description": "",
         "operationId": "update_tag",
         "parameters": [
           {
@@ -1607,7 +1607,7 @@
           "Tags"
         ],
         "summary": "メモタグの削除",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のメモタグを削除する</p>",
+        "description": "",
         "operationId": "destroy_tag",
         "parameters": [
           {
@@ -1698,7 +1698,7 @@
           "Sections"
         ],
         "summary": "部門一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の部門一覧を取得する</p>\n\n<h2 id=\"_2\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/sections?company_id=1</p>\n</blockquote>\n\n<pre><code>// プレミアムプラン（個人）、ベーシックプラン以上（法人）\n{\n  &quot;sections&quot; : [\n    {\n      &quot;id&quot; : 101,\n      &quot;company_id&quot; : 1,\n      &quot;name&quot; : &quot;開発部門&quot;,\n      &quot;long_name&quot;: &quot;開発部門&quot;,\n      &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n      &quot;shortcut2&quot; : &quot;123&quot;,\n      &quot;indent_count&quot;: 1,\n      &quot;parent_id&quot;: 11\n    },\n    ...\n  ]\n}\n// それ以外のプラン\n{\n  &quot;sections&quot; : [\n    {\n      &quot;id&quot; : 101,\n      &quot;company_id&quot; : 1,\n      &quot;name&quot; : &quot;開発部門&quot;,\n      &quot;long_name&quot;: &quot;開発部門&quot;,\n      &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n      &quot;shortcut2&quot; : &quot;123&quot;\n    },\n    ...\n  ]\n}</code></pre>\n",
+        "description": "",
         "operationId": "get_sections",
         "parameters": [
           {
@@ -1782,7 +1782,7 @@
           "Sections"
         ],
         "summary": "部門の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の部門を作成する</p>\n\n<h2 id=\"_2\">レスポンスの例</h2>\n\n<pre><code>// プレミアムプラン（個人）、ベーシックプラン以上（法人）\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;,\n    &quot;indent_count&quot;: 1,\n    &quot;parent_id&quot;: 101\n  }\n}\n// それ以外のプラン\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;\n  }\n}</code></pre>\n",
+        "description": "",
         "operationId": "create_section",
         "requestBody": {
           "description": "部門の作成",
@@ -1859,7 +1859,7 @@
         "tags": [
           "Sections"
         ],
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の部門を参照する</p><h2 id=\"_2\">レスポンスの例</h2>\n\n<pre><code>// プレミアムプラン（個人）、ベーシックプラン以上（法人）\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;long_name&quot;: &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;,\n    &quot;indent_count&quot;: 1,\n    &quot;parent_id&quot;: 101\n  }\n}\n// それ以外のプラン\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;long_name&quot;: &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;\n  }\n}</code></pre>\n",
+        "description": "",
         "operationId": "get_section",
         "parameters": [
           {
@@ -1953,7 +1953,7 @@
           "Sections"
         ],
         "summary": "部門の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の部門を更新する</p><h2 id=\"_2\">レスポンスの例</h2>\n\n<pre><code>// プレミアムプラン（個人）、ベーシックプラン以上（法人）\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;long_name&quot;: &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;,\n    &quot;indent_count&quot;: 1,\n    &quot;parent_id&quot;: 101\n  }\n}\n// それ以外のプラン\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;long_name&quot;: &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;\n  }\n}</code></pre>\n",
+        "description": "",
         "operationId": "update_section",
         "parameters": [
           {
@@ -2041,7 +2041,7 @@
           "Sections"
         ],
         "summary": "部門の削除",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の部門を削除する</p>",
+        "description": "",
         "operationId": "destroy_section",
         "parameters": [
           {
@@ -2121,7 +2121,7 @@
           "Invoices"
         ],
         "summary": "請求書一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の請求書一覧を取得する</p>\n",
+        "description": "",
         "operationId": "get_invoices",
         "parameters": [
           {
@@ -2320,7 +2320,7 @@
           "Invoices"
         ],
         "summary": "請求書の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の請求書を作成する</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n<li> <p>partner_code, partner_idはどちらかの指定が必須です。ただし両方同時に指定することはできません。</p> </li>\n<li> <p>請求書ステータス(invoice_status)を発行(issue)で利用した場合、請求内容の合計金額が0円以上になる必要があります。</p> </li>\n<li> <p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</p> </li>\n<li> <p>本APIでは請求内容(invoice_contents)は、最大100行までになります。</p> </li>\n</ul>",
+        "description": "",
         "operationId": "create_invoice",
         "requestBody": {
           "description": "請求書の作成",
@@ -2408,7 +2408,7 @@
           "Invoices"
         ],
         "summary": "請求書の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の請求書詳細を取得する</p>",
+        "description": "",
         "operationId": "get_invoice",
         "parameters": [
           {
@@ -2502,7 +2502,7 @@
           "Invoices"
         ],
         "summary": "請求書の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の請求書を更新する</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n<li> <p>入金済みの請求書に対する金額関連の変更はできません。</p> </li>\n<li> <p>請求書ステータスは確定(issue)のみ指定可能です。請求書ステータスを確定する時のみ指定してください。</p> </li>\n<li> <p>請求書WFを利用している場合、承認済み請求書は承認権限を持たないユーザーでは更新できません。</p> </li>\n<li> <p>更新後の請求書ステータス(invoice_status)が下書き以外の場合、請求内容の合計金額が0円以上になる必要があります。</p> </li>\n<li> <p>partner_code, partner_idを両方同時に指定することはできません。</p> </li>\n<li> <p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</p> </li>\n<li> <p>本APIでは請求内容(invoice_contents)は、最大100行までになります。</p> </li>\n</ul>",
+        "description": "",
         "operationId": "update_invoice",
         "parameters": [
           {
@@ -2601,7 +2601,7 @@
           "Invoices"
         ],
         "summary": "請求書の削除",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の請求書を削除する</p>",
+        "description": "",
         "operationId": "destroy_invoice",
         "parameters": [
           {
@@ -2691,7 +2691,7 @@
           "Quotations"
         ],
         "summary": "見積書一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の見積書一覧を取得する</p>\n",
+        "description": "",
         "operationId": "get_quotations",
         "parameters": [
           {
@@ -2858,7 +2858,7 @@
           "Quotations"
         ],
         "summary": "見積書の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の見積書を作成する</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n<li> <p>partner_code, partner_idはどちらかの指定が必須です。ただし両方同時に指定することはできません。</p> </li>\n<li> <p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</p> </li>\n<li> <p>本APIでは見積内容(quotation_contents)は、最大100行までになります。</p> </li>\n</ul>",
+        "description": "",
         "operationId": "create_quotation",
         "requestBody": {
           "description": "見積書の作成",
@@ -2946,7 +2946,7 @@
           "Quotations"
         ],
         "summary": "見積書の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の見積書詳細を取得する</p>",
+        "description": "",
         "operationId": "get_quotation",
         "parameters": [
           {
@@ -3040,7 +3040,7 @@
           "Quotations"
         ],
         "summary": "見積書の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の見積書を更新する</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n<li> <p>partner_code, partner_idを両方同時に指定することはできません。</p> </li>\n<li> <p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</p> </li>\n<li> <p>本APIでは見積内容(quotation_contents)は、最大100行までになります。</p> </li>\n</ul>",
+        "description": "",
         "operationId": "update_quotation",
         "parameters": [
           {
@@ -3139,7 +3139,7 @@
           "Quotations"
         ],
         "summary": "見積書の削除",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の見積書を削除する</p>",
+        "description": "",
         "operationId": "destroy_quotation",
         "parameters": [
           {
@@ -3229,7 +3229,7 @@
           "Deals"
         ],
         "summary": "取引（収入／支出）一覧の取得",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引一覧（収入／支出）を取得する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>details : 取引の明細行</p>\n</li>\n<li>\n<p>accruals : 取引の債権債務行</p>\n</li>\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n<li>\n<p>registered_from</p>\n<ul>\n<li>all : すべての取引</li>\n<li>me : 自身が登録した取引</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</li>\n</ul>",
+        "description": "",
         "operationId": "get_deals",
         "parameters": [
           {
@@ -3482,7 +3482,7 @@
           "Deals"
         ],
         "summary": "取引（収入／支出）の作成",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入／支出）を作成する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>ref_number : 管理番号</p>\n</li>\n<li>\n<p>details : 取引の明細行(最大40行)</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>receipt_ids : 証憑ファイルID（ファイルボックスのファイルID）</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n    <li><p>本APIでは+更新行(renews)の操作ができません。+更新行の作成APIをご利用ください。</p></li>\n    <li><p>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</p></li>\n    <li>\n        <p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</p></li>\n    <li>\n        <p>本APIでは取引の明細行(details)は、最大40行までになります。</p>\n    </li>\n</ul>\n",
+        "description": "",
         "operationId": "create_deal",
         "requestBody": {
           "description": "取引（収入／支出）の作成",
@@ -3570,7 +3570,7 @@
           "Deals"
         ],
         "summary": "取引（収入／支出）の取得",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入／支出）を取得する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>details : 取引の明細行</p>\n</li>\n<li>\n<p>accruals : 取引の債権債務行</p>\n</li>\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n<li>\n<p>registered_from</p>\n<ul>\n<li>all : すべての取引</li>\n<li>me : 自身が登録した取引</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n</ul>",
+        "description": "",
         "operationId": "get_deal",
         "parameters": [
           {
@@ -3675,7 +3675,7 @@
           "Deals"
         ],
         "summary": "取引（収入／支出）の更新",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入／支出）を更新する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>details : 取引の明細行(最大40行)</p>\n</li>\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n<li>\n<p>receipt_ids : 証憑ファイルID（ファイルボックスのファイルID）</p>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n    <li><p>本APIでは支払行(payments)の操作ができません。支払行の作成・更新・削除APIをご利用ください。</p></li>\n    <li><p>本APIでは+更新行(renews)の操作ができません。+更新行の作成・更新・削除APIをご利用ください。</p></li>\n    <li><p>本APIでは収入／支出の切替えができません。既存の取引を削除後、再度作成してください。</p></li>\n    <li><p>本APIで取引を更新すると、消費税の計算方法は必ず内税方式が選択されます。</p></li>\n    <li><p>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</p></li>\n    <li><p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</p></li>\n    <li>\n        <p>本APIでは取引の明細行(details)は、最大40行までになります。</p>\n    </li>\n</ul>",
+        "description": "",
         "operationId": "update_deal",
         "parameters": [
           {
@@ -3855,7 +3855,8 @@
               }
             }
           }
-        }
+        },
+        "description": ""
       }
     },
     "/api/1/deals/{id}/renews": {
@@ -3864,7 +3865,7 @@
           "Renews"
         ],
         "summary": "取引（収入／支出）に対する+更新の作成",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入／支出）の+更新を作成する</p>\n<h2 id=\"_2\">定義</h2>\n<ul> <li> <p>issue_date : 発生日</p> </li>\n<li> <p>due_date : 支払期日</p> </li>\n<li> <p>amount : 金額</p> </li>\n<li> <p>due_amount : 支払残額</p> </li>\n<li> <p>type</p>\n<ul> <li>income : 収入</li>\n<li>expense : 支出</li> </ul> </li>\n<li> <p>details : 取引の明細行</p> </li>\n<li> <p>accruals : 取引の債権債務行</p> </li>\n<li> <p>renews : 取引の+更新行</p> </li>\n<li> <p>payments : 取引の支払行</p> </li>\n<li> <p>from_walletable_type</p>\n<ul> <li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul> </li> </ul>\n<h2 id=\"_3\">注意点</h2>\n<ul> <li>本APIではdetails(取引の明細行)、accruals(債権債務行)、renewsのdetails(+更新の明細行)のみ操作可能です。</li>\n<li>本APIで取引を更新すると、消費税の計算方法は必ず内税方式が選択されます。</li> </ul>\n",
+        "description": "",
         "operationId": "create_deal_renew",
         "parameters": [
           {
@@ -3955,7 +3956,7 @@
           "Renews"
         ],
         "summary": "取引（収入／支出）の+更新の更新",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入／支出）の+更新を更新する</p>\n<h2 id=\"_2\">定義</h2>\n<ul> <li> <p>issue_date : 発生日</p> </li>\n<li> <p>due_date : 支払期日</p> </li>\n<li> <p>amount : 金額</p> </li>\n<li> <p>due_amount : 支払残額</p> </li>\n<li> <p>type</p>\n<ul> <li>income : 収入</li>\n<li>expense : 支出</li> </ul> </li>\n<li> <p>details : 取引の明細行</p> </li>\n<li> <p>accruals : 取引の債権債務行</p> </li>\n<li> <p>renews : 取引の+更新行</p> </li>\n<li> <p>payments : 取引の支払行</p> </li>\n<li> <p>from_walletable_type</p>\n<ul> <li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul> </li> </ul>\n<h2 id=\"_3\">注意点</h2>\n<ul> <li>本APIでは+更新の更新のみ可能です。取引や支払行に対する更新はできません。</li> <li>renew_idにはrenewsのid(+更新ID)を指定してください。renewsのdetailsのid(+更新の明細行ID)を指定できません。</li> <li>月締めされている仕訳に紐づく＋更新行の編集・削除はできません。</li> <li>承認済み仕訳に紐づく＋更新行の編集・削除は管理者権限のユーザーのみ可能です。</li>\n<li>本APIで取引を更新すると、消費税の計算方法は必ず内税方式が選択されます。</li> </ul>\n",
+        "description": "",
         "operationId": "update_deal_renew",
         "parameters": [
           {
@@ -4055,7 +4056,7 @@
           "Renews"
         ],
         "summary": "取引（収入／支出）の+更新の削除",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入／支出）の+更新を削除する</p>\n<h2 id=\"_3\">注意点</h2>\n<ul> <li>本APIでは+更新の削除のみ可能です。取引や支払行に対する削除はできません。</li> <li>renew_idにはrenewsのid(+更新ID)を指定してください。renewsのdetailsのid(+更新の明細行ID)を指定できません。</li>\n<li>月締めされている仕訳に紐づく＋更新行の編集・削除はできません。</li> <li>承認済み仕訳に紐づく＋更新行の編集・削除は管理者権限のユーザーのみ可能です。</li>\n<li>本APIで取引を更新すると、消費税の計算方法は必ず内税方式が選択されます。</li> </ul>\n",
+        "description": "",
         "operationId": "delete_deal_renew",
         "parameters": [
           {
@@ -4152,7 +4153,7 @@
           "Payments"
         ],
         "summary": "取引（収入／支出）の支払行作成",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入／支出）の支払行を作成する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li> <p>details : 取引の明細行</p> </li>\n<li> <p>renews : 取引の+更新行</p> </li>\n<li> <p>payments : 取引の支払行</p> </li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n</ul>",
+        "description": "",
         "operationId": "create_deal_payment",
         "parameters": [
           {
@@ -4253,7 +4254,7 @@
           "Payments"
         ],
         "summary": "取引（収入／支出）の支払行更新",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入／支出）の支払行を更新する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>details : 取引の明細行</p>\n</li>\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n</ul>",
+        "description": "",
         "operationId": "update_deal_payment",
         "parameters": [
           {
@@ -4364,7 +4365,7 @@
           "Payments"
         ],
         "summary": "取引（収入／支出）の支払行削除",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入／支出）の支払行を削除する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>details : 取引の明細行</p>\n</li>\n</ul>",
+        "description": "",
         "operationId": "destroy_deal_payment",
         "parameters": [
           {
@@ -4467,7 +4468,7 @@
           "ManualJournals"
         ],
         "summary": "振替伝票一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の振替伝票一覧を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>adjustment : 決算整理仕訳フラグ（true: 決算整理仕訳, false: 日常仕訳）</p>\n</li>\n\n<li>\n<p>txn_number : 仕訳番号</p>\n</li>\n\n<li>\n<p>details : 振替伝票の貸借行</p>\n</li>\n\n<li>\n<p>entry_side : 貸借区分</p>\n\n<ul>\n<li>credit : 貸方</li>\n\n<li>debit : 借方</li>\n</ul>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>振替伝票は売掛・買掛レポートには反映されません。債権・債務データの登録は取引(Deals)をお使いください。</li>\n<li>事業所の仕訳番号形式が有効な場合のみ、レスポンスで仕訳番号(txn_number)を返します。</li>\n<li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</li></ul>",
+        "description": "",
         "operationId": "get_manual_journals",
         "parameters": [
           {
@@ -4748,7 +4749,7 @@
           "ManualJournals"
         ],
         "summary": "振替伝票の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の振替伝票を作成する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>adjustment : 決算整理仕訳フラグ（true: 決算整理仕訳, false: 日常仕訳）</p>\n</li>\n\n<li>\n<p>txn_number : 仕訳番号</p>\n</li>\n\n<li>\n<p>details : 振替伝票の貸借行</p>\n</li>\n\n<li>\n<p>entry_side : 貸借区分</p>\n\n<ul>\n<li>credit : 貸方</li>\n\n<li>debit : 借方</li>\n</ul>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>振替伝票は売掛・買掛レポートには反映されません。債権・債務データの登録は取引(Deals)をお使いください。</li>\n<li>事業所の仕訳番号形式が有効な場合のみ、レスポンスで仕訳番号(txn_number)を返します。</li>\n<li>貸借合わせて100行まで仕訳行を登録できます。</li>\n<li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</li></ul>\n\n",
+        "description": "",
         "operationId": "create_manual_journal",
         "requestBody": {
           "description": "振替伝票の作成",
@@ -4836,7 +4837,7 @@
           "ManualJournals"
         ],
         "summary": "振替伝票の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の振替伝票を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul> <li> <p>issue_date : 発生日</p> </li>\n<li> <p>adjustment : 決算整理仕訳フラグ（true: 決算整理仕訳, false: 日常仕訳）</p> </li>\n<li> <p>txn_number : 仕訳番号</p> </li>\n<li> <p>details : 振替伝票の貸借行</p> </li>\n<li> <p>entry_side : 貸借区分</p>\n<ul> <li>credit : 貸方</li>\n<li>debit : 借方</li> </ul> </li>\n<li> <p>amount : 金額</p> </li> </ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>振替伝票は売掛・買掛レポートには反映されません。債権・債務データの登録は取引(Deals)をお使いください。</li>\n<li>事業所の仕訳番号形式が有効な場合のみ、レスポンスで仕訳番号(txn_number)を返します。</li>\n<li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n</ul>",
+        "description": "",
         "operationId": "get_manual_journal",
         "parameters": [
           {
@@ -4929,7 +4930,7 @@
           "ManualJournals"
         ],
         "summary": "振替伝票の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の振替伝票を更新する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>adjustment : 決算整理仕訳フラグ（true: 決算整理仕訳, false: 日常仕訳）</p>\n</li>\n\n<li>\n<p>txn_number : 仕訳番号</p>\n</li>\n\n<li>\n<p>details : 振替伝票の貸借行</p>\n</li>\n\n<li>\n<p>entry_side : 貸借区分</p>\n\n<ul>\n<li>credit : 貸方</li>\n\n<li>debit : 借方</li>\n</ul>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>振替伝票は売掛・買掛レポートには反映されません。債権・債務データの登録は取引(Deals)をお使いください。</li>\n\n<li>事業所の仕訳番号形式が有効な場合のみ、レスポンスで仕訳番号(txn_number)を返します。</li>\n<li>貸借合わせて100行まで仕訳行を登録できます。</li>\n\n<li>detailsに含まれない既存の貸借行は削除されます。更新後も残したい行は、必ず貸借行IDを指定してdetailsに含めてください。</li>\n\n<li>detailsに含まれる貸借行IDの指定がある行は、更新行として扱われ更新されます。</li>\n\n<li>detailsに含まれる貸借行IDの指定がない行は、新規行として扱われ追加されます。</li>\n<li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</li></ul>\n\n",
+        "description": "",
         "operationId": "update_manual_journal",
         "parameters": [
           {
@@ -5017,7 +5018,7 @@
           "ManualJournals"
         ],
         "summary": "振替伝票の削除",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の振替伝票を削除する</p>",
+        "description": "",
         "operationId": "destroy_manual_journal",
         "parameters": [
           {
@@ -5107,7 +5108,7 @@
           "Users"
         ],
         "summary": "事業所に所属するユーザー一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>事業所に所属するユーザーの一覧を取得する</p>",
+        "description": "",
         "operationId": "get_users",
         "parameters": [
           {
@@ -5213,7 +5214,7 @@
           "Users"
         ],
         "summary": "ログインユーザー情報の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ユーザーの情報を取得する</p>",
+        "description": "",
         "operationId": "get_users_me",
         "parameters": [
           {
@@ -5309,7 +5310,7 @@
           "Users"
         ],
         "summary": "ユーザー情報の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ユーザー情報を更新する</p>",
+        "description": "",
         "operationId": "update_user",
         "requestBody": {
           "description": "ユーザー情報の更新",
@@ -5397,7 +5398,7 @@
           "Users"
         ],
         "summary": "ログインユーザーの権限の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ユーザーの権限情報を取得する</p>",
+        "description": "",
         "operationId": "get_users_capabilities",
         "parameters": [
           {
@@ -5726,7 +5727,7 @@
           "Companies"
         ],
         "summary": "事業所一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ユーザーが所属する事業所の一覧を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>role\n<ul>\n<li>admin : 管理者</li>\n\n<li>simple_accounting : 一般</li>\n\n<li>self_only : 取引登録のみ</li>\n\n<li>read_only : 閲覧のみ</li>\n</ul>\n</li>\n</ul>",
+        "description": "",
         "operationId": "get_companies",
         "responses": {
           "200": {
@@ -5788,7 +5789,7 @@
           "Companies"
         ],
         "summary": "事業所の詳細情報の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ユーザーが所属する事業所の詳細を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>role\n<ul>\n<li>admin : 管理者</li>\n\n<li>simple_accounting : 一般</li>\n\n<li>self_only : 取引登録のみ</li>\n\n<li>read_only : 閲覧のみ</li>\n</ul>\n</li>\n</ul>\n\n<h2 id=\"_3\">",
+        "description": "",
         "operationId": "get_company",
         "parameters": [
           {
@@ -5951,7 +5952,7 @@
           "Items"
         ],
         "summary": "品目一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目一覧を取得する</p>",
+        "description": "",
         "operationId": "get_items",
         "parameters": [
           {
@@ -6071,7 +6072,7 @@
           "Items"
         ],
         "summary": "品目の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目を作成する</p>",
+        "description": "",
         "operationId": "create_item",
         "requestBody": {
           "description": "品目の作成",
@@ -6149,7 +6150,7 @@
           "Items"
         ],
         "summary": "品目の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目を取得する</p>",
+        "description": "",
         "operationId": "get_item",
         "parameters": [
           {
@@ -6243,7 +6244,7 @@
           "Items"
         ],
         "summary": "品目の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目を更新する</p>",
+        "description": "",
         "operationId": "update_item",
         "parameters": [
           {
@@ -6332,7 +6333,7 @@
           "Items"
         ],
         "summary": "品目の削除",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目を削除する</p>",
+        "description": "",
         "operationId": "destroy_item",
         "parameters": [
           {
@@ -6423,7 +6424,7 @@
           "Taxes"
         ],
         "summary": "税区分コード一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>税区分コード一覧を取得する</p>",
+        "description": "",
         "operationId": "get_tax_codes",
         "responses": {
           "200": {
@@ -6496,7 +6497,7 @@
           "Taxes"
         ],
         "summary": "税区分コードの取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>税区分コードを取得する</p>",
+        "description": "",
         "operationId": "get_tax_code",
         "parameters": [
           {
@@ -6698,7 +6699,8 @@
               }
             }
           }
-        }
+        },
+        "description": ""
       }
     },
     "/api/1/walletables": {
@@ -6707,7 +6709,7 @@
           "Walletables"
         ],
         "summary": "口座一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の口座一覧を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>type\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n\n<li>walletable_balance : 登録残高</li>\n\n<li>last_balance : 同期残高</li>\n</ul>",
+        "description": "",
         "operationId": "get_walletables",
         "parameters": [
           {
@@ -6822,7 +6824,7 @@
           "Walletables"
         ],
         "summary": "口座の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所に口座を作成する</p>\n\n<h2 id=\"\">注意点</h2>\n<ul><li>同期に対応した口座はこのAPIでは作成できません</li></ul>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n\n<li>\n<p>name : 口座名</p>\n</li>\n\n<li>\n<p>bank_id : サービスID</p>\n</li>\n\n<li>\n<p>group_name : 決算書表示名（小カテゴリー）　例：売掛金, 受取手形, 未収入金（法人のみ）, 買掛金, 支払手形, 未払金, 預り金, 前受金</p>\n</li>\n</ul>",
+        "description": "",
         "operationId": "create_walletable",
         "requestBody": {
           "description": "口座の作成",
@@ -6900,7 +6902,7 @@
           "Walletables"
         ],
         "summary": "口座情報の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の口座情報を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>type\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n\n<li>walletable_balance : 登録残高</li>\n\n<li>last_balance : 同期残高</li>\n</ul>",
+        "description": "",
         "operationId": "get_walletable",
         "parameters": [
           {
@@ -7026,7 +7028,7 @@
           "Walletables"
         ],
         "summary": "口座の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>口座を更新する</p>",
+        "description": "",
         "operationId": "update_walletable",
         "parameters": [
           {
@@ -7156,7 +7158,7 @@
           "Walletables"
         ],
         "summary": "口座の削除",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の口座を削除する</p>\n\n<h2 id=\"\">注意点</h2>\n<ul>\n<li>削除を実行するには、当該口座に関連する仕訳データを事前に削除する必要があります。</li>\n<li>当該口座に仕訳が残っていないか確認するには、レポートの「仕訳帳」等を参照し、必要に応じて、「取引」や「口座振替」も削除します。</li>\n\n</ul>",
+        "description": "",
         "operationId": "destroy_walletable",
         "parameters": [
           {
@@ -7261,7 +7263,7 @@
           "Banks"
         ],
         "summary": "連携サービス一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>連携しているサービス一覧を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>type\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>",
+        "description": "",
         "operationId": "get_banks",
         "parameters": [
           {
@@ -7370,7 +7372,7 @@
           "Banks"
         ],
         "summary": "連携サービスの取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>連携しているサービスを取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>type\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>",
+        "description": "",
         "operationId": "get_bank",
         "parameters": [
           {
@@ -7455,7 +7457,7 @@
           "Transfers"
         ],
         "summary": "取引（振替）一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引（振替）一覧を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>amount : 振替金額</p>\n</li>\n\n<li>\n<p>from_walletable_type, to_walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>",
+        "description": "",
         "operationId": "get_transfers",
         "parameters": [
           {
@@ -7576,7 +7578,7 @@
           "Transfers"
         ],
         "summary": "取引（振替）の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引（振替）を作成する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>amount : 振替金額</p>\n</li>\n\n<li>\n<p>from_walletable_type, to_walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>",
+        "description": "",
         "operationId": "create_transfer",
         "requestBody": {
           "description": "取引（振替）の作成",
@@ -7654,7 +7656,7 @@
           "Transfers"
         ],
         "summary": "取引（振替）の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引（振替）を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>amount : 振替金額</p>\n</li>\n\n<li>\n<p>from_walletable_type, to_walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>",
+        "description": "",
         "operationId": "get_transfer",
         "parameters": [
           {
@@ -7748,7 +7750,7 @@
           "Transfers"
         ],
         "summary": "取引（振替）の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引（振替）を更新する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>amount : 振替金額</p>\n</li>\n\n<li>\n<p>from_walletable_type, to_walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>",
+        "description": "",
         "operationId": "update_transfer",
         "parameters": [
           {
@@ -7847,7 +7849,7 @@
           "Transfers"
         ],
         "summary": "取引（振替）の削除する",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引（振替）を削除する</p>",
+        "description": "",
         "operationId": "destroy_transfer",
         "parameters": [
           {
@@ -7938,7 +7940,7 @@
           "Wallet txns"
         ],
         "summary": "明細一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の明細一覧を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>amount : 明細金額</p>\n</li>\n\n<li>\n<p>due_amount : 取引登録待ち金額</p>\n</li>\n\n<li>\n<p>balance : 残高</p>\n</li>\n\n<li>\n<p>entry_side</p>\n\n<ul>\n<li>income : 入金</li>\n\n<li>expense : 出金</li>\n</ul>\n</li>\n\n<li>\n<p>walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>",
+        "description": "",
         "operationId": "get_wallet_txns",
         "parameters": [
           {
@@ -8094,7 +8096,7 @@
           "Wallet txns"
         ],
         "summary": "明細の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の明細を作成する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>amount : 明細金額</p>\n</li>\n\n<li>\n<p>due_amount : 取引登録待ち金額</p>\n</li>\n\n<li>\n<p>balance : 残高</p>\n</li>\n\n<li>\n<p>entry_side</p>\n\n<ul>\n<li>income : 入金</li>\n\n<li>expense : 出金</li>\n</ul>\n</li>\n\n<li>\n<p>walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>",
+        "description": "",
         "operationId": "create_wallet_txn",
         "requestBody": {
           "description": "明細の作成",
@@ -8172,7 +8174,7 @@
           "Wallet txns"
         ],
         "summary": "明細の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の明細を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>amount : 明細金額</p>\n</li>\n\n<li>\n<p>due_amount : 取引登録待ち金額</p>\n</li>\n\n<li>\n<p>balance : 残高</p>\n</li>\n\n<li>\n<p>entry_side</p>\n\n<ul>\n<li>income : 入金</li>\n\n<li>expense : 出金</li>\n</ul>\n</li>\n\n<li>\n<p>walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>",
+        "description": "",
         "operationId": "get_wallet_txn",
         "parameters": [
           {
@@ -8266,7 +8268,7 @@
           "Wallet txns"
         ],
         "summary": "明細の削除",
-        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の明細を削除する</p>\n\n<h2 id=\"\">注意点</h2>\n<ul>\n  <li>同期をして取得したデータが「明細」の場合は、削除および再取得はできません。</li>\n  <li>詳細は<a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/360015892332\">freeeヘルプセンター</a>をご確認ください。</li>\n</ul>",
+        "description": "",
         "operationId": "destroy_wallet_txn",
         "parameters": [
           {
@@ -8357,7 +8359,7 @@
           "Journals"
         ],
         "summary": "ダウンロード要求",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ユーザーが所属する事業所の仕訳帳のダウンロードをリクエストします 生成されるファイルに関しては、<a href=\"https://support.freee.co.jp/hc/ja/articles/204599604#2\">ヘルプページ</a>をご参照ください</p>\n\n<p>＊このAPIは無料プランのアカウントではご利用になれません</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n  <li>download_type\n    <ul>\n      <li>generic(freee Webからダウンロードできるものと同じ)</li>\n      <li>csv (yayoi形式)</li>\n      <li>pdf</li>\n    </ul>\n  </li>\n  <li>visible_tags : 指定しない場合は従来の仕様の仕訳帳が出力されます\n    <ul>\n      <li>partner : 取引先タグ</li>\n      <li>item : 品目タグ</li>\n      <li>tag : メモタグ</li>\n      <li>section : 部門タグ</li>\n      <li>description : 備考欄</li>\n      <li>wallet_txn_description : 明細の備考欄</li>\n      <li>\n        segment_1_tag : セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン)<br>\n        segment_2_tag : セグメント2(法人向け エンタープライズプラン)<br>\n        segment_3_tag : セグメント3(法人向け エンタープライズプラン)<br><br>\n        <a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n      </li>\n      <li>all : 指定された場合は上記の設定をすべて有効として扱いますが、セグメント1、セグメント2、セグメント3は含みません。セグメントが必要な場合はallではなく、segment_1_tag, segment_2_tag, segment_3_tagを指定してください。</li>\n    </ul>\n  </li>\n  <li>visible_ids : download_typeがgenericの場合のみ利用可能です\n    <ul>\n      <li>deal_id : 取引ID</li>\n      <li>transfer_id : 取引(振替)ID</li>\n      <li>manual_journal_id : 振替伝票ID</li>\n    </ul>\n  </li>\n\n  <li>id : 受け付けID</li>\n</ul>",
+        "description": "",
         "operationId": "get_journals",
         "parameters": [
           {
@@ -8506,7 +8508,7 @@
           "Journals"
         ],
         "summary": "ステータス確認",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ダウンロードリクエストのステータスを確認する</p>\n\n<p>＊このAPIは無料プランのアカウントではご利用になれません</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>status</p>\n\n<ul>\n<li>enqueued : 実行待ち</li>\n\n<li>working : 実行中</li>\n\n<li>uploaded : 準備完了</li>\n</ul>\n</li>\n\n<li>\n<p>id : 受け付けID</p>\n</li>\n</ul>",
+        "description": "",
         "operationId": "get_journal_status",
         "parameters": [
           {
@@ -8602,7 +8604,7 @@
           "Journals"
         ],
         "summary": "ダウンロード実行",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ダウンロードを実行する</p>\n\n<p>＊このAPIは無料プランのアカウントではご利用になれません</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>id : 受け付けID</li>\n</ul>",
+        "description": "",
         "operationId": "download_journal",
         "parameters": [
           {
@@ -8704,7 +8706,7 @@
           "Trial balance"
         ],
         "summary": "貸借対照表の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の貸借対照表を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>opening_balance : 期首残高 </p>\n</li>\n\n<li>\n<p>debit_amount : 借方金額 </p>\n</li>\n<li>\n<p>credit_amount:  貸方金額 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>composition_ratio : 構成比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n<li>partner_codeとpartner_idは同時に指定することはできません。</li>\n<li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>\n  <ul>\n  <li>fiscal_year</li>\n  <li>start_month</li>\n  <li>end_month</li>\n  </ul>\n<li>0を指定すると未選択で絞り込めます</li>\n  <ul>\n  <li>partner_idに0を指定して絞り込んだ場合</li>\n    <ul>\n    <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n  </ul>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_bs?company_id=1&amp;fiscal_year=2019&amp;breakdown_display_type=partner</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_bs&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;breakdown_display_type&quot; : &quot;partner&quot;,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1000,\n        &quot;account_item_name&quot; : &quot;現金&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;流動資産&quot;,\n        &quot;opening_balance&quot; : 100000,\n        &quot;debit_amount&quot; : 50000,\n        &quot;credit_amount&quot; : 20000,\n        &quot;closing_balance&quot; : 130000,\n        &quot;composition_ratio&quot; : 0.25\n        &quot;partners&quot; : [{\n          &quot;id&quot; : 123,\n          &quot;name&quot; : &quot;freee&quot;,\n          &quot;opening_balance&quot; : 100000,\n          &quot;debit_amount&quot; : 50000,\n          &quot;credit_amount&quot; : 20000,\n          &quot;closing_balance&quot; : 130000,\n          &quot;composition_ratio&quot; : 0.25\n          },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "",
         "operationId": "get_trial_bs",
         "parameters": [
           {
@@ -8924,7 +8926,7 @@
           "Trial balance"
         ],
         "summary": "貸借対照表(前年比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の貸借対照表(前年比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>year_on_year : 前年比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n<li>partner_codeとpartner_idは同時に指定することはできません。</li>\n<li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>\n  <ul>\n  <li>fiscal_year</li>\n  <li>start_month</li>\n  <li>end_month</li>\n  </ul>\n<li>0を指定すると未選択で絞り込めます</li>\n  <ul>\n  <li>partner_idに0を指定して絞り込んだ場合</li>\n    <ul>\n    <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n  </ul>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_bs_two_years?company_id=1&amp;fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_bs_two_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1000,\n        &quot;account_item_name&quot; : &quot;現金&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;流動資産&quot;,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "",
         "operationId": "get_trial_bs_two_years",
         "parameters": [
           {
@@ -9144,7 +9146,7 @@
           "Trial balance"
         ],
         "summary": "貸借対照表(３期間比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の貸借対照表(３期間比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>two_years_before_closing_balance:  前々年度期末残高 </p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>year_on_year : 前年比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n<li>partner_codeとpartner_idは同時に指定することはできません。</li>\n<li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>\n  <ul>\n  <li>fiscal_year</li>\n  <li>start_month</li>\n  <li>end_month</li>\n  </ul>\n<li>0を指定すると未選択で絞り込めます</li>\n  <ul>\n  <li>partner_idに0を指定して絞り込んだ場合</li>\n    <ul>\n    <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n  </ul>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_bs_three_years?company_id=1&amp;fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_bs_three_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1000,\n        &quot;account_item_name&quot; : &quot;現金&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;流動資産&quot;,\n        &quot;two_year_before_closing_balance&quot; : 50000,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "",
         "operationId": "get_trial_bs_three_years",
         "parameters": [
           {
@@ -9364,7 +9366,7 @@
           "Trial balance"
         ],
         "summary": "損益計算書の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>opening_balance : 期首残高 </p>\n</li>\n\n<li>\n<p>debit_amount : 借方金額 </p>\n</li>\n<li>\n<p>credit_amount:  貸方金額 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>composition_ratio : 構成比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n<li>partner_codeとpartner_idは同時に指定することはできません。</li>\n<li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>\n  <ul>\n  <li>fiscal_year</li>\n  <li>start_month</li>\n  <li>end_month</li>\n  </ul>\n<li>0を指定すると未選択で絞り込めます</li>\n  <ul>\n  <li>partner_idに0を指定して絞り込んだ場合</li>\n    <ul>\n    <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n  </ul>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl?company_id=1&amp;fiscal_year=2019&amp;breakdown_display_type=partner</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;breakdown_display_type&quot; : &quot;partner&quot;,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;opening_balance&quot; : 100000,\n        &quot;debit_amount&quot; : 50000,\n        &quot;credit_amount&quot; : 20000,\n        &quot;closing_balance&quot; : 130000,\n        &quot;composition_ratio&quot; : 0.25\n        &quot;partners&quot; : [{\n          &quot;id&quot; : 123,\n          &quot;name&quot; : &quot;freee&quot;,\n          &quot;opening_balance&quot; : 100000,\n          &quot;debit_amount&quot; : 50000,\n          &quot;credit_amount&quot; : 20000,\n          &quot;closing_balance&quot; : 130000,\n          &quot;composition_ratio&quot; : 0.25\n          },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "",
         "operationId": "get_trial_pl",
         "parameters": [
           {
@@ -9596,7 +9598,7 @@
           "Trial balance"
         ],
         "summary": "損益計算書(前年比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書(前年比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>year_on_year : 前年比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n<li>partner_codeとpartner_idは同時に指定することはできません。</li>\n<li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>\n  <ul>\n  <li>fiscal_year</li>\n  <li>start_month</li>\n  <li>end_month</li>\n  </ul>\n<li>0を指定すると未選択で絞り込めます</li>\n  <ul>\n  <li>partner_idに0を指定して絞り込んだ場合</li>\n    <ul>\n    <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n  </ul>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_two_years?company_id=1&amp;fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_two_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "",
         "operationId": "get_trial_pl_two_years",
         "parameters": [
           {
@@ -9828,7 +9830,7 @@
           "Trial balance"
         ],
         "summary": "損益計算書(３期間比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書(３期間比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>two_years_before_closing_balance:  前々年度期末残高 </p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>year_on_year : 前年比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n<li>partner_codeとpartner_idは同時に指定することはできません。</li>\n<li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>\n  <ul>\n  <li>fiscal_year</li>\n  <li>start_month</li>\n  <li>end_month</li>\n  </ul>\n<li>0を指定すると未選択で絞り込めます</li>\n  <ul>\n  <li>partner_idに0を指定して絞り込んだ場合</li>\n    <ul>\n    <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n  </ul>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_three_years?company_id=1&fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_three_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;two_year_before_closing_balance&quot; : 50000,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "",
         "operationId": "get_trial_pl_three_years",
         "parameters": [
           {
@@ -10060,7 +10062,7 @@
           "Trial balance"
         ],
         "summary": "損益計算書(部門比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書(部門比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>個人向けのプレミアムプラン、法人向けのベーシックプラン以上で利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n<li>partner_codeとpartner_idは同時に指定することはできません。</li>\n<li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>\n  <ul>\n  <li>fiscal_year</li>\n  <li>start_month</li>\n  <li>end_month</li>\n  </ul>\n<li>0を指定すると未選択で絞り込めます</li>\n  <ul>\n  <li>partner_idに0を指定して絞り込んだ場合</li>\n    <ul>\n    <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n  </ul>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_sections?company_id=1&amp;section_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_sections&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;section_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;sections&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;営業部&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;広報部&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;人事部&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "",
         "operationId": "get_trial_pl_sections",
         "parameters": [
           {
@@ -10290,7 +10292,7 @@
           "Trial balance"
         ],
         "summary": "損益計算書(セグメント1比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書(セグメント1比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>法人向けのプロフェッショナルプラン以上で利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n<li>partner_codeとpartner_idは同時に指定することはできません。</li>\n<li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>\n  <ul>\n  <li>fiscal_year</li>\n  <li>start_month</li>\n  <li>end_month</li>\n  </ul>\n<li>0を指定すると未選択で絞り込めます</li>\n  <ul>\n  <li>partner_idに0を指定して絞り込んだ場合</li>\n    <ul>\n    <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n  </ul>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_segment_1_tags?company_id=1&amp;segment_1_tag_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_segment_1_tags&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;segment_1_tag_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;segment_1_tags&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;プロジェクトA&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;プロジェクトB&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;プロジェクトC&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "",
         "operationId": "get_trial_pl_segment_1_tags",
         "parameters": [
           {
@@ -10528,7 +10530,7 @@
           "Trial balance"
         ],
         "summary": "損益計算書(セグメント2比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書(セグメント2比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>法人向けのエンタープライズプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n<li>partner_codeとpartner_idは同時に指定することはできません。</li>\n<li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>\n  <ul>\n  <li>fiscal_year</li>\n  <li>start_month</li>\n  <li>end_month</li>\n  </ul>\n<li>0を指定すると未選択で絞り込めます</li>\n  <ul>\n  <li>partner_idに0を指定して絞り込んだ場合</li>\n    <ul>\n    <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n  </ul>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_segment_2_tags?company_id=1&amp;segment_2_tag_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_segment_2_tags&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;segment_2_tag_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;segment_2_tags&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;プロジェクトA&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;プロジェクトB&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;プロジェクトC&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "",
         "operationId": "get_trial_pl_segment_2_tags",
         "parameters": [
           {
@@ -10766,7 +10768,7 @@
           "Trial balance"
         ],
         "summary": "損益計算書(セグメント3比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の損益計算書(セグメント3比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>法人向けのエンタープライズプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n<li>partner_codeとpartner_idは同時に指定することはできません。</li>\n<li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>\n  <ul>\n  <li>fiscal_year</li>\n  <li>start_month</li>\n  <li>end_month</li>\n  </ul>\n<li>0を指定すると未選択で絞り込めます</li>\n  <ul>\n  <li>partner_idに0を指定して絞り込んだ場合</li>\n    <ul>\n    <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n  </ul>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_segment_3_tags?company_id=1&amp;segment_3_tag_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_segment_3_tags&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;segment_3_tag_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;segment_3_tags&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;プロジェクトA&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;プロジェクトB&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;プロジェクトC&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "",
         "operationId": "get_trial_pl_segment_3_tags",
         "parameters": [
           {
@@ -11004,7 +11006,7 @@
           "Trial balance"
         ],
         "summary": "製造原価報告書の取得",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の製造原価報告書を取得する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>created_at : 作成日時</p>\n</li>\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>opening_balance : 期首残高 </p>\n</li>\n<li>\n<p>debit_amount : 借方金額 </p>\n</li>\n<li>\n<p>credit_amount:  貸方金額 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>composition_ratio : 構成比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>法人向けのプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n<li>partner_codeとpartner_idは同時に指定することはできません。</li>\n<li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>\n  <ul>\n  <li>fiscal_year</li>\n  <li>start_month</li>\n  <li>end_month</li>\n  </ul>\n<li>0を指定すると未選択で絞り込めます</li>\n  <ul>\n  <li>partner_idに0を指定して絞り込んだ場合</li>\n    <ul>\n    <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n  </ul>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_cr?company_id=1&amp;fiscal_year=2019&amp;breakdown_display_type=partner</p>\n</blockquote>\n<pre><code>{\n  &quot;trial_cr&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;breakdown_display_type&quot; : &quot;partner&quot;,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,\n        &quot;opening_balance&quot; : 100000,\n        &quot;debit_amount&quot; : 50000,\n        &quot;credit_amount&quot; : 20000,\n        &quot;closing_balance&quot; : 130000,\n        &quot;composition_ratio&quot; : 0.25\n        &quot;partners&quot; : [{\n          &quot;id&quot; : 123,\n          &quot;name&quot; : &quot;freee&quot;,\n          &quot;opening_balance&quot; : 100000,\n          &quot;debit_amount&quot; : 50000,\n          &quot;credit_amount&quot; : 20000,\n          &quot;closing_balance&quot; : 130000,\n          &quot;composition_ratio&quot; : 0.25\n          },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "",
         "operationId": "get_trial_cr",
         "parameters": [
           {
@@ -11236,7 +11238,7 @@
           "Trial balance"
         ],
         "summary": "製造原価報告書(前年比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の製造原価報告書(前年比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>year_on_year : 前年比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>法人向けのプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n<li>partner_codeとpartner_idは同時に指定することはできません。</li>\n<li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>\n  <ul>\n  <li>fiscal_year</li>\n  <li>start_month</li>\n  <li>end_month</li>\n  </ul>\n<li>0を指定すると未選択で絞り込めます</li>\n  <ul>\n  <li>partner_idに0を指定して絞り込んだ場合</li>\n    <ul>\n    <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n  </ul>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_cr_two_years?company_id=1&amp;fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_cr_two_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "",
         "operationId": "get_trial_cr_two_years",
         "parameters": [
           {
@@ -11468,7 +11470,7 @@
           "Trial balance"
         ],
         "summary": "製造原価報告書(３期間比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の製造原価報告書(３期間比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>two_years_before_closing_balance:  前々年度期末残高 </p>\n</li>\n<li>\n<p>last_year_closing_balance:  前年度期末残高 </p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<li>\n<p>year_on_year : 前年比</p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>法人向けのプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n<li>partner_codeとpartner_idは同時に指定することはできません。</li>\n<li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>\n  <ul>\n  <li>fiscal_year</li>\n  <li>start_month</li>\n  <li>end_month</li>\n  </ul>\n<li>0を指定すると未選択で絞り込めます</li>\n  <ul>\n  <li>partner_idに0を指定して絞り込んだ場合</li>\n    <ul>\n    <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n  </ul>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_cr_three_years?company_id=1&fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_cr_three_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,\n        &quot;two_year_before_closing_balance&quot; : 50000,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "",
         "operationId": "get_trial_cr_three_years",
         "parameters": [
           {
@@ -11700,7 +11702,7 @@
           "Trial balance"
         ],
         "summary": "製造原価報告書(部門比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の製造原価報告書(部門比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>法人向けのベーシックプラン以上で利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n<li>partner_codeとpartner_idは同時に指定することはできません。</li>\n<li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>\n  <ul>\n  <li>fiscal_year</li>\n  <li>start_month</li>\n  <li>end_month</li>\n  </ul>\n<li>0を指定すると未選択で絞り込めます</li>\n  <ul>\n  <li>partner_idに0を指定して絞り込んだ場合</li>\n    <ul>\n    <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n  </ul>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_cr_sections?company_id=1&amp;section_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_cr_sections&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;section_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;sections&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;営業部&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;広報部&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;人事部&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "",
         "operationId": "get_trial_cr_sections",
         "parameters": [
           {
@@ -11930,7 +11932,7 @@
           "Trial balance"
         ],
         "summary": "製造原価報告書(セグメント1比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の製造原価報告書(セグメント1比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>法人向けのプロフェッショナルプラン以上で利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n<li>partner_codeとpartner_idは同時に指定することはできません。</li>\n<li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>\n  <ul>\n  <li>fiscal_year</li>\n  <li>start_month</li>\n  <li>end_month</li>\n  </ul>\n<li>0を指定すると未選択で絞り込めます</li>\n  <ul>\n  <li>partner_idに0を指定して絞り込んだ場合</li>\n    <ul>\n    <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n  </ul>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_cr_segment_1_tags?company_id=1&amp;segment_1_tag_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_cr_segment_1_tags&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;segment_1_tag_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;segment_1_tags&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;プロジェクトA&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;プロジェクトB&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;プロジェクトC&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "",
         "operationId": "get_trial_cr_segment_1_tags",
         "parameters": [
           {
@@ -12168,7 +12170,7 @@
           "Trial balance"
         ],
         "summary": "製造原価報告書(セグメント2比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の製造原価報告書(セグメント2比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>法人向けのエンタープライズプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n<li>partner_codeとpartner_idは同時に指定することはできません。</li>\n<li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>\n  <ul>\n  <li>fiscal_year</li>\n  <li>start_month</li>\n  <li>end_month</li>\n  </ul>\n<li>0を指定すると未選択で絞り込めます</li>\n  <ul>\n  <li>partner_idに0を指定して絞り込んだ場合</li>\n    <ul>\n    <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n  </ul>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_cr_segment_2_tags?company_id=1&amp;segment_2_tag_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_cr_segment_2_tags&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;segment_2_tag_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;segment_2_tags&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;プロジェクトA&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;プロジェクトB&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;プロジェクトC&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "",
         "operationId": "get_trial_cr_segment_2_tags",
         "parameters": [
           {
@@ -12406,7 +12408,7 @@
           "Trial balance"
         ],
         "summary": "製造原価報告書(セグメント3比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の製造原価報告書(セグメント3比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n\n<li>\n<p>created_at : 作成日時</p>\n</li>\n\n<li>\n<p>account_item_name : 勘定科目名</p>\n</li>\n\n<li>\n<p>hierarchy_level: 階層レベル</p>\n</li>\n\n<li>\n<p>parent_account_category_name: 上位勘定科目カテゴリー名</p>\n</li>\n<li>\n<p>closing_balance : 期末残高 </p>\n</li>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>法人向けのエンタープライズプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>\n<li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n<li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n<li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>\n<li>partner_codeとpartner_idは同時に指定することはできません。</li>\n<li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>\n  <ul>\n  <li>fiscal_year</li>\n  <li>start_month</li>\n  <li>end_month</li>\n  </ul>\n<li>0を指定すると未選択で絞り込めます</li>\n  <ul>\n  <li>partner_idに0を指定して絞り込んだ場合</li>\n    <ul>\n    <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n  </ul>\n</ul>\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_cr_segment_3_tags?company_id=1&amp;segment_3_tag_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_cr_segment_3_tags&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;segment_3_tag_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;segment_3_tags&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;プロジェクトA&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;プロジェクトB&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;プロジェクトC&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "",
         "operationId": "get_trial_cr_segment_3_tags",
         "parameters": [
           {
@@ -12644,7 +12646,7 @@
           "Receipts"
         ],
         "summary": "ファイルボックス 証憑ファイル一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のファイルボックス 証憑ファイル一覧を取得する</p>",
+        "description": "",
         "operationId": "get_receipts",
         "parameters": [
           {
@@ -12821,7 +12823,7 @@
           "Receipts"
         ],
         "summary": "ファイルボックス 証憑ファイルアップロード",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ファイルボックスに証憑ファイルをアップロードする</p>\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>リクエストヘッダーの Content-Type は、multipart/form-dataにのみ対応しています。</li>\n</ul>",
+        "description": "",
         "operationId": "create_receipt",
         "requestBody": {
           "content": {
@@ -12893,7 +12895,7 @@
           "Receipts"
         ],
         "summary": "ファイルボックス 証憑ファイルの取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のファイルボックス 証憑ファイルを取得する</p>",
+        "description": "",
         "operationId": "get_receipt",
         "parameters": [
           {
@@ -12987,7 +12989,7 @@
           "Receipts"
         ],
         "summary": "ファイルボックス 証憑ファイル情報更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ファイルボックスの証憑ファイル情報を更新する</p>\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、証憑ファイルの再アップロードはできません。</li>\n</ul>",
+        "description": "",
         "operationId": "update_receipt",
         "parameters": [
           {
@@ -13086,7 +13088,7 @@
           "Receipts"
         ],
         "summary": "ファイルボックス 証憑ファイルを削除する",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ファイルボックスの証憑ファイルを削除する</p>",
+        "description": "",
         "operationId": "destroy_receipt",
         "parameters": [
           {
@@ -13177,7 +13179,7 @@
           "Receipts"
         ],
         "summary": "ファイルボックス 証憑ファイルのダウンロード",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のファイルボックス 証憑ファイルのダウンロードをする</p>",
+        "description": "",
         "operationId": "download_receipt",
         "parameters": [
           {
@@ -13285,7 +13287,7 @@
           "Expense applications"
         ],
         "summary": "経費申請一覧の取得",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費申請一覧を取得する</p>\n\n<p>経費申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計の経費申請APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、経費申請の一覧を取得することができます。</li>\n  <li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している経費申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
+        "description": "",
         "operationId": "get_expense_applications",
         "parameters": [
           {
@@ -13506,7 +13508,7 @@
           "Expense applications"
         ],
         "summary": "経費申請の作成",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費申請を作成する</p>\n\n<p>経費申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計の経費申請APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している経費申請は本API経由で作成ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>申請時には、申請タイトル(title)に加え、項目行については金額(amount)、日付(transaction_date)、内容(description)が必須項目となります。申請時の業務効率化のため、API入力をお勧めします。</li>\n  <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は作成できません。</li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
+        "description": "",
         "operationId": "create_expense_application",
         "requestBody": {
           "description": "経費申請の作成",
@@ -13584,7 +13586,7 @@
           "Expense applications"
         ],
         "summary": "経費申請詳細の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の経費申請を取得する</p>\n\n<p>経費申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計の経費申請APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している経費申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は取得できません。</li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
+        "description": "",
         "operationId": "get_expense_application",
         "parameters": [
           {
@@ -13678,7 +13680,7 @@
           "Expense applications"
         ],
         "summary": "経費申請の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の経費申請を更新する</p>\n\n<p>経費申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計の経費申請APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、経費申請を更新することができます。</li>\n  <li>本APIでは、status(申請ステータス): draft:下書き, feedback:差戻しのみ更新可能です。</li>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している経費申請は本API経由で更新ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>申請時には、申請タイトル(title)に加え、項目行については金額(amount)、日付(transaction_date)、内容(description)が必須項目となります。申請時の業務効率化のため、API入力をお勧めします。</li>\n  <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は更新できません。</li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
+        "description": "",
         "operationId": "update_expense_application",
         "parameters": [
           {
@@ -13777,7 +13779,7 @@
           "Expense applications"
         ],
         "summary": "経費申請の削除",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の経費申請を削除する</p>\n\n<p>経費申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計の経費申請APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n      <li>自分が申請者でない申請の削除が可能なのはユーザーの権限が管理者権限、且つ申請ステータスが差し戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は削除できません。</li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
+        "description": "",
         "operationId": "destroy_expense_application",
         "parameters": [
           {
@@ -13868,7 +13870,7 @@
           "Expense applications"
         ],
         "summary": "経費申請の承認操作",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費申請の承認操作を行う</p>\n\n<p>経費申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計の経費申請APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、経費申請の承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）を行うことができます。</li>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n　<li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している経費申請はAPI経由で承認ステータスの変更ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は承認操作できません。</li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
+        "description": "",
         "operationId": "update_expense_application_action",
         "parameters": [
           {
@@ -13969,7 +13971,7 @@
           "Expense application line templates"
         ],
         "summary": "経費科目一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の経費科目一覧を取得する</p>",
+        "description": "",
         "operationId": "get_expense_application_line_templates",
         "parameters": [
           {
@@ -14142,7 +14144,8 @@
               }
             }
           }
-        }
+        },
+        "description": ""
       }
     },
     "/api/1/expense_application_line_templates/{id}": {
@@ -14237,7 +14240,8 @@
               }
             }
           }
-        }
+        },
+        "description": ""
       },
       "put": {
         "tags": [
@@ -14335,7 +14339,8 @@
               }
             }
           }
-        }
+        },
+        "description": ""
       },
       "delete": {
         "tags": [
@@ -14423,7 +14428,8 @@
               }
             }
           }
-        }
+        },
+        "description": ""
       }
     },
     "/api/1/payment_requests": {
@@ -14432,7 +14438,7 @@
           "Payment requests"
         ],
         "summary": "支払依頼一覧の取得",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の支払依頼一覧を取得する</p>\n\n<p>支払依頼APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-payment-requests\" target=\"_blank\">freee会計の支払依頼APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、支払依頼の一覧を取得することができます。</li>\n  <li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している支払依頼と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>個人アカウントの場合は、ご利用になれません。</li>\n  <li>法人アカウントの場合は、プロフェッショナルプラン、エンタープライズプランでご利用いただけます。</li>\n</ul>",
+        "description": "",
         "operationId": "get_payment_requests",
         "parameters": [
           {
@@ -14715,7 +14721,7 @@
           "Payment requests"
         ],
         "summary": "支払依頼の作成",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の支払依頼を作成する</p>\n\n<p>支払依頼APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-payment-requests\" target=\"_blank\">freee会計の支払依頼APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している支払依頼は本API経由で作成ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>本APIでは支払依頼の項目行一覧(payment_request_lines)は、最大100行までになります。</li>\n  <li>個人アカウントの場合は、ご利用になれません。</li>\n  <li>法人アカウントの場合は、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
+        "description": "",
         "operationId": "create_payment_request",
         "requestBody": {
           "description": "支払依頼の作成",
@@ -14803,7 +14809,7 @@
           "Payment requests"
         ],
         "summary": "支払依頼詳細の取得",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の支払依頼を取得する</p>\n\n<p>支払依頼APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-payment-requests\" target=\"_blank\">freee会計の支払依頼APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している支払依頼と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>個人アカウントの場合は、ご利用になれません。</li>\n  <li>法人アカウントの場合は、プロフェッショナルプラン、エンタープライズプランでご利用いただけます。</li>\n</ul>",
+        "description": "",
         "operationId": "get_payment_request",
         "parameters": [
           {
@@ -14897,7 +14903,7 @@
           "Payment requests"
         ],
         "summary": "支払依頼の更新",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の支払依頼を更新する</p>\n\n<p>支払依頼APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-payment-requests\" target=\"_blank\">freee会計の支払依頼APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、支払依頼を更新することができます。</li>\n  <li>本APIでは、status(申請ステータス): draft:下書き, in_progress:申請中, feedback:差戻しのみ更新可能です。</li>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している支払依頼は本API経由で更新ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>申請ステータスが申請中の場合には、申請タイトル(title)、申請日(application_date)、申請経路ID(approval_flow_route_id)、承認者のユーザーID(approver_id)は更新ができません。</li>\n  <li>本APIでは支払依頼の項目行一覧(payment_request_lines)は、最大100行までになります。</li>\n  <li>個人アカウントの場合は、ご利用になれません。</li>\n  <li>法人アカウントの場合は、プロフェッショナルプラン、エンタープライズプランでご利用いただけます。</li>\n</ul>",
+        "description": "",
         "operationId": "update_payment_request",
         "parameters": [
           {
@@ -14996,7 +15002,7 @@
           "Payment requests"
         ],
         "summary": "支払依頼の削除",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の支払依頼を削除する</p>\n\n<p>支払依頼APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-payment-requests\" target=\"_blank\">freee会計の支払依頼APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、支払依頼の承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）を行うことができます。</li>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n　<li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している支払依頼はAPI経由で承認ステータスの変更ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>個人アカウントの場合は、ご利用になれません。</li>\n  <li>法人アカウントの場合は、プロフェッショナルプラン、エンタープライズプランでご利用いただけます。</li>\n</ul>",
+        "description": "",
         "operationId": "destroy_payment_request",
         "parameters": [
           {
@@ -15087,7 +15093,7 @@
           "Payment requests"
         ],
         "summary": "支払依頼の承認操作",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の支払依頼の承認操作を行う</p>\n\n<p>支払依頼APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-payment-requests\" target=\"_blank\">freee会計の支払依頼APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、支払依頼の承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）を行うことができます。</li>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n　<li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している支払依頼はAPI経由で承認ステータスの変更ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>個人アカウントの場合は、ご利用になれません。</li>\n  <li>法人アカウントの場合は、プロフェッショナルプラン、エンタープライズプランでご利用いただけます。</li>\n</ul>",
+        "description": "",
         "operationId": "update_payment_request_action",
         "parameters": [
           {
@@ -15188,7 +15194,7 @@
           "Approval requests"
         ],
         "summary": "各種申請の一覧",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の各種申請一覧を取得する</p>\n\n<p>各種申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-approval-requests\" target=\"_blank\">freee会計の各種申請APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、各種申請の一覧を取得することができます。</li>\n  <li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している各種申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>\n    申請フォームの項目に契約書（NINJA SIGN連携）が利用されている各種申請については、API経由で参照は可能ですが、作成と更新ができません。\n  </li>\n  <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>\n</ul>",
+        "description": "",
         "operationId": "get_approval_requests",
         "parameters": [
           {
@@ -15396,7 +15402,7 @@
           "Approval requests"
         ],
         "summary": "各種申請の作成",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の各種申請を作成する</p>\n\n<p>各種申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-approval-requests\" target=\"_blank\">freee会計の各種申請APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、各種申請を作成することができます。</li>\n  <li>\n    申請項目(request_items)については、申請フォームで設定された項目のIDとそれに対応する値を入力してください。\n    <ul>\n      <li>タイトル(title)：文字列(改行なし) 例)予算申請</li>\n      <li>1行コメント(single_line)：文字列(改行なし) 例)予算に関する申請</li>\n      <li>複数行コメント(multi_line)：文字列(改行あり)\n      <br>\n      &nbsp;&nbsp;例)<br>\n      &nbsp;&nbsp;予算に関する申請<br>\n      &nbsp;&nbsp;申請日 2019-12-17<br>\n      </li>\n      <li>プルダウン(select)： プルダウンの選択肢の名前(改行なし) 例)開発部</li>\n      <li>日付(date)： 日付形式 例)2019-12-17</li>\n      <li>金額(amount)： 数値(申請フォームで設定した上限・下限金額内の値, 改行なし) 例)10000</li>\n      <li>添付ファイル(receipt)： ファイルボックスAPIのID 例)1</li>\n      <li>部門ID(section)： 部門APIのID 例)1</li>\n      <li>取引先ID(partner)： 取引先APIのID 例)1</li>\n    </ul>\n  </li>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している各種申請は本API経由で作成ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>\n    申請フォームの項目に契約書（NINJA SIGN連携）が利用されている各種申請については、API経由で参照は可能ですが、作成と更新ができません。\n  </li>\n  <li>Web画面やAPIを通じて申請フォームが変更されると、本APIで使用する項目ID（request_itemsで指定するid）も変更されます。本API利用前に各種申請の取得APIを利用し、最新の申請フォームを取得することを推奨します。</li>\n  <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>\n</ul>",
+        "description": "",
         "operationId": "create_approval_request",
         "requestBody": {
           "description": "各種申請の作成",
@@ -15484,7 +15490,7 @@
           "Approval requests"
         ],
         "summary": "各種申請の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の各種申請を取得する</p>\n\n<p>各種申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-approval-requests\" target=\"_blank\">freee会計の各種申請APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している各種申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>\n    申請フォームの項目に契約書（NINJA SIGN連携）が利用されている各種申請については、API経由で参照は可能ですが、作成と更新ができません。\n  </li>\n  <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>\n</ul>",
+        "description": "",
         "operationId": "get_approval_request",
         "parameters": [
           {
@@ -15578,7 +15584,7 @@
           "Approval requests"
         ],
         "summary": "各種申請の更新",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の各種申請を更新する</p>\n\n<p>各種申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-approval-requests\" target=\"_blank\">freee会計の各種申請APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、各種申請を更新することができます。</li>\n  <li>\n    申請項目(request_items)については、各種申請の取得APIで取得したrequest_items.idとそれに対応する値を入力してください。\n    <ul>\n      <li>タイトル(title)：文字列(改行なし) 例)予算申請</li>\n      <li>1行コメント(single_line)：文字列(改行なし) 例)予算に関する申請</li>\n      <li>複数行コメント(multi_line)：文字列(改行あり)\n      <br>\n      &nbsp;&nbsp;例)<br>\n      &nbsp;&nbsp;予算に関する申請<br>\n      &nbsp;&nbsp;申請日 2019-12-17<br>\n      </li>\n      <li>プルダウン(select)： プルダウンの選択肢の名前(改行なし) 例)開発部</li>\n      <li>日付(date)： 日付形式 例)2019-12-17</li>\n      <li>金額(amount)： 数値(申請フォームで設定した上限・下限金額内の値, 改行なし) 例)10000</li>\n      <li>添付ファイル(receipt)： ファイルボックスAPIのID 例)1</li>\n      <li>部門ID(section)： 部門APIのID 例)1</li>\n      <li>取引先ID(partner)： 取引先APIのID 例)1</li>\n    </ul>\n  </li>\n  <li>本APIでは、status(申請ステータス): draft:下書き, feedback:差戻しのみ更新可能です。</li>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している各種申請は本API経由で更新ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>\n    申請フォームの項目に契約書（NINJA SIGN連携）が利用されている各種申請については、API経由で参照は可能ですが、作成と更新ができません。\n  </li>\n  <li>Web画面やAPIを通じて申請フォームが変更されると、本APIで使用する項目ID（request_itemsで指定するid）も変更されます。本APIで使用する項目IDは申請作成時点の項目IDです。本API利用前に各種申請の取得APIを利用し、申請作成時点の項目IDを取得することを推奨します。</li>\n  <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>\n</ul>",
+        "description": "",
         "operationId": "update_approval_request",
         "parameters": [
           {
@@ -15677,7 +15683,7 @@
           "Approval requests"
         ],
         "summary": "各種申請の削除",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の各種申請を削除する</p>\n\n<p>各種申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-approval-requests\" target=\"_blank\">freee会計の各種申請APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>\n</ul>",
+        "description": "",
         "operationId": "destroy_approval_request",
         "parameters": [
           {
@@ -15768,7 +15774,7 @@
           "Approval requests"
         ],
         "summary": "各種申請の承認操作",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の各種申請の承認操作を行う</p>\n\n<p>各種申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-approval-requests\" target=\"_blank\">freee会計の各種申請APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、各種申請の承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）を行うことができます。</li>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n　<li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している各種申請はAPI経由で承認ステータスの変更ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>\n    申請フォームの項目に契約書（NINJA SIGN連携）が利用されている各種申請については、API経由で参照は可能ですが、作成と更新ができません。\n  </li>\n  <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>\n</ul>",
+        "description": "",
         "operationId": "update_approval_request_action",
         "parameters": [
           {
@@ -15869,7 +15875,7 @@
           "Approval requests"
         ],
         "summary": "各種申請の申請フォーム一覧の取得",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の各種申請の申請フォーム一覧を取得する</p>\n\n<p>各種申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-approval-requests\" target=\"_blank\">freee会計の各種申請APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>\n</ul>",
+        "description": "",
         "operationId": "get_approval_request_forms",
         "parameters": [
           {
@@ -15954,7 +15960,7 @@
           "Approval requests"
         ],
         "summary": "各種申請の申請フォームの取得",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の各種申請の申請フォームを取得する</p>\n\n<p>各種申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-approval-requests\" target=\"_blank\">freee会計の各種申請APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>\n</ul>",
+        "description": "",
         "operationId": "get_approval_request_form",
         "parameters": [
           {
@@ -16050,7 +16056,7 @@
           "Approval flow routes"
         ],
         "summary": "申請経路一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の申請経路一覧を取得する</p>\n\n<p>各種申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-approval-requests\" target=\"_blank\">freee会計の各種申請APIの使い方</a>をご参照ください</p>\n<p>経費精算APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計の経費精算APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"\">注意点</h2>\n\n<ul>\n  <li>\n    <p>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</p>\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
+        "description": "",
         "operationId": "get_approval_flow_routes",
         "parameters": [
           {
@@ -16170,7 +16176,7 @@
           "Approval flow routes"
         ],
         "summary": "申請経路の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の申請経路を取得する</p>\n\n<p>各種申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-approval-requests\" target=\"_blank\">freee会計の各種申請APIの使い方</a>をご参照ください</p>\n<p>経費精算APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計の経費精算APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"\">注意点</h2>\n\n<ul>\n  <li>\n    <p>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</p>\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
+        "description": "",
         "operationId": "get_approval_flow_route",
         "parameters": [
           {
@@ -16266,7 +16272,7 @@
           "Segment tags"
         ],
         "summary": "セグメントタグ一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のセグメントタグ一覧を取得する</p>\n\n<h2 id=\"\">注意点</h2>\n\n<ul>\n\n<li>本APIは法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n\n</ul>",
+        "description": "",
         "operationId": "get_segment_tags",
         "parameters": [
           {
@@ -16382,7 +16388,7 @@
           "Segment tags"
         ],
         "summary": "セグメントの作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のセグメントタグを作成する</p>\n\n<h2 id=\"\">注意点</h2>\n\n<ul>\n\n<li>本APIは法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n\n</ul>",
+        "description": "",
         "operationId": "create_segment_tag",
         "parameters": [
           {
@@ -16473,7 +16479,7 @@
           "Segment tags"
         ],
         "summary": "セグメントタグの更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のセグメントタグを更新する</p>\n\n<h2 id=\"\">注意点</h2>\n\n<ul>\n\n<li>本APIは法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n\n</ul>",
+        "description": "",
         "operationId": "update_segment_tag",
         "parameters": [
           {
@@ -16573,7 +16579,7 @@
           "Segment tags"
         ],
         "summary": "セグメントタグの削除",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のセグメントタグを削除する</p>\n\n<h2 id=\"\">注意点</h2>\n\n<ul>\n\n<li>本APIは法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>\n\n</ul>",
+        "description": "",
         "operationId": "destroy_segments_tag",
         "parameters": [
           {

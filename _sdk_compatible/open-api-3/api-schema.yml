@@ -435,8 +435,9 @@ paths:
           maximum: 2147483647
           minimum: 1
           type: integer
-      - description: 申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下,
-          feedback:差戻し)
+      - description: |-
+          申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下, feedback:差戻し)
+          承認者指定時には無効です。
         example: draft
         in: query
         name: status
@@ -502,7 +503,9 @@ paths:
           maximum: 9223372036854775807
           minimum: -9223372036854775808
           type: integer
-      - description: 承認者のユーザーID
+      - description: |-
+          承認者のユーザーID
+          承認者指定時には申請ステータスが申請中のものだけが取得可能です。
         example: 1
         in: query
         name: approver_id
@@ -5747,7 +5750,7 @@ paths:
         name: fiscal_year
         schema:
           type: integer
-      - description: 発生月で絞込：開始会計月(1-12)
+      - description: 発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。
         in: query
         name: start_month
         schema:
@@ -5755,7 +5758,7 @@ paths:
           minimum: 1
           type: integer
       - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
-          9のいずれかを指定する。)
+          9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。
         in: query
         name: end_month
         schema:
@@ -5772,7 +5775,7 @@ paths:
         name: end_date
         schema:
           type: string
-      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。'
         in: query
         name: account_item_display_type
         schema:
@@ -5821,7 +5824,8 @@ paths:
           maximum: 2147483647
           minimum: 0
           type: integer
-      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外:
+          withoutが指定されます。'
         in: query
         name: adjustment
         schema:
@@ -5898,7 +5902,7 @@ paths:
         name: fiscal_year
         schema:
           type: integer
-      - description: 発生月で絞込：開始会計月(1-12)
+      - description: 発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。
         in: query
         name: start_month
         schema:
@@ -5906,7 +5910,7 @@ paths:
           minimum: 1
           type: integer
       - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
-          9のいずれかを指定する。)
+          9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。
         in: query
         name: end_month
         schema:
@@ -5923,7 +5927,7 @@ paths:
         name: end_date
         schema:
           type: string
-      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。'
         in: query
         name: account_item_display_type
         schema:
@@ -5972,7 +5976,8 @@ paths:
           maximum: 2147483647
           minimum: 0
           type: integer
-      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外:
+          withoutが指定されます。'
         in: query
         name: adjustment
         schema:
@@ -6049,7 +6054,7 @@ paths:
         name: fiscal_year
         schema:
           type: integer
-      - description: 発生月で絞込：開始会計月(1-12)
+      - description: 発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。
         in: query
         name: start_month
         schema:
@@ -6057,7 +6062,7 @@ paths:
           minimum: 1
           type: integer
       - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
-          9のいずれかを指定する。)
+          9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。
         in: query
         name: end_month
         schema:
@@ -6074,7 +6079,7 @@ paths:
         name: end_date
         schema:
           type: string
-      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。'
         in: query
         name: account_item_display_type
         schema:
@@ -6123,7 +6128,8 @@ paths:
           maximum: 2147483647
           minimum: 0
           type: integer
-      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外:
+          withoutが指定されます。'
         in: query
         name: adjustment
         schema:
@@ -6200,7 +6206,7 @@ paths:
         name: fiscal_year
         schema:
           type: integer
-      - description: 発生月で絞込：開始会計月(1-12)
+      - description: 発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。
         in: query
         name: start_month
         schema:
@@ -6208,7 +6214,7 @@ paths:
           minimum: 1
           type: integer
       - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
-          9のいずれかを指定する。)
+          9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。
         in: query
         name: end_month
         schema:
@@ -6225,7 +6231,7 @@ paths:
         name: end_date
         schema:
           type: string
-      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。'
         in: query
         name: account_item_display_type
         schema:
@@ -6274,7 +6280,8 @@ paths:
           maximum: 2147483647
           minimum: 0
           type: integer
-      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外:
+          withoutが指定されます。'
         in: query
         name: adjustment
         schema:
@@ -6282,7 +6289,7 @@ paths:
           - only
           - without
           type: string
-      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）
+      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。
         in: query
         name: cost_allocation
         schema:
@@ -6365,7 +6372,7 @@ paths:
         name: fiscal_year
         schema:
           type: integer
-      - description: 発生月で絞込：開始会計月(1-12)
+      - description: 発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。
         in: query
         name: start_month
         schema:
@@ -6373,7 +6380,7 @@ paths:
           minimum: 1
           type: integer
       - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
-          9のいずれかを指定する。)
+          9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。
         in: query
         name: end_month
         schema:
@@ -6390,7 +6397,7 @@ paths:
         name: end_date
         schema:
           type: string
-      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。'
         in: query
         name: account_item_display_type
         schema:
@@ -6431,7 +6438,8 @@ paths:
           maximum: 2147483647
           minimum: 0
           type: integer
-      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外:
+          withoutが指定されます。'
         in: query
         name: adjustment
         schema:
@@ -6439,7 +6447,7 @@ paths:
           - only
           - without
           type: string
-      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）
+      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。
         in: query
         name: cost_allocation
         schema:
@@ -6522,7 +6530,7 @@ paths:
         name: fiscal_year
         schema:
           type: integer
-      - description: 発生月で絞込：開始会計月(1-12)
+      - description: 発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。
         in: query
         name: start_month
         schema:
@@ -6530,7 +6538,7 @@ paths:
           minimum: 1
           type: integer
       - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
-          9のいずれかを指定する。)
+          9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。
         in: query
         name: end_month
         schema:
@@ -6547,7 +6555,7 @@ paths:
         name: end_date
         schema:
           type: string
-      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。'
         in: query
         name: account_item_display_type
         schema:
@@ -6592,7 +6600,8 @@ paths:
           maximum: 2147483647
           minimum: 0
           type: integer
-      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外:
+          withoutが指定されます。'
         in: query
         name: adjustment
         schema:
@@ -6600,7 +6609,7 @@ paths:
           - only
           - without
           type: string
-      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）
+      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。
         in: query
         name: cost_allocation
         schema:
@@ -6683,7 +6692,7 @@ paths:
         name: fiscal_year
         schema:
           type: integer
-      - description: 発生月で絞込：開始会計月(1-12)
+      - description: 発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。
         in: query
         name: start_month
         schema:
@@ -6691,7 +6700,7 @@ paths:
           minimum: 1
           type: integer
       - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
-          9のいずれかを指定する。)
+          9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。
         in: query
         name: end_month
         schema:
@@ -6708,7 +6717,7 @@ paths:
         name: end_date
         schema:
           type: string
-      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。'
         in: query
         name: account_item_display_type
         schema:
@@ -6753,7 +6762,8 @@ paths:
           maximum: 2147483647
           minimum: 0
           type: integer
-      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外:
+          withoutが指定されます。'
         in: query
         name: adjustment
         schema:
@@ -6761,7 +6771,7 @@ paths:
           - only
           - without
           type: string
-      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）
+      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。
         in: query
         name: cost_allocation
         schema:
@@ -6844,7 +6854,7 @@ paths:
         name: fiscal_year
         schema:
           type: integer
-      - description: 発生月で絞込：開始会計月(1-12)
+      - description: 発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。
         in: query
         name: start_month
         schema:
@@ -6852,7 +6862,7 @@ paths:
           minimum: 1
           type: integer
       - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
-          9のいずれかを指定する。)
+          9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。
         in: query
         name: end_month
         schema:
@@ -6869,7 +6879,7 @@ paths:
         name: end_date
         schema:
           type: string
-      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。'
         in: query
         name: account_item_display_type
         schema:
@@ -6914,7 +6924,8 @@ paths:
           maximum: 2147483647
           minimum: 0
           type: integer
-      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外:
+          withoutが指定されます。'
         in: query
         name: adjustment
         schema:
@@ -6922,7 +6933,7 @@ paths:
           - only
           - without
           type: string
-      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）
+      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。
         in: query
         name: cost_allocation
         schema:
@@ -6999,7 +7010,7 @@ paths:
         name: fiscal_year
         schema:
           type: integer
-      - description: 発生月で絞込：開始会計月(1-12)
+      - description: 発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。
         in: query
         name: start_month
         schema:
@@ -7007,7 +7018,7 @@ paths:
           minimum: 1
           type: integer
       - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
-          9のいずれかを指定する。)
+          9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。
         in: query
         name: end_month
         schema:
@@ -7024,7 +7035,7 @@ paths:
         name: end_date
         schema:
           type: string
-      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。'
         in: query
         name: account_item_display_type
         schema:
@@ -7073,7 +7084,8 @@ paths:
           maximum: 2147483647
           minimum: 0
           type: integer
-      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外:
+          withoutが指定されます。'
         in: query
         name: adjustment
         schema:
@@ -7081,7 +7093,7 @@ paths:
           - only
           - without
           type: string
-      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）
+      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。
         in: query
         name: cost_allocation
         schema:
@@ -7158,7 +7170,7 @@ paths:
         name: fiscal_year
         schema:
           type: integer
-      - description: 発生月で絞込：開始会計月(1-12)
+      - description: 発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。
         in: query
         name: start_month
         schema:
@@ -7166,7 +7178,7 @@ paths:
           minimum: 1
           type: integer
       - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
-          9のいずれかを指定する。)
+          9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。
         in: query
         name: end_month
         schema:
@@ -7183,7 +7195,7 @@ paths:
         name: end_date
         schema:
           type: string
-      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。'
         in: query
         name: account_item_display_type
         schema:
@@ -7232,7 +7244,8 @@ paths:
           maximum: 2147483647
           minimum: 0
           type: integer
-      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外:
+          withoutが指定されます。'
         in: query
         name: adjustment
         schema:
@@ -7240,7 +7253,7 @@ paths:
           - only
           - without
           type: string
-      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）
+      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。
         in: query
         name: cost_allocation
         schema:
@@ -7317,7 +7330,7 @@ paths:
         name: fiscal_year
         schema:
           type: integer
-      - description: 発生月で絞込：開始会計月(1-12)
+      - description: 発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。
         in: query
         name: start_month
         schema:
@@ -7325,7 +7338,7 @@ paths:
           minimum: 1
           type: integer
       - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
-          9のいずれかを指定する。)
+          9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。
         in: query
         name: end_month
         schema:
@@ -7342,7 +7355,7 @@ paths:
         name: end_date
         schema:
           type: string
-      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。'
         in: query
         name: account_item_display_type
         schema:
@@ -7391,7 +7404,8 @@ paths:
           maximum: 2147483647
           minimum: 0
           type: integer
-      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外:
+          withoutが指定されます。'
         in: query
         name: adjustment
         schema:
@@ -7399,7 +7413,7 @@ paths:
           - only
           - without
           type: string
-      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）
+      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。
         in: query
         name: cost_allocation
         schema:
@@ -7482,7 +7496,7 @@ paths:
         name: fiscal_year
         schema:
           type: integer
-      - description: 発生月で絞込：開始会計月(1-12)
+      - description: 発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。
         in: query
         name: start_month
         schema:
@@ -7490,7 +7504,7 @@ paths:
           minimum: 1
           type: integer
       - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
-          9のいずれかを指定する。)
+          9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。
         in: query
         name: end_month
         schema:
@@ -7507,7 +7521,7 @@ paths:
         name: end_date
         schema:
           type: string
-      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。'
         in: query
         name: account_item_display_type
         schema:
@@ -7548,7 +7562,8 @@ paths:
           maximum: 2147483647
           minimum: 0
           type: integer
-      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外:
+          withoutが指定されます。'
         in: query
         name: adjustment
         schema:
@@ -7556,7 +7571,7 @@ paths:
           - only
           - without
           type: string
-      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）
+      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。
         in: query
         name: cost_allocation
         schema:
@@ -7639,7 +7654,7 @@ paths:
         name: fiscal_year
         schema:
           type: integer
-      - description: 発生月で絞込：開始会計月(1-12)
+      - description: 発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。
         in: query
         name: start_month
         schema:
@@ -7647,7 +7662,7 @@ paths:
           minimum: 1
           type: integer
       - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
-          9のいずれかを指定する。)
+          9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。
         in: query
         name: end_month
         schema:
@@ -7664,7 +7679,7 @@ paths:
         name: end_date
         schema:
           type: string
-      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。'
         in: query
         name: account_item_display_type
         schema:
@@ -7709,7 +7724,8 @@ paths:
           maximum: 2147483647
           minimum: 0
           type: integer
-      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外:
+          withoutが指定されます。'
         in: query
         name: adjustment
         schema:
@@ -7717,7 +7733,7 @@ paths:
           - only
           - without
           type: string
-      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）
+      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。
         in: query
         name: cost_allocation
         schema:
@@ -7800,7 +7816,7 @@ paths:
         name: fiscal_year
         schema:
           type: integer
-      - description: 発生月で絞込：開始会計月(1-12)
+      - description: 発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。
         in: query
         name: start_month
         schema:
@@ -7808,7 +7824,7 @@ paths:
           minimum: 1
           type: integer
       - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
-          9のいずれかを指定する。)
+          9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。
         in: query
         name: end_month
         schema:
@@ -7825,7 +7841,7 @@ paths:
         name: end_date
         schema:
           type: string
-      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。'
         in: query
         name: account_item_display_type
         schema:
@@ -7870,7 +7886,8 @@ paths:
           maximum: 2147483647
           minimum: 0
           type: integer
-      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外:
+          withoutが指定されます。'
         in: query
         name: adjustment
         schema:
@@ -7878,7 +7895,7 @@ paths:
           - only
           - without
           type: string
-      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）
+      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。
         in: query
         name: cost_allocation
         schema:
@@ -7961,7 +7978,7 @@ paths:
         name: fiscal_year
         schema:
           type: integer
-      - description: 発生月で絞込：開始会計月(1-12)
+      - description: 発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。
         in: query
         name: start_month
         schema:
@@ -7969,7 +7986,7 @@ paths:
           minimum: 1
           type: integer
       - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
-          9のいずれかを指定する。)
+          9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。
         in: query
         name: end_month
         schema:
@@ -7986,7 +8003,7 @@ paths:
         name: end_date
         schema:
           type: string
-      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。'
         in: query
         name: account_item_display_type
         schema:
@@ -8031,7 +8048,8 @@ paths:
           maximum: 2147483647
           minimum: 0
           type: integer
-      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外:
+          withoutが指定されます。'
         in: query
         name: adjustment
         schema:
@@ -8039,7 +8057,7 @@ paths:
           - only
           - without
           type: string
-      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）
+      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。
         in: query
         name: cost_allocation
         schema:
@@ -8116,7 +8134,7 @@ paths:
         name: fiscal_year
         schema:
           type: integer
-      - description: 発生月で絞込：開始会計月(1-12)
+      - description: 発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。
         in: query
         name: start_month
         schema:
@@ -8124,7 +8142,7 @@ paths:
           minimum: 1
           type: integer
       - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
-          9のいずれかを指定する。)
+          9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。
         in: query
         name: end_month
         schema:
@@ -8141,7 +8159,7 @@ paths:
         name: end_date
         schema:
           type: string
-      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。'
         in: query
         name: account_item_display_type
         schema:
@@ -8190,7 +8208,8 @@ paths:
           maximum: 2147483647
           minimum: 0
           type: integer
-      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外:
+          withoutが指定されます。'
         in: query
         name: adjustment
         schema:
@@ -8198,7 +8217,7 @@ paths:
           - only
           - without
           type: string
-      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）
+      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。
         in: query
         name: cost_allocation
         schema:
@@ -8275,7 +8294,7 @@ paths:
         name: fiscal_year
         schema:
           type: integer
-      - description: 発生月で絞込：開始会計月(1-12)
+      - description: 発生月で絞込：開始会計月(1-12)。指定されない場合、現在の会計年度の期首月が指定されます。
         in: query
         name: start_month
         schema:
@@ -8283,7 +8302,7 @@ paths:
           minimum: 1
           type: integer
       - description: 発生月で絞込：終了会計月(1-12)(会計年度が10月始まりでstart_monthが11なら11, 12, 1, ...
-          9のいずれかを指定する。)
+          9のいずれかを指定する)。指定されない場合、現在の会計年度の期末月が指定されます。
         in: query
         name: end_month
         schema:
@@ -8300,7 +8319,7 @@ paths:
         name: end_date
         schema:
           type: string
-      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）'
+      - description: '勘定科目の表示（勘定科目: account_item, 決算書表示:group）。指定されない場合、勘定科目: account_itemが指定されます。'
         in: query
         name: account_item_display_type
         schema:
@@ -8349,7 +8368,8 @@ paths:
           maximum: 2147483647
           minimum: 0
           type: integer
-      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）'
+      - description: '決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外:
+          withoutが指定されます。'
         in: query
         name: adjustment
         schema:
@@ -8357,7 +8377,7 @@ paths:
           - only
           - without
           type: string
-      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）
+      - description: 配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。
         in: query
         name: cost_allocation
         schema:
@@ -11397,7 +11417,9 @@ components:
     approvalRequestCreateParams:
       properties:
         application_date:
-          description: 申請日 (yyyy-mm-dd)
+          description: |
+            申請日 (yyyy-mm-dd)<br>
+            指定しない場合は当日の日付が登録されます。
           example: '2019-12-17'
           type: string
         approval_flow_route_id:
@@ -11466,7 +11488,6 @@ components:
           type: array
       required:
       - company_id
-      - application_date
       - approval_flow_route_id
       - form_id
       - request_items
@@ -12066,7 +12087,9 @@ components:
     approvalRequestUpdateParams:
       properties:
         application_date:
-          description: 申請日 (yyyy-mm-dd)
+          description: |
+            申請日 (yyyy-mm-dd)<br>
+            指定しない場合は当日の日付が登録されます。
           example: '2019-12-17'
           type: string
         approval_flow_route_id:
@@ -12123,7 +12146,6 @@ components:
           type: array
       required:
       - company_id
-      - application_date
       - approval_flow_route_id
       - request_items
       - draft
@@ -13944,7 +13966,9 @@ components:
             type: object
           type: array
         issue_date:
-          description: 申請日 (yyyy-mm-dd)
+          description: |
+            申請日 (yyyy-mm-dd)<br>
+            指定しない場合は当日の日付が登録されます。
           example: '2019-12-17'
           type: string
         parent_id:
@@ -14010,7 +14034,6 @@ components:
       required:
       - company_id
       - expense_application_lines
-      - issue_date
       - title
       type: object
     expenseApplicationLineTemplateParams:
@@ -14493,7 +14516,9 @@ components:
             type: object
           type: array
         issue_date:
-          description: 申請日 (yyyy-mm-dd)
+          description: |
+            申請日 (yyyy-mm-dd)<br>
+            指定しない場合は当日の日付が登録されます。
           example: '2019-12-17'
           type: string
         section_id:
@@ -14548,7 +14573,6 @@ components:
       required:
       - company_id
       - expense_application_lines
-      - issue_date
       - title
       type: object
     expenseApplicationsIndexResponse:
@@ -18271,7 +18295,7 @@ components:
           - credit_card
           - wallet
           - private_account_item
-          example: '2019-12-17'
+          example: bank_account
           type: string
       required:
       - amount
@@ -18355,7 +18379,9 @@ components:
           example: ordinary
           type: string
         application_date:
-          description: 申請日 (yyyy-mm-dd)
+          description: |
+            申請日 (yyyy-mm-dd)<br>
+            指定しない場合は当日の日付が登録されます。
           example: '2019-12-17'
           type: string
         approval_flow_route_id:
@@ -18598,7 +18624,6 @@ components:
       required:
       - company_id
       - title
-      - application_date
       - payment_request_lines
       - approval_flow_route_id
       - draft
@@ -19090,6 +19115,7 @@ components:
         application_date:
           description: |
             申請日 (yyyy-mm-dd)<br>
+            指定しない場合は当日の日付が登録されます。<br>
             申請者が、下書き状態もしくは差戻し状態の支払依頼に対して指定する場合のみ有効
           example: '2019-12-17'
           type: string
@@ -19330,7 +19356,6 @@ components:
       required:
       - company_id
       - title
-      - application_date
       - payment_request_lines
       - approval_flow_route_id
       - draft
@@ -27773,9 +27798,15 @@ components:
           maximum: 2147483647
           minimum: 1
           type: integer
+        rule_matched:
+          description: |
+            登録時に<a href="https://support.freee.co.jp/hc/ja/articles/202848350-明細の自動登録ルールを設定する" target="_blank">自動登録ルールの設定</a>が適用され、登録処理が実行された場合、
+            trueになります。〜を推測する、〜の消込をするの条件の場合は一致してもfalseになります。
+          example: true
+          type: boolean
         status:
-          description: '明細のステータス（消込待ち: 1, 消込済み: 2, 無視: 3, 消込中: 4）'
-          maximum: 4
+          description: '明細のステータス（消込待ち: 1, 消込済み: 2, 無視: 3, 消込中: 4, 対象外: 6）'
+          maximum: 6
           minimum: 1
           type: integer
         walletable_id:
@@ -27804,6 +27835,7 @@ components:
       - status
       - walletable_id
       - walletable_type
+      - rule_matched
       type: object
     walletable:
       properties:
