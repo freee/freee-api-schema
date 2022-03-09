@@ -13506,7 +13506,7 @@
           "Expense applications"
         ],
         "summary": "経費申請の作成",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費申請を作成する</p>\n\n<p>経費申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計の経費申請APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している経費申請は本API経由で作成ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>申請時には、申請タイトル(title)に加え、申請日(issue_date)、項目行については金額(amount)、日付(transaction_date)、内容(description)が必須項目となります。申請時の業務効率化のため、API入力をお勧めします。</li>\n  <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は作成できません。</li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費申請を作成する</p>\n\n<p>経費申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計の経費申請APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している経費申請は本API経由で作成ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>申請時には、申請タイトル(title)に加え、項目行については金額(amount)、日付(transaction_date)、内容(description)が必須項目となります。申請時の業務効率化のため、API入力をお勧めします。</li>\n  <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は作成できません。</li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
         "operationId": "create_expense_application",
         "requestBody": {
           "description": "経費申請の作成",
@@ -13678,7 +13678,7 @@
           "Expense applications"
         ],
         "summary": "経費申請の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の経費申請を更新する</p>\n\n<p>経費申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計の経費申請APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、経費申請を更新することができます。</li>\n  <li>本APIでは、status(申請ステータス): draft:下書き, feedback:差戻しのみ更新可能です。</li>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している経費申請は本API経由で更新ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>申請時には、申請タイトル(title)に加え、申請日(issue_date)、項目行については金額(amount)、日付(transaction_date)、内容(description)が必須項目となります。申請時の業務効率化のため、API入力をお勧めします。</li>\n  <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は更新できません。</li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の経費申請を更新する</p>\n\n<p>経費申請APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計の経費申請APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、経費申請を更新することができます。</li>\n  <li>本APIでは、status(申請ステータス): draft:下書き, feedback:差戻しのみ更新可能です。</li>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している経費申請は本API経由で更新ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>申請時には、申請タイトル(title)に加え、項目行については金額(amount)、日付(transaction_date)、内容(description)が必須項目となります。申請時の業務効率化のため、API入力をお勧めします。</li>\n  <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は更新できません。</li>\n  <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>\n  <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
         "operationId": "update_expense_application",
         "parameters": [
           {
@@ -15215,7 +15215,7 @@
                 "feedback"
               ]
             },
-            "description": "申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下, feedback:差戻し)",
+            "description": "申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下, feedback:差戻し)\n承認者指定時には無効です。",
             "example": "draft"
           },
           {
@@ -15304,7 +15304,7 @@
               "minimum": 1,
               "maximum": 2147483647
             },
-            "description": "承認者のユーザーID",
+            "description": "承認者のユーザーID\n承認者指定時には申請ステータスが申請中のものだけが取得可能です。",
             "example": 1
           },
           {
@@ -17626,7 +17626,6 @@
         "required": [
           "company_id",
           "expense_application_lines",
-          "issue_date",
           "title"
         ],
         "properties": {
@@ -17645,7 +17644,7 @@
           },
           "issue_date": {
             "type": "string",
-            "description": "申請日 (yyyy-mm-dd)",
+            "description": "申請日 (yyyy-mm-dd)<br>\n指定しない場合は当日の日付が登録されます。\n",
             "example": "2019-12-17"
           },
           "description": {
@@ -17768,7 +17767,6 @@
         "required": [
           "company_id",
           "expense_application_lines",
-          "issue_date",
           "title"
         ],
         "properties": {
@@ -17787,7 +17785,7 @@
           },
           "issue_date": {
             "type": "string",
-            "description": "申請日 (yyyy-mm-dd)",
+            "description": "申請日 (yyyy-mm-dd)<br>\n指定しない場合は当日の日付が登録されます。\n",
             "example": "2019-12-17"
           },
           "description": {
@@ -17964,7 +17962,6 @@
         "required": [
           "company_id",
           "title",
-          "application_date",
           "payment_request_lines",
           "approval_flow_route_id",
           "draft",
@@ -17985,7 +17982,7 @@
           },
           "application_date": {
             "type": "string",
-            "description": "申請日 (yyyy-mm-dd)",
+            "description": "申請日 (yyyy-mm-dd)<br>\n指定しない場合は当日の日付が登録されます。\n",
             "example": "2019-12-17"
           },
           "description": {
@@ -18240,7 +18237,6 @@
         "required": [
           "company_id",
           "title",
-          "application_date",
           "payment_request_lines",
           "approval_flow_route_id",
           "draft",
@@ -18261,7 +18257,7 @@
           },
           "application_date": {
             "type": "string",
-            "description": "申請日 (yyyy-mm-dd)<br>\n申請者が、下書き状態もしくは差戻し状態の支払依頼に対して指定する場合のみ有効\n",
+            "description": "申請日 (yyyy-mm-dd)<br>\n指定しない場合は当日の日付が登録されます。<br>\n申請者が、下書き状態もしくは差戻し状態の支払依頼に対して指定する場合のみ有効\n",
             "example": "2019-12-17"
           },
           "description": {
@@ -31946,7 +31942,6 @@
         "type": "object",
         "required": [
           "company_id",
-          "application_date",
           "approval_flow_route_id",
           "form_id",
           "request_items",
@@ -31962,7 +31957,7 @@
           },
           "application_date": {
             "type": "string",
-            "description": "申請日 (yyyy-mm-dd)",
+            "description": "申請日 (yyyy-mm-dd)<br>\n指定しない場合は当日の日付が登録されます。\n",
             "example": "2019-12-17"
           },
           "approval_flow_route_id": {
@@ -32039,7 +32034,6 @@
         "type": "object",
         "required": [
           "company_id",
-          "application_date",
           "approval_flow_route_id",
           "request_items",
           "draft"
@@ -32054,7 +32048,7 @@
           },
           "application_date": {
             "type": "string",
-            "description": "申請日 (yyyy-mm-dd)",
+            "description": "申請日 (yyyy-mm-dd)<br>\n指定しない場合は当日の日付が登録されます。\n",
             "example": "2019-12-17"
           },
           "approval_flow_route_id": {
