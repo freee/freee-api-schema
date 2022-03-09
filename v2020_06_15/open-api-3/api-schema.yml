@@ -815,7 +815,7 @@ paths:
             </ul>
           </li>
           <li>
-            申請フォームの項目に契約書（NINJA SIGN連携）が利用されている各種申請については、API経由で参照は可能ですが、作成と更新ができません。
+            申請フォームの項目に契約書（freeeサイン連携）が利用されている各種申請については、API経由で参照は可能ですが、作成と更新ができません。
           </li>
           <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>
         </ul>
@@ -923,7 +923,7 @@ paths:
             </ul>
           </li>
           <li>
-            申請フォームの項目に契約書（NINJA SIGN連携）が利用されている各種申請については、API経由で参照は可能ですが、作成と更新ができません。
+            申請フォームの項目に契約書（freeeサイン連携）が利用されている各種申請については、API経由で参照は可能ですが、作成と更新ができません。
           </li>
           <li>Web画面やAPIを通じて申請フォームが変更されると、本APIで使用する項目ID（request_itemsで指定するid）も変更されます。本API利用前に各種申請の取得APIを利用し、最新の申請フォームを取得することを推奨します。</li>
           <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>
@@ -1244,7 +1244,7 @@ paths:
             </ul>
           </li>
           <li>
-            申請フォームの項目に契約書（NINJA SIGN連携）が利用されている各種申請については、API経由で参照は可能ですが、作成と更新ができません。
+            申請フォームの項目に契約書（freeeサイン連携）が利用されている各種申請については、API経由で参照は可能ですが、作成と更新ができません。
           </li>
           <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>
         </ul>
@@ -1362,7 +1362,7 @@ paths:
             </ul>
           </li>
           <li>
-            申請フォームの項目に契約書（NINJA SIGN連携）が利用されている各種申請については、API経由で参照は可能ですが、作成と更新ができません。
+            申請フォームの項目に契約書（freeeサイン連携）が利用されている各種申請については、API経由で参照は可能ですが、作成と更新ができません。
           </li>
           <li>Web画面やAPIを通じて申請フォームが変更されると、本APIで使用する項目ID（request_itemsで指定するid）も変更されます。本APIで使用する項目IDは申請作成時点の項目IDです。本API利用前に各種申請の取得APIを利用し、申請作成時点の項目IDを取得することを推奨します。</li>
           <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>
@@ -1472,7 +1472,7 @@ paths:
             </ul>
           </li>
           <li>
-            申請フォームの項目に契約書（NINJA SIGN連携）が利用されている各種申請については、API経由で参照は可能ですが、作成と更新ができません。
+            申請フォームの項目に契約書（freeeサイン連携）が利用されている各種申請については、API経由で参照は可能ですが、作成と更新ができません。
           </li>
           <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>
         </ul>
@@ -15516,8 +15516,7 @@ components:
                   type:
                     description: '項目種別 (title: 申請タイトル, single_line: 自由記述形式 1行, multi_line:
                       自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt: 添付ファイル,
-                      section: 部門ID, partner: 取引先ID, ninja_sign_document: 契約書（NINJA
-                      SIGN連携）)'
+                      section: 部門ID, partner: 取引先ID, ninja_sign_document: 契約書（freeeサイン連携）)'
                     enum:
                     - title
                     - single_line
@@ -15688,7 +15687,7 @@ components:
                         description: '項目種別 (title: 申請タイトル, single_line: 自由記述形式 1行,
                           multi_line: 自由記述形式 複数行, select: プルダウン, date: 日付, amount:
                           金額, receipt: 添付ファイル, section: 部門ID, partner: 取引先ID, ninja_sign_document:
-                          契約書（NINJA SIGN連携）)'
+                          契約書（freeeサイン連携）)'
                         enum:
                         - title
                         - single_line
@@ -15897,8 +15896,7 @@ components:
                   type:
                     description: '項目タイプ(title: 申請タイトル, single_line: 自由記述形式 1行, multi_line:
                       自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt: 添付ファイル,
-                      section: 部門ID, partner: 取引先ID, ninja_sign_document: 契約書（NINJA
-                      SIGN連携）)'
+                      section: 部門ID, partner: 取引先ID, ninja_sign_document: 契約書（freeeサイン連携）)'
                     enum:
                     - title
                     - single_line
@@ -16117,7 +16115,7 @@ components:
                       description: '項目タイプ(title: 申請タイトル, single_line: 自由記述形式 1行, multi_line:
                         自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt:
                         添付ファイル, section: 部門ID, partner: 取引先ID, ninja_sign_document:
-                        契約書（NINJA SIGN連携）)'
+                        契約書（freeeサイン連携）)'
                       enum:
                       - title
                       - single_line
