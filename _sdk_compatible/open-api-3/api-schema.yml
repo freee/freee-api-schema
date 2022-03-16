@@ -4113,6 +4113,12 @@ paths:
               schema:
                 "$ref": "#/components/schemas/forbiddenError"
           description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/badRequestNotFoundError"
+          description: ''
         '500':
           content:
             application/json:
