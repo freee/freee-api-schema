@@ -1511,7 +1511,7 @@
           "従業員の扶養親族"
         ],
         "summary": "更新\n",
-        "description": "\n指定した従業員の扶養親族情報を更新します。\nidがない場合は新規作成、destroyがtrueの場合は削除になります。",
+        "description": "指定した従業員の扶養親族情報を更新します。\nidがない場合は新規作成、destroyがtrueの場合は削除になります。\n\nresidence_type=live_in: 同居の場合、以下のパラメータに指定した値はWebに反映されません。\n- zipcode1\n- zipcode2\n- prefecture_code\n- address\n- address_kana\n- annual_remittance_amount\n\nresidence_type=non_resident: 別居(国外)の場合、以下のパラメータに指定した値はWebに反映されません。\n- prefecture_code",
         "operationId": "bulk_update_employee_dependent_rules",
         "parameters": [
           {
