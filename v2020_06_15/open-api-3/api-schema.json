@@ -33983,7 +33983,8 @@
                   "minimum": 1,
                   "maximum": 2147483647,
                   "description": "取引ID (invoice_statusがsubmitted, unsubmittedの時IDが表示されます)",
-                  "nullable": true
+                  "nullable": true,
+                  "example": 1
                 },
                 "invoice_contents": {
                   "type": "array",
@@ -34563,7 +34564,8 @@
                 "minimum": 1,
                 "maximum": 2147483647,
                 "description": "取引ID (invoice_statusがsubmitted, unsubmittedの時IDが表示されます)",
-                "nullable": true
+                "nullable": true,
+                "example": 1
               },
               "invoice_contents": {
                 "type": "array",
@@ -34815,7 +34817,6 @@
               "related_quotation_ids": {
                 "type": "array",
                 "description": "関連する見積書ID(配列)<br>\n下記で作成したものが該当します。\n\n<a href=\"https://support.freee.co.jp/hc/ja/articles/203318410#1-2\" target=\"_blank\">見積書・納品書を納品書・請求書に変換する</a><br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/209076226\" target=\"_blank\">複数の見積書・納品書から合算請求書を作成する</a><br>\n",
-                "example": 1,
                 "items": {
                   "type": "integer",
                   "minimum": 1,
