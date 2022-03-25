@@ -12459,6 +12459,7 @@ components:
                 - simple_accounting
                 - self_only
                 - read_only
+                - workflow
                 example: admin
                 type: string
             required:
@@ -12784,6 +12785,7 @@ components:
               - simple_accounting
               - self_only
               - read_only
+              - workflow
               example: admin
               type: string
             street_name1:
@@ -17296,12 +17298,21 @@ components:
                     minimum: 1
                     type: integer
                   role:
-                    description: ユーザーの権限
+                    description: |-
+                      ユーザーの権限
+                      <ul>
+                      <li>admin: 管理者</li>
+                      <li>simple_accounting: 一般</li>
+                      <li>self_only: 取引登録のみ</li>
+                      <li>read_only: 閲覧のみ</li>
+                      <li>workflow: 申請・承認</li>
+                      </ul>
                     enum:
                     - admin
                     - simple_accounting
                     - self_only
                     - read_only
+                    - workflow
                     example: admin
                     type: string
                   use_custom_role:
@@ -17804,15 +17815,15 @@ components:
               nullable: true
               type: string
             shortcut1:
-              description: ショートカット1 (20文字以内)
+              description: ショートカット1 (255文字以内)
               example: ABC
-              maxLength: 20
+              maxLength: 255
               nullable: true
               type: string
             shortcut2:
-              description: ショートカット2 (20文字以内)
+              description: ショートカット2 (255文字以内)
               example: '501'
-              maxLength: 20
+              maxLength: 255
               nullable: true
               type: string
             transfer_fee_handling_side:
@@ -18233,15 +18244,15 @@ components:
                 nullable: true
                 type: string
               shortcut1:
-                description: ショートカット1 (20文字以内)
+                description: ショートカット1 (255文字以内)
                 example: ABC
-                maxLength: 20
+                maxLength: 255
                 nullable: true
                 type: string
               shortcut2:
-                description: ショートカット2 (20文字以内)
+                description: ショートカット2 (255文字以内)
                 example: '501'
-                maxLength: 20
+                maxLength: 255
                 nullable: true
                 type: string
               transfer_fee_handling_side:
