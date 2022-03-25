@@ -28600,7 +28600,8 @@
                     "admin",
                     "simple_accounting",
                     "self_only",
-                    "read_only"
+                    "read_only",
+                    "workflow"
                   ]
                 }
               }
@@ -28735,7 +28736,8 @@
                   "admin",
                   "simple_accounting",
                   "self_only",
-                  "read_only"
+                  "read_only",
+                  "workflow"
                 ]
               },
               "phone1": {
@@ -29230,15 +29232,15 @@
                 },
                 "shortcut1": {
                   "type": "string",
-                  "maxLength": 20,
-                  "description": "ショートカット1 (20文字以内)",
+                  "maxLength": 255,
+                  "description": "ショートカット1 (255文字以内)",
                   "example": "ABC",
                   "nullable": true
                 },
                 "shortcut2": {
                   "type": "string",
-                  "maxLength": 20,
-                  "description": "ショートカット2 (20文字以内)",
+                  "maxLength": 255,
+                  "description": "ショートカット2 (255文字以内)",
                   "example": "501",
                   "nullable": true
                 },
@@ -29487,15 +29489,15 @@
               },
               "shortcut1": {
                 "type": "string",
-                "maxLength": 20,
-                "description": "ショートカット1 (20文字以内)",
+                "maxLength": 255,
+                "description": "ショートカット1 (255文字以内)",
                 "example": "ABC",
                 "nullable": true
               },
               "shortcut2": {
                 "type": "string",
-                "maxLength": 20,
-                "description": "ショートカット2 (20文字以内)",
+                "maxLength": 255,
+                "description": "ショートカット2 (255文字以内)",
                 "example": "501",
                 "nullable": true
               },
@@ -30264,13 +30266,14 @@
                     },
                     "role": {
                       "type": "string",
-                      "description": "ユーザーの権限",
+                      "description": "ユーザーの権限\n<ul>\n<li>admin: 管理者</li>\n<li>simple_accounting: 一般</li>\n<li>self_only: 取引登録のみ</li>\n<li>read_only: 閲覧のみ</li>\n<li>workflow: 申請・承認</li>\n</ul>",
                       "example": "admin",
                       "enum": [
                         "admin",
                         "simple_accounting",
                         "self_only",
-                        "read_only"
+                        "read_only",
+                        "workflow"
                       ]
                     },
                     "use_custom_role": {
