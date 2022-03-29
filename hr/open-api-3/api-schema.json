@@ -4654,7 +4654,7 @@
           },
           "parent_group_id": {
             "type": "integer",
-            "description": "親部門ID",
+            "description": "親部門ID（部門階層レベルが10以内になるように親部門IDを指定してください。）",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
