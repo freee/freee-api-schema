@@ -4639,7 +4639,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "部門コード",
+            "description": "部門コード（入力しない場合、空文字が入力されます。）",
             "minLength": 1,
             "maxLength": 255,
             "nullable": true,
@@ -4671,7 +4671,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "部門コード",
+            "description": "部門コード（入力しない場合、空文字が入力されます。）",
             "minLength": 1,
             "maxLength": 255,
             "nullable": true,
@@ -4746,7 +4746,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "役職コード",
+            "description": "役職コード（入力しない場合、空文字が入力されます。）",
             "minLength": 1,
             "maxLength": 255,
             "nullable": true,
