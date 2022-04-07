@@ -3602,7 +3602,7 @@
           "部門"
         ],
         "summary": "部門情報の一覧取得\n",
-        "description": "\n指定した事業所の指定日付時点における部門情報をリストで返します。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "description": "\n指定した事業所の指定日付時点における部門情報をリストで返します。\n部門APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/groups-api-hierarchy\" target=\"_blank\">部門APIを利用した組織図の取得について</a> をご参照ください。\n- 管理者権限を持ったユーザのみ実行可能です。",
         "operationId": "get_groups",
         "parameters": [
           {
@@ -3681,7 +3681,7 @@
           "部門"
         ],
         "summary": "部門情報の作成\n",
-        "description": "\n指定した事業所の部門を新規作成します。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "description": "\n指定した事業所の部門を新規作成します。\n部門APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/groups-api-hierarchy\" target=\"_blank\">部門APIを利用した組織図の取得について</a> をご参照ください。\n- 管理者権限を持ったユーザのみ実行可能です。",
         "operationId": "create_group",
         "requestBody": {
           "content": {
@@ -3757,7 +3757,7 @@
           "部門"
         ],
         "summary": "部門情報の更新\n",
-        "description": "\n指定した事業所の部門の情報を更新します。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "description": "\n指定した事業所の部門の情報を更新します。\n部門APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/groups-api-hierarchy\" target=\"_blank\">部門APIを利用した組織図の取得について</a> をご参照ください。\n- 管理者権限を持ったユーザのみ実行可能です。",
         "operationId": "update_group",
         "parameters": [
           {
@@ -3854,7 +3854,7 @@
           "部門"
         ],
         "summary": "部門情報の削除\n",
-        "description": "\n指定した事業所の部門の情報を削除します。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "description": "\n指定した事業所の部門の情報を削除します。\n部門APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/groups-api-hierarchy\" target=\"_blank\">部門APIを利用した組織図の取得について</a> をご参照ください。\n- 管理者権限を持ったユーザのみ実行可能です。",
         "operationId": "destroy_group",
         "parameters": [
           {
