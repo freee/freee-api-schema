@@ -193,6 +193,16 @@
               "maximum": 2147483647
             },
             "example": 1
+          },
+          {
+            "name": "with_no_payroll_calculation",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "trueを指定すると給与計算対象外の従業員情報をレスポンスに含めます。",
+            "example": true
           }
         ],
         "responses": {
@@ -4310,7 +4320,7 @@
           },
           "display_name": {
             "type": "string",
-            "description": "従業員名（freee人事労務上での表示にのみ使用される名前です。出力書類には姓名が使用されます。）",
+            "description": "従業員名（freee人事労務上での表示にのみ使用される名前です。出力書類には姓名が使用されます。）\n- 給与計算対象外の従業員情報の場合は必須になります。",
             "maxLength": 255,
             "example": "山田 太郎"
           },
@@ -4322,7 +4332,7 @@
           },
           "employment_insurance_reference_number": {
             "type": "string",
-            "description": "被保険者番号（雇用保険） 数値文字列11桁固定長 例: 11111111111",
+            "description": "被保険者番号（雇用保険） 数値文字列11桁固定長 例: 11111111111\n- 給与計算対象外の従業員情報の場合に指定するとエラーになります。",
             "maxLength": 11,
             "example": "11111111111"
           },
@@ -4414,9 +4424,7 @@
           "last_name_kana",
           "first_name_kana",
           "entry_date",
-          "birth_date",
-          "pay_calc_type",
-          "pay_amount"
+          "birth_date"
         ],
         "properties": {
           "num": {
@@ -4427,13 +4435,13 @@
           },
           "working_hours_system_name": {
             "type": "string",
-            "description": "<a href=\"https://support.freee.co.jp/hc/ja/articles/360000562403-労働時間制度と勤務-賃金設定について\" target=\"_blank\">勤務・賃金設定名</a>\nで設定した名称を指定してください。\n- 未指定の際は、最初に登録したデータが利用されます。",
+            "description": "<a href=\"https://support.freee.co.jp/hc/ja/articles/360000562403-労働時間制度と勤務-賃金設定について\" target=\"_blank\">勤務・賃金設定名</a>\nで設定した名称を指定してください。\n- 未指定の際は、最初に登録したデータが利用されます。\n- 入力パラメータのno_payroll_calculationがtrueの場合に指定するとエラーになります。",
             "maxLength": 30,
             "example": "固定"
           },
           "company_reference_date_rule_name": {
             "type": "string",
-            "description": "<a href=\"https://support.freee.co.jp/hc/ja/articles/360000666303-締め日支払い日を変更する方法は-\" target=\"_blank\">締め日支払い日グループ名</a>\nで設定した締め日支払い日を指定してください。\n- 未指定の際は、最初に登録したデータが利用されます。",
+            "description": "<a href=\"https://support.freee.co.jp/hc/ja/articles/360000666303-締め日支払い日を変更する方法は-\" target=\"_blank\">締め日支払い日グループ名</a>\nで設定した締め日支払い日を指定してください。\n- 未指定の際は、最初に登録したデータが利用されます。\n- 入力パラメータのno_payroll_calculationがtrueの場合に指定するとエラーになります。",
             "maxLength": 15,
             "example": "15日締め（当月25日払い）"
           },
@@ -4482,12 +4490,12 @@
               "daily",
               "hourly"
             ],
-            "description": "給与方式（必須） monthly: 月給, daily: 日給, hourly: 時給\n- フレックスタイム制を使用している場合はmonthly以外指定できません。",
+            "description": "給与方式 monthly: 月給, daily: 日給, hourly: 時給\n- フレックスタイム制を使用している場合はmonthly以外指定できません。\n- 入力パラメータのno_payroll_calculationがfalseの場合は必須になります。\n- 入力パラメータのno_payroll_calculationがtrueの場合に指定するとエラーになります。",
             "example": "15日締め（当月25日払い）"
           },
           "pay_amount": {
             "type": "integer",
-            "description": "基本給（必須）",
+            "description": "基本給\n- 入力パラメータのno_payroll_calculationがfalseの場合は必須になります。\n- 入力パラメータのno_payroll_calculationがtrueの場合に指定するとエラーになります。",
             "format": "int32",
             "minimum": 0,
             "maximum": 99999999,
@@ -4506,6 +4514,12 @@
           "married": {
             "type": "boolean",
             "description": "配偶者の有無（デフォルト: false）"
+          },
+          "no_payroll_calculation": {
+            "type": "boolean",
+            "description": "給与計算対象外の従業員情報を作成する場合はtrueを指定します",
+            "default": false,
+            "example": true
           }
         }
       },
@@ -5176,6 +5190,11 @@
           },
           "basic_pay_rule": {
             "$ref": "#/components/schemas/ApiV1EmployeesBasicPayRuleSerializer"
+          },
+          "payroll_calculation": {
+            "type": "boolean",
+            "description": "給与計算対象従業員の場合trueを返します",
+            "example": true
           }
         }
       },
@@ -5407,6 +5426,11 @@
             "type": "string",
             "description": "ログイン用メールアドレス(従業員詳細未設定の場合、nullになります。)",
             "nullable": true
+          },
+          "payroll_calculation": {
+            "type": "boolean",
+            "description": "給与計算対象従業員の場合trueを返します",
+            "example": true
           }
         }
       },
@@ -6746,8 +6770,6 @@
         "type": "object",
         "required": [
           "company_id",
-          "year",
-          "month",
           "employee"
         ],
         "properties": {
@@ -6761,7 +6783,7 @@
           },
           "year": {
             "type": "integer",
-            "description": "更新対象年（必須）",
+            "description": "更新対象年\n- 給与計算対象の従業員情報の場合は必須になります。",
             "format": "int32",
             "minimum": 2000,
             "maximum": 2100,
@@ -6769,7 +6791,7 @@
           },
           "month": {
             "type": "integer",
-            "description": "更新対象月（必須）",
+            "description": "更新対象月\n- 給与計算対象の従業員情報の場合は必須になります。",
             "format": "int32",
             "minimum": 1,
             "maximum": 12,
