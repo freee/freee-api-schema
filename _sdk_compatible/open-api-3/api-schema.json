@@ -17237,6 +17237,16 @@
               },
               "description": "貸借行一覧（配列）: 貸借合わせて100行まで登録できます。"
             }
+          },
+          "receipt_ids": {
+            "type": "array",
+            "description": "証憑ファイルID（ファイルボックスのファイルID）（配列）",
+            "items": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647,
+              "example": 1
+            }
           }
         }
       },
@@ -17387,6 +17397,16 @@
                 }
               },
               "description": "貸借行一覧（配列）: 貸借合わせて100行まで登録できます。"
+            }
+          },
+          "receipt_ids": {
+            "type": "array",
+            "description": "証憑ファイルID（ファイルボックスのファイルID）（配列）",
+            "items": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647,
+              "example": 1
             }
           }
         }
@@ -28439,6 +28459,20 @@
                   "example": "備考"
                 }
               }
+            }
+          },
+          "receipt_ids": {
+            "type": "array",
+            "description": "証憑ファイルID（ファイルボックスのファイルID）",
+            "example": [
+              1,
+              2,
+              3
+            ],
+            "items": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
             }
           }
         }
