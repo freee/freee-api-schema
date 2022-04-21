@@ -13678,7 +13678,259 @@ paths:
                 - workflows
                 - year_end
                 type: object
-          description: ''
+          description: |
+            <p>レスポンスの各キーは以下の項目と対応しています。</p>
+            <p>詳細は <a href="https://support.freee.co.jp/hc/ja/articles/210265673">https://support.freee.co.jp/hc/ja/articles/210265673</a> を参照してください。</p>
+            <table>
+              <thead>
+                <tr>
+                  <th style="padding: 5px">キー</th>
+                  <th style="padding: 5px">対応する項目</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding: 5px">wallet_txns</td>
+                  <td style="padding: 5px">自動で経理 / 取得した明細</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">deals</td>
+                  <td style="padding: 5px">取引</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">transfers</td>
+                  <td style="padding: 5px">口座振替</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">docs</td>
+                  <td style="padding: 5px">見積書・納品書・請求書・領収書・発注書</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">doc_postings</td>
+                  <td style="padding: 5px">(請求書の)郵送</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">receipts</td>
+                  <td style="padding: 5px">ファイルボックス</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">receipt_stream_editor</td>
+                  <td style="padding: 5px">連続取引登録</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">expense_applications</td>
+                  <td style="padding: 5px">経費精算</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">spreadsheets</td>
+                  <td style="padding: 5px">エクセルインポート</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">payment_requests</td>
+                  <td style="padding: 5px">支払依頼</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">request_forms</td>
+                  <td style="padding: 5px">申請フォーム</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">approval_requests</td>
+                  <td style="padding: 5px">各種申請</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">reports</td>
+                  <td style="padding: 5px">収益 / 費用レポート</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">reports_income_expense</td>
+                  <td style="padding: 5px">損益レポート</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">reports_receivables</td>
+                  <td style="padding: 5px">入金管理レポート</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">reports_payables</td>
+                  <td style="padding: 5px">支払管理レポート(一括振込ファイルを含む)</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">reports_cash_balance</td>
+                  <td style="padding: 5px">現預金レポート/資金繰りレポート</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">reports_crosstabs</td>
+                  <td style="padding: 5px">集計表</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">reports_general_ledgers</td>
+                  <td style="padding: 5px">総勘定元帳</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">reports_pl</td>
+                  <td style="padding: 5px">損益計算書(月次推移/試算表)</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">reports_bs</td>
+                  <td style="padding: 5px">貸借対照表(月次推移/試算表)</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">reports_journals</td>
+                  <td style="padding: 5px">仕訳帳</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">reports_managements_planning</td>
+                  <td style="padding: 5px">経営プランニング</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">reports_managements_navigation</td>
+                  <td style="padding: 5px">経営ナビゲーション</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">manual_journals</td>
+                  <td style="padding: 5px">振替伝票</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">fixed_assets</td>
+                  <td style="padding: 5px">固定資産台帳</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">inventory_refreshes</td>
+                  <td style="padding: 5px">在庫棚卸</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">biz_allocations</td>
+                  <td style="padding: 5px">家事按分</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">payment_records</td>
+                  <td style="padding: 5px">支払調書</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">annual_reports</td>
+                  <td style="padding: 5px">決算書、確定申告書類</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">tax_reports</td>
+                  <td style="padding: 5px">消費税区分別表・消費税集計表</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">consumption_entries</td>
+                  <td style="padding: 5px">消費税申告書</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">tax_return</td>
+                  <td style="padding: 5px">連携用データ</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">account_item_statements</td>
+                  <td style="padding: 5px">勘定科目内訳明細書</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">month_end</td>
+                  <td style="padding: 5px">月締め</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">year_end</td>
+                  <td style="padding: 5px">年度締め</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">walletables</td>
+                  <td style="padding: 5px">口座</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">companies</td>
+                  <td style="padding: 5px">事業所の設定</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">invitations</td>
+                  <td style="padding: 5px">メンバー招待</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">sign_in_logs</td>
+                  <td style="padding: 5px">ログイン履歴</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">backups</td>
+                  <td style="padding: 5px">バックアップ</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">opening_balances</td>
+                  <td style="padding: 5px">開始残高の設定</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">system_conversion</td>
+                  <td style="padding: 5px">乗り換え設定</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">resets</td>
+                  <td style="padding: 5px">リセット</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">partners</td>
+                  <td style="padding: 5px">取引先</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">items</td>
+                  <td style="padding: 5px">品目</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">sections</td>
+                  <td style="padding: 5px">部門</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">tags</td>
+                  <td style="padding: 5px">メモタグ</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">account_items</td>
+                  <td style="padding: 5px">勘定科目</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">taxes</td>
+                  <td style="padding: 5px">税区分</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">user_matchers</td>
+                  <td style="padding: 5px">自動登録ルール</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">deal_templates</td>
+                  <td style="padding: 5px">取引テンプレート</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">manual_journal_templates</td>
+                  <td style="padding: 5px">振替伝票テンプレート</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">cost_allocations</td>
+                  <td style="padding: 5px">部門配賦</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">approval_flow_routes</td>
+                  <td style="padding: 5px">承認経路</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">expense_application_templates</td>
+                  <td style="padding: 5px">経費科目</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">workflows</td>
+                  <td style="padding: 5px">仕訳承認</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">oauth_applications</td>
+                  <td style="padding: 5px">アプリ利用</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">oauth_authorizations</td>
+                  <td style="padding: 5px">アプリ認可</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px">bank_accountant_staff_users</td>
+                  <td style="padding: 5px">アドバイザー事業所内でのメンバー管理</td>
+                </tr>
+              </tbody>
+            </table>
         '400':
           content:
             application/json:
