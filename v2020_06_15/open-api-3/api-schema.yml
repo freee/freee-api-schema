@@ -16602,6 +16602,74 @@ components:
       properties:
         company:
           properties:
+            tags:
+              items:
+                properties:
+                  id:
+                    description: タグID
+                    example: 1
+                    maximum: 2147483647
+                    minimum: 1
+                    type: integer
+                  name:
+                    description: 名前(30文字以内)
+                    example: メモタグ
+                    maxLength: 30
+                    type: string
+                  shortcut1:
+                    description: ショートカット1 (255文字以内)
+                    example: MEMOTAG
+                    maxLength: 255
+                    nullable: true
+                    type: string
+                  shortcut2:
+                    description: ショートカット2 (255文字以内)
+                    example: '123'
+                    maxLength: 255
+                    nullable: true
+                    type: string
+                required:
+                - id
+                - name
+                type: object
+              type: array
+            account_items:
+              items:
+                properties:
+                  categories:
+                    items:
+                      description: 勘定科目カテゴリー
+                      example: 資産
+                      type: string
+                    type: array
+                  default_tax_id:
+                    description: デフォルト設定がされている税区分ID
+                    example: 34
+                    maximum: 2147483647
+                    minimum: 1
+                    type: integer
+                  id:
+                    description: 勘定科目ID
+                    example: 1
+                    maximum: 2147483647
+                    minimum: 1
+                    type: integer
+                  name:
+                    description: 勘定科目名 (30文字以内)
+                    example: ソフトウェア
+                    type: string
+                  shortcut:
+                    description: ショートカット1 (20文字以内)
+                    example: SOFUTO
+                    maxLength: 20
+                    nullable: true
+                    type: string
+                required:
+                - id
+                - name
+                - categories
+                type: object
+              type: array
             amount_fraction:
               description: '金額端数処理方法（0: 切り捨て、1: 切り上げ、2: 四捨五入）'
               example: 0
@@ -16865,6 +16933,35 @@ components:
               - envelope_modern
               example: default_classic
               type: string
+            items:
+              items:
+                properties:
+                  id:
+                    description: 品目ID
+                    example: 101
+                    maximum: 2147483647
+                    minimum: 1
+                    type: integer
+                  name:
+                    description: 品目名 (30文字以内)
+                    example: タクシー代
+                    maxLength: 30
+                    type: string
+                  shortcut1:
+                    description: ショートカット１ (20文字以内)
+                    example: TAXI
+                    nullable: true
+                    type: string
+                  shortcut2:
+                    description: ショートカット２ (20文字以内)
+                    example: 201
+                    nullable: true
+                    type: string
+                required:
+                - id
+                - name
+                type: object
+              type: array
             minus_format:
               description: 'マイナスの表示方法（0: -、 1: △）'
               example: 0
@@ -16883,9 +16980,46 @@ components:
               maxLength: 100
               nullable: true
               type: string
+            partners:
+              items:
+                properties:
+                  code:
+                    description: 取引先コード
+                    example: code001
+                    nullable: true
+                    type: string
+                  id:
+                    description: 取引先ID
+                    example: 1
+                    maximum: 2147483647
+                    minimum: 1
+                    type: integer
+                  name:
+                    description: 取引先名
+                    example: ABC商店
+                    type: string
+                  shortcut1:
+                    description: ショートカット1 (255文字以内)
+                    example: ABC
+                    maxLength: 255
+                    nullable: true
+                    type: string
+                  shortcut2:
+                    description: ショートカット2 (255文字以内)
+                    example: '501'
+                    maxLength: 255
+                    nullable: true
+                    type: string
+                required:
+                - id
+                - code
+                - name
+                type: object
+              type: array
             phone1:
               description: 電話番号１
               example: 03-1234-xxxx
+              nullable: true
               type: string
             phone2:
               description: 電話番号２
@@ -16913,6 +17047,37 @@ components:
               - workflow
               example: admin
               type: string
+            sections:
+              items:
+                properties:
+                  id:
+                    description: 部門ID
+                    example: 1
+                    maximum: 2147483647
+                    minimum: 1
+                    type: integer
+                  name:
+                    description: 部門名 (30文字以内)
+                    example: 開発部門
+                    maxLength: 30
+                    type: string
+                  shortcut1:
+                    description: ショートカット１ (20文字以内)
+                    example: DEVELOPER
+                    maxLength: 20
+                    nullable: true
+                    type: string
+                  shortcut2:
+                    description: ショートカット２ (20文字以内)
+                    example: '123'
+                    maxLength: 20
+                    nullable: true
+                    type: string
+                required:
+                - id
+                - name
+                type: object
+              type: array
             street_name1:
               description: 市区町村・番地
               example: ＸＸ区ＹＹ１−１−１
@@ -16927,6 +17092,47 @@ components:
               maximum: 1
               minimum: 0
               type: integer
+            tax_codes:
+              items:
+                properties:
+                  code:
+                    description: 税区分コード
+                    example: 21
+                    maximum: 2147483647
+                    minimum: 1
+                    type: integer
+                  name:
+                    description: 税区分名
+                    example: sales_with_tax
+                    type: string
+                  name_ja:
+                    description: 税区分名（日本語表示用）
+                    example: 課税売上
+                    type: string
+                required:
+                - code
+                - name
+                - name_ja
+                type: object
+              type: array
+            taxes:
+              items:
+                properties:
+                  id:
+                    description: 税区分ID（廃止予定。tax_codeを使用してください。）
+                    example: 21
+                    maximum: 2147483647
+                    minimum: 1
+                    type: integer
+                  name:
+                    description: 税区分名
+                    example: sales_with_tax
+                    type: string
+                required:
+                - id
+                - name
+                type: object
+              type: array
             txn_number_format:
               description: '仕訳番号形式（not_used: 使用しない、digits: 数字（例：5091824）、alnum: 英数字（例：59J0P））'
               enum:
@@ -16939,6 +17145,35 @@ components:
               description: '取引先コードの利用設定（true: 有効、 false: 無効）'
               example: true
               type: boolean
+            walletables:
+              items:
+                properties:
+                  id:
+                    description: 口座ID
+                    example: 1
+                    maximum: 2147483647
+                    minimum: 1
+                    type: integer
+                  name:
+                    description: 口座名 (255文字以内)
+                    example: freee銀行
+                    maxLength: 255
+                    type: string
+                  type:
+                    description: '口座区分 (銀行口座: bank_account, クレジットカード: credit_card,
+                      現金: wallet)'
+                    enum:
+                    - bank_account
+                    - credit_card
+                    - wallet
+                    example: bank_account
+                    type: string
+                required:
+                - id
+                - name
+                - type
+                type: object
+              type: array
             workflow_setting:
               description: '仕訳承認フロー（enable: 有効、 disable: 無効）'
               enum:

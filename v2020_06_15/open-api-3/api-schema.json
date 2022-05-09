@@ -28771,7 +28771,8 @@
               "phone1": {
                 "type": "string",
                 "description": "電話番号１",
-                "example": "03-1234-xxxx"
+                "example": "03-1234-xxxx",
+                "nullable": true
               },
               "phone2": {
                 "type": "string",
@@ -28983,6 +28984,303 @@
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/fiscal_years"
+                }
+              },
+              "account_items": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "name",
+                    "categories"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 2147483647,
+                      "description": "勘定科目ID",
+                      "example": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "勘定科目名 (30文字以内)",
+                      "example": "ソフトウェア"
+                    },
+                    "shortcut": {
+                      "type": "string",
+                      "maxLength": 20,
+                      "description": "ショートカット1 (20文字以内)",
+                      "example": "SOFUTO",
+                      "nullable": true
+                    },
+                    "default_tax_id": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 2147483647,
+                      "description": "デフォルト設定がされている税区分ID",
+                      "example": 34
+                    },
+                    "categories": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "description": "勘定科目カテゴリー",
+                        "example": "資産"
+                      }
+                    }
+                  }
+                }
+              },
+              "tax_codes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "name",
+                    "name_ja"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 2147483647,
+                      "description": "税区分コード",
+                      "example": 21
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "税区分名",
+                      "example": "sales_with_tax"
+                    },
+                    "name_ja": {
+                      "type": "string",
+                      "description": "税区分名（日本語表示用）",
+                      "example": "課税売上"
+                    }
+                  }
+                }
+              },
+              "taxes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "name"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 2147483647,
+                      "description": "税区分ID（廃止予定。tax_codeを使用してください。）",
+                      "example": 21
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "税区分名",
+                      "example": "sales_with_tax"
+                    }
+                  }
+                }
+              },
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "name"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 2147483647,
+                      "description": "品目ID",
+                      "example": 101
+                    },
+                    "name": {
+                      "type": "string",
+                      "maxLength": 30,
+                      "description": "品目名 (30文字以内)",
+                      "example": "タクシー代"
+                    },
+                    "shortcut1": {
+                      "type": "string",
+                      "description": "ショートカット１ (20文字以内)",
+                      "example": "TAXI",
+                      "nullable": true
+                    },
+                    "shortcut2": {
+                      "type": "string",
+                      "description": "ショートカット２ (20文字以内)",
+                      "example": 201,
+                      "nullable": true
+                    }
+                  }
+                }
+              },
+              "partners": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "code",
+                    "name"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 2147483647,
+                      "description": "取引先ID",
+                      "example": 1
+                    },
+                    "code": {
+                      "type": "string",
+                      "description": "取引先コード",
+                      "example": "code001",
+                      "nullable": true
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "取引先名",
+                      "example": "ABC商店"
+                    },
+                    "shortcut1": {
+                      "type": "string",
+                      "maxLength": 255,
+                      "description": "ショートカット1 (255文字以内)",
+                      "example": "ABC",
+                      "nullable": true
+                    },
+                    "shortcut2": {
+                      "type": "string",
+                      "maxLength": 255,
+                      "description": "ショートカット2 (255文字以内)",
+                      "example": "501",
+                      "nullable": true
+                    }
+                  }
+                }
+              },
+              "sections": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "name"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 2147483647,
+                      "description": "部門ID",
+                      "example": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "maxLength": 30,
+                      "description": "部門名 (30文字以内)",
+                      "example": "開発部門"
+                    },
+                    "shortcut1": {
+                      "type": "string",
+                      "maxLength": 20,
+                      "description": "ショートカット１ (20文字以内)",
+                      "example": "DEVELOPER",
+                      "nullable": true
+                    },
+                    "shortcut2": {
+                      "type": "string",
+                      "maxLength": 20,
+                      "description": "ショートカット２ (20文字以内)",
+                      "example": "123",
+                      "nullable": true
+                    }
+                  }
+                }
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "name"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 2147483647,
+                      "description": "タグID",
+                      "example": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "maxLength": 30,
+                      "description": "名前(30文字以内)",
+                      "example": "メモタグ"
+                    },
+                    "shortcut1": {
+                      "type": "string",
+                      "maxLength": 255,
+                      "description": "ショートカット1 (255文字以内)",
+                      "example": "MEMOTAG",
+                      "nullable": true
+                    },
+                    "shortcut2": {
+                      "type": "string",
+                      "maxLength": 255,
+                      "description": "ショートカット2 (255文字以内)",
+                      "example": "123",
+                      "nullable": true
+                    }
+                  }
+                }
+              },
+              "walletables": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "name",
+                    "type"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 2147483647,
+                      "description": "口座ID",
+                      "example": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "maxLength": 255,
+                      "description": "口座名 (255文字以内)",
+                      "example": "freee銀行"
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
+                      "example": "bank_account",
+                      "enum": [
+                        "bank_account",
+                        "credit_card",
+                        "wallet"
+                      ]
+                    }
+                  }
                 }
               }
             }
