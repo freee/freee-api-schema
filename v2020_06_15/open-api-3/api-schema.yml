@@ -13507,7 +13507,7 @@ paths:
                   approval_flow_routes:
                     "$ref": "#/components/schemas/userCapability"
                   approval_requests:
-                    "$ref": "#/components/schemas/userCapability"
+                    "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
                   backups:
                     "$ref": "#/components/schemas/userCapability"
                   bank_accountant_staff_users:
@@ -13523,15 +13523,15 @@ paths:
                   deal_templates:
                     "$ref": "#/components/schemas/userCapability"
                   deals:
-                    "$ref": "#/components/schemas/userCapability"
+                    "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
                   doc_postings:
                     "$ref": "#/components/schemas/userCapability"
                   docs:
-                    "$ref": "#/components/schemas/userCapability"
+                    "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
                   expense_application_templates:
                     "$ref": "#/components/schemas/userCapability"
                   expense_applications:
-                    "$ref": "#/components/schemas/userCapability"
+                    "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
                   fixed_assets:
                     "$ref": "#/components/schemas/userCapability"
                   inventory_refreshes:
@@ -13543,7 +13543,7 @@ paths:
                   manual_journal_templates:
                     "$ref": "#/components/schemas/userCapability"
                   manual_journals:
-                    "$ref": "#/components/schemas/userCapability"
+                    "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
                   month_end:
                     "$ref": "#/components/schemas/userCapability"
                   oauth_applications:
@@ -13557,11 +13557,11 @@ paths:
                   payment_records:
                     "$ref": "#/components/schemas/userCapability"
                   payment_requests:
-                    "$ref": "#/components/schemas/userCapability"
+                    "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
                   receipt_stream_editor:
                     "$ref": "#/components/schemas/userCapability"
                   receipts:
-                    "$ref": "#/components/schemas/userCapability"
+                    "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
                   reports:
                     "$ref": "#/components/schemas/userCapability"
                   reports_bs:
@@ -13605,7 +13605,7 @@ paths:
                   taxes:
                     "$ref": "#/components/schemas/userCapability"
                   transfers:
-                    "$ref": "#/components/schemas/userCapability"
+                    "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
                   user_matchers:
                     "$ref": "#/components/schemas/userCapability"
                   wallet_txns:
@@ -32041,6 +32041,31 @@ components:
       type: object
     userCapability:
       properties:
+        create:
+          description: 作成
+          example: true
+          type: boolean
+        destroy:
+          description: 削除
+          example: true
+          type: boolean
+        read:
+          description: 閲覧
+          example: true
+          type: boolean
+        update:
+          description: 更新
+          example: true
+          type: boolean
+      type: object
+    userCapabilityWithSelfOnly:
+      properties:
+        allowed_target:
+          description: "「自分のみ」がonになっている場合はself_only、offになっている場合はallになります。"
+          enum:
+          - self_only
+          - all
+          type: string
         create:
           description: 作成
           example: true
