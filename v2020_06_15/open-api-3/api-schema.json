@@ -5496,37 +5496,37 @@
                       "$ref": "#/components/schemas/userCapability"
                     },
                     "deals": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
                     },
                     "transfers": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
                     },
                     "docs": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
                     },
                     "doc_postings": {
                       "$ref": "#/components/schemas/userCapability"
                     },
                     "receipts": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
                     },
                     "receipt_stream_editor": {
                       "$ref": "#/components/schemas/userCapability"
                     },
                     "expense_applications": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
                     },
                     "spreadsheets": {
                       "$ref": "#/components/schemas/userCapability"
                     },
                     "payment_requests": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
                     },
                     "request_forms": {
                       "$ref": "#/components/schemas/userCapability"
                     },
                     "approval_requests": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
                     },
                     "reports": {
                       "$ref": "#/components/schemas/userCapability"
@@ -5565,7 +5565,7 @@
                       "$ref": "#/components/schemas/userCapability"
                     },
                     "manual_journals": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
                     },
                     "fixed_assets": {
                       "$ref": "#/components/schemas/userCapability"
@@ -30644,6 +30644,39 @@
             "type": "boolean",
             "description": "削除",
             "example": true
+          }
+        }
+      },
+      "userCapabilityWithSelfOnly": {
+        "type": "object",
+        "properties": {
+          "read": {
+            "type": "boolean",
+            "description": "閲覧",
+            "example": true
+          },
+          "create": {
+            "type": "boolean",
+            "description": "作成",
+            "example": true
+          },
+          "update": {
+            "type": "boolean",
+            "description": "更新",
+            "example": true
+          },
+          "destroy": {
+            "type": "boolean",
+            "description": "削除",
+            "example": true
+          },
+          "allowed_target": {
+            "type": "string",
+            "description": "「自分のみ」がonになっている場合はself_only、offになっている場合はallになります。",
+            "enum": [
+              "self_only",
+              "all"
+            ]
           }
         }
       },
