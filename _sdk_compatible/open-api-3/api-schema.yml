@@ -14155,6 +14155,86 @@ components:
                 - id
                 type: object
               type: array
+            receipts:
+              description: 証憑ファイル（ファイルボックスのファイル）
+              items:
+                properties:
+                  created_at:
+                    description: 作成日時（ISO8601形式）
+                    example: '2019-12-17T18:30:24+09:00'
+                    type: string
+                  description:
+                    description: メモ
+                    example: タクシー利用
+                    type: string
+                  id:
+                    description: 証憑ファイルID（ファイルボックスのファイルID）
+                    example: 1
+                    maximum: 2147483647
+                    minimum: 1
+                    type: integer
+                  issue_date:
+                    description: 発生日
+                    example: '2019-12-17'
+                    type: string
+                  mime_type:
+                    description: MIMEタイプ
+                    example: image/png
+                    type: string
+                  origin:
+                    description: アップロード元種別
+                    enum:
+                    - unknown
+                    - web
+                    - mobile_camera
+                    - mobile_album
+                    - scansnap
+                    - scannable
+                    - dropbox
+                    - mail
+                    - safety_contact_file
+                    - public_api
+                    example: public_api
+                    type: string
+                  status:
+                    description: ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)
+                    enum:
+                    - unconfirmed
+                    - confirmed
+                    - deleted
+                    - ignored
+                    example: unconfirmed
+                    type: string
+                  user:
+                    properties:
+                      display_name:
+                        description: 表示名
+                        example: フリー太郎
+                        nullable: true
+                        type: string
+                      email:
+                        description: メールアドレス
+                        example: contact@example.com
+                        type: string
+                      id:
+                        description: ユーザーID
+                        example: 1
+                        maximum: 2147483647
+                        minimum: 1
+                        type: integer
+                    required:
+                    - email
+                    - id
+                    type: object
+                required:
+                - created_at
+                - id
+                - mime_type
+                - origin
+                - status
+                - user
+                type: object
+              type: array
             ref_number:
               description: 管理番号
               example: 123-456
@@ -17942,7 +18022,7 @@ components:
         invoice_payment_term_attributes:
           properties:
             additional_months:
-              description: 支払月
+              description: 入金月
               example: 1
               maximum: 6
               minimum: 1
@@ -17954,7 +18034,7 @@ components:
               minimum: 1
               type: integer
             fixed_day:
-              description: 支払日（29, 30, 31日の末日を指定する場合は、32を指定してください。）
+              description: 入金日（29, 30, 31日の末日を指定する場合は、32を指定してください。）
               example: 32
               maximum: 32
               minimum: 1
@@ -18177,7 +18257,7 @@ components:
             invoice_payment_term_attributes:
               properties:
                 additional_months:
-                  description: 支払月
+                  description: 入金月
                   example: 1
                   maximum: 6
                   minimum: 1
@@ -18191,7 +18271,7 @@ components:
                   nullable: true
                   type: integer
                 fixed_day:
-                  description: 支払日（29, 30, 31日の末日を指定する場合は、32。）
+                  description: 入金日（29, 30, 31日の末日を指定する場合は、32。）
                   example: 32
                   maximum: 32
                   minimum: 1
@@ -18418,7 +18498,7 @@ components:
         invoice_payment_term_attributes:
           properties:
             additional_months:
-              description: 支払月
+              description: 入金月
               example: 1
               maximum: 6
               minimum: 1
@@ -18430,7 +18510,7 @@ components:
               minimum: 1
               type: integer
             fixed_day:
-              description: 支払日（29, 30, 31日の末日を指定する場合は、32を指定してください。）
+              description: 入金日（29, 30, 31日の末日を指定する場合は、32を指定してください。）
               example: 32
               maximum: 32
               minimum: 1
