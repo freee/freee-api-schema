@@ -18784,14 +18784,14 @@
                 "type": "integer",
                 "minimum": 1,
                 "maximum": 6,
-                "description": "支払月",
+                "description": "入金月",
                 "example": 1
               },
               "fixed_day": {
                 "type": "integer",
                 "minimum": 1,
                 "maximum": 32,
-                "description": "支払日（29, 30, 31日の末日を指定する場合は、32を指定してください。）",
+                "description": "入金日（29, 30, 31日の末日を指定する場合は、32を指定してください。）",
                 "example": 32
               }
             }
@@ -19040,14 +19040,14 @@
                 "type": "integer",
                 "minimum": 1,
                 "maximum": 6,
-                "description": "支払月",
+                "description": "入金月",
                 "example": 1
               },
               "fixed_day": {
                 "type": "integer",
                 "minimum": 1,
                 "maximum": 32,
-                "description": "支払日（29, 30, 31日の末日を指定する場合は、32を指定してください。）",
+                "description": "入金日（29, 30, 31日の末日を指定する場合は、32を指定してください。）",
                 "example": 32
               }
             }
@@ -27419,6 +27419,105 @@
                     }
                   }
                 }
+              },
+              "receipts": {
+                "type": "array",
+                "description": "証憑ファイル（ファイルボックスのファイル）",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "created_at",
+                    "id",
+                    "mime_type",
+                    "origin",
+                    "status",
+                    "user"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 2147483647,
+                      "description": "証憑ファイルID（ファイルボックスのファイルID）",
+                      "example": 1
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)",
+                      "example": "unconfirmed",
+                      "enum": [
+                        "unconfirmed",
+                        "confirmed",
+                        "deleted",
+                        "ignored"
+                      ]
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "メモ",
+                      "example": "タクシー利用"
+                    },
+                    "mime_type": {
+                      "type": "string",
+                      "description": "MIMEタイプ",
+                      "example": "image/png"
+                    },
+                    "issue_date": {
+                      "type": "string",
+                      "description": "発生日",
+                      "example": "2019-12-17"
+                    },
+                    "origin": {
+                      "type": "string",
+                      "description": "アップロード元種別",
+                      "example": "public_api",
+                      "enum": [
+                        "unknown",
+                        "web",
+                        "mobile_camera",
+                        "mobile_album",
+                        "scansnap",
+                        "scannable",
+                        "dropbox",
+                        "mail",
+                        "safety_contact_file",
+                        "public_api"
+                      ]
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "description": "作成日時（ISO8601形式）",
+                      "example": "2019-12-17T18:30:24+09:00"
+                    },
+                    "user": {
+                      "required": [
+                        "email",
+                        "id"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 2147483647,
+                          "description": "ユーザーID",
+                          "example": 1
+                        },
+                        "email": {
+                          "type": "string",
+                          "description": "メールアドレス",
+                          "example": "contact@example.com"
+                        },
+                        "display_name": {
+                          "type": "string",
+                          "description": "表示名",
+                          "example": "フリー太郎",
+                          "nullable": true
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -30058,7 +30157,7 @@
                     "type": "integer",
                     "minimum": 1,
                     "maximum": 6,
-                    "description": "支払月",
+                    "description": "入金月",
                     "example": 1,
                     "nullable": true
                   },
@@ -30066,7 +30165,7 @@
                     "type": "integer",
                     "minimum": 1,
                     "maximum": 32,
-                    "description": "支払日（29, 30, 31日の末日を指定する場合は、32。）",
+                    "description": "入金日（29, 30, 31日の末日を指定する場合は、32。）",
                     "example": 32,
                     "nullable": true
                   }
