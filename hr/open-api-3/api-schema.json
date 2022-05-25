@@ -5117,6 +5117,824 @@
           }
         }
       },
+      "ApiV1MonthlyAttendanceIndexResponseParams": {
+        "type": "object",
+        "required": [
+          "id",
+          "company_id",
+          "application_number",
+          "applicant_id",
+          "approver_id",
+          "target_date",
+          "issue_date",
+          "content",
+          "status",
+          "passed_auto_check"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "申請ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "company_id": {
+            "type": "integer",
+            "description": "事業所ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "application_number": {
+            "type": "integer",
+            "description": "申請No",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "applicant_id": {
+            "type": "integer",
+            "description": "申請者の従業員ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "approver_id": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "description": "承認者の従業員ID",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2147483647,
+              "nullable": true,
+              "example": 1
+            }
+          },
+          "target_date": {
+            "type": "string",
+            "description": "対象日",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+            "example": "2022-02-01"
+          },
+          "issue_date": {
+            "type": "string",
+            "description": "申請日",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "content": {
+            "type": "string",
+            "description": "申請内容",
+            "nullable": true,
+            "example": "申請内容"
+          },
+          "status": {
+            "type": "string",
+            "description": "申請ステータス。（in_progress:申請中、approved:承認済、feedback:差戻し）",
+            "enum": [
+              "in_progress",
+              "approved",
+              "feedback"
+            ],
+            "example": "in_progress"
+          },
+          "passed_auto_check": {
+            "type": "boolean",
+            "description": "自動チェック結果",
+            "example": true
+          }
+        }
+      },
+      "ApiV1MonthlyAttendanceResponseParams": {
+        "type": "object",
+        "required": [
+          "id",
+          "company_id",
+          "application_number",
+          "applicant_id",
+          "approver_id",
+          "target_date",
+          "issue_date",
+          "content",
+          "status",
+          "passed_auto_check",
+          "approval_flow_route_id",
+          "approval_flow_route_name",
+          "approval_flow_logs",
+          "current_step_id",
+          "current_round"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "申請ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "company_id": {
+            "type": "integer",
+            "description": "事業所ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "application_number": {
+            "type": "integer",
+            "description": "申請No",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "applicant_id": {
+            "type": "integer",
+            "description": "申請者の従業員ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "approver_id": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "description": "承認者の従業員ID",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2147483647,
+              "nullable": true,
+              "example": 1
+            }
+          },
+          "target_date": {
+            "type": "string",
+            "description": "対象日",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+            "example": "2022-02-01"
+          },
+          "issue_date": {
+            "type": "string",
+            "description": "申請日",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "content": {
+            "type": "string",
+            "description": "申請内容",
+            "nullable": true,
+            "example": "申請内容"
+          },
+          "status": {
+            "type": "string",
+            "description": "申請ステータス。（in_progress:申請中、approved:承認済、feedback:差戻し）",
+            "enum": [
+              "in_progress",
+              "approved",
+              "feedback"
+            ],
+            "example": "in_progress"
+          },
+          "passed_auto_check": {
+            "type": "boolean",
+            "description": "自動チェック結果",
+            "example": true
+          },
+          "approval_flow_route_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "申請経路ID",
+            "example": 1
+          },
+          "approval_flow_route_name": {
+            "type": "string",
+            "description": "申請経路名",
+            "example": "申請経路"
+          },
+          "approval_flow_logs": {
+            "type": "array",
+            "description": "承認履歴",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1ApprovalFlowLogsParams"
+            }
+          },
+          "current_step_id": {
+            "type": "integer",
+            "description": "現在承認ステップID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "current_round": {
+            "type": "integer",
+            "description": "現在のround。差戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "example": 1
+          }
+        }
+      },
+      "ApiV1PaidHolidayIndexResponseParams": {
+        "type": "object",
+        "required": [
+          "id",
+          "company_id",
+          "application_number",
+          "applicant_id",
+          "approver_id",
+          "target_date",
+          "holiday_type",
+          "issue_date",
+          "content",
+          "status",
+          "passed_auto_check"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "申請ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "company_id": {
+            "type": "integer",
+            "description": "事業所ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "application_number": {
+            "type": "integer",
+            "description": "申請No",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "applicant_id": {
+            "type": "integer",
+            "description": "申請者の従業員ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "approver_id": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "description": "承認者の従業員ID",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2147483647,
+              "nullable": true,
+              "example": 1
+            }
+          },
+          "target_date": {
+            "type": "string",
+            "description": "対象日",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "holiday_type": {
+            "type": "string",
+            "description": "取得単位。（full:全休、half:半休、hour:時間休）",
+            "enum": [
+              "full",
+              "half",
+              "hour"
+            ],
+            "example": "half"
+          },
+          "start_at": {
+            "type": "string",
+            "description": "取得予定開始時間",
+            "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+            "nullable": true,
+            "example": 43200
+          },
+          "end_at": {
+            "type": "string",
+            "description": "取得予定終了時間",
+            "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+            "nullable": true,
+            "example": 86340
+          },
+          "issue_date": {
+            "type": "string",
+            "description": "申請日",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "content": {
+            "type": "string",
+            "description": "申請内容",
+            "nullable": true,
+            "example": "申請内容"
+          },
+          "comment": {
+            "type": "string",
+            "description": "申請理由",
+            "nullable": true,
+            "example": "申請理由"
+          },
+          "status": {
+            "type": "string",
+            "description": "申請ステータス。（in_progress:申請中、approved:承認済、feedback:差戻し）",
+            "enum": [
+              "in_progress",
+              "approved",
+              "feedback"
+            ],
+            "example": "in_progress"
+          },
+          "passed_auto_check": {
+            "type": "boolean",
+            "description": "自動チェック結果",
+            "example": true
+          }
+        }
+      },
+      "ApiV1PaidHolidayResponseParams": {
+        "type": "object",
+        "required": [
+          "id",
+          "company_id",
+          "application_number",
+          "applicant_id",
+          "approver_id",
+          "target_date",
+          "holiday_type",
+          "issue_date",
+          "content",
+          "status",
+          "passed_auto_check",
+          "approval_flow_route_id",
+          "approval_flow_route_name",
+          "approval_flow_logs",
+          "current_step_id",
+          "current_round"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "申請ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "company_id": {
+            "type": "integer",
+            "description": "事業所ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "application_number": {
+            "type": "integer",
+            "description": "申請No",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "applicant_id": {
+            "type": "integer",
+            "description": "申請者の従業員ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "approver_id": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "description": "承認者の従業員ID",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2147483647,
+              "nullable": true,
+              "example": 1
+            }
+          },
+          "target_date": {
+            "type": "string",
+            "description": "対象日",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "holiday_type": {
+            "type": "string",
+            "description": "取得単位。（full:全休、half:半休、hour:時間休）",
+            "enum": [
+              "full",
+              "half",
+              "hour"
+            ],
+            "example": "half"
+          },
+          "start_at": {
+            "type": "string",
+            "description": "取得予定開始時間",
+            "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+            "nullable": true,
+            "example": 43200
+          },
+          "end_at": {
+            "type": "string",
+            "description": "取得予定終了時間",
+            "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+            "nullable": true,
+            "example": 86340
+          },
+          "issue_date": {
+            "type": "string",
+            "description": "申請日",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "content": {
+            "type": "string",
+            "description": "申請内容",
+            "nullable": true,
+            "example": "申請内容"
+          },
+          "comment": {
+            "type": "string",
+            "description": "申請理由",
+            "nullable": true,
+            "example": "申請理由"
+          },
+          "status": {
+            "type": "string",
+            "description": "申請ステータス。（in_progress:申請中、approved:承認済、feedback:差戻し）",
+            "enum": [
+              "in_progress",
+              "approved",
+              "feedback"
+            ],
+            "example": "in_progress"
+          },
+          "passed_auto_check": {
+            "type": "boolean",
+            "description": "自動チェック結果",
+            "example": true
+          },
+          "approval_flow_route_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "申請経路ID",
+            "example": 1
+          },
+          "approval_flow_route_name": {
+            "type": "string",
+            "description": "申請経路名",
+            "example": "申請経路"
+          },
+          "approval_flow_logs": {
+            "type": "array",
+            "description": "承認履歴",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1ApprovalFlowLogsParams"
+            }
+          },
+          "current_step_id": {
+            "type": "integer",
+            "description": "現在承認ステップID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "current_round": {
+            "type": "integer",
+            "description": "現在のround。差戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "example": 1
+          }
+        }
+      },
+      "ApiV1OvertimeWorkIndexResponseParams": {
+        "type": "object",
+        "required": [
+          "id",
+          "company_id",
+          "application_number",
+          "applicant_id",
+          "approver_id",
+          "target_date",
+          "issue_date",
+          "content",
+          "status",
+          "passed_auto_check"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "申請ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "company_id": {
+            "type": "integer",
+            "description": "事業所ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "application_number": {
+            "type": "integer",
+            "description": "申請No",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "applicant_id": {
+            "type": "integer",
+            "description": "申請者の従業員ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "approver_id": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "description": "承認者の従業員ID",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2147483647,
+              "nullable": true,
+              "example": 1
+            }
+          },
+          "target_date": {
+            "type": "string",
+            "description": "対象日",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "start_at": {
+            "type": "string",
+            "description": "取得予定開始時間",
+            "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+            "nullable": true,
+            "example": 43200
+          },
+          "end_at": {
+            "type": "string",
+            "description": "取得予定終了時間",
+            "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+            "nullable": true,
+            "example": 86340
+          },
+          "issue_date": {
+            "type": "string",
+            "description": "申請日",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "content": {
+            "type": "string",
+            "description": "申請内容",
+            "nullable": true,
+            "example": "申請内容"
+          },
+          "comment": {
+            "type": "string",
+            "description": "申請理由",
+            "nullable": true,
+            "example": "申請理由"
+          },
+          "status": {
+            "type": "string",
+            "description": "申請ステータス。（in_progress:申請中、approved:承認済、feedback:差戻し）",
+            "enum": [
+              "in_progress",
+              "approved",
+              "feedback"
+            ],
+            "example": "in_progress"
+          },
+          "passed_auto_check": {
+            "type": "boolean",
+            "description": "自動チェック結果",
+            "example": true
+          }
+        }
+      },
+      "ApiV1OvertimeWorkResponseParams": {
+        "type": "object",
+        "required": [
+          "id",
+          "company_id",
+          "application_number",
+          "applicant_id",
+          "approver_id",
+          "target_date",
+          "issue_date",
+          "content",
+          "status",
+          "passed_auto_check",
+          "approval_flow_route_id",
+          "approval_flow_route_name",
+          "approval_flow_logs",
+          "current_step_id",
+          "current_round"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "申請ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "company_id": {
+            "type": "integer",
+            "description": "事業所ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "application_number": {
+            "type": "integer",
+            "description": "申請No",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "applicant_id": {
+            "type": "integer",
+            "description": "申請者の従業員ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "approver_id": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "description": "承認者の従業員ID",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2147483647,
+              "nullable": true,
+              "example": 1
+            }
+          },
+          "target_date": {
+            "type": "string",
+            "description": "対象日",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "start_at": {
+            "type": "string",
+            "description": "取得予定開始時間",
+            "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+            "nullable": true,
+            "example": 43200
+          },
+          "end_at": {
+            "type": "string",
+            "description": "取得予定終了時間",
+            "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+            "nullable": true,
+            "example": 86340
+          },
+          "issue_date": {
+            "type": "string",
+            "description": "申請日",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "content": {
+            "type": "string",
+            "description": "申請内容",
+            "nullable": true,
+            "example": "申請内容"
+          },
+          "comment": {
+            "type": "string",
+            "description": "申請理由",
+            "nullable": true,
+            "example": "申請理由"
+          },
+          "status": {
+            "type": "string",
+            "description": "申請ステータス。（in_progress:申請中、approved:承認済、feedback:差戻し）",
+            "enum": [
+              "in_progress",
+              "approved",
+              "feedback"
+            ],
+            "example": "in_progress"
+          },
+          "passed_auto_check": {
+            "type": "boolean",
+            "description": "自動チェック結果",
+            "example": true
+          },
+          "approval_flow_route_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "申請経路ID",
+            "example": 1
+          },
+          "approval_flow_route_name": {
+            "type": "string",
+            "description": "申請経路名",
+            "example": "申請経路"
+          },
+          "approval_flow_logs": {
+            "type": "array",
+            "description": "承認履歴",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1ApprovalFlowLogsParams"
+            }
+          },
+          "current_step_id": {
+            "type": "integer",
+            "description": "現在承認ステップID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "current_round": {
+            "type": "integer",
+            "description": "現在のround。差戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "example": 1
+          }
+        }
+      },
+      "ApiV1ApprovalFlowLogsParams": {
+        "type": "object",
+        "properties": {
+          "employee_id": {
+            "type": "integer",
+            "description": "申請操作をした従業員ID",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "action": {
+            "type": "string",
+            "description": "申請操作。（apply:申請する、approve:承認、cancel:取り消し、feedback:差戻し）",
+            "enum": [
+              "apply",
+              "approve",
+              "cancel",
+              "feedback"
+            ],
+            "example": "approve"
+          },
+          "update_at": {
+            "type": "string",
+            "description": "申請操作をした日付時間",
+            "format": "date-time",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$"
+          }
+        }
+      },
       "ApiV1EmployeeSerializer": {
         "type": "object",
         "properties": {
@@ -7574,6 +8392,629 @@
           },
           "position": {
             "$ref": "#/components/schemas/ApiV1PositionRequestParams"
+          }
+        }
+      },
+      "ApiV1MonthlyAttendanceIndexResponse": {
+        "type": "object",
+        "required": [
+          "monthly_attendances",
+          "total_count"
+        ],
+        "properties": {
+          "monthly_attendances": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1MonthlyAttendanceIndexResponseParams"
+            }
+          },
+          "total_count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "example": 1
+          }
+        }
+      },
+      "ApiV1MonthlyAttendanceResponse": {
+        "type": "object",
+        "required": [
+          "monthly_attendance"
+        ],
+        "properties": {
+          "monthly_attendance": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1MonthlyAttendanceResponseParams"
+            }
+          }
+        }
+      },
+      "ApiV1MonthlyAttendanceCreateRequest": {
+        "type": "object",
+        "required": [
+          "company_id",
+          "target_year",
+          "target_month",
+          "approval_flow_route_id"
+        ],
+        "properties": {
+          "company_id": {
+            "type": "integer",
+            "description": "作成対象事業所ID（必須）",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "target_year": {
+            "type": "integer",
+            "description": "対象年（必須）",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "target_month": {
+            "type": "integer",
+            "description": "対象月（必須）",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 12,
+            "example": 1
+          },
+          "approval_flow_route_id": {
+            "type": "integer",
+            "description": "申請経路ID（必須）",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "approver_id": {
+            "type": "integer",
+            "description": "承認者の従業員ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true,
+            "example": 1
+          },
+          "group_id": {
+            "type": "integer",
+            "description": "部門ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true,
+            "example": 1
+          }
+        }
+      },
+      "ApiV1MonthlyAttendanceUpdateRequest": {
+        "type": "object",
+        "required": [
+          "company_id",
+          "approval_flow_route_id"
+        ],
+        "properties": {
+          "company_id": {
+            "type": "integer",
+            "description": "事業所ID（必須）",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "approval_flow_route_id": {
+            "type": "integer",
+            "description": "申請経路ID（必須）",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true,
+            "example": 1
+          },
+          "approver_id": {
+            "type": "integer",
+            "description": "承認者の従業員ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true,
+            "example": 1
+          },
+          "group_id": {
+            "type": "integer",
+            "description": "部門ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true,
+            "example": 1
+          }
+        }
+      },
+      "ApiV1PaidHolidayIndexResponse": {
+        "type": "object",
+        "required": [
+          "paid_holidays",
+          "total_count"
+        ],
+        "properties": {
+          "paid_holidays": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1PaidHolidayIndexResponseParams"
+            }
+          },
+          "total_count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "example": 1
+          }
+        }
+      },
+      "ApiV1PaidHolidayResponse": {
+        "type": "object",
+        "required": [
+          "paid_holiday"
+        ],
+        "properties": {
+          "paid_holiday": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1PaidHolidayResponseParams"
+            }
+          }
+        }
+      },
+      "ApiV1PaidHolidayRequest": {
+        "type": "object",
+        "required": [
+          "company_id",
+          "target_date",
+          "holiday_type",
+          "approval_flow_route_id"
+        ],
+        "properties": {
+          "company_id": {
+            "type": "integer",
+            "description": "事業所ID（必須）",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "target_date": {
+            "type": "string",
+            "description": "対象日（必須）",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+            "nullable": true
+          },
+          "holiday_type": {
+            "type": "string",
+            "description": "取得単位（必須）（full:全休、half:半休、hour:時間休）",
+            "enum": [
+              "full",
+              "half",
+              "hour"
+            ],
+            "example": "half"
+          },
+          "start_at": {
+            "type": "string",
+            "description": "取得予定開始時間",
+            "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+            "example": 43200
+          },
+          "end_at": {
+            "type": "string",
+            "description": "取得予定終了時間",
+            "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+            "example": 86340
+          },
+          "comment": {
+            "type": "string",
+            "description": "申請理由",
+            "nullable": true,
+            "example": "申請理由"
+          },
+          "approval_flow_route_id": {
+            "type": "integer",
+            "description": "申請経路ID（必須）",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true,
+            "example": 1
+          },
+          "approver_id": {
+            "type": "integer",
+            "description": "承認者の従業員ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true,
+            "example": 1
+          },
+          "group_id": {
+            "type": "integer",
+            "description": "部門ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true,
+            "example": 1
+          }
+        }
+      },
+      "ApiV1OvertimeWorkIndexResponse": {
+        "type": "object",
+        "required": [
+          "overtime_works",
+          "total_count"
+        ],
+        "properties": {
+          "overtime_works": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1OvertimeWorkIndexResponseParams"
+            }
+          },
+          "total_count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "example": 1
+          }
+        }
+      },
+      "ApiV1OvertimeWorkResponse": {
+        "type": "object",
+        "required": [
+          "overtime_work"
+        ],
+        "properties": {
+          "overtime_works": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1OvertimeWorkResponseParams"
+            }
+          }
+        }
+      },
+      "ApiV1OvertimeWorkRequest": {
+        "type": "object",
+        "required": [
+          "company_id",
+          "target_date",
+          "start_at",
+          "end_at",
+          "approval_flow_route_id"
+        ],
+        "properties": {
+          "company_id": {
+            "type": "integer",
+            "description": "作成対象事業所ID（必須）",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "target_date": {
+            "type": "string",
+            "description": "対象日（必須）",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "start_at": {
+            "type": "string",
+            "description": "取得予定開始時間（必須）",
+            "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+            "example": 43200
+          },
+          "end_at": {
+            "type": "string",
+            "description": "取得予定終了時間（必須）",
+            "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+            "example": 86340
+          },
+          "comment": {
+            "type": "string",
+            "description": "申請理由",
+            "nullable": true,
+            "example": "申請理由"
+          },
+          "approval_flow_route_id": {
+            "type": "integer",
+            "description": "申請経路ID（必須）",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "approver_id": {
+            "type": "integer",
+            "description": "承認者の従業員ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true,
+            "example": 1
+          },
+          "group_id": {
+            "type": "integer",
+            "description": "部門ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true,
+            "example": 1
+          }
+        }
+      },
+      "ApiV1ApprovalActionRequest": {
+        "type": "object",
+        "required": [
+          "company_id",
+          "action",
+          "target_round",
+          "target_step_id"
+        ],
+        "properties": {
+          "company_id": {
+            "type": "integer",
+            "description": "事業所ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "action": {
+            "type": "string",
+            "description": "申請操作。（approve:承認、cancel:取り消し、feedback:差戻し、force_feedback:承認取り消し）",
+            "enum": [
+              "approve",
+              "cancel",
+              "feedback",
+              "force_feedback"
+            ],
+            "example": "approve"
+          },
+          "target_round": {
+            "type": "integer",
+            "description": "対象round。操作がcancelのとき必須です。差戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。取得APIレスポンス.current_roundを送信してください。",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true,
+            "example": 1
+          },
+          "target_step_id": {
+            "type": "integer",
+            "description": "対象承認ステップID 操作がcancelのとき必須です。取得APIレスポンス.current_step_idを送信してください。",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true,
+            "example": 1
+          },
+          "next_approver_id": {
+            "type": "integer",
+            "description": "次のステップの承認者の従業員ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true,
+            "example": 1
+          },
+          "next_group_id": {
+            "type": "integer",
+            "description": "次のステップの部門ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true,
+            "example": 1
+          }
+        }
+      },
+      "ApiV1ApprovalFlowRoutesIndexResponse": {
+        "type": "object",
+        "required": [
+          "approval_flow_routes"
+        ],
+        "properties": {
+          "approval_flow_routes": {
+            "$ref": "#/components/schemas/ApiV1ApprovalFlowRouteIndexResponseParams"
+          }
+        }
+      },
+      "ApiV1ApprovalFlowRouteIndexResponseParams": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "申請経路ID",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "申請経路名",
+            "example": "申請経路"
+          },
+          "description": {
+            "type": "string",
+            "description": "申請経路の説明",
+            "example": "申請経路の説明"
+          },
+          "user_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "更新したユーザーのユーザーID",
+            "example": 1,
+            "nullable": true
+          },
+          "definition_system": {
+            "type": "boolean",
+            "description": "システム作成の申請経路かどうか",
+            "example": true
+          },
+          "first_step_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "最初の承認ステップのID",
+            "example": 1
+          },
+          "usages": {
+            "type": "array",
+            "description": "申請種別（申請経路を使用できる申請種別を示します。例えば、AttendanceWorkflow の場合は、勤怠申請で使用できる申請経路です。）\n- AttendanceWorkflow - 勤怠申請\n- PersonalDataWorkflow - 身上変更申請",
+            "items": {
+              "type": "string",
+              "enum": [
+                "AttendanceWorkflow",
+                "PersonalDataWorkflow"
+              ],
+              "example": "AttendanceWorkflow"
+            }
+          }
+        }
+      },
+      "ApiV1ApprovalFlowRouteResponse": {
+        "type": "object",
+        "required": [
+          "approval_flow_route"
+        ],
+        "properties": {
+          "approval_flow_route": {
+            "$ref": "#/components/schemas/ApiV1ApprovalFlowRouteResponseParams"
+          }
+        }
+      },
+      "ApiV1ApprovalFlowRouteResponseParams": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "申請経路ID",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "申請経路名",
+            "example": "申請経路"
+          },
+          "description": {
+            "type": "string",
+            "description": "申請経路の説明",
+            "example": "申請経路の説明"
+          },
+          "user_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "更新したユーザーのユーザーID",
+            "example": 1,
+            "nullable": true
+          },
+          "definition_system": {
+            "type": "boolean",
+            "description": "システム作成の申請経路かどうか",
+            "example": true
+          },
+          "first_step_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "最初の承認ステップのID",
+            "example": 1
+          },
+          "usages": {
+            "type": "array",
+            "description": "申請種別（申請経路を使用できる申請種別を示します。例えば、AttendanceWorkflow の場合は、勤怠申請で使用できる申請経路です。）\n- AttendanceWorkflow - 勤怠申請\n- PersonalDataWorkflow - 身上変更申請",
+            "items": {
+              "type": "string",
+              "enum": [
+                "AttendanceWorkflow",
+                "PersonalDataWorkflow"
+              ],
+              "example": "AttendanceWorkflow"
+            }
+          },
+          "steps": {
+            "$ref": "#/components/schemas/ApiV1FlowRouteStepSrializer"
+          }
+        }
+      },
+      "ApiV1FlowRouteStepSrializer": {
+        "type": "array",
+        "description": "承認ステップ（配列）",
+        "items": {
+          "type": "object",
+          "required": [
+            "id",
+            "next_step_id",
+            "resource_type"
+          ],
+          "properties": {
+            "id": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647,
+              "description": "承認ステップID",
+              "example": 1
+            },
+            "next_step_id": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647,
+              "description": "次の承認ステップID",
+              "nullable": true,
+              "example": 2
+            },
+            "resource_type": {
+              "type": "string",
+              "description": "承認方法( predefined_user: メンバー指定 (1人), selected_user: 申請時にメンバー指定,unspecified: 指定なし, and_resource: メンバー指定 (複数、全員の承認), or_resource: メンバー指定 (複数、1人の承認), and_position: 役職指定 (複数、全員の承認), or_position: 役職指定 (複数、1人の承認) ) ",
+              "enum": [
+                "predefined_user",
+                "selected_user",
+                "unspecified",
+                "and_resource",
+                "or_resource",
+                "and_position",
+                "or_position"
+              ],
+              "example": "predefined_user"
+            },
+            "user_ids": {
+              "type": "array",
+              "description": "承認者のユーザーID (配列)",
+              "items": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 2147483647,
+                "description": "承認者のユーザーID",
+                "example": 3
+              }
+            }
           }
         }
       },
