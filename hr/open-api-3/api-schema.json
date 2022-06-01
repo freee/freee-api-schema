@@ -4564,16 +4564,19 @@
             "type": "integer",
             "description": "役職ID",
             "format": "int32",
+            "nullable": true,
             "example": 1
           },
           "position_code": {
             "type": "string",
             "description": "役職コード",
+            "nullable": true,
             "example": "position1"
           },
           "position_name": {
             "type": "string",
             "description": "役職名称",
+            "nullable": true,
             "example": "部長"
           },
           "parent_group_id": {
@@ -7504,6 +7507,7 @@
         "properties": {
           "id": {
             "type": "integer",
+            "description": "従業員の基本給ID",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647
@@ -7978,7 +7982,7 @@
           },
           "day_pattern": {
             "type": "string",
-            "description": "勤務パターン（所定労働日: normal_day, 所定休日: prescribed_holiday, 法定休日: legal_holiday）",
+            "description": "勤務パターン（所定労働日: normal_day, 所定休日: prescribed_holiday, 法定休日: legal_holiday）\n\nprescribed_holiday、legal_holidayを指定すると、以下のパラメータについて、指定した値が反映されず無視されます\n- early_leaving_mins\n- lateness_mins\n- paid_holiday",
             "enum": [
               "normal_day",
               "prescribed_holiday",
@@ -8049,7 +8053,7 @@
           },
           "use_default_work_pattern": {
             "type": "boolean",
-            "description": "デフォルトの勤務設定を使うかどうか。"
+            "description": "デフォルトの勤務設定を使うかどうか。\n\ntrueを指定した場合、以下のパラメータについて、指定した値に関係なく、従業員に設定した勤務賃金設定の休日の設定を参照して値が決まります\n- day_pattern\n\ntrueを指定した場合、以下のパラメータについて、指定した値に関係なく、従業員に設定した勤務賃金設定の出退勤時刻と労働時間の設定を参照して値が決まります。\n- normal_work_clock_in_at\n- normal_work_clock_out_at\n- normal_work_mins"
           }
         }
       },
@@ -8832,7 +8836,10 @@
         ],
         "properties": {
           "approval_flow_routes": {
-            "$ref": "#/components/schemas/ApiV1ApprovalFlowRouteIndexResponseParams"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1ApprovalFlowRouteIndexResponseParams"
+            }
           }
         }
       },
