@@ -6651,7 +6651,7 @@
           },
           "widow_type": {
             "type": "string",
-            "description": "寡夫／寡婦かどうか na: 空白, widower: 寡夫, widow: 寡婦, special_widow: 特別寡婦"
+            "description": "寡夫／寡婦かどうか na: 空白, widower: 寡夫, widow: 寡婦, special_widow: 特別寡婦, one_parent: ひとり親"
           },
           "disability_type": {
             "type": "string",
