@@ -5361,7 +5361,6 @@
           "target_date",
           "holiday_type",
           "issue_date",
-          "content",
           "status",
           "passed_auto_check"
         ],
@@ -5446,12 +5445,6 @@
             "format": "date",
             "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
           },
-          "content": {
-            "type": "string",
-            "description": "申請内容",
-            "nullable": true,
-            "example": "申請内容"
-          },
           "comment": {
             "type": "string",
             "description": "申請理由",
@@ -5482,11 +5475,10 @@
           "company_id",
           "application_number",
           "applicant_id",
-          "approver_id",
+          "approver_ids",
           "target_date",
           "holiday_type",
           "issue_date",
-          "content",
           "status",
           "passed_auto_check",
           "approval_flow_route_id",
@@ -5528,7 +5520,7 @@
             "maximum": 2147483647,
             "example": 1
           },
-          "approver_id": {
+          "approver_ids": {
             "type": "array",
             "items": {
               "type": "integer",
@@ -5575,12 +5567,6 @@
             "description": "申請日",
             "format": "date",
             "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
-          },
-          "content": {
-            "type": "string",
-            "description": "申請内容",
-            "nullable": true,
-            "example": "申請内容"
           },
           "comment": {
             "type": "string",
@@ -5647,7 +5633,7 @@
           "company_id",
           "application_number",
           "applicant_id",
-          "approver_id",
+          "approver_ids",
           "target_date",
           "issue_date",
           "content",
@@ -5687,7 +5673,7 @@
             "maximum": 2147483647,
             "example": 1
           },
-          "approver_id": {
+          "approver_ids": {
             "type": "array",
             "items": {
               "type": "integer",
@@ -5911,9 +5897,9 @@
       "ApiV1ApprovalFlowLogsParams": {
         "type": "object",
         "properties": {
-          "employee_id": {
+          "user_id": {
             "type": "integer",
-            "description": "申請操作をした従業員ID",
+            "description": "申請操作をしたユーザーのユーザーID",
             "format": "int32",
             "minimum": 0,
             "maximum": 2147483647,
@@ -5934,7 +5920,7 @@
             "type": "string",
             "description": "申請操作をした日付時間",
             "format": "date-time",
-            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$"
+            "example": "2022-06-08T09:46:46.000+09:00"
           }
         }
       },
@@ -8569,10 +8555,7 @@
         ],
         "properties": {
           "paid_holiday": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ApiV1PaidHolidayResponseParams"
-            }
+            "$ref": "#/components/schemas/ApiV1PaidHolidayResponseParams"
           }
         }
       },
