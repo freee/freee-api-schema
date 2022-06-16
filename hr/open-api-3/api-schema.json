@@ -4827,6 +4827,7 @@
           },
           "total_count": {
             "type": "integer",
+            "description": "合計件数",
             "format": "int32"
           }
         }
@@ -4846,6 +4847,7 @@
           },
           "total_count": {
             "type": "integer",
+            "description": "合計件数",
             "format": "int32",
             "minimum": 0,
             "maximum": 2147483647,
@@ -4985,6 +4987,7 @@
           },
           "total_count": {
             "type": "integer",
+            "description": "合計件数",
             "format": "int32",
             "minimum": 0,
             "maximum": 2147483647,
@@ -5127,10 +5130,9 @@
           "company_id",
           "application_number",
           "applicant_id",
-          "approver_id",
+          "approver_ids",
           "target_date",
           "issue_date",
-          "content",
           "status",
           "passed_auto_check"
         ],
@@ -5161,17 +5163,17 @@
           },
           "applicant_id": {
             "type": "integer",
-            "description": "申請者の従業員ID",
+            "description": "申請者のユーザーID",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
             "example": 1
           },
-          "approver_id": {
+          "approver_ids": {
             "type": "array",
             "items": {
               "type": "integer",
-              "description": "承認者の従業員ID",
+              "description": "承認者のユーザーID",
               "format": "int32",
               "minimum": 1,
               "maximum": 2147483647,
@@ -5191,12 +5193,6 @@
             "description": "申請日",
             "format": "date",
             "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
-          },
-          "content": {
-            "type": "string",
-            "description": "申請内容",
-            "nullable": true,
-            "example": "申請内容"
           },
           "status": {
             "type": "string",
@@ -5222,10 +5218,9 @@
           "company_id",
           "application_number",
           "applicant_id",
-          "approver_id",
+          "approver_ids",
           "target_date",
           "issue_date",
-          "content",
           "status",
           "passed_auto_check",
           "approval_flow_route_id",
@@ -5261,17 +5256,17 @@
           },
           "applicant_id": {
             "type": "integer",
-            "description": "申請者の従業員ID",
+            "description": "申請者のユーザーID",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
             "example": 1
           },
-          "approver_id": {
+          "approver_ids": {
             "type": "array",
             "items": {
               "type": "integer",
-              "description": "承認者の従業員ID",
+              "description": "承認者のユーザーID",
               "format": "int32",
               "minimum": 1,
               "maximum": 2147483647,
@@ -5291,12 +5286,6 @@
             "description": "申請日",
             "format": "date",
             "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
-          },
-          "content": {
-            "type": "string",
-            "description": "申請内容",
-            "nullable": true,
-            "example": "申請内容"
           },
           "status": {
             "type": "string",
@@ -5357,7 +5346,7 @@
           "company_id",
           "application_number",
           "applicant_id",
-          "approver_id",
+          "approver_ids",
           "target_date",
           "holiday_type",
           "issue_date",
@@ -5391,17 +5380,17 @@
           },
           "applicant_id": {
             "type": "integer",
-            "description": "申請者の従業員ID",
+            "description": "申請者のユーザーID",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
             "example": 1
           },
-          "approver_id": {
+          "approver_ids": {
             "type": "array",
             "items": {
               "type": "integer",
-              "description": "承認者の従業員ID",
+              "description": "承認者のユーザーID",
               "format": "int32",
               "minimum": 1,
               "maximum": 2147483647,
@@ -5448,6 +5437,7 @@
           "comment": {
             "type": "string",
             "description": "申請理由",
+            "maxLength": 255,
             "nullable": true,
             "example": "申請理由"
           },
@@ -5514,7 +5504,7 @@
           },
           "applicant_id": {
             "type": "integer",
-            "description": "申請者の従業員ID",
+            "description": "申請者のユーザーID",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
@@ -5524,7 +5514,7 @@
             "type": "array",
             "items": {
               "type": "integer",
-              "description": "承認者の従業員ID",
+              "description": "承認者のユーザーID",
               "format": "int32",
               "minimum": 1,
               "maximum": 2147483647,
@@ -5571,6 +5561,7 @@
           "comment": {
             "type": "string",
             "description": "申請理由",
+            "maxLength": 255,
             "nullable": true,
             "example": "申請理由"
           },
@@ -5636,7 +5627,6 @@
           "approver_ids",
           "target_date",
           "issue_date",
-          "content",
           "status",
           "passed_auto_check"
         ],
@@ -5667,7 +5657,7 @@
           },
           "applicant_id": {
             "type": "integer",
-            "description": "申請者の従業員ID",
+            "description": "申請者のユーザーID",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
@@ -5677,7 +5667,7 @@
             "type": "array",
             "items": {
               "type": "integer",
-              "description": "承認者の従業員ID",
+              "description": "承認者のユーザーID",
               "format": "int32",
               "minimum": 1,
               "maximum": 2147483647,
@@ -5711,15 +5701,10 @@
             "format": "date",
             "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
           },
-          "content": {
-            "type": "string",
-            "description": "申請内容",
-            "nullable": true,
-            "example": "申請内容"
-          },
           "comment": {
             "type": "string",
             "description": "申請理由",
+            "maxLength": 255,
             "nullable": true,
             "example": "申請理由"
           },
@@ -5747,10 +5732,9 @@
           "company_id",
           "application_number",
           "applicant_id",
-          "approver_id",
+          "approver_ids",
           "target_date",
           "issue_date",
-          "content",
           "status",
           "passed_auto_check",
           "approval_flow_route_id",
@@ -5786,17 +5770,17 @@
           },
           "applicant_id": {
             "type": "integer",
-            "description": "申請者の従業員ID",
+            "description": "申請者のユーザーID",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
             "example": 1
           },
-          "approver_id": {
+          "approver_ids": {
             "type": "array",
             "items": {
               "type": "integer",
-              "description": "承認者の従業員ID",
+              "description": "承認者のユーザーID",
               "format": "int32",
               "minimum": 1,
               "maximum": 2147483647,
@@ -5830,15 +5814,10 @@
             "format": "date",
             "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
           },
-          "content": {
-            "type": "string",
-            "description": "申請内容",
-            "nullable": true,
-            "example": "申請内容"
-          },
           "comment": {
             "type": "string",
             "description": "申請理由",
+            "maxLength": 255,
             "nullable": true,
             "example": "申請理由"
           },
@@ -6070,6 +6049,7 @@
           },
           "total_count": {
             "type": "integer",
+            "description": "合計件数",
             "format": "int32",
             "example": 1
           }
@@ -6086,6 +6066,7 @@
           },
           "total_count": {
             "type": "integer",
+            "description": "合計件数",
             "format": "int32"
           }
         }
@@ -8400,6 +8381,7 @@
           },
           "total_count": {
             "type": "integer",
+            "description": "合計件数",
             "format": "int32",
             "minimum": 0,
             "maximum": 2147483647,
@@ -8464,16 +8446,7 @@
           },
           "approver_id": {
             "type": "integer",
-            "description": "承認者の従業員ID",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 2147483647,
-            "nullable": true,
-            "example": 1
-          },
-          "group_id": {
-            "type": "integer",
-            "description": "部門ID",
+            "description": "承認者のユーザーID",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
@@ -8508,16 +8481,7 @@
           },
           "approver_id": {
             "type": "integer",
-            "description": "承認者の従業員ID",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 2147483647,
-            "nullable": true,
-            "example": 1
-          },
-          "group_id": {
-            "type": "integer",
-            "description": "部門ID",
+            "description": "承認者のユーザーID",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
@@ -8541,6 +8505,7 @@
           },
           "total_count": {
             "type": "integer",
+            "description": "合計件数",
             "format": "int32",
             "minimum": 0,
             "maximum": 2147483647,
@@ -8608,6 +8573,7 @@
           "comment": {
             "type": "string",
             "description": "申請理由",
+            "maxLength": 255,
             "nullable": true,
             "example": "申請理由"
           },
@@ -8622,16 +8588,7 @@
           },
           "approver_id": {
             "type": "integer",
-            "description": "承認者の従業員ID",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 2147483647,
-            "nullable": true,
-            "example": 1
-          },
-          "group_id": {
-            "type": "integer",
-            "description": "部門ID",
+            "description": "承認者のユーザーID",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
@@ -8655,6 +8612,7 @@
           },
           "total_count": {
             "type": "integer",
+            "description": "合計件数",
             "format": "int32",
             "minimum": 0,
             "maximum": 2147483647,
@@ -8715,6 +8673,7 @@
           "comment": {
             "type": "string",
             "description": "申請理由",
+            "maxLength": 255,
             "nullable": true,
             "example": "申請理由"
           },
@@ -8728,16 +8687,7 @@
           },
           "approver_id": {
             "type": "integer",
-            "description": "承認者の従業員ID",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 2147483647,
-            "nullable": true,
-            "example": 1
-          },
-          "group_id": {
-            "type": "integer",
-            "description": "部門ID",
+            "description": "承認者のユーザーID",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
@@ -8794,16 +8744,7 @@
           },
           "next_approver_id": {
             "type": "integer",
-            "description": "次のステップの承認者の従業員ID",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 2147483647,
-            "nullable": true,
-            "example": 1
-          },
-          "next_group_id": {
-            "type": "integer",
-            "description": "次のステップの部門ID",
+            "description": "次のステップの承認者のユーザーID",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
