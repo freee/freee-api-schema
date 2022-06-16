@@ -5130,7 +5130,6 @@
           "company_id",
           "application_number",
           "applicant_id",
-          "approver_ids",
           "target_date",
           "issue_date",
           "status",
@@ -5170,6 +5169,7 @@
             "example": 1
           },
           "approver_ids": {
+            "description": "承認者のユーザーID配列<br>\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した申請\n- 申請が差戻された",
             "type": "array",
             "items": {
               "type": "integer",
@@ -5196,8 +5196,9 @@
           },
           "status": {
             "type": "string",
-            "description": "申請ステータス。（in_progress:申請中、approved:承認済、feedback:差戻し）",
+            "description": "申請ステータス。（draft:下書き、in_progress:申請中、approved:承認済、feedback:差戻し）",
             "enum": [
+              "draft",
               "in_progress",
               "approved",
               "feedback"
@@ -5218,7 +5219,6 @@
           "company_id",
           "application_number",
           "applicant_id",
-          "approver_ids",
           "target_date",
           "issue_date",
           "status",
@@ -5226,7 +5226,6 @@
           "approval_flow_route_id",
           "approval_flow_route_name",
           "approval_flow_logs",
-          "current_step_id",
           "current_round"
         ],
         "properties": {
@@ -5263,6 +5262,7 @@
             "example": 1
           },
           "approver_ids": {
+            "description": "承認者のユーザーID配列<br>\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した申請\n- 申請が差戻された",
             "type": "array",
             "items": {
               "type": "integer",
@@ -5289,8 +5289,9 @@
           },
           "status": {
             "type": "string",
-            "description": "申請ステータス。（in_progress:申請中、approved:承認済、feedback:差戻し）",
+            "description": "申請ステータス。（draft:下書き、in_progress:申請中、approved:承認済、feedback:差戻し）",
             "enum": [
+              "draft",
               "in_progress",
               "approved",
               "feedback"
@@ -5323,11 +5324,12 @@
           },
           "current_step_id": {
             "type": "integer",
-            "description": "現在承認ステップID",
+            "description": "現在承認ステップID<br>\n申請を差戻した場合、nullになります。",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
-            "example": 1
+            "example": 1,
+            "nullable": true
           },
           "current_round": {
             "type": "integer",
@@ -5346,7 +5348,6 @@
           "company_id",
           "application_number",
           "applicant_id",
-          "approver_ids",
           "target_date",
           "holiday_type",
           "issue_date",
@@ -5387,6 +5388,7 @@
             "example": 1
           },
           "approver_ids": {
+            "description": "承認者のユーザーID配列<br>\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した申請\n- 申請が差戻された",
             "type": "array",
             "items": {
               "type": "integer",
@@ -5443,8 +5445,9 @@
           },
           "status": {
             "type": "string",
-            "description": "申請ステータス。（in_progress:申請中、approved:承認済、feedback:差戻し）",
+            "description": "申請ステータス。（draft:下書き、in_progress:申請中、approved:承認済、feedback:差戻し）",
             "enum": [
+              "draft",
               "in_progress",
               "approved",
               "feedback"
@@ -5465,7 +5468,6 @@
           "company_id",
           "application_number",
           "applicant_id",
-          "approver_ids",
           "target_date",
           "holiday_type",
           "issue_date",
@@ -5474,7 +5476,6 @@
           "approval_flow_route_id",
           "approval_flow_route_name",
           "approval_flow_logs",
-          "current_step_id",
           "current_round"
         ],
         "properties": {
@@ -5511,6 +5512,7 @@
             "example": 1
           },
           "approver_ids": {
+            "description": "承認者のユーザーID配列<br>\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した申請\n- 申請が差戻された",
             "type": "array",
             "items": {
               "type": "integer",
@@ -5567,8 +5569,9 @@
           },
           "status": {
             "type": "string",
-            "description": "申請ステータス。（in_progress:申請中、approved:承認済、feedback:差戻し）",
+            "description": "申請ステータス。（draft:下書き、in_progress:申請中、approved:承認済、feedback:差戻し）",
             "enum": [
+              "draft",
               "in_progress",
               "approved",
               "feedback"
@@ -5601,11 +5604,12 @@
           },
           "current_step_id": {
             "type": "integer",
-            "description": "現在承認ステップID",
+            "description": "現在承認ステップID<br>\n申請を差戻した場合、nullになります。",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
-            "example": 1
+            "example": 1,
+            "nullable": true
           },
           "current_round": {
             "type": "integer",
@@ -5624,7 +5628,6 @@
           "company_id",
           "application_number",
           "applicant_id",
-          "approver_ids",
           "target_date",
           "issue_date",
           "status",
@@ -5664,6 +5667,7 @@
             "example": 1
           },
           "approver_ids": {
+            "description": "承認者のユーザーID配列<br>\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した申請\n- 申請が差戻された",
             "type": "array",
             "items": {
               "type": "integer",
@@ -5710,8 +5714,9 @@
           },
           "status": {
             "type": "string",
-            "description": "申請ステータス。（in_progress:申請中、approved:承認済、feedback:差戻し）",
+            "description": "申請ステータス。（draft:下書き、in_progress:申請中、approved:承認済、feedback:差戻し）",
             "enum": [
+              "draft",
               "in_progress",
               "approved",
               "feedback"
@@ -5732,7 +5737,6 @@
           "company_id",
           "application_number",
           "applicant_id",
-          "approver_ids",
           "target_date",
           "issue_date",
           "status",
@@ -5740,7 +5744,6 @@
           "approval_flow_route_id",
           "approval_flow_route_name",
           "approval_flow_logs",
-          "current_step_id",
           "current_round"
         ],
         "properties": {
@@ -5777,6 +5780,7 @@
             "example": 1
           },
           "approver_ids": {
+            "description": "承認者のユーザーID配列<br>\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した申請\n- 申請が差戻された",
             "type": "array",
             "items": {
               "type": "integer",
@@ -5823,8 +5827,9 @@
           },
           "status": {
             "type": "string",
-            "description": "申請ステータス。（in_progress:申請中、approved:承認済、feedback:差戻し）",
+            "description": "申請ステータス。（draft:下書き、in_progress:申請中、approved:承認済、feedback:差戻し）",
             "enum": [
+              "draft",
               "in_progress",
               "approved",
               "feedback"
@@ -5857,11 +5862,12 @@
           },
           "current_step_id": {
             "type": "integer",
-            "description": "現在承認ステップID",
+            "description": "現在承認ステップID<br>\n申請を差戻した場合、nullになります。",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
-            "example": 1
+            "example": 1,
+            "nullable": true
           },
           "current_round": {
             "type": "integer",
@@ -8561,13 +8567,13 @@
           "start_at": {
             "type": "string",
             "description": "取得予定開始時間",
-            "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+            "pattern": "^[0-9]{2}:[0-9]{2}?$",
             "example": 43200
           },
           "end_at": {
             "type": "string",
             "description": "取得予定終了時間",
-            "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+            "pattern": "^[0-9]{2}:[0-9]{2}?$",
             "example": 86340
           },
           "comment": {
