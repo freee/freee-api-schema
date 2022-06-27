@@ -5352,6 +5352,7 @@
           "holiday_type",
           "issue_date",
           "status",
+          "revoke_status",
           "passed_auto_check"
         ],
         "properties": {
@@ -5381,10 +5382,11 @@
           },
           "applicant_id": {
             "type": "integer",
-            "description": "申請者のユーザーID",
+            "description": "申請者のユーザーID\n\n申請後に従業員が削除された場合、nullになります\n",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
+            "nullable": true,
             "example": 1
           },
           "approver_ids": {
@@ -5445,7 +5447,7 @@
           },
           "status": {
             "type": "string",
-            "description": "申請ステータス。（draft:下書き、in_progress:申請中、approved:承認済、feedback:差戻し）",
+            "description": "申請ステータス。（draft:下書き、in_progress:申請中、approved:承認済、feedback:差戻し）\n",
             "enum": [
               "draft",
               "in_progress",
@@ -5453,6 +5455,16 @@
               "feedback"
             ],
             "example": "in_progress"
+          },
+          "revoke_status": {
+            "type": "string",
+            "description": "取消申請ステータス。（null:取消申請されてない、revoking:取消中、revoked:取消済）",
+            "enum": [
+              "revoking",
+              "revoked"
+            ],
+            "nullable": true,
+            "example": "revoking"
           },
           "passed_auto_check": {
             "type": "boolean",
@@ -8589,7 +8601,7 @@
           },
           "approver_id": {
             "type": "integer",
-            "description": "承認者のユーザーID",
+            "description": "現在承認ステップの承認者のユーザーID\n\napprover_idに値を指定する場合、指定なしの申請経路を利用した申請は返却されません\n",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
@@ -8686,7 +8698,7 @@
           },
           "approver_id": {
             "type": "integer",
-            "description": "承認者のユーザーID",
+            "description": "現在承認ステップの承認者のユーザーID\n\napprover_idに値を指定する場合、指定なしの申請経路を利用した申請は返却されません\n",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
