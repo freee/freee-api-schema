@@ -8601,7 +8601,7 @@
           },
           "approver_id": {
             "type": "integer",
-            "description": "現在承認ステップの承認者のユーザーID\n\napprover_idに値を指定する場合、指定なしの申請経路を利用した申請は返却されません\n",
+            "description": "承認者のユーザーID",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
@@ -8698,7 +8698,7 @@
           },
           "approver_id": {
             "type": "integer",
-            "description": "現在承認ステップの承認者のユーザーID\n\napprover_idに値を指定する場合、指定なしの申請経路を利用した申請は返却されません\n",
+            "description": "承認者のユーザーID",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
