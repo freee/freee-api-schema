@@ -5484,6 +5484,7 @@
           "holiday_type",
           "issue_date",
           "status",
+          "revoke_status",
           "passed_auto_check",
           "approval_flow_route_id",
           "approval_flow_route_name",
@@ -5590,6 +5591,16 @@
             ],
             "example": "in_progress"
           },
+          "revoke_status": {
+            "type": "string",
+            "description": "取消申請ステータス。（null:取消申請されてない、revoking:取消中、revoked:取消済）",
+            "enum": [
+              "revoking",
+              "revoked"
+            ],
+            "nullable": true,
+            "example": "revoking"
+          },
           "passed_auto_check": {
             "type": "boolean",
             "description": "自動チェック結果",
@@ -5643,6 +5654,7 @@
           "target_date",
           "issue_date",
           "status",
+          "revoke_status",
           "passed_auto_check"
         ],
         "properties": {
@@ -5735,6 +5747,16 @@
             ],
             "example": "in_progress"
           },
+          "revoke_status": {
+            "type": "string",
+            "description": "取消申請ステータス。（null:取消申請されてない、revoking:取消中、revoked:取消済）",
+            "enum": [
+              "revoking",
+              "revoked"
+            ],
+            "nullable": true,
+            "example": "revoking"
+          },
           "passed_auto_check": {
             "type": "boolean",
             "description": "自動チェック結果",
@@ -5752,6 +5774,7 @@
           "target_date",
           "issue_date",
           "status",
+          "revoke_status",
           "passed_auto_check",
           "approval_flow_route_id",
           "approval_flow_route_name",
@@ -5847,6 +5870,16 @@
               "feedback"
             ],
             "example": "in_progress"
+          },
+          "revoke_status": {
+            "type": "string",
+            "description": "取消申請ステータス。（null:取消申請されてない、revoking:取消中、revoked:取消済）",
+            "enum": [
+              "revoking",
+              "revoked"
+            ],
+            "nullable": true,
+            "example": "revoking"
           },
           "passed_auto_check": {
             "type": "boolean",
@@ -8710,7 +8743,7 @@
         "type": "object",
         "required": [
           "company_id",
-          "action",
+          "approval_action",
           "target_round",
           "target_step_id"
         ],
@@ -8723,7 +8756,7 @@
             "maximum": 2147483647,
             "example": 1
           },
-          "action": {
+          "approval_action": {
             "type": "string",
             "description": "申請操作。（approve:承認、cancel:取り消し、feedback:差戻し、force_feedback:承認取り消し）",
             "enum": [
