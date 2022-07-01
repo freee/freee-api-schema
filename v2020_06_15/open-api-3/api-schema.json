@@ -18045,9 +18045,9 @@
                 },
                 "amount": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 0,
-                  "maximum": 2147483647,
-                  "description": "金額",
+                  "maximum": 99999999999,
                   "example": 30000
                 },
                 "account_item_id": {
@@ -18328,8 +18328,9 @@
                 },
                 "amount": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 0,
-                  "maximum": 2147483647,
+                  "maximum": 99999999999,
                   "description": "金額",
                   "example": 30000
                 },
@@ -31695,6 +31696,7 @@
               },
               "total_amount": {
                 "type": "integer",
+                "format": "int64",
                 "description": "合計金額",
                 "example": 30000
               },
@@ -31751,8 +31753,9 @@
                     },
                     "amount": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 0,
-                      "maximum": 2147483647,
+                      "maximum": 99999999999,
                       "description": "金額",
                       "example": 30000
                     },
@@ -32190,6 +32193,7 @@
                 },
                 "total_amount": {
                   "type": "integer",
+                  "format": "int64",
                   "description": "合計金額",
                   "example": 30000
                 },
