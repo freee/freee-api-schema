@@ -5262,7 +5262,7 @@
             "example": 1
           },
           "approver_ids": {
-            "description": "承認者のユーザーID配列<br>\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した申請\n- 申請が差戻された",
+            "description": "承認者のユーザーID配列<br>\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した、申請ステータスが承認済み以外の申請\n- 申請が差戻された",
             "type": "array",
             "items": {
               "type": "integer",
@@ -5525,7 +5525,7 @@
             "example": 1
           },
           "approver_ids": {
-            "description": "承認者のユーザーID配列<br>\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した申請\n- 申請が差戻された",
+            "description": "承認者のユーザーID配列<br>\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した、申請ステータスが承認済み以外の申請\n- 申請が差戻された",
             "type": "array",
             "items": {
               "type": "integer",
@@ -5815,7 +5815,7 @@
             "example": 1
           },
           "approver_ids": {
-            "description": "承認者のユーザーID配列<br>\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した申請\n- 申請が差戻された",
+            "description": "承認者のユーザーID配列<br>\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した、申請ステータスが承認済み以外の申請\n- 申請が差戻された",
             "type": "array",
             "items": {
               "type": "integer",
@@ -8769,7 +8769,7 @@
           },
           "target_round": {
             "type": "integer",
-            "description": "対象round。操作がcancelのとき必須です。差戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。取得APIレスポンス.current_roundを送信してください。",
+            "description": "対象round。差戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。取得APIレスポンス.current_roundを送信してください。",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
@@ -8778,7 +8778,7 @@
           },
           "target_step_id": {
             "type": "integer",
-            "description": "対象承認ステップID 操作がcancelのとき必須です。取得APIレスポンス.current_step_idを送信してください。",
+            "description": "対象承認ステップID。取得APIレスポンス.current_step_idを送信してください。",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
