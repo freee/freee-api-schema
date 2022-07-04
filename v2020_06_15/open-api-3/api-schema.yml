@@ -23011,6 +23011,7 @@ components:
                 nullable: true
                 type: integer
               amount:
+                description: 金額
                 example: 30000
                 format: int64
                 maximum: 99999999999
@@ -24302,7 +24303,8 @@ components:
           example: A001
           type: string
         quotation_status:
-          description: '見積書ステータス  (unsubmitted: 送付待ち, submitted: 送付済み)'
+          description: '見積書ステータス  (unsubmitted: 送付待ち, submitted: 送付済み) (請求書承認ワークフローを利用している場合、unsubmitted
+            を指定すると、下書きの見積書が作成されます)'
           enum:
           - unsubmitted
           - submitted
@@ -25435,7 +25437,8 @@ components:
           example: A001
           type: string
         quotation_status:
-          description: '見積書ステータス  (unsubmitted: 送付待ち, submitted: 送付済み)'
+          description: '見積書ステータス  (unsubmitted: 送付待ち, submitted: 送付済み) (請求書承認ワークフローを利用している場合、unsubmitted
+            を指定すると、下書きの見積書が作成されます)'
           enum:
           - unsubmitted
           - submitted
