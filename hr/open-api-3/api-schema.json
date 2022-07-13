@@ -5169,7 +5169,7 @@
             "example": 1
           },
           "approver_ids": {
-            "description": "承認者のユーザーID配列<br>\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した申請\n- 申請が差戻された",
+            "description": "承認者のユーザーID配列<br>\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した、申請ステータスが承認済み以外の申請\n- 申請が差戻された",
             "type": "array",
             "items": {
               "type": "integer",
@@ -5382,15 +5382,14 @@
           },
           "applicant_id": {
             "type": "integer",
-            "description": "申請者のユーザーID\n\n申請後に従業員が削除された場合、nullになります\n",
+            "description": "申請者のユーザーID",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
-            "nullable": true,
             "example": 1
           },
           "approver_ids": {
-            "description": "承認者のユーザーID配列<br>\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した申請\n- 申請が差戻された",
+            "description": "承認者のユーザーID配列<br>\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した、申請ステータスが承認済み以外の申請\n- 申請が差戻された",
             "type": "array",
             "items": {
               "type": "integer",
@@ -5652,6 +5651,8 @@
           "application_number",
           "applicant_id",
           "target_date",
+          "start_at",
+          "end_at",
           "issue_date",
           "status",
           "revoke_status",
@@ -5691,7 +5692,7 @@
             "example": 1
           },
           "approver_ids": {
-            "description": "承認者のユーザーID配列<br>\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した申請\n- 申請が差戻された",
+            "description": "承認者のユーザーID配列<br>\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した、申請ステータスが承認済み以外の申請\n- 申請が差戻された",
             "type": "array",
             "items": {
               "type": "integer",
@@ -5713,14 +5714,12 @@
             "type": "string",
             "description": "取得予定開始時間",
             "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
-            "nullable": true,
             "example": 43200
           },
           "end_at": {
             "type": "string",
             "description": "取得予定終了時間",
             "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
-            "nullable": true,
             "example": 86340
           },
           "issue_date": {
@@ -5772,6 +5771,8 @@
           "application_number",
           "applicant_id",
           "target_date",
+          "start_at",
+          "end_at",
           "issue_date",
           "status",
           "revoke_status",
@@ -5837,14 +5838,12 @@
             "type": "string",
             "description": "取得予定開始時間",
             "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
-            "nullable": true,
             "example": 43200
           },
           "end_at": {
             "type": "string",
             "description": "取得予定終了時間",
             "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
-            "nullable": true,
             "example": 86340
           },
           "issue_date": {
@@ -8671,11 +8670,8 @@
           "overtime_work"
         ],
         "properties": {
-          "overtime_works": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ApiV1OvertimeWorkResponseParams"
-            }
+          "overtime_work": {
+            "$ref": "#/components/schemas/ApiV1OvertimeWorkResponseParams"
           }
         }
       },
