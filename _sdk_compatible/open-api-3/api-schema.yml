@@ -11069,7 +11069,7 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               "$ref": "#/components/schemas/walletableUpdateParams"
-        description: 口座の作成
+        description: 口座の更新
         required: false
       summary: 口座の更新
 components:
@@ -28526,7 +28526,7 @@ components:
     walletableCreateParams:
       properties:
         bank_id:
-          description: サービスID
+          description: 連携サービスID（typeにbank_account、credit_cardを指定する場合は必須）
           example: 1
           maximum: 2147483647
           minimum: 1
@@ -28537,11 +28537,13 @@ components:
           maximum: 2147483647
           minimum: 1
           type: integer
-        group_name:
-          description: 決算書表示名（小カテゴリー）　例：売掛金, 受取手形, 未収入金（法人のみ）, 買掛金, 支払手形, 未払金, 預り金,
-            前受金
-          example: 売掛金
-          type: string
+        is_asset:
+          description: |
+            口座を資産口座とするか負債口座とするか（true: 資産口座 (デフォルト), false: 負債口座）<br>
+            bank_idを指定しない場合にのみ使われます。<br>
+            bank_idを指定する場合には資産口座か負債口座かはbank_idに指定したサービスに応じて決定され、is_assetに指定した値は無視されます。
+          example: true
+          type: boolean
         name:
           description: 口座名 (255文字以内)
           example: ＸＸ銀行
@@ -28566,7 +28568,7 @@ components:
         walletable:
           properties:
             bank_id:
-              description: サービスID
+              description: 連携サービスID（typeにbank_account、credit_cardを指定する場合は必須）
               example: 1
               maximum: 2147483647
               minimum: 1
