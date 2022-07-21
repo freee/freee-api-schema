@@ -4301,6 +4301,870 @@
           }
         }
       }
+    },
+    "/api/v1/approval_requests/paid_holidays": {
+      "get": {
+        "tags": [
+          "有給申請"
+        ],
+        "summary": "有給申請の一覧取得\n",
+        "description": "\n指定した事業所の指定日付時点における有給申請情報をリストで返します。\n- プロフェッショナルプラン、エンタープライズプランでのみ実行可能です。\n\n申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n- 役職指定（申請者の所属部門）\n- 役職指定（申請時に部門指定）\n- 部門および役職指定",
+        "operationId": "get_approval_requests_paid_holidays",
+        "parameters": [
+          {
+            "name": "company_id",
+            "in": "query",
+            "required": true,
+            "description": "事業所ID",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "example": 1
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "申請ステータス\n- `draft` - 下書き\n- `in_progress` - 申請中\n- `approved` - 承認済\n- `feedback` - 差戻し",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "draft",
+                "in_progress",
+                "approved",
+                "feedback"
+              ],
+              "example": "in_progress"
+            }
+          },
+          {
+            "name": "application_number",
+            "in": "query",
+            "description": "申請No",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "example": 1
+          },
+          {
+            "name": "start_issue_date",
+            "in": "query",
+            "description": "申請開始日",
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            },
+            "example": "2022-02-01"
+          },
+          {
+            "name": "end_issue_date",
+            "in": "query",
+            "description": "申請終了日",
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            },
+            "example": "2022-02-01"
+          },
+          {
+            "name": "approver_id",
+            "in": "query",
+            "description": "現在承認ステップの承認者のユーザーID\n\napprover_idに値を指定する場合、指定なしの申請経路を利用した申請は返却されません\n",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "example": 1
+          },
+          {
+            "name": "applicant_id",
+            "in": "query",
+            "description": "申請者のユーザーID",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "example": 1
+          },
+          {
+            "name": "start_target_date",
+            "in": "query",
+            "description": "対象開始日",
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            },
+            "example": "2022-02-01"
+          },
+          {
+            "name": "end_target_date",
+            "in": "query",
+            "description": "対象終了日",
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            },
+            "example": "2022-02-01"
+          },
+          {
+            "name": "passed_auto_check",
+            "in": "query",
+            "description": "自動チェック結果\n- trueを指定した場合、自動チェック結果がtrueの申請のみ返却します。\n- falseを指定した場合、自動チェック結果がfalseの申請のみ返却します。\n- キーごと指定しない場合、すべての申請を返却します。",
+            "schema": {
+              "type": "boolean"
+            },
+            "example": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "取得レコードの件数 (デフォルト: 50, 最小: 1, 最大: 100)",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "example": 50
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "取得レコードのオフセット (デフォルト: 0)",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647,
+              "example": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiV1PaidHolidayIndexResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "有給申請"
+        ],
+        "summary": "有給申請の作成\n",
+        "description": "\n指定した事業所の有給申請を新規作成します。\n- プロフェッショナルプラン、エンタープライズプランでのみ実行可能です。\n\n申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n- 役職指定（申請者の所属部門）\n- 役職指定（申請時に部門指定）\n- 部門および役職指定\n\n申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。\n- status: draft\n- approval_flow_logs.action: cancel",
+        "operationId": "create_approval_requests_paid_holiday",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiV1PaidHolidayRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiV1PaidHolidayResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/approval_requests/paid_holidays/{id}": {
+      "get": {
+        "tags": [
+          "有給申請"
+        ],
+        "summary": "有給申請の詳細取得\n",
+        "description": "\n指定した事業所の有給申請情報を取得します。\n- プロフェッショナルプラン、エンタープライズプランでのみ実行可能です。\n\n申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n- 役職指定（申請者の所属部門）\n- 役職指定（申請時に部門指定）\n- 部門および役職指定\n\n申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。\n- status: draft\n- approval_flow_logs.action: cancel",
+        "operationId": "get_approval_requests_paid_holiday",
+        "parameters": [
+          {
+            "name": "company_id",
+            "in": "query",
+            "required": true,
+            "description": "事業所ID",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "example": 1
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "有給申請ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiV1PaidHolidayResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "有給申請"
+        ],
+        "summary": "有給申請の更新\n",
+        "description": "\n指定した事業所の有給申請情報を更新します。\n- プロフェッショナルプラン、エンタープライズプランでのみ実行可能です。\n\n申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n- 役職指定（申請者の所属部門）\n- 役職指定（申請時に部門指定）\n- 部門および役職指定\n\n申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。\n- status: draft\n- approval_flow_logs.action: cancel",
+        "operationId": "update_approval_requests_paid_holiday",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "有給申請ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiV1PaidHolidayRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiV1PaidHolidayResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notfoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "有給申請"
+        ],
+        "summary": "有給申請の削除\n",
+        "description": "\n指定した事業所の有給申請情報を削除します。\n- プロフェッショナルプラン、エンタープライズプランでのみ実行可能です。\n\n申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n- 役職指定（申請者の所属部門）\n- 役職指定（申請時に部門指定）\n- 部門および役職指定",
+        "operationId": "destroy_approval_requests_paid_holiday",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "有給申請ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "example": 1
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "example": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notfoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/approval_requests/paid_holidays/{id}/actions": {
+      "post": {
+        "tags": [
+          "有給申請"
+        ],
+        "summary": "有給申請の承認操作\n",
+        "description": "\n指定した事業所の有給申請情報を承認操作します。\n- プロフェッショナルプラン、エンタープライズプランでのみ実行可能です。\n\n申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n- 役職指定（申請者の所属部門）\n- 役職指定（申請時に部門指定）\n- 部門および役職指定\n\n全休の有給申請は承認されると申請者の有給の残数が減ります。<br>\n半休と時間休の有給申請は承認されても申請者の有給の残数が減らない場合があります。以下の条件を満たす場合、申請者の有給の残数が減ります。\n- 申請承認後、申請者が申請の対象日に出勤打刻と退勤打刻をする。\n- 申請承認前に、申請者が申請の対象日に勤怠を登録している。\n\n申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。\n- status: draft\n- approval_flow_logs.action: cancel",
+        "operationId": "action_approval_requests_paid_holiday",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "有給申請ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "example": 1
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiV1ApprovalActionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiV1PaidHolidayResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notfoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/approval_flow_routes": {
+      "get": {
+        "tags": [
+          "申請経路"
+        ],
+        "summary": "申請経路一覧の取得",
+        "description": "指定した事業所の申請経路一覧を取得する\n- プロフェッショナルプラン、エンタープライズプランでのみ実行可能です。\n\n申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n- 役職指定（申請者の所属部門）\n- 役職指定（申請時に部門指定）\n- 部門および役職指定",
+        "operationId": "get_approval_flow_routes",
+        "parameters": [
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "name": "included_user_id",
+            "in": "query",
+            "description": "経路に含まれるユーザーのユーザーID",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "name": "usage",
+            "in": "query",
+            "description": "申請種別（申請経路を使用できる申請種別を示します。例えば、AttendanceWorkflow の場合は、勤怠申請で使用できる申請経路です。）\n- `AttendanceWorkflow` - 勤怠申請\n- `PersonalDataWorkflow` - 身上変更申請",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "AttendanceWorkflow",
+                "PersonalDataWorkflow"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiV1ApprovalFlowRoutesIndexResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/approval_flow_routes/{id}": {
+      "get": {
+        "tags": [
+          "申請経路"
+        ],
+        "summary": "申請経路の取得",
+        "description": "指定した事業所の申請経路を取得する\n- プロフェッショナルプラン、エンタープライズプランでのみ実行可能です。\n\n申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n- 役職指定（申請者の所属部門）\n- 役職指定（申請時に部門指定）\n- 部門および役職指定",
+        "operationId": "get_approval_flow_route",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "申請経路ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiV1ApprovalFlowRouteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notfoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -4447,13 +5311,13 @@
           },
           "last_name": {
             "type": "string",
-            "description": "姓（必須）",
+            "description": "姓（必須）<br>\nlast_nameとfirst_nameを空白文字で結合した文字列がdisplay_nameとして登録されます。\n- 例）last_name=田中、first_name＝太郎の場合、display_name＝田中 太郎\n- display_nameはput apiで更新可能です。",
             "maxLength": 255,
             "example": "山田"
           },
           "first_name": {
             "type": "string",
-            "description": "名（必須）",
+            "description": "名（必須）<br>\nlast_nameとfirst_nameを空白文字で結合した文字列がdisplay_nameとして登録されます。\n- 例）last_name=田中、first_name＝太郎の場合、display_name＝田中 太郎\n- display_nameはput apiで更新可能です。",
             "maxLength": 255,
             "example": "太郎"
           },
@@ -6694,7 +7558,7 @@
         "properties": {
           "id": {
             "type": "integer",
-            "description": "扶養親族ID（idがない場合は新規作成になる)",
+            "description": "扶養親族ルールID（idがない場合は新規作成になる)",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647
@@ -7813,6 +8677,7 @@
         "properties": {
           "employee_dependent_rules": {
             "type": "array",
+            "description": "扶養親族ルール",
             "items": {
               "$ref": "#/components/schemas/ApiV1EmployeesDependentRuleSerializer"
             }
