@@ -6832,7 +6832,7 @@
           "Walletables"
         ],
         "summary": "口座の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所に口座を作成する</p>\n\n<h2 id=\"\">注意点</h2>\n<ul><li>同期に対応した口座はこのAPIでは作成できません</li></ul>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n\n<li>\n<p>name : 口座名</p>\n</li>\n\n<li>\n<p>bank_id : サービスID</p>\n</li>\n\n<li>\n<p>group_name : 決算書表示名（小カテゴリー）　例：売掛金, 受取手形, 未収入金（法人のみ）, 買掛金, 支払手形, 未払金, 預り金, 前受金</p>\n</li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所に口座を作成する</p>\n\n<h2 id=\"\">注意点</h2>\n<ul><li>同期に対応した口座はこのAPIでは作成できません</li></ul>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n\n<li>\n<p>name : 口座名</p>\n</li>\n\n<li>\n<p>bank_id : 連携サービスID</p>\n</li>\n\n<li>\n<p>is_asset : type:wallet指定時に口座を資産口座とするか負債口座とするか（true: 資産口座 (デフォルト), false: 負債口座）</p>\n</li>\n</ul>",
         "operationId": "create_walletable",
         "requestBody": {
           "description": "口座の作成",
@@ -7065,7 +7065,7 @@
           }
         ],
         "requestBody": {
-          "description": "口座の作成",
+          "description": "口座の更新",
           "content": {
             "application/json": {
               "schema": {
@@ -17474,13 +17474,13 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 2147483647,
-            "description": "サービスID",
+            "description": "連携サービスID（typeにbank_account、credit_cardを指定する場合は必須）",
             "example": 1
           },
-          "group_name": {
-            "type": "string",
-            "description": "決算書表示名（小カテゴリー）　例：売掛金, 受取手形, 未収入金（法人のみ）, 買掛金, 支払手形, 未払金, 預り金, 前受金",
-            "example": "売掛金"
+          "is_asset": {
+            "type": "boolean",
+            "description": "口座を資産口座とするか負債口座とするか（true: 資産口座 (デフォルト), false: 負債口座）<br>\nbank_idを指定しない場合にのみ使われます。<br>\nbank_idを指定する場合には資産口座か負債口座かはbank_idに指定したサービスに応じて決定され、is_assetに指定した値は無視されます。\n",
+            "example": true
           }
         }
       },
@@ -30300,7 +30300,7 @@
                 "type": "integer",
                 "minimum": 1,
                 "maximum": 2147483647,
-                "description": "サービスID",
+                "description": "連携サービスID（typeにbank_account、credit_cardを指定する場合は必須）",
                 "example": 1
               },
               "type": {
