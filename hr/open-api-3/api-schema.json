@@ -5220,6 +5220,12 @@
             "format": "date",
             "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
             "nullable": true
+          },
+          "company_reference_date_rule_name": {
+            "type": "string",
+            "maxLength": 15,
+            "description": "<a href=\"https://support.freee.co.jp/hc/ja/articles/360000666303-締め日支払い日を変更する方法は-\" target=\"_blank\">締め日支払い日グループ名</a>\nで設定した締め日支払い日を指定してください。\n- 未指定の際は、締め日支払い日は変わりません。\n- 指定した従業員が給与計算対象外の場合、指定するとエラーになります。",
+            "example": "当月締め翌月払い"
           }
         }
       },
@@ -5305,8 +5311,8 @@
           },
           "company_reference_date_rule_name": {
             "type": "string",
-            "description": "<a href=\"https://support.freee.co.jp/hc/ja/articles/360000666303-締め日支払い日を変更する方法は-\" target=\"_blank\">締め日支払い日グループ名</a>\nで設定した締め日支払い日を指定してください。\n- 未指定の際は、最初に登録したデータが利用されます。\n- 入力パラメータのno_payroll_calculationがtrueの場合に指定するとエラーになります。",
             "maxLength": 15,
+            "description": "<a href=\"https://support.freee.co.jp/hc/ja/articles/360000666303-締め日支払い日を変更する方法は-\" target=\"_blank\">締め日支払い日グループ名</a>\nで設定した締め日支払い日を指定してください。\n- 未指定の際は、最初に登録したデータが利用されます。\n- 入力パラメータのno_payroll_calculationがtrueの場合に指定するとエラーになります。",
             "example": "15日締め（当月25日払い）"
           },
           "last_name": {
@@ -5355,7 +5361,7 @@
               "hourly"
             ],
             "description": "給与方式 monthly: 月給, daily: 日給, hourly: 時給\n- フレックスタイム制を使用している場合はmonthly以外指定できません。\n- 入力パラメータのno_payroll_calculationがfalseの場合は必須になります。\n- 入力パラメータのno_payroll_calculationがtrueの場合に指定するとエラーになります。",
-            "example": "15日締め（当月25日払い）"
+            "example": "monthly"
           },
           "pay_amount": {
             "type": "integer",
@@ -6895,6 +6901,12 @@
             "type": "boolean",
             "description": "給与計算対象従業員の場合trueを返します",
             "example": true
+          },
+          "company_reference_date_rule_name": {
+            "type": "string",
+            "description": "締め日支払日グループ名(給与計算対象外従業員の場合、nullを返します)",
+            "example": "当月締め翌月払い",
+            "nullable": true
           }
         }
       },
