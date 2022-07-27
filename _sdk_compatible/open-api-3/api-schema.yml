@@ -22678,7 +22678,7 @@ components:
                           description: 品目ID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         name:
                           description: 品目
@@ -22724,7 +22724,7 @@ components:
                           description: 取引先ID
                           example: 22
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         name:
                           description: 取引先名
@@ -22800,7 +22800,7 @@ components:
                           description: セグメント1タグID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         name:
                           description: セグメント1タグ名
@@ -22838,7 +22838,7 @@ components:
                           description: セグメント2タグID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         name:
                           description: セグメント2タグ名
@@ -22876,7 +22876,7 @@ components:
                           description: セグメント3タグID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         name:
                           description: セグメント3タグ名
@@ -22937,7 +22937,7 @@ components:
               description: 品目ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             partner_code:
               description: 取引先コード(条件に指定した時のみ含まれる）
@@ -22947,7 +22947,7 @@ components:
               description: 取引先ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             section_id:
               description: 部門ID(条件に指定した時のみ含まれる）
@@ -23062,7 +23062,7 @@ components:
                           description: 品目ID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -23104,7 +23104,7 @@ components:
                           description: 取引先ID
                           example: 22
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -23172,7 +23172,7 @@ components:
                           description: セグメント1タグID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -23206,7 +23206,7 @@ components:
                           description: セグメント2タグID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -23240,7 +23240,7 @@ components:
                           description: セグメント3タグID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -23317,7 +23317,7 @@ components:
               description: 品目ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             partner_code:
               description: 取引先コード(条件に指定した時のみ含まれる）
@@ -23327,7 +23327,7 @@ components:
               description: 取引先ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             section_id:
               description: 部門ID(条件に指定した時のみ含まれる）
@@ -23442,7 +23442,7 @@ components:
                           description: 品目ID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -23480,7 +23480,7 @@ components:
                           description: 取引先ID
                           example: 22
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -23540,7 +23540,7 @@ components:
                           description: セグメント1タグID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -23570,7 +23570,7 @@ components:
                           description: セグメント2タグID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -23600,7 +23600,7 @@ components:
                           description: セグメント3タグID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -23669,7 +23669,7 @@ components:
               description: 品目ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             partner_code:
               description: 取引先コード(条件に指定した時のみ含まれる）
@@ -23679,7 +23679,7 @@ components:
               description: 取引先ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             section_id:
               description: 部門ID(条件に指定した時のみ含まれる）
@@ -25329,7 +25329,7 @@ components:
                           description: 取引先ID
                           example: 22
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -26057,7 +26057,7 @@ components:
                           description: 品目ID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         name:
                           description: 品目
@@ -26103,7 +26103,7 @@ components:
                           description: 取引先ID
                           example: 22
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         name:
                           description: 取引先名
@@ -26141,7 +26141,7 @@ components:
                           description: 部門ID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         name:
                           description: 部門名
@@ -26179,7 +26179,7 @@ components:
                           description: セグメント1タグID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         name:
                           description: セグメント1タグ名
@@ -26217,7 +26217,7 @@ components:
                           description: セグメント2タグID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         name:
                           description: セグメント2タグ名
@@ -26255,7 +26255,7 @@ components:
                           description: セグメント3タグID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         name:
                           description: セグメント3タグ名
@@ -26323,7 +26323,7 @@ components:
               description: 品目ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             partner_code:
               description: 取引先コード(条件に指定した時のみ含まれる）
@@ -26333,13 +26333,13 @@ components:
               description: 取引先ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             section_id:
               description: 部門ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             start_date:
               description: 発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
@@ -26452,7 +26452,7 @@ components:
                           description: 部門ID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         items:
                           description: breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる
@@ -26466,7 +26466,7 @@ components:
                                 description: 品目ID
                                 example: 1
                                 maximum: 2147483647
-                                minimum: 1
+                                minimum: 0
                                 type: integer
                               name:
                                 description: 品目
@@ -26492,7 +26492,7 @@ components:
                                 description: 取引先ID
                                 example: 22
                                 maximum: 2147483647
-                                minimum: 1
+                                minimum: 0
                                 type: integer
                               name:
                                 description: 取引先名
@@ -26514,7 +26514,7 @@ components:
                                 description: セグメント1タグID
                                 example: 1
                                 maximum: 2147483647
-                                minimum: 1
+                                minimum: 0
                                 type: integer
                               name:
                                 description: セグメント1タグ名
@@ -26536,7 +26536,7 @@ components:
                                 description: セグメント2タグID
                                 example: 1
                                 maximum: 2147483647
-                                minimum: 1
+                                minimum: 0
                                 type: integer
                               name:
                                 description: セグメント2タグ名
@@ -26558,7 +26558,7 @@ components:
                                 description: セグメント3タグID
                                 example: 1
                                 maximum: 2147483647
-                                minimum: 1
+                                minimum: 0
                                 type: integer
                               name:
                                 description: セグメント3タグ名
@@ -26625,7 +26625,7 @@ components:
               description: 品目ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             partner_code:
               description: 取引先コード(条件に指定した時のみ含まれる）
@@ -26635,7 +26635,7 @@ components:
               description: 取引先ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             section_ids:
               description: 出力する部門の指定
@@ -26753,7 +26753,7 @@ components:
                           description: セグメント1タグID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         items:
                           description: breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる
@@ -26767,7 +26767,7 @@ components:
                                 description: 品目ID
                                 example: 1
                                 maximum: 2147483647
-                                minimum: 1
+                                minimum: 0
                                 type: integer
                               name:
                                 description: 品目
@@ -26793,7 +26793,7 @@ components:
                                 description: 取引先ID
                                 example: 22
                                 maximum: 2147483647
-                                minimum: 1
+                                minimum: 0
                                 type: integer
                               name:
                                 description: 取引先名
@@ -26815,7 +26815,7 @@ components:
                                 description: 部門ID
                                 example: 1
                                 maximum: 2147483647
-                                minimum: 1
+                                minimum: 0
                                 type: integer
                               name:
                                 description: 部門名
@@ -26878,7 +26878,7 @@ components:
               description: 品目ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             partner_code:
               description: 取引先コード(条件に指定した時のみ含まれる）
@@ -26888,13 +26888,13 @@ components:
               description: 取引先ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             section_id:
               description: 部門ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             segment_1_tag_ids:
               description: 出力するセグメント1の指定
@@ -27012,7 +27012,7 @@ components:
                           description: セグメント2タグID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         items:
                           description: breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる
@@ -27026,7 +27026,7 @@ components:
                                 description: 品目ID
                                 example: 1
                                 maximum: 2147483647
-                                minimum: 1
+                                minimum: 0
                                 type: integer
                               name:
                                 description: 品目
@@ -27052,7 +27052,7 @@ components:
                                 description: 取引先ID
                                 example: 22
                                 maximum: 2147483647
-                                minimum: 1
+                                minimum: 0
                                 type: integer
                               name:
                                 description: 取引先名
@@ -27074,7 +27074,7 @@ components:
                                 description: 部門ID
                                 example: 1
                                 maximum: 2147483647
-                                minimum: 1
+                                minimum: 0
                                 type: integer
                               name:
                                 description: 部門名
@@ -27137,7 +27137,7 @@ components:
               description: 品目ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             partner_code:
               description: 取引先コード(条件に指定した時のみ含まれる）
@@ -27147,13 +27147,13 @@ components:
               description: 取引先ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             section_id:
               description: 部門ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             segment_2_tag_ids:
               description: 出力するセグメント2の指定
@@ -27271,7 +27271,7 @@ components:
                           description: セグメント3タグID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         items:
                           description: breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる
@@ -27285,7 +27285,7 @@ components:
                                 description: 品目ID
                                 example: 1
                                 maximum: 2147483647
-                                minimum: 1
+                                minimum: 0
                                 type: integer
                               name:
                                 description: 品目
@@ -27311,7 +27311,7 @@ components:
                                 description: 取引先ID
                                 example: 22
                                 maximum: 2147483647
-                                minimum: 1
+                                minimum: 0
                                 type: integer
                               name:
                                 description: 取引先名
@@ -27333,7 +27333,7 @@ components:
                                 description: 部門ID
                                 example: 1
                                 maximum: 2147483647
-                                minimum: 1
+                                minimum: 0
                                 type: integer
                               name:
                                 description: 部門名
@@ -27396,7 +27396,7 @@ components:
               description: 品目ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             partner_code:
               description: 取引先コード(条件に指定した時のみ含まれる）
@@ -27406,13 +27406,13 @@ components:
               description: 取引先ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             section_id:
               description: 部門ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             segment_3_tag_ids:
               description: 出力するセグメント3の指定
@@ -27526,7 +27526,7 @@ components:
                           description: 品目ID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -27568,7 +27568,7 @@ components:
                           description: 取引先ID
                           example: 22
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -27602,7 +27602,7 @@ components:
                           description: 部門ID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -27636,7 +27636,7 @@ components:
                           description: セグメント1タグID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -27670,7 +27670,7 @@ components:
                           description: セグメント2タグID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -27704,7 +27704,7 @@ components:
                           description: セグメント3タグID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -27788,7 +27788,7 @@ components:
               description: 品目ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             partner_code:
               description: 取引先コード(条件に指定した時のみ含まれる）
@@ -27798,13 +27798,13 @@ components:
               description: 取引先ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             section_id:
               description: 部門ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             start_date:
               description: 発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
@@ -27913,7 +27913,7 @@ components:
                           description: 品目ID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -27951,7 +27951,7 @@ components:
                           description: 取引先ID
                           example: 22
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -27981,7 +27981,7 @@ components:
                           description: 部門ID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -28011,7 +28011,7 @@ components:
                           description: セグメント1タグID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -28041,7 +28041,7 @@ components:
                           description: セグメント2タグID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -28071,7 +28071,7 @@ components:
                           description: セグメント3タグID
                           example: 1
                           maximum: 2147483647
-                          minimum: 1
+                          minimum: 0
                           type: integer
                         last_year_closing_balance:
                           description: 前年度期末残高
@@ -28147,7 +28147,7 @@ components:
               description: 品目ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             partner_code:
               description: 取引先コード(条件に指定した時のみ含まれる）
@@ -28157,13 +28157,13 @@ components:
               description: 取引先ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             section_id:
               description: 部門ID(条件に指定した時のみ含まれる）
               example: 1
               maximum: 2147483647
-              minimum: 1
+              minimum: 0
               type: integer
             start_date:
               description: 発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
