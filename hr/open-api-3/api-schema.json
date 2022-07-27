@@ -9325,10 +9325,7 @@
         ],
         "properties": {
           "monthly_attendance": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ApiV1MonthlyAttendanceResponseParams"
-            }
+            "$ref": "#/components/schemas/ApiV1MonthlyAttendanceResponseParams"
           }
         }
       },
