@@ -19913,7 +19913,7 @@
               },
               "partner_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "取引先ID(条件に指定した時のみ含まれる）",
                 "example": 1
@@ -19925,7 +19925,7 @@
               },
               "item_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "品目ID(条件に指定した時のみ含まれる）",
                 "example": 1
@@ -19993,7 +19993,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "取引先ID",
                             "example": 22
@@ -20042,7 +20042,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "品目ID",
                             "example": 1
@@ -20140,7 +20140,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "セグメント1タグID",
                             "example": 1
@@ -20189,7 +20189,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "セグメント2タグID",
                             "example": 1
@@ -20238,7 +20238,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "セグメント3タグID",
                             "example": 1
@@ -20433,7 +20433,7 @@
               },
               "partner_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "取引先ID(条件に指定した時のみ含まれる）",
                 "example": 1
@@ -20445,7 +20445,7 @@
               },
               "item_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "品目ID(条件に指定した時のみ含まれる）",
                 "example": 1
@@ -20513,7 +20513,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "取引先ID",
                             "example": 22
@@ -20552,7 +20552,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "品目ID",
                             "example": 1
@@ -20630,7 +20630,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "セグメント1タグID",
                             "example": 1
@@ -20669,7 +20669,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "セグメント2タグID",
                             "example": 1
@@ -20708,7 +20708,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "セグメント3タグID",
                             "example": 1
@@ -20883,7 +20883,7 @@
               },
               "partner_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "取引先ID(条件に指定した時のみ含まれる）",
                 "example": 1
@@ -20895,7 +20895,7 @@
               },
               "item_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "品目ID(条件に指定した時のみ含まれる）",
                 "example": 1
@@ -20963,7 +20963,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "取引先ID",
                             "example": 22
@@ -21007,7 +21007,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "品目ID",
                             "example": 1
@@ -21095,7 +21095,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "セグメント1タグID",
                             "example": 1
@@ -21139,7 +21139,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "セグメント2タグID",
                             "example": 1
@@ -21183,7 +21183,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "セグメント3タグID",
                             "example": 1
@@ -21368,7 +21368,7 @@
               },
               "partner_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "取引先ID(条件に指定した時のみ含まれる）",
                 "example": 1
@@ -21380,14 +21380,14 @@
               },
               "item_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "品目ID(条件に指定した時のみ含まれる）",
                 "example": 1
               },
               "section_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "部門ID(条件に指定した時のみ含まれる）",
                 "example": 1
@@ -21457,7 +21457,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "取引先ID",
                             "example": 22
@@ -21506,7 +21506,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "品目ID",
                             "example": 1
@@ -21555,7 +21555,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "部門ID",
                             "example": 1
@@ -21604,7 +21604,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "セグメント1タグID",
                             "example": 1
@@ -21653,7 +21653,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "セグメント2タグID",
                             "example": 1
@@ -21702,7 +21702,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "セグメント3タグID",
                             "example": 1
@@ -21897,7 +21897,7 @@
               },
               "partner_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "取引先ID(条件に指定した時のみ含まれる）",
                 "example": 1
@@ -21909,14 +21909,14 @@
               },
               "item_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "品目ID(条件に指定した時のみ含まれる）",
                 "example": 1
               },
               "section_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "部門ID(条件に指定した時のみ含まれる）",
                 "example": 1
@@ -21986,7 +21986,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "取引先ID",
                             "example": 22
@@ -22025,7 +22025,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "品目ID",
                             "example": 1
@@ -22064,7 +22064,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "部門ID",
                             "example": 1
@@ -22103,7 +22103,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "セグメント1タグID",
                             "example": 1
@@ -22142,7 +22142,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "セグメント2タグID",
                             "example": 1
@@ -22181,7 +22181,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "セグメント3タグID",
                             "example": 1
@@ -22356,7 +22356,7 @@
               },
               "partner_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "取引先ID(条件に指定した時のみ含まれる）",
                 "example": 1
@@ -22368,14 +22368,14 @@
               },
               "item_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "品目ID(条件に指定した時のみ含まれる）",
                 "example": 1
               },
               "section_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "部門ID(条件に指定した時のみ含まれる）",
                 "example": 1
@@ -22445,7 +22445,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "取引先ID",
                             "example": 22
@@ -22489,7 +22489,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "品目ID",
                             "example": 1
@@ -22533,7 +22533,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "部門ID",
                             "example": 1
@@ -22577,7 +22577,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "セグメント1タグID",
                             "example": 1
@@ -22621,7 +22621,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "セグメント2タグID",
                             "example": 1
@@ -22665,7 +22665,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "セグメント3タグID",
                             "example": 1
@@ -22855,7 +22855,7 @@
               },
               "partner_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "取引先ID(条件に指定した時のみ含まれる）",
                 "example": 1
@@ -22867,7 +22867,7 @@
               },
               "item_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "品目ID(条件に指定した時のみ含まれる）",
                 "example": 1
@@ -22937,7 +22937,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "部門ID",
                             "example": 1
@@ -22963,7 +22963,7 @@
                               "properties": {
                                 "id": {
                                   "type": "integer",
-                                  "minimum": 1,
+                                  "minimum": 0,
                                   "maximum": 2147483647,
                                   "description": "取引先ID",
                                   "example": 22
@@ -22992,7 +22992,7 @@
                               "properties": {
                                 "id": {
                                   "type": "integer",
-                                  "minimum": 1,
+                                  "minimum": 0,
                                   "maximum": 2147483647,
                                   "description": "品目ID",
                                   "example": 1
@@ -23021,7 +23021,7 @@
                               "properties": {
                                 "id": {
                                   "type": "integer",
-                                  "minimum": 1,
+                                  "minimum": 0,
                                   "maximum": 2147483647,
                                   "description": "セグメント1タグID",
                                   "example": 1
@@ -23050,7 +23050,7 @@
                               "properties": {
                                 "id": {
                                   "type": "integer",
-                                  "minimum": 1,
+                                  "minimum": 0,
                                   "maximum": 2147483647,
                                   "description": "セグメント2タグID",
                                   "example": 1
@@ -23079,7 +23079,7 @@
                               "properties": {
                                 "id": {
                                   "type": "integer",
-                                  "minimum": 1,
+                                  "minimum": 0,
                                   "maximum": 2147483647,
                                   "description": "セグメント3タグID",
                                   "example": 1
@@ -23240,7 +23240,7 @@
               },
               "partner_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "取引先ID(条件に指定した時のみ含まれる）",
                 "example": 1
@@ -23252,14 +23252,14 @@
               },
               "item_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "品目ID(条件に指定した時のみ含まれる）",
                 "example": 1
               },
               "section_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "部門ID(条件に指定した時のみ含まれる）",
                 "example": 1
@@ -23329,7 +23329,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "セグメント1タグID",
                             "example": 1
@@ -23355,7 +23355,7 @@
                               "properties": {
                                 "id": {
                                   "type": "integer",
-                                  "minimum": 1,
+                                  "minimum": 0,
                                   "maximum": 2147483647,
                                   "description": "取引先ID",
                                   "example": 22
@@ -23384,7 +23384,7 @@
                               "properties": {
                                 "id": {
                                   "type": "integer",
-                                  "minimum": 1,
+                                  "minimum": 0,
                                   "maximum": 2147483647,
                                   "description": "品目ID",
                                   "example": 1
@@ -23413,7 +23413,7 @@
                               "properties": {
                                 "id": {
                                   "type": "integer",
-                                  "minimum": 1,
+                                  "minimum": 0,
                                   "maximum": 2147483647,
                                   "description": "部門ID",
                                   "example": 1
@@ -23574,7 +23574,7 @@
               },
               "partner_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "取引先ID(条件に指定した時のみ含まれる）",
                 "example": 1
@@ -23586,14 +23586,14 @@
               },
               "item_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "品目ID(条件に指定した時のみ含まれる）",
                 "example": 1
               },
               "section_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "部門ID(条件に指定した時のみ含まれる）",
                 "example": 1
@@ -23663,7 +23663,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "セグメント2タグID",
                             "example": 1
@@ -23689,7 +23689,7 @@
                               "properties": {
                                 "id": {
                                   "type": "integer",
-                                  "minimum": 1,
+                                  "minimum": 0,
                                   "maximum": 2147483647,
                                   "description": "取引先ID",
                                   "example": 22
@@ -23718,7 +23718,7 @@
                               "properties": {
                                 "id": {
                                   "type": "integer",
-                                  "minimum": 1,
+                                  "minimum": 0,
                                   "maximum": 2147483647,
                                   "description": "品目ID",
                                   "example": 1
@@ -23747,7 +23747,7 @@
                               "properties": {
                                 "id": {
                                   "type": "integer",
-                                  "minimum": 1,
+                                  "minimum": 0,
                                   "maximum": 2147483647,
                                   "description": "部門ID",
                                   "example": 1
@@ -23908,7 +23908,7 @@
               },
               "partner_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "取引先ID(条件に指定した時のみ含まれる）",
                 "example": 1
@@ -23920,14 +23920,14 @@
               },
               "item_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "品目ID(条件に指定した時のみ含まれる）",
                 "example": 1
               },
               "section_id": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 2147483647,
                 "description": "部門ID(条件に指定した時のみ含まれる）",
                 "example": 1
@@ -23997,7 +23997,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "セグメント3タグID",
                             "example": 1
@@ -24023,7 +24023,7 @@
                               "properties": {
                                 "id": {
                                   "type": "integer",
-                                  "minimum": 1,
+                                  "minimum": 0,
                                   "maximum": 2147483647,
                                   "description": "取引先ID",
                                   "example": 22
@@ -24052,7 +24052,7 @@
                               "properties": {
                                 "id": {
                                   "type": "integer",
-                                  "minimum": 1,
+                                  "minimum": 0,
                                   "maximum": 2147483647,
                                   "description": "品目ID",
                                   "example": 1
@@ -24081,7 +24081,7 @@
                               "properties": {
                                 "id": {
                                   "type": "integer",
-                                  "minimum": 1,
+                                  "minimum": 0,
                                   "maximum": 2147483647,
                                   "description": "部門ID",
                                   "example": 1
@@ -25316,7 +25316,7 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "minimum": 1,
+                            "minimum": 0,
                             "maximum": 2147483647,
                             "description": "取引先ID",
                             "example": 22
