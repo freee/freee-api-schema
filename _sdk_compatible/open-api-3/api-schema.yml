@@ -13590,13 +13590,12 @@ components:
                 example: public_api
                 type: string
               status:
-                description: ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)
+                description: ステータス(confirmed:確認済み、deleted:削除済み、ignored:無視)
                 enum:
-                - unconfirmed
                 - confirmed
                 - deleted
                 - ignored
-                example: unconfirmed
+                example: confirmed
                 type: string
               user:
                 properties:
@@ -14197,13 +14196,12 @@ components:
                     example: public_api
                     type: string
                   status:
-                    description: ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)
+                    description: ステータス(confirmed:確認済み、deleted:削除済み、ignored:無視)
                     enum:
-                    - unconfirmed
                     - confirmed
                     - deleted
                     - ignored
-                    example: unconfirmed
+                    example: confirmed
                     type: string
                   user:
                     properties:
@@ -21640,13 +21638,12 @@ components:
           example: public_api
           type: string
         status:
-          description: ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)
+          description: ステータス(confirmed:確認済み、deleted:削除済み、ignored:無視)
           enum:
-          - unconfirmed
           - confirmed
           - deleted
           - ignored
-          example: unconfirmed
+          example: confirmed
           type: string
         user:
           properties:

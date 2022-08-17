@@ -27453,10 +27453,9 @@
                     },
                     "status": {
                       "type": "string",
-                      "description": "ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)",
-                      "example": "unconfirmed",
+                      "description": "ステータス(confirmed:確認済み、deleted:削除済み、ignored:無視)",
+                      "example": "confirmed",
                       "enum": [
-                        "unconfirmed",
                         "confirmed",
                         "deleted",
                         "ignored"
@@ -27985,10 +27984,9 @@
                 },
                 "status": {
                   "type": "string",
-                  "description": "ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)",
-                  "example": "unconfirmed",
+                  "description": "ステータス(confirmed:確認済み、deleted:削除済み、ignored:無視)",
+                  "example": "confirmed",
                   "enum": [
-                    "unconfirmed",
                     "confirmed",
                     "deleted",
                     "ignored"
@@ -30810,10 +30808,9 @@
           },
           "status": {
             "type": "string",
-            "description": "ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)",
-            "example": "unconfirmed",
+            "description": "ステータス(confirmed:確認済み、deleted:削除済み、ignored:無視)",
+            "example": "confirmed",
             "enum": [
-              "unconfirmed",
               "confirmed",
               "deleted",
               "ignored"
