@@ -5766,7 +5766,7 @@ paths:
         <ul>
         <li>codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</li>
         <li>取引先コードの利用を有効にしている場合は、codeの指定は必須です。</li>
-        <li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li></ul>
+        <li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li></ul>
       operationId: create_partner
       requestBody:
         content:
@@ -5829,7 +5829,8 @@ paths:
         <ul>
         <li>このAPIを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</li>
         <li>コードを日本語に設定している場合は、URLエンコードしてURLに含めるようにしてください。</li>
-        <li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li></ul>
+        <li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li>
+        <li>支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）にnull型を入力することにより、期日を未設定に変更可能です。</li></ul>
       operationId: update_partner_by_code
       requestBody:
         content:
@@ -5967,7 +5968,7 @@ paths:
 
         <p>指定した事業所の取引先を取得する</p>
         <ul>
-        <li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li></ul>
+        <li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li></ul>
       operationId: get_partner
       summary: 取引先の取得
     put:
@@ -6020,7 +6021,8 @@ paths:
         <p>指定した取引先の情報を更新する</p>
         <ul>
         <li>codeを指定、更新することはできません。</li>
-        <li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li></ul>
+        <li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li>
+        <li>支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）にnull型を入力することにより、期日を未設定に変更可能です。</li></ul>
       operationId: update_partner
       requestBody:
         content:
@@ -6215,12 +6217,6 @@ paths:
               schema:
                 "$ref": "#/components/schemas/forbiddenError"
           description: ''
-        '404':
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/badRequestNotFoundError"
-          description: ''
         '500':
           content:
             application/json:
@@ -6278,12 +6274,6 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/forbiddenError"
-          description: ''
-        '404':
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/badRequestNotFoundError"
           description: ''
         '500':
           content:
@@ -22365,6 +22355,7 @@ components:
           maxLength: 255
           type: string
         invoice_payment_term_attributes:
+          nullable: true
           properties:
             additional_months:
               description: 入金月
@@ -22471,6 +22462,7 @@ components:
           nullable: true
           type: integer
         payment_term_attributes:
+          nullable: true
           properties:
             additional_months:
               description: 支払月

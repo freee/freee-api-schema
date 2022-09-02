@@ -4675,12 +4675,6 @@ paths:
               schema:
                 "$ref": "#/components/schemas/forbiddenError"
           description: ''
-        '404':
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/badRequestNotFoundError"
-          description: ''
         '500':
           content:
             application/json:
@@ -4717,12 +4711,6 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/forbiddenError"
-          description: ''
-        '404':
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/badRequestNotFoundError"
           description: ''
         '500':
           content:
@@ -18495,6 +18483,7 @@ components:
           maxLength: 255
           type: string
         invoice_payment_term_attributes:
+          nullable: true
           properties:
             additional_months:
               description: 入金月
@@ -18601,6 +18590,7 @@ components:
           nullable: true
           type: integer
         payment_term_attributes:
+          nullable: true
           properties:
             additional_months:
               description: 支払月

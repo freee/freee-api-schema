@@ -258,7 +258,7 @@
           "Partners"
         ],
         "summary": "取引先の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引先を作成する</p>\n<ul>\n<li>codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</li>\n<li>取引先コードの利用を有効にしている場合は、codeの指定は必須です。</li>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li></ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引先を作成する</p>\n<ul>\n<li>codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</li>\n<li>取引先コードの利用を有効にしている場合は、codeの指定は必須です。</li>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li></ul>",
         "operationId": "create_partner",
         "requestBody": {
           "description": "取引先の作成",
@@ -336,7 +336,7 @@
           "Partners"
         ],
         "summary": "取引先の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引先を取得する</p>\n<ul>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li></ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引先を取得する</p>\n<ul>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li></ul>",
         "operationId": "get_partner",
         "parameters": [
           {
@@ -430,7 +430,7 @@
           "Partners"
         ],
         "summary": "取引先の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した取引先の情報を更新する</p>\n<ul>\n<li>codeを指定、更新することはできません。</li>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li></ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した取引先の情報を更新する</p>\n<ul>\n<li>codeを指定、更新することはできません。</li>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li>\n<li>支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）にnull型を入力することにより、期日を未設定に変更可能です。</li></ul>",
         "operationId": "update_partner",
         "parameters": [
           {
@@ -610,7 +610,7 @@
           "Partners"
         ],
         "summary": "取引先の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>取引先コードをキーに、指定した取引先の情報を更新する</p>\n<ul>\n<li>このAPIを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</li>\n<li>コードを日本語に設定している場合は、URLエンコードしてURLに含めるようにしてください。</li>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li></ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>取引先コードをキーに、指定した取引先の情報を更新する</p>\n<ul>\n<li>このAPIを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</li>\n<li>コードを日本語に設定している場合は、URLエンコードしてURLに含めるようにしてください。</li>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li>\n<li>支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）にnull型を入力することにより、期日を未設定に変更可能です。</li></ul>",
         "operationId": "update_partner_by_code",
         "parameters": [
           {
@@ -14698,16 +14698,6 @@
               }
             }
           },
-          "404": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/badRequestNotFoundError"
-                }
-              }
-            }
-          },
           "500": {
             "description": "",
             "content": {
@@ -14780,16 +14770,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/forbiddenError"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/badRequestNotFoundError"
                 }
               }
             }
@@ -19028,7 +19008,8 @@
                 "description": "支払日（29, 30, 31日の末日を指定する場合は、32を指定してください。）",
                 "example": 32
               }
-            }
+            },
+            "nullable": true
           },
           "invoice_payment_term_attributes": {
             "type": "object",
@@ -19054,7 +19035,8 @@
                 "description": "入金日（29, 30, 31日の末日を指定する場合は、32を指定してください。）",
                 "example": 32
               }
-            }
+            },
+            "nullable": true
           }
         }
       },
