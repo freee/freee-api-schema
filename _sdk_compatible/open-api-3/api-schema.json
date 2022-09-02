@@ -14704,16 +14704,6 @@
               }
             }
           },
-          "404": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/badRequestNotFoundError"
-                }
-              }
-            }
-          },
           "500": {
             "description": "",
             "content": {
@@ -14786,16 +14776,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/forbiddenError"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/badRequestNotFoundError"
                 }
               }
             }
@@ -19034,7 +19014,8 @@
                 "description": "支払日（29, 30, 31日の末日を指定する場合は、32を指定してください。）",
                 "example": 32
               }
-            }
+            },
+            "nullable": true
           },
           "invoice_payment_term_attributes": {
             "type": "object",
@@ -19060,7 +19041,8 @@
                 "description": "入金日（29, 30, 31日の末日を指定する場合は、32を指定してください。）",
                 "example": 32
               }
-            }
+            },
+            "nullable": true
           }
         }
       },
