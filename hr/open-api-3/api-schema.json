@@ -2121,7 +2121,7 @@
           "勤怠"
         ],
         "summary": "更新\n",
-        "description": "\n指定した従業員の勤怠情報を更新します。\n※振替出勤・振替休日の登録はAPIでは行うことができません。\n\n# examples\n\n出勤日について出退勤時刻および休憩時間を更新する場合は以下のようなパラメータをリクエストします。\n\n```\n{\n  \"work_record\": {\n    \"company_id\": 1,\n    \"break_records\": [\n      {\n        \"clock_in_at\": \"2017-05-25 12:00:00\",\n        \"clock_out_at\": \"2017-05-25 13:00:00\"\n      }\n    ],\n    \"clock_in_at\": \"2017-05-25 09:10:00\",\n    \"clock_out_at\": \"2017-05-25 18:20:00\"\n  }\n}\n```\n\n勤務パターンや既定の所定労働時間を変更する場合は use_default_work_pattern に false を指定するとともに、各設定を上書きするパラメータをリクエストします。\n\n```\n{\n  \"work_record\": {\n    \"company_id\": 1,\n    \"break_records\": [\n      {\n        \"clock_in_at\": \"2017-05-25 12:00:00\",\n        \"clock_out_at\": \"2017-05-25 13:00:00\"\n      }\n    ],\n    \"clock_in_at\": \"2017-05-25 09:10:00\",\n    \"clock_out_at\": \"2017-05-25 18:20:00\",\n    \"day_pattern\": \"normal_day\",\n    \"normal_work_clock_in_at\": \"2017-05-25 11:00:00\",\n    \"normal_work_clock_out_at\": \"2017-12-20 20:00:00\",\n    \"normal_work_mins\": 0,\n    \"use_default_work_pattern\": false\n  }\n}\n```\n\n有給取得時の連携について\n半休の場合は通常勤務のように勤務開始・終了時間を指定しつつ、加えて以下の２つの要素を指定することで API での勤怠をつけることができます。\n    - paid_holiday (半休の場合は 0.5 とします)\n    - normal_work_mins_by_paid_holiday (半休により計上される所定労働時間を分で指定します)\n\n```\n{\n  \"work_record\": {\n    \"company_id\": 1,\n    \"break_records\": [\n      {\n        \"clock_in_at\": \"2017-05-25 12:00:00\",\n        \"clock_out_at\": \"2017-05-25 13:00:00\"\n      }\n    ],\n    \"clock_in_at\": \"2017-05-25 09:10:00\",\n    \"clock_out_at\": \"2017-05-25 18:20:00\",\n    \"paid_holiday\": 0.5,\n    \"normal_work_mins_by_paid_holiday\": 240\n  }\n}\n```\n\n欠勤を付ける場合は company_idとis_absence 以外のパラメータは必要ありません。\n\n```\n{\n  \"work_record\": {\n    \"company_id\": 1,\n    \"is_absence\": true\n  }\n}\n```",
+        "description": "\n指定した従業員の勤怠情報を更新します。\n※振替出勤・振替休日の登録はAPIでは行うことができません。\n\n# examples\n\n出勤日について出退勤時刻および休憩時間を更新する場合は以下のようなパラメータをリクエストします。\n\n```\n{\n  \"company_id\": 1,\n  \"break_records\": [\n    {\n      \"clock_in_at\": \"2017-05-25 12:00:00\",\n      \"clock_out_at\": \"2017-05-25 13:00:00\"\n    }\n  ],\n  \"clock_in_at\": \"2017-05-25 09:10:00\",\n  \"clock_out_at\": \"2017-05-25 18:20:00\"\n}\n```\n\n勤務パターンや既定の所定労働時間を変更する場合は use_default_work_pattern に false を指定するとともに、各設定を上書きするパラメータをリクエストします。\n\n```\n{\n  \"company_id\": 1,\n  \"break_records\": [\n    {\n      \"clock_in_at\": \"2017-05-25 12:00:00\",\n      \"clock_out_at\": \"2017-05-25 13:00:00\"\n    }\n  ],\n  \"clock_in_at\": \"2017-05-25 09:10:00\",\n  \"clock_out_at\": \"2017-05-25 18:20:00\",\n  \"day_pattern\": \"normal_day\",\n  \"normal_work_clock_in_at\": \"2017-05-25 11:00:00\",\n  \"normal_work_clock_out_at\": \"2017-12-20 20:00:00\",\n  \"normal_work_mins\": 0,\n  \"use_default_work_pattern\": false\n}\n```\n\n有給取得時の連携について\n半休の場合は通常勤務のように勤務開始・終了時間を指定しつつ、加えて以下の２つの要素を指定することで API での勤怠をつけることができます。\n    - paid_holiday (半休の場合は 0.5 とします)\n    - normal_work_mins_by_paid_holiday (半休により計上される所定労働時間を分で指定します)\n\n```\n{\n  \"company_id\": 1,\n  \"break_records\": [\n    {\n      \"clock_in_at\": \"2017-05-25 12:00:00\",\n      \"clock_out_at\": \"2017-05-25 13:00:00\"\n    }\n  ],\n  \"clock_in_at\": \"2017-05-25 09:10:00\",\n  \"clock_out_at\": \"2017-05-25 18:20:00\",\n  \"paid_holiday\": 0.5,\n  \"normal_work_mins_by_paid_holiday\": 240\n}\n```\n\n欠勤を付ける場合は company_idとis_absence 以外のパラメータは必要ありません。\n\n```\n{\n  \"company_id\": 1,\n  \"is_absence\": true\n}\n```",
         "operationId": "update_employee_work_record",
         "parameters": [
           {
@@ -8938,8 +8938,10 @@
             "type": "number",
             "description": "この日の有休取得数。0.5日単位で指定します。",
             "format": "float",
-            "minimum": 0,
-            "maximum": 1
+            "enum": [
+              0,
+              1
+            ]
           },
           "use_attendance_deduction": {
             "type": "boolean",
@@ -9350,9 +9352,9 @@
             "type": "integer",
             "description": "対象年（必須）",
             "format": "int32",
-            "minimum": 1,
-            "maximum": 2147483647,
-            "example": 1
+            "minimum": 2000,
+            "maximum": 2100,
+            "example": 2022
           },
           "target_month": {
             "type": "integer",
