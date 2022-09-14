@@ -13015,7 +13015,6 @@
           }
         ],
         "requestBody": {
-          "description": "経費申請の更新",
           "content": {
             "application/json": {
               "schema": {
@@ -19073,6 +19072,28 @@
             "type": "string",
             "description": "証憑ファイル",
             "format": "binary"
+          },
+          "receipt_metadatum_partner_name": {
+            "type": "string",
+            "maxLength": 255,
+            "nullable": true,
+            "description": "発行元",
+            "example": "freeeパートナー"
+          },
+          "receipt_metadatum_issue_date": {
+            "type": "string",
+            "nullable": true,
+            "description": "発行日 (yyyy-mm-dd)",
+            "example": "2019-12-17"
+          },
+          "receipt_metadatum_amount": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": -9223372036854775808,
+            "maximum": 9223372036854775807,
+            "nullable": true,
+            "description": "金額",
+            "example": 5250
           }
         }
       },
@@ -19100,6 +19121,33 @@
             "type": "string",
             "description": "取引日 (yyyy-mm-dd)",
             "example": "2019-12-17"
+          },
+          "receipt_metadatum": {
+            "type": "object",
+            "properties": {
+              "partner_name": {
+                "type": "string",
+                "maxLength": 255,
+                "nullable": true,
+                "description": "発行元",
+                "example": "freeeパートナー"
+              },
+              "issue_date": {
+                "type": "string",
+                "nullable": true,
+                "description": "発行日 (yyyy-mm-dd)",
+                "example": "2019-12-17"
+              },
+              "amount": {
+                "type": "integer",
+                "format": "int64",
+                "minimum": -9223372036854775808,
+                "maximum": 9223372036854775807,
+                "nullable": true,
+                "description": "金額",
+                "example": 5250
+              }
+            }
           }
         }
       },
@@ -27506,6 +27554,33 @@
                           "nullable": true
                         }
                       }
+                    },
+                    "receipt_metadatum": {
+                      "type": "object",
+                      "properties": {
+                        "partner_name": {
+                          "type": "string",
+                          "maxLength": 255,
+                          "nullable": true,
+                          "description": "発行元",
+                          "example": "freeeパートナー"
+                        },
+                        "issue_date": {
+                          "type": "string",
+                          "nullable": true,
+                          "description": "発行日 (yyyy-mm-dd)",
+                          "example": "2019-12-17"
+                        },
+                        "amount": {
+                          "type": "integer",
+                          "format": "int64",
+                          "minimum": -9223372036854775808,
+                          "maximum": 9223372036854775807,
+                          "nullable": true,
+                          "description": "金額",
+                          "example": 5250
+                        }
+                      }
                     }
                   }
                 }
@@ -28041,6 +28116,33 @@
                       "description": "表示名",
                       "example": "フリー太郎",
                       "nullable": true
+                    }
+                  }
+                },
+                "receipt_metadatum": {
+                  "type": "object",
+                  "properties": {
+                    "partner_name": {
+                      "type": "string",
+                      "maxLength": 255,
+                      "nullable": true,
+                      "description": "発行元",
+                      "example": "freeeパートナー"
+                    },
+                    "issue_date": {
+                      "type": "string",
+                      "nullable": true,
+                      "description": "発行日 (yyyy-mm-dd)",
+                      "example": "2019-12-17"
+                    },
+                    "amount": {
+                      "type": "integer",
+                      "format": "int64",
+                      "minimum": -9223372036854775808,
+                      "maximum": 9223372036854775807,
+                      "nullable": true,
+                      "description": "金額",
+                      "example": 5250
                     }
                   }
                 }
@@ -30865,6 +30967,33 @@
                 "description": "表示名",
                 "example": "フリー太郎",
                 "nullable": true
+              }
+            }
+          },
+          "receipt_metadatum": {
+            "type": "object",
+            "properties": {
+              "partner_name": {
+                "type": "string",
+                "maxLength": 255,
+                "nullable": true,
+                "description": "発行元",
+                "example": "freeeパートナー"
+              },
+              "issue_date": {
+                "type": "string",
+                "nullable": true,
+                "description": "発行日 (yyyy-mm-dd)",
+                "example": "2019-12-17"
+              },
+              "amount": {
+                "type": "integer",
+                "format": "int64",
+                "minimum": -9223372036854775808,
+                "maximum": 9223372036854775807,
+                "nullable": true,
+                "description": "金額",
+                "example": 5250
               }
             }
           }
