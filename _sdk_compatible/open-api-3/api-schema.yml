@@ -5656,7 +5656,6 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               "$ref": "#/components/schemas/receiptUpdateParams"
-        description: 経費申請の更新
         required: true
       summary: ファイルボックス 証憑ファイル情報更新
   "/api/1/receipts/{id}/download":
@@ -13577,6 +13576,28 @@ components:
                 - public_api
                 example: public_api
                 type: string
+              receipt_metadatum:
+                properties:
+                  amount:
+                    description: 金額
+                    example: 5250
+                    format: int64
+                    maximum: 9223372036854775807
+                    minimum: -9223372036854775808
+                    nullable: true
+                    type: integer
+                  issue_date:
+                    description: 発行日 (yyyy-mm-dd)
+                    example: '2019-12-17'
+                    nullable: true
+                    type: string
+                  partner_name:
+                    description: 発行元
+                    example: freeeパートナー
+                    maxLength: 255
+                    nullable: true
+                    type: string
+                type: object
               status:
                 description: ステータス(confirmed:確認済み、deleted:削除済み、ignored:無視)
                 enum:
@@ -14183,6 +14204,28 @@ components:
                     - public_api
                     example: public_api
                     type: string
+                  receipt_metadatum:
+                    properties:
+                      amount:
+                        description: 金額
+                        example: 5250
+                        format: int64
+                        maximum: 9223372036854775807
+                        minimum: -9223372036854775808
+                        nullable: true
+                        type: integer
+                      issue_date:
+                        description: 発行日 (yyyy-mm-dd)
+                        example: '2019-12-17'
+                        nullable: true
+                        type: string
+                      partner_name:
+                        description: 発行元
+                        example: freeeパートナー
+                        maxLength: 255
+                        nullable: true
+                        type: string
+                    type: object
                   status:
                     description: ステータス(confirmed:確認済み、deleted:削除済み、ignored:無視)
                     enum:
@@ -21627,6 +21670,28 @@ components:
           - public_api
           example: public_api
           type: string
+        receipt_metadatum:
+          properties:
+            amount:
+              description: 金額
+              example: 5250
+              format: int64
+              maximum: 9223372036854775807
+              minimum: -9223372036854775808
+              nullable: true
+              type: integer
+            issue_date:
+              description: 発行日 (yyyy-mm-dd)
+              example: '2019-12-17'
+              nullable: true
+              type: string
+            partner_name:
+              description: 発行元
+              example: freeeパートナー
+              maxLength: 255
+              nullable: true
+              type: string
+          type: object
         status:
           description: ステータス(confirmed:確認済み、deleted:削除済み、ignored:無視)
           enum:
@@ -21684,6 +21749,25 @@ components:
           description: 証憑ファイル
           format: binary
           type: string
+        receipt_metadatum_amount:
+          description: 金額
+          example: 5250
+          format: int64
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          nullable: true
+          type: integer
+        receipt_metadatum_issue_date:
+          description: 発行日 (yyyy-mm-dd)
+          example: '2019-12-17'
+          nullable: true
+          type: string
+        receipt_metadatum_partner_name:
+          description: 発行元
+          example: freeeパートナー
+          maxLength: 255
+          nullable: true
+          type: string
       required:
       - company_id
       - receipt
@@ -21712,6 +21796,28 @@ components:
           description: 取引日 (yyyy-mm-dd)
           example: '2019-12-17'
           type: string
+        receipt_metadatum:
+          properties:
+            amount:
+              description: 金額
+              example: 5250
+              format: int64
+              maximum: 9223372036854775807
+              minimum: -9223372036854775808
+              nullable: true
+              type: integer
+            issue_date:
+              description: 発行日 (yyyy-mm-dd)
+              example: '2019-12-17'
+              nullable: true
+              type: string
+            partner_name:
+              description: 発行元
+              example: freeeパートナー
+              maxLength: 255
+              nullable: true
+              type: string
+          type: object
       required:
       - company_id
       - issue_date
