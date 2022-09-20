@@ -11686,7 +11686,10 @@ components:
           minimum: 1
           type: integer
         draft:
-          description: falseの時、in_progress:申請中で作成する。それ以外の時はdraft:下書きで作成する
+          description: |
+            各種申請のステータス<br>
+            falseを指定した時は申請中（in_progress）で各種申請を作成します。<br>
+            trueを指定した時は下書き（draft）で各種申請を作成します。
           example: true
           type: boolean
         form_id:
@@ -12354,7 +12357,10 @@ components:
           minimum: 1
           type: integer
         draft:
-          description: falseの時、in_progress:申請中で更新する。それ以外の時はdraft:下書きで更新する
+          description: |
+            各種申請のステータス<br>
+            falseを指定した時は申請中（in_progress）で各種申請を更新します。<br>
+            trueを指定した時は下書き（draft）で各種申請を更新します。
           example: true
           type: boolean
         request_items:
@@ -19106,8 +19112,7 @@ components:
           description: |
             支払依頼のステータス<br>
             falseを指定した時は申請中（in_progress）で支払依頼を作成します。<br>
-            trueを指定した時は下書き（draft）で支払依頼を作成します。<br>
-            未指定の時は下書きとみなして支払依頼を作成します。
+            trueを指定した時は下書き（draft）で支払依頼を作成します。
           example: true
           type: boolean
         issue_date:
@@ -19844,8 +19849,7 @@ components:
           description: |
             支払依頼のステータス<br>
             falseを指定した時は申請中（in_progress）で支払依頼を更新します。<br>
-            trueを指定した時は下書き（draft）で支払依頼を更新します。<br>
-            未指定の時は下書きとみなして支払依頼を更新します。
+            trueを指定した時は下書き（draft）で支払依頼を更新します。
           example: true
           type: boolean
         issue_date:

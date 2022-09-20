@@ -18130,7 +18130,7 @@
           },
           "draft": {
             "type": "boolean",
-            "description": "支払依頼のステータス<br>\nfalseを指定した時は申請中（in_progress）で支払依頼を作成します。<br>\ntrueを指定した時は下書き（draft）で支払依頼を作成します。<br>\n未指定の時は下書きとみなして支払依頼を作成します。\n",
+            "description": "支払依頼のステータス<br>\nfalseを指定した時は申請中（in_progress）で支払依頼を作成します。<br>\ntrueを指定した時は下書き（draft）で支払依頼を作成します。\n",
             "example": true
           },
           "document_code": {
@@ -18406,7 +18406,7 @@
           },
           "draft": {
             "type": "boolean",
-            "description": "支払依頼のステータス<br>\nfalseを指定した時は申請中（in_progress）で支払依頼を更新します。<br>\ntrueを指定した時は下書き（draft）で支払依頼を更新します。<br>\n未指定の時は下書きとみなして支払依頼を更新します。\n",
+            "description": "支払依頼のステータス<br>\nfalseを指定した時は申請中（in_progress）で支払依頼を更新します。<br>\ntrueを指定した時は下書き（draft）で支払依頼を更新します。\n",
             "example": true
           },
           "document_code": {
@@ -32581,7 +32581,7 @@
           },
           "draft": {
             "type": "boolean",
-            "description": "falseの時、in_progress:申請中で作成する。それ以外の時はdraft:下書きで作成する",
+            "description": "各種申請のステータス<br>\nfalseを指定した時は申請中（in_progress）で各種申請を作成します。<br>\ntrueを指定した時は下書き（draft）で各種申請を作成します。\n",
             "example": true
           },
           "parent_id": {
@@ -32665,7 +32665,7 @@
           },
           "draft": {
             "type": "boolean",
-            "description": "falseの時、in_progress:申請中で更新する。それ以外の時はdraft:下書きで更新する",
+            "description": "各種申請のステータス<br>\nfalseを指定した時は申請中（in_progress）で各種申請を更新します。<br>\ntrueを指定した時は下書き（draft）で各種申請を更新します。\n",
             "example": true
           },
           "request_items": {
