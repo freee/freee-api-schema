@@ -15656,11 +15656,10 @@ components:
                 minimum: 0
                 type: integer
               status:
-                description: 'ステータス(draft: 申請で使用しない、active: 申請で使用する、deleted: 削除済み)'
+                description: 'ステータス(draft: 申請で使用しない、active: 申請で使用する)'
                 enum:
                 - draft
                 - active
-                - deleted
                 example: active
                 type: string
             required:
@@ -15804,11 +15803,10 @@ components:
               minimum: 0
               type: integer
             status:
-              description: 'ステータス(draft: 申請で使用しない、active: 申請で使用する、deleted: 削除済み)'
+              description: 'ステータス(draft: 申請で使用しない、active: 申請で使用する)'
               enum:
               - draft
               - active
-              - deleted
               example: active
               type: string
           required:
