@@ -10199,7 +10199,7 @@
           },
           "day_pattern": {
             "type": "string",
-            "description": "勤務パターン（所定労働日: normal_day, 所定休日: prescribed_holiday, 法定休日: legal_holiday）\n\nprescribed_holiday、legal_holidayを指定すると、以下のパラメータについて、指定した値が反映されず無視されます\n- early_leaving_mins\n- lateness_mins\n- paid_holiday",
+            "description": "勤務パターン（所定労働日: normal_day, 所定休日: prescribed_holiday, 法定休日: legal_holiday）\n\nprescribed_holiday、legal_holidayを指定すると、以下のパラメータについて、指定した値が反映されず無視されます。\n- early_leaving_mins\n- lateness_mins\n- paid_holiday",
             "enum": [
               "normal_day",
               "prescribed_holiday",
@@ -10215,7 +10215,7 @@
           },
           "is_absence": {
             "type": "boolean",
-            "description": "欠勤かどうか"
+            "description": "欠勤かどうか\n\nis_absenceにtrueを指定すると、以下のパラーメータについて、指定した値が反映されず無視されます。\n- break_records\n  - clock_in_at\n  - clock_out_at\n- clock_in_at\n- clock_out_at\n- early_leaving_mins\n- lateness_mins\n- normal_work_clock_in_at\n- normal_work_clock_out_at\n- normal_work_mins\n- normal_work_mins_by_paid_holiday\n- paid_holiday"
           },
           "lateness_mins": {
             "type": "integer",
