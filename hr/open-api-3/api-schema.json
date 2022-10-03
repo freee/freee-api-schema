@@ -8445,12 +8445,12 @@
           "entry_date": {
             "type": "string",
             "description": "入社日",
-            "format": "date-time"
+            "format": "date"
           },
           "retire_date": {
             "type": "string",
             "description": "退職日",
-            "format": "date-time",
+            "format": "date",
             "nullable": true
           },
           "user_id": {
