@@ -210,8 +210,6 @@ paths:
         <h2 id="_2">定義</h2>
 
         <ul>
-        <li>default_tax_id : デフォルト設定がされている税区分ID</li>
-
         <li>default_tax_code : リクエストした日時を基準とした税区分コード</li>
         </ul>
 
@@ -266,10 +264,10 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/accountItemParams"
+              "$ref": "#/components/schemas/accountItemCreateParams"
           application/x-www-form-urlencoded:
             schema:
-              "$ref": "#/components/schemas/accountItemParams"
+              "$ref": "#/components/schemas/accountItemCreateParams"
         description: 勘定科目の作成
         required: true
       summary: 勘定科目の作成
@@ -457,10 +455,10 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/accountItemParams"
+              "$ref": "#/components/schemas/accountItemUpdateParams"
           application/x-www-form-urlencoded:
             schema:
-              "$ref": "#/components/schemas/accountItemParams"
+              "$ref": "#/components/schemas/accountItemUpdateParams"
         description: 勘定科目の更新
         required: true
       summary: 勘定科目の更新
@@ -1714,7 +1712,7 @@ paths:
           maximum: 2147483647
           minimum: 1
           type: integer
-      - description: 取得情報に勘定科目・税区分コード・税区分・品目・取引先・部門・メモタグ・口座の一覧を含める
+      - description: 取得情報に勘定科目・税区分コード・品目・取引先・部門・メモタグ・口座の一覧を含める
         in: query
         name: details
         schema:
@@ -1728,7 +1726,7 @@ paths:
           enum:
           - true
           type: boolean
-      - description: 取得情報に税区分コード・税区分一覧を含める
+      - description: 取得情報に税区分コード一覧を含める
         in: query
         name: taxes
         schema:
@@ -12920,7 +12918,7 @@ paths:
                     items:
                       properties:
                         available:
-                          description: 'true: 使用する、false: 使用しない'
+                          description: '税区分の使用設定。true: 使用する、false: 使用しない'
                           example: true
                           type: boolean
                         code:
@@ -14933,7 +14931,7 @@ paths:
       summary: 口座の更新
 components:
   schemas:
-    accountItemParams:
+    accountItemCreateParams:
       properties:
         account_item:
           properties:
@@ -15174,6 +15172,101 @@ components:
       required:
       - account_item
       type: object
+    accountItemUpdateParams:
+      properties:
+        account_item:
+          properties:
+            account_category_id:
+              description: 勘定科目カテゴリーID Selectablesフォーム用選択項目情報エンドポイント(account_groups.account_category_id)で取得可能です
+              example: 1
+              maximum: 2147483647
+              minimum: 1
+              type: integer
+            accumulated_dep_account_item_id:
+              description: 減価償却累計額勘定科目ID（法人のみ利用可能）
+              example: 1
+              type: integer
+            corresponding_expense_id:
+              description: 支出取引相手勘定科目ID
+              example: 1
+              type: integer
+            corresponding_income_id:
+              description: 収入取引相手勘定科目ID
+              example: 1
+              type: integer
+            group_name:
+              description: 決算書表示名（小カテゴリー） Selectablesフォーム用選択項目情報エンドポイント(account_groups.name)で取得可能です
+              example: その他預金
+              type: string
+            items:
+              description: 品目
+              items:
+                properties:
+                  id:
+                    example: 1
+                    maximum: 2147483647
+                    minimum: 1
+                    type: integer
+                type: object
+              type: array
+            name:
+              description: |
+                勘定科目名 (30文字以内)
+                口座に紐付かない勘定科目の更新時は必須です。
+                口座に紐付く勘定科目の更新時は指定することができません。
+              example: 新しい勘定科目
+              maxLength: 30
+              type: string
+            partners:
+              description: 取引先
+              items:
+                properties:
+                  id:
+                    example: 1
+                    maximum: 2147483647
+                    minimum: 1
+                    type: integer
+                type: object
+              type: array
+            searchable:
+              description: 検索可能:2, 検索不可：3(登録時未指定の場合は2で登録されます。更新時未指定の場合はsearchableは変更されません。)
+              example: 2
+              maximum: 3
+              minimum: 2
+              type: integer
+            shortcut:
+              description: ショートカット1 (20文字以内)
+              example: NEWACCOUNTITEM
+              maxLength: 20
+              type: string
+            shortcut_num:
+              description: ショートカット2(勘定科目コード)(20文字以内)
+              example: '999'
+              maxLength: 20
+              type: string
+            tax_code:
+              description: 税区分コード
+              example: 1
+              maximum: 2147483647
+              minimum: 0
+              type: integer
+          required:
+          - account_category_id
+          - corresponding_expense_id
+          - corresponding_income_id
+          - group_name
+          - tax_code
+          type: object
+        company_id:
+          description: 事業所ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      required:
+      - account_item
+      - company_id
+      type: object
     accountItemsResponse:
       properties:
         account_items:
@@ -15224,12 +15317,6 @@ components:
                 example: 34
                 maximum: 2147483647
                 minimum: 0
-                type: integer
-              default_tax_id:
-                description: デフォルト設定がされている税区分ID
-                example: 34
-                maximum: 2147483647
-                minimum: 1
                 type: integer
               group_name:
                 description: 決算書表示名（小カテゴリー）
@@ -16632,12 +16719,6 @@ components:
                       example: 資産
                       type: string
                     type: array
-                  default_tax_id:
-                    description: デフォルト設定がされている税区分ID
-                    example: 34
-                    maximum: 2147483647
-                    minimum: 1
-                    type: integer
                   id:
                     description: 勘定科目ID
                     example: 1
@@ -17103,24 +17184,6 @@ components:
                 - code
                 - name
                 - name_ja
-                type: object
-              type: array
-            taxes:
-              items:
-                properties:
-                  id:
-                    description: 税区分ID（廃止予定。tax_codeを使用してください。）
-                    example: 21
-                    maximum: 2147483647
-                    minimum: 1
-                    type: integer
-                  name:
-                    description: 税区分名
-                    example: sales_with_tax
-                    type: string
-                required:
-                - id
-                - name
                 type: object
               type: array
             txn_number_format:
@@ -19847,7 +19910,7 @@ components:
                       nullable: true
                       type: integer
                     segment_1_tag_name:
-                      description: セグメント１ID
+                      description: セグメント１
                       example: セグメント１
                       nullable: true
                       type: string
@@ -20365,7 +20428,7 @@ components:
                     nullable: true
                     type: integer
                   segment_1_tag_name:
-                    description: セグメント１ID
+                    description: セグメント１
                     example: セグメント１
                     nullable: true
                     type: string
@@ -21673,8 +21736,10 @@ components:
                 minimum: 1
                 type: integer
               segment_1_tag_name:
-                description: セグメント１ID
-                type: integer
+                description: セグメント１
+                example: セグメント１
+                nullable: true
+                type: string
               segment_2_tag_id:
                 description: セグメント２ID
                 example: 1
@@ -21684,7 +21749,9 @@ components:
                 type: integer
               segment_2_tag_name:
                 description: セグメント２
-                type: integer
+                example: セグメント２
+                nullable: true
+                type: string
               segment_3_tag_id:
                 description: セグメント３ID
                 example: 1
@@ -21694,7 +21761,9 @@ components:
                 type: integer
               segment_3_tag_name:
                 description: セグメント３
-                type: integer
+                example: セグメント３
+                nullable: true
+                type: string
               tag_ids:
                 items:
                   description: メモタグID
@@ -22014,7 +22083,7 @@ components:
         partner_doc_setting_attributes:
           properties:
             sending_method:
-              description: 請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送)
+              description: 請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送、null:設定しない)
               enum:
               - email
               - posting
@@ -22269,7 +22338,7 @@ components:
             partner_doc_setting_attributes:
               properties:
                 sending_method:
-                  description: 請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送)
+                  description: 請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送、null:設定しない)
                   enum:
                   - email
                   - posting
@@ -22492,7 +22561,7 @@ components:
         partner_doc_setting_attributes:
           properties:
             sending_method:
-              description: 請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送)
+              description: 請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送、null:設定しない)
               enum:
               - email
               - posting
@@ -22725,7 +22794,7 @@ components:
               partner_doc_setting_attributes:
                 properties:
                   sending_method:
-                    description: 請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送)
+                    description: 請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送、null:設定しない)
                     enum:
                     - email
                     - posting
@@ -24570,7 +24639,7 @@ components:
                       nullable: true
                       type: integer
                     segment_1_tag_name:
-                      description: セグメント１ID
+                      description: セグメント１
                       example: セグメント１
                       nullable: true
                       type: string
@@ -24993,7 +25062,7 @@ components:
                     nullable: true
                     type: integer
                   segment_1_tag_name:
-                    description: セグメント１ID
+                    description: セグメント１
                     example: セグメント１
                     nullable: true
                     type: string

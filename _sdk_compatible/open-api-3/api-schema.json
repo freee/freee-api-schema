@@ -898,12 +898,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/accountItemParams"
+                "$ref": "#/components/schemas/accountItemUpdateParams"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/components/schemas/accountItemParams"
+                "$ref": "#/components/schemas/accountItemUpdateParams"
               }
             }
           },
@@ -1145,12 +1145,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/accountItemParams"
+                "$ref": "#/components/schemas/accountItemCreateParams"
               }
             },
             "application/x-www-form-urlencoded": {
               "schema": {
-                "$ref": "#/components/schemas/accountItemParams"
+                "$ref": "#/components/schemas/accountItemCreateParams"
               }
             }
           },
@@ -5816,7 +5816,7 @@
           {
             "name": "details",
             "in": "query",
-            "description": "取得情報に勘定科目・税区分コード・税区分・品目・取引先・部門・メモタグ・口座の一覧を含める",
+            "description": "取得情報に勘定科目・税区分コード・品目・取引先・部門・メモタグ・口座の一覧を含める",
             "schema": {
               "type": "boolean",
               "enum": [
@@ -5838,7 +5838,7 @@
           {
             "name": "taxes",
             "in": "query",
-            "description": "取得情報に税区分コード・税区分一覧を含める",
+            "description": "取得情報に税区分コード一覧を含める",
             "schema": {
               "type": "boolean",
               "enum": [
@@ -6658,7 +6658,7 @@
                           },
                           "available": {
                             "type": "boolean",
-                            "description": "true: 使用する、false: 使用しない",
+                            "description": "税区分の使用設定。true: 使用する、false: 使用しない",
                             "example": true
                           }
                         }
@@ -18666,7 +18666,7 @@
             "properties": {
               "sending_method": {
                 "type": "string",
-                "description": "請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送)",
+                "description": "請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送、null:設定しない)",
                 "example": "posting",
                 "enum": [
                   "email",
@@ -18923,7 +18923,7 @@
             "properties": {
               "sending_method": {
                 "type": "string",
-                "description": "請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送)",
+                "description": "請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送、null:設定しない)",
                 "example": "posting",
                 "enum": [
                   "email",
@@ -19151,7 +19151,7 @@
           }
         }
       },
-      "accountItemParams": {
+      "accountItemCreateParams": {
         "type": "object",
         "required": [
           "account_item",
@@ -19323,13 +19323,6 @@
                   "description": "ショートカット2(勘定科目コード) (20文字以内)",
                   "example": "123",
                   "nullable": true
-                },
-                "default_tax_id": {
-                  "type": "integer",
-                  "minimum": 1,
-                  "maximum": 2147483647,
-                  "description": "デフォルト設定がされている税区分ID",
-                  "example": 34
                 },
                 "default_tax_code": {
                   "type": "integer",
@@ -19585,6 +19578,123 @@
                 "description": "支出取引相手勘定科目ID",
                 "example": 1,
                 "nullable": true
+              }
+            }
+          }
+        }
+      },
+      "accountItemUpdateParams": {
+        "type": "object",
+        "required": [
+          "account_item",
+          "company_id"
+        ],
+        "properties": {
+          "company_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "事業所ID",
+            "example": 1
+          },
+          "account_item": {
+            "type": "object",
+            "required": [
+              "account_category_id",
+              "corresponding_expense_id",
+              "corresponding_income_id",
+              "group_name",
+              "tax_code"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "maxLength": 30,
+                "description": "勘定科目名 (30文字以内)\n口座に紐付かない勘定科目の更新時は必須です。\n口座に紐付く勘定科目の更新時は指定することができません。\n",
+                "example": "新しい勘定科目"
+              },
+              "shortcut": {
+                "type": "string",
+                "maxLength": 20,
+                "description": "ショートカット1 (20文字以内)",
+                "example": "NEWACCOUNTITEM"
+              },
+              "shortcut_num": {
+                "type": "string",
+                "maxLength": 20,
+                "description": "ショートカット2(勘定科目コード)(20文字以内)",
+                "example": "999"
+              },
+              "tax_code": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647,
+                "description": "税区分コード",
+                "example": 1
+              },
+              "group_name": {
+                "type": "string",
+                "description": "決算書表示名（小カテゴリー） Selectablesフォーム用選択項目情報エンドポイント(account_groups.name)で取得可能です",
+                "example": "その他預金"
+              },
+              "account_category_id": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 2147483647,
+                "description": "勘定科目カテゴリーID Selectablesフォーム用選択項目情報エンドポイント(account_groups.account_category_id)で取得可能です",
+                "example": 1
+              },
+              "corresponding_income_id": {
+                "type": "integer",
+                "description": "収入取引相手勘定科目ID",
+                "example": 1
+              },
+              "corresponding_expense_id": {
+                "type": "integer",
+                "description": "支出取引相手勘定科目ID",
+                "example": 1
+              },
+              "accumulated_dep_account_item_id": {
+                "type": "integer",
+                "description": "減価償却累計額勘定科目ID（法人のみ利用可能）",
+                "example": 1
+              },
+              "searchable": {
+                "type": "integer",
+                "minimum": 2,
+                "maximum": 3,
+                "description": "検索可能:2, 検索不可：3(登録時未指定の場合は2で登録されます。更新時未指定の場合はsearchableは変更されません。)",
+                "example": 2
+              },
+              "items": {
+                "type": "array",
+                "description": "品目",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 2147483647,
+                      "example": 1
+                    }
+                  }
+                }
+              },
+              "partners": {
+                "type": "array",
+                "description": "取引先",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 2147483647,
+                      "example": 1
+                    }
+                  }
+                }
               }
             }
           }
@@ -28599,8 +28709,10 @@
                   "example": 1
                 },
                 "segment_1_tag_name": {
-                  "type": "integer",
-                  "description": "セグメント１ID"
+                  "type": "string",
+                  "description": "セグメント１",
+                  "example": "セグメント１",
+                  "nullable": true
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
@@ -28611,8 +28723,10 @@
                   "example": 1
                 },
                 "segment_2_tag_name": {
-                  "type": "integer",
-                  "description": "セグメント２"
+                  "type": "string",
+                  "description": "セグメント２",
+                  "example": "セグメント２",
+                  "nullable": true
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
@@ -28623,8 +28737,10 @@
                   "example": 1
                 },
                 "segment_3_tag_name": {
-                  "type": "integer",
-                  "description": "セグメント３"
+                  "type": "string",
+                  "description": "セグメント３",
+                  "example": "セグメント３",
+                  "nullable": true
                 },
                 "amount": {
                   "type": "integer",
@@ -29206,13 +29322,6 @@
                       "example": "SOFUTO",
                       "nullable": true
                     },
-                    "default_tax_id": {
-                      "type": "integer",
-                      "minimum": 1,
-                      "maximum": 2147483647,
-                      "description": "デフォルト設定がされている税区分ID",
-                      "example": 34
-                    },
                     "categories": {
                       "type": "array",
                       "items": {
@@ -29250,30 +29359,6 @@
                       "type": "string",
                       "description": "税区分名（日本語表示用）",
                       "example": "課税売上"
-                    }
-                  }
-                }
-              },
-              "taxes": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "required": [
-                    "id",
-                    "name"
-                  ],
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "minimum": 1,
-                      "maximum": 2147483647,
-                      "description": "税区分ID（廃止予定。tax_codeを使用してください。）",
-                      "example": 21
-                    },
-                    "name": {
-                      "type": "string",
-                      "description": "税区分名",
-                      "example": "sales_with_tax"
                     }
                   }
                 }
@@ -29865,7 +29950,7 @@
                   "properties": {
                     "sending_method": {
                       "type": "string",
-                      "description": "請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送)",
+                      "description": "請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送、null:設定しない)",
                       "example": "posting",
                       "enum": [
                         "email",
@@ -30122,7 +30207,7 @@
                 "properties": {
                   "sending_method": {
                     "type": "string",
-                    "description": "請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送)",
+                    "description": "請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送、null:設定しない)",
                     "example": "posting",
                     "enum": [
                       "email",
@@ -34743,7 +34828,7 @@
                       },
                       "segment_1_tag_name": {
                         "type": "string",
-                        "description": "セグメント１ID",
+                        "description": "セグメント１",
                         "example": "セグメント１",
                         "nullable": true
                       },
@@ -35324,7 +35409,7 @@
                     },
                     "segment_1_tag_name": {
                       "type": "string",
-                      "description": "セグメント１ID",
+                      "description": "セグメント１",
                       "example": "セグメント１",
                       "nullable": true
                     },
@@ -36478,7 +36563,7 @@
                       },
                       "segment_1_tag_name": {
                         "type": "string",
-                        "description": "セグメント１ID",
+                        "description": "セグメント１",
                         "example": "セグメント１",
                         "nullable": true
                       },
@@ -36959,7 +37044,7 @@
                     },
                     "segment_1_tag_name": {
                       "type": "string",
-                      "description": "セグメント１ID",
+                      "description": "セグメント１",
                       "example": "セグメント１",
                       "nullable": true
                     },
