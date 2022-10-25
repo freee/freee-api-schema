@@ -18738,9 +18738,9 @@
               },
               "additional_months": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 6,
-                "description": "支払月",
+                "description": "支払月（当月を指定する場合は、0を指定してください。）",
                 "example": 1
               },
               "fixed_day": {
@@ -18764,9 +18764,9 @@
               },
               "additional_months": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 6,
-                "description": "入金月",
+                "description": "入金月（当月を指定する場合は、0を指定してください。）",
                 "example": 1
               },
               "fixed_day": {
@@ -18995,9 +18995,9 @@
               },
               "additional_months": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 6,
-                "description": "支払月",
+                "description": "支払月（当月を指定する場合は、0を指定してください。）",
                 "example": 1
               },
               "fixed_day": {
@@ -19022,9 +19022,9 @@
               },
               "additional_months": {
                 "type": "integer",
-                "minimum": 1,
+                "minimum": 0,
                 "maximum": 6,
-                "description": "入金月",
+                "description": "入金月（当月を指定する場合は、0を指定してください。）",
                 "example": 1
               },
               "fixed_day": {
@@ -30297,9 +30297,9 @@
                   },
                   "additional_months": {
                     "type": "integer",
-                    "minimum": 1,
+                    "minimum": 0,
                     "maximum": 6,
-                    "description": "支払月",
+                    "description": "支払月（当月を指定する場合は、0を指定してください。）",
                     "example": 1,
                     "nullable": true
                   },
@@ -30326,9 +30326,9 @@
                   },
                   "additional_months": {
                     "type": "integer",
-                    "minimum": 1,
+                    "minimum": 0,
                     "maximum": 6,
-                    "description": "入金月",
+                    "description": "入金月（当月を指定する場合は、0を指定してください。）",
                     "example": 1,
                     "nullable": true
                   },
