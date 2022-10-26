@@ -273,7 +273,7 @@
           "従業員"
         ],
         "summary": "一覧の取得\n",
-        "description": "\n指定した対象年月に事業所に所属する従業員をリストで返します。\n- 管理者権限を持ったユーザのみ実行可能です。\n- 指定した年月に退職済みユーザは取得できません。",
+        "description": "\n指定した対象年月に事業所に所属する従業員をリストで返します。\n- 管理者権限を持ったユーザのみ実行可能です。\n- 指定した年月に退職済みユーザは取得できません。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の健康保険料の計算方法が自動計算の場合、給与計算時の健康保険料の直接指定金額はnullが返されます)\n- 事業所が定額制の健康保険組合に加入している場合、保険料の直接指定金額は無視されnullが返されます。",
         "operationId": "get_employees",
         "parameters": [
           {
@@ -476,7 +476,7 @@
           "従業員"
         ],
         "summary": "取得\n",
-        "description": "\n指定したIDの従業員を返します。\n- 管理者権限を持ったユーザのみ実行可能です。\n- 指定した対象年月に退職済みユーザは取得できません。",
+        "description": "\n指定したIDの従業員を返します。\n- 管理者権限を持ったユーザのみ実行可能です。\n- 指定した対象年月に退職済みユーザは取得できません。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の健康保険料の計算方法が自動計算の場合、給与計算時の健康保険料の直接指定金額はnullが返されます)\n- 事業所が定額制の健康保険組合に加入している場合、保険料の直接指定金額は無視されnullが返されます。",
         "operationId": "get_employee",
         "parameters": [
           {
@@ -999,7 +999,7 @@
           "従業員の健康保険"
         ],
         "summary": "取得\n",
-        "description": "\n指定した従業員・日付の健康保険情報を返します。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "description": "\n指定した従業員・日付の健康保険情報を返します。\n- 管理者権限を持ったユーザのみ実行可能です。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の健康保険料の計算方法が自動計算の場合、給与計算時の健康保険料の直接指定金額はnullが返されます)",
         "operationId": "get_employee_health_insurance_rule",
         "parameters": [
           {
@@ -1114,7 +1114,7 @@
           "従業員の健康保険"
         ],
         "summary": "更新\n",
-        "description": "\n指定した従業員の健康保険情報を更新します。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "description": "\n指定した従業員の健康保険情報を更新します。\n- 管理者権限を持ったユーザのみ実行可能です。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の健康保険料の計算方法が自動計算の場合、給与計算時の健康保険料の直接指定金額はnullが返されます)\n- 事業所が定額制の健康保険組合に加入している場合、保険料の直接指定金額は無視されnullが返されます。\n- 事業所が定額制の健康保険組合に加入している場合、保険料の計算方法と保険料の更新はできません。",
         "operationId": "update_employee_health_insurance_rule",
         "parameters": [
           {
@@ -1206,7 +1206,7 @@
           "従業員の厚生年金保険"
         ],
         "summary": "取得\n",
-        "description": "\n指定した従業員・日付の厚生年金保険情報を返します。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "description": "\n指定した従業員・日付の厚生年金保険情報を返します。\n- 管理者権限を持ったユーザのみ実行可能です。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の厚生年金保険の計算方法が自動計算の場合、給与計算時の厚生年金保険料の直接指定金額はnullが返されます)",
         "operationId": "get_employee_welfare_pension_insurance_rule",
         "parameters": [
           {
@@ -1317,7 +1317,7 @@
           "従業員の厚生年金保険"
         ],
         "summary": "更新\n",
-        "description": "\n指定した従業員の厚生年金保険情報を更新します。",
+        "description": "\n指定した従業員の厚生年金保険情報を更新します。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の厚生年金保険料の計算方法が自動計算の場合、給与計算時の厚生年金保険料の直接指定金額はnullが返されます)",
         "operationId": "update_employee_welfare_pension_insurance_rule",
         "parameters": [
           {
@@ -8681,6 +8681,24 @@
             "type": "integer",
             "format": "int32"
           },
+          "child_allowance_contribution_bonus_calc_type": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "manual"
+            ],
+            "description": "賞与計算時の子ども・子育て拠出金の計算方法",
+            "example": "manual"
+          },
+          "child_allowance_contribution_salary_calc_type": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "manual"
+            ],
+            "description": "給与計算時の子ども・子育て拠出金の計算方法",
+            "example": "manual"
+          },
           "company_id": {
             "type": "integer",
             "description": "事業所ID",
@@ -8695,6 +8713,60 @@
             "type": "boolean",
             "description": "厚生年金保険に加入しているかどうか"
           },
+          "manual_child_allowance_contribution_amount_bonus": {
+            "type": "number",
+            "format": "float",
+            "description": "賞与計算時の子ども・子育て拠出金の直接指定金額",
+            "nullable": true,
+            "example": 111.0001,
+            "minimum": -999999999.9999,
+            "maximum": 999999999.9999
+          },
+          "manual_child_allowance_contribution_amount_salary": {
+            "type": "number",
+            "format": "float",
+            "description": "給与計算時の子ども・子育て拠出金の直接指定金額",
+            "nullable": true,
+            "example": 222.0001,
+            "minimum": -999999999.9999,
+            "maximum": 999999999.9999
+          },
+          "manual_welfare_pension_insurance_amount_of_company_bonus": {
+            "type": "number",
+            "format": "float",
+            "description": "賞与計算時の厚生年金保険料の直接指定金額（会社負担分）",
+            "nullable": true,
+            "example": 333.0001,
+            "minimum": -999999999.9999,
+            "maximum": 999999999.9999
+          },
+          "manual_welfare_pension_insurance_amount_of_company_salary": {
+            "type": "number",
+            "format": "float",
+            "description": "給与計算時の厚生年金保険料の直接指定金額（会社負担分）",
+            "nullable": true,
+            "example": 444.0001,
+            "minimum": -999999999.9999,
+            "maximum": 999999999.9999
+          },
+          "manual_welfare_pension_insurance_amount_of_employee_bonus": {
+            "type": "integer",
+            "format": "int32",
+            "description": "賞与計算時の厚生年金保険料の直接指定金額（従業員負担分）",
+            "nullable": true,
+            "example": 555,
+            "minimum": -999999999,
+            "maximum": 999999999
+          },
+          "manual_welfare_pension_insurance_amount_of_employee_salary": {
+            "type": "integer",
+            "format": "int32",
+            "description": "給与計算時の厚生年金保険料の直接指定金額（従業員負担分）",
+            "nullable": true,
+            "example": 666,
+            "minimum": -999999999,
+            "maximum": 999999999
+          },
           "reference_num": {
             "type": "string",
             "description": "厚生年金保険の被保険者整理番号",
@@ -8704,6 +8776,24 @@
             "type": "integer",
             "description": "標準報酬月額",
             "format": "int32"
+          },
+          "welfare_pension_insurance_bonus_calc_type": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "manual"
+            ],
+            "description": "賞与計算時の厚生年金保険料の計算方法",
+            "example": "manual"
+          },
+          "welfare_pension_insurance_salary_calc_type": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "manual"
+            ],
+            "description": "給与計算時の厚生年金保険料の計算方法",
+            "example": "manual"
           }
         },
         "nullable": true
@@ -8717,6 +8807,114 @@
           "entried": {
             "type": "boolean",
             "description": "健康保険に加入しているかどうか null不可"
+          },
+          "health_insurance_salary_calc_type": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "manual"
+            ],
+            "description": "給与計算時の健康保険料の計算方法",
+            "example": "manual"
+          },
+          "health_insurance_bonus_calc_type": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "manual"
+            ],
+            "description": "賞与計算時の健康保険料の計算方法",
+            "example": "manual"
+          },
+          "manual_health_insurance_amount_of_employee_salary": {
+            "type": "integer",
+            "format": "int32",
+            "description": "給与計算時の健康保険料の直接指定金額（従業員負担分）",
+            "example": 8888,
+            "nullable": true,
+            "minimum": -999999999,
+            "maximum": 999999999
+          },
+          "manual_health_insurance_amount_of_employee_bonus": {
+            "type": "integer",
+            "format": "int32",
+            "description": "賞与計算時の健康保険料の直接指定金額（従業員負担分）",
+            "example": 7777,
+            "nullable": true,
+            "minimum": -999999999,
+            "maximum": 999999999
+          },
+          "manual_health_insurance_amount_of_company_salary": {
+            "type": "number",
+            "format": "float",
+            "description": "給与計算時の健康保険料の直接指定金額（会社負担分）",
+            "example": 6666.0001,
+            "nullable": true,
+            "minimum": -999999999.9999,
+            "maximum": 999999999.9999
+          },
+          "manual_health_insurance_amount_of_company_bonus": {
+            "type": "number",
+            "format": "float",
+            "description": "賞与計算時の健康保険料の直接指定金額（会社負担分）",
+            "example": 5555.0001,
+            "nullable": true,
+            "minimum": -999999999.9999,
+            "maximum": 999999999.9999
+          },
+          "care_insurance_salary_calc_type": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "manual"
+            ],
+            "description": "給与計算時の介護保険料の計算方法",
+            "example": "manual"
+          },
+          "care_insurance_bonus_calc_type": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "manual"
+            ],
+            "description": "賞与計算時の介護保険料の計算方法",
+            "example": "manual"
+          },
+          "manual_care_insurance_amount_of_employee_salary": {
+            "type": "integer",
+            "format": "int32",
+            "description": "給与計算時の介護保険料の直接指定金額（従業員負担分）",
+            "example": 4444,
+            "nullable": true,
+            "minimum": -999999999,
+            "maximum": 999999999
+          },
+          "manual_care_insurance_amount_of_employee_bonus": {
+            "type": "integer",
+            "format": "int32",
+            "description": "賞与計算時の介護保険料の直接指定金額（従業員負担分）",
+            "example": 3333,
+            "nullable": true,
+            "minimum": -999999999,
+            "maximum": 999999999
+          },
+          "manual_care_insurance_amount_of_company_salary": {
+            "type": "number",
+            "format": "float",
+            "description": "給与計算時の介護保険料の直接指定金額（会社負担分）",
+            "example": 2222.0001,
+            "nullable": true,
+            "minimum": -999999999.9999,
+            "maximum": 999999999.9999
+          },
+          "manual_care_insurance_amount_of_company_bonus": {
+            "type": "number",
+            "format": "float",
+            "description": "賞与計算時の介護保険料の直接指定金額（会社負担分）",
+            "example": 1111.0001,
+            "nullable": true,
+            "minimum": -999999999.9999,
+            "maximum": 999999999.9999
           },
           "reference_num": {
             "type": "string",
@@ -9401,6 +9599,96 @@
             "type": "boolean",
             "description": "厚生年金保険に加入しているかどうか null不可"
           },
+          "welfare_pension_insurance_salary_calc_type": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "manual"
+            ],
+            "description": "給与計算時の厚生年金保険料の計算方法",
+            "example": "manual"
+          },
+          "welfare_pension_insurance_bonus_calc_type": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "manual"
+            ],
+            "description": "賞与計算時の厚生年金保険料の計算方法",
+            "example": "manual"
+          },
+          "manual_welfare_pension_insurance_amount_of_employee_salary": {
+            "type": "integer",
+            "format": "int32",
+            "description": "給与計算時の厚生年金保険料の直接指定金額（従業員負担分）",
+            "example": 1111,
+            "nullable": true,
+            "minimum": -999999999,
+            "maximum": 999999999
+          },
+          "manual_welfare_pension_insurance_amount_of_employee_bonus": {
+            "type": "integer",
+            "format": "int32",
+            "description": "賞与計算時の厚生年金保険料の直接指定金額（従業員負担分）",
+            "example": 2222,
+            "nullable": true,
+            "minimum": -999999999,
+            "maximum": 999999999
+          },
+          "manual_welfare_pension_insurance_amount_of_company_salary": {
+            "type": "number",
+            "format": "float",
+            "description": "給与計算時の厚生年金保険料の直接指定金額（会社負担分）",
+            "example": 3333.0001,
+            "nullable": true,
+            "minimum": -999999999.9999,
+            "maximum": 999999999.9999
+          },
+          "manual_welfare_pension_insurance_amount_of_company_bonus": {
+            "type": "number",
+            "format": "float",
+            "description": "賞与計算時の厚生年金保険料の直接指定金額（会社負担分）",
+            "example": 4444.0001,
+            "nullable": true,
+            "minimum": -999999999.9999,
+            "maximum": 999999999.9999
+          },
+          "child_allowance_contribution_salary_calc_type": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "manual"
+            ],
+            "description": "給与計算時の子ども・子育て拠出金の計算方法",
+            "example": "manual"
+          },
+          "child_allowance_contribution_bonus_calc_type": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "manual"
+            ],
+            "description": "賞与計算時の子ども・子育て拠出金の計算方法",
+            "example": "manual"
+          },
+          "manual_child_allowance_contribution_amount_salary": {
+            "type": "number",
+            "format": "float",
+            "description": "給与計算時の子ども・子育て拠出金の直接指定金額",
+            "nullable": true,
+            "example": 5555.0001,
+            "minimum": -999999999.9999,
+            "maximum": 999999999.9999
+          },
+          "manual_child_allowance_contribution_amount_bonus": {
+            "type": "number",
+            "format": "float",
+            "description": "賞与計算時の子ども・子育て拠出金の直接指定金額",
+            "nullable": true,
+            "example": 6666.0001,
+            "minimum": -999999999.9999,
+            "maximum": 999999999.9999
+          },
           "reference_num": {
             "type": "string",
             "description": "厚生年金保険の被保険者整理番号",
@@ -9517,6 +9805,114 @@
           "entried": {
             "type": "boolean",
             "description": "健康保険に加入しているかどうか"
+          },
+          "health_insurance_salary_calc_type": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "manual"
+            ],
+            "description": "給与計算時の健康保険料の計算方法",
+            "example": "manual"
+          },
+          "health_insurance_bonus_calc_type": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "manual"
+            ],
+            "description": "賞与計算時の健康保険料の計算方法",
+            "example": "manual"
+          },
+          "manual_health_insurance_amount_of_employee_salary": {
+            "type": "integer",
+            "format": "int32",
+            "description": "給与計算時の健康保険料の直接指定金額（従業員負担分）",
+            "example": 8888,
+            "nullable": true,
+            "minimum": -999999999,
+            "maximum": 999999999
+          },
+          "manual_health_insurance_amount_of_employee_bonus": {
+            "type": "integer",
+            "format": "int32",
+            "description": "賞与計算時の健康保険料の直接指定金額（従業員負担分）",
+            "example": 7777,
+            "nullable": true,
+            "minimum": -999999999,
+            "maximum": 999999999
+          },
+          "manual_health_insurance_amount_of_company_salary": {
+            "type": "number",
+            "format": "float",
+            "description": "給与計算時の健康保険料の直接指定金額（会社負担分）",
+            "example": 6666.0001,
+            "nullable": true,
+            "minimum": -999999999.9999,
+            "maximum": 999999999.9999
+          },
+          "manual_health_insurance_amount_of_company_bonus": {
+            "type": "number",
+            "format": "float",
+            "description": "賞与計算時の健康保険料の直接指定金額（会社負担分）",
+            "example": 5555.0001,
+            "nullable": true,
+            "minimum": -999999999.9999,
+            "maximum": 999999999.9999
+          },
+          "care_insurance_salary_calc_type": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "manual"
+            ],
+            "description": "給与計算時の介護保険料の計算方法",
+            "example": "manual"
+          },
+          "care_insurance_bonus_calc_type": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "manual"
+            ],
+            "description": "賞与計算時の介護保険料の計算方法",
+            "example": "manual"
+          },
+          "manual_care_insurance_amount_of_employee_salary": {
+            "type": "integer",
+            "format": "int32",
+            "description": "給与計算時の介護保険料の直接指定金額（従業員負担分）",
+            "example": 4444,
+            "nullable": true,
+            "minimum": -999999999,
+            "maximum": 999999999
+          },
+          "manual_care_insurance_amount_of_employee_bonus": {
+            "type": "integer",
+            "format": "int32",
+            "description": "賞与計算時の介護保険料の直接指定金額（従業員負担分）",
+            "example": 3333,
+            "nullable": true,
+            "minimum": -999999999,
+            "maximum": 999999999
+          },
+          "manual_care_insurance_amount_of_company_salary": {
+            "type": "number",
+            "format": "float",
+            "description": "給与計算時の介護保険料の直接指定金額（会社負担分）",
+            "example": 2222.0001,
+            "nullable": true,
+            "minimum": -999999999.9999,
+            "maximum": 999999999.9999
+          },
+          "manual_care_insurance_amount_of_company_bonus": {
+            "type": "number",
+            "format": "float",
+            "description": "賞与計算時の介護保険料の直接指定金額（会社負担分）",
+            "example": 1111.0001,
+            "nullable": true,
+            "minimum": -999999999.9999,
+            "maximum": 999999999.9999
           },
           "reference_num": {
             "type": "string",
