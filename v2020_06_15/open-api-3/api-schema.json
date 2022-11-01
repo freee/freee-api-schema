@@ -28766,7 +28766,8 @@
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント１ID",
-                  "example": 1
+                  "example": 1,
+                  "nullable": true
                 },
                 "segment_1_tag_name": {
                   "type": "string",
@@ -28780,7 +28781,8 @@
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント２ID",
-                  "example": 1
+                  "example": 1,
+                  "nullable": true
                 },
                 "segment_2_tag_name": {
                   "type": "string",
@@ -28794,7 +28796,8 @@
                   "minimum": 1,
                   "maximum": 9223372036854775807,
                   "description": "セグメント３ID",
-                  "example": 1
+                  "example": 1,
+                  "nullable": true
                 },
                 "segment_3_tag_name": {
                   "type": "string",
