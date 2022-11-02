@@ -502,6 +502,16 @@
               }
             }
           },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
+            }
+          },
           "500": {
             "description": "",
             "content": {
@@ -676,6 +686,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/forbiddenError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
                 }
               }
             }
@@ -18707,7 +18727,14 @@
               "account_type": {
                 "type": "string",
                 "description": "口座種別(ordinary:普通、checking：当座、earmarked：納税準備預金、savings：貯蓄、other:その他)、指定しない場合ordinaryになります。",
-                "example": "ordinary"
+                "example": "ordinary",
+                "enum": [
+                  "ordinary",
+                  "checking",
+                  "earmarked",
+                  "savings",
+                  "other"
+                ]
               },
               "account_number": {
                 "type": "string",
@@ -18964,7 +18991,14 @@
               "account_type": {
                 "type": "string",
                 "description": "口座種別(ordinary:普通、checking：当座、earmarked：納税準備預金、savings：貯蓄、other:その他)、指定しない場合ordinaryになります。",
-                "example": "ordinary"
+                "example": "ordinary",
+                "enum": [
+                  "ordinary",
+                  "checking",
+                  "earmarked",
+                  "savings",
+                  "other"
+                ]
               },
               "account_number": {
                 "type": "string",
