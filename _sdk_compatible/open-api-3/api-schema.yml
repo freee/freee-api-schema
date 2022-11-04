@@ -4306,6 +4306,12 @@ paths:
               schema:
                 "$ref": "#/components/schemas/forbiddenError"
           description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/badRequestNotFoundError"
+          description: ''
         '500':
           content:
             application/json:
@@ -4479,6 +4485,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/forbiddenError"
+          description: ''
+        '404':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/badRequestNotFoundError"
           description: ''
         '500':
           content:
@@ -17985,6 +17997,7 @@ components:
                 format: int64
                 maximum: 9223372036854775807
                 minimum: 1
+                nullable: true
                 type: integer
               segment_1_tag_name:
                 description: セグメント１
@@ -17997,6 +18010,7 @@ components:
                 format: int64
                 maximum: 9223372036854775807
                 minimum: 1
+                nullable: true
                 type: integer
               segment_2_tag_name:
                 description: セグメント２
@@ -18009,6 +18023,7 @@ components:
                 format: int64
                 maximum: 9223372036854775807
                 minimum: 1
+                nullable: true
                 type: integer
               segment_3_tag_name:
                 description: セグメント３
@@ -18300,6 +18315,12 @@ components:
               type: string
             account_type:
               description: 口座種別(ordinary:普通、checking：当座、earmarked：納税準備預金、savings：貯蓄、other:その他)、指定しない場合ordinaryになります。
+              enum:
+              - ordinary
+              - checking
+              - earmarked
+              - savings
+              - other
               example: ordinary
               type: string
             bank_code:
@@ -18778,6 +18799,12 @@ components:
               type: string
             account_type:
               description: 口座種別(ordinary:普通、checking：当座、earmarked：納税準備預金、savings：貯蓄、other:その他)、指定しない場合ordinaryになります。
+              enum:
+              - ordinary
+              - checking
+              - earmarked
+              - savings
+              - other
               example: ordinary
               type: string
             bank_code:
