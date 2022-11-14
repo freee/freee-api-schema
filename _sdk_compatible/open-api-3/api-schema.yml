@@ -9984,9 +9984,9 @@ paths:
                   user_matchers:
                     "$ref": "#/components/schemas/userCapability"
                   wallet_txns:
-                    "$ref": "#/components/schemas/userCapabilityWithConfirm"
+                    "$ref": "#/components/schemas/userCapability"
                   walletables:
-                    "$ref": "#/components/schemas/userCapabilityWithSync"
+                    "$ref": "#/components/schemas/userCapability"
                   workflows:
                     "$ref": "#/components/schemas/userCapability"
                   year_end:
@@ -10210,7 +10210,7 @@ paths:
                 </tr>
                 <tr>
                   <td style="padding: 5px">walletables</td>
-                  <td style="padding: 5px">口座 / 口座の同期</td>
+                  <td style="padding: 5px">口座</td>
                 </tr>
                 <tr>
                   <td style="padding: 5px">companies</td>
@@ -28630,29 +28630,6 @@ components:
           example: true
           type: boolean
       type: object
-    userCapabilityWithConfirm:
-      properties:
-        confirm:
-          description: "「自動で経理」の操作"
-          example: true
-          type: boolean
-        create:
-          description: "「取得した明細」の作成"
-          example: true
-          type: boolean
-        destroy:
-          description: "「取得した明細」の削除"
-          example: true
-          type: boolean
-        read:
-          description: "「取得した明細」の閲覧"
-          example: true
-          type: boolean
-        update:
-          description: "「取得した明細」の更新"
-          example: true
-          type: boolean
-      type: object
     userCapabilityWithSelfOnly:
       properties:
         allowed_target:
@@ -28675,30 +28652,6 @@ components:
           type: boolean
         update:
           description: 更新
-          example: true
-          type: boolean
-      type: object
-    userCapabilityWithSync:
-      properties:
-        create:
-          description: "「口座」の作成"
-          example: true
-          type: boolean
-        destroy:
-          description: "「口座」の削除"
-          example: true
-          type: boolean
-        read:
-          description: "「口座」の閲覧"
-          example: true
-          type: boolean
-        sync:
-          deprecated: true
-          description: "「口座の同期」の実行（廃止予定）"
-          example: true
-          type: boolean
-        update:
-          description: "「口座」の更新"
           example: true
           type: boolean
       type: object
