@@ -30289,7 +30289,7 @@
                     "example": "000-0000",
                     "nullable": true
                   },
-                  "prefecture_codes": {
+                  "prefecture_code": {
                     "type": "integer",
                     "minimum": -1,
                     "maximum": 46,
