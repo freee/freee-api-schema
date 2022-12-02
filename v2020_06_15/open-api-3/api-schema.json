@@ -28383,14 +28383,6 @@
                                 "description": "税区分コード",
                                 "example": 1
                               },
-                              "id": {
-                                "type": "integer",
-                                "minimum": 0,
-                                "maximum": 2147483647,
-                                "description": "税区分ID",
-                                "example": 1,
-                                "deprecated": true
-                              },
                               "name": {
                                 "type": "string",
                                 "description": "税区分",
@@ -28407,14 +28399,6 @@
                                 "maximum": 2147483647,
                                 "description": "税区分コード",
                                 "example": 1
-                              },
-                              "id": {
-                                "type": "integer",
-                                "minimum": 0,
-                                "maximum": 2147483647,
-                                "description": "税区分ID",
-                                "example": 1,
-                                "deprecated": true
                               },
                               "name": {
                                 "type": "string",
@@ -28433,14 +28417,6 @@
                                 "description": "税区分コード",
                                 "example": 1
                               },
-                              "id": {
-                                "type": "integer",
-                                "minimum": 0,
-                                "maximum": 2147483647,
-                                "description": "税区分ID",
-                                "example": 1,
-                                "deprecated": true
-                              },
                               "name": {
                                 "type": "string",
                                 "description": "税区分",
@@ -28457,14 +28433,6 @@
                                 "maximum": 2147483647,
                                 "description": "税区分コード",
                                 "example": 1
-                              },
-                              "id": {
-                                "type": "integer",
-                                "minimum": 0,
-                                "maximum": 2147483647,
-                                "description": "税区分ID",
-                                "example": 1,
-                                "deprecated": true
                               },
                               "name": {
                                 "type": "string",
