@@ -5796,9 +5796,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -5948,9 +5953,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -6100,9 +6110,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -6252,9 +6267,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -6418,9 +6438,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル,
-          法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -6576,8 +6601,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）
-          ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -6738,8 +6769,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）
-          ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -6900,8 +6937,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）
-          ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -7056,9 +7099,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -7216,9 +7264,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -7376,9 +7429,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -7542,9 +7600,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル,
-          法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -7700,8 +7763,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）
-          ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -7862,8 +7931,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）
-          ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -8024,8 +8099,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）
-          ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -8180,9 +8261,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -8340,9 +8426,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -22459,13 +22550,6 @@ components:
                               maximum: 2147483647
                               minimum: 0
                               type: integer
-                            id:
-                              deprecated: true
-                              description: 税区分ID
-                              example: 1
-                              maximum: 2147483647
-                              minimum: 0
-                              type: integer
                             name:
                               description: 税区分
                               example: 課対仕入10%
@@ -22475,13 +22559,6 @@ components:
                           properties:
                             code:
                               description: 税区分コード
-                              example: 1
-                              maximum: 2147483647
-                              minimum: 0
-                              type: integer
-                            id:
-                              deprecated: true
-                              description: 税区分ID
                               example: 1
                               maximum: 2147483647
                               minimum: 0
@@ -22499,13 +22576,6 @@ components:
                               maximum: 2147483647
                               minimum: 0
                               type: integer
-                            id:
-                              deprecated: true
-                              description: 税区分ID
-                              example: 1
-                              maximum: 2147483647
-                              minimum: 0
-                              type: integer
                             name:
                               description: 税区分
                               example: 課対仕入8%
@@ -22515,13 +22585,6 @@ components:
                           properties:
                             code:
                               description: 税区分コード
-                              example: 1
-                              maximum: 2147483647
-                              minimum: 0
-                              type: integer
-                            id:
-                              deprecated: true
-                              description: 税区分ID
                               example: 1
                               maximum: 2147483647
                               minimum: 0

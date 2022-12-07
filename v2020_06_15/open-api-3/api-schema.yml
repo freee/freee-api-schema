@@ -7622,9 +7622,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -7725,66 +7730,45 @@ paths:
       description: |2
 
         <h2 id="">概要</h2>
-
         <p>指定した事業所の貸借対照表を取得する</p>
 
         <h2 id="_2">定義</h2>
-
         <ul>
+          <li><p>created_at : 作成日時</p></li>
+          <li><p>account_item_name : 勘定科目名</p></li>
+          <li><p>hierarchy_level: 階層レベル</p></li>
+          <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>
+          <li><p>opening_balance : 期首残高</p></li>
+          <li><p>debit_amount : 借方金額</p></li>
+          <li><p>credit_amount:  貸方金額</p></li>
+          <li><p>closing_balance : 期末残高</p></li>
+          <li><p>composition_ratio : 構成比</p></li>
+        </ul>
 
-        <li>
-        <p>created_at : 作成日時</p>
-        </li>
-
-        <li>
-        <p>account_item_name : 勘定科目名</p>
-        </li>
-
-        <li>
-        <p>hierarchy_level: 階層レベル</p>
-        </li>
-
-        <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
-        </li>
-        <li>
-        <p>opening_balance : 期首残高 </p>
-        </li>
-
-        <li>
-        <p>debit_amount : 借方金額 </p>
-        </li>
-        <li>
-        <p>credit_amount:  貸方金額 </p>
-        </li>
-        <li>
-        <p>closing_balance : 期末残高 </p>
-        </li>
-        <li>
-        <p>composition_ratio : 構成比</p>
-        </li>
         <h2 id="_3">注意点</h2>
         <ul>
-        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
-        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
-        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
-        <li>partner_codeとpartner_idは同時に指定することはできません。</li>
-        <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>
+          <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+          <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+          <li>partner_codeとpartner_idは同時に指定することはできません。</li>
+          <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。
           <ul>
-          <li>fiscal_year</li>
-          <li>start_month</li>
-          <li>end_month</li>
+            <li>fiscal_year</li>
+            <li>start_month</li>
+            <li>end_month</li>
           </ul>
-        <li>0を指定すると未選択で絞り込めます</li>
+          </li>
+          <li>0を指定すると未選択で絞り込めます
           <ul>
-          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <li>partner_idに0を指定して絞り込んだ場合
             <ul>
-            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+              <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
             </ul>
+            </li>
           </ul>
+          </li>
         </ul>
-        <h2 id="_4">レスポンスの例</h2>
 
+        <h2 id="_4">レスポンスの例</h2>
         <blockquote>
         <p>GET https://api.freee.co.jp/api/1/reports/trial_bs?company_id=1&amp;fiscal_year=2019&amp;breakdown_display_type=partner</p>
         </blockquote>
@@ -7873,9 +7857,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -7976,62 +7965,43 @@ paths:
       description: |2
 
         <h2 id="">概要</h2>
-
         <p>指定した事業所の貸借対照表(３期間比較)を取得する</p>
 
         <h2 id="_2">定義</h2>
+        <ul><li><p>created_at : 作成日時</p></li>
+          <li><p>account_item_name : 勘定科目名</p></li>
+          <li><p>hierarchy_level: 階層レベル</p></li>
+          <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>
+          <li><p>two_years_before_closing_balance:  前々年度期末残高</p></li>
+          <li><p>last_year_closing_balance:  前年度期末残高</p></li>
+          <li><p>closing_balance : 期末残高</p></li>
+          <li><p>year_on_year : 前年比</p></li>
+        </ul>
 
-        <ul>
-
-        <li>
-        <p>created_at : 作成日時</p>
-        </li>
-
-        <li>
-        <p>account_item_name : 勘定科目名</p>
-        </li>
-
-        <li>
-        <p>hierarchy_level: 階層レベル</p>
-        </li>
-
-        <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
-        </li>
-        <li>
-        <p>two_years_before_closing_balance:  前々年度期末残高 </p>
-        </li>
-        <li>
-        <p>last_year_closing_balance:  前年度期末残高 </p>
-        </li>
-        <li>
-        <p>closing_balance : 期末残高 </p>
-        </li>
-        <li>
-        <p>year_on_year : 前年比</p>
-        </li>
         <h2 id="_3">注意点</h2>
         <ul>
-        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
-        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
-        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
-        <li>partner_codeとpartner_idは同時に指定することはできません。</li>
-        <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>
+          <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+          <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+          <li>partner_codeとpartner_idは同時に指定することはできません。</li>
+          <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。
           <ul>
-          <li>fiscal_year</li>
-          <li>start_month</li>
-          <li>end_month</li>
+            <li>fiscal_year</li>
+            <li>start_month</li>
+            <li>end_month</li>
           </ul>
-        <li>0を指定すると未選択で絞り込めます</li>
+          </li>
+          <li>0を指定すると未選択で絞り込めます
           <ul>
-          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <li>partner_idに0を指定して絞り込んだ場合
             <ul>
-            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+              <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
             </ul>
+            </li>
           </ul>
+          </li>
         </ul>
-        <h2 id="_4">レスポンスの例</h2>
 
+        <h2 id="_4">レスポンスの例</h2>
         <blockquote>
         <p>GET https://api.freee.co.jp/api/1/reports/trial_bs_three_years?company_id=1&amp;fiscal_year=2019</p>
         </blockquote>
@@ -8107,9 +8077,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -8210,60 +8185,43 @@ paths:
       description: |2
 
         <h2 id="">概要</h2>
-
         <p>指定した事業所の貸借対照表(前年比較)を取得する</p>
 
         <h2 id="_2">定義</h2>
-
         <ul>
+          <li><p>created_at : 作成日時</p></li>
+          <li><p>account_item_name : 勘定科目名</p></li>
+          <li><p>hierarchy_level: 階層レベル</p></li>
+          <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>
+          <li><p>last_year_closing_balance:  前年度期末残高</p></li>
+          <li><p>closing_balance : 期末残高</p></li>
+          <li><p>year_on_year : 前年比</p></li>
+        </ul>
 
-        <li>
-        <p>created_at : 作成日時</p>
-        </li>
-
-        <li>
-        <p>account_item_name : 勘定科目名</p>
-        </li>
-
-        <li>
-        <p>hierarchy_level: 階層レベル</p>
-        </li>
-
-        <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
-        </li>
-        <li>
-        <p>last_year_closing_balance:  前年度期末残高 </p>
-        </li>
-        <li>
-        <p>closing_balance : 期末残高 </p>
-        </li>
-        <li>
-        <p>year_on_year : 前年比</p>
-        </li>
         <h2 id="_3">注意点</h2>
         <ul>
-        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
-        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
-        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
-        <li>partner_codeとpartner_idは同時に指定することはできません。</li>
-        <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>
+          <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+          <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+          <li>partner_codeとpartner_idは同時に指定することはできません。</li>
+          <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。
           <ul>
-          <li>fiscal_year</li>
-          <li>start_month</li>
-          <li>end_month</li>
+            <li>fiscal_year</li>
+            <li>start_month</li>
+            <li>end_month</li>
           </ul>
-        <li>0を指定すると未選択で絞り込めます</li>
+          </li>
+          <li>0を指定すると未選択で絞り込めます
           <ul>
-          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <li>partner_idに0を指定して絞り込んだ場合
             <ul>
-            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+              <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
             </ul>
+            </li>
           </ul>
+          </li>
         </ul>
 
         <h2 id="_4">レスポンスの例</h2>
-
         <blockquote>
         <p>GET https://api.freee.co.jp/api/1/reports/trial_bs_two_years?company_id=1&amp;fiscal_year=2019</p>
         </blockquote>
@@ -8338,9 +8296,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -8449,57 +8412,45 @@ paths:
       description: |
         <h2 id="">概要</h2>
         <p>指定した事業所の製造原価報告書を取得する</p>
+
         <h2 id="_2">定義</h2>
         <ul>
-        <li>
-        <p>created_at : 作成日時</p>
-        </li>
-        <li>
-        <p>account_item_name : 勘定科目名</p>
-        </li>
-        <li>
-        <p>hierarchy_level: 階層レベル</p>
-        </li>
-        <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
-        </li>
-        <li>
-        <p>opening_balance : 期首残高 </p>
-        </li>
-        <li>
-        <p>debit_amount : 借方金額 </p>
-        </li>
-        <li>
-        <p>credit_amount:  貸方金額 </p>
-        </li>
-        <li>
-        <p>closing_balance : 期末残高 </p>
-        </li>
-        <li>
-        <p>composition_ratio : 構成比</p>
-        </li>
+          <li><p>created_at : 作成日時</p></li>
+          <li><p>account_item_name : 勘定科目名</p></li>
+          <li><p>hierarchy_level: 階層レベル</p></li>
+          <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>
+          <li><p>opening_balance : 期首残高</p></li>
+          <li><p>debit_amount : 借方金額</p></li>
+          <li><p>credit_amount:  貸方金額</p></li>
+          <li><p>closing_balance : 期末残高</p></li>
+          <li><p>composition_ratio : 構成比</p></li>
+        </ul>
+
         <h2 id="_3">注意点</h2>
         <ul>
         <li>法人向けのプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
-        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
-        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
-        <li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>
-        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
-        <li>partner_codeとpartner_idは同時に指定することはできません。</li>
-        <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>
+          <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+          <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+          <li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>
+          <li>partner_codeとpartner_idは同時に指定することはできません。</li>
+          <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。
           <ul>
-          <li>fiscal_year</li>
-          <li>start_month</li>
-          <li>end_month</li>
+            <li>fiscal_year</li>
+            <li>start_month</li>
+            <li>end_month</li>
           </ul>
-        <li>0を指定すると未選択で絞り込めます</li>
+          </li>
+          <li>0を指定すると未選択で絞り込めます
           <ul>
-          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <li>partner_idに0を指定して絞り込んだ場合
             <ul>
-            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+              <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
             </ul>
+            </li>
           </ul>
+          </li>
         </ul>
+
         <h2 id="_4">レスポンスの例</h2>
         <blockquote>
         <p>GET https://api.freee.co.jp/api/1/reports/trial_cr?company_id=1&amp;fiscal_year=2019&amp;breakdown_display_type=partner</p>
@@ -8594,9 +8545,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル,
-          法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -8697,53 +8653,42 @@ paths:
       description: |2
 
         <h2 id="">概要</h2>
-
         <p>指定した事業所の製造原価報告書(部門比較)を取得する</p>
 
         <h2 id="_2">定義</h2>
-
         <ul>
+          <li><p>created_at : 作成日時</p></li>
+          <li><p>account_item_name : 勘定科目名</p></li>
+          <li><p>hierarchy_level: 階層レベル</p></li>
+          <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>
+          <li><p>closing_balance : 期末残高</p></li>
+        </ul>
 
-        <li>
-        <p>created_at : 作成日時</p>
-        </li>
-
-        <li>
-        <p>account_item_name : 勘定科目名</p>
-        </li>
-
-        <li>
-        <p>hierarchy_level: 階層レベル</p>
-        </li>
-
-        <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
-        </li>
-        <li>
-        <p>closing_balance : 期末残高 </p>
-        </li>
         <h2 id="_3">注意点</h2>
         <ul>
-        <li>法人向けのベーシックプラン以上で利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
-        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
-        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
-        <li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>
-        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
-        <li>partner_codeとpartner_idは同時に指定することはできません。</li>
-        <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>
+          <li>法人向けのベーシックプラン以上で利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
+          <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+          <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+          <li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>
+          <li>partner_codeとpartner_idは同時に指定することはできません。</li>
+          <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。
           <ul>
-          <li>fiscal_year</li>
-          <li>start_month</li>
-          <li>end_month</li>
+            <li>fiscal_year</li>
+            <li>start_month</li>
+            <li>end_month</li>
           </ul>
-        <li>0を指定すると未選択で絞り込めます</li>
+          </li>
+          <li>0を指定すると未選択で絞り込めます
           <ul>
-          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <li>partner_idに0を指定して絞り込んだ場合
             <ul>
-            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+              <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
             </ul>
+            </li>
           </ul>
+          </li>
         </ul>
+
         <h2 id="_4">レスポンスの例</h2>
 
         <blockquote>
@@ -8842,8 +8787,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）
-          ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -8949,52 +8900,41 @@ paths:
       description: |2
 
         <h2 id="">概要</h2>
-
         <p>指定した事業所の製造原価報告書(セグメント1比較)を取得する</p>
 
         <h2 id="_2">定義</h2>
-
         <ul>
+          <li><p>created_at : 作成日時</p></li>
+          <li><p>account_item_name : 勘定科目名</p></li>
+          <li><p>hierarchy_level: 階層レベル</p></li>
+          <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>
+          <li><p>closing_balance : 期末残高</p></li>
+        </ul>
 
-        <li>
-        <p>created_at : 作成日時</p>
-        </li>
-
-        <li>
-        <p>account_item_name : 勘定科目名</p>
-        </li>
-
-        <li>
-        <p>hierarchy_level: 階層レベル</p>
-        </li>
-
-        <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
-        </li>
-        <li>
-        <p>closing_balance : 期末残高 </p>
-        </li>
         <h2 id="_3">注意点</h2>
         <ul>
-        <li>法人向けのプロフェッショナルプラン以上で利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
-        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
-        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
-        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
-        <li>partner_codeとpartner_idは同時に指定することはできません。</li>
-        <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>
+          <li>法人向けのプロフェッショナルプラン以上で利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
+          <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+          <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+          <li>partner_codeとpartner_idは同時に指定することはできません。</li>
+          <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。
           <ul>
-          <li>fiscal_year</li>
-          <li>start_month</li>
-          <li>end_month</li>
+            <li>fiscal_year</li>
+            <li>start_month</li>
+            <li>end_month</li>
           </ul>
-        <li>0を指定すると未選択で絞り込めます</li>
+          </li>
+          <li>0を指定すると未選択で絞り込めます
           <ul>
-          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <li>partner_idに0を指定して絞り込んだ場合
             <ul>
-            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+              <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
             </ul>
+            </li>
           </ul>
+          </li>
         </ul>
+
         <h2 id="_4">レスポンスの例</h2>
 
         <blockquote>
@@ -9093,8 +9033,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）
-          ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -9200,52 +9146,41 @@ paths:
       description: |2
 
         <h2 id="">概要</h2>
-
         <p>指定した事業所の製造原価報告書(セグメント2比較)を取得する</p>
 
         <h2 id="_2">定義</h2>
-
         <ul>
+          <li><p>created_at : 作成日時</p></li>
+          <li><p>account_item_name : 勘定科目名</p></li>
+          <li><p>hierarchy_level: 階層レベル</p></li>
+          <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>
+          <li><p>closing_balance : 期末残高</p></li>
+        </ul>
 
-        <li>
-        <p>created_at : 作成日時</p>
-        </li>
-
-        <li>
-        <p>account_item_name : 勘定科目名</p>
-        </li>
-
-        <li>
-        <p>hierarchy_level: 階層レベル</p>
-        </li>
-
-        <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
-        </li>
-        <li>
-        <p>closing_balance : 期末残高 </p>
-        </li>
         <h2 id="_3">注意点</h2>
         <ul>
-        <li>法人向けのエンタープライズプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
-        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
-        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
-        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
-        <li>partner_codeとpartner_idは同時に指定することはできません。</li>
-        <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>
+          <li>法人向けのエンタープライズプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
+          <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+          <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+          <li>partner_codeとpartner_idは同時に指定することはできません。</li>
+          <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。
           <ul>
-          <li>fiscal_year</li>
-          <li>start_month</li>
-          <li>end_month</li>
+            <li>fiscal_year</li>
+            <li>start_month</li>
+            <li>end_month</li>
           </ul>
-        <li>0を指定すると未選択で絞り込めます</li>
+          </li>
+          <li>0を指定すると未選択で絞り込めます
           <ul>
-          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <li>partner_idに0を指定して絞り込んだ場合
             <ul>
-            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+              <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
             </ul>
+            </li>
           </ul>
+          </li>
         </ul>
+
         <h2 id="_4">レスポンスの例</h2>
 
         <blockquote>
@@ -9344,8 +9279,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）
-          ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -9451,52 +9392,41 @@ paths:
       description: |2
 
         <h2 id="">概要</h2>
-
         <p>指定した事業所の製造原価報告書(セグメント3比較)を取得する</p>
 
         <h2 id="_2">定義</h2>
-
         <ul>
+          <li><p>created_at : 作成日時</p></li>
+          <li><p>account_item_name : 勘定科目名</p></li>
+          <li><p>hierarchy_level: 階層レベル</p></li>
+          <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>
+          <li><p>closing_balance : 期末残高</p></li>
+        </ul>
 
-        <li>
-        <p>created_at : 作成日時</p>
-        </li>
-
-        <li>
-        <p>account_item_name : 勘定科目名</p>
-        </li>
-
-        <li>
-        <p>hierarchy_level: 階層レベル</p>
-        </li>
-
-        <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
-        </li>
-        <li>
-        <p>closing_balance : 期末残高 </p>
-        </li>
         <h2 id="_3">注意点</h2>
         <ul>
-        <li>法人向けのエンタープライズプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
-        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
-        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
-        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
-        <li>partner_codeとpartner_idは同時に指定することはできません。</li>
-        <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>
+          <li>法人向けのエンタープライズプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
+          <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+          <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+          <li>partner_codeとpartner_idは同時に指定することはできません。</li>
+          <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。
           <ul>
-          <li>fiscal_year</li>
-          <li>start_month</li>
-          <li>end_month</li>
+            <li>fiscal_year</li>
+            <li>start_month</li>
+            <li>end_month</li>
           </ul>
-        <li>0を指定すると未選択で絞り込めます</li>
+          </li>
+          <li>0を指定すると未選択で絞り込めます
           <ul>
-          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <li>partner_idに0を指定して絞り込んだ場合
             <ul>
-            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+              <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
             </ul>
+            </li>
           </ul>
+          </li>
         </ul>
+
         <h2 id="_4">レスポンスの例</h2>
 
         <blockquote>
@@ -9589,9 +9519,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -9700,62 +9635,45 @@ paths:
       description: |2
 
         <h2 id="">概要</h2>
-
         <p>指定した事業所の製造原価報告書(３期間比較)を取得する</p>
 
         <h2 id="_2">定義</h2>
-
         <ul>
+          <li><p>created_at : 作成日時</p></li>
+          <li><p>account_item_name : 勘定科目名</p></li>
+          <li><p>hierarchy_level: 階層レベル</p></li>
+          <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>
+          <li><p>two_years_before_closing_balance:  前々年度期末残高</p></li>
+          <li><p>last_year_closing_balance:  前年度期末残高</p></li>
+          <li><p>closing_balance : 期末残高</p></li>
+          <li><p>year_on_year : 前年比</p></li>
+        </ul>
 
-        <li>
-        <p>created_at : 作成日時</p>
-        </li>
-
-        <li>
-        <p>account_item_name : 勘定科目名</p>
-        </li>
-
-        <li>
-        <p>hierarchy_level: 階層レベル</p>
-        </li>
-
-        <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
-        </li>
-        <li>
-        <p>two_years_before_closing_balance:  前々年度期末残高 </p>
-        </li>
-        <li>
-        <p>last_year_closing_balance:  前年度期末残高 </p>
-        </li>
-        <li>
-        <p>closing_balance : 期末残高 </p>
-        </li>
-        <li>
-        <p>year_on_year : 前年比</p>
-        </li>
         <h2 id="_3">注意点</h2>
         <ul>
-        <li>法人向けのプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
-        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
-        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
-        <li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>
-        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
-        <li>partner_codeとpartner_idは同時に指定することはできません。</li>
-        <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>
+          <li>法人向けのプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
+          <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+          <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+          <li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>
+          <li>partner_codeとpartner_idは同時に指定することはできません。</li>
+          <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。
           <ul>
-          <li>fiscal_year</li>
-          <li>start_month</li>
-          <li>end_month</li>
+            <li>fiscal_year</li>
+            <li>start_month</li>
+            <li>end_month</li>
           </ul>
-        <li>0を指定すると未選択で絞り込めます</li>
+          </li>
+          <li>0を指定すると未選択で絞り込めます
           <ul>
-          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <li>partner_idに0を指定して絞り込んだ場合
             <ul>
-            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+              <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
             </ul>
+            </li>
           </ul>
+          </li>
         </ul>
+
         <h2 id="_4">レスポンスの例</h2>
 
         <blockquote>
@@ -9833,9 +9751,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -9944,58 +9867,42 @@ paths:
       description: |2
 
         <h2 id="">概要</h2>
-
         <p>指定した事業所の製造原価報告書(前年比較)を取得する</p>
 
         <h2 id="_2">定義</h2>
-
         <ul>
+          <li><p>created_at : 作成日時</p></li>
+          <li><p>account_item_name : 勘定科目名</p></li>
+          <li><p>hierarchy_level: 階層レベル</p></li>
+          <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>
+          <li><p>last_year_closing_balance:  前年度期末残高</p></li>
+          <li><p>closing_balance : 期末残高</p></li>
+          <li><p>year_on_year : 前年比</p></li>
+        </ul>
 
-        <li>
-        <p>created_at : 作成日時</p>
-        </li>
-
-        <li>
-        <p>account_item_name : 勘定科目名</p>
-        </li>
-
-        <li>
-        <p>hierarchy_level: 階層レベル</p>
-        </li>
-
-        <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
-        </li>
-        <li>
-        <p>last_year_closing_balance:  前年度期末残高 </p>
-        </li>
-        <li>
-        <p>closing_balance : 期末残高 </p>
-        </li>
-        <li>
-        <p>year_on_year : 前年比</p>
-        </li>
         <h2 id="_3">注意点</h2>
         <ul>
-        <li>法人向けのプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
-        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
-        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
-        <li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>
-        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
-        <li>partner_codeとpartner_idは同時に指定することはできません。</li>
-        <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>
+          <li>法人向けのプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
+          <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+          <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+          <li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>
+          <li>partner_codeとpartner_idは同時に指定することはできません。</li>
+          <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。
           <ul>
-          <li>fiscal_year</li>
-          <li>start_month</li>
-          <li>end_month</li>
+            <li>fiscal_year</li>
+            <li>start_month</li>
+            <li>end_month</li>
           </ul>
-        <li>0を指定すると未選択で絞り込めます</li>
+          </li>
+          <li>0を指定すると未選択で絞り込めます
           <ul>
-          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <li>partner_idに0を指定して絞り込んだ場合
             <ul>
-            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+              <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
             </ul>
+            </li>
           </ul>
+          </li>
         </ul>
 
         <h2 id="_4">レスポンスの例</h2>
@@ -10074,9 +9981,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -10185,65 +10097,45 @@ paths:
       description: |2
 
         <h2 id="">概要</h2>
-
         <p>指定した事業所の損益計算書を取得する</p>
 
         <h2 id="_2">定義</h2>
-
         <ul>
+          <li><p>created_at : 作成日時</p></li>
+          <li><p>account_item_name : 勘定科目名</p></li>
+          <li><p>hierarchy_level: 階層レベル</p></li>
+          <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>
+          <li><p>opening_balance : 期首残高</p></li>
+          <li><p>debit_amount : 借方金額</p></li>
+          <li><p>credit_amount:  貸方金額</p></li>
+          <li><p>closing_balance : 期末残高</p></li>
+          <li><p>composition_ratio : 構成比</p></li>
+        </ul>
 
-        <li>
-        <p>created_at : 作成日時</p>
-        </li>
-
-        <li>
-        <p>account_item_name : 勘定科目名</p>
-        </li>
-
-        <li>
-        <p>hierarchy_level: 階層レベル</p>
-        </li>
-
-        <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
-        </li>
-        <li>
-        <p>opening_balance : 期首残高 </p>
-        </li>
-
-        <li>
-        <p>debit_amount : 借方金額 </p>
-        </li>
-        <li>
-        <p>credit_amount:  貸方金額 </p>
-        </li>
-        <li>
-        <p>closing_balance : 期末残高 </p>
-        </li>
-        <li>
-        <p>composition_ratio : 構成比</p>
-        </li>
         <h2 id="_3">注意点</h2>
         <ul>
-        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
-        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
-        <li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>
-        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
-        <li>partner_codeとpartner_idは同時に指定することはできません。</li>
-        <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>
+          <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+          <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+          <li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>
+          <li>partner_codeとpartner_idは同時に指定することはできません。</li>
+          <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。
           <ul>
-          <li>fiscal_year</li>
-          <li>start_month</li>
-          <li>end_month</li>
+            <li>fiscal_year</li>
+            <li>start_month</li>
+            <li>end_month</li>
           </ul>
-        <li>0を指定すると未選択で絞り込めます</li>
+          </li>
+          <li>0を指定すると未選択で絞り込めます
           <ul>
-          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <li>partner_idに0を指定して絞り込んだ場合
             <ul>
-            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+              <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
             </ul>
+            </li>
           </ul>
+          </li>
         </ul>
+
         <h2 id="_4">レスポンスの例</h2>
 
         <blockquote>
@@ -10340,9 +10232,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル,
-          法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -10443,53 +10340,42 @@ paths:
       description: |2
 
         <h2 id="">概要</h2>
-
         <p>指定した事業所の損益計算書(部門比較)を取得する</p>
 
         <h2 id="_2">定義</h2>
-
         <ul>
+          <li><p>created_at : 作成日時</p></li>
+          <li><p>account_item_name : 勘定科目名</p></li>
+          <li><p>hierarchy_level: 階層レベル</p></li>
+          <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>
+          <li><p>closing_balance : 期末残高</p></li>
+        </ul>
 
-        <li>
-        <p>created_at : 作成日時</p>
-        </li>
-
-        <li>
-        <p>account_item_name : 勘定科目名</p>
-        </li>
-
-        <li>
-        <p>hierarchy_level: 階層レベル</p>
-        </li>
-
-        <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
-        </li>
-        <li>
-        <p>closing_balance : 期末残高 </p>
-        </li>
         <h2 id="_3">注意点</h2>
         <ul>
-        <li>個人向けのプレミアムプラン、法人向けのベーシックプラン以上で利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
-        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
-        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
-        <li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>
-        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
-        <li>partner_codeとpartner_idは同時に指定することはできません。</li>
-        <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>
+          <li>個人向けのプレミアムプラン、法人向けのベーシックプラン以上で利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
+          <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+          <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+          <li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>
+          <li>partner_codeとpartner_idは同時に指定することはできません。</li>
+          <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。
           <ul>
-          <li>fiscal_year</li>
-          <li>start_month</li>
-          <li>end_month</li>
+            <li>fiscal_year</li>
+            <li>start_month</li>
+            <li>end_month</li>
           </ul>
-        <li>0を指定すると未選択で絞り込めます</li>
+          </li>
+          <li>0を指定すると未選択で絞り込めます
           <ul>
-          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <li>partner_idに0を指定して絞り込んだ場合
             <ul>
-            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+              <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
             </ul>
+            </li>
           </ul>
+          </li>
         </ul>
+
         <h2 id="_4">レスポンスの例</h2>
 
         <blockquote>
@@ -10588,8 +10474,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）
-          ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -10695,52 +10587,41 @@ paths:
       description: |2
 
         <h2 id="">概要</h2>
-
         <p>指定した事業所の損益計算書(セグメント1比較)を取得する</p>
 
         <h2 id="_2">定義</h2>
-
         <ul>
+          <li><p>created_at : 作成日時</p></li>
+          <li><p>account_item_name : 勘定科目名</p></li>
+          <li><p>hierarchy_level: 階層レベル</p></li>
+          <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>
+          <li><p>closing_balance : 期末残高</p></li>
+        </ul>
 
-        <li>
-        <p>created_at : 作成日時</p>
-        </li>
-
-        <li>
-        <p>account_item_name : 勘定科目名</p>
-        </li>
-
-        <li>
-        <p>hierarchy_level: 階層レベル</p>
-        </li>
-
-        <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
-        </li>
-        <li>
-        <p>closing_balance : 期末残高 </p>
-        </li>
         <h2 id="_3">注意点</h2>
         <ul>
-        <li>法人向けのプロフェッショナルプラン以上で利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
-        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
-        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
-        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
-        <li>partner_codeとpartner_idは同時に指定することはできません。</li>
-        <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>
+          <li>法人向けのプロフェッショナルプラン以上で利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
+          <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+          <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+          <li>partner_codeとpartner_idは同時に指定することはできません。</li>
+          <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。
           <ul>
-          <li>fiscal_year</li>
-          <li>start_month</li>
-          <li>end_month</li>
+            <li>fiscal_year</li>
+            <li>start_month</li>
+            <li>end_month</li>
           </ul>
-        <li>0を指定すると未選択で絞り込めます</li>
+          </li>
+          <li>0を指定すると未選択で絞り込めます
           <ul>
-          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <li>partner_idに0を指定して絞り込んだ場合
             <ul>
-            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+              <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
             </ul>
+            </li>
           </ul>
+          </li>
         </ul>
+
         <h2 id="_4">レスポンスの例</h2>
 
         <blockquote>
@@ -10839,8 +10720,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）
-          ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -10946,52 +10833,41 @@ paths:
       description: |2
 
         <h2 id="">概要</h2>
-
         <p>指定した事業所の損益計算書(セグメント2比較)を取得する</p>
 
         <h2 id="_2">定義</h2>
-
         <ul>
+          <li><p>created_at : 作成日時</p></li>
+          <li><p>account_item_name : 勘定科目名</p></li>
+          <li><p>hierarchy_level: 階層レベル</p></li>
+          <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>
+          <li><p>closing_balance : 期末残高</p></li>
+        </ul>
 
-        <li>
-        <p>created_at : 作成日時</p>
-        </li>
-
-        <li>
-        <p>account_item_name : 勘定科目名</p>
-        </li>
-
-        <li>
-        <p>hierarchy_level: 階層レベル</p>
-        </li>
-
-        <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
-        </li>
-        <li>
-        <p>closing_balance : 期末残高 </p>
-        </li>
         <h2 id="_3">注意点</h2>
         <ul>
-        <li>法人向けのエンタープライズプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
-        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
-        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
-        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
-        <li>partner_codeとpartner_idは同時に指定することはできません。</li>
-        <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>
+          <li>法人向けのエンタープライズプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
+          <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+          <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+          <li>partner_codeとpartner_idは同時に指定することはできません。</li>
+          <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。
           <ul>
-          <li>fiscal_year</li>
-          <li>start_month</li>
-          <li>end_month</li>
+            <li>fiscal_year</li>
+            <li>start_month</li>
+            <li>end_month</li>
           </ul>
-        <li>0を指定すると未選択で絞り込めます</li>
+          </li>
+          <li>0を指定すると未選択で絞り込めます
           <ul>
-          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <li>partner_idに0を指定して絞り込んだ場合
             <ul>
-            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+              <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
             </ul>
+            </li>
           </ul>
+          </li>
         </ul>
+
         <h2 id="_4">レスポンスの例</h2>
 
         <blockquote>
@@ -11090,8 +10966,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）
-          ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -11197,52 +11079,41 @@ paths:
       description: |2
 
         <h2 id="">概要</h2>
-
         <p>指定した事業所の損益計算書(セグメント3比較)を取得する</p>
 
         <h2 id="_2">定義</h2>
-
         <ul>
+          <li><p>created_at : 作成日時</p></li>
+          <li><p>account_item_name : 勘定科目名</p></li>
+          <li><p>hierarchy_level: 階層レベル</p></li>
+          <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>
+          <li><p>closing_balance : 期末残高</p></li>
+        </ul>
 
-        <li>
-        <p>created_at : 作成日時</p>
-        </li>
-
-        <li>
-        <p>account_item_name : 勘定科目名</p>
-        </li>
-
-        <li>
-        <p>hierarchy_level: 階層レベル</p>
-        </li>
-
-        <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
-        </li>
-        <li>
-        <p>closing_balance : 期末残高 </p>
-        </li>
         <h2 id="_3">注意点</h2>
         <ul>
-        <li>法人向けのエンタープライズプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
-        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
-        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
-        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
-        <li>partner_codeとpartner_idは同時に指定することはできません。</li>
-        <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>
+          <li>法人向けのエンタープライズプランで利用可能なAPIです。対象外のプランでは401エラーを返却します。</li>
+          <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+          <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+          <li>partner_codeとpartner_idは同時に指定することはできません。</li>
+          <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。
           <ul>
-          <li>fiscal_year</li>
-          <li>start_month</li>
-          <li>end_month</li>
+            <li>fiscal_year</li>
+            <li>start_month</li>
+            <li>end_month</li>
           </ul>
-        <li>0を指定すると未選択で絞り込めます</li>
+          </li>
+          <li>0を指定すると未選択で絞り込めます
           <ul>
-          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <li>partner_idに0を指定して絞り込んだ場合
             <ul>
-            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+              <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
             </ul>
+            </li>
           </ul>
+          </li>
         </ul>
+
         <h2 id="_4">レスポンスの例</h2>
 
         <blockquote>
@@ -11335,9 +11206,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -11446,61 +11322,44 @@ paths:
       description: |2
 
         <h2 id="">概要</h2>
-
         <p>指定した事業所の損益計算書(３期間比較)を取得する</p>
 
         <h2 id="_2">定義</h2>
-
         <ul>
+          <li><p>created_at : 作成日時</p></li>
+          <li><p>account_item_name : 勘定科目名</p></li>
+          <li><p>hierarchy_level: 階層レベル</p></li>
+          <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>
+          <li><p>two_years_before_closing_balance:  前々年度期末残高</p></li>
+          <li><p>last_year_closing_balance:  前年度期末残高</p></li>
+          <li><p>closing_balance : 期末残高</p></li>
+          <li><p>year_on_year : 前年比</p></li>
+        </ul>
 
-        <li>
-        <p>created_at : 作成日時</p>
-        </li>
-
-        <li>
-        <p>account_item_name : 勘定科目名</p>
-        </li>
-
-        <li>
-        <p>hierarchy_level: 階層レベル</p>
-        </li>
-
-        <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
-        </li>
-        <li>
-        <p>two_years_before_closing_balance:  前々年度期末残高 </p>
-        </li>
-        <li>
-        <p>last_year_closing_balance:  前年度期末残高 </p>
-        </li>
-        <li>
-        <p>closing_balance : 期末残高 </p>
-        </li>
-        <li>
-        <p>year_on_year : 前年比</p>
-        </li>
         <h2 id="_3">注意点</h2>
         <ul>
-        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
-        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
-        <li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>
-        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
-        <li>partner_codeとpartner_idは同時に指定することはできません。</li>
-        <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>
+          <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+          <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+          <li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>
+          <li>partner_codeとpartner_idは同時に指定することはできません。</li>
+          <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。
           <ul>
-          <li>fiscal_year</li>
-          <li>start_month</li>
-          <li>end_month</li>
+            <li>fiscal_year</li>
+            <li>start_month</li>
+            <li>end_month</li>
           </ul>
-        <li>0を指定すると未選択で絞り込めます</li>
+          </li>
+          <li>0を指定すると未選択で絞り込めます
           <ul>
-          <li>partner_idに0を指定して絞り込んだ場合</li>
+            <li>partner_idに0を指定して絞り込んだ場合
             <ul>
-            <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
+              <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
             </ul>
+            </li>
           </ul>
+          </li>
         </ul>
+
         <h2 id="_4">レスポンスの例</h2>
 
         <blockquote>
@@ -11578,9 +11437,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -11689,61 +11553,44 @@ paths:
       description: |2
 
         <h2 id="">概要</h2>
-
         <p>指定した事業所の損益計算書(前年比較)を取得する</p>
 
         <h2 id="_2">定義</h2>
-
         <ul>
+          <li><p>created_at : 作成日時</p></li>
+          <li><p>account_item_name : 勘定科目名</p></li>
+          <li><p>hierarchy_level: 階層レベル</p></li>
+          <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>
+          <li><p>last_year_closing_balance:  前年度期末残高</p></li>
+          <li><p>closing_balance : 期末残高</p></li>
+          <li><p>year_on_year : 前年比</p></li>
+        </ul>
 
-        <li>
-        <p>created_at : 作成日時</p>
-        </li>
-
-        <li>
-        <p>account_item_name : 勘定科目名</p>
-        </li>
-
-        <li>
-        <p>hierarchy_level: 階層レベル</p>
-        </li>
-
-        <li>
-        <p>parent_account_category_name: 上位勘定科目カテゴリー名</p>
-        </li>
-        <li>
-        <p>last_year_closing_balance:  前年度期末残高 </p>
-        </li>
-        <li>
-        <p>closing_balance : 期末残高 </p>
-        </li>
-        <li>
-        <p>year_on_year : 前年比</p>
-        </li>
         <h2 id="_3">注意点</h2>
         <ul>
-        <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
-        <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
-        <li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>
-        <li>取引先、品目、部門、セグメントはそれぞれの合計値が1000を超えるとレスポンスを得ることができません。</li>
-        <li>partner_codeとpartner_idは同時に指定することはできません。</li>
-        <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。</li>
+          <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>
+          <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>
+          <li>配賦仕訳の絞り込み（cost_allocation）は法人向けのベーシックプラン以上で利用可能です。</li>
+          <li>partner_codeとpartner_idは同時に指定することはできません。</li>
+          <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。
           <ul>
-          <li>fiscal_year</li>
-          <li>start_month</li>
-          <li>end_month</li>
+            <li>fiscal_year</li>
+            <li>start_month</li>
+            <li>end_month</li>
           </ul>
-        <li>0を指定すると未選択で絞り込めます</li>
+          </li>
+          <li>0を指定すると未選択で絞り込めます
           <ul>
-          <li>partner_idに0を指定して絞り込んだ場合</li>
+          <li>partner_idに0を指定して絞り込んだ場合
             <ul>
             <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>
             </ul>
+            </li>
           </ul>
+          </li>
         </ul>
 
         <h2 id="_4">レスポンスの例</h2>
-
         <blockquote>
         <p>GET https://api.freee.co.jp/api/1/reports/trial_pl_two_years?company_id=1&amp;fiscal_year=2019</p>
         </blockquote>
@@ -26329,13 +26176,6 @@ components:
                               maximum: 2147483647
                               minimum: 0
                               type: integer
-                            id:
-                              deprecated: true
-                              description: 税区分ID
-                              example: 1
-                              maximum: 2147483647
-                              minimum: 0
-                              type: integer
                             name:
                               description: 税区分
                               example: 課対仕入10%
@@ -26345,13 +26185,6 @@ components:
                           properties:
                             code:
                               description: 税区分コード
-                              example: 1
-                              maximum: 2147483647
-                              minimum: 0
-                              type: integer
-                            id:
-                              deprecated: true
-                              description: 税区分ID
                               example: 1
                               maximum: 2147483647
                               minimum: 0
@@ -26369,13 +26202,6 @@ components:
                               maximum: 2147483647
                               minimum: 0
                               type: integer
-                            id:
-                              deprecated: true
-                              description: 税区分ID
-                              example: 1
-                              maximum: 2147483647
-                              minimum: 0
-                              type: integer
                             name:
                               description: 税区分
                               example: 課対仕入8%
@@ -26385,13 +26211,6 @@ components:
                           properties:
                             code:
                               description: 税区分コード
-                              example: 1
-                              maximum: 2147483647
-                              minimum: 0
-                              type: integer
-                            id:
-                              deprecated: true
-                              description: 税区分ID
                               example: 1
                               maximum: 2147483647
                               minimum: 0
