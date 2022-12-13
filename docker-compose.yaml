@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+  console:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: freee-accounting-console
+    volumes:
+      - "./:/usr/src/app"
+    command: /bin/sh -c "while sleep 1000; do :; done"
