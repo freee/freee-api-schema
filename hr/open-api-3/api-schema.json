@@ -9234,6 +9234,58 @@
             "minimum": 0,
             "maximum": 999999999
           },
+          "employment_insurance_receive_status": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "unselected",
+              "receiving_employment_insurance",
+              "not_receiving_employment_insurance",
+              "pending_employment_insurance"
+            ],
+            "description": "雇用保険受給の有無\n- unselected 未選択\n- receiving_employment_insurance 雇用保険受給有り\n- not_receiving_employment_insurance 雇用保険受給無し\n- pending_employment_insurance 申請中",
+            "format": "string"
+          },
+          "employment_insurance_receives_from": {
+            "type": "string",
+            "nullable": true,
+            "description": "雇用保険受給開始年月日 employment_insurance_receive_statusが未選択、無しの場合は指定できません。",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "phone_type": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "unselected",
+              "home",
+              "office",
+              "mobile",
+              "other"
+            ],
+            "description": "電話番号の種別\n- unselected 未選択\n- home 自宅\n- office 勤務先\n- mobile 携帯\n- other その他"
+          },
+          "phone1": {
+            "type": "string",
+            "nullable": true,
+            "description": "電話番号1",
+            "maxLength": 4,
+            "example": "000"
+          },
+          "phone2": {
+            "type": "string",
+            "nullable": true,
+            "description": "電話番号2",
+            "maxLength": 4,
+            "example": "0000"
+          },
+          "phone3": {
+            "type": "string",
+            "nullable": true,
+            "description": "電話番号3",
+            "maxLength": 4,
+            "example": "0000"
+          },
           "destroy": {
             "type": "boolean",
             "description": "扶養親族を削除するか"
@@ -10107,6 +10159,58 @@
             "type": "integer",
             "description": "一年間の送金額",
             "format": "int32"
+          },
+          "employment_insurance_receive_status": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "unselected",
+              "receiving_employment_insurance",
+              "not_receiving_employment_insurance",
+              "pending_employment_insurance"
+            ],
+            "description": "雇用保険受給の有無\n- unselected 未選択\n- receiving_employment_insurance 雇用保険受給有り\n- not_receiving_employment_insurance 雇用保険受給無し\n- pending_employment_insurance 申請中",
+            "format": "string"
+          },
+          "employment_insurance_receives_from": {
+            "type": "string",
+            "nullable": true,
+            "description": "雇用保険受給開始年月日 employment_insurance_receive_statusが未選択、無しの場合は指定できません。",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "phone_type": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "unselected",
+              "home",
+              "office",
+              "mobile",
+              "other"
+            ],
+            "description": "電話番号の種別\n- unselected 未選択\n- home 自宅\n- office 勤務先\n- mobile 携帯\n- other その他"
+          },
+          "phone1": {
+            "type": "string",
+            "nullable": true,
+            "description": "電話番号1",
+            "maxLength": 4,
+            "example": "000"
+          },
+          "phone2": {
+            "type": "string",
+            "nullable": true,
+            "description": "電話番号2",
+            "maxLength": 4,
+            "example": "0000"
+          },
+          "phone3": {
+            "type": "string",
+            "nullable": true,
+            "description": "電話番号3",
+            "maxLength": 4,
+            "example": "0000"
           },
           "social_insurance_and_tax_dependent": {
             "type": "string",
