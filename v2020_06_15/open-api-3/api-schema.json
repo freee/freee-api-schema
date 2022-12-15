@@ -29099,7 +29099,7 @@
                 "type": "integer",
                 "minimum": 1,
                 "maximum": 2147483647,
-                "description": "決済口座のデフォルト",
+                "description": "デフォルトの決済口座が紐づく勘定科目ID",
                 "example": 1
               },
               "private_settlement": {
@@ -29147,7 +29147,8 @@
               "zipcode": {
                 "type": "string",
                 "description": "郵便番号",
-                "example": "000-0000"
+                "example": "000-0000",
+                "nullable": true
               },
               "prefecture_code": {
                 "type": "integer",
@@ -29160,12 +29161,14 @@
               "street_name1": {
                 "type": "string",
                 "description": "市区町村・番地",
-                "example": "ＸＸ区ＹＹ１−１−１"
+                "example": "ＸＸ区ＹＹ１−１−１",
+                "nullable": true
               },
               "street_name2": {
                 "type": "string",
                 "description": "建物名・部屋番号など",
-                "example": "ビル１Ｆ"
+                "example": "ビル１Ｆ",
+                "nullable": true
               },
               "invoice_layout": {
                 "type": "string",
@@ -29189,9 +29192,15 @@
                 "description": "金額端数処理方法（0: 切り捨て、1: 切り上げ、2: 四捨五入）",
                 "example": 0
               },
+              "use_partner_code": {
+                "type": "boolean",
+                "description": "取引先コードの利用設定（true: 有効、 false: 無効）",
+                "example": true
+              },
               "industry_class": {
                 "type": "string",
-                "description": "種別（agriculture_forestry_fisheries_ore: 農林水産業/鉱業、construction: 建設、manufacturing_processing: 製造/加工、it: IT、transportation_logistics: 運輸/物流、retail_wholesale: 小売/卸売、finance_insurance: 金融/保険、real_estate_rental: 不動産/レンタル、profession: 士業/学術/専門技術サービス、design_production: デザイン/制作、food: 飲食、leisure_entertainment: レジャー/娯楽、lifestyle: 生活関連サービス、education: 教育/学習支援、medical_welfare: 医療/福祉、other_services: その他サービス、other: その他, \"\": 未選択）",
+                "nullable": true,
+                "description": "種別（agriculture_forestry_fisheries_ore: 農林水産業/鉱業,construction: 建設,manufacturing_processing: 製造/加工,it: IT,transportation_logistics: 運輸/物流,retail_wholesale: 小売/卸売,finance_insurance: 金融/保険,real_estate_rental: 不動産/レンタル,profession: 士業/学術/専門技術サービス,design_production: デザイン/制作,food: 飲食,leisure_entertainment: レジャー/娯楽,lifestyle: 生活関連サービス,education: 教育/学習支援,medical_welfare: 医療/福祉,other_services: その他サービス,other_association: NPO、一般社団法人等,other: その他, \"\": 未選択）",
                 "example": "agriculture_forestry_fisheries_ore",
                 "enum": [
                   "agriculture_forestry_fisheries_ore",
@@ -29210,6 +29219,7 @@
                   "education",
                   "medical_welfare",
                   "other_services",
+                  "other_association",
                   "other",
                   ""
                 ]
@@ -29359,11 +29369,6 @@
                   "disable"
                 ]
               },
-              "use_partner_code": {
-                "type": "boolean",
-                "description": "取引先コードの利用設定（true: 有効、 false: 無効）",
-                "example": true
-              },
               "fiscal_years": {
                 "type": "array",
                 "items": {
@@ -29483,7 +29488,6 @@
                   "type": "object",
                   "required": [
                     "id",
-                    "code",
                     "name"
                   ],
                   "properties": {
