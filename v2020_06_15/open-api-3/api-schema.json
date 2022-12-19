@@ -1158,7 +1158,7 @@
           "Account items"
         ],
         "summary": "勘定科目の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の勘定科目を作成する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<p>tax_nameは、api/1/taxes/companies/{company_id} で該当事業所の税区分の一覧を取得して、availableの値がtrue、かつ”name_ja”に”税率%”を含んでいない税区分を確認して、そのnameを指定して勘定科目の作成をしてください</p>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の勘定科目を作成する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<p>tax_codeは、api/1/taxes/companies/{company_id} で該当事業所の税区分の一覧を取得して、availableの値がtrue、かつ”name_ja”に”税率%”を含んでいない税区分を確認して、そのcodeを指定して勘定科目の作成をしてください</p>",
         "operationId": "create_account_item",
         "requestBody": {
           "description": "勘定科目の作成",
