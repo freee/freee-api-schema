@@ -10195,21 +10195,18 @@
             "type": "string",
             "nullable": true,
             "description": "電話番号1",
-            "maxLength": 4,
             "example": "000"
           },
           "phone2": {
             "type": "string",
             "nullable": true,
             "description": "電話番号2",
-            "maxLength": 4,
             "example": "0000"
           },
           "phone3": {
             "type": "string",
             "nullable": true,
             "description": "電話番号3",
-            "maxLength": 4,
             "example": "0000"
           },
           "social_insurance_and_tax_dependent": {
