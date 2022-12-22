@@ -310,7 +310,7 @@
               "maximum": 12
             },
             "example": 1,
-            "description": "対象年月（月）"
+            "description": "対象年月（月）<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>"
           },
           {
             "name": "limit",
@@ -513,7 +513,7 @@
               "maximum": 12
             },
             "example": 1,
-            "description": "対象年月（月）"
+            "description": "対象年月（月）<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>"
           },
           {
             "name": "id",
@@ -825,7 +825,7 @@
           {
             "name": "month",
             "in": "query",
-            "description": "対象月<br>\n締日支払日設定が翌月払いの従業員情報の場合は、\n指定したmonth + 1の値が検索結果として戻ります。",
+            "description": "対象月<br>\n締日支払日設定が翌月払いの従業員情報の場合は、指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1029,7 +1029,7 @@
           {
             "name": "month",
             "in": "query",
-            "description": "対象月",
+            "description": "対象月<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1234,7 +1234,7 @@
           {
             "name": "month",
             "in": "query",
-            "description": "対象月",
+            "description": "対象月<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1436,7 +1436,7 @@
           {
             "name": "month",
             "in": "query",
-            "description": "対象月",
+            "description": "対象月<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1640,7 +1640,7 @@
           {
             "name": "month",
             "in": "query",
-            "description": "対象月",
+            "description": "対象月<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1844,7 +1844,7 @@
           {
             "name": "month",
             "in": "query",
-            "description": "対象月",
+            "description": "対象月<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>",
             "required": true,
             "schema": {
               "type": "integer",
@@ -8529,18 +8529,21 @@
           },
           "phone1": {
             "type": "string",
-            "description": "電話番号1",
-            "maxLength": 5
+            "description": "電話番号1（先頭番号、例:03-1111-222x の03部分）",
+            "maxLength": 5,
+            "example": "000"
           },
           "phone2": {
             "type": "string",
-            "description": "電話番号2",
-            "maxLength": 4
+            "description": "電話番号2（中間番号、例:03-1111-222x の1111部分）",
+            "maxLength": 4,
+            "example": "0000"
           },
           "phone3": {
             "type": "string",
-            "description": "電話番号3",
-            "maxLength": 4
+            "description": "電話番号3（末尾番号、例:03-1111-222x の222x部分）",
+            "maxLength": 4,
+            "example": "0000"
           },
           "residential_zipcode1": {
             "type": "string",
@@ -8994,18 +8997,21 @@
           },
           "phone1": {
             "type": "string",
-            "description": "電話番号1",
-            "nullable": true
+            "description": "電話番号1（先頭番号、例:03-1111-222x の03部分）",
+            "nullable": true,
+            "example": "000"
           },
           "phone2": {
             "type": "string",
-            "description": "電話番号2",
-            "nullable": true
+            "description": "電話番号2（中間番号、例:03-1111-222x の1111部分）",
+            "nullable": true,
+            "example": "0000"
           },
           "phone3": {
             "type": "string",
-            "description": "電話番号3",
-            "nullable": true
+            "description": "電話番号3（末尾番号、例:03-1111-222x の222x部分）",
+            "nullable": true,
+            "example": "0000"
           },
           "residential_zipcode1": {
             "type": "string",
@@ -9268,21 +9274,21 @@
           "phone1": {
             "type": "string",
             "nullable": true,
-            "description": "電話番号1",
+            "description": "電話番号1（先頭番号、例:03-1111-222x の03部分）",
             "maxLength": 4,
             "example": "000"
           },
           "phone2": {
             "type": "string",
             "nullable": true,
-            "description": "電話番号2",
+            "description": "電話番号2（中間番号、例:03-1111-222x の1111部分）",
             "maxLength": 4,
             "example": "0000"
           },
           "phone3": {
             "type": "string",
             "nullable": true,
-            "description": "電話番号3",
+            "description": "電話番号3（末尾番号、例:03-1111-222x の222x部分）",
             "maxLength": 4,
             "example": "0000"
           },
@@ -10194,19 +10200,19 @@
           "phone1": {
             "type": "string",
             "nullable": true,
-            "description": "電話番号1",
+            "description": "電話番号1（先頭番号、例:03-1111-222x の03部分）",
             "example": "000"
           },
           "phone2": {
             "type": "string",
             "nullable": true,
-            "description": "電話番号2",
+            "description": "電話番号2（中間番号、例:03-1111-222x の1111部分）",
             "example": "0000"
           },
           "phone3": {
             "type": "string",
             "nullable": true,
-            "description": "電話番号3",
+            "description": "電話番号3（末尾番号、例:03-1111-222x の222x部分）",
             "example": "0000"
           },
           "social_insurance_and_tax_dependent": {
@@ -10326,7 +10332,7 @@
           },
           "month": {
             "type": "integer",
-            "description": "更新対象月\n- 給与計算対象の従業員情報の場合は必須になります。",
+            "description": "更新対象月\n- 給与計算対象の従業員情報の場合は必須になります。\n- 締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が更新されます。\n- 翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。",
             "format": "int32",
             "minimum": 1,
             "maximum": 12,
@@ -10380,7 +10386,7 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 12,
-            "description": "更新対象月（必須）<br>\n締日支払日設定が翌月払いの従業員情報の場合は、\n指定したmonth + 1の値が更新されます。",
+            "description": "更新対象月（必須）<br>\n締日支払日設定が翌月払いの従業員情報の場合は、指定したmonth + 1の値が更新されます。<br>\n翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。<br>",
             "format": "int32"
           },
           "employee_profile_rule": {
@@ -10431,7 +10437,7 @@
           },
           "month": {
             "type": "integer",
-            "description": "更新対象月（必須）",
+            "description": "更新対象月（必須）<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が更新されます。<br>\n翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。<br>",
             "format": "int32",
             "minimum": 1,
             "maximum": 12,
@@ -10483,7 +10489,7 @@
           },
           "month": {
             "type": "integer",
-            "description": "更新対象月（必須）",
+            "description": "更新対象月（必須）<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が更新されます。<br>\n翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。<br>",
             "format": "int32",
             "minimum": 1,
             "maximum": 12
@@ -10541,7 +10547,7 @@
           },
           "month": {
             "type": "integer",
-            "description": "更新対象月（必須）",
+            "description": "更新対象月（必須）<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が更新されます。<br>\n翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。<br>",
             "format": "int32",
             "minimum": 1,
             "maximum": 12
@@ -10596,7 +10602,7 @@
           },
           "month": {
             "type": "integer",
-            "description": "更新対象月（必須）",
+            "description": "更新対象月（必須）<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が更新されます。<br>\n翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。<br>",
             "format": "int32",
             "minimum": 1,
             "maximum": 12
@@ -10649,7 +10655,7 @@
           },
           "month": {
             "type": "integer",
-            "description": "更新対象月（必須）",
+            "description": "更新対象月（必須）<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が更新されます<br>\n翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。<br>",
             "format": "int32",
             "minimum": 1,
             "maximum": 12,
