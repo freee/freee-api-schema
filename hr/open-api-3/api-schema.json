@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "freee人事労務 API",
-    "description": "freee人事労務のAPI仕様です。\n\n## 認証について\n\nOAuth2.0を利用します。[詳細はリファレンスの認証に関する記載を参照してください。](https://developer.freee.co.jp/reference/#%e8%aa%8d%e8%a8%bc)\n\n## エンドポイント\n\nhttps://api.freee.co.jp/hr\n\n## 後方互換性ありの変更\n\nfreeeでは、APIを改善していくために以下のような変更は後方互換性ありとして通知なく変更を入れることがあります。アプリケーション実装者は以下を踏まえて開発を行ってください。\n\n- 新しいAPIリソース・エンドポイントの追加\n- 既存のAPIに対して必須ではない新しいリクエストパラメータの追加\n- 既存のAPIレスポンスに対する新しいプロパティの追加\n- 既存のAPIレスポンスに対するプロパティの順番の入れ変え\n- keyとなっているidやcodeの長さの変更（長くする）\n\n## エラーレスポンス\n\nAPIリクエストでエラーが発生した場合は、エラー原因に応じたステータスコードおよびメッセージを返します。\n\n|ステータスコード|原因|\n|---|---|\n|400|リクエストパラメータが不正|\n|401|アクセストークンが無効|\n|403|アクセス権限がない|\n|404|リソースが存在しない|\n|429|リクエスト回数制限を越えた|\n|503|システム内で予期しないエラーが発生|\n\nメッセージボディ内の `messages` にはエラー内容を説明する文字列が入ります。\n\n```\n{\n    \"status_code\": 400,\n    \"errors\": [\n        {\n            \"type\": \"bad_request\",\n            \"messages\": [\n                \"リクエストの形式が不正です。\"\n            ]\n        }\n    ]\n}\n```\n\n## API使用制限\n\nAPIリクエストは1時間で5000回を上限としています。API使用ステータスはレスポンスヘッダに付与されます。\n\n```\nX-Ratelimit-Limit:5000\nX-Ratelimit-Remaining:4998\nX-Ratelimit-Reset:2018-01-01T12:00:00.000000Z\n```\n\n各ヘッダの意味は次のとおりです。\n\n|ヘッダ名|説明|\n|---|---|\n|X-Ratelimit-Limit|使用回数の上限|\n|X-Ratelimit-Remaining|残り使用回数|\n|X-Ratelimit-Reset|使用回数がリセットされる時刻|\n\n上記に加え、freeeは一定期間に過度のアクセスを検知した場合、APIアクセスをコントロールする場合があります。\nその際のhttp status codeは403となります。制限がかかってから10分程度が過ぎると再度使用することができるようになります。\n\n",
+    "description": "\n<p>freee人事労務のAPI仕様です。</p>\n\n</br>\n\n<h3 id=\"about_authorize\">認証について</h3>\n\n<p>OAuth2.0を利用します。<a href=\"https://developer.freee.co.jp/reference/#%e8%aa%8d%e8%a8%bc\" target=\"_blank\">詳細はリファレンスの認証に関する記載を参照してください。</a></p>\n\n<h3 id=\"api_endpoint\">エンドポイント</h3>\n\n<p>https://api.freee.co.jp/hr</p>\n\n\n<h3 id=\"compatibility\">後方互換性ありの変更</h3>\n\n<p>freeeでは、APIを改善していくために以下のような変更は後方互換性ありとして通知なく変更を入れることがあります。アプリケーション実装者は以下を踏まえて開発を行ってください。</p>\n\n<ul>\n<li>新しいAPIリソース・エンドポイントの追加</li>\n<li>既存のAPIに対して必須ではない新しいリクエストパラメータの追加</li>\n<li>既存のAPIレスポンスに対する新しいプロパティの追加</li>\n<li>既存のAPIレスポンスに対するプロパティの順番の入れ変え</li>\n<li>keyとなっているidやcodeの長さの変更（長くする）</li>\n</ul>\n\n<h3 id=\"error_response\">エラーレスポンス</h3>\n\n<p>APIリクエストでエラーが発生した場合は、エラー原因に応じたステータスコードおよびメッセージを返します。</p>\n\n  <table border=\"1\">\n  <tbody>\n    <tr>\n      <th style=\"padding: 10px\"><strong>ステータスコード</strong></th>\n      <th style=\"padding: 10px\"><strong>原因</strong></th>\n    </tr>\n    <tr><td style=\"padding: 10px\">400</td><td style=\"padding: 10px\">リクエストパラメータが不正</td></tr>\n    <tr><td style=\"padding: 10px\">401</td><td style=\"padding: 10px\">アクセストークンが無効</td></tr>\n    <tr><td style=\"padding: 10px\">403</td><td style=\"padding: 10px\">アクセス権限がない</td></tr>\n    <tr><td style=\"padding: 10px\">404</td><td style=\"padding: 10px\">リソースが存在しない</td></tr>\n    <tr><td style=\"padding: 10px\">429</td><td style=\"padding: 10px\">リクエスト回数制限を超えた</td></tr>\n    <tr><td style=\"padding: 10px\">503</td><td style=\"padding: 10px\">システム内で予期しないエラーが発生</td></tr>\n  </tbody>\n</table>\n\n<p>メッセージボディ内の <code>messages</code> にはエラー内容を説明する文字列が入ります。</p>\n<pre><code>  {\n    &quot;status_code&quot; : 400,\n    &quot;errors&quot; : [\n      {\n        &quot;type&quot; : &quot;bad_request&quot;,\n        &quot;messages&quot; : [\n          &quot;リクエストの形式が不正です。&quot;\n        ]\n      }\n    ]\n  }  </code></pre>\n\n</br>\n\n<h3 id=\"api_rate_limit\">API使用制限</h3> \n<p>APIリクエストは1時間で5000回を上限としています。API使用ステータスはレスポンスヘッダに付与されます。</p>\n<pre><code>X-Ratelimit-Limit:5000\nX-Ratelimit-Remaining:4998\nX-Ratelimit-Reset:2018-01-01T12:00:00.000000Z\n</code></pre>\n\n<br> 各ヘッダの意味は次のとおりです。</p>\n\n <table border=\"1\">\n  <tbody>\n    <tr>\n      <th style=\"padding: 10px\"><strong>ヘッダ名</strong></th>\n      <th style=\"padding: 10px\"><strong>説明</strong></th>\n    </tr>\n    <tr><td style=\"padding: 10px\">X-RateLimit-Limit</td><td style=\"padding: 10px\">使用回数の上限</td></tr>\n    <tr><td style=\"padding: 10px\">X-RateLimit-Remaining</td><td style=\"padding: 10px\">残り使用回数</td></tr>\n    <tr><td style=\"padding: 10px\">X-RateLimit-Reset</td><td style=\"padding: 10px\">使用回数がリセットされる時刻</td></tr>\n  </tbody>\n</table>\n\n<p>上記に加え、freeeは一定期間に過度のアクセスを検知した場合、APIアクセスをコントロールする場合があります。<br> その際のhttp status codeは403となります。制限がかかってから10分程度が過ぎると再度使用することができるようになります。</p>",
     "termsOfService": "",
     "contact": {
       "name": "",
@@ -797,7 +797,7 @@
           "従業員の姓名・住所など"
         ],
         "summary": "取得",
-        "description": "\n指定した従業員・日付の姓名などの情報を返します。",
+        "description": "\n指定した従業員・日付の姓名などの情報を返します。\n\n本APIは、給与計算対象外の従業員には非対応です。employee_idに給与計算対象外の従業員IDを指定した場合、本APIを利用できません。",
         "operationId": "get_employee_profile_rule",
         "parameters": [
           {
@@ -908,7 +908,7 @@
           "従業員の姓名・住所など"
         ],
         "summary": "更新",
-        "description": "\n指定した従業員の姓名・住所などを更新します。",
+        "description": "\n指定した従業員の姓名・住所などを更新します。\n\n本APIは、給与計算対象外の従業員には非対応です。employee_idに給与計算対象外の従業員IDを指定した場合、本APIを利用できません。",
         "operationId": "update_employee_profile_rule",
         "parameters": [
           {
@@ -2694,7 +2694,7 @@
           "タイムレコーダー(打刻)"
         ],
         "summary": "打刻情報の登録",
-        "description": "\n指定した従業員の打刻情報を登録します。\n休憩開始の連続や退勤のみなど、整合性の取れていない打刻は登録できません。\n退勤の打刻は、すでに登録されている退勤打刻よりも後の時刻であれば上書き登録することができます。\n打刻可能種別の取得APIを呼ぶことで、その従業員がその時点で登録可能な打刻種別が取得できます。\n打刻が日をまたぐ場合は、base_date(打刻日)に前日の日付を指定してください。\ndatetime(打刻日時)を指定できるのは管理者か事務担当者の権限を持ったユーザのみです。\n\n本APIはベーシックプラン以上で利用可能なAPIです。対象外のプランでは403エラーを返却します。\n\n## 操作可能な打刻種別\n- clock_in：出勤\n- break_begin：休憩開始\n- break_end：休憩終了\n- clock_out：退勤",
+        "description": "\n指定した従業員の打刻情報を登録します。\n\n休憩開始の連続や退勤のみなど、整合性の取れていない打刻は登録できません。\n打刻可能種別の取得APIを呼ぶことで、その従業員がその時点で登録可能な打刻種別が取得できます。\n\n出勤の打刻は\n\n- 前日の出勤時刻から24時間以内の場合、前日の退勤打刻が必須です。\n\n- 前日の出勤時刻から24時間経過している場合は、前日の退勤打刻がなくとも出勤打刻を登録することができます。\n\n退勤の打刻は\n\n- [『退勤を自動打刻する』](https://support.freee.co.jp/hc/ja/articles/900004490226-%E5%8B%A4%E6%80%A0%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A%E3%82%92%E8%A1%8C%E3%81%86#h_01EYPYTR9HZ7YB8V5F18VMD1BT)の設定を使用している場合は、出勤打刻から24時間経過しても退勤打刻がない場合に、退勤打刻が自動で登録されます。\n\n- すでに登録されている退勤打刻よりも後の時刻であれば上書き登録することができます。\n\n打刻が日をまたぐ場合は、base_date(打刻日)に前日の日付を指定してください。\n\ndatetime(打刻日時)を指定できるのは管理者か事務担当者の権限を持ったユーザのみです。\n\n本APIはベーシックプラン以上で利用可能なAPIです。対象外のプランでは403エラーを返却します。\n\n## 操作可能な打刻種別\n- clock_in：出勤\n- break_begin：休憩開始\n- break_end：休憩終了\n- clock_out：退勤",
         "operationId": "create_employee_time_clock",
         "parameters": [
           {
