@@ -8809,7 +8809,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない\n",
             "schema": {
               "type": "string",
               "enum": [
@@ -9029,7 +9029,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -9249,7 +9249,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -9469,7 +9469,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -9701,7 +9701,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -9933,7 +9933,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -10174,7 +10174,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -10404,7 +10404,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -10642,7 +10642,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -10880,7 +10880,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -11109,7 +11109,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -11341,7 +11341,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -11573,7 +11573,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -11814,7 +11814,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag, セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -12044,7 +12044,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -12282,7 +12282,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -12520,7 +12520,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -16808,7 +16808,7 @@
                   "format": "int64",
                   "minimum": -9223372036854775808,
                   "maximum": 9223372036854775807,
-                  "description": "取引金額（税込で指定してください）",
+                  "description": "取引金額（税込で指定してください）<br>\nマイナスの値を指定した場合、控除・マイナス行として登録されます。<br>\n上記以外の値を指定した場合、通常行として登録されます。\n",
                   "example": 1
                 },
                 "item_id": {
@@ -17019,7 +17019,7 @@
                   "format": "int64",
                   "minimum": -9223372036854775808,
                   "maximum": 9223372036854775807,
-                  "description": "取引金額（税込で指定してください）",
+                  "description": "取引金額（税込で指定してください）<br>\nマイナスの値を指定した場合、控除・マイナス行として登録されます。<br>\n上記以外の値を指定した場合、通常行として登録されます。\n",
                   "example": 1
                 },
                 "item_id": {
@@ -28389,14 +28389,6 @@
                                 "description": "税区分コード",
                                 "example": 1
                               },
-                              "id": {
-                                "type": "integer",
-                                "minimum": 0,
-                                "maximum": 2147483647,
-                                "description": "税区分ID",
-                                "example": 1,
-                                "deprecated": true
-                              },
                               "name": {
                                 "type": "string",
                                 "description": "税区分",
@@ -28413,14 +28405,6 @@
                                 "maximum": 2147483647,
                                 "description": "税区分コード",
                                 "example": 1
-                              },
-                              "id": {
-                                "type": "integer",
-                                "minimum": 0,
-                                "maximum": 2147483647,
-                                "description": "税区分ID",
-                                "example": 1,
-                                "deprecated": true
                               },
                               "name": {
                                 "type": "string",
@@ -28439,14 +28423,6 @@
                                 "description": "税区分コード",
                                 "example": 1
                               },
-                              "id": {
-                                "type": "integer",
-                                "minimum": 0,
-                                "maximum": 2147483647,
-                                "description": "税区分ID",
-                                "example": 1,
-                                "deprecated": true
-                              },
                               "name": {
                                 "type": "string",
                                 "description": "税区分",
@@ -28464,18 +28440,146 @@
                                 "description": "税区分コード",
                                 "example": 1
                               },
-                              "id": {
-                                "type": "integer",
-                                "minimum": 0,
-                                "maximum": 2147483647,
-                                "description": "税区分ID",
-                                "example": 1,
-                                "deprecated": true
-                              },
                               "name": {
                                 "type": "string",
                                 "description": "税区分",
                                 "example": "課対仕入8%（軽）"
+                              }
+                            }
+                          },
+                          "tax_rate_5_exempt_80": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入免80"
+                              }
+                            }
+                          },
+                          "tax_rate_5_exempt_50": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入免50"
+                              }
+                            }
+                          },
+                          "tax_rate_8_exempt_80": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入免80 8%"
+                              }
+                            }
+                          },
+                          "tax_rate_8_exempt_50": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入免50 8%"
+                              }
+                            }
+                          },
+                          "tax_rate_10_exempt_80": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入免80 10%"
+                              }
+                            }
+                          },
+                          "tax_rate_10_exempt_50": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入免50 10%"
+                              }
+                            }
+                          },
+                          "tax_rate_r8_exempt_80": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入免80 8%（軽）"
+                              }
+                            }
+                          },
+                          "tax_rate_r8_exempt_50": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入免50 8%（軽）"
                               }
                             }
                           }
@@ -29137,7 +29241,7 @@
                 "type": "integer",
                 "minimum": 1,
                 "maximum": 2147483647,
-                "description": "決済口座のデフォルト",
+                "description": "デフォルトの決済口座が紐づく勘定科目ID",
                 "example": 1
               },
               "private_settlement": {
@@ -29185,7 +29289,8 @@
               "zipcode": {
                 "type": "string",
                 "description": "郵便番号",
-                "example": "000-0000"
+                "example": "000-0000",
+                "nullable": true
               },
               "prefecture_code": {
                 "type": "integer",
@@ -29198,12 +29303,14 @@
               "street_name1": {
                 "type": "string",
                 "description": "市区町村・番地",
-                "example": "ＸＸ区ＹＹ１−１−１"
+                "example": "ＸＸ区ＹＹ１−１−１",
+                "nullable": true
               },
               "street_name2": {
                 "type": "string",
                 "description": "建物名・部屋番号など",
-                "example": "ビル１Ｆ"
+                "example": "ビル１Ｆ",
+                "nullable": true
               },
               "invoice_layout": {
                 "type": "string",
@@ -29227,9 +29334,15 @@
                 "description": "金額端数処理方法（0: 切り捨て、1: 切り上げ、2: 四捨五入）",
                 "example": 0
               },
+              "use_partner_code": {
+                "type": "boolean",
+                "description": "取引先コードの利用設定（true: 有効、 false: 無効）",
+                "example": true
+              },
               "industry_class": {
                 "type": "string",
-                "description": "種別（agriculture_forestry_fisheries_ore: 農林水産業/鉱業、construction: 建設、manufacturing_processing: 製造/加工、it: IT、transportation_logistics: 運輸/物流、retail_wholesale: 小売/卸売、finance_insurance: 金融/保険、real_estate_rental: 不動産/レンタル、profession: 士業/学術/専門技術サービス、design_production: デザイン/制作、food: 飲食、leisure_entertainment: レジャー/娯楽、lifestyle: 生活関連サービス、education: 教育/学習支援、medical_welfare: 医療/福祉、other_services: その他サービス、other: その他, \"\": 未選択）",
+                "nullable": true,
+                "description": "種別（agriculture_forestry_fisheries_ore: 農林水産業/鉱業,construction: 建設,manufacturing_processing: 製造/加工,it: IT,transportation_logistics: 運輸/物流,retail_wholesale: 小売/卸売,finance_insurance: 金融/保険,real_estate_rental: 不動産/レンタル,profession: 士業/学術/専門技術サービス,design_production: デザイン/制作,food: 飲食,leisure_entertainment: レジャー/娯楽,lifestyle: 生活関連サービス,education: 教育/学習支援,medical_welfare: 医療/福祉,other_services: その他サービス,other_association: NPO、一般社団法人等,other: その他, \"\": 未選択）",
                 "example": "agriculture_forestry_fisheries_ore",
                 "enum": [
                   "agriculture_forestry_fisheries_ore",
@@ -29248,6 +29361,7 @@
                   "education",
                   "medical_welfare",
                   "other_services",
+                  "other_association",
                   "other",
                   ""
                 ]
@@ -29397,11 +29511,6 @@
                   "disable"
                 ]
               },
-              "use_partner_code": {
-                "type": "boolean",
-                "description": "取引先コードの利用設定（true: 有効、 false: 無効）",
-                "example": true
-              },
               "fiscal_years": {
                 "type": "array",
                 "items": {
@@ -29521,7 +29630,6 @@
                   "type": "object",
                   "required": [
                     "id",
-                    "code",
                     "name"
                   ],
                   "properties": {
@@ -33078,7 +33186,7 @@
                   "format": "int64",
                   "minimum": -9223372036854775808,
                   "maximum": 9223372036854775807,
-                  "description": "取引金額（税込で指定してください）",
+                  "description": "取引金額（税込で指定してください）<br>\nマイナスの値を指定した場合、控除・マイナス行として登録されます。<br>\n上記以外の値を指定した場合、通常行として登録されます。\n",
                   "example": 1080
                 },
                 "vat": {
@@ -33201,7 +33309,7 @@
                   "format": "int64",
                   "minimum": -9223372036854775808,
                   "maximum": 9223372036854775807,
-                  "description": "取引金額（税込で指定してください）",
+                  "description": "取引金額（税込で指定してください）<br>\nマイナスの値を指定した場合、控除・マイナス行として登録されます。<br>\n上記以外の値を指定した場合、通常行として登録されます。\n",
                   "example": 1080
                 },
                 "vat": {
@@ -34585,7 +34693,7 @@
                 },
                 "total_vat": {
                   "type": "integer",
-                  "description": "合計金額",
+                  "description": "消費税",
                   "example": 8000
                 },
                 "sub_total": {
@@ -35166,7 +35274,7 @@
               },
               "total_vat": {
                 "type": "integer",
-                "description": "合計金額",
+                "description": "消費税",
                 "example": 8000
               },
               "sub_total": {

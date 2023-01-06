@@ -5796,9 +5796,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -5948,9 +5953,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -6100,9 +6110,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -6252,9 +6267,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -6418,9 +6438,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル,
-          法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -6576,8 +6601,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）
-          ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -6738,8 +6769,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）
-          ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -6900,8 +6937,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）
-          ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -7056,9 +7099,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -7216,9 +7264,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -7376,9 +7429,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -7542,9 +7600,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナル,
-          法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -7700,8 +7763,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）
-          ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -7862,8 +7931,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）
-          ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -8024,8 +8099,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）
-          ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -8180,9 +8261,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -8340,9 +8426,14 @@ paths:
           - account_item
           - group
           type: string
-      - description: '内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item,
-          セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向け エンタープライズプラン):segment_2_tag,
-          セグメント3(法人向け エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます'
+      - description: |-
+          内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(法人向けプロフェッショナルプラン, 法人向けエンタープライズプラン): segment_1_tag, セグメント2(法人向けエンタープライズプラン):segment_2_tag, セグメント3(法人向けエンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。
+
+          取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。
+
+          例）取引先の登録数が1,000以上、品目の登録数が999以下の場合
+          * breakdown_display_type: 取引先を指定 → エラーになる
+          * breakdown_display_type: 品目を指定 → エラーにならない
         in: query
         name: breakdown_display_type
         schema:
@@ -12908,7 +12999,7 @@ components:
               example: '1234567890123'
               type: string
             default_wallet_account_id:
-              description: 決済口座のデフォルト
+              description: デフォルトの決済口座が紐づく勘定科目ID
               example: 1
               maximum: 2147483647
               minimum: 1
@@ -12941,12 +13032,13 @@ components:
               minimum: 1
               type: integer
             industry_class:
-              description: '種別（agriculture_forestry_fisheries_ore: 農林水産業/鉱業、construction:
-                建設、manufacturing_processing: 製造/加工、it: IT、transportation_logistics:
-                運輸/物流、retail_wholesale: 小売/卸売、finance_insurance: 金融/保険、real_estate_rental:
-                不動産/レンタル、profession: 士業/学術/専門技術サービス、design_production: デザイン/制作、food:
-                飲食、leisure_entertainment: レジャー/娯楽、lifestyle: 生活関連サービス、education: 教育/学習支援、medical_welfare:
-                医療/福祉、other_services: その他サービス、other: その他, "": 未選択）'
+              description: '種別（agriculture_forestry_fisheries_ore: 農林水産業/鉱業,construction:
+                建設,manufacturing_processing: 製造/加工,it: IT,transportation_logistics:
+                運輸/物流,retail_wholesale: 小売/卸売,finance_insurance: 金融/保険,real_estate_rental:
+                不動産/レンタル,profession: 士業/学術/専門技術サービス,design_production: デザイン/制作,food:
+                飲食,leisure_entertainment: レジャー/娯楽,lifestyle: 生活関連サービス,education: 教育/学習支援,medical_welfare:
+                医療/福祉,other_services: その他サービス,other_association: NPO、一般社団法人等,other:
+                その他, "": 未選択）'
               enum:
               - agriculture_forestry_fisheries_ore
               - construction
@@ -12964,9 +13056,11 @@ components:
               - education
               - medical_welfare
               - other_services
+              - other_association
               - other
               - ''
               example: agriculture_forestry_fisheries_ore
+              nullable: true
               type: string
             industry_code:
               description: |-
@@ -13346,7 +13440,6 @@ components:
                     type: string
                 required:
                 - id
-                - code
                 - name
                 type: object
               type: array
@@ -13415,10 +13508,12 @@ components:
             street_name1:
               description: 市区町村・番地
               example: ＸＸ区ＹＹ１−１−１
+              nullable: true
               type: string
             street_name2:
               description: 建物名・部屋番号など
               example: ビル１Ｆ
+              nullable: true
               type: string
             tax_at_source_calc_type:
               description: '源泉徴収税計算（0: 消費税を含める、1: 消費税を含めない）'
@@ -13500,6 +13595,7 @@ components:
             zipcode:
               description: 郵便番号
               example: 000-0000
+              nullable: true
               type: string
           required:
           - amount_fraction
@@ -14023,7 +14119,10 @@ components:
                 minimum: 1
                 type: integer
               amount:
-                description: 取引金額（税込で指定してください）
+                description: |
+                  取引金額（税込で指定してください）<br>
+                  マイナスの値を指定した場合、控除・マイナス行として登録されます。<br>
+                  上記以外の値を指定した場合、通常行として登録されます。
                 example: 1
                 format: int64
                 maximum: 9223372036854775807
@@ -14520,7 +14619,10 @@ components:
                 minimum: 1
                 type: integer
               amount:
-                description: 取引金額（税込で指定してください）
+                description: |
+                  取引金額（税込で指定してください）<br>
+                  マイナスの値を指定した場合、控除・マイナス行として登録されます。<br>
+                  上記以外の値を指定した場合、通常行として登録されます。
                 example: 1
                 format: int64
                 maximum: 9223372036854775807
@@ -16485,7 +16587,7 @@ components:
                 - vat_8
                 type: object
               total_vat:
-                description: 合計金額
+                description: 消費税
                 example: 8000
                 type: integer
               web_confirmed_at:
@@ -17017,7 +17119,7 @@ components:
               - vat_8
               type: object
             total_vat:
-              description: 合計金額
+              description: 消費税
               example: 8000
               type: integer
             web_confirmed_at:
@@ -22050,7 +22152,10 @@ components:
                 minimum: 1
                 type: integer
               amount:
-                description: 取引金額（税込で指定してください）
+                description: |
+                  取引金額（税込で指定してください）<br>
+                  マイナスの値を指定した場合、控除・マイナス行として登録されます。<br>
+                  上記以外の値を指定した場合、通常行として登録されます。
                 example: 1080
                 format: int64
                 maximum: 9223372036854775807
@@ -22159,7 +22264,10 @@ components:
                 minimum: 1
                 type: integer
               amount:
-                description: 取引金額（税込で指定してください）
+                description: |
+                  取引金額（税込で指定してください）<br>
+                  マイナスの値を指定した場合、控除・マイナス行として登録されます。<br>
+                  上記以外の値を指定した場合、通常行として登録されます。
                 example: 1080
                 format: int64
                 maximum: 9223372036854775807
@@ -22459,16 +22567,35 @@ components:
                               maximum: 2147483647
                               minimum: 0
                               type: integer
-                            id:
-                              deprecated: true
-                              description: 税区分ID
+                            name:
+                              description: 税区分
+                              example: 課対仕入10%
+                              type: string
+                          type: object
+                        tax_rate_10_exempt_50:
+                          properties:
+                            code:
+                              description: 税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）
                               example: 1
                               maximum: 2147483647
                               minimum: 0
                               type: integer
                             name:
                               description: 税区分
-                              example: 課対仕入10%
+                              example: 課対仕入免50 10%
+                              type: string
+                          type: object
+                        tax_rate_10_exempt_80:
+                          properties:
+                            code:
+                              description: 税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）
+                              example: 1
+                              maximum: 2147483647
+                              minimum: 0
+                              type: integer
+                            name:
+                              description: 税区分
+                              example: 課対仕入免80 10%
                               type: string
                           type: object
                         tax_rate_5:
@@ -22479,16 +22606,35 @@ components:
                               maximum: 2147483647
                               minimum: 0
                               type: integer
-                            id:
-                              deprecated: true
-                              description: 税区分ID
+                            name:
+                              description: 税区分
+                              example: 課対仕入
+                              type: string
+                          type: object
+                        tax_rate_5_exempt_50:
+                          properties:
+                            code:
+                              description: 税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）
                               example: 1
                               maximum: 2147483647
                               minimum: 0
                               type: integer
                             name:
                               description: 税区分
-                              example: 課対仕入
+                              example: 課対仕入免50
+                              type: string
+                          type: object
+                        tax_rate_5_exempt_80:
+                          properties:
+                            code:
+                              description: 税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）
+                              example: 1
+                              maximum: 2147483647
+                              minimum: 0
+                              type: integer
+                            name:
+                              description: 税区分
+                              example: 課対仕入免80
                               type: string
                           type: object
                         tax_rate_8:
@@ -22499,16 +22645,35 @@ components:
                               maximum: 2147483647
                               minimum: 0
                               type: integer
-                            id:
-                              deprecated: true
-                              description: 税区分ID
+                            name:
+                              description: 税区分
+                              example: 課対仕入8%
+                              type: string
+                          type: object
+                        tax_rate_8_exempt_50:
+                          properties:
+                            code:
+                              description: 税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）
                               example: 1
                               maximum: 2147483647
                               minimum: 0
                               type: integer
                             name:
                               description: 税区分
-                              example: 課対仕入8%
+                              example: 課対仕入免50 8%
+                              type: string
+                          type: object
+                        tax_rate_8_exempt_80:
+                          properties:
+                            code:
+                              description: 税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）
+                              example: 1
+                              maximum: 2147483647
+                              minimum: 0
+                              type: integer
+                            name:
+                              description: 税区分
+                              example: 課対仕入免80 8%
                               type: string
                           type: object
                         tax_rate_r8:
@@ -22519,16 +22684,35 @@ components:
                               maximum: 2147483647
                               minimum: 0
                               type: integer
-                            id:
-                              deprecated: true
-                              description: 税区分ID
+                            name:
+                              description: 税区分
+                              example: 課対仕入8%（軽）
+                              type: string
+                          type: object
+                        tax_rate_r8_exempt_50:
+                          properties:
+                            code:
+                              description: 税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）
                               example: 1
                               maximum: 2147483647
                               minimum: 0
                               type: integer
                             name:
                               description: 税区分
-                              example: 課対仕入8%（軽）
+                              example: 課対仕入免50 8%（軽）
+                              type: string
+                          type: object
+                        tax_rate_r8_exempt_80:
+                          properties:
+                            code:
+                              description: 税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）
+                              example: 1
+                              maximum: 2147483647
+                              minimum: 0
+                              type: integer
+                            name:
+                              description: 税区分
+                              example: 課対仕入免80 8%（軽）
                               type: string
                           type: object
                       type: object
