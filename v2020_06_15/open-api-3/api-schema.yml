@@ -26198,6 +26198,32 @@ components:
                               example: 課対仕入10%
                               type: string
                           type: object
+                        tax_rate_10_exempt_50:
+                          properties:
+                            code:
+                              description: 税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）
+                              example: 1
+                              maximum: 2147483647
+                              minimum: 0
+                              type: integer
+                            name:
+                              description: 税区分
+                              example: 課対仕入免50 10%
+                              type: string
+                          type: object
+                        tax_rate_10_exempt_80:
+                          properties:
+                            code:
+                              description: 税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）
+                              example: 1
+                              maximum: 2147483647
+                              minimum: 0
+                              type: integer
+                            name:
+                              description: 税区分
+                              example: 課対仕入免80 10%
+                              type: string
+                          type: object
                         tax_rate_5:
                           properties:
                             code:
@@ -26209,6 +26235,32 @@ components:
                             name:
                               description: 税区分
                               example: 課対仕入
+                              type: string
+                          type: object
+                        tax_rate_5_exempt_50:
+                          properties:
+                            code:
+                              description: 税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）
+                              example: 1
+                              maximum: 2147483647
+                              minimum: 0
+                              type: integer
+                            name:
+                              description: 税区分
+                              example: 課対仕入免50
+                              type: string
+                          type: object
+                        tax_rate_5_exempt_80:
+                          properties:
+                            code:
+                              description: 税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）
+                              example: 1
+                              maximum: 2147483647
+                              minimum: 0
+                              type: integer
+                            name:
+                              description: 税区分
+                              example: 課対仕入免80
                               type: string
                           type: object
                         tax_rate_8:
@@ -26224,6 +26276,32 @@ components:
                               example: 課対仕入8%
                               type: string
                           type: object
+                        tax_rate_8_exempt_50:
+                          properties:
+                            code:
+                              description: 税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）
+                              example: 1
+                              maximum: 2147483647
+                              minimum: 0
+                              type: integer
+                            name:
+                              description: 税区分
+                              example: 課対仕入免50 8%
+                              type: string
+                          type: object
+                        tax_rate_8_exempt_80:
+                          properties:
+                            code:
+                              description: 税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）
+                              example: 1
+                              maximum: 2147483647
+                              minimum: 0
+                              type: integer
+                            name:
+                              description: 税区分
+                              example: 課対仕入免80 8%
+                              type: string
+                          type: object
                         tax_rate_r8:
                           properties:
                             code:
@@ -26235,6 +26313,32 @@ components:
                             name:
                               description: 税区分
                               example: 課対仕入8%（軽）
+                              type: string
+                          type: object
+                        tax_rate_r8_exempt_50:
+                          properties:
+                            code:
+                              description: 税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）
+                              example: 1
+                              maximum: 2147483647
+                              minimum: 0
+                              type: integer
+                            name:
+                              description: 税区分
+                              example: 課対仕入免50 8%（軽）
+                              type: string
+                          type: object
+                        tax_rate_r8_exempt_80:
+                          properties:
+                            code:
+                              description: 税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）
+                              example: 1
+                              maximum: 2147483647
+                              minimum: 0
+                              type: integer
+                            name:
+                              description: 税区分
+                              example: 課対仕入免80 8%（軽）
                               type: string
                           type: object
                       type: object
