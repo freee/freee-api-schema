@@ -28446,6 +28446,142 @@
                                 "example": "課対仕入8%（軽）"
                               }
                             }
+                          },
+                          "tax_rate_5_exempt_80": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入免80"
+                              }
+                            }
+                          },
+                          "tax_rate_5_exempt_50": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入免50"
+                              }
+                            }
+                          },
+                          "tax_rate_8_exempt_80": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入免80 8%"
+                              }
+                            }
+                          },
+                          "tax_rate_8_exempt_50": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入免50 8%"
+                              }
+                            }
+                          },
+                          "tax_rate_10_exempt_80": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入免80 10%"
+                              }
+                            }
+                          },
+                          "tax_rate_10_exempt_50": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入免50 10%"
+                              }
+                            }
+                          },
+                          "tax_rate_r8_exempt_80": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入免80 8%（軽）"
+                              }
+                            }
+                          },
+                          "tax_rate_r8_exempt_50": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入免50 8%（軽）"
+                              }
+                            }
                           }
                         }
                       }
