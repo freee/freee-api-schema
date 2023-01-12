@@ -2321,13 +2321,6 @@ paths:
         <li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>
         </ul>
         </li>
-        <li>
-        <p>registered_from</p>
-        <ul>
-        <li>all : すべての取引</li>
-        <li>me : 自身が登録した取引</li>
-        </ul>
-        </li>
         </ul>
         <h2 id="_3">注意点</h2>
         <ul>
