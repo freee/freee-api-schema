@@ -8623,6 +8623,13 @@
               "general",
               "heavy"
             ]
+          },
+          "email": {
+            "type": "string",
+            "description": "メールアドレス",
+            "nullable": true,
+            "maxLength": 255,
+            "example": "test@example.com"
           }
         }
       },
@@ -9077,6 +9084,13 @@
           "disability_type": {
             "type": "string",
             "description": "障害者かどうか na: 空白, general: 障害者, heavy: 特別障害者"
+          },
+          "email": {
+            "type": "string",
+            "description": "メールアドレス",
+            "nullable": true,
+            "maxLength": 255,
+            "example": "test@example.com"
           }
         },
         "nullable": true
