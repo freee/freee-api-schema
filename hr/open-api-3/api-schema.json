@@ -3,15 +3,15 @@
   "info": {
     "title": "freee人事労務 API",
     "description": "\n<p>freee人事労務のAPI仕様です。</p>\n\n</br>\n\n<h3 id=\"about_authorize\">認証について</h3>\n\n<p>OAuth2.0を利用します。<a href=\"https://developer.freee.co.jp/reference/#%e8%aa%8d%e8%a8%bc\" target=\"_blank\">詳細はリファレンスの認証に関する記載を参照してください。</a></p>\n\n<h3 id=\"api_endpoint\">エンドポイント</h3>\n\n<p>https://api.freee.co.jp/hr</p>\n\n\n<h3 id=\"compatibility\">後方互換性ありの変更</h3>\n\n<p>freeeでは、APIを改善していくために以下のような変更は後方互換性ありとして通知なく変更を入れることがあります。アプリケーション実装者は以下を踏まえて開発を行ってください。</p>\n\n<ul>\n<li>新しいAPIリソース・エンドポイントの追加</li>\n<li>既存のAPIに対して必須ではない新しいリクエストパラメータの追加</li>\n<li>既存のAPIレスポンスに対する新しいプロパティの追加</li>\n<li>既存のAPIレスポンスに対するプロパティの順番の入れ変え</li>\n<li>keyとなっているidやcodeの長さの変更（長くする）</li>\n</ul>\n\n<h3 id=\"error_response\">エラーレスポンス</h3>\n\n<p>APIリクエストでエラーが発生した場合は、エラー原因に応じたステータスコードおよびメッセージを返します。</p>\n\n  <table border=\"1\">\n  <tbody>\n    <tr>\n      <th style=\"padding: 10px\"><strong>ステータスコード</strong></th>\n      <th style=\"padding: 10px\"><strong>原因</strong></th>\n    </tr>\n    <tr><td style=\"padding: 10px\">400</td><td style=\"padding: 10px\">リクエストパラメータが不正</td></tr>\n    <tr><td style=\"padding: 10px\">401</td><td style=\"padding: 10px\">アクセストークンが無効</td></tr>\n    <tr><td style=\"padding: 10px\">403</td><td style=\"padding: 10px\">アクセス権限がない</td></tr>\n    <tr><td style=\"padding: 10px\">404</td><td style=\"padding: 10px\">リソースが存在しない</td></tr>\n    <tr><td style=\"padding: 10px\">429</td><td style=\"padding: 10px\">リクエスト回数制限を超えた</td></tr>\n    <tr><td style=\"padding: 10px\">503</td><td style=\"padding: 10px\">システム内で予期しないエラーが発生</td></tr>\n  </tbody>\n</table>\n\n<p>メッセージボディ内の <code>messages</code> にはエラー内容を説明する文字列が入ります。</p>\n<pre><code>  {\n    &quot;status_code&quot; : 400,\n    &quot;errors&quot; : [\n      {\n        &quot;type&quot; : &quot;bad_request&quot;,\n        &quot;messages&quot; : [\n          &quot;リクエストの形式が不正です。&quot;\n        ]\n      }\n    ]\n  }  </code></pre>\n\n</br>\n\n<h3 id=\"api_rate_limit\">API使用制限</h3> \n<p>APIリクエストは1時間で5000回を上限としています。API使用ステータスはレスポンスヘッダに付与されます。</p>\n<pre><code>X-Ratelimit-Limit:5000\nX-Ratelimit-Remaining:4998\nX-Ratelimit-Reset:2018-01-01T12:00:00.000000Z\n</code></pre>\n\n<br> 各ヘッダの意味は次のとおりです。</p>\n\n <table border=\"1\">\n  <tbody>\n    <tr>\n      <th style=\"padding: 10px\"><strong>ヘッダ名</strong></th>\n      <th style=\"padding: 10px\"><strong>説明</strong></th>\n    </tr>\n    <tr><td style=\"padding: 10px\">X-RateLimit-Limit</td><td style=\"padding: 10px\">使用回数の上限</td></tr>\n    <tr><td style=\"padding: 10px\">X-RateLimit-Remaining</td><td style=\"padding: 10px\">残り使用回数</td></tr>\n    <tr><td style=\"padding: 10px\">X-RateLimit-Reset</td><td style=\"padding: 10px\">使用回数がリセットされる時刻</td></tr>\n  </tbody>\n</table>\n\n<p>上記に加え、freeeは一定期間に過度のアクセスを検知した場合、APIアクセスをコントロールする場合があります。<br> その際のhttp status codeは403となります。制限がかかってから10分程度が過ぎると再度使用することができるようになります。</p>",
-    "termsOfService": "",
+    "termsOfService": "https://app.secure.freee.co.jp/terms-freee-api.html",
     "contact": {
-      "name": "",
-      "url": "https://support.freee.co.jp/hc/ja/requests/new"
+      "name": "サポートデスクへのお問い合わせ",
+      "url": "https://accounts.secure.freee.co.jp/contacts?from=payroll"
     },
     "license": {
-      "name": ""
+      "name": "© Since 2013 freee K.K."
     },
-    "version": "v2022-02-01"
+    "version": "2022-02-01"
   },
   "servers": [
     {
