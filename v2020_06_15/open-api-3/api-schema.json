@@ -5444,27 +5444,32 @@
         ],
         "responses": {
           "200": {
-            "description": "<p>レスポンスの各キーは以下の項目と対応しています。</p>\n<p>詳細は <a href=\"https://support.freee.co.jp/hc/ja/articles/210265673\">https://support.freee.co.jp/hc/ja/articles/210265673</a> を参照してください。</p>\n<table>\n  <thead>\n    <tr>\n      <th style=\"padding: 5px\">キー</th>\n      <th style=\"padding: 5px\">対応する項目</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td style=\"padding: 5px\">wallet_txns</td>\n      <td style=\"padding: 5px\">自動で経理 / 取得した明細</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">deals</td>\n      <td style=\"padding: 5px\">取引</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">transfers</td>\n      <td style=\"padding: 5px\">口座振替</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">docs</td>\n      <td style=\"padding: 5px\">見積書・納品書・請求書・領収書・発注書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">doc_postings</td>\n      <td style=\"padding: 5px\">(請求書の)郵送</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">receipts</td>\n      <td style=\"padding: 5px\">ファイルボックス</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">receipt_stream_editor</td>\n      <td style=\"padding: 5px\">連続取引登録</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">expense_applications</td>\n      <td style=\"padding: 5px\">経費精算</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">spreadsheets</td>\n      <td style=\"padding: 5px\">エクセルインポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">payment_requests</td>\n      <td style=\"padding: 5px\">支払依頼</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">request_forms</td>\n      <td style=\"padding: 5px\">申請フォーム</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">approval_requests</td>\n      <td style=\"padding: 5px\">各種申請</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports</td>\n      <td style=\"padding: 5px\">収益 / 費用レポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_income_expense</td>\n      <td style=\"padding: 5px\">損益レポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_receivables</td>\n      <td style=\"padding: 5px\">入金管理レポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_payables</td>\n      <td style=\"padding: 5px\">支払管理レポート(一括振込ファイルを含む)</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_cash_balance</td>\n      <td style=\"padding: 5px\">現預金レポート/資金繰りレポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_crosstabs</td>\n      <td style=\"padding: 5px\">集計表</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_general_ledgers</td>\n      <td style=\"padding: 5px\">総勘定元帳</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_pl</td>\n      <td style=\"padding: 5px\">損益計算書(月次推移/試算表)</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_bs</td>\n      <td style=\"padding: 5px\">貸借対照表(月次推移/試算表)</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_journals</td>\n      <td style=\"padding: 5px\">仕訳帳</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_managements_planning</td>\n      <td style=\"padding: 5px\">経営プランニング</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_managements_navigation</td>\n      <td style=\"padding: 5px\">経営ナビゲーション</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">manual_journals</td>\n      <td style=\"padding: 5px\">振替伝票</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">fixed_assets</td>\n      <td style=\"padding: 5px\">固定資産台帳</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">inventory_refreshes</td>\n      <td style=\"padding: 5px\">在庫棚卸</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">biz_allocations</td>\n      <td style=\"padding: 5px\">家事按分</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">payment_records</td>\n      <td style=\"padding: 5px\">支払調書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">annual_reports</td>\n      <td style=\"padding: 5px\">決算書、確定申告書類</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">tax_reports</td>\n      <td style=\"padding: 5px\">消費税区分別表・消費税集計表</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">consumption_entries</td>\n      <td style=\"padding: 5px\">消費税申告書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">tax_return</td>\n      <td style=\"padding: 5px\">連携用データ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">account_item_statements</td>\n      <td style=\"padding: 5px\">勘定科目内訳明細書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">month_end</td>\n      <td style=\"padding: 5px\">月締め</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">year_end</td>\n      <td style=\"padding: 5px\">年度締め</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">walletables</td>\n      <td style=\"padding: 5px\">口座 / 口座の同期</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">companies</td>\n      <td style=\"padding: 5px\">事業所の設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">invitations</td>\n      <td style=\"padding: 5px\">メンバー招待</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">sign_in_logs</td>\n      <td style=\"padding: 5px\">ログイン履歴</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">backups</td>\n      <td style=\"padding: 5px\">バックアップ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">opening_balances</td>\n      <td style=\"padding: 5px\">開始残高の設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">system_conversion</td>\n      <td style=\"padding: 5px\">乗り換え設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">resets</td>\n      <td style=\"padding: 5px\">リセット</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">partners</td>\n      <td style=\"padding: 5px\">取引先</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">items</td>\n      <td style=\"padding: 5px\">品目</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">sections</td>\n      <td style=\"padding: 5px\">部門</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">tags</td>\n      <td style=\"padding: 5px\">メモタグ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">account_items</td>\n      <td style=\"padding: 5px\">勘定科目</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">taxes</td>\n      <td style=\"padding: 5px\">税区分</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">user_matchers</td>\n      <td style=\"padding: 5px\">自動登録ルール</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">deal_templates</td>\n      <td style=\"padding: 5px\">取引テンプレート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">manual_journal_templates</td>\n      <td style=\"padding: 5px\">振替伝票テンプレート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">cost_allocations</td>\n      <td style=\"padding: 5px\">部門配賦</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">approval_flow_routes</td>\n      <td style=\"padding: 5px\">承認経路</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">expense_application_templates</td>\n      <td style=\"padding: 5px\">経費科目</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">workflows</td>\n      <td style=\"padding: 5px\">仕訳承認</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">oauth_applications</td>\n      <td style=\"padding: 5px\">アプリ利用</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">oauth_authorizations</td>\n      <td style=\"padding: 5px\">アプリ認可</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">bank_accountant_staff_users</td>\n      <td style=\"padding: 5px\">アドバイザー事業所内でのメンバー管理</td>\n    </tr>\n  </tbody>\n</table>\n",
+            "description": "<p>レスポンスの各キーは以下の項目と対応しています。</p>\n<p>詳細は <a href=\"https://support.freee.co.jp/hc/ja/articles/210265673\">https://support.freee.co.jp/hc/ja/articles/210265673</a> を参照してください。</p>\n<table>\n  <thead>\n    <tr>\n      <th style=\"padding: 5px\">キー</th>\n      <th style=\"padding: 5px\">対応する項目</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td style=\"padding: 5px\">wallet_txns</td>\n      <td style=\"padding: 5px\">自動で経理 / 取得した明細</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">deals</td>\n      <td style=\"padding: 5px\">取引</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">transfers</td>\n      <td style=\"padding: 5px\">口座振替</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">docs</td>\n      <td style=\"padding: 5px\">見積書・納品書・請求書・領収書・発注書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">doc_postings</td>\n      <td style=\"padding: 5px\">(請求書の)郵送</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">receipts</td>\n      <td style=\"padding: 5px\">ファイルボックス</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">receipt_stream_editor</td>\n      <td style=\"padding: 5px\">連続取引登録</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">spreadsheets</td>\n      <td style=\"padding: 5px\">エクセルインポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">expense_applications</td>\n      <td style=\"padding: 5px\">経費精算</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">expense_application_sync_payroll</td>\n      <td style=\"padding: 5px\">経費精算の給与連携</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">payment_requests</td>\n      <td style=\"padding: 5px\">支払依頼</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">approval_requests</td>\n      <td style=\"padding: 5px\">各種申請</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports</td>\n      <td style=\"padding: 5px\">収益 / 費用レポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_income_expense</td>\n      <td style=\"padding: 5px\">損益レポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_receivables</td>\n      <td style=\"padding: 5px\">入金管理レポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_payables</td>\n      <td style=\"padding: 5px\">支払管理レポート(一括振込ファイルを含む)</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_cash_balance</td>\n      <td style=\"padding: 5px\">現預金レポート/資金繰りレポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_managements_planning</td>\n      <td style=\"padding: 5px\">経営プランニング</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_managements_navigation</td>\n      <td style=\"padding: 5px\">経営ナビゲーション</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_crosstabs</td>\n      <td style=\"padding: 5px\">集計表</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_custom_reports_aggregate</td>\n      <td style=\"padding: 5px\">カスタムレポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_pl</td>\n      <td style=\"padding: 5px\">損益計算書(月次推移/試算表)</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_bs</td>\n      <td style=\"padding: 5px\">貸借対照表(月次推移/試算表)</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_general_ledgers</td>\n      <td style=\"padding: 5px\">総勘定元帳</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_journals</td>\n      <td style=\"padding: 5px\">仕訳帳</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">manual_journals</td>\n      <td style=\"padding: 5px\">振替伝票</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">fixed_assets</td>\n      <td style=\"padding: 5px\">固定資産台帳</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">inventory_refreshes</td>\n      <td style=\"padding: 5px\">在庫棚卸</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">biz_allocations</td>\n      <td style=\"padding: 5px\">家事按分</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">payment_records</td>\n      <td style=\"padding: 5px\">支払調書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">annual_reports</td>\n      <td style=\"padding: 5px\">決算書、確定申告書類</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">tax_reports</td>\n      <td style=\"padding: 5px\">消費税区分別表・消費税集計表</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">consumption_entries</td>\n      <td style=\"padding: 5px\">消費税申告書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">tax_return</td>\n      <td style=\"padding: 5px\">連携用データ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">account_item_statements</td>\n      <td style=\"padding: 5px\">勘定科目内訳明細書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">month_end</td>\n      <td style=\"padding: 5px\">月締め</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">year_end</td>\n      <td style=\"padding: 5px\">年度締め</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">walletables</td>\n      <td style=\"padding: 5px\">口座 / 口座の同期</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">companies</td>\n      <td style=\"padding: 5px\">事業所の設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">invitations</td>\n      <td style=\"padding: 5px\">メンバー招待</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">access_controls</td>\n      <td style=\"padding: 5px\">権限管理<i>※2023年2月にリリースされる予定の機能に関する権限です</i></td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">sign_in_logs</td>\n      <td style=\"padding: 5px\">ログイン履歴</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">user_attribute_logs</td>\n      <td style=\"padding: 5px\">ユーザー更新履歴<i>※2023年2月にリリースされる予定の機能に関する権限です</i></td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">app_role_logs</td>\n      <td style=\"padding: 5px\">権限変更履歴<i>※2023年2月にリリースされる予定の機能に関する権限です</i></td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">txn_relationship_logs</td>\n      <td style=\"padding: 5px\">仕訳関連履歴<i>※2023年2月にリリースされる予定の機能に関する権限です</i></td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">backups</td>\n      <td style=\"padding: 5px\">バックアップ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">opening_balances</td>\n      <td style=\"padding: 5px\">開始残高の設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">system_conversion</td>\n      <td style=\"padding: 5px\">乗り換え設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">resets</td>\n      <td style=\"padding: 5px\">リセット</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">partners</td>\n      <td style=\"padding: 5px\">取引先</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">items</td>\n      <td style=\"padding: 5px\">品目</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">sections</td>\n      <td style=\"padding: 5px\">部門</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">tags</td>\n      <td style=\"padding: 5px\">メモタグ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">account_items</td>\n      <td style=\"padding: 5px\">勘定科目</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">taxes</td>\n      <td style=\"padding: 5px\">税区分</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">payroll_item_sets</td>\n      <td style=\"padding: 5px\">給与連携の設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">user_matchers</td>\n      <td style=\"padding: 5px\">自動登録ルール</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">deal_templates</td>\n      <td style=\"padding: 5px\">取引テンプレート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">manual_journal_templates</td>\n      <td style=\"padding: 5px\">振替伝票テンプレート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">cost_allocations</td>\n      <td style=\"padding: 5px\">部門配賦</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">approval_flow_routes</td>\n      <td style=\"padding: 5px\">承認経路</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">expense_application_templates</td>\n      <td style=\"padding: 5px\">経費科目</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">request_forms</td>\n      <td style=\"padding: 5px\">申請フォーム</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">system_messages_for_admin</td>\n      <td style=\"padding: 5px\">管理者向けお知らせ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">company_internal_announcements</td>\n      <td style=\"padding: 5px\"><a href=\"https://support.freee.co.jp/hc/ja/articles/900002322383#:~:text=%E7%A4%BE%E5%86%85%E5%90%91%E3%81%91%E3%81%AE%E3%82%A2%E3%83%8A%E3%82%A6%E3%83%B3%E3%82%B9%E3%82%92%E6%8E%B2%E7%A4%BA%E3%81%A7%E3%81%8D%E3%82%8B%E6%A9%9F%E8%83%BD%E3%81%A7%E3%81%99%E3%80%82\" target=\"_blank\">アナウンス</a><i>※2023年2月にリリースされる予定の機能に関する権限です</i></td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">doc_change_logs</td>\n      <td style=\"padding: 5px\">受発注書類変更履歴</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">workflows</td>\n      <td style=\"padding: 5px\">仕訳承認</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">oauth_applications</td>\n      <td style=\"padding: 5px\">アプリ利用</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">oauth_authorizations</td>\n      <td style=\"padding: 5px\">アプリ認可</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">bank_accountant_staff_users</td>\n      <td style=\"padding: 5px\">アドバイザー事業所内でのメンバー管理</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_managements_introduction</td>\n      <td style=\"padding: 5px\">予実管理の紹介\n      <li>管理者のみtrue,それ以外はfalse</li>\n      <li>trueの場合予実管理の紹介画面を表示可能</li>\n      </td>\n    </tr>\n  </tbody>\n</table>\n",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "required": [
+                    "access_controls",
                     "account_item_statements",
                     "account_items",
                     "annual_reports",
                     "approval_flow_routes",
                     "approval_requests",
+                    "app_role_logs",
                     "backups",
                     "bank_accountant_staff_users",
                     "biz_allocations",
                     "companies",
+                    "company_internal_announcements",
                     "consumption_entries",
                     "cost_allocations",
                     "deal_templates",
                     "deals",
+                    "doc_change_logs",
                     "doc_postings",
                     "docs",
+                    "expense_application_sync_payroll",
                     "expense_application_templates",
                     "expense_applications",
                     "fixed_assets",
@@ -5480,15 +5485,18 @@
                     "partners",
                     "payment_records",
                     "payment_requests",
+                    "payroll_item_sets",
                     "receipt_stream_editor",
                     "receipts",
                     "reports",
                     "reports_bs",
                     "reports_cash_balance",
                     "reports_crosstabs",
+                    "reports_custom_reports_aggregate",
                     "reports_general_ledgers",
                     "reports_income_expense",
                     "reports_journals",
+                    "reports_managements_introduction",
                     "reports_managements_navigation",
                     "reports_managements_planning",
                     "reports_payables",
@@ -5500,11 +5508,14 @@
                     "sign_in_logs",
                     "spreadsheets",
                     "system_conversion",
+                    "system_messages_for_admin",
                     "tags",
                     "tax_reports",
                     "tax_return",
                     "taxes",
                     "transfers",
+                    "txn_relationship_logs",
+                    "user_attribute_logs",
                     "user_matchers",
                     "wallet_txns",
                     "walletables",
@@ -5525,64 +5536,67 @@
                       "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
                     },
                     "doc_postings": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustCreate"
                     },
                     "receipts": {
                       "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
                     },
                     "receipt_stream_editor": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
+                    },
+                    "spreadsheets": {
+                      "$ref": "#/components/schemas/userCapabilityJustCreateRead"
                     },
                     "expense_applications": {
                       "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
                     },
-                    "spreadsheets": {
-                      "$ref": "#/components/schemas/userCapability"
+                    "expense_application_sync_payroll": {
+                      "$ref": "#/components/schemas/userCapabilityJustCreate"
                     },
                     "payment_requests": {
                       "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
-                    },
-                    "request_forms": {
-                      "$ref": "#/components/schemas/userCapability"
                     },
                     "approval_requests": {
                       "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
                     },
                     "reports": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
                     },
                     "reports_income_expense": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
                     },
                     "reports_receivables": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
                     },
                     "reports_payables": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustReadWrite"
                     },
                     "reports_cash_balance": {
-                      "$ref": "#/components/schemas/userCapability"
-                    },
-                    "reports_crosstabs": {
-                      "$ref": "#/components/schemas/userCapability"
-                    },
-                    "reports_general_ledgers": {
-                      "$ref": "#/components/schemas/userCapability"
-                    },
-                    "reports_pl": {
-                      "$ref": "#/components/schemas/userCapability"
-                    },
-                    "reports_bs": {
-                      "$ref": "#/components/schemas/userCapability"
-                    },
-                    "reports_journals": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
                     },
                     "reports_managements_planning": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustReadWrite"
                     },
                     "reports_managements_navigation": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustReadWrite"
+                    },
+                    "reports_crosstabs": {
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
+                    },
+                    "reports_custom_reports_aggregate": {
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
+                    },
+                    "reports_pl": {
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
+                    },
+                    "reports_bs": {
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
+                    },
+                    "reports_general_ledgers": {
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
+                    },
+                    "reports_journals": {
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
                     },
                     "manual_journals": {
                       "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
@@ -5600,49 +5614,61 @@
                       "$ref": "#/components/schemas/userCapability"
                     },
                     "annual_reports": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
                     },
                     "tax_reports": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
                     },
                     "consumption_entries": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
                     },
                     "tax_return": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
                     },
                     "account_item_statements": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
                     },
                     "month_end": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
                     },
                     "year_end": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustReadUpdate"
                     },
                     "walletables": {
                       "$ref": "#/components/schemas/userCapabilityWithSync"
                     },
                     "companies": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustReadUpdate"
                     },
                     "invitations": {
                       "$ref": "#/components/schemas/userCapability"
                     },
+                    "access_controls": {
+                      "$ref": "#/components/schemas/userCapabilityWithWrite"
+                    },
                     "sign_in_logs": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
+                    },
+                    "user_attribute_logs": {
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
+                    },
+                    "app_role_logs": {
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
+                    },
+                    "txn_relationship_logs": {
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
                     },
                     "backups": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
                     },
                     "opening_balances": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustReadUpdate"
                     },
                     "system_conversion": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
                     },
                     "resets": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
                     },
                     "partners": {
                       "$ref": "#/components/schemas/userCapability"
@@ -5660,6 +5686,9 @@
                       "$ref": "#/components/schemas/userCapability"
                     },
                     "taxes": {
+                      "$ref": "#/components/schemas/userCapabilityJustReadUpdate"
+                    },
+                    "payroll_item_sets": {
                       "$ref": "#/components/schemas/userCapability"
                     },
                     "user_matchers": {
@@ -5672,7 +5701,7 @@
                       "$ref": "#/components/schemas/userCapability"
                     },
                     "cost_allocations": {
-                      "$ref": "#/components/schemas/userCapability"
+                      "$ref": "#/components/schemas/userCapabilityJustReadUpdate"
                     },
                     "approval_flow_routes": {
                       "$ref": "#/components/schemas/userCapability"
@@ -5680,8 +5709,20 @@
                     "expense_application_templates": {
                       "$ref": "#/components/schemas/userCapability"
                     },
-                    "workflows": {
+                    "request_forms": {
                       "$ref": "#/components/schemas/userCapability"
+                    },
+                    "system_messages_for_admin": {
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
+                    },
+                    "company_internal_announcements": {
+                      "$ref": "#/components/schemas/userCapabilityJustUpdate"
+                    },
+                    "doc_change_logs": {
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
+                    },
+                    "workflows": {
+                      "$ref": "#/components/schemas/userCapabilityJustReadUpdateDestroy"
                     },
                     "oauth_applications": {
                       "$ref": "#/components/schemas/userCapability"
@@ -5691,6 +5732,9 @@
                     },
                     "bank_accountant_staff_users": {
                       "$ref": "#/components/schemas/userCapability"
+                    },
+                    "reports_managements_introduction": {
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
                     }
                   }
                 }
@@ -31178,6 +31222,101 @@
           }
         }
       },
+      "userCapabilityJustCreate": {
+        "type": "object",
+        "properties": {
+          "create": {
+            "type": "boolean",
+            "description": "作成",
+            "example": true
+          }
+        }
+      },
+      "userCapabilityJustCreateRead": {
+        "type": "object",
+        "properties": {
+          "create": {
+            "type": "boolean",
+            "description": "作成",
+            "example": true
+          },
+          "read": {
+            "type": "boolean",
+            "description": "閲覧",
+            "example": true
+          }
+        }
+      },
+      "userCapabilityJustRead": {
+        "type": "object",
+        "properties": {
+          "read": {
+            "type": "boolean",
+            "description": "閲覧",
+            "example": true
+          }
+        }
+      },
+      "userCapabilityJustReadUpdate": {
+        "type": "object",
+        "properties": {
+          "read": {
+            "type": "boolean",
+            "description": "閲覧",
+            "example": true
+          },
+          "update": {
+            "type": "boolean",
+            "description": "更新",
+            "example": true
+          }
+        }
+      },
+      "userCapabilityJustReadUpdateDestroy": {
+        "type": "object",
+        "properties": {
+          "read": {
+            "type": "boolean",
+            "description": "閲覧",
+            "example": true
+          },
+          "update": {
+            "type": "boolean",
+            "description": "更新",
+            "example": true
+          },
+          "destroy": {
+            "type": "boolean",
+            "description": "削除",
+            "example": true
+          }
+        }
+      },
+      "userCapabilityJustReadWrite": {
+        "type": "object",
+        "properties": {
+          "read": {
+            "type": "boolean",
+            "description": "閲覧",
+            "example": true
+          },
+          "write": {
+            "type": "boolean",
+            "description": "操作",
+            "example": true
+          }
+        }
+      },
+      "userCapabilityJustUpdate": {
+        "type": "object",
+        "properties": {
+          "update": {
+            "type": "boolean",
+            "description": "更新",
+            "example": true
+          }
+        }
+      },
       "userCapabilityWithSelfOnly": {
         "type": "object",
         "properties": {
@@ -31269,6 +31408,36 @@
             "description": "「口座の同期」の実行（廃止予定）",
             "example": true,
             "deprecated": true
+          }
+        }
+      },
+      "userCapabilityWithWrite": {
+        "type": "object",
+        "properties": {
+          "read": {
+            "type": "boolean",
+            "description": "閲覧",
+            "example": true
+          },
+          "create": {
+            "type": "boolean",
+            "description": "作成",
+            "example": true
+          },
+          "update": {
+            "type": "boolean",
+            "description": "更新",
+            "example": true
+          },
+          "destroy": {
+            "type": "boolean",
+            "description": "削除",
+            "example": true
+          },
+          "write": {
+            "type": "string",
+            "description": "操作",
+            "example": true
           }
         }
       },
@@ -38075,6 +38244,158 @@
               "personal",
               "corporate"
             ]
+          }
+        }
+      },
+      "fixedAsset": {
+        "type": "object",
+        "required": [
+          "id",
+          "company_id",
+          "name"
+        ],
+        "properties": {
+          "company_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "事業所ID",
+            "example": 1
+          },
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "固定資産ID",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "固定資産名",
+            "example": "pc"
+          },
+          "management_number": {
+            "type": "string",
+            "nullable": true,
+            "description": "管理番号",
+            "example": "pc-0001"
+          },
+          "account_item_id": {
+            "type": "integer",
+            "description": "勘定科目ID",
+            "example": 22
+          },
+          "section_id": {
+            "type": "integer",
+            "nullable": true,
+            "description": "部門ID",
+            "example": 0
+          },
+          "item_id": {
+            "type": "integer",
+            "nullable": true,
+            "description": "品目ID",
+            "example": 0
+          },
+          "depreciation_method": {
+            "type": "string",
+            "description": "償却方法:(少額償却: small_sum_method, 一括償却: lump_sum_method, 定額法: straight_line_method, 定率法: multiple_method, 旧定率法: old_multiple_method, 旧定額法: old_straight_line_method, 償却なし: non_depreciate_method, 任意償却: voluntary_method, 即時償却: immediate_method, 均等償却: equal_method)",
+            "enum": [
+              "small_sum_method",
+              "lump_sum_method",
+              "straight_line_method",
+              "multiple_method",
+              "old_multiple_method",
+              "old_straight_line_method",
+              "non_depreciate_method",
+              "voluntary_method",
+              "immediate_method",
+              "equal_method"
+            ],
+            "example": "straight_line_method"
+          },
+          "depreciation_account_item_id": {
+            "type": "integer",
+            "description": "減価償却に使う勘定科目ID",
+            "example": 99
+          },
+          "prefecture_code": {
+            "type": "integer",
+            "minimum": -1,
+            "maximum": 46,
+            "description": "都道府県コード（-1: 設定しない、0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
+            "example": 4,
+            "nullable": true
+          },
+          "city_name": {
+            "type": "string",
+            "nullable": true,
+            "description": "申告先市区町村",
+            "example": "港区"
+          },
+          "depreciation_amount": {
+            "type": "integer",
+            "description": "減価償却費",
+            "example": "18533"
+          },
+          "acquisition_cost": {
+            "type": "integer",
+            "description": "取得価額",
+            "example": "150000"
+          },
+          "opening_balance": {
+            "type": "integer",
+            "description": "期首残高",
+            "example": "92000"
+          },
+          "closing_balance": {
+            "type": "integer",
+            "description": "未償却残高(期末残高)",
+            "example": "46000"
+          },
+          "opening_accumulated_depreciation": {
+            "type": "integer",
+            "description": "期首減価償却累計額",
+            "example": "100000"
+          },
+          "closing_accumulated_depreciation": {
+            "type": "integer",
+            "description": "期末減価償却累計額",
+            "example": "46000"
+          },
+          "life_years": {
+            "type": "integer",
+            "description": "耐用年数",
+            "example": "5"
+          },
+          "acquisition_date": {
+            "type": "string",
+            "description": "取得日",
+            "format": "date",
+            "example": "2021-07-13"
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "更新日",
+            "format": "date",
+            "example": "2021-07-13"
+          },
+          "retire_type": {
+            "type": "string",
+            "description": "売却もしくは除却ステータス: (売却: sell, 除却: retire, 償却中: depreciating)",
+            "enum": [
+              "sell",
+              "retire",
+              "depreciating"
+            ],
+            "example": "retire"
+          },
+          "retire_date": {
+            "type": "string",
+            "format": "date",
+            "nullable": true,
+            "description": "除却日、もしくは売却日",
+            "example": "2022-03-24"
           }
         }
       }
