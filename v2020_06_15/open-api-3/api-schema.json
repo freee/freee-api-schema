@@ -28492,7 +28492,7 @@
                               "name": {
                                 "type": "string",
                                 "description": "税区分",
-                                "example": "課対仕入免80"
+                                "example": "課対仕入（控80）"
                               }
                             }
                           },
@@ -28509,7 +28509,7 @@
                               "name": {
                                 "type": "string",
                                 "description": "税区分",
-                                "example": "課対仕入免50"
+                                "example": "課対仕入（控50）"
                               }
                             }
                           },
@@ -28526,7 +28526,7 @@
                               "name": {
                                 "type": "string",
                                 "description": "税区分",
-                                "example": "課対仕入免80 8%"
+                                "example": "課対仕入（控80）8%"
                               }
                             }
                           },
@@ -28543,7 +28543,7 @@
                               "name": {
                                 "type": "string",
                                 "description": "税区分",
-                                "example": "課対仕入免50 8%"
+                                "example": "課対仕入（控50）8%"
                               }
                             }
                           },
@@ -28560,7 +28560,7 @@
                               "name": {
                                 "type": "string",
                                 "description": "税区分",
-                                "example": "課対仕入免80 10%"
+                                "example": "課対仕入（控80）10%"
                               }
                             }
                           },
@@ -28577,7 +28577,7 @@
                               "name": {
                                 "type": "string",
                                 "description": "税区分",
-                                "example": "課対仕入免50 10%"
+                                "example": "課対仕入（控50）10%"
                               }
                             }
                           },
@@ -28594,7 +28594,7 @@
                               "name": {
                                 "type": "string",
                                 "description": "税区分",
-                                "example": "課対仕入免80 8%（軽）"
+                                "example": "課対仕入（控80）8%（軽）"
                               }
                             }
                           },
@@ -28611,7 +28611,7 @@
                               "name": {
                                 "type": "string",
                                 "description": "税区分",
-                                "example": "課対仕入免50 8%（軽）"
+                                "example": "課対仕入（控50）8%（軽）"
                               }
                             }
                           }
