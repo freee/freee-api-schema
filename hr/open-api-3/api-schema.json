@@ -27,8 +27,8 @@
   ],
   "tags": [
     {
-      "name": "ログインユーザ",
-      "description": "ログインユーザの取得"
+      "name": "ログインユーザー",
+      "description": "ログインユーザーの取得"
     },
     {
       "name": "従業員",
@@ -87,10 +87,10 @@
     "/api/v1/users/me": {
       "get": {
         "tags": [
-          "ログインユーザ"
+          "ログインユーザー"
         ],
         "summary": "取得",
-        "description": "\nこのリクエストの認可セッションにおけるログインユーザの情報を返します。\nfreee人事労務では一人のログインユーザを複数の事業所に関連付けられるため、このユーザと関連のあるすべての事業所の情報をリストで返します。\n他のAPIのパラメータとして `company_id` が求められる場合は、このAPIで取得した `company_id` を使用します。\n給与計算対象外の従業員の `employee_id` と `display_name` は取得できません。",
+        "description": "\nこのリクエストの認可セッションにおけるログインユーザーの情報を返します。\nfreee人事労務では一人のログインユーザーを複数の事業所に関連付けられるため、このユーザーと関連のあるすべての事業所の情報をリストで返します。\n他のAPIのパラメータとして `company_id` が求められる場合は、このAPIで取得した `company_id` を使用します。\n給与計算対象外の従業員の `employee_id` と `display_name` は取得できません。",
         "operationId": "get_users_me",
         "responses": {
           "200": {
@@ -157,7 +157,7 @@
           "従業員"
         ],
         "summary": "一覧の取得",
-        "description": "\n指定した事業所に所属する従業員をリストで返します。\n- 管理者権限を持ったユーザのみ実行可能です。\n- 退職ユーザも含めて取得可能です。",
+        "description": "\n指定した事業所に所属する従業員をリストで返します。\n- 管理者権限を持ったユーザーのみ実行可能です。\n- 退職ユーザーも含めて取得可能です。",
         "operationId": "get_company_employees",
         "parameters": [
           {
@@ -273,7 +273,7 @@
           "従業員"
         ],
         "summary": "一覧の取得",
-        "description": "\n指定した対象年月に事業所に所属する従業員をリストで返します。\n- 管理者権限を持ったユーザのみ実行可能です。\n- 指定した年月に退職済みユーザは取得できません。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の健康保険料の計算方法が自動計算の場合、給与計算時の健康保険料の直接指定金額はnullが返されます)\n- 事業所が定額制の健康保険組合に加入している場合、保険料の直接指定金額は無視されnullが返されます。",
+        "description": "\n指定した対象年月に事業所に所属する従業員をリストで返します。\n- 管理者権限を持ったユーザーのみ実行可能です。\n- 指定した年月に退職済みユーザーは取得できません。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の健康保険料の計算方法が自動計算の場合、給与計算時の健康保険料の直接指定金額はnullが返されます)\n- 事業所が定額制の健康保険組合に加入している場合、保険料の直接指定金額は無視されnullが返されます。",
         "operationId": "get_employees",
         "parameters": [
           {
@@ -398,7 +398,7 @@
           "従業員"
         ],
         "summary": "作成",
-        "description": "\n従業員を新規作成します。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "description": "\n従業員を新規作成します。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "create_employee",
         "requestBody": {
           "content": {
@@ -476,7 +476,7 @@
           "従業員"
         ],
         "summary": "取得",
-        "description": "\n指定したIDの従業員を返します。\n- 管理者権限を持ったユーザのみ実行可能です。\n- 指定した対象年月に退職済みユーザは取得できません。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の健康保険料の計算方法が自動計算の場合、給与計算時の健康保険料の直接指定金額はnullが返されます)\n- 事業所が定額制の健康保険組合に加入している場合、保険料の直接指定金額は無視されnullが返されます。",
+        "description": "\n指定したIDの従業員を返します。\n- 管理者権限を持ったユーザーのみ実行可能です。\n- 指定した対象年月に退職済みユーザーは取得できません。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の健康保険料の計算方法が自動計算の場合、給与計算時の健康保険料の直接指定金額はnullが返されます)\n- 事業所が定額制の健康保険組合に加入している場合、保険料の直接指定金額は無視されnullが返されます。",
         "operationId": "get_employee",
         "parameters": [
           {
@@ -601,7 +601,7 @@
           "従業員"
         ],
         "summary": "更新",
-        "description": "\n指定した従業員の情報を更新します。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "description": "\n指定した従業員の情報を更新します。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "update_employee",
         "parameters": [
           {
@@ -700,7 +700,7 @@
           "従業員"
         ],
         "summary": "削除",
-        "description": "\n指定したIDの従業員を削除します。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "description": "\n指定したIDの従業員を削除します。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "destroy_employee",
         "parameters": [
           {
@@ -999,7 +999,7 @@
           "従業員の健康保険"
         ],
         "summary": "取得",
-        "description": "\n指定した従業員・日付の健康保険情報を返します。\n- 管理者権限を持ったユーザのみ実行可能です。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の健康保険料の計算方法が自動計算の場合、給与計算時の健康保険料の直接指定金額はnullが返されます)",
+        "description": "\n指定した従業員・日付の健康保険情報を返します。\n- 管理者権限を持ったユーザーのみ実行可能です。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の健康保険料の計算方法が自動計算の場合、給与計算時の健康保険料の直接指定金額はnullが返されます)",
         "operationId": "get_employee_health_insurance_rule",
         "parameters": [
           {
@@ -1114,7 +1114,7 @@
           "従業員の健康保険"
         ],
         "summary": "更新",
-        "description": "\n指定した従業員の健康保険情報を更新します。\n- 管理者権限を持ったユーザのみ実行可能です。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の健康保険料の計算方法が自動計算の場合、給与計算時の健康保険料の直接指定金額はnullが返されます)\n- 事業所が定額制の健康保険組合に加入している場合、保険料の直接指定金額は無視されnullが返されます。\n- 事業所が定額制の健康保険組合に加入している場合、保険料の計算方法と保険料の更新はできません。",
+        "description": "\n指定した従業員の健康保険情報を更新します。\n- 管理者権限を持ったユーザーのみ実行可能です。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の健康保険料の計算方法が自動計算の場合、給与計算時の健康保険料の直接指定金額はnullが返されます)\n- 事業所が定額制の健康保険組合に加入している場合、保険料の直接指定金額は無視されnullが返されます。\n- 事業所が定額制の健康保険組合に加入している場合、保険料の計算方法と保険料の更新はできません。",
         "operationId": "update_employee_health_insurance_rule",
         "parameters": [
           {
@@ -1206,7 +1206,7 @@
           "従業員の厚生年金保険"
         ],
         "summary": "取得",
-        "description": "\n指定した従業員・日付の厚生年金保険情報を返します。\n- 管理者権限を持ったユーザのみ実行可能です。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の厚生年金保険の計算方法が自動計算の場合、給与計算時の厚生年金保険料の直接指定金額はnullが返されます)",
+        "description": "\n指定した従業員・日付の厚生年金保険情報を返します。\n- 管理者権限を持ったユーザーのみ実行可能です。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の厚生年金保険の計算方法が自動計算の場合、給与計算時の厚生年金保険料の直接指定金額はnullが返されます)",
         "operationId": "get_employee_welfare_pension_insurance_rule",
         "parameters": [
           {
@@ -1814,7 +1814,7 @@
           "従業員の基本給"
         ],
         "summary": "取得",
-        "description": "\n指定した従業員・日付の基本給情報を返します。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "description": "\n指定した従業員・日付の基本給情報を返します。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "get_employee_basic_pay_rule",
         "parameters": [
           {
@@ -1929,7 +1929,7 @@
           "従業員の基本給"
         ],
         "summary": "更新",
-        "description": "\n指定した従業員の基本給情報を更新します。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "description": "\n指定した従業員の基本給情報を更新します。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "update_employee_basic_pay_rule",
         "parameters": [
           {
@@ -2450,7 +2450,7 @@
           "勤怠情報サマリ"
         ],
         "summary": "勤怠情報月次サマリの更新",
-        "description": "\n指定した従業員、月の勤怠情報のサマリを更新します。勤怠データが存在しない場合は新規作成、既に存在する場合は上書き更新されます。\n※日毎の勤怠の更新はこのAPIではできません。日毎の勤怠の操作には勤怠APIを使用して下さい。\n※管理者権限を持ったユーザのみ実行可能です。\n\n## 更新可能な項目\n※値が設定された項目のみ更新されます。値が設定されなかった場合は自動的に0が設定されます。\n- work_days：総勤務日数\n- work_days_on_weekdays：所定労働日の勤務日数\n- work_days_on_prescribed_holidays：所定休日の勤務日数\n- work_days_on_legal_holidays：法定休日の勤務日数\n- total_work_mins：労働時間（分）\n- total_normal_work_mins：所定労働時間（分）\n- total_excess_statutory_work_mins：給与計算に用いられる法定内残業時間（分）\n- total_holiday_work_mins：法定休日労働時間（分）\n- total_latenight_work_mins：深夜労働時間（分）\n- total_actual_excess_statutory_work_mins：実労働時間ベースの法定内残業時間（分）\n- total_overtime_work_mins：時間外労働時間（分）\n- num_absences：欠勤日数\n- num_absences_for_deduction：控除対象の欠勤日数\n- total_lateness_mins：遅刻時間（分）\n- total_lateness_mins_for_deduction：控除対象の遅刻時間（分）\n- total_early_leaving_mins：早退時間（分）\n- total_early_leaving_mins_for_deduction：控除対象の早退時間（分）\n- num_paid_holidays：有給取得日数\n- total_shortage_work_mins：不足時間（分）（フレックスタイム制でのみ使用）\n- total_deemed_paid_excess_statutory_work_mins：支給対象の法定内残業時間（分）（裁量労働制でのみ使用）\n- total_deemed_paid_overtime_except_normal_work_mins：支給対象の時間外労働時間（分）（裁量労働制でのみ使用）\n\n# examples\n\n勤怠情報を更新する場合は以下のようなパラメータをリクエストします。\n\n```\n{\n  \"company_id\": 1,\n  \"work_days\": 20,\n  \"work_days_on_weekdays\": 20,\n  \"work_days_on_prescribed_holidays\": 0,\n  \"work_days_on_legal_holidays\": 0,\n  \"total_work_mins\": 9600,\n  \"total_normal_work_mins\": 9000,\n  \"total_excess_statutory_work_mins\": 600,\n  \"total_holiday_work_mins\": 0,\n  \"total_latenight_work_mins\": 0,\n  \"total_actual_excess_statutory_work_mins\": 0,\n  \"total_overtime_work_mins\": 600,\n  \"num_absences\": 0,\n  \"num_absences_for_deduction\": 0,\n  \"total_lateness_mins\": 60,\n  \"total_lateness_mins_for_deduction\": 60,\n  \"total_early_leaving_mins\": 60,\n  \"total_early_leaving_mins_for_deduction\": 60,\n  \"num_paid_holidays\": 2\n}\n```",
+        "description": "\n指定した従業員、月の勤怠情報のサマリを更新します。勤怠データが存在しない場合は新規作成、既に存在する場合は上書き更新されます。\n※日毎の勤怠の更新はこのAPIではできません。日毎の勤怠の操作には勤怠APIを使用して下さい。\n※管理者権限を持ったユーザーのみ実行可能です。\n\n## 更新可能な項目\n※値が設定された項目のみ更新されます。値が設定されなかった場合は自動的に0が設定されます。\n- work_days：総勤務日数\n- work_days_on_weekdays：所定労働日の勤務日数\n- work_days_on_prescribed_holidays：所定休日の勤務日数\n- work_days_on_legal_holidays：法定休日の勤務日数\n- total_work_mins：労働時間（分）\n- total_normal_work_mins：所定労働時間（分）\n- total_excess_statutory_work_mins：給与計算に用いられる法定内残業時間（分）\n- total_holiday_work_mins：法定休日労働時間（分）\n- total_latenight_work_mins：深夜労働時間（分）\n- total_actual_excess_statutory_work_mins：実労働時間ベースの法定内残業時間（分）\n- total_overtime_work_mins：時間外労働時間（分）\n- num_absences：欠勤日数\n- num_absences_for_deduction：控除対象の欠勤日数\n- total_lateness_mins：遅刻時間（分）\n- total_lateness_mins_for_deduction：控除対象の遅刻時間（分）\n- total_early_leaving_mins：早退時間（分）\n- total_early_leaving_mins_for_deduction：控除対象の早退時間（分）\n- num_paid_holidays：有給取得日数\n- total_shortage_work_mins：不足時間（分）（フレックスタイム制でのみ使用）\n- total_deemed_paid_excess_statutory_work_mins：支給対象の法定内残業時間（分）（裁量労働制でのみ使用）\n- total_deemed_paid_overtime_except_normal_work_mins：支給対象の時間外労働時間（分）（裁量労働制でのみ使用）\n\n# examples\n\n勤怠情報を更新する場合は以下のようなパラメータをリクエストします。\n\n```\n{\n  \"company_id\": 1,\n  \"work_days\": 20,\n  \"work_days_on_weekdays\": 20,\n  \"work_days_on_prescribed_holidays\": 0,\n  \"work_days_on_legal_holidays\": 0,\n  \"total_work_mins\": 9600,\n  \"total_normal_work_mins\": 9000,\n  \"total_excess_statutory_work_mins\": 600,\n  \"total_holiday_work_mins\": 0,\n  \"total_latenight_work_mins\": 0,\n  \"total_actual_excess_statutory_work_mins\": 0,\n  \"total_overtime_work_mins\": 600,\n  \"num_absences\": 0,\n  \"num_absences_for_deduction\": 0,\n  \"total_lateness_mins\": 60,\n  \"total_lateness_mins_for_deduction\": 60,\n  \"total_early_leaving_mins\": 60,\n  \"total_early_leaving_mins_for_deduction\": 60,\n  \"num_paid_holidays\": 2\n}\n```",
         "operationId": "update_employee_work_record_summary",
         "parameters": [
           {
@@ -2694,7 +2694,7 @@
           "タイムレコーダー(打刻)"
         ],
         "summary": "打刻情報の登録",
-        "description": "\n指定した従業員の打刻情報を登録します。\n\n休憩開始の連続や退勤のみなど、整合性の取れていない打刻は登録できません。\n打刻可能種別の取得APIを呼ぶことで、その従業員がその時点で登録可能な打刻種別が取得できます。\n\n出勤の打刻は\n\n- 前日の出勤時刻から24時間以内の場合、前日の退勤打刻が必須です。\n\n- 前日の出勤時刻から24時間経過している場合は、前日の退勤打刻がなくとも出勤打刻を登録することができます。\n\n退勤の打刻は\n\n- [『退勤を自動打刻する』](https://support.freee.co.jp/hc/ja/articles/900004490226-%E5%8B%A4%E6%80%A0%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A%E3%82%92%E8%A1%8C%E3%81%86#h_01EYPYTR9HZ7YB8V5F18VMD1BT)の設定を使用している場合は、出勤打刻から24時間経過しても退勤打刻がない場合に、退勤打刻が自動で登録されます。\n\n- すでに登録されている退勤打刻よりも後の時刻であれば上書き登録することができます。\n\n打刻が日をまたぐ場合は、base_date(打刻日)に前日の日付を指定してください。\n\ndatetime(打刻日時)を指定できるのは管理者か事務担当者の権限を持ったユーザのみです。\n\n本APIはベーシックプラン以上で利用可能なAPIです。対象外のプランでは403エラーを返却します。\n\n## 操作可能な打刻種別\n- clock_in：出勤\n- break_begin：休憩開始\n- break_end：休憩終了\n- clock_out：退勤",
+        "description": "\n指定した従業員の打刻情報を登録します。\n\n休憩開始の連続や退勤のみなど、整合性の取れていない打刻は登録できません。\n打刻可能種別の取得APIを呼ぶことで、その従業員がその時点で登録可能な打刻種別が取得できます。\n\n出勤の打刻は\n\n- 前日の出勤時刻から24時間以内の場合、前日の退勤打刻が必須です。\n\n- 前日の出勤時刻から24時間経過している場合は、前日の退勤打刻がなくとも出勤打刻を登録することができます。\n\n退勤の打刻は\n\n- [『退勤を自動打刻する』](https://support.freee.co.jp/hc/ja/articles/900004490226-%E5%8B%A4%E6%80%A0%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A%E3%82%92%E8%A1%8C%E3%81%86#h_01EYPYTR9HZ7YB8V5F18VMD1BT)の設定を使用している場合は、出勤打刻から24時間経過しても退勤打刻がない場合に、退勤打刻が自動で登録されます。\n\n- すでに登録されている退勤打刻よりも後の時刻であれば上書き登録することができます。\n\n打刻が日をまたぐ場合は、base_date(打刻日)に前日の日付を指定してください。\n\ndatetime(打刻日時)を指定できるのは管理者か事務担当者の権限を持ったユーザーのみです。\n\n本APIはベーシックプラン以上で利用可能なAPIです。対象外のプランでは403エラーを返却します。\n\n## 操作可能な打刻種別\n- clock_in：出勤\n- break_begin：休憩開始\n- break_end：休憩終了\n- clock_out：退勤",
         "operationId": "create_employee_time_clock",
         "parameters": [
           {
@@ -2998,7 +2998,7 @@
           "給与明細"
         ],
         "summary": "一覧の取得",
-        "description": "\n指定した事業所に所属する従業員の給与明細をリストで返します。\n指定した年月に支払いのある給与明細が返されます。\n- 複数時給を設定している場合はpaymentsに内訳が返されます。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "description": "\n指定した事業所に所属する従業員の給与明細をリストで返します。\n指定した年月に支払いのある給与明細が返されます。\n- 複数時給を設定している場合はpaymentsに内訳が返されます。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "get_salaries_employee_payroll_statements",
         "parameters": [
           {
@@ -3120,7 +3120,7 @@
           "給与明細"
         ],
         "summary": "取得",
-        "description": "\n指定した従業員ID、年月の給与明細を返します。\n指定した年月に支払いのある給与明細が返されます。\n- 複数時給を設定している場合はpaymentsに内訳が返されます。\n- 管理者権限を持ったユーザのみ実行可能です。\n\n# examples\n```\n{\n \"employee_payroll_statement\": {\n   \"id\": 1,\n   \"company_id\": 1,\n   \"employee_id\": 1,\n   \"employee_name\": \"給与 太郎\",\n   \"employee_display_name\": \"給与 太郎\",\n   \"employee_num\": \"001\",\n   \"pay_date\": \"2018-02-25\",\n   \"start_date\": \"2018-02-01\",\n   \"closing_date\": \"2018-02-28\",\n   \"variable_pay_start_date\": \"2018-01-01\",\n   \"variable_pay_closing_date\": \"2018-01-31\",\n   \"fixed\": true,\n   \"calc_status\": \"calculated\",\n   \"calculated_at\": \"2018-09-27T05:06:45.315Z\",\n   \"pay_calc_type\": \"monthly\",\n   \"basic_pay_amount\": \"300000.0\",\n   \"work_days\": \"21.0\",\n   \"normal_work_time\": \"8.0\",\n   \"normal_work_days\": \"21.0\",\n   \"work_mins_by_paid_holiday\": \"480.0\",\n   \"num_paid_holidays\": \"1.0\",\n   \"is_board_member\": true,\n   \"total_attendance_deduction_amount\": \"0.0\",\n   \"total_allowance_amount\": \"0.0\",\n   \"total_deduction_amount\": \"23830.0\",\n   \"net_payment_amount\": \"277170.0\",\n   \"gross_payment_amount\": \"301000.0\",\n   \"total_worked_days_count\": \"21.0\",\n   \"total_taxable_payment_amount\": \"301000.0\",\n   \"total_expense_amount\": \"0.0\",\n   \"total_transfer_amount\": \"277170.0\",\n   \"total_annual_payment_amount\": \"600000.0\",\n   \"payments\": [{ \"name\": \"基本給\", \"amount\": \"300000.0\"},{ \"name\": \"残業代\", \"amount\": \"1000.0\"}],\n   \"deductions\": [{\"name\": \"所得税\", \"amount\": \"7000.0\"}, {\"name\": \"健康保険料\", \"amount\": \"16830.0\"}],\n   \"attendances\": [{\"name\": \"遅刻・早退\", \"time\": \"0.0\", \"amount\": \"0.0\"}],\n   \"overtime_pays\": [{ \"name\": \"時間外労働\", \"time\": \"60.0\", \"amount\": \"1000.0\", \"code\": null }, { \"name\": \"カスタム固定残業代\", \"time\": null, \"amount\": \"10000.0\", \"code\": \"a001\" }],\n   \"remark\": \"備考\"\n }\n}\n```",
+        "description": "\n指定した従業員ID、年月の給与明細を返します。\n指定した年月に支払いのある給与明細が返されます。\n- 複数時給を設定している場合はpaymentsに内訳が返されます。\n- 管理者権限を持ったユーザーのみ実行可能です。\n\n# examples\n```\n{\n \"employee_payroll_statement\": {\n   \"id\": 1,\n   \"company_id\": 1,\n   \"employee_id\": 1,\n   \"employee_name\": \"給与 太郎\",\n   \"employee_display_name\": \"給与 太郎\",\n   \"employee_num\": \"001\",\n   \"pay_date\": \"2018-02-25\",\n   \"start_date\": \"2018-02-01\",\n   \"closing_date\": \"2018-02-28\",\n   \"variable_pay_start_date\": \"2018-01-01\",\n   \"variable_pay_closing_date\": \"2018-01-31\",\n   \"fixed\": true,\n   \"calc_status\": \"calculated\",\n   \"calculated_at\": \"2018-09-27T05:06:45.315Z\",\n   \"pay_calc_type\": \"monthly\",\n   \"basic_pay_amount\": \"300000.0\",\n   \"work_days\": \"21.0\",\n   \"normal_work_time\": \"8.0\",\n   \"normal_work_days\": \"21.0\",\n   \"work_mins_by_paid_holiday\": \"480.0\",\n   \"num_paid_holidays\": \"1.0\",\n   \"is_board_member\": true,\n   \"total_attendance_deduction_amount\": \"0.0\",\n   \"total_allowance_amount\": \"0.0\",\n   \"total_deduction_amount\": \"23830.0\",\n   \"net_payment_amount\": \"277170.0\",\n   \"gross_payment_amount\": \"301000.0\",\n   \"total_worked_days_count\": \"21.0\",\n   \"total_taxable_payment_amount\": \"301000.0\",\n   \"total_expense_amount\": \"0.0\",\n   \"total_transfer_amount\": \"277170.0\",\n   \"total_annual_payment_amount\": \"600000.0\",\n   \"payments\": [{ \"name\": \"基本給\", \"amount\": \"300000.0\"},{ \"name\": \"残業代\", \"amount\": \"1000.0\"}],\n   \"deductions\": [{\"name\": \"所得税\", \"amount\": \"7000.0\"}, {\"name\": \"健康保険料\", \"amount\": \"16830.0\"}],\n   \"attendances\": [{\"name\": \"遅刻・早退\", \"time\": \"0.0\", \"amount\": \"0.0\"}],\n   \"overtime_pays\": [{ \"name\": \"時間外労働\", \"time\": \"60.0\", \"amount\": \"1000.0\", \"code\": null }, { \"name\": \"カスタム固定残業代\", \"time\": null, \"amount\": \"10000.0\", \"code\": \"a001\" }],\n   \"remark\": \"備考\"\n }\n}\n```",
         "operationId": "get_salaries_employee_payroll_statement",
         "parameters": [
           {
@@ -3243,7 +3243,7 @@
           "賞与明細"
         ],
         "summary": "一覧の取得",
-        "description": "\n指定した事業所に所属する従業員の賞与明細をリストで返します。\n指定した年月に支払いのある賞与明細が返されます。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "description": "\n指定した事業所に所属する従業員の賞与明細をリストで返します。\n指定した年月に支払いのある賞与明細が返されます。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "get_bonuses_employee_payroll_statements",
         "parameters": [
           {
@@ -3377,7 +3377,7 @@
           "賞与明細"
         ],
         "summary": "取得",
-        "description": "\n指定した従業員ID、年月の賞与明細を返します。\n指定した年月に支払いのある賞与明細が返されます。\n- 管理者権限を持ったユーザのみ実行可能です。\n\n# examples\n```\n{\n \"employee_payroll_statement\": {\n   \"id\": 1,\n   \"company_id\": 1,\n   \"employee_id\": 1,\n   \"employee_name\": \"給与 太郎\",\n   \"employee_display_name\": \"給与 太郎\",\n   \"employee_num\": \"001\",\n   \"closing_date\": \"2018-03-31\",\n   \"pay_date\": \"2018-03-31\",\n   \"fixed\": true,\n   \"calc_status\": \"calculated\",\n   \"calculated_at\": \"2018-09-27T05:06:45.315Z\",\n   \"bonus_amount\": \"300000.0\",\n   \"total_allowance_amount\": \"0.0\",\n   \"total_deduction_amount\": \"23830.0\",\n   \"net_payment_amount\": \"268000.0\",\n   \"gross_payment_amount\": \"330000.0\",\n   \"total_taxable_payment_amount\": \"330000.0\",\n   \"allowances\": [{\"name\": \"地域手当\", \"amount\": \"30000.0\"}],\n   \"deductions\": [{\"name\": \"所得税\", \"amount\": \"46000.0\"}, {\"name\": \"健康保険料\", \"amount\": \"16000.0\"}],\n   \"remark\": \"備考\"\n }\n}\n```",
+        "description": "\n指定した従業員ID、年月の賞与明細を返します。\n指定した年月に支払いのある賞与明細が返されます。\n- 管理者権限を持ったユーザーのみ実行可能です。\n\n# examples\n```\n{\n \"employee_payroll_statement\": {\n   \"id\": 1,\n   \"company_id\": 1,\n   \"employee_id\": 1,\n   \"employee_name\": \"給与 太郎\",\n   \"employee_display_name\": \"給与 太郎\",\n   \"employee_num\": \"001\",\n   \"closing_date\": \"2018-03-31\",\n   \"pay_date\": \"2018-03-31\",\n   \"fixed\": true,\n   \"calc_status\": \"calculated\",\n   \"calculated_at\": \"2018-09-27T05:06:45.315Z\",\n   \"bonus_amount\": \"300000.0\",\n   \"total_allowance_amount\": \"0.0\",\n   \"total_deduction_amount\": \"23830.0\",\n   \"net_payment_amount\": \"268000.0\",\n   \"gross_payment_amount\": \"330000.0\",\n   \"total_taxable_payment_amount\": \"330000.0\",\n   \"allowances\": [{\"name\": \"地域手当\", \"amount\": \"30000.0\"}],\n   \"deductions\": [{\"name\": \"所得税\", \"amount\": \"46000.0\"}, {\"name\": \"健康保険料\", \"amount\": \"16000.0\"}],\n   \"remark\": \"備考\"\n }\n}\n```",
         "operationId": "get_bonuses_employee_payroll_statement",
         "parameters": [
           {
@@ -3500,7 +3500,7 @@
           "所属"
         ],
         "summary": "一覧の取得",
-        "description": "\n指定した事業所の指定日付時点における所属情報をリストで返します。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "description": "\n指定した事業所の指定日付時点における所属情報をリストで返します。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "get_employee_group_memberships",
         "parameters": [
           {
@@ -3625,7 +3625,7 @@
           "部門"
         ],
         "summary": "部門情報の一覧取得",
-        "description": "\n指定した事業所の指定日付時点における部門情報をリストで返します。\n部門APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/groups-api-hierarchy\" target=\"_blank\">部門APIを利用した組織図の取得について</a> をご参照ください。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "description": "\n指定した事業所の指定日付時点における部門情報をリストで返します。\n部門APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/groups-api-hierarchy\" target=\"_blank\">部門APIを利用した組織図の取得について</a> をご参照ください。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "get_groups",
         "parameters": [
           {
@@ -3704,7 +3704,7 @@
           "部門"
         ],
         "summary": "部門情報の作成",
-        "description": "\n指定した事業所の部門を新規作成します。\n部門APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/groups-api-hierarchy\" target=\"_blank\">部門APIを利用した組織図の取得について</a> をご参照ください。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "description": "\n指定した事業所の部門を新規作成します。\n部門APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/groups-api-hierarchy\" target=\"_blank\">部門APIを利用した組織図の取得について</a> をご参照ください。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "create_group",
         "requestBody": {
           "content": {
@@ -3780,7 +3780,7 @@
           "部門"
         ],
         "summary": "部門情報の更新",
-        "description": "\n指定した事業所の部門の情報を更新します。\n部門APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/groups-api-hierarchy\" target=\"_blank\">部門APIを利用した組織図の取得について</a> をご参照ください。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "description": "\n指定した事業所の部門の情報を更新します。\n部門APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/groups-api-hierarchy\" target=\"_blank\">部門APIを利用した組織図の取得について</a> をご参照ください。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "update_group",
         "parameters": [
           {
@@ -3877,7 +3877,7 @@
           "部門"
         ],
         "summary": "部門情報の削除",
-        "description": "\n指定した事業所の部門の情報を削除します。\n部門APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/groups-api-hierarchy\" target=\"_blank\">部門APIを利用した組織図の取得について</a> をご参照ください。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "description": "\n指定した事業所の部門の情報を削除します。\n部門APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/groups-api-hierarchy\" target=\"_blank\">部門APIを利用した組織図の取得について</a> をご参照ください。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "destroy_group",
         "parameters": [
           {
@@ -3973,7 +3973,7 @@
           "役職"
         ],
         "summary": "役職情報の一覧取得",
-        "description": "\n指定した事業所の指定日付時点における役職情報をリストで返します。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "description": "\n指定した事業所の指定日付時点における役職情報をリストで返します。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "get_positions",
         "parameters": [
           {
@@ -4052,7 +4052,7 @@
           "役職"
         ],
         "summary": "役職情報の作成",
-        "description": "\n指定した事業所の役職を新規作成します。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "description": "\n指定した事業所の役職を新規作成します。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "create_position",
         "requestBody": {
           "content": {
@@ -4128,7 +4128,7 @@
           "役職"
         ],
         "summary": "役職情報の更新",
-        "description": "\n指定した事業所の役職の情報を更新します。\n- 管理者権限を持ったユーザのみ実行可能です。",
+        "description": "\n指定した事業所の役職の情報を更新します。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "update_position",
         "parameters": [
           {
@@ -4225,7 +4225,7 @@
           "役職"
         ],
         "summary": "役職情報の削除",
-        "description": "\n指定した事業所の役職の情報を削除します。\n- 管理者権限を持ったユーザのみ実行可能です。\n- 従業員に役職が適用されている場合、従業員の役職情報も削除されます。",
+        "description": "\n指定した事業所の役職の情報を削除します。\n- 管理者権限を持ったユーザーのみ実行可能です。\n- 従業員に役職が適用されている場合、従業員の役職情報も削除されます。",
         "operationId": "destroy_position",
         "parameters": [
           {
@@ -6304,7 +6304,7 @@
           "申請経路"
         ],
         "summary": "申請経路一覧の取得",
-        "description": "指定した事業所の申請経路一覧を取得する\n- プロフェッショナルプラン、エンタープライズプランでのみ実行可能です。\n- 指定した事業所の従業員に紐づくユーザのみ実行可能です。\n\n申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n- 役職指定（申請者の所属部門）\n- 役職指定（申請時に部門指定）\n- 部門および役職指定",
+        "description": "指定した事業所の申請経路一覧を取得する\n- プロフェッショナルプラン、エンタープライズプランでのみ実行可能です。\n- 指定した事業所の従業員に紐づくユーザーのみ実行可能です。\n\n申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n- 役職指定（申請者の所属部門）\n- 役職指定（申請時に部門指定）\n- 部門および役職指定",
         "operationId": "get_approval_flow_routes",
         "parameters": [
           {
@@ -6406,7 +6406,7 @@
           "申請経路"
         ],
         "summary": "申請経路の取得",
-        "description": "指定した事業所の申請経路を取得する\n- プロフェッショナルプラン、エンタープライズプランでのみ実行可能です。\n- 指定した事業所の従業員に紐づくユーザのみ実行可能です。\n\n申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n- 役職指定（申請者の所属部門）\n- 役職指定（申請時に部門指定）\n- 部門および役職指定",
+        "description": "指定した事業所の申請経路を取得する\n- プロフェッショナルプラン、エンタープライズプランでのみ実行可能です。\n- 指定した事業所の従業員に紐づくユーザーのみ実行可能です。\n\n申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n- 役職指定（申請者の所属部門）\n- 役職指定（申請時に部門指定）\n- 部門および役職指定",
         "operationId": "get_approval_flow_route",
         "parameters": [
           {
@@ -8289,12 +8289,12 @@
         "properties": {
           "id": {
             "type": "integer",
-            "description": "ユーザID",
+            "description": "ユーザーID",
             "format": "int32"
           },
           "companies": {
             "type": "array",
-            "description": "ユーザが属する事業所の一覧",
+            "description": "ユーザーが属する事業所の一覧",
             "items": {
               "$ref": "#/components/schemas/ApiV1UsersCompanySerializer"
             }
