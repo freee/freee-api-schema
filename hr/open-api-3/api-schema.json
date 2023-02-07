@@ -8517,12 +8517,14 @@
           "zipcode1": {
             "type": "string",
             "description": "住民票住所の郵便番号1",
-            "maxLength": 3
+            "maxLength": 3,
+            "example": "000"
           },
           "zipcode2": {
             "type": "string",
             "description": "住民票住所の郵便番号2",
-            "maxLength": 4
+            "maxLength": 4,
+            "example": "0000"
           },
           "prefecture_code": {
             "type": "integer",
@@ -8562,12 +8564,14 @@
           "residential_zipcode1": {
             "type": "string",
             "description": "現住所の郵便番号１",
-            "maxLength": 3
+            "maxLength": 3,
+            "example": "000"
           },
           "residential_zipcode2": {
             "type": "string",
             "description": "現住所の郵便番号２",
-            "maxLength": 4
+            "maxLength": 4,
+            "example": "0000"
           },
           "residential_prefecture_code": {
             "type": "integer",
@@ -8944,7 +8948,7 @@
             "type": "string",
             "description": "健康保険の被保険者整理番号",
             "maxLength": 255,
-            "example": 1
+            "example": "0000000000"
           },
           "standard_monthly_remuneration": {
             "type": "integer",
@@ -8992,12 +8996,14 @@
           "zipcode1": {
             "type": "string",
             "description": "住民票住所の郵便番号1",
-            "nullable": true
+            "nullable": true,
+            "example": "000"
           },
           "zipcode2": {
             "type": "string",
             "description": "住民票住所の郵便番号2",
-            "nullable": true
+            "nullable": true,
+            "example": "0000"
           },
           "prefecture_code": {
             "type": "integer",
@@ -9037,11 +9043,13 @@
           "residential_zipcode1": {
             "type": "string",
             "description": "現住所の郵便番号１",
-            "nullable": true
+            "nullable": true,
+            "example": "000"
           },
           "residential_zipcode2": {
             "type": "string",
             "description": "現住所の郵便番号２",
+            "example": "0000",
             "nullable": true
           },
           "residential_prefecture_code": {
@@ -9128,7 +9136,8 @@
             "description": "扶養親族ルールID（idがない場合は新規作成になる)",
             "format": "int32",
             "minimum": 1,
-            "maximum": 2147483647
+            "maximum": 2147483647,
+            "example": 1
           },
           "last_name": {
             "type": "string",
@@ -9143,12 +9152,14 @@
           "last_name_kana": {
             "type": "string",
             "description": "姓カナ",
-            "maxLength": 255
+            "maxLength": 255,
+            "example": "カナ"
           },
           "first_name_kana": {
             "type": "string",
             "description": "名カナ",
-            "maxLength": 255
+            "maxLength": 255,
+            "example": "カナ"
           },
           "gender": {
             "type": "string",
@@ -9190,7 +9201,8 @@
             "description": "生年月日 null不可",
             "format": "date",
             "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
-            "maxLength": 10
+            "maxLength": 10,
+            "example": "1999-01-01"
           },
           "residence_type": {
             "type": "string",
@@ -9204,12 +9216,14 @@
           "zipcode1": {
             "type": "string",
             "description": "住民票住所の郵便番号1",
-            "maxLength": 3
+            "maxLength": 3,
+            "example": "000"
           },
           "zipcode2": {
             "type": "string",
             "description": "住民票住所の郵便番号2",
-            "maxLength": 4
+            "maxLength": 4,
+            "example": "0000"
           },
           "prefecture_code": {
             "type": "integer",
@@ -9231,7 +9245,8 @@
           "base_pension_num": {
             "type": "string",
             "description": "基礎年金番号",
-            "maxLength": 10
+            "maxLength": 10,
+            "example": "1234567890"
           },
           "income": {
             "type": "integer",
@@ -9278,14 +9293,16 @@
               "pending_employment_insurance"
             ],
             "description": "雇用保険受給の有無\n- unselected 未選択\n- receiving_employment_insurance 雇用保険受給有り\n- not_receiving_employment_insurance 雇用保険受給無し\n- pending_employment_insurance 申請中",
-            "format": "string"
+            "format": "string",
+            "example": "receiving_employment_insurance"
           },
           "employment_insurance_receives_from": {
             "type": "string",
             "nullable": true,
             "description": "雇用保険受給開始年月日 employment_insurance_receive_statusが未選択、無しの場合は指定できません。",
             "format": "date",
-            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+            "example": "2021-04-01"
           },
           "phone_type": {
             "type": "string",
@@ -9322,7 +9339,8 @@
           },
           "destroy": {
             "type": "boolean",
-            "description": "扶養親族を削除するか"
+            "description": "扶養親族を削除するか",
+            "example": false
           },
           "social_insurance_and_tax_dependent": {
             "type": "string",
@@ -9778,14 +9796,16 @@
           "reference_num": {
             "type": "string",
             "description": "厚生年金保険の被保険者整理番号",
-            "maxLength": 255
+            "maxLength": 255,
+            "example": "0000000000"
           },
           "standard_monthly_remuneration": {
             "type": "integer",
             "description": "標準報酬月額 null不可",
             "format": "int32",
             "minimum": 1,
-            "maximum": 2147483647
+            "maximum": 2147483647,
+            "example": 88000
           }
         }
       },
@@ -9805,7 +9825,8 @@
           "bank_code": {
             "type": "string",
             "description": "金融機関コード 数値文字列4桁",
-            "maxLength": 4
+            "maxLength": 4,
+            "example": "0000"
           },
           "branch_name": {
             "type": "string",
@@ -9820,12 +9841,14 @@
           "branch_code": {
             "type": "string",
             "description": "支店コード 数値文字列3桁",
-            "maxLength": 3
+            "maxLength": 3,
+            "example": "000"
           },
           "account_number": {
             "type": "string",
             "description": "口座番号 数値文字列7桁",
-            "maxLength": 7
+            "maxLength": 7,
+            "example": "0000000"
           },
           "account_name": {
             "type": "string",
@@ -10408,12 +10431,14 @@
             "minimum": 2000,
             "maximum": 2100,
             "description": "更新対象年（必須）",
-            "format": "int32"
+            "format": "int32",
+            "example": 2021
           },
           "month": {
             "type": "integer",
             "minimum": 1,
             "maximum": 12,
+            "example": 1,
             "description": "更新対象月（必須）<br>\n締日支払日設定が翌月払いの従業員情報の場合は、指定したmonth + 1の値が更新されます。<br>\n翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。<br>",
             "format": "int32"
           },
@@ -10513,14 +10538,16 @@
             "description": "更新対象年（必須）",
             "format": "int32",
             "minimum": 2000,
-            "maximum": 2100
+            "maximum": 2100,
+            "example": 2021
           },
           "month": {
             "type": "integer",
             "description": "更新対象月（必須）<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が更新されます。<br>\n翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。<br>",
             "format": "int32",
             "minimum": 1,
-            "maximum": 12
+            "maximum": 12,
+            "example": 1
           },
           "employee_welfare_pension_insurance_rule": {
             "$ref": "#/components/schemas/ApiV1EmployeesWelfarePensionInsuranceRuleUpdateRequestSerializer"
@@ -10571,14 +10598,16 @@
             "description": "更新対象年（必須）",
             "format": "int32",
             "minimum": 2000,
-            "maximum": 2100
+            "maximum": 2100,
+            "example": 2021
           },
           "month": {
             "type": "integer",
             "description": "更新対象月（必須）<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が更新されます。<br>\n翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。<br>",
             "format": "int32",
             "minimum": 1,
-            "maximum": 12
+            "maximum": 12,
+            "example": 1
           },
           "employee_dependent_rules": {
             "type": "array",
@@ -10626,14 +10655,16 @@
             "description": "更新対象年（必須）",
             "format": "int32",
             "minimum": 2000,
-            "maximum": 2100
+            "maximum": 2100,
+            "example": 2021
           },
           "month": {
             "type": "integer",
             "description": "更新対象月（必須）<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が更新されます。<br>\n翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。<br>",
             "format": "int32",
             "minimum": 1,
-            "maximum": 12
+            "maximum": 12,
+            "example": 1
           },
           "employee_bank_account_rule": {
             "$ref": "#/components/schemas/ApiV1EmployeesBankAccountRuleUpdateRequestSerializer"
@@ -11029,7 +11060,8 @@
             "type": "string",
             "description": "打刻日。打刻が日をまたぐ場合に、前日の日付を指定します。(YYYY-MM-DD)(例:2018-07-31)",
             "format": "date",
-            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+            "example": "2018-07-31"
           },
           "datetime": {
             "type": "string",
