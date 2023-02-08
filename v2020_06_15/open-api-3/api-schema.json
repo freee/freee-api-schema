@@ -18108,7 +18108,7 @@
               "properties": {
                 "line_type": {
                   "type": "string",
-                  "description": "'行の種類 (deal_line: 支払依頼, withholding_tax: 源泉徴収税)'<br>\n'デフォルトは deal_line: 支払依頼 です'\n",
+                  "description": "'行の種類 (deal_line: 支払依頼の通常取引行, withholding_tax: 源泉所得税行)'<br>\n'デフォルトは deal_line: 支払依頼の通常取引行 です'\n",
                   "example": "deal_line",
                   "enum": [
                     "deal_line",
@@ -18392,7 +18392,7 @@
                 },
                 "line_type": {
                   "type": "string",
-                  "description": "'行の種類 (deal_line: 支払依頼, withholding_tax: 源泉徴収税)'<br>\n'デフォルトは deal_line: 支払依頼 です'\n",
+                  "description": "'行の種類 (deal_line: 支払依頼の通常取引行, withholding_tax: 源泉所得税行)'<br>\n'デフォルトは deal_line: 支払依頼の通常取引行 です'\n",
                   "example": "deal_line",
                   "enum": [
                     "deal_line",
@@ -32420,7 +32420,7 @@
                     },
                     "line_type": {
                       "type": "string",
-                      "description": "行の種類 (deal_line: 支払依頼, withholding_tax: 源泉徴収税)",
+                      "description": "行の種類 (deal_line: 支払依頼の通常取引行, withholding_tax: 源泉所得税行)",
                       "example": "deal_line",
                       "enum": [
                         "deal_line",
