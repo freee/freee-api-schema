@@ -9351,6 +9351,124 @@
               "social_insurance_only",
               "not_dependent"
             ]
+          },
+          "social_insurance_dependent_acquisition_date": {
+            "type": "string",
+            "nullable": true,
+            "description": "社会保険の扶養加入日",
+            "format": "date"
+          },
+          "social_insurance_dependent_acquisition_reason": {
+            "type": "string",
+            "enum": [
+              "",
+              "start_working",
+              "marriage",
+              "turnover",
+              "decrease_in_income",
+              "other",
+              "birth",
+              "live_in"
+            ],
+            "description": "社会保険の扶養加入理由 配偶者の場合 \"\": 未選択, start_working: 配偶者の就職, marriage: 婚姻, turnover: 離職, decrease_in_income: 収入減少, other: その他 配偶者以外の場合 \"\": 未選択, birth: 出生, turnover: 離職, decrease_in_income: 収入減, live_in: 同居, other: その他"
+          },
+          "social_insurance_other_dependent_acquisition_reason": {
+            "type": "string",
+            "nullable": true,
+            "description": "社会保険のその他の扶養加入理由",
+            "maxLength": 255
+          },
+          "social_insurance_dependent_disqualification_date": {
+            "type": "string",
+            "nullable": true,
+            "description": "社会保険の扶養喪失日",
+            "format": "date"
+          },
+          "social_insurance_dependent_disqualification_reason": {
+            "type": "string",
+            "enum": [
+              "",
+              "death",
+              "divorce",
+              "start_working_or_increase_in_income",
+              "reach_75_years_old",
+              "disability",
+              "other",
+              "start_working",
+              "increase_in_income"
+            ],
+            "description": "社会保険の扶養喪失理由 配偶者の場合 \"\": 未選択, death: 死亡, divorce: 離婚, start_working_or_increase_in_income: 就職・収入増加, reach_75_years_old: 歳到達, disability: 障害認定, other: その他 配偶者以外の場合 \"\": 未選択, death: 死亡, start_working: 就職, increase_in_income: 収入増加, reach_75_years_old: ７５歳到達, disability: 障害認定, other: その他"
+          },
+          "social_insurance_other_dependent_disqualification_reason": {
+            "type": "string",
+            "nullable": true,
+            "description": "社会保険のその他の扶養喪失理由",
+            "maxLength": 255
+          },
+          "tax_dependent_acquisition_date": {
+            "type": "string",
+            "nullable": true,
+            "description": "税扶養の加入日",
+            "format": "date"
+          },
+          "tax_dependent_acquisition_reason": {
+            "type": "string",
+            "enum": [
+              "",
+              "start_working",
+              "marriage",
+              "turnover",
+              "decrease_in_income",
+              "other",
+              "birth",
+              "live_in"
+            ],
+            "description": "税扶養の加入理由 配偶者の場合 \"\": 未選択, start_working: 配偶者の就職, marriage: 婚姻, turnover: 離職, decrease_in_income: 収入減少, other: その他 配偶者以外の場合 \"\": birth: 出生, turnover: 離職, decrease_in_income: 収入減, live_in: 同居, other: その他"
+          },
+          "tax_other_dependent_acquisition_reason": {
+            "type": "string",
+            "nullable": true,
+            "description": "税扶養のその他の加入理由",
+            "maxLength": 255
+          },
+          "tax_dependent_disqualification_date": {
+            "type": "string",
+            "nullable": true,
+            "description": "税扶養の喪失日",
+            "format": "date"
+          },
+          "tax_dependent_disqualification_reason": {
+            "type": "string",
+            "enum": [
+              "",
+              "death",
+              "divorce",
+              "start_working_or_increase_in_income",
+              "reach_75_years_old",
+              "disability",
+              "other",
+              "start_working",
+              "increase_in_income"
+            ],
+            "description": "税扶養の喪失理由 配偶者の場合 \"\": 未選択, death: 死亡, divorce: 離婚, start_working_or_increase_in_income: 就職・収入増加, reach_75_years_old: 歳到達, disability: 障害認定, other: その他 配偶者以外の場合 \"\": 未選択, death: 死亡, start_working: 就職, increase_in_income: 収入増加, reach_75_years_old: ７５歳到達, disability: 障害認定, other: その他"
+          },
+          "tax_other_dependent_disqualification_reason": {
+            "type": "string",
+            "nullable": true,
+            "description": "税扶養のその他の喪失理由",
+            "maxLength": 255
+          },
+          "non_resident_dependents_reason": {
+            "type": "string",
+            "enum": [
+              "none",
+              "over_16_to_under_30_or_over_70",
+              "study_abroad",
+              "handicapped",
+              "over_38_man"
+            ],
+            "description": "非居住者である親族の条件 none: なし, over_16_to_under_30_or_over_70: 16歳以上30歳未満又は70歳以上, study_abroad: 留学, handicapped: 障害者, over_38_man: 38万円以上の支払",
+            "format": "string"
           }
         }
       },
@@ -10269,6 +10387,124 @@
           "social_insurance_and_tax_dependent": {
             "type": "string",
             "description": "扶養状況 social_insurance_and_tax: 所得税・住民税と社会保険, tax_only: 所得税・住民税のみ, social_insurance_only: 社会保険のみ"
+          },
+          "social_insurance_dependent_acquisition_date": {
+            "type": "string",
+            "nullable": true,
+            "description": "社会保険の扶養加入日",
+            "format": "date"
+          },
+          "social_insurance_dependent_acquisition_reason": {
+            "type": "string",
+            "enum": [
+              "",
+              "start_working",
+              "marriage",
+              "turnover",
+              "decrease_in_income",
+              "other",
+              "birth",
+              "live_in"
+            ],
+            "description": "社会保険の扶養加入理由 配偶者の場合 \"\": 未選択, start_working: 配偶者の就職, marriage: 婚姻, turnover: 離職, decrease_in_income: 収入減少, other: その他 配偶者以外の場合 \"\": 未選択, birth: 出生, turnover: 離職, decrease_in_income: 収入減, live_in: 同居, other: その他"
+          },
+          "social_insurance_other_dependent_acquisition_reason": {
+            "type": "string",
+            "nullable": true,
+            "description": "社会保険のその他の扶養加入理由",
+            "maxLength": 255
+          },
+          "social_insurance_dependent_disqualification_date": {
+            "type": "string",
+            "nullable": true,
+            "description": "社会保険の扶養喪失日",
+            "format": "date"
+          },
+          "social_insurance_dependent_disqualification_reason": {
+            "type": "string",
+            "enum": [
+              "",
+              "death",
+              "divorce",
+              "start_working_or_increase_in_income",
+              "reach_75_years_old",
+              "disability",
+              "other",
+              "start_working",
+              "increase_in_income"
+            ],
+            "description": "社会保険の扶養喪失理由 配偶者の場合 \"\": 未選択, death: 死亡, divorce: 離婚, start_working_or_increase_in_income: 就職・収入増加, reach_75_years_old: 歳到達, disability: 障害認定, other: その他 配偶者以外の場合 \"\": 未選択, death: 死亡, start_working: 就職, increase_in_income: 収入増加, reach_75_years_old: ７５歳到達, disability: 障害認定, other: その他"
+          },
+          "social_insurance_other_dependent_disqualification_reason": {
+            "type": "string",
+            "nullable": true,
+            "description": "社会保険のその他の扶養喪失理由",
+            "maxLength": 255
+          },
+          "tax_dependent_acquisition_date": {
+            "type": "string",
+            "nullable": true,
+            "description": "税扶養の加入日",
+            "format": "date"
+          },
+          "tax_dependent_acquisition_reason": {
+            "type": "string",
+            "enum": [
+              "",
+              "start_working",
+              "marriage",
+              "turnover",
+              "decrease_in_income",
+              "other",
+              "birth",
+              "live_in"
+            ],
+            "description": "税扶養の加入理由 配偶者の場合 \"\": 未選択, start_working: 配偶者の就職, marriage: 婚姻, turnover: 離職, decrease_in_income: 収入減少, other: その他 配偶者以外の場合 \"\": birth: 出生, turnover: 離職, decrease_in_income: 収入減, live_in: 同居, other: その他"
+          },
+          "tax_other_dependent_acquisition_reason": {
+            "type": "string",
+            "nullable": true,
+            "description": "税扶養のその他の加入理由",
+            "maxLength": 255
+          },
+          "tax_dependent_disqualification_date": {
+            "type": "string",
+            "nullable": true,
+            "description": "税扶養の喪失日",
+            "format": "date"
+          },
+          "tax_dependent_disqualification_reason": {
+            "type": "string",
+            "enum": [
+              "",
+              "death",
+              "divorce",
+              "start_working_or_increase_in_income",
+              "reach_75_years_old",
+              "disability",
+              "other",
+              "start_working",
+              "increase_in_income"
+            ],
+            "description": "税扶養の喪失理由 配偶者の場合 \"\": 未選択, death: 死亡, divorce: 離婚, start_working_or_increase_in_income: 就職・収入増加, reach_75_years_old: 歳到達, disability: 障害認定, other: その他 配偶者以外の場合 \"\": 未選択, death: 死亡, start_working: 就職, increase_in_income: 収入増加, reach_75_years_old: ７５歳到達, disability: 障害認定, other: その他"
+          },
+          "tax_other_dependent_disqualification_reason": {
+            "type": "string",
+            "nullable": true,
+            "description": "税扶養のその他の喪失理由",
+            "maxLength": 255
+          },
+          "non_resident_dependents_reason": {
+            "type": "string",
+            "enum": [
+              "none",
+              "over_16_to_under_30_or_over_70",
+              "study_abroad",
+              "handicapped",
+              "over_38_man"
+            ],
+            "description": "非居住者である親族の条件 none: なし, over_16_to_under_30_or_over_70: 16歳以上30歳未満又は70歳以上, study_abroad: 留学, handicapped: 障害者, over_38_man: 38万円以上の支払",
+            "format": "string"
           }
         }
       },
