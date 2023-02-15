@@ -89,7 +89,7 @@
         "tags": [
           "ログインユーザー"
         ],
-        "summary": "取得",
+        "summary": "ログインユーザーの取得",
         "description": "\nこのリクエストの認可セッションにおけるログインユーザーの情報を返します。\nfreee人事労務では一人のログインユーザーを複数の事業所に関連付けられるため、このユーザーと関連のあるすべての事業所の情報をリストで返します。\n他のAPIのパラメータとして `company_id` が求められる場合は、このAPIで取得した `company_id` を使用します。\n給与計算対象外の従業員の `employee_id` と `display_name` は取得できません。",
         "operationId": "get_users_me",
         "responses": {
@@ -156,7 +156,7 @@
         "tags": [
           "従業員"
         ],
-        "summary": "一覧の取得",
+        "summary": "全期間の従業員一覧の取得",
         "description": "\n指定した事業所に所属する従業員をリストで返します。\n- 管理者権限を持ったユーザーのみ実行可能です。\n- 退職ユーザーも含めて取得可能です。",
         "operationId": "get_company_employees",
         "parameters": [
@@ -272,8 +272,8 @@
         "tags": [
           "従業員"
         ],
-        "summary": "一覧の取得",
-        "description": "\n指定した対象年月に事業所に所属する従業員をリストで返します。\n- 管理者権限を持ったユーザーのみ実行可能です。\n- 指定した年月に退職済みユーザーは取得できません。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の健康保険料の計算方法が自動計算の場合、給与計算時の健康保険料の直接指定金額はnullが返されます)\n- 事業所が定額制の健康保険組合に加入している場合、保険料の直接指定金額は無視されnullが返されます。",
+        "summary": "従業員一覧の取得",
+        "description": "\n指定した対象年月に事業所に所属する従業員をリストで返します。\n- 管理者権限を持ったユーザーのみ実行可能です。\n- 指定した年月に退職済みユーザーは取得できません。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の健康保険料の計算方法が自動計算の場合、給与計算時の健康保険料の直接指定金額はnullが返されます)\n- 事業所が定額制の健康保険組合に加入している場合、保険料の直接指定金額は無視されnullが返されます。\n\n扶養親族情報の以下の項目は2023年2月下旬頃から利用できる予定です。\n- social_insurance_dependent_acquisition_date\n- social_insurance_dependent_acquisition_reason\n- social_insurance_other_dependent_acquisition_reason\n- social_insurance_dependent_disqualification_date\n- social_insurance_dependent_disqualification_reason\n- social_insurance_other_dependent_disqualification_reason\n- tax_dependent_acquisition_date\n- tax_dependent_acquisition_reason\n- tax_other_dependent_acquisition_reason\n- tax_dependent_disqualification_date\n- tax_dependent_disqualification_reason\n- tax_other_dependent_disqualification_reason\n- non_resident_dependents_reason",
         "operationId": "get_employees",
         "parameters": [
           {
@@ -397,8 +397,8 @@
         "tags": [
           "従業員"
         ],
-        "summary": "作成",
-        "description": "\n従業員を新規作成します。\n- 管理者権限を持ったユーザーのみ実行可能です。",
+        "summary": "従業員の作成",
+        "description": "\n従業員を新規作成します。\n- 管理者権限を持ったユーザーのみ実行可能です。\n\n扶養親族情報の以下の項目は2023年2月下旬頃から利用できる予定です。\n- social_insurance_dependent_acquisition_date\n- social_insurance_dependent_acquisition_reason\n- social_insurance_other_dependent_acquisition_reason\n- social_insurance_dependent_disqualification_date\n- social_insurance_dependent_disqualification_reason\n- social_insurance_other_dependent_disqualification_reason\n- tax_dependent_acquisition_date\n- tax_dependent_acquisition_reason\n- tax_other_dependent_acquisition_reason\n- tax_dependent_disqualification_date\n- tax_dependent_disqualification_reason\n- tax_other_dependent_disqualification_reason\n- non_resident_dependents_reason",
         "operationId": "create_employee",
         "requestBody": {
           "content": {
@@ -475,8 +475,8 @@
         "tags": [
           "従業員"
         ],
-        "summary": "取得",
-        "description": "\n指定したIDの従業員を返します。\n- 管理者権限を持ったユーザーのみ実行可能です。\n- 指定した対象年月に退職済みユーザーは取得できません。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の健康保険料の計算方法が自動計算の場合、給与計算時の健康保険料の直接指定金額はnullが返されます)\n- 事業所が定額制の健康保険組合に加入している場合、保険料の直接指定金額は無視されnullが返されます。",
+        "summary": "従業員の取得",
+        "description": "\n指定したIDの従業員を返します。\n- 管理者権限を持ったユーザーのみ実行可能です。\n- 指定した対象年月に退職済みユーザーは取得できません。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の健康保険料の計算方法が自動計算の場合、給与計算時の健康保険料の直接指定金額はnullが返されます)\n- 事業所が定額制の健康保険組合に加入している場合、保険料の直接指定金額は無視されnullが返されます。\n\n扶養親族情報の以下の項目は2023年2月下旬頃から利用できる予定です。\n- social_insurance_dependent_acquisition_date\n- social_insurance_dependent_acquisition_reason\n- social_insurance_other_dependent_acquisition_reason\n- social_insurance_dependent_disqualification_date\n- social_insurance_dependent_disqualification_reason\n- social_insurance_other_dependent_disqualification_reason\n- tax_dependent_acquisition_date\n- tax_dependent_acquisition_reason\n- tax_other_dependent_acquisition_reason\n- tax_dependent_disqualification_date\n- tax_dependent_disqualification_reason\n- tax_other_dependent_disqualification_reason\n- non_resident_dependents_reason",
         "operationId": "get_employee",
         "parameters": [
           {
@@ -600,8 +600,8 @@
         "tags": [
           "従業員"
         ],
-        "summary": "更新",
-        "description": "\n指定した従業員の情報を更新します。\n- 管理者権限を持ったユーザーのみ実行可能です。",
+        "summary": "従業員の更新",
+        "description": "\n指定した従業員の情報を更新します。\n- 管理者権限を持ったユーザーのみ実行可能です。\n\n扶養親族情報の以下の項目は2023年2月下旬頃から利用できる予定です。\n- social_insurance_dependent_acquisition_date\n- social_insurance_dependent_acquisition_reason\n- social_insurance_other_dependent_acquisition_reason\n- social_insurance_dependent_disqualification_date\n- social_insurance_dependent_disqualification_reason\n- social_insurance_other_dependent_disqualification_reason\n- tax_dependent_acquisition_date\n- tax_dependent_acquisition_reason\n- tax_other_dependent_acquisition_reason\n- tax_dependent_disqualification_date\n- tax_dependent_disqualification_reason\n- tax_other_dependent_disqualification_reason\n- non_resident_dependents_reason",
         "operationId": "update_employee",
         "parameters": [
           {
@@ -699,7 +699,7 @@
         "tags": [
           "従業員"
         ],
-        "summary": "削除",
+        "summary": "従業員の削除",
         "description": "\n指定したIDの従業員を削除します。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "destroy_employee",
         "parameters": [
@@ -796,7 +796,7 @@
         "tags": [
           "従業員の姓名・住所など"
         ],
-        "summary": "取得",
+        "summary": "従業員の姓名・住所などの取得",
         "description": "\n指定した従業員・日付の姓名などの情報を返します。\n\n本APIは、給与計算対象外の従業員には非対応です。employee_idに給与計算対象外の従業員IDを指定した場合、本APIを利用できません。",
         "operationId": "get_employee_profile_rule",
         "parameters": [
@@ -907,7 +907,7 @@
         "tags": [
           "従業員の姓名・住所など"
         ],
-        "summary": "更新",
+        "summary": "従業員の姓名・住所などの更新",
         "description": "\n指定した従業員の姓名・住所などを更新します。\n\n本APIは、給与計算対象外の従業員には非対応です。employee_idに給与計算対象外の従業員IDを指定した場合、本APIを利用できません。",
         "operationId": "update_employee_profile_rule",
         "parameters": [
@@ -998,7 +998,7 @@
         "tags": [
           "従業員の健康保険"
         ],
-        "summary": "取得",
+        "summary": "従業員の健康保険の取得",
         "description": "\n指定した従業員・日付の健康保険情報を返します。\n- 管理者権限を持ったユーザーのみ実行可能です。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の健康保険料の計算方法が自動計算の場合、給与計算時の健康保険料の直接指定金額はnullが返されます)",
         "operationId": "get_employee_health_insurance_rule",
         "parameters": [
@@ -1113,7 +1113,7 @@
         "tags": [
           "従業員の健康保険"
         ],
-        "summary": "更新",
+        "summary": "従業員の健康保険の更新",
         "description": "\n指定した従業員の健康保険情報を更新します。\n- 管理者権限を持ったユーザーのみ実行可能です。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の健康保険料の計算方法が自動計算の場合、給与計算時の健康保険料の直接指定金額はnullが返されます)\n- 事業所が定額制の健康保険組合に加入している場合、保険料の直接指定金額は無視されnullが返されます。\n- 事業所が定額制の健康保険組合に加入している場合、保険料の計算方法と保険料の更新はできません。",
         "operationId": "update_employee_health_insurance_rule",
         "parameters": [
@@ -1205,7 +1205,7 @@
         "tags": [
           "従業員の厚生年金保険"
         ],
-        "summary": "取得",
+        "summary": "従業員の厚生年金保険の取得",
         "description": "\n指定した従業員・日付の厚生年金保険情報を返します。\n- 管理者権限を持ったユーザーのみ実行可能です。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の厚生年金保険の計算方法が自動計算の場合、給与計算時の厚生年金保険料の直接指定金額はnullが返されます)",
         "operationId": "get_employee_welfare_pension_insurance_rule",
         "parameters": [
@@ -1316,7 +1316,7 @@
         "tags": [
           "従業員の厚生年金保険"
         ],
-        "summary": "更新",
+        "summary": "従業員の厚生年金保険の更新",
         "description": "\n指定した従業員の厚生年金保険情報を更新します。\n- 保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。\n(例: 給与計算時の厚生年金保険料の計算方法が自動計算の場合、給与計算時の厚生年金保険料の直接指定金額はnullが返されます)",
         "operationId": "update_employee_welfare_pension_insurance_rule",
         "parameters": [
@@ -1407,8 +1407,8 @@
         "tags": [
           "従業員の扶養親族"
         ],
-        "summary": "取得",
-        "description": "\n指定した従業員・日付の扶養親族情報を返します。",
+        "summary": "従業員の扶養親族の取得",
+        "description": "\n指定した従業員・日付の扶養親族情報を返します。\n\n以下の項目は2023年2月下旬頃から利用できる予定です。\n- social_insurance_dependent_acquisition_date\n- social_insurance_dependent_acquisition_reason\n- social_insurance_other_dependent_acquisition_reason\n- social_insurance_dependent_disqualification_date\n- social_insurance_dependent_disqualification_reason\n- social_insurance_other_dependent_disqualification_reason\n- tax_dependent_acquisition_date\n- tax_dependent_acquisition_reason\n- tax_other_dependent_acquisition_reason\n- tax_dependent_disqualification_date\n- tax_dependent_disqualification_reason\n- tax_other_dependent_disqualification_reason\n- non_resident_dependents_reason",
         "operationId": "get_employee_dependent_rules",
         "parameters": [
           {
@@ -1520,8 +1520,8 @@
         "tags": [
           "従業員の扶養親族"
         ],
-        "summary": "更新",
-        "description": "指定した従業員の扶養親族情報を更新します。\nidがない場合は新規作成、destroyがtrueの場合は削除になります。\n\nresidence_type=live_in: 同居の場合、以下のパラメータに指定した値はWebに反映されません。\n- zipcode1\n- zipcode2\n- prefecture_code\n- address\n- address_kana\n- annual_remittance_amount\n\nresidence_type=non_resident: 別居(国外)の場合、以下のパラメータに指定した値はWebに反映されません。\n- prefecture_code",
+        "summary": "従業員の扶養親族の更新",
+        "description": "指定した従業員の扶養親族情報を更新します。\nidがない場合は新規作成、destroyがtrueの場合は削除になります。\n\nresidence_type=live_in: 同居の場合、以下のパラメータに指定した値はWebに反映されません。\n- zipcode1\n- zipcode2\n- prefecture_code\n- address\n- address_kana\n- annual_remittance_amount\n\nresidence_type=non_resident: 別居(国外)の場合、以下のパラメータに指定した値はWebに反映されません。\n- prefecture_code\n\n以下の項目は2023年2月下旬頃から利用できる予定です。\n- social_insurance_dependent_acquisition_date\n- social_insurance_dependent_acquisition_reason\n- social_insurance_other_dependent_acquisition_reason\n- social_insurance_dependent_disqualification_date\n- social_insurance_dependent_disqualification_reason\n- social_insurance_other_dependent_disqualification_reason\n- tax_dependent_acquisition_date\n- tax_dependent_acquisition_reason\n- tax_other_dependent_acquisition_reason\n- tax_dependent_disqualification_date\n- tax_dependent_disqualification_reason\n- tax_other_dependent_disqualification_reason\n- non_resident_dependents_reason",
         "operationId": "bulk_update_employee_dependent_rules",
         "parameters": [
           {
@@ -1611,7 +1611,7 @@
         "tags": [
           "従業員の銀行口座"
         ],
-        "summary": "取得",
+        "summary": "従業員の銀行口座の取得",
         "description": "\n指定した従業員・日付の銀行口座情報を返します。",
         "operationId": "get_employee_bank_account_rule",
         "parameters": [
@@ -1722,7 +1722,7 @@
         "tags": [
           "従業員の銀行口座"
         ],
-        "summary": "更新",
+        "summary": "従業員の銀行口座の更新",
         "description": "\n指定した従業員の銀行口座1の情報を更新します。",
         "operationId": "update_employee_bank_account_rule",
         "parameters": [
@@ -1813,7 +1813,7 @@
         "tags": [
           "従業員の基本給"
         ],
-        "summary": "取得",
+        "summary": "従業員の基本給の取得",
         "description": "\n指定した従業員・日付の基本給情報を返します。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "get_employee_basic_pay_rule",
         "parameters": [
@@ -1928,7 +1928,7 @@
         "tags": [
           "従業員の基本給"
         ],
-        "summary": "更新",
+        "summary": "従業員の基本給の更新",
         "description": "\n指定した従業員の基本給情報を更新します。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "update_employee_basic_pay_rule",
         "parameters": [
@@ -2020,7 +2020,7 @@
         "tags": [
           "勤怠"
         ],
-        "summary": "取得",
+        "summary": "勤怠の取得",
         "description": "\n指定した従業員・日付の勤怠情報を返します。",
         "operationId": "get_employee_work_record",
         "parameters": [
@@ -2120,7 +2120,7 @@
         "tags": [
           "勤怠"
         ],
-        "summary": "更新",
+        "summary": "勤怠の更新",
         "description": "\n指定した従業員の勤怠情報を更新します。\n\n振替出勤・振替休日・代休出勤・代休・特別休暇の登録はAPIでは行うことができません。\n\n# examples\n\n出勤日について出退勤時刻および休憩時間を更新する場合は以下のようなパラメータをリクエストします。\n\n```\n{\n  \"company_id\": 1,\n  \"break_records\": [\n    {\n      \"clock_in_at\": \"2017-05-25 12:00:00\",\n      \"clock_out_at\": \"2017-05-25 13:00:00\"\n    }\n  ],\n  \"clock_in_at\": \"2017-05-25 09:10:00\",\n  \"clock_out_at\": \"2017-05-25 18:20:00\"\n}\n```\n\n勤務パターンや既定の所定労働時間を変更する場合は use_default_work_pattern に false を指定するとともに、各設定を上書きするパラメータをリクエストします。\n\n```\n{\n  \"company_id\": 1,\n  \"break_records\": [\n    {\n      \"clock_in_at\": \"2017-05-25 12:00:00\",\n      \"clock_out_at\": \"2017-05-25 13:00:00\"\n    }\n  ],\n  \"clock_in_at\": \"2017-05-25 09:10:00\",\n  \"clock_out_at\": \"2017-05-25 18:20:00\",\n  \"day_pattern\": \"normal_day\",\n  \"normal_work_clock_in_at\": \"2017-05-25 11:00:00\",\n  \"normal_work_clock_out_at\": \"2017-12-20 20:00:00\",\n  \"normal_work_mins\": 0,\n  \"use_default_work_pattern\": false\n}\n```\n\n有給取得時の連携について\n半休の場合は通常勤務のように勤務開始・終了時間を指定しつつ、加えて以下の２つの要素を指定することで API での勤怠をつけることができます。\n    - paid_holiday (半休の場合は 0.5 とします)\n    - normal_work_mins_by_paid_holiday (半休により計上される所定労働時間を分で指定します)\n\n```\n{\n  \"company_id\": 1,\n  \"break_records\": [\n    {\n      \"clock_in_at\": \"2017-05-25 12:00:00\",\n      \"clock_out_at\": \"2017-05-25 13:00:00\"\n    }\n  ],\n  \"clock_in_at\": \"2017-05-25 09:10:00\",\n  \"clock_out_at\": \"2017-05-25 18:20:00\",\n  \"paid_holiday\": 0.5,\n  \"normal_work_mins_by_paid_holiday\": 240\n}\n```\n\n欠勤を付ける場合は company_idとis_absence 以外のパラメータは必要ありません。\n\n```\n{\n  \"company_id\": 1,\n  \"is_absence\": true\n}\n```",
         "operationId": "update_employee_work_record",
         "parameters": [
@@ -2220,7 +2220,7 @@
         "tags": [
           "勤怠"
         ],
-        "summary": "削除",
+        "summary": "勤怠の削除",
         "description": "\n指定した従業員の勤怠情報を削除します。",
         "operationId": "destroy_employee_work_record",
         "parameters": [
@@ -2564,7 +2564,7 @@
         "tags": [
           "タイムレコーダー(打刻)"
         ],
-        "summary": "打刻情報の一覧取得",
+        "summary": "打刻一覧の取得",
         "description": "\n指定した従業員・期間の打刻情報を返します。\nデフォルトでは従業員の当月の打刻開始日から当日までの値が返ります。\n\n本APIはベーシックプラン以上で利用可能なAPIです。対象外のプランでは403エラーを返却します。",
         "operationId": "get_employee_time_clocks",
         "parameters": [
@@ -2693,7 +2693,7 @@
         "tags": [
           "タイムレコーダー(打刻)"
         ],
-        "summary": "打刻情報の登録",
+        "summary": "打刻の登録",
         "description": "\n指定した従業員の打刻情報を登録します。\n\n休憩開始の連続や退勤のみなど、整合性の取れていない打刻は登録できません。\n打刻可能種別の取得APIを呼ぶことで、その従業員がその時点で登録可能な打刻種別が取得できます。\n\n出勤の打刻は\n\n- 前日の出勤時刻から24時間以内の場合、前日の退勤打刻が必須です。\n\n- 前日の出勤時刻から24時間経過している場合は、前日の退勤打刻がなくとも出勤打刻を登録することができます。\n\n退勤の打刻は\n\n- [『退勤を自動打刻する』](https://support.freee.co.jp/hc/ja/articles/900004490226-%E5%8B%A4%E6%80%A0%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A%E3%82%92%E8%A1%8C%E3%81%86#h_01EYPYTR9HZ7YB8V5F18VMD1BT)の設定を使用している場合は、出勤打刻から24時間経過しても退勤打刻がない場合に、退勤打刻が自動で登録されます。\n\n- すでに登録されている退勤打刻よりも後の時刻であれば上書き登録することができます。\n\n打刻が日をまたぐ場合は、base_date(打刻日)に前日の日付を指定してください。\n\ndatetime(打刻日時)を指定できるのは管理者か事務担当者の権限を持ったユーザーのみです。\n\n本APIはベーシックプラン以上で利用可能なAPIです。対象外のプランでは403エラーを返却します。\n\n## 操作可能な打刻種別\n- clock_in：出勤\n- break_begin：休憩開始\n- break_end：休憩終了\n- clock_out：退勤",
         "operationId": "create_employee_time_clock",
         "parameters": [
@@ -2784,8 +2784,8 @@
         "tags": [
           "タイムレコーダー(打刻)"
         ],
-        "summary": "打刻情報の詳細取得",
-        "description": "\n指定した従業員・指定した打刻の詳細情報を返します。\n打刻情報の一覧取得APIにて取得した打刻IDを利用することができます。\n\n本APIはベーシックプラン以上で利用可能なAPIです。対象外のプランでは403エラーを返却します。",
+        "summary": "打刻の取得",
+        "description": "\n指定した従業員・指定した打刻の詳細情報を返します。\n打刻一覧の取得APIにて取得した打刻IDを利用することができます。\n\n本APIはベーシックプラン以上で利用可能なAPIです。対象外のプランでは403エラーを返却します。",
         "operationId": "get_employee_time_clock",
         "parameters": [
           {
@@ -2997,7 +2997,7 @@
         "tags": [
           "給与明細"
         ],
-        "summary": "一覧の取得",
+        "summary": "給与明細一覧の取得",
         "description": "\n指定した事業所に所属する従業員の給与明細をリストで返します。\n指定した年月に支払いのある給与明細が返されます。\n- 複数時給を設定している場合はpaymentsに内訳が返されます。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "get_salaries_employee_payroll_statements",
         "parameters": [
@@ -3119,7 +3119,7 @@
         "tags": [
           "給与明細"
         ],
-        "summary": "取得",
+        "summary": "給与明細の取得",
         "description": "\n指定した従業員ID、年月の給与明細を返します。\n指定した年月に支払いのある給与明細が返されます。\n- 複数時給を設定している場合はpaymentsに内訳が返されます。\n- 管理者権限を持ったユーザーのみ実行可能です。\n\n# examples\n```\n{\n \"employee_payroll_statement\": {\n   \"id\": 1,\n   \"company_id\": 1,\n   \"employee_id\": 1,\n   \"employee_name\": \"給与 太郎\",\n   \"employee_display_name\": \"給与 太郎\",\n   \"employee_num\": \"001\",\n   \"pay_date\": \"2018-02-25\",\n   \"start_date\": \"2018-02-01\",\n   \"closing_date\": \"2018-02-28\",\n   \"variable_pay_start_date\": \"2018-01-01\",\n   \"variable_pay_closing_date\": \"2018-01-31\",\n   \"fixed\": true,\n   \"calc_status\": \"calculated\",\n   \"calculated_at\": \"2018-09-27T05:06:45.315Z\",\n   \"pay_calc_type\": \"monthly\",\n   \"basic_pay_amount\": \"300000.0\",\n   \"work_days\": \"21.0\",\n   \"normal_work_time\": \"8.0\",\n   \"normal_work_days\": \"21.0\",\n   \"work_mins_by_paid_holiday\": \"480.0\",\n   \"num_paid_holidays\": \"1.0\",\n   \"is_board_member\": true,\n   \"total_attendance_deduction_amount\": \"0.0\",\n   \"total_allowance_amount\": \"0.0\",\n   \"total_deduction_amount\": \"23830.0\",\n   \"net_payment_amount\": \"277170.0\",\n   \"gross_payment_amount\": \"301000.0\",\n   \"total_worked_days_count\": \"21.0\",\n   \"total_taxable_payment_amount\": \"301000.0\",\n   \"total_expense_amount\": \"0.0\",\n   \"total_transfer_amount\": \"277170.0\",\n   \"total_annual_payment_amount\": \"600000.0\",\n   \"payments\": [{ \"name\": \"基本給\", \"amount\": \"300000.0\"},{ \"name\": \"残業代\", \"amount\": \"1000.0\"}],\n   \"deductions\": [{\"name\": \"所得税\", \"amount\": \"7000.0\"}, {\"name\": \"健康保険料\", \"amount\": \"16830.0\"}],\n   \"attendances\": [{\"name\": \"遅刻・早退\", \"time\": \"0.0\", \"amount\": \"0.0\"}],\n   \"overtime_pays\": [{ \"name\": \"時間外労働\", \"time\": \"60.0\", \"amount\": \"1000.0\", \"code\": null }, { \"name\": \"カスタム固定残業代\", \"time\": null, \"amount\": \"10000.0\", \"code\": \"a001\" }],\n   \"remark\": \"備考\"\n }\n}\n```",
         "operationId": "get_salaries_employee_payroll_statement",
         "parameters": [
@@ -3242,7 +3242,7 @@
         "tags": [
           "賞与明細"
         ],
-        "summary": "一覧の取得",
+        "summary": "賞与明細一覧の取得",
         "description": "\n指定した事業所に所属する従業員の賞与明細をリストで返します。\n指定した年月に支払いのある賞与明細が返されます。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "get_bonuses_employee_payroll_statements",
         "parameters": [
@@ -3376,7 +3376,7 @@
         "tags": [
           "賞与明細"
         ],
-        "summary": "取得",
+        "summary": "賞与明細の取得",
         "description": "\n指定した従業員ID、年月の賞与明細を返します。\n指定した年月に支払いのある賞与明細が返されます。\n- 管理者権限を持ったユーザーのみ実行可能です。\n\n# examples\n```\n{\n \"employee_payroll_statement\": {\n   \"id\": 1,\n   \"company_id\": 1,\n   \"employee_id\": 1,\n   \"employee_name\": \"給与 太郎\",\n   \"employee_display_name\": \"給与 太郎\",\n   \"employee_num\": \"001\",\n   \"closing_date\": \"2018-03-31\",\n   \"pay_date\": \"2018-03-31\",\n   \"fixed\": true,\n   \"calc_status\": \"calculated\",\n   \"calculated_at\": \"2018-09-27T05:06:45.315Z\",\n   \"bonus_amount\": \"300000.0\",\n   \"total_allowance_amount\": \"0.0\",\n   \"total_deduction_amount\": \"23830.0\",\n   \"net_payment_amount\": \"268000.0\",\n   \"gross_payment_amount\": \"330000.0\",\n   \"total_taxable_payment_amount\": \"330000.0\",\n   \"allowances\": [{\"name\": \"地域手当\", \"amount\": \"30000.0\"}],\n   \"deductions\": [{\"name\": \"所得税\", \"amount\": \"46000.0\"}, {\"name\": \"健康保険料\", \"amount\": \"16000.0\"}],\n   \"remark\": \"備考\"\n }\n}\n```",
         "operationId": "get_bonuses_employee_payroll_statement",
         "parameters": [
@@ -3499,7 +3499,7 @@
         "tags": [
           "所属"
         ],
-        "summary": "一覧の取得",
+        "summary": "所属一覧の取得",
         "description": "\n指定した事業所の指定日付時点における所属情報をリストで返します。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "get_employee_group_memberships",
         "parameters": [
@@ -3624,7 +3624,7 @@
         "tags": [
           "部門"
         ],
-        "summary": "部門情報の一覧取得",
+        "summary": "部門一覧の取得",
         "description": "\n指定した事業所の指定日付時点における部門情報をリストで返します。\n部門APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/groups-api-hierarchy\" target=\"_blank\">部門APIを利用した組織図の取得について</a> をご参照ください。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "get_groups",
         "parameters": [
@@ -3703,7 +3703,7 @@
         "tags": [
           "部門"
         ],
-        "summary": "部門情報の作成",
+        "summary": "部門の作成",
         "description": "\n指定した事業所の部門を新規作成します。\n部門APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/groups-api-hierarchy\" target=\"_blank\">部門APIを利用した組織図の取得について</a> をご参照ください。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "create_group",
         "requestBody": {
@@ -3779,7 +3779,7 @@
         "tags": [
           "部門"
         ],
-        "summary": "部門情報の更新",
+        "summary": "部門の更新",
         "description": "\n指定した事業所の部門の情報を更新します。\n部門APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/groups-api-hierarchy\" target=\"_blank\">部門APIを利用した組織図の取得について</a> をご参照ください。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "update_group",
         "parameters": [
@@ -3876,7 +3876,7 @@
         "tags": [
           "部門"
         ],
-        "summary": "部門情報の削除",
+        "summary": "部門の削除",
         "description": "\n指定した事業所の部門の情報を削除します。\n部門APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/groups-api-hierarchy\" target=\"_blank\">部門APIを利用した組織図の取得について</a> をご参照ください。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "destroy_group",
         "parameters": [
@@ -3972,7 +3972,7 @@
         "tags": [
           "役職"
         ],
-        "summary": "役職情報の一覧取得",
+        "summary": "役職一覧の取得",
         "description": "\n指定した事業所の指定日付時点における役職情報をリストで返します。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "get_positions",
         "parameters": [
@@ -4051,7 +4051,7 @@
         "tags": [
           "役職"
         ],
-        "summary": "役職情報の作成",
+        "summary": "役職の作成",
         "description": "\n指定した事業所の役職を新規作成します。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "create_position",
         "requestBody": {
@@ -4127,7 +4127,7 @@
         "tags": [
           "役職"
         ],
-        "summary": "役職情報の更新",
+        "summary": "役職の更新",
         "description": "\n指定した事業所の役職の情報を更新します。\n- 管理者権限を持ったユーザーのみ実行可能です。",
         "operationId": "update_position",
         "parameters": [
@@ -4224,7 +4224,7 @@
         "tags": [
           "役職"
         ],
-        "summary": "役職情報の削除",
+        "summary": "役職の削除",
         "description": "\n指定した事業所の役職の情報を削除します。\n- 管理者権限を持ったユーザーのみ実行可能です。\n- 従業員に役職が適用されている場合、従業員の役職情報も削除されます。",
         "operationId": "destroy_position",
         "parameters": [
@@ -4320,7 +4320,7 @@
         "tags": [
           "月次勤怠締め申請"
         ],
-        "summary": "月次勤怠締め申請の一覧取得",
+        "summary": "月次勤怠締め申請一覧の取得",
         "description": "\n指定した事業所の指定日付時点における月次勤怠締め申請情報をリストで返します。\n- プロフェッショナルプラン、エンタープライズプランでのみ実行可能です。\n\n申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n- 役職指定（申請者の所属部門）\n- 役職指定（申請時に部門指定）\n- 部門および役職指定",
         "operationId": "get_approval_requests_monthly_attendances",
         "parameters": [
@@ -4598,7 +4598,7 @@
         "tags": [
           "月次勤怠締め申請"
         ],
-        "summary": "月次勤怠締め申請の詳細取得",
+        "summary": "月次勤怠締め申請の取得",
         "description": "\n指定した事業所の月次勤怠締め申請情報を取得します。\n- プロフェッショナルプラン、エンタープライズプランでのみ実行可能です。\n\n申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n- 役職指定（申請者の所属部門）\n- 役職指定（申請時に部門指定）\n- 部門および役職指定\n\n申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。\n- status: draft\n- approval_flow_logs.action: cancel",
         "operationId": "get_approval_requests_monthly_attendance",
         "parameters": [
@@ -4981,7 +4981,7 @@
         "tags": [
           "有給申請"
         ],
-        "summary": "有給申請の一覧取得",
+        "summary": "有給申請一覧の取得",
         "description": "\n指定した事業所の指定日付時点における有給申請情報をリストで返します。\n- プロフェッショナルプラン、エンタープライズプランでのみ実行可能です。\n\n申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n- 役職指定（申請者の所属部門）\n- 役職指定（申請時に部門指定）\n- 部門および役職指定",
         "operationId": "get_approval_requests_paid_holidays",
         "parameters": [
@@ -5259,7 +5259,7 @@
         "tags": [
           "有給申請"
         ],
-        "summary": "有給申請の詳細取得",
+        "summary": "有給申請の取得",
         "description": "\n指定した事業所の有給申請情報を取得します。\n- プロフェッショナルプラン、エンタープライズプランでのみ実行可能です。\n\n申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n- 役職指定（申請者の所属部門）\n- 役職指定（申請時に部門指定）\n- 部門および役職指定\n\n申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。\n- status: draft\n- approval_flow_logs.action: cancel",
         "operationId": "get_approval_requests_paid_holiday",
         "parameters": [
@@ -5642,7 +5642,7 @@
         "tags": [
           "残業申請"
         ],
-        "summary": "残業申請の一覧取得",
+        "summary": "残業申請一覧の取得",
         "description": "\n指定した事業所の指定日付時点における残業申請情報をリストで返します。\n- プロフェッショナルプラン、エンタープライズプランでのみ実行可能です。\n\n申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n- 役職指定（申請者の所属部門）\n- 役職指定（申請時に部門指定）\n- 部門および役職指定",
         "operationId": "get_approval_requests_overtime_works",
         "parameters": [
@@ -5920,7 +5920,7 @@
         "tags": [
           "残業申請"
         ],
-        "summary": "残業申請の詳細取得",
+        "summary": "残業申請の取得",
         "description": "\n指定した事業所の残業申請情報を取得します。\n- プロフェッショナルプラン、エンタープライズプランでのみ実行可能です。\n\n申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。\n- 役職指定（申請者の所属部門）\n- 役職指定（申請時に部門指定）\n- 部門および役職指定\n\n申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。\n- status: draft\n- approval_flow_logs.action: cancel",
         "operationId": "get_approval_requests_overtime_work",
         "parameters": [
@@ -9351,6 +9351,124 @@
               "social_insurance_only",
               "not_dependent"
             ]
+          },
+          "social_insurance_dependent_acquisition_date": {
+            "type": "string",
+            "nullable": true,
+            "description": "社会保険の扶養加入日",
+            "format": "date"
+          },
+          "social_insurance_dependent_acquisition_reason": {
+            "type": "string",
+            "enum": [
+              "",
+              "start_working",
+              "marriage",
+              "turnover",
+              "decrease_in_income",
+              "other",
+              "birth",
+              "live_in"
+            ],
+            "description": "社会保険の扶養加入理由 配偶者の場合 \"\": 未選択, start_working: 配偶者の就職, marriage: 婚姻, turnover: 離職, decrease_in_income: 収入減少, other: その他 配偶者以外の場合 \"\": 未選択, birth: 出生, turnover: 離職, decrease_in_income: 収入減, live_in: 同居, other: その他"
+          },
+          "social_insurance_other_dependent_acquisition_reason": {
+            "type": "string",
+            "nullable": true,
+            "description": "社会保険のその他の扶養加入理由",
+            "maxLength": 255
+          },
+          "social_insurance_dependent_disqualification_date": {
+            "type": "string",
+            "nullable": true,
+            "description": "社会保険の扶養喪失日",
+            "format": "date"
+          },
+          "social_insurance_dependent_disqualification_reason": {
+            "type": "string",
+            "enum": [
+              "",
+              "death",
+              "divorce",
+              "start_working_or_increase_in_income",
+              "reach_75_years_old",
+              "disability",
+              "other",
+              "start_working",
+              "increase_in_income"
+            ],
+            "description": "社会保険の扶養喪失理由 配偶者の場合 \"\": 未選択, death: 死亡, divorce: 離婚, start_working_or_increase_in_income: 就職・収入増加, reach_75_years_old: 歳到達, disability: 障害認定, other: その他 配偶者以外の場合 \"\": 未選択, death: 死亡, start_working: 就職, increase_in_income: 収入増加, reach_75_years_old: ７５歳到達, disability: 障害認定, other: その他"
+          },
+          "social_insurance_other_dependent_disqualification_reason": {
+            "type": "string",
+            "nullable": true,
+            "description": "社会保険のその他の扶養喪失理由",
+            "maxLength": 255
+          },
+          "tax_dependent_acquisition_date": {
+            "type": "string",
+            "nullable": true,
+            "description": "税扶養の加入日",
+            "format": "date"
+          },
+          "tax_dependent_acquisition_reason": {
+            "type": "string",
+            "enum": [
+              "",
+              "start_working",
+              "marriage",
+              "turnover",
+              "decrease_in_income",
+              "other",
+              "birth",
+              "live_in"
+            ],
+            "description": "税扶養の加入理由 配偶者の場合 \"\": 未選択, start_working: 配偶者の就職, marriage: 婚姻, turnover: 離職, decrease_in_income: 収入減少, other: その他 配偶者以外の場合 \"\": birth: 出生, turnover: 離職, decrease_in_income: 収入減, live_in: 同居, other: その他"
+          },
+          "tax_other_dependent_acquisition_reason": {
+            "type": "string",
+            "nullable": true,
+            "description": "税扶養のその他の加入理由",
+            "maxLength": 255
+          },
+          "tax_dependent_disqualification_date": {
+            "type": "string",
+            "nullable": true,
+            "description": "税扶養の喪失日",
+            "format": "date"
+          },
+          "tax_dependent_disqualification_reason": {
+            "type": "string",
+            "enum": [
+              "",
+              "death",
+              "divorce",
+              "start_working_or_increase_in_income",
+              "reach_75_years_old",
+              "disability",
+              "other",
+              "start_working",
+              "increase_in_income"
+            ],
+            "description": "税扶養の喪失理由 配偶者の場合 \"\": 未選択, death: 死亡, divorce: 離婚, start_working_or_increase_in_income: 就職・収入増加, reach_75_years_old: 歳到達, disability: 障害認定, other: その他 配偶者以外の場合 \"\": 未選択, death: 死亡, start_working: 就職, increase_in_income: 収入増加, reach_75_years_old: ７５歳到達, disability: 障害認定, other: その他"
+          },
+          "tax_other_dependent_disqualification_reason": {
+            "type": "string",
+            "nullable": true,
+            "description": "税扶養のその他の喪失理由",
+            "maxLength": 255
+          },
+          "non_resident_dependents_reason": {
+            "type": "string",
+            "enum": [
+              "none",
+              "over_16_to_under_30_or_over_70",
+              "study_abroad",
+              "handicapped",
+              "over_38_man"
+            ],
+            "description": "非居住者である親族の条件 none: なし, over_16_to_under_30_or_over_70: 16歳以上30歳未満又は70歳以上, study_abroad: 留学, handicapped: 障害者, over_38_man: 38万円以上の支払",
+            "format": "string"
           }
         }
       },
@@ -10269,6 +10387,124 @@
           "social_insurance_and_tax_dependent": {
             "type": "string",
             "description": "扶養状況 social_insurance_and_tax: 所得税・住民税と社会保険, tax_only: 所得税・住民税のみ, social_insurance_only: 社会保険のみ"
+          },
+          "social_insurance_dependent_acquisition_date": {
+            "type": "string",
+            "nullable": true,
+            "description": "社会保険の扶養加入日",
+            "format": "date"
+          },
+          "social_insurance_dependent_acquisition_reason": {
+            "type": "string",
+            "enum": [
+              "",
+              "start_working",
+              "marriage",
+              "turnover",
+              "decrease_in_income",
+              "other",
+              "birth",
+              "live_in"
+            ],
+            "description": "社会保険の扶養加入理由 配偶者の場合 \"\": 未選択, start_working: 配偶者の就職, marriage: 婚姻, turnover: 離職, decrease_in_income: 収入減少, other: その他 配偶者以外の場合 \"\": 未選択, birth: 出生, turnover: 離職, decrease_in_income: 収入減, live_in: 同居, other: その他"
+          },
+          "social_insurance_other_dependent_acquisition_reason": {
+            "type": "string",
+            "nullable": true,
+            "description": "社会保険のその他の扶養加入理由",
+            "maxLength": 255
+          },
+          "social_insurance_dependent_disqualification_date": {
+            "type": "string",
+            "nullable": true,
+            "description": "社会保険の扶養喪失日",
+            "format": "date"
+          },
+          "social_insurance_dependent_disqualification_reason": {
+            "type": "string",
+            "enum": [
+              "",
+              "death",
+              "divorce",
+              "start_working_or_increase_in_income",
+              "reach_75_years_old",
+              "disability",
+              "other",
+              "start_working",
+              "increase_in_income"
+            ],
+            "description": "社会保険の扶養喪失理由 配偶者の場合 \"\": 未選択, death: 死亡, divorce: 離婚, start_working_or_increase_in_income: 就職・収入増加, reach_75_years_old: 歳到達, disability: 障害認定, other: その他 配偶者以外の場合 \"\": 未選択, death: 死亡, start_working: 就職, increase_in_income: 収入増加, reach_75_years_old: ７５歳到達, disability: 障害認定, other: その他"
+          },
+          "social_insurance_other_dependent_disqualification_reason": {
+            "type": "string",
+            "nullable": true,
+            "description": "社会保険のその他の扶養喪失理由",
+            "maxLength": 255
+          },
+          "tax_dependent_acquisition_date": {
+            "type": "string",
+            "nullable": true,
+            "description": "税扶養の加入日",
+            "format": "date"
+          },
+          "tax_dependent_acquisition_reason": {
+            "type": "string",
+            "enum": [
+              "",
+              "start_working",
+              "marriage",
+              "turnover",
+              "decrease_in_income",
+              "other",
+              "birth",
+              "live_in"
+            ],
+            "description": "税扶養の加入理由 配偶者の場合 \"\": 未選択, start_working: 配偶者の就職, marriage: 婚姻, turnover: 離職, decrease_in_income: 収入減少, other: その他 配偶者以外の場合 \"\": birth: 出生, turnover: 離職, decrease_in_income: 収入減, live_in: 同居, other: その他"
+          },
+          "tax_other_dependent_acquisition_reason": {
+            "type": "string",
+            "nullable": true,
+            "description": "税扶養のその他の加入理由",
+            "maxLength": 255
+          },
+          "tax_dependent_disqualification_date": {
+            "type": "string",
+            "nullable": true,
+            "description": "税扶養の喪失日",
+            "format": "date"
+          },
+          "tax_dependent_disqualification_reason": {
+            "type": "string",
+            "enum": [
+              "",
+              "death",
+              "divorce",
+              "start_working_or_increase_in_income",
+              "reach_75_years_old",
+              "disability",
+              "other",
+              "start_working",
+              "increase_in_income"
+            ],
+            "description": "税扶養の喪失理由 配偶者の場合 \"\": 未選択, death: 死亡, divorce: 離婚, start_working_or_increase_in_income: 就職・収入増加, reach_75_years_old: 歳到達, disability: 障害認定, other: その他 配偶者以外の場合 \"\": 未選択, death: 死亡, start_working: 就職, increase_in_income: 収入増加, reach_75_years_old: ７５歳到達, disability: 障害認定, other: その他"
+          },
+          "tax_other_dependent_disqualification_reason": {
+            "type": "string",
+            "nullable": true,
+            "description": "税扶養のその他の喪失理由",
+            "maxLength": 255
+          },
+          "non_resident_dependents_reason": {
+            "type": "string",
+            "enum": [
+              "none",
+              "over_16_to_under_30_or_over_70",
+              "study_abroad",
+              "handicapped",
+              "over_38_man"
+            ],
+            "description": "非居住者である親族の条件 none: なし, over_16_to_under_30_or_over_70: 16歳以上30歳未満又は70歳以上, study_abroad: 留学, handicapped: 障害者, over_38_man: 38万円以上の支払",
+            "format": "string"
           }
         }
       },
