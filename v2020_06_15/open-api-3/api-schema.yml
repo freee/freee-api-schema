@@ -404,9 +404,9 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>指定した勘定科目の詳細を取得する</p>
+        <p>指定した勘定科目を取得する</p>
       operationId: get_account_item
-      summary: 勘定科目の詳細情報の取得
+      summary: 勘定科目の取得
     put:
       parameters:
       - in: path
@@ -459,10 +459,10 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>勘定科目を更新する</p>
+        <p>指定した勘定科目を更新する</p>
 
         <h2 id="_2">注意点</h2>
-        <p>tax_codeは、api/1/taxes/companies/{company_id} で該当事業所の税区分の一覧を取得して、availableの値がtrue、かつ”name_ja”に”税率%”を含んでいない税区分を確認して、そのcodeを指定して勘定科目の更新をしてください</p>
+        <p>tax_codeは、api/1/taxes/companies/{company_id} で該当事業所の税区分一覧を取得して、availableの値がtrue、かつ”name_ja”に”税率%”を含んでいない税区分を確認して、そのcodeを指定して勘定科目の更新をしてください</p>
       operationId: update_account_item
       requestBody:
         content:
@@ -816,7 +816,7 @@ paths:
 
         <h2 id="_2">注意点</h2>
         <ul>
-          <li>本APIでは、各種申請の一覧を取得することができます。</li>
+          <li>本APIでは、各種申請一覧を取得することができます。</li>
           <li>
             申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している各種申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。
             <ul>
@@ -831,7 +831,7 @@ paths:
           <li>本APIはプロフェッショナルプラン、エンタープライズプランをご利用の事業所のみ利用可能です。</li>
         </ul>
       operationId: get_approval_requests
-      summary: 各種申請の一覧
+      summary: 各種申請一覧の取得
     post:
       responses:
         '201':
@@ -897,7 +897,7 @@ paths:
               <li>プルダウン(select)： プルダウンの選択肢の名前(改行なし) 例)開発部</li>
               <li>日付(date)： 日付形式 例)2019-12-17</li>
               <li>金額(amount)： 数値(申請フォームで設定した上限・下限金額内の値, 改行なし) 例)10000</li>
-              <li>添付ファイル(receipt)： ファイルボックスAPIのID 例)1</li>
+              <li>添付ファイル(receipt)： ファイルボックス（証憑ファイル）APIのID 例)1</li>
               <li>部門ID(section)： 部門APIのID 例)1</li>
               <li>取引先ID(partner)： 取引先APIのID 例)1</li>
             </ul>
@@ -1335,7 +1335,7 @@ paths:
               <li>プルダウン(select)： プルダウンの選択肢の名前(改行なし) 例)開発部</li>
               <li>日付(date)： 日付形式 例)2019-12-17</li>
               <li>金額(amount)： 数値(申請フォームで設定した上限・下限金額内の値, 改行なし) 例)10000</li>
-              <li>添付ファイル(receipt)： ファイルボックスAPIのID 例)1</li>
+              <li>添付ファイル(receipt)： ファイルボックス（証憑ファイル）APIのID 例)1</li>
               <li>部門ID(section)： 部門APIのID 例)1</li>
               <li>取引先ID(partner)： 取引先APIのID 例)1</li>
             </ul>
@@ -1697,7 +1697,7 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>ユーザーが所属する事業所の一覧を取得する</p>
+        <p>ユーザーが所属する事業所一覧を取得する</p>
 
         <h2 id="_2">定義</h2>
 
@@ -1818,7 +1818,7 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>ユーザーが所属する事業所の詳細を取得する</p>
+        <p>ユーザーが所属する事業所を取得する</p>
 
         <h2 id="_2">定義</h2>
 
@@ -1836,7 +1836,7 @@ paths:
 
         <h2 id="_3">
       operationId: get_company
-      summary: 事業所の詳細情報の取得
+      summary: 事業所の取得
   "/api/1/deals":
     get:
       parameters:
@@ -2002,7 +2002,7 @@ paths:
       - Deals
       description: |-
         <h2 id="">概要</h2>
-        <p>指定した事業所の取引一覧（収入／支出）を取得する</p>
+        <p>指定した事業所の取引（収入・支出）一覧を取得する</p>
         <h2 id="_2">定義</h2>
         <ul>
         <li>
@@ -2059,7 +2059,7 @@ paths:
         <li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</li>
         </ul>
       operationId: get_deals
-      summary: 取引（収入／支出）一覧の取得
+      summary: 取引（収入・支出）一覧の取得
     post:
       responses:
         '201':
@@ -2102,7 +2102,7 @@ paths:
       - Deals
       description: |
         <h2 id="">概要</h2>
-        <p>指定した事業所の取引（収入／支出）を作成する</p>
+        <p>指定した事業所の取引（収入・支出）を作成する</p>
         <h2 id="_2">定義</h2>
         <ul>
         <li>
@@ -2134,7 +2134,7 @@ paths:
         <p>payments : 取引の支払行</p>
         </li>
         <li>
-        <p>receipt_ids : 証憑ファイルID（ファイルボックスのファイルID）</p>
+        <p>receipt_ids : ファイルボックス（証憑ファイル）ID</p>
         </li>
         <li>
         <p>from_walletable_type</p>
@@ -2148,7 +2148,7 @@ paths:
         </ul>
         <h2 id="_3">注意点</h2>
         <ul>
-            <li><p>本APIでは+更新行(renews)の操作ができません。+更新行の作成APIをご利用ください。</p></li>
+            <li><p>本APIでは+更新行(renews)の操作ができません。取引（収入・支出）の+更新の作成APIをご利用ください。</p></li>
             <li><p>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</p></li>
             <li>
                 <p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</p></li>
@@ -2165,9 +2165,9 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               "$ref": "#/components/schemas/dealCreateParams"
-        description: 取引（収入／支出）の作成
+        description: 取引（収入・支出）の作成
         required: false
-      summary: 取引（収入／支出）の作成
+      summary: 取引（収入・支出）の作成
   "/api/1/deals/{id}":
     delete:
       parameters:
@@ -2223,8 +2223,11 @@ paths:
           description: ''
       tags:
       - Deals
+      description: |
+        <h2 id="">概要</h2>
+        <p>指定した取引（収入・支出）を削除する</p>
       operationId: destroy_deal
-      summary: 取引（収入／支出）の削除
+      summary: 取引（収入・支出）の削除
     get:
       parameters:
       - description: 事業所ID
@@ -2291,7 +2294,7 @@ paths:
       - Deals
       description: |-
         <h2 id="">概要</h2>
-        <p>指定した事業所の取引（収入／支出）を取得する</p>
+        <p>指定した事業所の取引（収入・支出）を取得する</p>
         <h2 id="_2">定義</h2>
         <ul>
         <li>
@@ -2340,7 +2343,7 @@ paths:
         <li>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</li>
         </ul>
       operationId: get_deal
-      summary: 取引（収入／支出）の取得
+      summary: 取引（収入・支出）の取得
     put:
       parameters:
       - description: 取引ID
@@ -2392,7 +2395,7 @@ paths:
       - Deals
       description: |-
         <h2 id="">概要</h2>
-        <p>指定した事業所の取引（収入／支出）を更新する</p>
+        <p>指定した事業所の取引（収入・支出）を更新する</p>
         <h2 id="_2">定義</h2>
         <ul>
         <li>
@@ -2433,13 +2436,13 @@ paths:
         </ul>
         </li>
         <li>
-        <p>receipt_ids : 証憑ファイルID（ファイルボックスのファイルID）</p>
+        <p>receipt_ids : ファイルボックス（証憑ファイル）ID</p>
         </li>
         </ul>
         <h2 id="_3">注意点</h2>
         <ul>
-            <li><p>本APIでは支払行(payments)の操作ができません。支払行の作成・更新・削除APIをご利用ください。</p></li>
-            <li><p>本APIでは+更新行(renews)の操作ができません。+更新行の作成・更新・削除APIをご利用ください。</p></li>
+            <li><p>本APIでは支払行(payments)の操作ができません。取引（収入・支出）の支払行の作成・更新・削除APIをご利用ください。</p></li>
+            <li><p>本APIでは+更新行(renews)の操作ができません。取引（収入・支出）の+更新の作成・更新・削除APIをご利用ください。</p></li>
             <li><p>本APIでは収入／支出の切替えができません。既存の取引を削除後、再度作成してください。</p></li>
             <li><p>本APIで取引を更新すると、消費税の計算方法は必ず内税方式が選択されます。</p></li>
             <li><p>セグメントタグ情報は法人向けのプロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、法人向けのプロフェッショナルプランの場合は1つ、エンタープライズプランの場合は3つです。</p></li>
@@ -2457,9 +2460,9 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               "$ref": "#/components/schemas/dealUpdateParams"
-        description: 取引（収入／支出）の更新
+        description: 取引（収入・支出）の更新
         required: false
-      summary: 取引（収入／支出）の更新
+      summary: 取引（収入・支出）の更新
   "/api/1/deals/{id}/payments":
     post:
       parameters:
@@ -2512,7 +2515,7 @@ paths:
       - Payments
       description: |-
         <h2 id="">概要</h2>
-        <p>指定した事業所の取引（収入／支出）の支払行を作成する</p>
+        <p>指定した事業所の取引（収入・支出）の支払行を作成する</p>
         <h2 id="_2">定義</h2>
         <ul>
         <li>
@@ -2556,9 +2559,9 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               "$ref": "#/components/schemas/paymentParams"
-        description: 取引（収入／支出）の支払行作成
+        description: 取引（収入・支出）の支払行の作成
         required: true
-      summary: 取引（収入／支出）の支払行作成
+      summary: 取引（収入・支出）の支払行の作成
   "/api/1/deals/{id}/payments/{payment_id}":
     delete:
       parameters:
@@ -2625,7 +2628,7 @@ paths:
       - Payments
       description: |-
         <h2 id="">概要</h2>
-        <p>指定した事業所の取引（収入／支出）の支払行を削除する</p>
+        <p>指定した事業所の取引（収入・支出）の支払行を削除する</p>
         <h2 id="_2">定義</h2>
         <ul>
         <li>
@@ -2652,7 +2655,7 @@ paths:
         </li>
         </ul>
       operationId: destroy_deal_payment
-      summary: 取引（収入／支出）の支払行削除
+      summary: 取引（収入・支出）の支払行の削除
     put:
       parameters:
       - description: 取引ID
@@ -2713,7 +2716,7 @@ paths:
       - Payments
       description: |-
         <h2 id="">概要</h2>
-        <p>指定した事業所の取引（収入／支出）の支払行を更新する</p>
+        <p>指定した事業所の取引（収入・支出）の支払行を更新する</p>
         <h2 id="_2">定義</h2>
         <ul>
         <li>
@@ -2763,9 +2766,9 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               "$ref": "#/components/schemas/paymentParams"
-        description: 取引（収入／支出）の支払行更新
+        description: 取引（収入・支出）の支払行の更新
         required: true
-      summary: 取引（収入／支出）の支払行更新
+      summary: 取引（収入・支出）の支払行の更新
   "/api/1/deals/{id}/renews":
     post:
       parameters:
@@ -2812,7 +2815,7 @@ paths:
       - Renews
       description: |
         <h2 id="">概要</h2>
-        <p>指定した事業所の取引（収入／支出）の+更新を作成する</p>
+        <p>指定した事業所の取引（収入・支出）の+更新を作成する</p>
         <h2 id="_2">定義</h2>
         <ul> <li> <p>issue_date : 発生日</p> </li>
         <li> <p>due_date : 支払期日</p> </li>
@@ -2843,9 +2846,9 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               "$ref": "#/components/schemas/renewCreateParams"
-        description: 取引（収入／支出）に対する+更新の情報
+        description: 取引（収入・支出）の+更新の作成
         required: true
-      summary: 取引（収入／支出）に対する+更新の作成
+      summary: 取引（収入・支出）の+更新の作成
   "/api/1/deals/{id}/renews/{renew_id}":
     delete:
       parameters:
@@ -2908,13 +2911,13 @@ paths:
       - Renews
       description: |
         <h2 id="">概要</h2>
-        <p>指定した事業所の取引（収入／支出）の+更新を削除する</p>
+        <p>指定した事業所の取引（収入・支出）の+更新を削除する</p>
         <h2 id="_3">注意点</h2>
         <ul> <li>本APIでは+更新の削除のみ可能です。取引や支払行に対する削除はできません。</li> <li>renew_idにはrenewsのid(+更新ID)を指定してください。renewsのdetailsのid(+更新の明細行ID)を指定できません。</li>
         <li>月締めされている仕訳に紐づく＋更新行の編集・削除はできません。</li> <li>承認済み仕訳に紐づく＋更新行の編集・削除は管理者権限のユーザーのみ可能です。</li>
         <li>本APIで取引を更新すると、消費税の計算方法は必ず内税方式が選択されます。</li> </ul>
       operationId: delete_deal_renew
-      summary: 取引（収入／支出）の+更新の削除
+      summary: 取引（収入・支出）の+更新の削除
     put:
       parameters:
       - description: 取引ID
@@ -2968,7 +2971,7 @@ paths:
       - Renews
       description: |
         <h2 id="">概要</h2>
-        <p>指定した事業所の取引（収入／支出）の+更新を更新する</p>
+        <p>指定した事業所の取引（収入・支出）の+更新を更新する</p>
         <h2 id="_2">定義</h2>
         <ul> <li> <p>issue_date : 発生日</p> </li>
         <li> <p>due_date : 支払期日</p> </li>
@@ -2999,9 +3002,9 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               "$ref": "#/components/schemas/renewUpdateParams"
-        description: "+更新の更新情報"
+        description: 取引（収入・支出）の+更新の更新
         required: true
-      summary: 取引（収入／支出）の+更新の更新
+      summary: 取引（収入・支出）の+更新の更新
   "/api/1/expense_application_line_templates":
     get:
       parameters:
@@ -3454,7 +3457,7 @@ paths:
 
         <p>指定した事業所の経費申請一覧を取得する</p>
 
-        <p>経費申請APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-expense-applications" target="_blank">freee会計の経費申請APIの使い方</a>をご参照ください</p>
+        <p>経費精算APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-expense-applications" target="_blank">freee会計経費精算APIの使い方</a>をご参照ください</p>
 
         <h2 id="_2">注意点</h2>
         <ul>
@@ -3512,7 +3515,7 @@ paths:
 
         <p>指定した事業所の経費申請を作成する</p>
 
-        <p>経費申請APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-expense-applications" target="_blank">freee会計の経費申請APIの使い方</a>をご参照ください</p>
+        <p>経費精算APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-expense-applications" target="_blank">freee会計経費精算APIの使い方</a>をご参照ください</p>
 
         <h2 id="_2">注意点</h2>
         <ul>
@@ -3625,7 +3628,7 @@ paths:
 
         <p>指定した事業所の経費申請を削除する</p>
 
-        <p>経費申請APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-expense-applications" target="_blank">freee会計の経費申請APIの使い方</a>をご参照ください</p>
+        <p>経費精算APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-expense-applications" target="_blank">freee会計経費精算APIの使い方</a>をご参照ください</p>
 
         <h2 id="_2">注意点</h2>
         <ul>
@@ -3722,7 +3725,7 @@ paths:
 
         <p>指定した事業所の経費申請を取得する</p>
 
-        <p>経費申請APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-expense-applications" target="_blank">freee会計の経費申請APIの使い方</a>をご参照ください</p>
+        <p>経費精算APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-expense-applications" target="_blank">freee会計経費精算APIの使い方</a>をご参照ください</p>
 
         <h2 id="_2">注意点</h2>
         <ul>
@@ -3795,7 +3798,7 @@ paths:
 
         <p>指定した事業所の経費申請を更新する</p>
 
-        <p>経費申請APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-expense-applications" target="_blank">freee会計の経費申請APIの使い方</a>をご参照ください</p>
+        <p>経費精算APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-expense-applications" target="_blank">freee会計経費精算APIの使い方</a>をご参照ください</p>
 
         <h2 id="_2">注意点</h2>
         <ul>
@@ -3905,7 +3908,7 @@ paths:
 
         <p>指定した事業所の経費申請の承認操作を行う</p>
 
-        <p>経費申請APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-expense-applications" target="_blank">freee会計の経費申請APIの使い方</a>をご参照ください</p>
+        <p>経費精算APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-expense-applications" target="_blank">freee会計経費精算APIの使い方</a>をご参照ください</p>
 
         <h2 id="_2">注意点</h2>
         <ul>
@@ -4338,7 +4341,7 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>指定した事業所の請求書詳細を取得する</p>
+        <p>指定した事業所の請求書を取得する</p>
       operationId: get_invoice
       summary: 請求書の取得
     put:
@@ -4881,7 +4884,7 @@ paths:
           <li>id : 受け付けID</li>
         </ul>
       operationId: get_journals
-      summary: ダウンロード要求
+      summary: 仕訳帳のダウンロード要求
   "/api/1/journals/reports/{id}/download":
     get:
       parameters:
@@ -4948,7 +4951,7 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>ダウンロードを実行する</p>
+        <p>仕訳帳をダウンロードする</p>
 
         <p>＊このAPIは無料プランのアカウントではご利用になれません</p>
 
@@ -4958,7 +4961,7 @@ paths:
         <li>id : 受け付けID</li>
         </ul>
       operationId: download_journal
-      summary: ダウンロード実行
+      summary: 仕訳帳のダウンロード
   "/api/1/journals/reports/{id}/status":
     get:
       parameters:
@@ -5021,7 +5024,7 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>ダウンロードリクエストのステータスを確認する</p>
+        <p>仕訳帳のダウンロードリクエストのステータスを取得する</p>
 
         <p>＊このAPIは無料プランのアカウントではご利用になれません</p>
 
@@ -5045,7 +5048,7 @@ paths:
         </li>
         </ul>
       operationId: get_journal_status
-      summary: ステータス確認
+      summary: 仕訳帳のステータスの取得
   "/api/1/manual_journals":
     get:
       parameters:
@@ -5776,8 +5779,14 @@ paths:
 
         <p>指定した事業所の取引先を作成する</p>
         <ul>
+        <li>取引先名称（name）は重複不可です。</li>
         <li>codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</li>
-        <li>取引先コードの利用を有効にしている場合は、codeの指定は必須です。ただし重複は不可。</li>
+        <li>取引先コードの利用を有効にしている場合は、
+          <ul>
+            <li>codeの指定は必須です。</li>
+            <li>name、codeそれぞれ重複不可です。</li>
+          </ul>
+        </li>
         <li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li></ul>
       operationId: create_partner
       requestBody:
@@ -5847,6 +5856,7 @@ paths:
         <ul>
         <li>このAPIを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</li>
         <li>コードを日本語に設定している場合は、URLエンコードしてURLに含めるようにしてください。</li>
+        <li>取引先名称（name）は重複不可です。</li>
         <li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li>
         <li>支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）にnull型を入力することにより、期日を未設定に変更可能です。</li></ul>
       operationId: update_partner_by_code
@@ -6044,6 +6054,7 @@ paths:
 
         <p>指定した取引先の情報を更新する</p>
         <ul>
+        <li>取引先名称（name）は重複不可です。</li>
         <li>codeを指定、更新することはできません。</li>
         <li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）は法人向けのプロフェッショナルプラン以上で利用可能です。</li>
         <li>支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）にnull型を入力することにより、期日を未設定に変更可能です。</li></ul>
@@ -6255,7 +6266,7 @@ paths:
 
         <p>指定した事業所の支払依頼一覧を取得する</p>
 
-        <p>支払依頼APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-payment-requests" target="_blank">freee会計の支払依頼APIの使い方</a>をご参照ください</p>
+        <p>支払依頼APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-payment-requests" target="_blank">freee会計支払依頼APIの使い方</a>をご参照ください</p>
 
         <h2 id="_2">注意点</h2>
         <ul>
@@ -6313,7 +6324,7 @@ paths:
 
         <p>指定した事業所の支払依頼を作成する</p>
 
-        <p>支払依頼APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-payment-requests" target="_blank">freee会計の支払依頼APIの使い方</a>をご参照ください</p>
+        <p>支払依頼APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-payment-requests" target="_blank">freee会計支払依頼APIの使い方</a>をご参照ください</p>
 
         <h2 id="_2">注意点</h2>
         <ul>
@@ -6425,7 +6436,7 @@ paths:
 
         <p>指定した事業所の支払依頼を削除する</p>
 
-        <p>支払依頼APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-payment-requests" target="_blank">freee会計の支払依頼APIの使い方</a>をご参照ください</p>
+        <p>支払依頼APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-payment-requests" target="_blank">freee会計支払依頼APIの使い方</a>をご参照ください</p>
 
         <h2 id="_2">注意点</h2>
         <ul>
@@ -6529,7 +6540,7 @@ paths:
 
         <p>指定した事業所の支払依頼を取得する</p>
 
-        <p>支払依頼APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-payment-requests" target="_blank">freee会計の支払依頼APIの使い方</a>をご参照ください</p>
+        <p>支払依頼APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-payment-requests" target="_blank">freee会計支払依頼APIの使い方</a>をご参照ください</p>
 
         <h2 id="_2">注意点</h2>
         <ul>
@@ -6545,7 +6556,7 @@ paths:
           <li>法人アカウントの場合は、プロフェッショナルプラン、エンタープライズプランでご利用いただけます。</li>
         </ul>
       operationId: get_payment_request
-      summary: 支払依頼詳細の取得
+      summary: 支払依頼の取得
     put:
       parameters:
       - description: 支払依頼ID
@@ -6601,7 +6612,7 @@ paths:
 
         <p>指定した事業所の支払依頼を更新する</p>
 
-        <p>支払依頼APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-payment-requests" target="_blank">freee会計の支払依頼APIの使い方</a>をご参照ください</p>
+        <p>支払依頼APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-payment-requests" target="_blank">freee会計支払依頼APIの使い方</a>をご参照ください</p>
 
         <h2 id="_2">注意点</h2>
         <ul>
@@ -6711,7 +6722,7 @@ paths:
 
         <p>指定した事業所の支払依頼の承認操作を行う</p>
 
-        <p>支払依頼APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-payment-requests" target="_blank">freee会計の支払依頼APIの使い方</a>をご参照ください</p>
+        <p>支払依頼APIの使い方については、<a href="https://developer.freee.co.jp/tips/accounting-payment-requests" target="_blank">freee会計支払依頼APIの使い方</a>をご参照ください</p>
 
         <h2 id="_2">注意点</h2>
         <ul>
@@ -7257,9 +7268,9 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>指定した事業所のファイルボックス 証憑ファイル一覧を取得する</p>
+        <p>指定した事業所のファイルボックス（証憑ファイル）一覧を取得する</p>
       operationId: get_receipts
-      summary: ファイルボックス 証憑ファイル一覧の取得
+      summary: ファイルボックス（証憑ファイル）一覧の取得
     post:
       responses:
         '201':
@@ -7298,7 +7309,7 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>ファイルボックスに証憑ファイルをアップロードする</p>
+        <p>ファイルボックス（証憑ファイル）をアップロードする</p>
         <h2 id="_2">注意点</h2>
         <ul>
           <li>リクエストヘッダーの Content-Type は、multipart/form-dataにのみ対応しています。</li>
@@ -7310,11 +7321,11 @@ paths:
             schema:
               "$ref": "#/components/schemas/receiptCreateParams"
         required: true
-      summary: ファイルボックス 証憑ファイルアップロード
+      summary: ファイルボックス（証憑ファイル）のアップロード
   "/api/1/receipts/{id}":
     delete:
       parameters:
-      - description: 証憑ファイルID
+      - description: ファイルボックス（証憑ファイル）ID
         in: path
         name: id
         required: true
@@ -7370,12 +7381,12 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>ファイルボックスの証憑ファイルを削除する</p>
+        <p>ファイルボックス（証憑ファイル）を削除する</p>
       operationId: destroy_receipt
-      summary: ファイルボックス 証憑ファイルを削除する
+      summary: ファイルボックス（証憑ファイル）の削除
     get:
       parameters:
-      - description: 証憑ファイルID
+      - description: ファイルボックス（証憑ファイル）ID
         in: path
         name: id
         required: true
@@ -7434,12 +7445,12 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>指定した事業所のファイルボックス 証憑ファイルを取得する</p>
+        <p>指定した事業所のファイルボックス（証憑ファイル）を取得する</p>
       operationId: get_receipt
-      summary: ファイルボックス 証憑ファイルの取得
+      summary: ファイルボックス（証憑ファイル）の取得
     put:
       parameters:
-      - description: 証憑ファイルID
+      - description: ファイルボックス（証憑ファイル）ID
         in: path
         name: id
         required: true
@@ -7490,7 +7501,7 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>ファイルボックスの証憑ファイル情報を更新する</p>
+        <p>ファイルボックス（証憑ファイル）を更新する</p>
         <h2 id="_2">注意点</h2>
         <ul>
           <li>本APIでは、証憑ファイルの再アップロードはできません。</li>
@@ -7505,11 +7516,11 @@ paths:
             schema:
               "$ref": "#/components/schemas/receiptUpdateParams"
         required: true
-      summary: ファイルボックス 証憑ファイル情報更新
+      summary: ファイルボックス（証憑ファイル）の更新
   "/api/1/receipts/{id}/download":
     get:
       parameters:
-      - description: 証憑ファイルID
+      - description: ファイルボックス（証憑ファイル）ID
         in: path
         name: id
         required: true
@@ -7576,9 +7587,9 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>指定した事業所のファイルボックス 証憑ファイルのダウンロードをする</p>
+        <p>指定した事業所のファイルボックス（証憑ファイル）をダウンロードする</p>
       operationId: download_receipt
-      summary: ファイルボックス 証憑ファイルのダウンロード
+      summary: ファイルボックス（証憑ファイル）のダウンロード
   "/api/1/reports/trial_bs":
     get:
       parameters:
@@ -11909,7 +11920,7 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>指定した事業所の部門を参照する</p><h2 id="_2">レスポンスの例</h2>
+        <p>指定した事業所の部門を取得する</p><h2 id="_2">レスポンスの例</h2>
 
         <pre><code>// プレミアムプラン（個人）、ベーシックプラン以上（法人）
         {
@@ -11936,6 +11947,7 @@ paths:
           }
         }</code></pre>
       operationId: get_section
+      summary: 部門の取得
     put:
       parameters:
       - in: path
@@ -12184,7 +12196,7 @@ paths:
               "$ref": "#/components/schemas/segmentTagParams"
         description: セグメントタグの作成
         required: true
-      summary: セグメントの作成
+      summary: セグメントタグの作成
   "/api/1/segments/{segment_id}/tags/{id}":
     delete:
       parameters:
@@ -12599,7 +12611,7 @@ paths:
 
         <p>指定した事業所のメモタグを取得する</p>
       operationId: get_tag
-      summary: メモタグの詳細情報の取得
+      summary: メモタグの取得
     put:
       parameters:
       - description: メモタグID
@@ -12712,9 +12724,9 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>税区分コード一覧を取得する</p>
+        <p>税区分一覧を取得する</p>
       operationId: get_tax_codes
-      summary: 税区分コード一覧の取得
+      summary: 税区分一覧の取得
   "/api/1/taxes/codes/{code}":
     get:
       parameters:
@@ -12767,9 +12779,9 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>税区分コードを取得する</p>
+        <p>税区分を取得する</p>
       operationId: get_tax_code
-      summary: 税区分コードの取得
+      summary: 税区分の取得
   "/api/1/taxes/companies/{company_id}":
     get:
       parameters:
@@ -12898,8 +12910,13 @@ paths:
           description: ''
       tags:
       - Taxes
+      description: |2-
+
+        <h2 id="">概要</h2>
+
+        <p>指定した事業所の税区分一覧を取得する</p>
       operationId: get_taxes_companies
-      summary: 税区分コード詳細一覧の取得
+      summary: 指定した事業所の税区分一覧の取得
   "/api/1/transfers":
     get:
       parameters:
@@ -13135,7 +13152,7 @@ paths:
 
         <p>指定した事業所の取引（振替）を削除する</p>
       operationId: destroy_transfer
-      summary: 取引（振替）の削除する
+      summary: 取引（振替）の削除
     get:
       parameters:
       - description: 取引(振替)ID
@@ -13374,7 +13391,7 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>事業所に所属するユーザーの一覧を取得する</p>
+        <p>事業所に所属するユーザー一覧を取得する</p>
       operationId: get_users
       summary: 事業所に所属するユーザー一覧の取得
   "/api/1/users/capabilities":
@@ -13779,7 +13796,7 @@ paths:
                 </tr>
                 <tr>
                   <td style="padding: 5px">access_controls</td>
-                  <td style="padding: 5px">権限管理<i>※2023年2月にリリースされる予定の機能に関する権限です</i></td>
+                  <td style="padding: 5px">権限管理</td>
                 </tr>
                 <tr>
                   <td style="padding: 5px">sign_in_logs</td>
@@ -13787,15 +13804,15 @@ paths:
                 </tr>
                 <tr>
                   <td style="padding: 5px">user_attribute_logs</td>
-                  <td style="padding: 5px">ユーザー更新履歴<i>※2023年2月にリリースされる予定の機能に関する権限です</i></td>
+                  <td style="padding: 5px">ユーザー更新履歴</td>
                 </tr>
                 <tr>
                   <td style="padding: 5px">app_role_logs</td>
-                  <td style="padding: 5px">権限変更履歴<i>※2023年2月にリリースされる予定の機能に関する権限です</i></td>
+                  <td style="padding: 5px">権限変更履歴</td>
                 </tr>
                 <tr>
                   <td style="padding: 5px">txn_relationship_logs</td>
-                  <td style="padding: 5px">仕訳関連履歴<i>※2023年2月にリリースされる予定の機能に関する権限です</i></td>
+                  <td style="padding: 5px">仕訳関連履歴</td>
                 </tr>
                 <tr>
                   <td style="padding: 5px">backups</td>
@@ -13875,7 +13892,7 @@ paths:
                 </tr>
                 <tr>
                   <td style="padding: 5px">company_internal_announcements</td>
-                  <td style="padding: 5px"><a href="https://support.freee.co.jp/hc/ja/articles/900002322383#:~:text=%E7%A4%BE%E5%86%85%E5%90%91%E3%81%91%E3%81%AE%E3%82%A2%E3%83%8A%E3%82%A6%E3%83%B3%E3%82%B9%E3%82%92%E6%8E%B2%E7%A4%BA%E3%81%A7%E3%81%8D%E3%82%8B%E6%A9%9F%E8%83%BD%E3%81%A7%E3%81%99%E3%80%82" target="_blank">アナウンス</a><i>※2023年2月にリリースされる予定の機能に関する権限です</i></td>
+                  <td style="padding: 5px"><a href="https://support.freee.co.jp/hc/ja/articles/900002322383#:~:text=%E7%A4%BE%E5%86%85%E5%90%91%E3%81%91%E3%81%AE%E3%82%A2%E3%83%8A%E3%82%A6%E3%83%B3%E3%82%B9%E3%82%92%E6%8E%B2%E7%A4%BA%E3%81%A7%E3%81%8D%E3%82%8B%E6%A9%9F%E8%83%BD%E3%81%A7%E3%81%99%E3%80%82" target="_blank">アナウンス</a></td>
                 </tr>
                 <tr>
                   <td style="padding: 5px">doc_change_logs</td>
@@ -13935,7 +13952,7 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>ユーザーの権限情報を取得する</p>
+        <p>ログインユーザーの権限を取得する</p>
       operationId: get_users_capabilities
       summary: ログインユーザーの権限の取得
   "/api/1/users/me":
@@ -14000,9 +14017,9 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>ユーザーの情報を取得する</p>
+        <p>ログインユーザーを取得する</p>
       operationId: get_users_me
-      summary: ログインユーザー情報の取得
+      summary: ログインユーザーの取得
     put:
       responses:
         '200':
@@ -14047,7 +14064,7 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>ユーザー情報を更新する</p>
+        <p>ログインユーザーを更新する</p>
       operationId: update_user
       requestBody:
         content:
@@ -14057,9 +14074,9 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               "$ref": "#/components/schemas/userParams"
-        description: ユーザー情報の更新
+        description: ログインユーザーの更新
         required: false
-      summary: ユーザー情報の更新
+      summary: ログインユーザーの更新
   "/api/1/wallet_txns":
     get:
       parameters:
@@ -14165,7 +14182,7 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>指定した事業所の明細一覧を取得する</p>
+        <p>指定した事業所の口座明細一覧を取得する</p>
 
         <h2 id="_2">定義</h2>
 
@@ -14205,7 +14222,7 @@ paths:
         </li>
         </ul>
       operationId: get_wallet_txns
-      summary: 明細一覧の取得
+      summary: 口座明細一覧の取得
     post:
       responses:
         '201':
@@ -14244,7 +14261,7 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>指定した事業所の明細を作成する</p>
+        <p>指定した事業所の口座明細を作成する</p>
 
         <h2 id="_2">定義</h2>
 
@@ -14292,9 +14309,9 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               "$ref": "#/components/schemas/walletTxnParams"
-        description: 明細の作成
+        description: 口座明細の作成
         required: false
-      summary: 明細の作成
+      summary: 口座明細の作成
   "/api/1/wallet_txns/{id}":
     delete:
       parameters:
@@ -14353,7 +14370,7 @@ paths:
       description: |2-
 
         <h2 id="">概要</h2>
-        <p>指定した事業所の明細を削除する</p>
+        <p>指定した事業所の口座明細を削除する</p>
 
         <h2 id="">注意点</h2>
         <ul>
@@ -14361,7 +14378,7 @@ paths:
           <li>詳細は<a target="_blank" href="https://support.freee.co.jp/hc/ja/articles/360015892332">freeeヘルプセンター</a>をご確認ください。</li>
         </ul>
       operationId: destroy_wallet_txn
-      summary: 明細の削除
+      summary: 口座明細の削除
     get:
       parameters:
       - description: 明細ID
@@ -14423,7 +14440,7 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>指定した事業所の明細を取得する</p>
+        <p>指定した事業所の口座明細を取得する</p>
 
         <h2 id="_2">定義</h2>
 
@@ -14463,7 +14480,7 @@ paths:
         </li>
         </ul>
       operationId: get_wallet_txn
-      summary: 明細の取得
+      summary: 口座明細の取得
   "/api/1/walletables":
     get:
       parameters:
@@ -14599,7 +14616,7 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>指定した事業所に口座を作成する</p>
+        <p>指定した事業所の口座を作成する</p>
 
         <h2 id="">注意点</h2>
         <ul><li>同期に対応した口座はこのAPIでは作成できません</li></ul>
@@ -14805,7 +14822,7 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>指定した事業所の口座情報を取得する</p>
+        <p>指定した事業所の口座を取得する</p>
 
         <h2 id="_2">定義</h2>
 
@@ -14825,7 +14842,7 @@ paths:
         <li>last_balance : 同期残高</li>
         </ul>
       operationId: get_walletable
-      summary: 口座情報の取得
+      summary: 口座の取得
     put:
       parameters:
       - in: path
@@ -14900,7 +14917,7 @@ paths:
 
         <h2 id="">概要</h2>
 
-        <p>口座を更新する</p>
+        <p>指定した事業所の口座を更新する</p>
       operationId: update_walletable
       requestBody:
         content:
@@ -17563,7 +17580,7 @@ components:
             type: object
           type: array
         receipts:
-          description: 証憑ファイル（ファイルボックスのファイル）
+          description: ファイルボックス（証憑ファイル）
           items:
             properties:
               created_at:
@@ -17581,15 +17598,15 @@ components:
                   <br>
                   <br>
                   file_srcは廃止予定の属性になります。<br>
-                  file_srcに替わり、証憑ファイル（ファイルボックスのファイル）のダウンロード APIをご利用ください。<br>
-                  証憑ファイル（ファイルボックスのファイル）のダウンロードAPIを利用することで、以下のようになります。
+                  file_srcに替わり、ファイルボックス（証憑ファイル）のダウンロード APIをご利用ください。<br>
+                  ファイルボックス（証憑ファイル）のダウンロードAPIを利用することで、以下のようになります。
                   <ul>
                     <li>アプリケーション利用者はfreee APIアプリケーションにログインしていれば、証憑ダウンロード毎にfreeeに改めてログインすることなくファイルが参照できるようになります。</li>
                   </ul>
                 example: https://www.freee.co.jp/api/p/receipts/revisions/1234xxxxx/download
                 type: string
               id:
-                description: 証憑ファイルID（ファイルボックスのファイルID）
+                description: ファイルボックス（証憑ファイル）ID
                 example: 1
                 maximum: 2147483647
                 minimum: 1
@@ -17989,7 +18006,7 @@ components:
             type: object
           type: array
         receipt_ids:
-          description: 証憑ファイルID（ファイルボックスのファイルID）（配列）
+          description: ファイルボックス（証憑ファイル）ID（配列）
           items:
             example: 1
             maximum: 2147483647
@@ -18208,7 +18225,7 @@ components:
                 type: object
               type: array
             receipts:
-              description: 証憑ファイル（ファイルボックスのファイル）
+              description: ファイルボックス（証憑ファイル）
               items:
                 properties:
                   created_at:
@@ -18220,7 +18237,7 @@ components:
                     example: タクシー利用
                     type: string
                   id:
-                    description: 証憑ファイルID（ファイルボックスのファイルID）
+                    description: ファイルボックス（証憑ファイル）ID
                     example: 1
                     maximum: 2147483647
                     minimum: 1
@@ -18458,7 +18475,7 @@ components:
           minimum: 1
           type: integer
         receipt_ids:
-          description: 証憑ファイルID（ファイルボックスのファイルID）（配列）
+          description: ファイルボックス（証憑ファイル）ID（配列）
           items:
             example: 1
             maximum: 2147483647
@@ -18603,7 +18620,7 @@ components:
                 minimum: 1
                 type: integer
               receipt_id:
-                description: 証憑ファイルID（ファイルボックスのファイルID）
+                description: ファイルボックス（証憑ファイル）ID
                 example: 606
                 maximum: 2147483647
                 minimum: 1
@@ -18640,7 +18657,7 @@ components:
         segment_1_tag_id:
           description: |
             セグメント１ID(法人向けプロフェッショナル, 法人向けエンタープライズプラン)<br>
-            セグメントタグ一覧APIを利用して取得してください。<br>
+            セグメントタグ一覧の取得APIを利用して取得してください。<br>
             <a href="https://support.freee.co.jp/hc/ja/articles/360020679611" target="_blank">セグメント（分析用タグ）の設定</a><br>
           example: 1
           format: int64
@@ -18650,7 +18667,7 @@ components:
         segment_2_tag_id:
           description: |
             セグメント２ID(法人向け エンタープライズプラン)<br>
-            セグメントタグ一覧APIを利用して取得してください。<br>
+            セグメントタグ一覧の取得APIを利用して取得してください。<br>
             <a href="https://support.freee.co.jp/hc/ja/articles/360020679611" target="_blank">セグメント（分析用タグ）の設定</a><br>
           example: 2
           format: int64
@@ -18660,7 +18677,7 @@ components:
         segment_3_tag_id:
           description: |
             セグメント３ID(法人向け エンタープライズプラン)<br>
-            セグメントタグ一覧APIを利用して取得してください。<br>
+            セグメントタグ一覧の取得APIを利用して取得してください。<br>
             <a href="https://support.freee.co.jp/hc/ja/articles/360020679611" target="_blank">セグメント（分析用タグ）の設定</a><br>
           example: 3
           format: int64
@@ -18968,7 +18985,7 @@ components:
                     minimum: 1
                     type: integer
                   receipt_id:
-                    description: 証憑ファイルID（ファイルボックスのファイルID）
+                    description: ファイルボックス（証憑ファイル）ID
                     example: 606
                     maximum: 2147483647
                     minimum: 1
@@ -19153,7 +19170,7 @@ components:
                 minimum: 1
                 type: integer
               receipt_id:
-                description: 証憑ファイルID（ファイルボックスのファイルID）
+                description: ファイルボックス（証憑ファイル）ID
                 example: 606
                 maximum: 2147483647
                 minimum: 1
@@ -19179,7 +19196,7 @@ components:
         segment_1_tag_id:
           description: |
             セグメント１ID(法人向けプロフェッショナル, 法人向けエンタープライズプラン)<br>
-            セグメントタグ一覧APIを利用して取得してください。<br>
+            セグメントタグ一覧の取得APIを利用して取得してください。<br>
             <a href="https://support.freee.co.jp/hc/ja/articles/360020679611" target="_blank">セグメント（分析用タグ）の設定</a><br>
           example: 1
           format: int64
@@ -19189,7 +19206,7 @@ components:
         segment_2_tag_id:
           description: |
             セグメント２ID(法人向け エンタープライズプラン)<br>
-            セグメントタグ一覧APIを利用して取得してください。<br>
+            セグメントタグ一覧の取得APIを利用して取得してください。<br>
             <a href="https://support.freee.co.jp/hc/ja/articles/360020679611" target="_blank">セグメント（分析用タグ）の設定</a><br>
           example: 2
           format: int64
@@ -19199,7 +19216,7 @@ components:
         segment_3_tag_id:
           description: |
             セグメント３ID(法人向け エンタープライズプラン)<br>
-            セグメントタグ一覧APIを利用して取得してください。<br>
+            セグメントタグ一覧の取得APIを利用して取得してください。<br>
             <a href="https://support.freee.co.jp/hc/ja/articles/360020679611" target="_blank">セグメント（分析用タグ）の設定</a><br>
           example: 3
           format: int64
@@ -19306,7 +19323,7 @@ components:
                       minimum: 1
                       type: integer
                     receipt_id:
-                      description: 証憑ファイルID（ファイルボックスのファイルID）
+                      description: ファイルボックス（証憑ファイル）ID
                       example: 606
                       maximum: 2147483647
                       minimum: 1
@@ -21348,7 +21365,7 @@ components:
                 trueの場合、Web画面での取引登録時などに入力候補として表示されます。
               </li>
               <li>
-                falseの場合、品目自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの品目をパラメータに指定すれば、取引などにfalseの品目を設定できます。
+                falseの場合、品目自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入・支出）の作成APIなどでfalseの品目をパラメータに指定すれば、取引などにfalseの品目を設定できます。
               </li>
             </ul>
           type: boolean
@@ -21546,7 +21563,7 @@ components:
               example: '2019-12-17'
               type: string
             status_url:
-              description: ステータス確認用URL
+              description: 仕訳帳のステータスの取得用URL
               example: https://api.freee.co.jp/api/1/journals/reports/4/status
               type: string
             up_to_date:
@@ -21720,7 +21737,7 @@ components:
           example: '2019-12-17'
           type: string
         receipt_ids:
-          description: 証憑ファイルID（ファイルボックスのファイルID）（配列）
+          description: ファイルボックス（証憑ファイル）ID（配列）
           items:
             example: 1
             maximum: 2147483647
@@ -21859,7 +21876,7 @@ components:
           example: '2019-12-17'
           type: string
         receipt_ids:
-          description: 証憑ファイルID（ファイルボックスのファイルID）（配列）
+          description: ファイルボックス（証憑ファイル）ID（配列）
           items:
             example: 1
             maximum: 2147483647
@@ -22057,7 +22074,7 @@ components:
           example: '2019-12-17'
           type: string
         receipt_ids:
-          description: 証憑ファイルID（ファイルボックスのファイルID）
+          description: ファイルボックス（証憑ファイル）ID
           example:
           - 1
           - 2
@@ -22259,7 +22276,7 @@ components:
           maxLength: 255
           type: string
         name:
-          description: 取引先名 (255文字以内)
+          description: 取引先名 (255文字以内、重複不可)
           example: 新しい取引先
           maxLength: 255
           type: string
@@ -22428,7 +22445,7 @@ components:
                     trueの場合、Web画面での取引登録時などに入力候補として表示されます。
                   </li>
                   <li>
-                    falseの場合、取引先自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの取引先をパラメータに指定すれば、取引などにfalseの取引先を設定できます。
+                    falseの場合、取引先自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入・支出）の作成APIなどでfalseの取引先をパラメータに指定すれば、取引などにfalseの取引先を設定できます。
                   </li>
                 </ul>
               type: boolean
@@ -22737,7 +22754,7 @@ components:
           maxLength: 255
           type: string
         name:
-          description: 取引先名 (255文字以内)
+          description: 取引先名 (255文字以内、重複不可)
           example: 新しい取引先
           maxLength: 255
           type: string
@@ -22908,7 +22925,7 @@ components:
                       trueの場合、Web画面での取引登録時などに入力候補として表示されます。
                     </li>
                     <li>
-                      falseの場合、取引先自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの取引先をパラメータに指定すれば、取引などにfalseの取引先を設定できます。
+                      falseの場合、取引先自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入・支出）の作成APIなどでfalseの取引先をパラメータに指定すれば、取引などにfalseの取引先を設定できます。
                     </li>
                   </ul>
                 type: boolean
@@ -23386,7 +23403,7 @@ components:
               segment_1_tag_id:
                 description: |
                   セグメント１ID<br>
-                  セグメントタグ一覧APIを利用して取得してください。<br>
+                  セグメントタグ一覧の取得APIを利用して取得してください。<br>
                   <a href="https://support.freee.co.jp/hc/ja/articles/360020679611" target="_blank">セグメント（分析用タグ）の設定</a><br>
                 example: 1
                 format: int64
@@ -23396,7 +23413,7 @@ components:
               segment_2_tag_id:
                 description: |
                   セグメント２ID(法人向けエンタープライズプラン)<br>
-                  セグメントタグ一覧APIを利用して取得してください。<br>
+                  セグメントタグ一覧の取得APIを利用して取得してください。<br>
                   <a href="https://support.freee.co.jp/hc/ja/articles/360020679611" target="_blank">セグメント（分析用タグ）の設定</a><br>
                 example: 1
                 format: int64
@@ -23406,7 +23423,7 @@ components:
               segment_3_tag_id:
                 description: |
                   セグメント３ID(法人向けエンタープライズプラン)<br>
-                  セグメントタグ一覧APIを利用して取得してください。<br>
+                  セグメントタグ一覧の取得APIを利用して取得してください。<br>
                   <a href="https://support.freee.co.jp/hc/ja/articles/360020679611" target="_blank">セグメント（分析用タグ）の設定</a><br>
                 example: 1
                 format: int64
@@ -23437,7 +23454,7 @@ components:
             type: object
           type: array
         receipt_ids:
-          description: 証憑ファイルID（ファイルボックスのファイルID）（配列）
+          description: ファイルボックス（証憑ファイル）ID（配列）
           items:
             example: 1
             maximum: 2147483647
@@ -23843,7 +23860,7 @@ components:
                 type: object
               type: array
             receipt_ids:
-              description: 証憑ファイルID（ファイルボックスのファイルID）
+              description: ファイルボックス（証憑ファイル）ID
               example:
               - 1
               - 2
@@ -24118,7 +24135,7 @@ components:
               segment_1_tag_id:
                 description: |
                   セグメント１ID<br>
-                  セグメントタグ一覧APIを利用して取得してください。<br>
+                  セグメントタグ一覧の取得APIを利用して取得してください。<br>
                   <a href="https://support.freee.co.jp/hc/ja/articles/360020679611" target="_blank">セグメント（分析用タグ）の設定</a><br>
                 example: 1
                 format: int64
@@ -24128,7 +24145,7 @@ components:
               segment_2_tag_id:
                 description: |
                   セグメント２ID(法人向けエンタープライズプラン)<br>
-                  セグメントタグ一覧APIを利用して取得してください。<br>
+                  セグメントタグ一覧の取得APIを利用して取得してください。<br>
                   <a href="https://support.freee.co.jp/hc/ja/articles/360020679611" target="_blank">セグメント（分析用タグ）の設定</a><br>
                 example: 1
                 format: int64
@@ -24138,7 +24155,7 @@ components:
               segment_3_tag_id:
                 description: |
                   セグメント３ID(法人向けエンタープライズプラン)<br>
-                  セグメントタグ一覧APIを利用して取得してください。<br>
+                  セグメントタグ一覧の取得APIを利用して取得してください。<br>
                   <a href="https://support.freee.co.jp/hc/ja/articles/360020679611" target="_blank">セグメント（分析用タグ）の設定</a><br>
                 example: 1
                 format: int64
@@ -24169,7 +24186,7 @@ components:
             type: object
           type: array
         receipt_ids:
-          description: 証憑ファイルID（ファイルボックスのファイルID）（配列）
+          description: ファイルボックス（証憑ファイル）ID（配列）
           items:
             example: 1
             maximum: 2147483647
@@ -25809,6 +25826,17 @@ components:
           description: メモ
           example: タクシー利用
           type: string
+        document_type:
+          description: |
+            この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。
+            書類の種類（receipt: 領収書、invoice: 請求書、other: その他）
+          enum:
+          - receipt
+          - invoice
+          - other
+          example: receipt
+          nullable: true
+          type: string
         file_src:
           deprecated: true
           description: |-
@@ -25824,11 +25852,23 @@ components:
           example: https://www.freee.co.jp/api/p/receipts/revisions/1234xxxxx/download
           type: string
         id:
-          description: 証憑ファイルID
+          description: ファイルボックス（証憑ファイル）ID
           example: 1
           maximum: 2147483647
           minimum: 1
           type: integer
+        invoice_registration_number:
+          description: |
+            この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。
+            インボイス制度適格請求書発行事業者登録番号
+            - 先頭T数字13桁の固定14桁の文字列
+            <a target="_blank" href="https://www.invoice-kohyo.nta.go.jp/index.html">国税庁インボイス制度適格請求書発行事業者公表サイト</a>
+          example: T1000000000001
+          maxLength: 14
+          minLength: 14
+          nullable: true
+          pattern: "^T[1-9][0-9]{12}$"
+          type: string
         issue_date:
           description: 発生日
           example: '2019-12-17'
@@ -25851,6 +25891,16 @@ components:
           - safety_contact_file
           - public_api
           example: public_api
+          type: string
+        qualified_invoice:
+          description: |
+            この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。
+            適格請求書等（qualified: 該当する、not_qualified: 該当しない）
+          enum:
+          - qualified
+          - not_qualified
+          example: qualified
+          nullable: true
           type: string
         receipt_metadatum:
           properties:
@@ -25924,8 +25974,29 @@ components:
           description: メモ (255文字以内)
           maxLength: 255
           type: string
+        document_type:
+          description: |
+            この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。
+            書類の種類（receipt: 領収書、invoice: 請求書、other: その他）
+          enum:
+          - receipt
+          - invoice
+          - other
+          example: receipt
+          nullable: true
+          type: string
         issue_date:
           description: 取引日 (yyyy-mm-dd)
+          type: string
+        qualified_invoice:
+          description: |
+            この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。
+            適格請求書等（qualified: 該当する、not_qualified: 該当しない）
+          enum:
+          - qualified
+          - not_qualified
+          example: qualified
+          nullable: true
           type: string
         receipt:
           description: 証憑ファイル
@@ -25974,9 +26045,42 @@ components:
           example: メモ
           maxLength: 255
           type: string
+        document_type:
+          description: |
+            この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。
+            書類の種類（receipt: 領収書、invoice: 請求書、other: その他）
+          enum:
+          - receipt
+          - invoice
+          - other
+          example: receipt
+          nullable: true
+          type: string
+        invoice_registration_number:
+          description: |
+            この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。
+            インボイス制度適格請求書発行事業者登録番号
+            - 先頭T数字13桁の固定14桁の文字列
+            <a target="_blank" href="https://www.invoice-kohyo.nta.go.jp/index.html">国税庁インボイス制度適格請求書発行事業者公表サイト</a>
+          example: T1000000000001
+          maxLength: 14
+          minLength: 13
+          nullable: true
+          pattern: "^T?[1-9][0-9]{12}$"
+          type: string
         issue_date:
           description: 取引日 (yyyy-mm-dd)
           example: '2019-12-17'
+          type: string
+        qualified_invoice:
+          description: |
+            この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。
+            適格請求書等（qualified: 該当する、not_qualified: 該当しない）
+          enum:
+          - qualified
+          - not_qualified
+          example: qualified
+          nullable: true
           type: string
         receipt_metadatum:
           properties:
@@ -26237,7 +26341,7 @@ components:
                 trueの場合、Web画面での取引登録時などに入力候補として表示されます。
               </li>
               <li>
-                falseの場合、部門自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの部門をパラメータに指定すれば、取引などにfalseの部門を設定できます。
+                falseの場合、部門自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入・支出）の作成APIなどでfalseの部門をパラメータに指定すれば、取引などにfalseの部門を設定できます。
               </li>
             </ul>
           example: true
@@ -33208,15 +33312,15 @@ tags:
   name: Invoices
 - description: |2
 
-    <p>取引（収入／支出）</p>
+    <p>取引（収入・支出）</p>
   name: Deals
 - description: |2
 
-    <p>取引の支払行</p>
+    <p>取引（収入・支出）の支払行</p>
   name: Payments
 - description: |2
 
-    <p>取引の+更新</p>
+    <p>取引（収入・支出）の+更新</p>
   name: Renews
 - description: |2
 
@@ -33252,7 +33356,7 @@ tags:
   name: Transfers
 - description: |2
 
-    <p>明細</p>
+    <p>口座明細</p>
   name: Wallet txns
 - description: |2
 
@@ -33264,7 +33368,7 @@ tags:
   name: Trial balance
 - description: |2
 
-    <p>ファイルボックス</p>
+    <p>ファイルボックス（証憑ファイル）</p>
   name: Receipts
 - description: |2
 

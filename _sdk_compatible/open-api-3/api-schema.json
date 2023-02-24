@@ -46,15 +46,15 @@
     },
     {
       "name": "Deals",
-      "description": "\n<p>取引（収入／支出）</p>\n"
+      "description": "\n<p>取引（収入・支出）</p>\n"
     },
     {
       "name": "Payments",
-      "description": "\n<p>取引の支払行</p>\n"
+      "description": "\n<p>取引（収入・支出）の支払行</p>\n"
     },
     {
       "name": "Renews",
-      "description": "\n<p>取引の+更新</p>\n"
+      "description": "\n<p>取引（収入・支出）の+更新</p>\n"
     },
     {
       "name": "ManualJournals",
@@ -90,7 +90,7 @@
     },
     {
       "name": "Wallet txns",
-      "description": "\n<p>明細</p>\n"
+      "description": "\n<p>口座明細</p>\n"
     },
     {
       "name": "Journals",
@@ -102,7 +102,7 @@
     },
     {
       "name": "Receipts",
-      "description": "\n<p>ファイルボックス</p>\n"
+      "description": "\n<p>ファイルボックス（証憑ファイル）</p>\n"
     },
     {
       "name": "Expense applications",
@@ -804,7 +804,7 @@
         "tags": [
           "Account items"
         ],
-        "summary": "勘定科目の詳細情報の取得",
+        "summary": "勘定科目の取得",
         "description": "",
         "operationId": "get_account_item",
         "parameters": [
@@ -1433,7 +1433,7 @@
         "tags": [
           "Tags"
         ],
-        "summary": "メモタグの詳細情報の取得",
+        "summary": "メモタグの取得",
         "description": "",
         "operationId": "get_tag",
         "parameters": [
@@ -1879,6 +1879,7 @@
         "tags": [
           "Sections"
         ],
+        "summary": "部門の取得",
         "description": "",
         "operationId": "get_section",
         "parameters": [
@@ -3248,7 +3249,7 @@
         "tags": [
           "Deals"
         ],
-        "summary": "取引（収入／支出）一覧の取得",
+        "summary": "取引（収入・支出）一覧の取得",
         "description": "",
         "operationId": "get_deals",
         "parameters": [
@@ -3501,11 +3502,11 @@
         "tags": [
           "Deals"
         ],
-        "summary": "取引（収入／支出）の作成",
+        "summary": "取引（収入・支出）の作成",
         "description": "",
         "operationId": "create_deal",
         "requestBody": {
-          "description": "取引（収入／支出）の作成",
+          "description": "取引（収入・支出）の作成",
           "content": {
             "application/json": {
               "schema": {
@@ -3589,7 +3590,7 @@
         "tags": [
           "Deals"
         ],
-        "summary": "取引（収入／支出）の取得",
+        "summary": "取引（収入・支出）の取得",
         "description": "",
         "operationId": "get_deal",
         "parameters": [
@@ -3694,7 +3695,7 @@
         "tags": [
           "Deals"
         ],
-        "summary": "取引（収入／支出）の更新",
+        "summary": "取引（収入・支出）の更新",
         "description": "",
         "operationId": "update_deal",
         "parameters": [
@@ -3711,7 +3712,7 @@
           }
         ],
         "requestBody": {
-          "description": "取引（収入／支出）の更新",
+          "description": "取引（収入・支出）の更新",
           "content": {
             "application/json": {
               "schema": {
@@ -3793,7 +3794,8 @@
         "tags": [
           "Deals"
         ],
-        "summary": "取引（収入／支出）の削除",
+        "summary": "取引（収入・支出）の削除",
+        "description": "",
         "operationId": "destroy_deal",
         "parameters": [
           {
@@ -3875,8 +3877,7 @@
               }
             }
           }
-        },
-        "description": ""
+        }
       }
     },
     "/api/1/deals/{id}/renews": {
@@ -3884,7 +3885,7 @@
         "tags": [
           "Renews"
         ],
-        "summary": "取引（収入／支出）に対する+更新の作成",
+        "summary": "取引（収入・支出）の+更新の作成",
         "description": "",
         "operationId": "create_deal_renew",
         "parameters": [
@@ -3901,7 +3902,7 @@
           }
         ],
         "requestBody": {
-          "description": "取引（収入／支出）に対する+更新の情報",
+          "description": "取引（収入・支出）の+更新の作成",
           "content": {
             "application/json": {
               "schema": {
@@ -3975,7 +3976,7 @@
         "tags": [
           "Renews"
         ],
-        "summary": "取引（収入／支出）の+更新の更新",
+        "summary": "取引（収入・支出）の+更新の更新",
         "description": "",
         "operationId": "update_deal_renew",
         "parameters": [
@@ -4003,7 +4004,7 @@
           }
         ],
         "requestBody": {
-          "description": "+更新の更新情報",
+          "description": "取引（収入・支出）の+更新の更新",
           "content": {
             "application/json": {
               "schema": {
@@ -4075,7 +4076,7 @@
         "tags": [
           "Renews"
         ],
-        "summary": "取引（収入／支出）の+更新の削除",
+        "summary": "取引（収入・支出）の+更新の削除",
         "description": "",
         "operationId": "delete_deal_renew",
         "parameters": [
@@ -4172,7 +4173,7 @@
         "tags": [
           "Payments"
         ],
-        "summary": "取引（収入／支出）の支払行作成",
+        "summary": "取引（収入・支出）の支払行の作成",
         "description": "",
         "operationId": "create_deal_payment",
         "parameters": [
@@ -4189,7 +4190,7 @@
           }
         ],
         "requestBody": {
-          "description": "取引（収入／支出）の支払行作成",
+          "description": "取引（収入・支出）の支払行の作成",
           "content": {
             "application/json": {
               "schema": {
@@ -4273,7 +4274,7 @@
         "tags": [
           "Payments"
         ],
-        "summary": "取引（収入／支出）の支払行更新",
+        "summary": "取引（収入・支出）の支払行の更新",
         "description": "",
         "operationId": "update_deal_payment",
         "parameters": [
@@ -4302,7 +4303,7 @@
           }
         ],
         "requestBody": {
-          "description": "取引（収入／支出）の支払行更新",
+          "description": "取引（収入・支出）の支払行の更新",
           "content": {
             "application/json": {
               "schema": {
@@ -4384,7 +4385,7 @@
         "tags": [
           "Payments"
         ],
-        "summary": "取引（収入／支出）の支払行削除",
+        "summary": "取引（収入・支出）の支払行の削除",
         "description": "",
         "operationId": "destroy_deal_payment",
         "parameters": [
@@ -5243,7 +5244,7 @@
         "tags": [
           "Users"
         ],
-        "summary": "ログインユーザー情報の取得",
+        "summary": "ログインユーザーの取得",
         "description": "",
         "operationId": "get_users_me",
         "parameters": [
@@ -5339,11 +5340,11 @@
         "tags": [
           "Users"
         ],
-        "summary": "ユーザー情報の更新",
+        "summary": "ログインユーザーの更新",
         "description": "",
         "operationId": "update_user",
         "requestBody": {
-          "description": "ユーザー情報の更新",
+          "description": "ログインユーザーの更新",
           "content": {
             "application/json": {
               "schema": {
@@ -5445,7 +5446,7 @@
         ],
         "responses": {
           "200": {
-            "description": "<p>レスポンスの各キーは以下の項目と対応しています。</p>\n<p>詳細は <a href=\"https://support.freee.co.jp/hc/ja/articles/210265673\">https://support.freee.co.jp/hc/ja/articles/210265673</a> を参照してください。</p>\n<table>\n  <thead>\n    <tr>\n      <th style=\"padding: 5px\">キー</th>\n      <th style=\"padding: 5px\">対応する項目</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td style=\"padding: 5px\">wallet_txns</td>\n      <td style=\"padding: 5px\">自動で経理 / 取得した明細</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">deals</td>\n      <td style=\"padding: 5px\">取引</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">transfers</td>\n      <td style=\"padding: 5px\">口座振替</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">docs</td>\n      <td style=\"padding: 5px\">見積書・納品書・請求書・領収書・発注書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">doc_postings</td>\n      <td style=\"padding: 5px\">(請求書の)郵送</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">receipts</td>\n      <td style=\"padding: 5px\">ファイルボックス</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">receipt_stream_editor</td>\n      <td style=\"padding: 5px\">連続取引登録</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">spreadsheets</td>\n      <td style=\"padding: 5px\">エクセルインポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">expense_applications</td>\n      <td style=\"padding: 5px\">経費精算</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">expense_application_sync_payroll</td>\n      <td style=\"padding: 5px\">経費精算の給与連携</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">payment_requests</td>\n      <td style=\"padding: 5px\">支払依頼</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">approval_requests</td>\n      <td style=\"padding: 5px\">各種申請</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports</td>\n      <td style=\"padding: 5px\">収益 / 費用レポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_income_expense</td>\n      <td style=\"padding: 5px\">損益レポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_receivables</td>\n      <td style=\"padding: 5px\">入金管理レポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_payables</td>\n      <td style=\"padding: 5px\">支払管理レポート(一括振込ファイルを含む)</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_cash_balance</td>\n      <td style=\"padding: 5px\">現預金レポート/資金繰りレポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_managements_planning</td>\n      <td style=\"padding: 5px\">経営プランニング</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_managements_navigation</td>\n      <td style=\"padding: 5px\">経営ナビゲーション</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_crosstabs</td>\n      <td style=\"padding: 5px\">集計表</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_custom_reports_aggregate</td>\n      <td style=\"padding: 5px\">カスタムレポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_pl</td>\n      <td style=\"padding: 5px\">損益計算書(月次推移/試算表)</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_bs</td>\n      <td style=\"padding: 5px\">貸借対照表(月次推移/試算表)</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_general_ledgers</td>\n      <td style=\"padding: 5px\">総勘定元帳</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_journals</td>\n      <td style=\"padding: 5px\">仕訳帳</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">manual_journals</td>\n      <td style=\"padding: 5px\">振替伝票</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">fixed_assets</td>\n      <td style=\"padding: 5px\">固定資産台帳</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">inventory_refreshes</td>\n      <td style=\"padding: 5px\">在庫棚卸</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">biz_allocations</td>\n      <td style=\"padding: 5px\">家事按分</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">payment_records</td>\n      <td style=\"padding: 5px\">支払調書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">annual_reports</td>\n      <td style=\"padding: 5px\">決算書、確定申告書類</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">tax_reports</td>\n      <td style=\"padding: 5px\">消費税区分別表・消費税集計表</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">consumption_entries</td>\n      <td style=\"padding: 5px\">消費税申告書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">tax_return</td>\n      <td style=\"padding: 5px\">連携用データ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">account_item_statements</td>\n      <td style=\"padding: 5px\">勘定科目内訳明細書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">month_end</td>\n      <td style=\"padding: 5px\">月締め</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">year_end</td>\n      <td style=\"padding: 5px\">年度締め</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">walletables</td>\n      <td style=\"padding: 5px\">口座 / 口座の同期</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">companies</td>\n      <td style=\"padding: 5px\">事業所の設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">invitations</td>\n      <td style=\"padding: 5px\">メンバー招待</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">access_controls</td>\n      <td style=\"padding: 5px\">権限管理<i>※2023年2月にリリースされる予定の機能に関する権限です</i></td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">sign_in_logs</td>\n      <td style=\"padding: 5px\">ログイン履歴</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">user_attribute_logs</td>\n      <td style=\"padding: 5px\">ユーザー更新履歴<i>※2023年2月にリリースされる予定の機能に関する権限です</i></td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">app_role_logs</td>\n      <td style=\"padding: 5px\">権限変更履歴<i>※2023年2月にリリースされる予定の機能に関する権限です</i></td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">txn_relationship_logs</td>\n      <td style=\"padding: 5px\">仕訳関連履歴<i>※2023年2月にリリースされる予定の機能に関する権限です</i></td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">backups</td>\n      <td style=\"padding: 5px\">バックアップ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">opening_balances</td>\n      <td style=\"padding: 5px\">開始残高の設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">system_conversion</td>\n      <td style=\"padding: 5px\">乗り換え設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">resets</td>\n      <td style=\"padding: 5px\">リセット</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">partners</td>\n      <td style=\"padding: 5px\">取引先</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">items</td>\n      <td style=\"padding: 5px\">品目</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">sections</td>\n      <td style=\"padding: 5px\">部門</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">tags</td>\n      <td style=\"padding: 5px\">メモタグ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">account_items</td>\n      <td style=\"padding: 5px\">勘定科目</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">taxes</td>\n      <td style=\"padding: 5px\">税区分</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">payroll_item_sets</td>\n      <td style=\"padding: 5px\">給与連携の設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">user_matchers</td>\n      <td style=\"padding: 5px\">自動登録ルール</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">deal_templates</td>\n      <td style=\"padding: 5px\">取引テンプレート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">manual_journal_templates</td>\n      <td style=\"padding: 5px\">振替伝票テンプレート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">cost_allocations</td>\n      <td style=\"padding: 5px\">部門配賦</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">approval_flow_routes</td>\n      <td style=\"padding: 5px\">承認経路</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">expense_application_templates</td>\n      <td style=\"padding: 5px\">経費科目</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">request_forms</td>\n      <td style=\"padding: 5px\">申請フォーム</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">system_messages_for_admin</td>\n      <td style=\"padding: 5px\">管理者向けお知らせ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">company_internal_announcements</td>\n      <td style=\"padding: 5px\"><a href=\"https://support.freee.co.jp/hc/ja/articles/900002322383#:~:text=%E7%A4%BE%E5%86%85%E5%90%91%E3%81%91%E3%81%AE%E3%82%A2%E3%83%8A%E3%82%A6%E3%83%B3%E3%82%B9%E3%82%92%E6%8E%B2%E7%A4%BA%E3%81%A7%E3%81%8D%E3%82%8B%E6%A9%9F%E8%83%BD%E3%81%A7%E3%81%99%E3%80%82\" target=\"_blank\">アナウンス</a><i>※2023年2月にリリースされる予定の機能に関する権限です</i></td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">doc_change_logs</td>\n      <td style=\"padding: 5px\">受発注書類変更履歴</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">workflows</td>\n      <td style=\"padding: 5px\">仕訳承認</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">oauth_applications</td>\n      <td style=\"padding: 5px\">アプリ利用</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">oauth_authorizations</td>\n      <td style=\"padding: 5px\">アプリ認可</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">bank_accountant_staff_users</td>\n      <td style=\"padding: 5px\">アドバイザー事業所内でのメンバー管理</td>\n    </tr>\n  </tbody>\n</table>\n",
+            "description": "<p>レスポンスの各キーは以下の項目と対応しています。</p>\n<p>詳細は <a href=\"https://support.freee.co.jp/hc/ja/articles/210265673\">https://support.freee.co.jp/hc/ja/articles/210265673</a> を参照してください。</p>\n<table>\n  <thead>\n    <tr>\n      <th style=\"padding: 5px\">キー</th>\n      <th style=\"padding: 5px\">対応する項目</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td style=\"padding: 5px\">wallet_txns</td>\n      <td style=\"padding: 5px\">自動で経理 / 取得した明細</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">deals</td>\n      <td style=\"padding: 5px\">取引</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">transfers</td>\n      <td style=\"padding: 5px\">口座振替</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">docs</td>\n      <td style=\"padding: 5px\">見積書・納品書・請求書・領収書・発注書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">doc_postings</td>\n      <td style=\"padding: 5px\">(請求書の)郵送</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">receipts</td>\n      <td style=\"padding: 5px\">ファイルボックス</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">receipt_stream_editor</td>\n      <td style=\"padding: 5px\">連続取引登録</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">spreadsheets</td>\n      <td style=\"padding: 5px\">エクセルインポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">expense_applications</td>\n      <td style=\"padding: 5px\">経費精算</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">expense_application_sync_payroll</td>\n      <td style=\"padding: 5px\">経費精算の給与連携</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">payment_requests</td>\n      <td style=\"padding: 5px\">支払依頼</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">approval_requests</td>\n      <td style=\"padding: 5px\">各種申請</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports</td>\n      <td style=\"padding: 5px\">収益 / 費用レポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_income_expense</td>\n      <td style=\"padding: 5px\">損益レポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_receivables</td>\n      <td style=\"padding: 5px\">入金管理レポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_payables</td>\n      <td style=\"padding: 5px\">支払管理レポート(一括振込ファイルを含む)</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_cash_balance</td>\n      <td style=\"padding: 5px\">現預金レポート/資金繰りレポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_managements_planning</td>\n      <td style=\"padding: 5px\">経営プランニング</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_managements_navigation</td>\n      <td style=\"padding: 5px\">経営ナビゲーション</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_crosstabs</td>\n      <td style=\"padding: 5px\">集計表</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_custom_reports_aggregate</td>\n      <td style=\"padding: 5px\">カスタムレポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_pl</td>\n      <td style=\"padding: 5px\">損益計算書(月次推移/試算表)</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_bs</td>\n      <td style=\"padding: 5px\">貸借対照表(月次推移/試算表)</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_general_ledgers</td>\n      <td style=\"padding: 5px\">総勘定元帳</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_journals</td>\n      <td style=\"padding: 5px\">仕訳帳</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">manual_journals</td>\n      <td style=\"padding: 5px\">振替伝票</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">fixed_assets</td>\n      <td style=\"padding: 5px\">固定資産台帳</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">inventory_refreshes</td>\n      <td style=\"padding: 5px\">在庫棚卸</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">biz_allocations</td>\n      <td style=\"padding: 5px\">家事按分</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">payment_records</td>\n      <td style=\"padding: 5px\">支払調書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">annual_reports</td>\n      <td style=\"padding: 5px\">決算書、確定申告書類</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">tax_reports</td>\n      <td style=\"padding: 5px\">消費税区分別表・消費税集計表</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">consumption_entries</td>\n      <td style=\"padding: 5px\">消費税申告書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">tax_return</td>\n      <td style=\"padding: 5px\">連携用データ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">account_item_statements</td>\n      <td style=\"padding: 5px\">勘定科目内訳明細書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">month_end</td>\n      <td style=\"padding: 5px\">月締め</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">year_end</td>\n      <td style=\"padding: 5px\">年度締め</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">walletables</td>\n      <td style=\"padding: 5px\">口座 / 口座の同期</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">companies</td>\n      <td style=\"padding: 5px\">事業所の設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">invitations</td>\n      <td style=\"padding: 5px\">メンバー招待</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">access_controls</td>\n      <td style=\"padding: 5px\">権限管理</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">sign_in_logs</td>\n      <td style=\"padding: 5px\">ログイン履歴</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">user_attribute_logs</td>\n      <td style=\"padding: 5px\">ユーザー更新履歴</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">app_role_logs</td>\n      <td style=\"padding: 5px\">権限変更履歴</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">txn_relationship_logs</td>\n      <td style=\"padding: 5px\">仕訳関連履歴</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">backups</td>\n      <td style=\"padding: 5px\">バックアップ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">opening_balances</td>\n      <td style=\"padding: 5px\">開始残高の設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">system_conversion</td>\n      <td style=\"padding: 5px\">乗り換え設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">resets</td>\n      <td style=\"padding: 5px\">リセット</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">partners</td>\n      <td style=\"padding: 5px\">取引先</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">items</td>\n      <td style=\"padding: 5px\">品目</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">sections</td>\n      <td style=\"padding: 5px\">部門</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">tags</td>\n      <td style=\"padding: 5px\">メモタグ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">account_items</td>\n      <td style=\"padding: 5px\">勘定科目</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">taxes</td>\n      <td style=\"padding: 5px\">税区分</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">payroll_item_sets</td>\n      <td style=\"padding: 5px\">給与連携の設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">user_matchers</td>\n      <td style=\"padding: 5px\">自動登録ルール</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">deal_templates</td>\n      <td style=\"padding: 5px\">取引テンプレート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">manual_journal_templates</td>\n      <td style=\"padding: 5px\">振替伝票テンプレート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">cost_allocations</td>\n      <td style=\"padding: 5px\">部門配賦</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">approval_flow_routes</td>\n      <td style=\"padding: 5px\">承認経路</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">expense_application_templates</td>\n      <td style=\"padding: 5px\">経費科目</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">request_forms</td>\n      <td style=\"padding: 5px\">申請フォーム</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">system_messages_for_admin</td>\n      <td style=\"padding: 5px\">管理者向けお知らせ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">company_internal_announcements</td>\n      <td style=\"padding: 5px\"><a href=\"https://support.freee.co.jp/hc/ja/articles/900002322383#:~:text=%E7%A4%BE%E5%86%85%E5%90%91%E3%81%91%E3%81%AE%E3%82%A2%E3%83%8A%E3%82%A6%E3%83%B3%E3%82%B9%E3%82%92%E6%8E%B2%E7%A4%BA%E3%81%A7%E3%81%8D%E3%82%8B%E6%A9%9F%E8%83%BD%E3%81%A7%E3%81%99%E3%80%82\" target=\"_blank\">アナウンス</a></td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">doc_change_logs</td>\n      <td style=\"padding: 5px\">受発注書類変更履歴</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">workflows</td>\n      <td style=\"padding: 5px\">仕訳承認</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">oauth_applications</td>\n      <td style=\"padding: 5px\">アプリ利用</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">oauth_authorizations</td>\n      <td style=\"padding: 5px\">アプリ認可</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">bank_accountant_staff_users</td>\n      <td style=\"padding: 5px\">アドバイザー事業所内でのメンバー管理</td>\n    </tr>\n  </tbody>\n</table>\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -5858,7 +5859,7 @@
         "tags": [
           "Companies"
         ],
-        "summary": "事業所の詳細情報の取得",
+        "summary": "事業所の取得",
         "description": "",
         "operationId": "get_company",
         "parameters": [
@@ -6493,7 +6494,7 @@
         "tags": [
           "Taxes"
         ],
-        "summary": "税区分コード一覧の取得",
+        "summary": "税区分一覧の取得",
         "description": "",
         "operationId": "get_tax_codes",
         "responses": {
@@ -6566,7 +6567,7 @@
         "tags": [
           "Taxes"
         ],
-        "summary": "税区分コードの取得",
+        "summary": "税区分の取得",
         "description": "",
         "operationId": "get_tax_code",
         "parameters": [
@@ -6649,7 +6650,8 @@
         "tags": [
           "Taxes"
         ],
-        "summary": "税区分コード詳細一覧の取得",
+        "summary": "指定した事業所の税区分一覧の取得",
+        "description": "",
         "operationId": "get_taxes_companies",
         "parameters": [
           {
@@ -6807,8 +6809,7 @@
               }
             }
           }
-        },
-        "description": ""
+        }
       }
     },
     "/api/1/walletables": {
@@ -7009,7 +7010,7 @@
         "tags": [
           "Walletables"
         ],
-        "summary": "口座情報の取得",
+        "summary": "口座の取得",
         "description": "",
         "operationId": "get_walletable",
         "parameters": [
@@ -7956,7 +7957,7 @@
         "tags": [
           "Transfers"
         ],
-        "summary": "取引（振替）の削除する",
+        "summary": "取引（振替）の削除",
         "description": "",
         "operationId": "destroy_transfer",
         "parameters": [
@@ -8047,7 +8048,7 @@
         "tags": [
           "Wallet txns"
         ],
-        "summary": "明細一覧の取得",
+        "summary": "口座明細一覧の取得",
         "description": "",
         "operationId": "get_wallet_txns",
         "parameters": [
@@ -8203,11 +8204,11 @@
         "tags": [
           "Wallet txns"
         ],
-        "summary": "明細の作成",
+        "summary": "口座明細の作成",
         "description": "",
         "operationId": "create_wallet_txn",
         "requestBody": {
-          "description": "明細の作成",
+          "description": "口座明細の作成",
           "content": {
             "application/json": {
               "schema": {
@@ -8281,7 +8282,7 @@
         "tags": [
           "Wallet txns"
         ],
-        "summary": "明細の取得",
+        "summary": "口座明細の取得",
         "description": "",
         "operationId": "get_wallet_txn",
         "parameters": [
@@ -8375,7 +8376,7 @@
         "tags": [
           "Wallet txns"
         ],
-        "summary": "明細の削除",
+        "summary": "口座明細の削除",
         "description": "",
         "operationId": "destroy_wallet_txn",
         "parameters": [
@@ -8466,7 +8467,7 @@
         "tags": [
           "Journals"
         ],
-        "summary": "ダウンロード要求",
+        "summary": "仕訳帳のダウンロード要求",
         "description": "",
         "operationId": "get_journals",
         "parameters": [
@@ -8615,7 +8616,7 @@
         "tags": [
           "Journals"
         ],
-        "summary": "ステータス確認",
+        "summary": "仕訳帳のステータスの取得",
         "description": "",
         "operationId": "get_journal_status",
         "parameters": [
@@ -8711,7 +8712,7 @@
         "tags": [
           "Journals"
         ],
-        "summary": "ダウンロード実行",
+        "summary": "仕訳帳のダウンロード",
         "description": "",
         "operationId": "download_journal",
         "parameters": [
@@ -12753,7 +12754,7 @@
         "tags": [
           "Receipts"
         ],
-        "summary": "ファイルボックス 証憑ファイル一覧の取得",
+        "summary": "ファイルボックス（証憑ファイル）一覧の取得",
         "description": "",
         "operationId": "get_receipts",
         "parameters": [
@@ -12930,7 +12931,7 @@
         "tags": [
           "Receipts"
         ],
-        "summary": "ファイルボックス 証憑ファイルアップロード",
+        "summary": "ファイルボックス（証憑ファイル）のアップロード",
         "description": "",
         "operationId": "create_receipt",
         "requestBody": {
@@ -13002,14 +13003,14 @@
         "tags": [
           "Receipts"
         ],
-        "summary": "ファイルボックス 証憑ファイルの取得",
+        "summary": "ファイルボックス（証憑ファイル）の取得",
         "description": "",
         "operationId": "get_receipt",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "証憑ファイルID",
+            "description": "ファイルボックス（証憑ファイル）ID",
             "required": true,
             "schema": {
               "type": "integer",
@@ -13096,14 +13097,14 @@
         "tags": [
           "Receipts"
         ],
-        "summary": "ファイルボックス 証憑ファイル情報更新",
+        "summary": "ファイルボックス（証憑ファイル）の更新",
         "description": "",
         "operationId": "update_receipt",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "証憑ファイルID",
+            "description": "ファイルボックス（証憑ファイル）ID",
             "required": true,
             "schema": {
               "type": "integer",
@@ -13194,14 +13195,14 @@
         "tags": [
           "Receipts"
         ],
-        "summary": "ファイルボックス 証憑ファイルを削除する",
+        "summary": "ファイルボックス（証憑ファイル）の削除",
         "description": "",
         "operationId": "destroy_receipt",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "証憑ファイルID",
+            "description": "ファイルボックス（証憑ファイル）ID",
             "required": true,
             "schema": {
               "type": "integer",
@@ -13285,14 +13286,14 @@
         "tags": [
           "Receipts"
         ],
-        "summary": "ファイルボックス 証憑ファイルのダウンロード",
+        "summary": "ファイルボックス（証憑ファイル）のダウンロード",
         "description": "",
         "operationId": "download_receipt",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "証憑ファイルID",
+            "description": "ファイルボックス（証憑ファイル）ID",
             "required": true,
             "schema": {
               "type": "integer",
@@ -14895,7 +14896,7 @@
         "tags": [
           "Payment requests"
         ],
-        "summary": "支払依頼詳細の取得",
+        "summary": "支払依頼の取得",
         "description": "",
         "operationId": "get_payment_request",
         "parameters": [
@@ -15280,7 +15281,7 @@
         "tags": [
           "Approval requests"
         ],
-        "summary": "各種申請の一覧",
+        "summary": "各種申請一覧の取得",
         "description": "",
         "operationId": "get_approval_requests",
         "parameters": [
@@ -16474,7 +16475,7 @@
         "tags": [
           "Segment tags"
         ],
-        "summary": "セグメントの作成",
+        "summary": "セグメントタグの作成",
         "description": "",
         "operationId": "create_segment_tag",
         "parameters": [
@@ -16998,7 +16999,7 @@
           },
           "receipt_ids": {
             "type": "array",
-            "description": "証憑ファイルID（ファイルボックスのファイルID）（配列）",
+            "description": "ファイルボックス（証憑ファイル）ID（配列）",
             "items": {
               "type": "integer",
               "minimum": 1,
@@ -17164,7 +17165,7 @@
           "receipt_ids": {
             "type": "array",
             "nullable": true,
-            "description": "証憑ファイルID（ファイルボックスのファイルID）（配列）",
+            "description": "ファイルボックス（証憑ファイル）ID（配列）",
             "items": {
               "type": "integer",
               "minimum": 1,
@@ -17317,7 +17318,7 @@
           },
           "receipt_ids": {
             "type": "array",
-            "description": "証憑ファイルID（ファイルボックスのファイルID）（配列）",
+            "description": "ファイルボックス（証憑ファイル）ID（配列）",
             "items": {
               "type": "integer",
               "minimum": 1,
@@ -17478,7 +17479,7 @@
           },
           "receipt_ids": {
             "type": "array",
-            "description": "証憑ファイルID（ファイルボックスのファイルID）（配列）",
+            "description": "ファイルボックス（証憑ファイル）ID（配列）",
             "items": {
               "type": "integer",
               "minimum": 1,
@@ -17817,7 +17818,7 @@
                   "type": "integer",
                   "minimum": 1,
                   "maximum": 2147483647,
-                  "description": "証憑ファイルID（ファイルボックスのファイルID）",
+                  "description": "ファイルボックス（証憑ファイル）ID",
                   "example": 606
                 }
               }
@@ -17854,7 +17855,7 @@
             "format": "int64",
             "minimum": 1,
             "maximum": 9223372036854775807,
-            "description": "セグメント１ID(法人向けプロフェッショナル, 法人向けエンタープライズプラン)<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+            "description": "セグメント１ID(法人向けプロフェッショナル, 法人向けエンタープライズプラン)<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
             "example": 1
           },
           "segment_2_tag_id": {
@@ -17862,7 +17863,7 @@
             "format": "int64",
             "minimum": 1,
             "maximum": 9223372036854775807,
-            "description": "セグメント２ID(法人向け エンタープライズプラン)<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+            "description": "セグメント２ID(法人向け エンタープライズプラン)<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
             "example": 2
           },
           "segment_3_tag_id": {
@@ -17870,7 +17871,7 @@
             "format": "int64",
             "minimum": 1,
             "maximum": 9223372036854775807,
-            "description": "セグメント３ID(法人向け エンタープライズプラン)<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+            "description": "セグメント３ID(法人向け エンタープライズプラン)<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
             "example": 3
           }
         }
@@ -17966,7 +17967,7 @@
                   "type": "integer",
                   "minimum": 1,
                   "maximum": 2147483647,
-                  "description": "証憑ファイルID（ファイルボックスのファイルID）",
+                  "description": "ファイルボックス（証憑ファイル）ID",
                   "example": 606
                 }
               }
@@ -17996,7 +17997,7 @@
             "format": "int64",
             "minimum": 1,
             "maximum": 9223372036854775807,
-            "description": "セグメント１ID(法人向けプロフェッショナル, 法人向けエンタープライズプラン)<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+            "description": "セグメント１ID(法人向けプロフェッショナル, 法人向けエンタープライズプラン)<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
             "example": 1
           },
           "segment_2_tag_id": {
@@ -18004,7 +18005,7 @@
             "format": "int64",
             "minimum": 1,
             "maximum": 9223372036854775807,
-            "description": "セグメント２ID(法人向け エンタープライズプラン)<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+            "description": "セグメント２ID(法人向け エンタープライズプラン)<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
             "example": 2
           },
           "segment_3_tag_id": {
@@ -18012,7 +18013,7 @@
             "format": "int64",
             "minimum": 1,
             "maximum": 9223372036854775807,
-            "description": "セグメント３ID(法人向け エンタープライズプラン)<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+            "description": "セグメント３ID(法人向け エンタープライズプラン)<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
             "example": 3
           }
         }
@@ -18182,7 +18183,7 @@
                   "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
-                  "description": "セグメント１ID<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+                  "description": "セグメント１ID<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
                   "example": 1
                 },
                 "segment_2_tag_id": {
@@ -18190,7 +18191,7 @@
                   "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
-                  "description": "セグメント２ID(法人向けエンタープライズプラン)<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+                  "description": "セグメント２ID(法人向けエンタープライズプラン)<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
                   "example": 1
                 },
                 "segment_3_tag_id": {
@@ -18198,7 +18199,7 @@
                   "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
-                  "description": "セグメント３ID(法人向けエンタープライズプラン)<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+                  "description": "セグメント３ID(法人向けエンタープライズプラン)<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
                   "example": 1
                 }
               }
@@ -18239,7 +18240,7 @@
           },
           "receipt_ids": {
             "type": "array",
-            "description": "証憑ファイルID（ファイルボックスのファイルID）（配列）",
+            "description": "ファイルボックス（証憑ファイル）ID（配列）",
             "items": {
               "type": "integer",
               "minimum": 1,
@@ -18466,7 +18467,7 @@
                   "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
-                  "description": "セグメント１ID<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+                  "description": "セグメント１ID<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
                   "example": 1
                 },
                 "segment_2_tag_id": {
@@ -18474,7 +18475,7 @@
                   "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
-                  "description": "セグメント２ID(法人向けエンタープライズプラン)<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+                  "description": "セグメント２ID(法人向けエンタープライズプラン)<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
                   "example": 1
                 },
                 "segment_3_tag_id": {
@@ -18482,7 +18483,7 @@
                   "format": "int64",
                   "minimum": 1,
                   "maximum": 9223372036854775807,
-                  "description": "セグメント３ID(法人向けエンタープライズプラン)<br>\nセグメントタグ一覧APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+                  "description": "セグメント３ID(法人向けエンタープライズプラン)<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
                   "example": 1
                 }
               }
@@ -18515,7 +18516,7 @@
           },
           "receipt_ids": {
             "type": "array",
-            "description": "証憑ファイルID（ファイルボックスのファイルID）（配列）",
+            "description": "ファイルボックス（証憑ファイル）ID（配列）",
             "items": {
               "type": "integer",
               "minimum": 1,
@@ -18639,7 +18640,7 @@
           "name": {
             "type": "string",
             "maxLength": 255,
-            "description": "取引先名 (255文字以内)",
+            "description": "取引先名 (255文字以内、重複不可)",
             "example": "新しい取引先"
           },
           "code": {
@@ -18901,7 +18902,7 @@
           "name": {
             "type": "string",
             "maxLength": 255,
-            "description": "取引先名 (255文字以内)",
+            "description": "取引先名 (255文字以内、重複不可)",
             "example": "新しい取引先"
           },
           "shortcut1": {
@@ -19192,6 +19193,27 @@
             "nullable": true,
             "description": "金額",
             "example": 5250
+          },
+          "qualified_invoice": {
+            "type": "string",
+            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\n適格請求書等（qualified: 該当する、not_qualified: 該当しない）\n",
+            "enum": [
+              "qualified",
+              "not_qualified"
+            ],
+            "example": "qualified",
+            "nullable": true
+          },
+          "document_type": {
+            "type": "string",
+            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\n書類の種類（receipt: 領収書、invoice: 請求書、other: その他）\n",
+            "enum": [
+              "receipt",
+              "invoice",
+              "other"
+            ],
+            "example": "receipt",
+            "nullable": true
           }
         }
       },
@@ -19246,6 +19268,36 @@
                 "example": 5250
               }
             }
+          },
+          "qualified_invoice": {
+            "type": "string",
+            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\n適格請求書等（qualified: 該当する、not_qualified: 該当しない）\n",
+            "enum": [
+              "qualified",
+              "not_qualified"
+            ],
+            "example": "qualified",
+            "nullable": true
+          },
+          "invoice_registration_number": {
+            "type": "string",
+            "maxLength": 14,
+            "minLength": 13,
+            "pattern": "^T?[1-9][0-9]{12}$",
+            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者登録番号\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+            "example": "T1000000000001",
+            "nullable": true
+          },
+          "document_type": {
+            "type": "string",
+            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\n書類の種類（receipt: 領収書、invoice: 請求書、other: その他）\n",
+            "enum": [
+              "receipt",
+              "invoice",
+              "other"
+            ],
+            "example": "receipt",
+            "nullable": true
           }
         }
       },
@@ -19935,7 +19987,7 @@
               },
               "status_url": {
                 "type": "string",
-                "description": "ステータス確認用URL",
+                "description": "仕訳帳のステータスの取得用URL",
                 "example": "https://api.freee.co.jp/api/1/journals/reports/4/status"
               },
               "up_to_date": {
@@ -27346,7 +27398,7 @@
           },
           "available": {
             "type": "boolean",
-            "description": "部門の使用設定（true: 使用する、false: 使用しない）\n<br>\n<ul>\n  <li>\n    本APIでsectionを作成した場合はtrueになります。\n  </li>\n  <li>\n    falseにする場合はWeb画面から変更できます。\n  </li>\n  <li>\n    trueの場合、Web画面での取引登録時などに入力候補として表示されます。\n  </li>\n  <li>\n    falseの場合、部門自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの部門をパラメータに指定すれば、取引などにfalseの部門を設定できます。\n  </li>\n</ul>",
+            "description": "部門の使用設定（true: 使用する、false: 使用しない）\n<br>\n<ul>\n  <li>\n    本APIでsectionを作成した場合はtrueになります。\n  </li>\n  <li>\n    falseにする場合はWeb画面から変更できます。\n  </li>\n  <li>\n    trueの場合、Web画面での取引登録時などに入力候補として表示されます。\n  </li>\n  <li>\n    falseの場合、部門自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入・支出）の作成APIなどでfalseの部門をパラメータに指定すれば、取引などにfalseの部門を設定できます。\n  </li>\n</ul>",
             "example": true
           },
           "long_name": {
@@ -27670,7 +27722,7 @@
               },
               "receipts": {
                 "type": "array",
-                "description": "証憑ファイル（ファイルボックスのファイル）",
+                "description": "ファイルボックス（証憑ファイル）",
                 "items": {
                   "type": "object",
                   "required": [
@@ -27686,7 +27738,7 @@
                       "type": "integer",
                       "minimum": 1,
                       "maximum": 2147483647,
-                      "description": "証憑ファイルID（ファイルボックスのファイルID）",
+                      "description": "ファイルボックス（証憑ファイル）ID",
                       "example": 1
                     },
                     "status": {
@@ -28227,7 +28279,7 @@
           },
           "receipts": {
             "type": "array",
-            "description": "証憑ファイル（ファイルボックスのファイル）",
+            "description": "ファイルボックス（証憑ファイル）",
             "items": {
               "type": "object",
               "required": [
@@ -28244,7 +28296,7 @@
                   "type": "integer",
                   "minimum": 1,
                   "maximum": 2147483647,
-                  "description": "証憑ファイルID（ファイルボックスのファイルID）",
+                  "description": "ファイルボックス（証憑ファイル）ID",
                   "example": 1
                 },
                 "status": {
@@ -28296,7 +28348,7 @@
                 },
                 "file_src": {
                   "type": "string",
-                  "description": "ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。）\n<br>\n<br>\nfile_srcは廃止予定の属性になります。<br>\nfile_srcに替わり、証憑ファイル（ファイルボックスのファイル）のダウンロード APIをご利用ください。<br>\n証憑ファイル（ファイルボックスのファイル）のダウンロードAPIを利用することで、以下のようになります。\n<ul>\n  <li>アプリケーション利用者はfreee APIアプリケーションにログインしていれば、証憑ダウンロード毎にfreeeに改めてログインすることなくファイルが参照できるようになります。</li>\n</ul>",
+                  "description": "ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。）\n<br>\n<br>\nfile_srcは廃止予定の属性になります。<br>\nfile_srcに替わり、ファイルボックス（証憑ファイル）のダウンロード APIをご利用ください。<br>\nファイルボックス（証憑ファイル）のダウンロードAPIを利用することで、以下のようになります。\n<ul>\n  <li>アプリケーション利用者はfreee APIアプリケーションにログインしていれば、証憑ダウンロード毎にfreeeに改めてログインすることなくファイルが参照できるようになります。</li>\n</ul>",
                   "example": "https://www.freee.co.jp/api/p/receipts/revisions/1234xxxxx/download",
                   "deprecated": true
                 },
@@ -28772,7 +28824,7 @@
           },
           "available": {
             "type": "boolean",
-            "description": "品目の使用設定（true: 使用する、false: 使用しない）\n<br>\n<ul>\n  <li>\n    本APIでitemを作成した場合はtrueになります。\n  </li>\n  <li>\n    falseにする場合はWeb画面から変更できます。\n  </li>\n  <li>\n    trueの場合、Web画面での取引登録時などに入力候補として表示されます。\n  </li>\n  <li>\n    falseの場合、品目自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの品目をパラメータに指定すれば、取引などにfalseの品目を設定できます。\n  </li>\n</ul>"
+            "description": "品目の使用設定（true: 使用する、false: 使用しない）\n<br>\n<ul>\n  <li>\n    本APIでitemを作成した場合はtrueになります。\n  </li>\n  <li>\n    falseにする場合はWeb画面から変更できます。\n  </li>\n  <li>\n    trueの場合、Web画面での取引登録時などに入力候補として表示されます。\n  </li>\n  <li>\n    falseの場合、品目自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入・支出）の作成APIなどでfalseの品目をパラメータに指定すれば、取引などにfalseの品目を設定できます。\n  </li>\n</ul>"
           },
           "shortcut1": {
             "type": "string",
@@ -29035,7 +29087,7 @@
           },
           "receipt_ids": {
             "type": "array",
-            "description": "証憑ファイルID（ファイルボックスのファイルID）",
+            "description": "ファイルボックス（証憑ファイル）ID",
             "example": [
               1,
               2,
@@ -30131,7 +30183,7 @@
                 },
                 "available": {
                   "type": "boolean",
-                  "description": "取引先の使用設定（true: 使用する、false: 使用しない）\n<br>\n<ul>\n  <li>\n    本APIでpartnerを作成した場合はtrueになります。\n  </li>\n  <li>\n    falseにする場合はWeb画面から変更できます。\n  </li>\n  <li>\n    trueの場合、Web画面での取引登録時などに入力候補として表示されます。\n  </li>\n  <li>\n    falseの場合、取引先自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの取引先をパラメータに指定すれば、取引などにfalseの取引先を設定できます。\n  </li>\n</ul>"
+                  "description": "取引先の使用設定（true: 使用する、false: 使用しない）\n<br>\n<ul>\n  <li>\n    本APIでpartnerを作成した場合はtrueになります。\n  </li>\n  <li>\n    falseにする場合はWeb画面から変更できます。\n  </li>\n  <li>\n    trueの場合、Web画面での取引登録時などに入力候補として表示されます。\n  </li>\n  <li>\n    falseの場合、取引先自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入・支出）の作成APIなどでfalseの取引先をパラメータに指定すれば、取引などにfalseの取引先を設定できます。\n  </li>\n</ul>"
                 },
                 "shortcut1": {
                   "type": "string",
@@ -30388,7 +30440,7 @@
               },
               "available": {
                 "type": "boolean",
-                "description": "取引先の使用設定（true: 使用する、false: 使用しない）\n<br>\n<ul>\n  <li>\n    本APIでpartnerを作成した場合はtrueになります。\n  </li>\n  <li>\n    falseにする場合はWeb画面から変更できます。\n  </li>\n  <li>\n    trueの場合、Web画面での取引登録時などに入力候補として表示されます。\n  </li>\n  <li>\n    falseの場合、取引先自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの取引先をパラメータに指定すれば、取引などにfalseの取引先を設定できます。\n  </li>\n</ul>"
+                "description": "取引先の使用設定（true: 使用する、false: 使用しない）\n<br>\n<ul>\n  <li>\n    本APIでpartnerを作成した場合はtrueになります。\n  </li>\n  <li>\n    falseにする場合はWeb画面から変更できます。\n  </li>\n  <li>\n    trueの場合、Web画面での取引登録時などに入力候補として表示されます。\n  </li>\n  <li>\n    falseの場合、取引先自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入・支出）の作成APIなどでfalseの取引先をパラメータに指定すれば、取引などにfalseの取引先を設定できます。\n  </li>\n</ul>"
               },
               "shortcut1": {
                 "type": "string",
@@ -31459,7 +31511,7 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 2147483647,
-            "description": "証憑ファイルID",
+            "description": "ファイルボックス（証憑ファイル）ID",
             "example": 1
           },
           "status": {
@@ -31568,6 +31620,36 @@
                 "example": 5250
               }
             }
+          },
+          "qualified_invoice": {
+            "type": "string",
+            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\n適格請求書等（qualified: 該当する、not_qualified: 該当しない）\n",
+            "enum": [
+              "qualified",
+              "not_qualified"
+            ],
+            "example": "qualified",
+            "nullable": true
+          },
+          "invoice_registration_number": {
+            "type": "string",
+            "maxLength": 14,
+            "minLength": 14,
+            "pattern": "^T[1-9][0-9]{12}$",
+            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者登録番号\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+            "example": "T1000000000001",
+            "nullable": true
+          },
+          "document_type": {
+            "type": "string",
+            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\n書類の種類（receipt: 領収書、invoice: 請求書、other: その他）\n",
+            "enum": [
+              "receipt",
+              "invoice",
+              "other"
+            ],
+            "example": "receipt",
+            "nullable": true
           }
         }
       },
@@ -31791,7 +31873,7 @@
                         "type": "integer",
                         "minimum": 1,
                         "maximum": 2147483647,
-                        "description": "証憑ファイルID（ファイルボックスのファイルID）",
+                        "description": "ファイルボックス（証憑ファイル）ID",
                         "example": 606
                       }
                     }
@@ -32014,7 +32096,7 @@
                       "type": "integer",
                       "minimum": 1,
                       "maximum": 2147483647,
-                      "description": "証憑ファイルID（ファイルボックスのファイルID）",
+                      "description": "ファイルボックス（証憑ファイル）ID",
                       "example": 606,
                       "nullable": true
                     }
@@ -32712,7 +32794,7 @@
               },
               "receipt_ids": {
                 "type": "array",
-                "description": "証憑ファイルID（ファイルボックスのファイルID）",
+                "description": "ファイルボックス（証憑ファイル）ID",
                 "example": [
                   1,
                   2,
