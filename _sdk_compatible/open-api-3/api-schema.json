@@ -18730,6 +18730,21 @@
               "payee"
             ]
           },
+          "qualified_invoice_issuer": {
+            "type": "boolean",
+            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者（true: 対象事業者、false: 非対象事業者）\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+            "example": false,
+            "default": false
+          },
+          "invoice_registration_number": {
+            "type": "string",
+            "maxLength": 14,
+            "minLength": 13,
+            "pattern": "^T?[1-9][0-9]{12}$",
+            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者登録番号\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+            "example": "T1000000000001",
+            "nullable": true
+          },
           "address_attributes": {
             "type": "object",
             "properties": {
@@ -18986,6 +19001,20 @@
               "payer",
               "payee"
             ]
+          },
+          "qualified_invoice_issuer": {
+            "type": "boolean",
+            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者（true: 対象事業者、false: 非対象事業者）\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+            "example": false
+          },
+          "invoice_registration_number": {
+            "type": "string",
+            "maxLength": 14,
+            "minLength": 13,
+            "pattern": "^T?[1-9][0-9]{12}$",
+            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者登録番号\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+            "example": "T1000000000001",
+            "nullable": true
           },
           "address_attributes": {
             "type": "object",
@@ -30267,6 +30296,17 @@
                     "payee"
                   ]
                 },
+                "qualified_invoice_issuer": {
+                  "type": "boolean",
+                  "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者（true: 対象事業者、false: 非対象事業者）\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+                  "example": false
+                },
+                "invoice_registration_number": {
+                  "type": "string",
+                  "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者登録番号\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+                  "example": "T1000000000001",
+                  "nullable": true
+                },
                 "address_attributes": {
                   "type": "object",
                   "properties": {
@@ -30523,6 +30563,17 @@
                   "payer",
                   "payee"
                 ]
+              },
+              "qualified_invoice_issuer": {
+                "type": "boolean",
+                "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者（true: 対象事業者、false: 非対象事業者）\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+                "example": false
+              },
+              "invoice_registration_number": {
+                "type": "string",
+                "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者登録番号\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+                "example": "T1000000000001",
+                "nullable": true
               },
               "address_attributes": {
                 "type": "object",
