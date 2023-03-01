@@ -22270,6 +22270,18 @@ components:
               minimum: 1
               type: integer
           type: object
+        invoice_registration_number:
+          description: |
+            この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。
+            インボイス制度適格請求書発行事業者登録番号
+            - 先頭T数字13桁の固定14桁の文字列
+            <a target="_blank" href="https://www.invoice-kohyo.nta.go.jp/index.html">国税庁インボイス制度適格請求書発行事業者公表サイト</a>
+          example: T1000000000001
+          maxLength: 14
+          minLength: 13
+          nullable: true
+          pattern: "^T?[1-9][0-9]{12}$"
+          type: string
         long_name:
           description: 正式名称（255文字以内）
           example: 新しい取引先正式名称
@@ -22380,6 +22392,14 @@ components:
           description: 電話番号
           example: 03-1234-xxxx
           type: string
+        qualified_invoice_issuer:
+          default: false
+          description: |
+            この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。
+            インボイス制度適格請求書発行事業者（true: 対象事業者、false: 非対象事業者）
+            <a target="_blank" href="https://www.invoice-kohyo.nta.go.jp/index.html">国税庁インボイス制度適格請求書発行事業者公表サイト</a>
+          example: false
+          type: boolean
         shortcut1:
           description: ショートカット１ (255文字以内)
           example: NEWPARTNER
@@ -22509,6 +22529,15 @@ components:
                   nullable: true
                   type: integer
               type: object
+            invoice_registration_number:
+              description: |
+                この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。
+                インボイス制度適格請求書発行事業者登録番号
+                - 先頭T数字13桁の固定14桁の文字列
+                <a target="_blank" href="https://www.invoice-kohyo.nta.go.jp/index.html">国税庁インボイス制度適格請求書発行事業者公表サイト</a>
+              example: T1000000000001
+              nullable: true
+              type: string
             long_name:
               description: 正式名称（255文字以内）
               example: 新しい取引先正式名称
@@ -22639,6 +22668,13 @@ components:
               example: 03-1234-xxxx
               nullable: true
               type: string
+            qualified_invoice_issuer:
+              description: |
+                この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。
+                インボイス制度適格請求書発行事業者（true: 対象事業者、false: 非対象事業者）
+                <a target="_blank" href="https://www.invoice-kohyo.nta.go.jp/index.html">国税庁インボイス制度適格請求書発行事業者公表サイト</a>
+              example: false
+              type: boolean
             shortcut1:
               description: ショートカット1 (255文字以内)
               example: ABC
@@ -22748,6 +22784,18 @@ components:
               minimum: 1
               type: integer
           type: object
+        invoice_registration_number:
+          description: |
+            この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。
+            インボイス制度適格請求書発行事業者登録番号
+            - 先頭T数字13桁の固定14桁の文字列
+            <a target="_blank" href="https://www.invoice-kohyo.nta.go.jp/index.html">国税庁インボイス制度適格請求書発行事業者公表サイト</a>
+          example: T1000000000001
+          maxLength: 14
+          minLength: 13
+          nullable: true
+          pattern: "^T?[1-9][0-9]{12}$"
+          type: string
         long_name:
           description: 正式名称（255文字以内）
           example: 新しい取引先正式名称
@@ -22859,6 +22907,13 @@ components:
           description: 電話番号
           example: 03-1234-xxxx
           type: string
+        qualified_invoice_issuer:
+          description: |
+            この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。
+            インボイス制度適格請求書発行事業者（true: 対象事業者、false: 非対象事業者）
+            <a target="_blank" href="https://www.invoice-kohyo.nta.go.jp/index.html">国税庁インボイス制度適格請求書発行事業者公表サイト</a>
+          example: false
+          type: boolean
         shortcut1:
           description: ショートカット１ (255文字以内)
           example: NEWPARTNER
@@ -22965,6 +23020,15 @@ components:
                 maximum: 2147483647
                 minimum: 1
                 type: integer
+              invoice_registration_number:
+                description: |
+                  この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。
+                  インボイス制度適格請求書発行事業者登録番号
+                  - 先頭T数字13桁の固定14桁の文字列
+                  <a target="_blank" href="https://www.invoice-kohyo.nta.go.jp/index.html">国税庁インボイス制度適格請求書発行事業者公表サイト</a>
+                example: T1000000000001
+                nullable: true
+                type: string
               long_name:
                 description: 正式名称（255文字以内）
                 example: 新しい取引先正式名称
@@ -23071,6 +23135,13 @@ components:
                 example: 03-1234-xxxx
                 nullable: true
                 type: string
+              qualified_invoice_issuer:
+                description: |
+                  この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。
+                  インボイス制度適格請求書発行事業者（true: 対象事業者、false: 非対象事業者）
+                  <a target="_blank" href="https://www.invoice-kohyo.nta.go.jp/index.html">国税庁インボイス制度適格請求書発行事業者公表サイト</a>
+                example: false
+                type: boolean
               shortcut1:
                 description: ショートカット1 (255文字以内)
                 example: ABC
