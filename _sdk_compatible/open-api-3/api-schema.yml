@@ -19810,10 +19810,12 @@ components:
                 type: integer
               line_type:
                 description: |
-                  '行の種類 (deal_line: 支払依頼の通常取引行, withholding_tax: 源泉所得税行)'<br>
-                  'デフォルトは deal_line: 支払依頼の通常取引行 です'
+                  '行の種類 (deal_line: 支払依頼の通常取引行, negative_line: 支払依頼の控除・マイナス行, withholding_tax: 源泉所得税行)'<br>
+                  'デフォルトは deal_line: 支払依頼の通常取引行 です'<br>
+                  '※ negative_line は2023年3月下旬から利用できる予定です'
                 enum:
                 - deal_line
+                - negative_line
                 - withholding_tax
                 example: deal_line
                 type: string
@@ -20215,9 +20217,12 @@ components:
                     nullable: true
                     type: integer
                   line_type:
-                    description: '行の種類 (deal_line: 支払依頼の通常取引行, withholding_tax: 源泉所得税行)'
+                    description: |
+                      '行の種類 (deal_line: 支払依頼の通常取引行, negative_line: 支払依頼の控除・マイナス行, withholding_tax: 源泉所得税行)'<br>
+                      '※ negative_line は2023年3月下旬から利用できる予定です'
                     enum:
                     - deal_line
+                    - negative_line
                     - withholding_tax
                     example: deal_line
                     type: string
@@ -20542,10 +20547,12 @@ components:
                 type: integer
               line_type:
                 description: |
-                  '行の種類 (deal_line: 支払依頼の通常取引行, withholding_tax: 源泉所得税行)'<br>
-                  'デフォルトは deal_line: 支払依頼の通常取引行 です'
+                  '行の種類 (deal_line: 支払依頼の通常取引行, negative_line: 支払依頼の控除・マイナス行, withholding_tax: 源泉所得税行)'<br>
+                  'デフォルトは deal_line: 支払依頼の通常取引行 です'<br>
+                  '※ negative_line は2023年3月下旬から利用できる予定です'
                 enum:
                 - deal_line
+                - negative_line
                 - withholding_tax
                 example: deal_line
                 type: string
@@ -22406,7 +22413,6 @@ components:
           - invoice
           - other
           example: receipt
-          nullable: true
           type: string
         issue_date:
           description: 取引日 (yyyy-mm-dd)
@@ -22419,7 +22425,6 @@ components:
           - qualified
           - not_qualified
           example: qualified
-          nullable: true
           type: string
         receipt:
           description: 証憑ファイル
