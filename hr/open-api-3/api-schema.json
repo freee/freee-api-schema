@@ -12176,6 +12176,13 @@
             "items": {
               "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentParams"
             }
+          },
+          "total_count": {
+            "type": "integer",
+            "description": "合計件数",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647
           }
         }
       },
@@ -12209,6 +12216,752 @@
               "submitted",
               "fixed"
             ]
+          }
+        }
+      },
+      "ApiV1EmployeeYearendAdjustmentController.update_employee_body": {
+        "type": "object",
+        "required": [
+          "company_id",
+          "employee"
+        ],
+        "properties": {
+          "company_id": {
+            "type": "integer",
+            "description": "更新対象事業所ID（必須）",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "employee": {
+            "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentEmployeeUpdateRequestSerializer"
+          }
+        }
+      },
+      "ApiV1EmployeeYearendAdjustmentEmployeeUpdateRequestSerializer": {
+        "type": "object",
+        "properties": {
+          "last_name": {
+            "type": "string",
+            "description": "姓 null不可",
+            "maxLength": 255,
+            "example": "山田"
+          },
+          "first_name": {
+            "type": "string",
+            "description": "名 null不可",
+            "maxLength": 255,
+            "example": "太郎"
+          },
+          "last_name_kana": {
+            "type": "string",
+            "description": "姓カナ",
+            "maxLength": 255,
+            "example": "ヤマダ"
+          },
+          "first_name_kana": {
+            "type": "string",
+            "description": "名カナ",
+            "maxLength": 255,
+            "example": "タロウ"
+          },
+          "zipcode1": {
+            "type": "string",
+            "description": "住民票住所の郵便番号1",
+            "maxLength": 3,
+            "example": "141"
+          },
+          "zipcode2": {
+            "type": "string",
+            "description": "住民票住所の郵便番号2",
+            "maxLength": 4,
+            "example": "0031"
+          },
+          "prefecture_code": {
+            "type": "integer",
+            "minimum": -1,
+            "maximum": 46,
+            "description": "住民票住所の都道府県コード（-1: 設定しない、0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄)",
+            "example": 12
+          },
+          "address": {
+            "type": "string",
+            "description": "住民票住所の市区町村以降の住所",
+            "maxLength": 255,
+            "example": "品川区大崎1-2-2"
+          },
+          "address_kana": {
+            "type": "string",
+            "description": "住民票住所の市区町村以降の住所カナ",
+            "maxLength": 255,
+            "example": "シナガワクオオサキ1-2-2"
+          },
+          "payer_type": {
+            "type": "string",
+            "description": "所得税納税者区分 kou: 甲, otsu: 乙, hei: 丙",
+            "enum": [
+              "kou",
+              "otsu",
+              "hei"
+            ]
+          },
+          "widow_type": {
+            "type": "string",
+            "description": "寡夫／寡婦かどうか null不可 na: 空白, widow: 寡婦, one_parent: ひとり親",
+            "enum": [
+              "na",
+              "widow",
+              "one_parent"
+            ]
+          },
+          "disability_type": {
+            "type": "string",
+            "description": "障害者かどうか null不可 na: 空白, general: 障害者, heavy: 特別障害者",
+            "enum": [
+              "na",
+              "general",
+              "heavy"
+            ]
+          },
+          "married": {
+            "type": "boolean",
+            "description": "配偶者の有無 null不可"
+          },
+          "is_working_student": {
+            "type": "boolean",
+            "description": "勤労学生かどうか null不可"
+          },
+          "is_foreigner": {
+            "type": "boolean",
+            "description": "外国人かどうか null不可"
+          },
+          "other_company_revenue": {
+            "type": "integer",
+            "description": "その他の事業所の給与収入 null不可",
+            "example": 1000000,
+            "minimum": 0,
+            "maximum": 2000000000
+          },
+          "all_other_income": {
+            "type": "integer",
+            "description": "給与以外の所得 null不可",
+            "example": 1000000,
+            "minimum": 0,
+            "maximum": 2000000000
+          },
+          "householder": {
+            "type": "string",
+            "description": "世帯主の続柄 myself: 本人, husband: 夫, wife: 妻, father: 父, mother: 母, child: 子, senior_brother: 兄, junior_brother: 弟, senior_sister: 姉, junior_sister: 妹, grandchild: 孫, grandfather: 祖父, grandmother: 祖母, father_in_law: 義父, mother_in_law: 義母, grandfather_in_law: 義祖父, grandmother_in_law: 義祖母, other: その他",
+            "enum": [
+              "myself",
+              "husband",
+              "wife",
+              "father",
+              "mother",
+              "child",
+              "senior_brother",
+              "junior_brother",
+              "senior_sister",
+              "junior_sister",
+              "grandchild",
+              "grandfather",
+              "grandmother",
+              "father_in_law",
+              "mother_in_law",
+              "grandfather_in_law",
+              "grandmother_in_law",
+              "other"
+            ]
+          },
+          "householder_name": {
+            "type": "string",
+            "description": "世帯主の名前",
+            "example": "山田 太郎"
+          }
+        }
+      },
+      "ApiV1EmployeeYearendAdjustmentController.update_employee_response": {
+        "type": "object",
+        "properties": {
+          "employees": {
+            "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentEmployeeSerializer"
+          }
+        }
+      },
+      "ApiV1EmployeeYearendAdjustmentEmployeeSerializer": {
+        "type": "object",
+        "properties": {
+          "employee_id": {
+            "type": "integer",
+            "description": "従業員ID",
+            "format": "int32"
+          },
+          "num": {
+            "type": "string",
+            "description": "従業員番号<br>\n従業員を判別しやすいよう管理することができます。（例: 1人目の正社員を A-001 と入力）",
+            "example": "A-001",
+            "nullable": true
+          },
+          "last_name": {
+            "type": "string",
+            "description": "姓 null不可",
+            "maxLength": 255,
+            "example": "山田"
+          },
+          "first_name": {
+            "type": "string",
+            "description": "名 null不可",
+            "maxLength": 255,
+            "example": "太郎"
+          },
+          "last_name_kana": {
+            "type": "string",
+            "description": "姓カナ",
+            "maxLength": 255,
+            "example": "ヤマダ"
+          },
+          "first_name_kana": {
+            "type": "string",
+            "description": "名カナ",
+            "maxLength": 255,
+            "example": "タロウ"
+          },
+          "birth_date": {
+            "type": "string",
+            "description": "生年月日",
+            "format": "date"
+          },
+          "entry_date": {
+            "type": "string",
+            "description": "入社日",
+            "format": "date"
+          },
+          "retire_date": {
+            "type": "string",
+            "description": "退職日",
+            "format": "date",
+            "nullable": true
+          },
+          "employment_type": {
+            "type": "string",
+            "description": "雇用形態 board-member: 役員, (空文字列): 役員以外",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "description": "肩書",
+            "nullable": true
+          },
+          "zipcode1": {
+            "type": "string",
+            "description": "住民票住所の郵便番号1",
+            "maxLength": 3,
+            "nullable": true,
+            "example": "141"
+          },
+          "zipcode2": {
+            "type": "string",
+            "description": "住民票住所の郵便番号2",
+            "maxLength": 4,
+            "nullable": true,
+            "example": "0031"
+          },
+          "prefecture_code": {
+            "type": "integer",
+            "nullable": true,
+            "minimum": -1,
+            "maximum": 46,
+            "description": "住民票住所の都道府県コード（-1: 設定しない、0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄)",
+            "example": 12
+          },
+          "address": {
+            "type": "string",
+            "description": "住民票住所の市区町村以降の住所",
+            "maxLength": 255,
+            "example": "品川区大崎1-2-2"
+          },
+          "address_kana": {
+            "type": "string",
+            "description": "住民票住所の市区町村以降の住所カナ",
+            "maxLength": 255,
+            "example": "シナガワクオオサキ1-2-2"
+          },
+          "payer_type": {
+            "type": "string",
+            "description": "所得税納税者区分 kou: 甲, otsu: 乙, hei: 丙",
+            "enum": [
+              "kou",
+              "otsu",
+              "hei"
+            ]
+          },
+          "widow_type": {
+            "type": "string",
+            "description": "寡夫／寡婦かどうか null不可 na: 空白, widow: 寡婦, one_parent: ひとり親",
+            "enum": [
+              "na",
+              "widow",
+              "one_parent"
+            ]
+          },
+          "disability_type": {
+            "type": "string",
+            "description": "障害者かどうか na: 空白, general: 障害者, heavy: 特別障害者",
+            "enum": [
+              "na",
+              "general",
+              "heavy"
+            ]
+          },
+          "married": {
+            "type": "boolean",
+            "description": "配偶者の有無"
+          },
+          "is_working_student": {
+            "type": "boolean",
+            "description": "勤労学生かどうか"
+          },
+          "is_foreigner": {
+            "type": "boolean",
+            "description": "外国人かどうか"
+          },
+          "other_company_revenue": {
+            "type": "integer",
+            "description": "その他の事業所の給与収入",
+            "example": 1000000,
+            "minimum": 0,
+            "maximum": 2000000000
+          },
+          "all_other_income": {
+            "type": "integer",
+            "description": "給与以外の所得",
+            "example": 1000000,
+            "minimum": 0,
+            "maximum": 2000000000
+          },
+          "householder": {
+            "type": "string",
+            "description": "世帯主の続柄 myself: 本人, husband: 夫, wife: 妻, father: 父, mother: 母, child: 子, senior_brother: 兄, junior_brother: 弟, senior_sister: 姉, junior_sister: 妹, grandchild: 孫, grandfather: 祖父, grandmother: 祖母, father_in_law: 義父, mother_in_law: 義母, grandfather_in_law: 義祖父, grandmother_in_law: 義祖母, other: その他",
+            "enum": [
+              "myself",
+              "husband",
+              "wife",
+              "father",
+              "mother",
+              "child",
+              "senior_brother",
+              "junior_brother",
+              "senior_sister",
+              "junior_sister",
+              "grandchild",
+              "grandfather",
+              "grandmother",
+              "father_in_law",
+              "mother_in_law",
+              "grandfather_in_law",
+              "grandmother_in_law",
+              "other"
+            ]
+          },
+          "householder_name": {
+            "type": "string",
+            "description": "世帯主の名前",
+            "example": "山田 太郎"
+          }
+        }
+      },
+      "ApiV1EmployeeYearendAdjustmentController.show_response": {
+        "type": "object",
+        "properties": {
+          "employee": {
+            "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentEmployeeSerializer"
+          },
+          "dependents": {
+            "type": "array",
+            "description": "家族情報"
+          },
+          "insurances": {
+            "type": "array",
+            "description": "保険料"
+          },
+          "housing_loans": {
+            "type": "array",
+            "description": "住宅ローン"
+          },
+          "annual_income_and_tax": {
+            "type": "object",
+            "description": "給与・賞与"
+          },
+          "previous_job": {
+            "type": "object",
+            "description": "前職情報"
+          }
+        }
+      },
+      "ApiV1EmployeeYearendAdjustmentController.update_dependents_body": {
+        "type": "object",
+        "required": [
+          "company_id",
+          "dependents"
+        ],
+        "properties": {
+          "company_id": {
+            "type": "integer",
+            "description": "更新対象事業所ID（必須）",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "dependents": {
+            "type": "array",
+            "description": "家族情報",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentDependentUpdateRequestSerializer"
+            }
+          }
+        }
+      },
+      "ApiV1EmployeeYearendAdjustmentDependentUpdateRequestSerializer": {
+        "type": "object",
+        "required": [
+          "last_name",
+          "first_name",
+          "relationship",
+          "birth_date",
+          "social_insurance_and_tax_dependent",
+          "disability_type",
+          "residence_type"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "家族情報ID（idがない場合は新規作成になる)",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "destroy": {
+            "type": "boolean",
+            "description": "家族情報を削除するか true: 削除する, false: 削除しない",
+            "example": false
+          },
+          "last_name": {
+            "type": "string",
+            "description": "姓 null不可",
+            "maxLength": 255,
+            "example": "山田"
+          },
+          "first_name": {
+            "type": "string",
+            "description": "名 null不可",
+            "maxLength": 255,
+            "example": "花子"
+          },
+          "last_name_kana": {
+            "type": "string",
+            "description": "姓カナ",
+            "maxLength": 255,
+            "example": "ヤマダ"
+          },
+          "first_name_kana": {
+            "type": "string",
+            "description": "名カナ",
+            "maxLength": 255,
+            "example": "ハナコ"
+          },
+          "relationship": {
+            "type": "string",
+            "description": "続柄 null不可 spouse: 配偶者, father: 父, mother: 母, child: 子, senior_brother: 兄, junior_brother: 弟, senior_sister: 姉, junior_sister: 妹, grandchild: 孫, grandfather: 祖父, grandmother: 祖母, father_in_law: 義父, mother_in_law: 義母, grandfather_in_law: 義祖父, grandmother_in_law: 義祖母, other: その他, great_grandfather: 曽祖父, great_grandmother: 曽祖母, spouses_child: 配偶者の連れ子",
+            "enum": [
+              "spouse",
+              "father",
+              "mother",
+              "child",
+              "senior_brother",
+              "junior_brother",
+              "senior_sister",
+              "junior_sister",
+              "grandchild",
+              "grandfather",
+              "grandmother",
+              "father_in_law",
+              "mother_in_law",
+              "grandfather_in_law",
+              "grandmother_in_law",
+              "other",
+              "great_grandfather",
+              "great_grandmother",
+              "spouses_child"
+            ]
+          },
+          "birth_date": {
+            "type": "string",
+            "description": "生年月日 null不可",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+            "maxLength": 10,
+            "example": "1999-01-01"
+          },
+          "social_insurance_and_tax_dependent": {
+            "type": "string",
+            "description": "扶養状況 social_insurance_and_tax: 所得税・住民税と社会保険, tax_only: 所得税・住民税のみ, social_insurance_only: 社会保険のみ, not_dependent: 扶養していない",
+            "enum": [
+              "social_insurance_and_tax",
+              "tax_only",
+              "social_insurance_only",
+              "not_dependent"
+            ]
+          },
+          "income": {
+            "type": "integer",
+            "description": "所得 配偶者は「扶養状況」がsocial_insurance_only又はnot_dependentの場合のみ更新可能。配偶者以外は更新可能。",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          },
+          "employment_revenue": {
+            "type": "integer",
+            "description": "給与収入 配偶者は「扶養状況」がsocial_insurance_and_tax又はtax_onlyの場合のみ更新可能。配偶者以外は更新不可。",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          },
+          "all_other_income": {
+            "type": "integer",
+            "description": "給与以外の所得 配偶者は「扶養状況」がsocial_insurance_and_tax又はtax_onlyの場合のみ更新可能。配偶者以外は更新不可。",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          },
+          "disability_type": {
+            "type": "string",
+            "description": "障害に該当するか null不可 na: 障害なし, general: 一般の障害者, heavy: 特別障害者",
+            "enum": [
+              "na",
+              "general",
+              "heavy"
+            ]
+          },
+          "residence_type": {
+            "type": "string",
+            "description": "同居・別居 null不可 live_in: 同居, resident: 別居(国内), non_resident: 別居(国外)",
+            "enum": [
+              "live_in",
+              "resident",
+              "non_resident"
+            ]
+          },
+          "zipcode1": {
+            "type": "string",
+            "description": "住民票住所の郵便番号1",
+            "maxLength": 3,
+            "nullable": true,
+            "example": "141"
+          },
+          "zipcode2": {
+            "type": "string",
+            "description": "住民票住所の郵便番号2",
+            "maxLength": 4,
+            "nullable": true,
+            "example": "0031"
+          },
+          "prefecture_code": {
+            "type": "integer",
+            "nullable": true,
+            "minimum": -1,
+            "maximum": 46,
+            "description": "住民票住所の都道府県コード（-1: 設定しない、0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄)",
+            "example": 12
+          },
+          "address": {
+            "type": "string",
+            "description": "住民票住所の市区町村以降の住所",
+            "maxLength": 255,
+            "example": "品川区大崎1-2-2"
+          },
+          "address_kana": {
+            "type": "string",
+            "description": "住民票住所の市区町村以降の住所カナ",
+            "maxLength": 255,
+            "example": "シナガワクオオサキ1-2-2"
+          },
+          "annual_remittance_amount": {
+            "type": "integer",
+            "description": "国外居住親族への年間の送金額(「別居(国外)」のみ)",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          }
+        }
+      },
+      "ApiV1EmployeeYearendAdjustmentController.update_dependents_response": {
+        "type": "object",
+        "properties": {
+          "dependents": {
+            "type": "array",
+            "description": "家族情報",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentDependentSerializer"
+            }
+          }
+        }
+      },
+      "ApiV1EmployeeYearendAdjustmentDependentSerializer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "家族情報ID",
+            "format": "int32",
+            "example": 1
+          },
+          "last_name": {
+            "type": "string",
+            "description": "姓 null不可",
+            "maxLength": 255,
+            "example": "山田"
+          },
+          "first_name": {
+            "type": "string",
+            "description": "名 null不可",
+            "maxLength": 255,
+            "example": "花子"
+          },
+          "last_name_kana": {
+            "type": "string",
+            "description": "姓カナ",
+            "maxLength": 255,
+            "example": "ヤマダ"
+          },
+          "first_name_kana": {
+            "type": "string",
+            "description": "名カナ",
+            "maxLength": 255,
+            "example": "ハナコ"
+          },
+          "relationship": {
+            "type": "string",
+            "description": "続柄 null不可 spouse: 配偶者, father: 父, mother: 母, child: 子, senior_brother: 兄, junior_brother: 弟, senior_sister: 姉, junior_sister: 妹, grandchild: 孫, grandfather: 祖父, grandmother: 祖母, father_in_law: 義父, mother_in_law: 義母, grandfather_in_law: 義祖父, grandmother_in_law: 義祖母, other: その他, great_grandfather: 曽祖父, great_grandmother: 曽祖母, spouses_child: 配偶者の連れ子",
+            "enum": [
+              "spouse",
+              "father",
+              "mother",
+              "child",
+              "senior_brother",
+              "junior_brother",
+              "senior_sister",
+              "junior_sister",
+              "grandchild",
+              "grandfather",
+              "grandmother",
+              "father_in_law",
+              "mother_in_law",
+              "grandfather_in_law",
+              "grandmother_in_law",
+              "other",
+              "great_grandfather",
+              "great_grandmother",
+              "spouses_child"
+            ]
+          },
+          "birth_date": {
+            "type": "string",
+            "description": "生年月日 null不可",
+            "format": "date",
+            "example": "1999-01-01"
+          },
+          "social_insurance_and_tax_dependent": {
+            "type": "string",
+            "description": "扶養状況 social_insurance_and_tax: 所得税・住民税と社会保険, tax_only: 所得税・住民税のみ, social_insurance_only: 社会保険のみ, not_dependent: 扶養していない",
+            "enum": [
+              "social_insurance_and_tax",
+              "tax_only",
+              "social_insurance_only",
+              "not_dependent"
+            ]
+          },
+          "income": {
+            "type": "integer",
+            "description": "所得 配偶者は「扶養状況」がsocial_insurance_only又はnot_dependentの場合のみ更新可能。配偶者以外は更新可能。",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          },
+          "employment_revenue": {
+            "type": "integer",
+            "description": "給与収入 配偶者は「扶養状況」がsocial_insurance_and_tax又はtax_onlyの場合のみ更新可能。配偶者以外は更新不可。",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          },
+          "all_other_income": {
+            "type": "integer",
+            "description": "給与以外の所得 配偶者は「扶養状況」がsocial_insurance_and_tax又はtax_onlyの場合のみ更新可能。配偶者以外は更新不可。",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          },
+          "disability_type": {
+            "type": "string",
+            "description": "障害に該当するか null不可 na: 障害なし, general: 一般の障害者, heavy: 特別障害者",
+            "enum": [
+              "na",
+              "general",
+              "heavy"
+            ]
+          },
+          "residence_type": {
+            "type": "string",
+            "description": "同居・別居 null不可 live_in: 同居, resident: 別居(国内), non_resident: 別居(国外)",
+            "enum": [
+              "live_in",
+              "resident",
+              "non_resident"
+            ]
+          },
+          "zipcode1": {
+            "type": "string",
+            "description": "住民票住所の郵便番号1",
+            "maxLength": 3,
+            "nullable": true,
+            "example": "141"
+          },
+          "zipcode2": {
+            "type": "string",
+            "description": "住民票住所の郵便番号2",
+            "maxLength": 4,
+            "nullable": true,
+            "example": "0031"
+          },
+          "prefecture_code": {
+            "type": "integer",
+            "nullable": true,
+            "minimum": -1,
+            "maximum": 46,
+            "description": "住民票住所の都道府県コード（-1: 設定しない、0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄)",
+            "example": 12
+          },
+          "address": {
+            "type": "string",
+            "description": "住民票住所の市区町村以降の住所",
+            "maxLength": 255,
+            "example": "品川区大崎1-2-2"
+          },
+          "address_kana": {
+            "type": "string",
+            "description": "住民票住所の市区町村以降の住所カナ",
+            "maxLength": 255,
+            "example": "シナガワクオオサキ1-2-2"
+          },
+          "annual_remittance_amount": {
+            "type": "integer",
+            "description": "国外居住親族への年間の送金額(「別居(国外)」のみ)",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
           }
         }
       },
