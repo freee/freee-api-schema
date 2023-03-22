@@ -12589,13 +12589,176 @@
             "type": "array",
             "description": "住宅ローン"
           },
-          "annual_income_and_tax": {
-            "type": "object",
-            "description": "給与・賞与"
+          "payroll_and_bonus": {
+            "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentPayrollAndBonusSerializer"
           },
           "previous_job": {
             "type": "object",
             "description": "前職情報"
+          }
+        }
+      },
+      "ApiV1EmployeeYearendAdjustmentPayrollAndBonusSerializer": {
+        "type": "object",
+        "properties": {
+          "fixed_payroll": {
+            "type": "integer",
+            "description": "確定給与額",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          },
+          "fixed_payroll_deduction": {
+            "type": "integer",
+            "description": "確定給与控除額",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          },
+          "fixed_payroll_income_tax": {
+            "type": "integer",
+            "description": "確定給与所得税額",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          },
+          "fixed_bonus": {
+            "type": "integer",
+            "description": "確定賞与額",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          },
+          "fixed_bonus_deduction": {
+            "type": "integer",
+            "description": "確定賞与控除額",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          },
+          "fixed_bonus_income_tax": {
+            "type": "integer",
+            "description": "確定賞与所得税額",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          },
+          "unentered_payroll_amount": {
+            "type": "integer",
+            "description": "未入力給与額",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          },
+          "unentered_payroll_deduction_amount": {
+            "type": "integer",
+            "description": "未入力給与控除額",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          },
+          "unentered_payroll_income_tax_amount": {
+            "type": "integer",
+            "description": "未入力給与所得税額",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          },
+          "unentered_bonus_amount": {
+            "type": "integer",
+            "description": "未入力賞与額",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          },
+          "unentered_bonus_deduction_amount": {
+            "type": "integer",
+            "description": "未入力賞与控除額",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          },
+          "unentered_bonus_income_tax_amount": {
+            "type": "integer",
+            "description": "未入力賞与所得税額",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          }
+        }
+      },
+      "ApiV1EmployeeYearendAdjustmentPayrollAndBonusUpdateRequestSerializer": {
+        "type": "object",
+        "properties": {
+          "unentered_payroll_amount": {
+            "type": "integer",
+            "description": "未入力給与額",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          },
+          "unentered_payroll_deduction_amount": {
+            "type": "integer",
+            "description": "未入力給与控除額",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          },
+          "unentered_payroll_income_tax_amount": {
+            "type": "integer",
+            "description": "未入力給与所得税額",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          },
+          "unentered_bonus_amount": {
+            "type": "integer",
+            "description": "未入力賞与額",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          },
+          "unentered_bonus_deduction_amount": {
+            "type": "integer",
+            "description": "未入力賞与控除額",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          },
+          "unentered_bonus_income_tax_amount": {
+            "type": "integer",
+            "description": "未入力賞与所得税額",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
+          }
+        }
+      },
+      "ApiV1EmployeeYearendAdjustmentController.update_payroll_and_bonus_body": {
+        "type": "object",
+        "required": [
+          "company_id",
+          "payroll_and_bonus"
+        ],
+        "properties": {
+          "company_id": {
+            "type": "integer",
+            "description": "更新対象事業所ID（必須）",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "payroll_and_bonus": {
+            "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentPayrollAndBonusUpdateRequestSerializer"
+          }
+        }
+      },
+      "ApiV1EmployeeYearendAdjustmentController.update_payroll_and_bonus_response": {
+        "type": "object",
+        "properties": {
+          "payroll_and_bonus": {
+            "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentPayrollAndBonusSerializer"
           }
         }
       },
