@@ -3473,6 +3473,14 @@ paths:
           <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>
           <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>
         </ul>
+
+        <pre>
+        <code>インボイス制度の対応にともない明細行のデータ構造が変更されます。<br>
+        新しいデータ構造は2023年4月上旬から利用できる予定です。利用するにはリクエストヘッダーに以下を指定します。
+        Expense-Application-Mode: purchase-lines<br>
+        指定がない場合は従来のデータ構造を利用することとなります。<br>
+        詳細は、<a href="https://developer.freee.co.jp/news/6369#2-%e7%b5%8c%e8%b2%bb%e7%b2%be%e7%ae%97api%e3%81%ae%e4%bb%95%e6%a7%98%e5%a4%89%e6%9b%b4%ef%bc%88%e7%a0%b4%e5%a3%8a%e7%9a%84%e5%a4%89%e6%9b%b4%ef%bc%89" target="_blank">お知らせ</a>をご覧ください。</code>
+        </pre>
       operationId: get_expense_applications
       summary: 経費申請一覧の取得
     post:
@@ -3555,6 +3563,14 @@ paths:
           <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>
           <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>
         </ul>
+
+        <pre>
+        <code>インボイス制度の対応にともない明細行のデータ構造が変更されます。<br>
+        新しいデータ構造は2023年4月上旬から利用できる予定です。利用するにはリクエストヘッダーに以下を指定します。
+        Expense-Application-Mode: purchase-lines<br>
+        指定がない場合は従来のデータ構造を利用することとなります。<br>
+        詳細は、<a href="https://developer.freee.co.jp/news/6369#2-%e7%b5%8c%e8%b2%bb%e7%b2%be%e7%ae%97api%e3%81%ae%e4%bb%95%e6%a7%98%e5%a4%89%e6%9b%b4%ef%bc%88%e7%a0%b4%e5%a3%8a%e7%9a%84%e5%a4%89%e6%9b%b4%ef%bc%89" target="_blank">お知らせ</a>をご覧ください。</code>
+        </pre>
       operationId: create_expense_application
       requestBody:
         content:
@@ -3741,6 +3757,14 @@ paths:
           <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>
           <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>
         </ul>
+
+        <pre>
+        <code>インボイス制度の対応にともない明細行のデータ構造が変更されます。<br>
+        新しいデータ構造は2023年4月上旬から利用できる予定です。利用するにはリクエストヘッダーに以下を指定します。
+        Expense-Application-Mode: purchase-lines<br>
+        指定がない場合は従来のデータ構造を利用することとなります。<br>
+        詳細は、<a href="https://developer.freee.co.jp/news/6369#2-%e7%b5%8c%e8%b2%bb%e7%b2%be%e7%ae%97api%e3%81%ae%e4%bb%95%e6%a7%98%e5%a4%89%e6%9b%b4%ef%bc%88%e7%a0%b4%e5%a3%8a%e7%9a%84%e5%a4%89%e6%9b%b4%ef%bc%89" target="_blank">お知らせ</a>をご覧ください。</code>
+        </pre>
       operationId: get_expense_application
       summary: 経費申請詳細の取得
     put:
@@ -3840,6 +3864,14 @@ paths:
           <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>
           <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>
         </ul>
+
+        <pre>
+        <code>インボイス制度の対応にともない明細行のデータ構造が変更されます。<br>
+        新しいデータ構造は2023年4月上旬から利用できる予定です。利用するにはリクエストヘッダーに以下を指定します。
+        Expense-Application-Mode: purchase-lines<br>
+        指定がない場合は従来のデータ構造を利用することとなります。<br>
+        詳細は、<a href="https://developer.freee.co.jp/news/6369#2-%e7%b5%8c%e8%b2%bb%e7%b2%be%e7%ae%97api%e3%81%ae%e4%bb%95%e6%a7%98%e5%a4%89%e6%9b%b4%ef%bc%88%e7%a0%b4%e5%a3%8a%e7%9a%84%e5%a4%89%e6%9b%b4%ef%bc%89" target="_blank">お知らせ</a>をご覧ください。</code>
+        </pre>
       operationId: update_expense_application
       requestBody:
         content:
@@ -3948,6 +3980,14 @@ paths:
           <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>
           <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>
         </ul>
+
+        <pre>
+        <code>インボイス制度の対応にともない明細行のデータ構造が変更されます。<br>
+        新しいデータ構造は2023年4月上旬から利用できる予定です。利用するにはリクエストヘッダーに以下を指定します。
+        Expense-Application-Mode: purchase-lines<br>
+        指定がない場合は従来のデータ構造を利用することとなります。<br>
+        詳細は、<a href="https://developer.freee.co.jp/news/6369#2-%e7%b5%8c%e8%b2%bb%e7%b2%be%e7%ae%97api%e3%81%ae%e4%bb%95%e6%a7%98%e5%a4%89%e6%9b%b4%ef%bc%88%e7%a0%b4%e5%a3%8a%e7%9a%84%e5%a4%89%e6%9b%b4%ef%bc%89" target="_blank">お知らせ</a>をご覧ください。</code>
+        </pre>
       operationId: update_expense_application_action
       requestBody:
         content:
@@ -18599,6 +18639,7 @@ components:
           example: true
           type: boolean
         expense_application_lines:
+          description: 経費申請の項目行一覧（配列）
           items:
             properties:
               amount:
@@ -18647,6 +18688,47 @@ components:
           maximum: 2147483647
           minimum: 1
           type: integer
+        purchase_lines:
+          description: |
+            この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>
+            経費申請の申請行一覧（配列）
+          items:
+            properties:
+              expense_application_lines:
+                description: 明細行一覧（配列）
+                items:
+                  properties:
+                    amount:
+                      description: 金額
+                      example: 30000
+                      maximum: 2147483647
+                      minimum: 0
+                      type: integer
+                    description:
+                      description: 内容 (250文字以内)
+                      example: 交通費：新幹線往復（東京〜大阪）
+                      maxLength: 250
+                      type: string
+                    expense_application_line_template_id:
+                      description: 経費科目ID
+                      example: 505
+                      maximum: 2147483647
+                      minimum: 1
+                      type: integer
+                  type: object
+                type: array
+              receipt_id:
+                description: ファイルボックス（証憑ファイル）ID
+                example: 606
+                maximum: 2147483647
+                minimum: 1
+                type: integer
+              transaction_date:
+                description: 日付 (yyyy-mm-dd)
+                example: '2019-12-17'
+                type: string
+            type: object
+          type: array
         section_id:
           description: 部門ID
           example: 101
@@ -18698,7 +18780,6 @@ components:
           type: string
       required:
       - company_id
-      - expense_application_lines
       - title
       type: object
     expenseApplicationLineTemplateParams:
@@ -19009,6 +19090,68 @@ components:
               description: 申請日 (yyyy-mm-dd)
               example: '2019-12-17'
               type: string
+            purchase_lines:
+              description: |
+                この項目はインボイス制度で利用する項目です。2023年4月上旬から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>
+                経費申請の申請行一覧（配列）
+              items:
+                properties:
+                  expense_application_lines:
+                    description: 明細行一覧（配列）
+                    items:
+                      properties:
+                        amount:
+                          description: 金額
+                          example: 30000
+                          maximum: 2147483647
+                          minimum: 0
+                          type: integer
+                        description:
+                          description: 内容
+                          example: 交通費：新幹線往復（東京〜大阪）
+                          nullable: true
+                          type: string
+                        expense_application_line_template_id:
+                          description: 経費科目ID
+                          example: 505
+                          maximum: 2147483647
+                          minimum: 1
+                          nullable: true
+                          type: integer
+                        id:
+                          description: 明細行ID
+                          example: 1
+                          format: int64
+                          maximum: 9223372036854775807
+                          minimum: 1
+                          type: integer
+                      required:
+                      - id
+                      type: object
+                    type: array
+                  id:
+                    description: 経費申請の申請行ID
+                    example: 1
+                    format: int64
+                    maximum: 9223372036854775807
+                    minimum: 1
+                    type: integer
+                  receipt_id:
+                    description: ファイルボックス（証憑ファイル）ID
+                    example: 606
+                    maximum: 2147483647
+                    minimum: 1
+                    nullable: true
+                    type: integer
+                  transaction_date:
+                    description: 日付 (yyyy-mm-dd)
+                    example: '2019-12-17'
+                    nullable: true
+                    type: string
+                required:
+                - id
+                type: object
+              type: array
             section_id:
               description: 部門ID
               example: 101
@@ -19072,7 +19215,6 @@ components:
           - application_number
           - approvers
           - company_id
-          - expense_application_lines
           - id
           - issue_date
           - status
@@ -19186,6 +19328,61 @@ components:
             指定しない場合は当日の日付が登録されます。
           example: '2019-12-17'
           type: string
+        purchase_lines:
+          description: |
+            この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>
+            経費申請の申請行一覧（配列）
+          items:
+            properties:
+              expense_application_lines:
+                description: 明細行一覧（配列）
+                items:
+                  properties:
+                    amount:
+                      description: 金額
+                      example: 30000
+                      maximum: 2147483647
+                      minimum: 0
+                      type: integer
+                    description:
+                      description: 内容 (250文字以内)
+                      example: 交通費：新幹線往復（東京〜大阪）
+                      maxLength: 250
+                      type: string
+                    expense_application_line_template_id:
+                      description: 経費科目ID
+                      example: 505
+                      maximum: 2147483647
+                      minimum: 1
+                      type: integer
+                    id:
+                      description: '経費申請の明細行ID: 既存明細行を更新する場合に指定します。IDを指定しない明細行は、新規行として扱われ追加されます。また、expense_application_linesに含まれない既存の明細行は削除されます。更新後も残したい行は、必ず経費申請の明細行IDを指定してexpense_application_linesに含めてください。'
+                      example: 1
+                      format: int64
+                      maximum: 9223372036854775807
+                      minimum: 1
+                      type: integer
+                  type: object
+                type: array
+              id:
+                description: '経費申請の申請行ID: 既存申請行を更新する場合に指定します。IDを指定しない申請行は、新規行として扱われ追加されます。また、purchase_linesに含まれない既存の申請行は削除されます。更新後も残したい行は、必ず経費申請の申請行IDを指定してpurchase_linesに含めてください。'
+                example: 1
+                format: int64
+                maximum: 9223372036854775807
+                minimum: 1
+                type: integer
+              receipt_id:
+                description: ファイルボックス（証憑ファイル）ID
+                example: 606
+                maximum: 2147483647
+                minimum: 1
+                type: integer
+              transaction_date:
+                description: 日付 (yyyy-mm-dd)
+                example: '2019-12-17'
+                type: string
+            type: object
+          type: array
         section_id:
           description: 部門ID
           example: 101
@@ -19237,7 +19434,6 @@ components:
           type: string
       required:
       - company_id
-      - expense_application_lines
       - title
       type: object
     expenseApplicationsIndexResponse:
@@ -19345,6 +19541,68 @@ components:
                 description: 申請日 (yyyy-mm-dd)
                 example: '2019-12-17'
                 type: string
+              purchase_lines:
+                description: |
+                  この項目はインボイス制度で利用する項目です。2023年4月上旬から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>
+                  経費申請の申請行一覧（配列）
+                items:
+                  properties:
+                    expense_application_lines:
+                      description: 明細行一覧（配列）
+                      items:
+                        properties:
+                          amount:
+                            description: 金額
+                            example: 30000
+                            maximum: 2147483647
+                            minimum: 0
+                            type: integer
+                          description:
+                            description: 内容
+                            example: 交通費：新幹線往復（東京〜大阪）
+                            nullable: true
+                            type: string
+                          expense_application_line_template_id:
+                            description: 経費科目ID
+                            example: 505
+                            maximum: 2147483647
+                            minimum: 1
+                            nullable: true
+                            type: integer
+                          id:
+                            description: 明細行ID
+                            example: 1
+                            format: int64
+                            maximum: 9223372036854775807
+                            minimum: 1
+                            type: integer
+                        required:
+                        - id
+                        type: object
+                      type: array
+                    id:
+                      description: 経費申請の申請行ID
+                      example: 1
+                      format: int64
+                      maximum: 9223372036854775807
+                      minimum: 1
+                      type: integer
+                    receipt_id:
+                      description: ファイルボックス（証憑ファイル）ID
+                      example: 606
+                      maximum: 2147483647
+                      minimum: 1
+                      nullable: true
+                      type: integer
+                    transaction_date:
+                      description: 日付 (yyyy-mm-dd)
+                      example: '2019-12-17'
+                      nullable: true
+                      type: string
+                  required:
+                  - id
+                  type: object
+                type: array
               section_id:
                 description: 部門ID
                 example: 101
@@ -19407,7 +19665,6 @@ components:
             - applicant_id
             - application_number
             - company_id
-            - expense_application_lines
             - id
             - issue_date
             - status
@@ -25906,7 +26163,7 @@ components:
         document_type:
           description: |
             この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。
-            書類の種類（receipt: 領収書、invoice: 請求書、other: その他）
+            書類の種類（receipt: 領収書、invoice: 請求書、other: その他、null: OCR解析結果が保存されている時等）
           enum:
           - receipt
           - invoice
@@ -25937,7 +26194,7 @@ components:
         invoice_registration_number:
           description: |
             この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。
-            インボイス制度適格請求書発行事業者登録番号
+            インボイス制度適格請求書発行事業者登録番号（null: OCR解析結果が保存されている時等）
             - 先頭T数字13桁の固定14桁の文字列
             <a target="_blank" href="https://www.invoice-kohyo.nta.go.jp/index.html">国税庁インボイス制度適格請求書発行事業者公表サイト</a>
           example: T1000000000001
@@ -25972,10 +26229,11 @@ components:
         qualified_invoice:
           description: |
             この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。
-            適格請求書等（qualified: 該当する、not_qualified: 該当しない）
+            適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択、null: OCR解析結果が保存されている時等）
           enum:
           - qualified
           - not_qualified
+          - unselected
           example: qualified
           nullable: true
           type: string
@@ -26067,10 +26325,11 @@ components:
         qualified_invoice:
           description: |
             この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。
-            適格請求書等（qualified: 該当する、not_qualified: 該当しない）
+            適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択）
           enum:
           - qualified
           - not_qualified
+          - unselected
           example: qualified
           type: string
         receipt:

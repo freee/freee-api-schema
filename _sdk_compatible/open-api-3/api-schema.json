@@ -17739,7 +17739,6 @@
         "type": "object",
         "required": [
           "company_id",
-          "expense_application_lines",
           "title"
         ],
         "properties": {
@@ -17784,8 +17783,59 @@
               "example": 202
             }
           },
+          "purchase_lines": {
+            "type": "array",
+            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>\n経費申請の申請行一覧（配列）\n",
+            "items": {
+              "type": "object",
+              "properties": {
+                "receipt_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "ファイルボックス（証憑ファイル）ID",
+                  "example": 606
+                },
+                "transaction_date": {
+                  "type": "string",
+                  "description": "日付 (yyyy-mm-dd)",
+                  "example": "2019-12-17"
+                },
+                "expense_application_lines": {
+                  "type": "array",
+                  "description": "明細行一覧（配列）",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string",
+                        "maxLength": 250,
+                        "description": "内容 (250文字以内)",
+                        "example": "交通費：新幹線往復（東京〜大阪）"
+                      },
+                      "amount": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 2147483647,
+                        "description": "金額",
+                        "example": 30000
+                      },
+                      "expense_application_line_template_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 2147483647,
+                        "description": "経費科目ID",
+                        "example": 505
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           "expense_application_lines": {
             "type": "array",
+            "description": "経費申請の項目行一覧（配列）",
             "items": {
               "type": "object",
               "properties": {
@@ -17880,7 +17930,6 @@
         "type": "object",
         "required": [
           "company_id",
-          "expense_application_lines",
           "title"
         ],
         "properties": {
@@ -17923,6 +17972,72 @@
               "minimum": 1,
               "maximum": 2147483647,
               "example": 202
+            }
+          },
+          "purchase_lines": {
+            "type": "array",
+            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>\n経費申請の申請行一覧（配列）\n",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
+                  "maximum": 9223372036854775807,
+                  "description": "経費申請の申請行ID: 既存申請行を更新する場合に指定します。IDを指定しない申請行は、新規行として扱われ追加されます。また、purchase_linesに含まれない既存の申請行は削除されます。更新後も残したい行は、必ず経費申請の申請行IDを指定してpurchase_linesに含めてください。",
+                  "example": 1
+                },
+                "transaction_date": {
+                  "type": "string",
+                  "description": "日付 (yyyy-mm-dd)",
+                  "example": "2019-12-17"
+                },
+                "receipt_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "ファイルボックス（証憑ファイル）ID",
+                  "example": 606
+                },
+                "expense_application_lines": {
+                  "type": "array",
+                  "description": "明細行一覧（配列）",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 1,
+                        "maximum": 9223372036854775807,
+                        "description": "経費申請の明細行ID: 既存明細行を更新する場合に指定します。IDを指定しない明細行は、新規行として扱われ追加されます。また、expense_application_linesに含まれない既存の明細行は削除されます。更新後も残したい行は、必ず経費申請の明細行IDを指定してexpense_application_linesに含めてください。",
+                        "example": 1
+                      },
+                      "description": {
+                        "type": "string",
+                        "maxLength": 250,
+                        "description": "内容 (250文字以内)",
+                        "example": "交通費：新幹線往復（東京〜大阪）"
+                      },
+                      "amount": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 2147483647,
+                        "description": "金額",
+                        "example": 30000
+                      },
+                      "expense_application_line_template_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 2147483647,
+                        "description": "経費科目ID",
+                        "example": 505
+                      }
+                    }
+                  }
+                }
+              }
             }
           },
           "expense_application_lines": {
@@ -19227,10 +19342,11 @@
           },
           "qualified_invoice": {
             "type": "string",
-            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\n適格請求書等（qualified: 該当する、not_qualified: 該当しない）\n",
+            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\n適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択）\n",
             "enum": [
               "qualified",
-              "not_qualified"
+              "not_qualified",
+              "unselected"
             ],
             "example": "qualified"
           },
@@ -31674,10 +31790,11 @@
           },
           "qualified_invoice": {
             "type": "string",
-            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\n適格請求書等（qualified: 該当する、not_qualified: 該当しない）\n",
+            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\n適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択、null: OCR解析結果が保存されている時等）\n",
             "enum": [
               "qualified",
-              "not_qualified"
+              "not_qualified",
+              "unselected"
             ],
             "example": "qualified",
             "nullable": true
@@ -31687,13 +31804,13 @@
             "maxLength": 14,
             "minLength": 14,
             "pattern": "^T[1-9][0-9]{12}$",
-            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者登録番号\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者登録番号（null: OCR解析結果が保存されている時等）\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
             "example": "T1000000000001",
             "nullable": true
           },
           "document_type": {
             "type": "string",
-            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\n書類の種類（receipt: 領収書、invoice: 請求書、other: その他）\n",
+            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\n書類の種類（receipt: 領収書、invoice: 請求書、other: その他、null: OCR解析結果が保存されている時等）\n",
             "enum": [
               "receipt",
               "invoice",
@@ -31806,7 +31923,6 @@
                 "applicant_id",
                 "application_number",
                 "company_id",
-                "expense_application_lines",
                 "id",
                 "issue_date",
                 "status",
@@ -31877,6 +31993,81 @@
                     "minimum": 1,
                     "maximum": 2147483647,
                     "example": 202
+                  }
+                },
+                "purchase_lines": {
+                  "type": "array",
+                  "description": "この項目はインボイス制度で利用する項目です。2023年4月上旬から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>\n経費申請の申請行一覧（配列）\n",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 1,
+                        "maximum": 9223372036854775807,
+                        "description": "経費申請の申請行ID",
+                        "example": 1
+                      },
+                      "transaction_date": {
+                        "type": "string",
+                        "description": "日付 (yyyy-mm-dd)",
+                        "example": "2019-12-17",
+                        "nullable": true
+                      },
+                      "receipt_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 2147483647,
+                        "description": "ファイルボックス（証憑ファイル）ID",
+                        "example": 606,
+                        "nullable": true
+                      },
+                      "expense_application_lines": {
+                        "type": "array",
+                        "description": "明細行一覧（配列）",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "id"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "format": "int64",
+                              "minimum": 1,
+                              "maximum": 9223372036854775807,
+                              "description": "明細行ID",
+                              "example": 1
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "内容",
+                              "example": "交通費：新幹線往復（東京〜大阪）",
+                              "nullable": true
+                            },
+                            "amount": {
+                              "type": "integer",
+                              "minimum": 0,
+                              "maximum": 2147483647,
+                              "description": "金額",
+                              "example": 30000
+                            },
+                            "expense_application_line_template_id": {
+                              "type": "integer",
+                              "minimum": 1,
+                              "maximum": 2147483647,
+                              "description": "経費科目ID",
+                              "example": 505,
+                              "nullable": true
+                            }
+                          }
+                        }
+                      }
+                    }
                   }
                 },
                 "expense_application_lines": {
@@ -32020,7 +32211,6 @@
               "application_number",
               "approvers",
               "company_id",
-              "expense_application_lines",
               "id",
               "issue_date",
               "status",
@@ -32097,6 +32287,81 @@
                   "minimum": 1,
                   "maximum": 2147483647,
                   "example": 202
+                }
+              },
+              "purchase_lines": {
+                "type": "array",
+                "description": "この項目はインボイス制度で利用する項目です。2023年4月上旬から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>\n経費申請の申請行一覧（配列）\n",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "format": "int64",
+                      "minimum": 1,
+                      "maximum": 9223372036854775807,
+                      "description": "経費申請の申請行ID",
+                      "example": 1
+                    },
+                    "transaction_date": {
+                      "type": "string",
+                      "description": "日付 (yyyy-mm-dd)",
+                      "example": "2019-12-17",
+                      "nullable": true
+                    },
+                    "receipt_id": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 2147483647,
+                      "description": "ファイルボックス（証憑ファイル）ID",
+                      "example": 606,
+                      "nullable": true
+                    },
+                    "expense_application_lines": {
+                      "type": "array",
+                      "description": "明細行一覧（配列）",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int64",
+                            "minimum": 1,
+                            "maximum": 9223372036854775807,
+                            "description": "明細行ID",
+                            "example": 1
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "内容",
+                            "example": "交通費：新幹線往復（東京〜大阪）",
+                            "nullable": true
+                          },
+                          "amount": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 2147483647,
+                            "description": "金額",
+                            "example": 30000
+                          },
+                          "expense_application_line_template_id": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2147483647,
+                            "description": "経費科目ID",
+                            "example": 505,
+                            "nullable": true
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
               },
               "expense_application_lines": {
