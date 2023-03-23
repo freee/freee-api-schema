@@ -12579,22 +12579,27 @@
           },
           "dependents": {
             "type": "array",
-            "description": "家族情報"
+            "description": "家族情報",
+            "items": {
+            }
           },
           "insurances": {
             "type": "array",
-            "description": "保険料"
+            "description": "保険料",
+            "items": {
+            }
           },
           "housing_loans": {
             "type": "array",
-            "description": "住宅ローン"
+            "description": "住宅ローン",
+            "items": {
+            }
           },
           "payroll_and_bonus": {
             "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentPayrollAndBonusSerializer"
           },
           "previous_job": {
-            "type": "object",
-            "description": "前職情報"
+            "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentPreviousJobSerializer"
           }
         }
       },
@@ -13125,6 +13130,130 @@
             "format": "int32",
             "minimum": 0,
             "maximum": 999999999
+          }
+        }
+      },
+      "ApiV1EmployeeYearendAdjustmentController.update_previous_job_body": {
+        "type": "object",
+        "required": [
+          "company_id",
+          "previous_job"
+        ],
+        "properties": {
+          "company_id": {
+            "type": "integer",
+            "description": "更新対象事業所ID（必須）",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "previous_job": {
+            "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentPreviousJobUpdateRequestSerializer"
+          }
+        }
+      },
+      "ApiV1EmployeeYearendAdjustmentPreviousJobUpdateRequestSerializer": {
+        "type": "object",
+        "required": [
+          "income",
+          "deduction",
+          "withholding_tax_amount",
+          "company_name",
+          "company_address",
+          "retire_date"
+        ],
+        "properties": {
+          "income": {
+            "type": "integer",
+            "description": "前職の支払金額",
+            "example": 5000000,
+            "minimum": -999999999,
+            "maximum": 999999999
+          },
+          "deduction": {
+            "type": "integer",
+            "description": "前職の社会保険料等の金額",
+            "example": 1200000,
+            "minimum": -999999999,
+            "maximum": 999999999
+          },
+          "withholding_tax_amount": {
+            "type": "integer",
+            "description": "前職の源泉徴収額",
+            "example": 100000,
+            "minimum": -999999999,
+            "maximum": 999999999
+          },
+          "company_name": {
+            "type": "string",
+            "description": "前職の社名",
+            "maxLength": 255,
+            "example": "株式会社 前職"
+          },
+          "company_address": {
+            "type": "string",
+            "description": "前職の事業所住所",
+            "maxLength": 255,
+            "example": "品川区大崎1-2-2"
+          },
+          "retire_date": {
+            "type": "string",
+            "description": "前職の退職日",
+            "format": "date",
+            "example": "2022-03-31"
+          }
+        }
+      },
+      "ApiV1EmployeeYearendAdjustmentController.update_previous_job_response": {
+        "type": "object",
+        "properties": {
+          "previous_job": {
+            "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentPreviousJobSerializer"
+          }
+        }
+      },
+      "ApiV1EmployeeYearendAdjustmentPreviousJobSerializer": {
+        "type": "object",
+        "properties": {
+          "income": {
+            "type": "integer",
+            "description": "前職の支払金額",
+            "example": 5000000,
+            "minimum": -999999999,
+            "maximum": 999999999
+          },
+          "deduction": {
+            "type": "integer",
+            "description": "前職の社会保険料等の金額",
+            "example": 1200000,
+            "minimum": -999999999,
+            "maximum": 999999999
+          },
+          "withholding_tax_amount": {
+            "type": "integer",
+            "description": "前職の源泉徴収額",
+            "example": 100000,
+            "minimum": -999999999,
+            "maximum": 999999999
+          },
+          "company_name": {
+            "type": "string",
+            "description": "前職の社名",
+            "maxLength": 255,
+            "example": "株式会社 前職"
+          },
+          "company_address": {
+            "type": "string",
+            "description": "前職の事業所住所",
+            "maxLength": 255,
+            "example": "品川区大崎1-2-2"
+          },
+          "retire_date": {
+            "type": "string",
+            "description": "前職の退職日",
+            "format": "date",
+            "example": "2022-03-31"
           }
         }
       },
