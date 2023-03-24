@@ -1,0 +1,3095 @@
+openapi: 3.0.3
+info:
+  contact:
+    name: freee請求書問い合わせ
+    url: https://support.freee.co.jp/hc/ja/requests/new
+  description: |2
+
+    <p>freee請求書のAPI仕様です。</p>
+
+    </br>
+
+    <h3 id="about_authorize">認証について</h3>
+
+    <p>OAuth2.0を利用します。<a href="https://developer.freee.co.jp/reference/#%e8%aa%8d%e8%a8%bc" target="_blank">詳細はリファレンスの認証に関する記載を参照してください。</a></p>
+
+    <h3 id="api_endpoint">エンドポイント</h3>
+
+    <p>https://api.freee.co.jp/iv</p>
+
+
+    <h3 id="compatibility">後方互換性ありの変更</h3>
+
+    <p>freeeでは、APIを改善していくために以下のような変更は後方互換性ありとして通知なく変更を入れることがあります。アプリケーション実装者は以下を踏まえて開発を行ってください。</p>
+
+    <ul>
+    <li>新しいAPIリソース・エンドポイントの追加</li>
+    <li>既存のAPIに対して必須ではない新しいリクエストパラメータの追加</li>
+    <li>既存のAPIレスポンスに対する新しいプロパティの追加</li>
+    <li>既存のAPIレスポンスに対するプロパティの順番の入れ変え</li>
+    <li>keyとなっているidやcodeの長さの変更（長くする）</li>
+    </ul>
+
+    <h3 id="error_response">エラーレスポンス</h3>
+
+    <p>APIリクエストでエラーが発生した場合は、エラー原因に応じたステータスコードおよびメッセージを返します。</p>
+
+      <table border="1">
+      <tbody>
+        <tr>
+          <th style="padding: 10px"><strong>ステータスコード</strong></th>
+          <th style="padding: 10px"><strong>原因</strong></th>
+        </tr>
+        <tr><td style="padding: 10px">400</td><td style="padding: 10px">リクエストパラメータが不正</td></tr>
+        <tr><td style="padding: 10px">401</td><td style="padding: 10px">アクセストークンが無効</td></tr>
+        <tr><td style="padding: 10px">403</td><td style="padding: 10px">アクセス権限がない</td></tr>
+        <tr><td style="padding: 10px">404</td><td style="padding: 10px">リソースが存在しない</td></tr>
+        <tr><td style="padding: 10px">429</td><td style="padding: 10px">リクエスト回数制限を超えた</td></tr>
+        <tr><td style="padding: 10px">503</td><td style="padding: 10px">システム内で予期しないエラーが発生</td></tr>
+      </tbody>
+    </table>
+
+    <p>メッセージボディ内の <code>messages</code> にはエラー内容を説明する文字列が入ります。</p>
+    <pre><code>  {
+        &quot;status_code&quot; : 400,
+        &quot;errors&quot; : [
+          {
+            &quot;type&quot; : &quot;bad_request&quot;,
+            &quot;messages&quot; : [
+              &quot;リクエストの形式が不正です。&quot;
+            ]
+          }
+        ]
+      }  </code></pre>
+
+    </br>
+
+    <h3 id="api_rate_limit">API使用制限</h3>
+    <p>APIリクエストは1時間で5000回を上限としています。API使用ステータスはレスポンスヘッダに付与されます。</p>
+    <pre><code>X-Ratelimit-Limit:5000
+    X-Ratelimit-Remaining:4998
+    X-Ratelimit-Reset:2018-01-01T12:00:00.000000Z
+    </code></pre>
+
+    <br> 各ヘッダの意味は次のとおりです。</p>
+
+     <table border="1">
+      <tbody>
+        <tr>
+          <th style="padding: 10px"><strong>ヘッダ名</strong></th>
+          <th style="padding: 10px"><strong>説明</strong></th>
+        </tr>
+        <tr><td style="padding: 10px">X-RateLimit-Limit</td><td style="padding: 10px">使用回数の上限</td></tr>
+        <tr><td style="padding: 10px">X-RateLimit-Remaining</td><td style="padding: 10px">残り使用回数</td></tr>
+        <tr><td style="padding: 10px">X-RateLimit-Reset</td><td style="padding: 10px">使用回数がリセットされる時刻</td></tr>
+      </tbody>
+    </table>
+
+    <p>上記に加え、freeeは一定期間に過度のアクセスを検知した場合、APIアクセスをコントロールする場合があります。<br> その際のhttp status codeは403となります。制限がかかってから10分程度が過ぎると再度使用することができるようになります。</p>
+  license:
+    name: © 2023 freee K.K.
+  title: freee請求書 API
+  version: v1
+servers:
+  - url: https://api.freee.co.jp/iv
+security:
+  - oauth2:
+      - write
+      - read
+tags:
+  - description: 請求書
+    name: Invoices
+  - description: 見積書
+    name: Quotations
+paths:
+  /invoices:
+    get:
+      description: 請求書の一覧を返します。
+      operationId: invoices/index
+      parameters:
+        - description: 事業所ID
+          example: 1
+          in: query
+          name: company_id
+          required: true
+          schema:
+            format: int64
+            maximum: 9223372036854775807
+            minimum: 1
+            type: integer
+        - description: 請求書番号
+          example: INV-0000000001
+          in: query
+          name: invoice_number
+          schema:
+            maxLength: 255
+            minLength: 1
+            type: string
+        - description: 件名
+          example: Webサイト製作費
+          in: query
+          name: subject
+          schema:
+            maxLength: 255
+            minLength: 1
+            type: string
+        - description: 取引先ID（半角数字のidを半角カンマ区切りスペースなしで指定してください。最大3件まで指定できます。）
+          example: 1,2
+          in: query
+          name: partner_ids
+          schema:
+            maxLength: 255
+            type: string
+        - description: "入金ステータス（unsettled: 入金待ち, settled: 入金済み）"
+          example: settled
+          in: query
+          name: payment_status
+          schema:
+            enum:
+              - settled
+              - unsettled
+            type: string
+        - description: "取引ステータス（registered: 登録済み、 unregistered: 登録待ち）"
+          example: registered
+          in: query
+          name: deal_status
+          schema:
+            enum:
+              - registered
+              - unregistered
+            type: string
+        - description: "送付ステータス（sent: 送付済み、 unsent: 送付待ち）"
+          example: sent
+          in: query
+          name: sending_status
+          schema:
+            enum:
+              - sent
+              - unsent
+            type: string
+        - description: "取消済み（canceled: 該当する、 uncanceled: 該当しない）"
+          example: canceled
+          in: query
+          name: cancel_status
+          schema:
+            enum:
+              - canceled
+              - uncanceled
+            type: string
+        - description: 請求日の開始日
+          example: "2023-04-01"
+          in: query
+          name: start_billing_date
+          schema:
+            format: date
+            pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+            type: string
+        - description: 請求日の終了日
+          example: "2023-04-01"
+          in: query
+          name: end_billing_date
+          schema:
+            format: date
+            pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+            type: string
+        - description: 入金期日の開始日
+          example: "2023-04-01"
+          in: query
+          name: start_payment_date
+          schema:
+            format: date
+            pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+            type: string
+        - description: 入金期日の終了日
+          example: "2023-04-01"
+          in: query
+          name: end_payment_date
+          schema:
+            format: date
+            pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+            type: string
+        - description: "取得レコードの件数 (デフォルト: 20, 最小: 1, 最大: 100)"
+          example: 20
+          in: query
+          name: limit
+          schema:
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: "取得レコードのオフセット (デフォルト: 0)"
+          example: 0
+          in: query
+          name: offset
+          schema:
+            maximum: 2147483647
+            minimum: 0
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceIndexResponse"
+          description: successful operation
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/badRequest"
+          description: ""
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/unauthorizedError"
+          description: ""
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/forbiddenError"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/accessDeniedError"
+          description: ""
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/internalServerError"
+          description: ""
+      summary: |
+        請求書一覧の取得
+      tags:
+        - Invoices
+    post:
+      description: 請求書の作成をします。
+      operationId: invoices/create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvoiceRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceResponse"
+          description: |
+            successful operation
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/badRequest"
+          description: ""
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/unauthorizedError"
+          description: ""
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/forbiddenError"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/accessDeniedError"
+          description: ""
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/internalServerError"
+          description: ""
+      summary: |
+        請求書の作成
+      tags:
+        - Invoices
+  /invoices/{id}:
+    get:
+      description: 指定されたIDの請求書を返します。
+      operationId: invoices/show
+      parameters:
+        - description: 事業所ID
+          example: 1
+          in: query
+          name: company_id
+          required: true
+          schema:
+            format: int64
+            maximum: 9223372036854775807
+            minimum: 1
+            type: integer
+        - description: 請求書ID
+          example: 1
+          in: path
+          name: id
+          required: true
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceResponse"
+          description: |
+            successful operation
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/badRequest"
+          description: ""
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/unauthorizedError"
+          description: ""
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/forbiddenError"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/accessDeniedError"
+          description: ""
+        "404":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/notfoundError"
+          description: ""
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/internalServerError"
+          description: ""
+      summary: |
+        請求書の取得
+      tags:
+        - Invoices
+    put:
+      description: 請求書の更新をします。
+      operationId: invoices/update
+      parameters:
+        - description: 請求書ID
+          example: 1
+          in: path
+          name: id
+          required: true
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvoiceRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceResponse"
+          description: |
+            successful operation
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/badRequest"
+          description: ""
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/unauthorizedError"
+          description: ""
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/forbiddenError"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/accessDeniedError"
+          description: ""
+        "404":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/notfoundError"
+          description: ""
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/internalServerError"
+          description: ""
+      summary: |
+        請求書の更新
+      tags:
+        - Invoices
+  /invoices/templates:
+    get:
+      description: 使用可能な請求書の帳票テンプレート一覧を返します。
+      operationId: invoices/templates/index
+      parameters:
+        - description: 事業所ID
+          example: 1
+          in: query
+          name: company_id
+          required: true
+          schema:
+            format: int64
+            maximum: 9223372036854775807
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TemplateIndexResponse"
+          description: successful operation
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/badRequest"
+          description: ""
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/unauthorizedError"
+          description: ""
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/forbiddenError"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/accessDeniedError"
+          description: ""
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/internalServerError"
+          description: ""
+      summary: |
+        使用可能な請求書の帳票テンプレート一覧の取得
+      tags:
+        - Invoices
+  /quotations:
+    get:
+      description: 見積書の一覧を返します。
+      operationId: quotations/index
+      parameters:
+        - description: 事業所ID
+          example: 1
+          in: query
+          name: company_id
+          required: true
+          schema:
+            format: int64
+            maximum: 9223372036854775807
+            minimum: 1
+            type: integer
+        - description: 見積書番号
+          example: Q-0000000001
+          in: query
+          name: quotation_number
+          schema:
+            maxLength: 255
+            minLength: 1
+            type: string
+        - description: 件名
+          example: Webサイト製作費
+          in: query
+          name: subject
+          schema:
+            maxLength: 255
+            minLength: 1
+            type: string
+        - description: 取引先ID（半角数字のidを半角カンマ区切りスペースなしで指定してください。最大3件まで指定できます。）
+          example: 1,2
+          in: query
+          name: partner_ids
+          schema:
+            maxLength: 255
+            type: string
+        - description: "送付ステータス（sent: 送付済み、 unsent: 送付待ち）"
+          example: sent
+          in: query
+          name: sending_status
+          schema:
+            enum:
+              - sent
+              - unsent
+            type: string
+        - description: "取消済み（canceled: 該当する、 uncanceled: 該当しない）"
+          example: canceled
+          in: query
+          name: cancel_status
+          schema:
+            enum:
+              - canceled
+              - uncanceled
+            type: string
+        - description: 見積日の開始日
+          example: "2023-04-01"
+          in: query
+          name: start_quotation_date
+          schema:
+            format: date
+            pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+            type: string
+        - description: 見積日の終了日
+          example: "2023-04-01"
+          in: query
+          name: end_quotation_date
+          schema:
+            format: date
+            pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+            type: string
+        - description: 有効期限の開始日
+          example: "2023-04-01"
+          in: query
+          name: start_expiration_date
+          schema:
+            format: date
+            pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+            type: string
+        - description: 有効期限の終了日
+          example: "2023-04-01"
+          in: query
+          name: end_expiration_date
+          schema:
+            format: date
+            pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+            type: string
+        - description: "取得レコードの件数 (デフォルト: 20, 最小: 1, 最大: 100)"
+          example: 20
+          in: query
+          name: limit
+          schema:
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: "取得レコードのオフセット (デフォルト: 0)"
+          example: 0
+          in: query
+          name: offset
+          schema:
+            maximum: 2147483647
+            minimum: 0
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuotationIndexResponse"
+          description: successful operation
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/badRequest"
+          description: ""
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/unauthorizedError"
+          description: ""
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/forbiddenError"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/accessDeniedError"
+          description: ""
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/internalServerError"
+          description: ""
+      summary: |
+        見積書一覧の取得
+      tags:
+        - Quotations
+    post:
+      description: 見積書の作成をします。
+      operationId: quotations/create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuotationRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuotationResponse"
+          description: |
+            successful operation
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/badRequest"
+          description: ""
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/unauthorizedError"
+          description: ""
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/forbiddenError"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/accessDeniedError"
+          description: ""
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/internalServerError"
+          description: ""
+      summary: |
+        見積書の作成
+      tags:
+        - Quotations
+  /quotations/{id}:
+    get:
+      description: 指定されたIDの見積書を返します。
+      operationId: quotations/show
+      parameters:
+        - description: 事業所ID
+          example: 1
+          in: query
+          name: company_id
+          required: true
+          schema:
+            format: int64
+            maximum: 9223372036854775807
+            minimum: 1
+            type: integer
+        - description: 見積書ID
+          example: 1
+          in: path
+          name: id
+          required: true
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuotationResponse"
+          description: successful operation
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/badRequest"
+          description: ""
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/unauthorizedError"
+          description: ""
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/forbiddenError"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/accessDeniedError"
+          description: ""
+        "404":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/notfoundError"
+          description: ""
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/internalServerError"
+          description: ""
+      summary: |
+        見積書の取得
+      tags:
+        - Quotations
+    put:
+      description: 見積書の更新をします。
+      operationId: quotations/update
+      parameters:
+        - description: 見積書ID
+          example: 1
+          in: path
+          name: id
+          required: true
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuotationRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuotationResponse"
+          description: |
+            successful operation
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/badRequest"
+          description: ""
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/unauthorizedError"
+          description: ""
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/forbiddenError"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/accessDeniedError"
+          description: ""
+        "404":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/notfoundError"
+          description: ""
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/internalServerError"
+          description: ""
+      summary: |
+        見積書の更新
+      tags:
+        - Quotations
+  /quotations/templates:
+    get:
+      description: 使用可能な見積書の帳票テンプレート一覧を返します。
+      operationId: quotations/templates/index
+      parameters:
+        - description: 事業所ID
+          example: 1
+          in: query
+          name: company_id
+          required: true
+          schema:
+            format: int64
+            maximum: 9223372036854775807
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TemplateIndexResponse"
+          description: successful operation
+        "400":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/badRequest"
+          description: ""
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/unauthorizedError"
+          description: ""
+        "403":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/forbiddenError"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/accessDeniedError"
+          description: ""
+        "500":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/internalServerError"
+          description: ""
+      summary: |
+        使用可能な見積書の帳票テンプレート一覧の取得
+      tags:
+        - Quotations
+components:
+  schemas:
+    InvoiceIndexResponse:
+      example:
+        invoices:
+          - company_id: 1
+            subject: Webサイト製作費
+            partner_name: freeeパートナー
+            payment_status: settled
+            memo: 社内メモ
+            amount_including_tax: 11000
+            billing_partner_id: 1
+            billing_date: 2023-04-01
+            sending_status: sent
+            amount_withholding_tax: 1000
+            amount_tax: 1000
+            partner_id: 1
+            cancel_status: canceled
+            total_amount: 11000
+            amount_excluding_tax: 10000
+            template_id: 1
+            id: 101
+            deal_id: 1
+            invoice_number: INV-0000000001
+            payment_date: 2023-04-01
+            deal_status: registered
+          - company_id: 1
+            subject: Webサイト製作費
+            partner_name: freeeパートナー
+            payment_status: settled
+            memo: 社内メモ
+            amount_including_tax: 11000
+            billing_partner_id: 1
+            billing_date: 2023-04-01
+            sending_status: sent
+            amount_withholding_tax: 1000
+            amount_tax: 1000
+            partner_id: 1
+            cancel_status: canceled
+            total_amount: 11000
+            amount_excluding_tax: 10000
+            template_id: 1
+            id: 101
+            deal_id: 1
+            invoice_number: INV-0000000001
+            payment_date: 2023-04-01
+            deal_status: registered
+      properties:
+        invoices:
+          items:
+            $ref: "#/components/schemas/InvoiceIndexResponse_invoices"
+          type: array
+      required:
+        - invoices
+      type: object
+    badRequest:
+      properties:
+        status_code:
+          example: 400
+          type: integer
+        errors:
+          items:
+            $ref: "#/components/schemas/badRequest_errors"
+          type: array
+      type: object
+    unauthorizedError:
+      properties:
+        message:
+          example: ログインをして下さい
+          type: string
+        messages:
+          type: string
+      type: object
+    forbiddenError:
+      properties:
+        status_code:
+          example: 403
+          type: integer
+        errors:
+          items:
+            $ref: "#/components/schemas/forbiddenError_errors"
+          type: array
+      type: object
+    accessDeniedError:
+      properties:
+        error:
+          example: access_denied
+          type: string
+        message:
+          example: アクセスする権限がありません
+          type: string
+        code:
+          example: expired_access_token
+          type: string
+      type: object
+    internalServerError:
+      properties:
+        status_code:
+          example: 500
+          type: integer
+        errors:
+          items:
+            $ref: "#/components/schemas/internalServerError_errors"
+          type: array
+      type: object
+    InvoiceRequest:
+      example:
+        partner_address_prefecture_code: 4
+        partner_address_zipcode: "1410032"
+        company_id: 1
+        subject: Webサイト製作費
+        partner_address_street_name2: ビル 1F
+        memo: 社内メモ
+        partner_address_street_name1: 東京都ＸＸ区ＹＹ１−１−１
+        billing_partner_id: 1
+        billing_date: 2023-04-01
+        tax_fraction: omit
+        invoice_note: 備考
+        withholding_tax_entry_method: out
+        branch_no: 1
+        tax_entry_method: out
+        partner_id: 1
+        partner_title: 御中
+        partner_contact_name: 法人営業担当
+        template_id: 1
+        partner_contact_department: 営業部
+        lines:
+          - withholding: true
+            unit: 個
+            reduced_tax_rate: false
+            quantity: 1
+            sales_date: 2023-04-01
+            description: 切手代
+            unit_price: "1234567890123.123"
+            tax_rate: 8
+          - withholding: true
+            unit: 個
+            reduced_tax_rate: false
+            quantity: 1
+            sales_date: 2023-04-01
+            description: 切手代
+            unit_price: "1234567890123.123"
+            tax_rate: 8
+        payment_date: 2023-04-01
+      properties:
+        company_id:
+          description: 事業所ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        template_id:
+          description: 帳票テンプレートID（指定しない場合、事業所の既定のテンプレートが指定されます。）
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        branch_no:
+          description: 枝番
+          example: 1
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        billing_date:
+          description: 請求日
+          example: "2023-04-01"
+          format: date
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+          type: string
+        payment_date:
+          description: 入金期日
+          example: "2023-04-01"
+          format: date
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+          type: string
+        subject:
+          description: 件名
+          example: Webサイト製作費
+          maxLength: 255
+          minLength: 1
+          type: string
+        tax_entry_method:
+          description: "消費税の内税・外税区分（in: 税込表示（内税）、out: 税別表示（外税））"
+          enum:
+            - in
+            - out
+          example: out
+          type: string
+        tax_fraction:
+          description: "消費税端数の計算方法（omit: 切り捨て、round_up: 切り上げ、round: 四捨五入）"
+          enum:
+            - omit
+            - round_up
+            - round
+          example: omit
+          type: string
+        withholding_tax_entry_method:
+          description: "源泉徴収の計算方法（in: 税込み価格で計算、out: 税別価格で計算）"
+          enum:
+            - in
+            - out
+          example: out
+          type: string
+        invoice_note:
+          description: 備考
+          example: 備考
+          maxLength: 4000
+          minLength: 1
+          type: string
+        memo:
+          description: 社内メモ
+          example: 社内メモ
+          maxLength: 2000
+          minLength: 1
+          type: string
+        partner_id:
+          description: |
+            取引先ID<br>
+            <a href='https://support.freee.co.jp/hc/ja/articles/12515437008409-取引先を登録する#:~:text=確認ください。-,取引先役割,-種別' target='_blank'>取引先役割に関してはこちらを御覧ください。</a>
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        billing_partner_id:
+          description: |
+            請求先ID（請求先IDが入力された場合は取引先IDより優先されます。）<br>
+            <a href='https://support.freee.co.jp/hc/ja/articles/12515437008409-取引先を登録する#:~:text=取引先に支払う）-,請求設定,-外税／内' target='_blank'>請求設定に関してはこちらを御覧ください。</a>
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        partner_title:
+          description: 敬称（御中、様、（空白）の3つから選択）
+          enum:
+            - 御中
+            - 様
+            - （空白）
+          example: 御中
+          type: string
+        partner_address_zipcode:
+          description: 郵便番号
+          example: "1410032"
+          maxLength: 10
+          minLength: 1
+          pattern: ^[0-9]{3}[\-]?[0-9]{4}$
+          type: string
+        partner_address_prefecture_code:
+          description: "都道府県コード（-1: 設定しない、0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄）"
+          example: 4
+          maximum: 46
+          minimum: -1
+          type: integer
+        partner_address_street_name1:
+          description: 取引先 市区町村・番地
+          example: 東京都ＸＸ区ＹＹ１−１−１
+          maxLength: 255
+          minLength: 1
+          type: string
+        partner_address_street_name2:
+          description: 取引先 建物名・部屋番号など
+          example: ビル 1F
+          maxLength: 255
+          minLength: 1
+          type: string
+        partner_contact_department:
+          description: 取引先部署
+          example: 営業部
+          maxLength: 255
+          minLength: 1
+          type: string
+        partner_contact_name:
+          description: 取引先担当者名
+          example: 法人営業担当
+          maxLength: 255
+          minLength: 1
+          type: string
+        lines:
+          description: 請求書の明細行
+          items:
+            $ref: "#/components/schemas/InvoiceRequest_lines"
+          type: array
+      required:
+        - billing_date
+        - company_id
+        - lines
+        - partner_id
+        - partner_title
+        - tax_entry_method
+        - tax_fraction
+        - withholding_tax_entry_method
+      type: object
+    InvoiceResponse:
+      example:
+        invoice:
+          amount_including_tax_0: 0
+          subject: Webサイト製作費
+          partner_name: freeeパートナー
+          memo: 社内メモ
+          amount_excluding_tax_8: 0
+          amount_excluding_tax_10: 10000
+          invoice_note: 備考
+          withholding_tax_entry_method: out
+          amount_excluding_tax_0: 0
+          amount_tax_8_reduced: 0
+          partner_title: 御中
+          amount_excluding_tax: 10000
+          id: 101
+          deal_id: 1
+          invoice_number: INV-0000000001
+          payment_date: 2023-04-01
+          amount_tax_10: 1000
+          amount_excluding_tax_8_reduced: 0
+          amount_including_tax_8_reduced: 0
+          partner_address_street_name2: ビル 1F
+          partner_address_street_name1: 東京都ＸＸ区ＹＹ１−１−１
+          sending_status: sent
+          cancel_status: canceled
+          total_amount: 11000
+          amount_including_tax_8: 0
+          template:
+            company_description: 〒141-0032　東京都品川区大崎1-2-2アートヴィレッジ大崎セントラルタワー 21階
+            company_name: freee株式会社
+            title: 請求書
+            invoice_registration_number: T1000000000001
+            message: メッセージ
+            bank_account_to_transfer: freee銀行 第一営業支店 1234567
+          company_contact_name: 法人営業担当
+          created_at: 2000-01-23 04:56:07
+          amount_including_tax_10: 10000
+          amount_including_tax: 11000
+          amount_tax: 1000
+          partner_id: 1
+          partner_contact_department: 営業部
+          lines:
+            - withholding: true
+              unit: 個
+              reduced_tax_rate: true
+              quantity: 1
+              sales_date: 2023-04-01
+              amount_excluding_tax: 10000
+              description: 切手代
+              id: 1
+              type: item
+              unit_price: "1234567890123.123"
+              tax_rate: 8
+            - withholding: true
+              unit: 個
+              reduced_tax_rate: true
+              quantity: 1
+              sales_date: 2023-04-01
+              amount_excluding_tax: 10000
+              description: 切手代
+              id: 1
+              type: item
+              unit_price: "1234567890123.123"
+              tax_rate: 8
+          deal_status: registered
+          partner_address_prefecture_code: 4
+          partner_address_zipcode: "1410032"
+          company_id: 1
+          payment_status: settled
+          billing_partner_id: 1
+          billing_date: 2023-04-01
+          tax_fraction: omit
+          template_name: 標準の請求書テンプレート
+          amount_withholding_tax: 1000
+          amount_tax_8: 0
+          branch_no: 1
+          tax_entry_method: out
+          partner_contact_name: 法人営業担当
+          template_id: 1
+          amount_tax_0: 0
+      properties:
+        invoice:
+          $ref: "#/components/schemas/InvoiceResponse_invoice"
+      required:
+        - invoice
+      type: object
+    notfoundError:
+      properties:
+        status_code:
+          example: 404
+          type: integer
+        errors:
+          items:
+            $ref: "#/components/schemas/notfoundError_errors"
+          type: array
+      type: object
+    TemplateIndexResponse:
+      example:
+        templates:
+          - name: 標準の請求書テンプレート
+            id: 101
+          - name: 標準の請求書テンプレート
+            id: 101
+      properties:
+        templates:
+          items:
+            $ref: "#/components/schemas/TemplateIndexResponse_templates"
+          type: array
+      required:
+        - templates
+      type: object
+    QuotationIndexResponse:
+      example:
+        quotations:
+          - company_id: 1
+            quotation_number: Q-0000000001
+            subject: Webサイト製作費
+            partner_name: freeeパートナー
+            memo: 社内メモ
+            amount_including_tax: 11000
+            expiration_date: 2023-04-01
+            sending_status: sent
+            quotation_date: 2023-04-01
+            amount_withholding_tax: 1000
+            amount_tax: 1000
+            partner_id: 1
+            cancel_status: canceled
+            total_amount: 11000
+            amount_excluding_tax: 10000
+            template_id: 1
+            id: 101
+          - company_id: 1
+            quotation_number: Q-0000000001
+            subject: Webサイト製作費
+            partner_name: freeeパートナー
+            memo: 社内メモ
+            amount_including_tax: 11000
+            expiration_date: 2023-04-01
+            sending_status: sent
+            quotation_date: 2023-04-01
+            amount_withholding_tax: 1000
+            amount_tax: 1000
+            partner_id: 1
+            cancel_status: canceled
+            total_amount: 11000
+            amount_excluding_tax: 10000
+            template_id: 1
+            id: 101
+      properties:
+        quotations:
+          items:
+            $ref: "#/components/schemas/QuotationIndexResponse_quotations"
+          type: array
+      required:
+        - quotations
+      type: object
+    QuotationRequest:
+      example:
+        delivery_deadline: 2023年12月31日
+        partner_address_prefecture_code: 4
+        partner_address_zipcode: "1410032"
+        company_id: 1
+        subject: Webサイト製作費
+        partner_address_street_name2: ビル 1F
+        memo: 社内メモ
+        partner_address_street_name1: 東京都ＸＸ区ＹＹ１−１−１
+        expiration_date: 2023-04-01
+        delivery_location: 納品場所
+        tax_fraction: omit
+        withholding_tax_entry_method: out
+        quotation_date: 2023-04-01
+        branch_no: 1
+        tax_entry_method: out
+        partner_id: 1
+        partner_title: 御中
+        partner_contact_name: 法人営業担当
+        template_id: 1
+        partner_contact_department: 営業部
+        lines:
+          - withholding: true
+            unit: 個
+            reduced_tax_rate: false
+            quantity: 1
+            description: 切手代
+            unit_price: "1234567890123.123"
+            tax_rate: 8
+          - withholding: true
+            unit: 個
+            reduced_tax_rate: false
+            quantity: 1
+            description: 切手代
+            unit_price: "1234567890123.123"
+            tax_rate: 8
+        quotation_note: 備考
+      properties:
+        company_id:
+          description: 事業所ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        template_id:
+          description: 帳票テンプレートID（指定しない場合、事業所の既定のテンプレートが指定されます。）
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        branch_no:
+          description: 枝番
+          example: 1
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        quotation_date:
+          description: 見積日
+          example: "2023-04-01"
+          format: date
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+          type: string
+        expiration_date:
+          description: 有効期限
+          example: "2023-04-01"
+          format: date
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+          type: string
+        delivery_deadline:
+          description: 納品期限
+          example: 2023年12月31日
+          maxLength: 255
+          minLength: 1
+          type: string
+        delivery_location:
+          description: 納品場所
+          example: 納品場所
+          maxLength: 255
+          minLength: 1
+          type: string
+        subject:
+          description: 件名
+          example: Webサイト製作費
+          maxLength: 255
+          minLength: 1
+          type: string
+        tax_entry_method:
+          description: "消費税の内税・外税区分（in: 税込表示（内税）、out: 税別表示（外税））"
+          enum:
+            - in
+            - out
+          example: out
+          type: string
+        tax_fraction:
+          description: "消費税端数の計算方法（omit: 切り捨て、round_up: 切り上げ、round: 四捨五入）"
+          enum:
+            - omit
+            - round_up
+            - round
+          example: omit
+          type: string
+        withholding_tax_entry_method:
+          description: "源泉徴収の計算方法（in: 税込み価格で計算、out: 税別価格で計算）"
+          enum:
+            - in
+            - out
+          example: out
+          type: string
+        quotation_note:
+          description: 備考
+          example: 備考
+          maxLength: 4000
+          minLength: 1
+          type: string
+        memo:
+          description: 社内メモ
+          example: 社内メモ
+          maxLength: 2000
+          minLength: 1
+          type: string
+        partner_id:
+          description: |
+            取引先ID<br>
+            <a href='https://support.freee.co.jp/hc/ja/articles/12515437008409-取引先を登録する#:~:text=確認ください。-,取引先役割,-種別' target='_blank'>取引先役割に関してはこちらを御覧ください。</a>
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        partner_title:
+          description: 敬称（御中、様、（空白）の3つから選択）
+          enum:
+            - 御中
+            - 様
+            - （空白）
+          example: 御中
+          type: string
+        partner_address_zipcode:
+          description: 郵便番号
+          example: "1410032"
+          maxLength: 10
+          minLength: 1
+          pattern: ^[0-9]{3}[\-]?[0-9]{4}$
+          type: string
+        partner_address_prefecture_code:
+          description: "都道府県コード（-1: 設定しない、0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄）"
+          example: 4
+          maximum: 46
+          minimum: -1
+          type: integer
+        partner_address_street_name1:
+          description: 取引先 市区町村・番地
+          example: 東京都ＸＸ区ＹＹ１−１−１
+          maxLength: 255
+          minLength: 1
+          type: string
+        partner_address_street_name2:
+          description: 取引先 建物名・部屋番号など
+          example: ビル 1F
+          maxLength: 255
+          minLength: 1
+          type: string
+        partner_contact_department:
+          description: 取引先部署
+          example: 営業部
+          maxLength: 255
+          minLength: 1
+          type: string
+        partner_contact_name:
+          description: 取引先担当者名
+          example: 法人営業担当
+          maxLength: 255
+          minLength: 1
+          type: string
+        lines:
+          description: 請求書の明細行
+          items:
+            $ref: "#/components/schemas/QuotationRequest_lines"
+          type: array
+      required:
+        - company_id
+        - lines
+        - partner_id
+        - partner_title
+        - quotation_date
+        - tax_entry_method
+        - tax_fraction
+        - withholding_tax_entry_method
+      type: object
+    QuotationResponse:
+      example:
+        quotation:
+          template:
+            company_description: 〒141-0032　東京都品川区大崎1-2-2アートヴィレッジ大崎セントラルタワー 21階
+            company_name: freee株式会社
+            title: 見積書
+            message: メッセージ
+          company_contact_name: 法人営業担当
+          amount_including_tax_0: 0
+          subject: Webサイト製作費
+          partner_name: freeeパートナー
+          memo: 社内メモ
+          created_at: 2000-01-23 04:56:07
+          amount_including_tax_10: 10000
+          amount_excluding_tax_8: 0
+          amount_including_tax: 11000
+          amount_excluding_tax_10: 10000
+          expiration_date: 2023-04-01
+          delivery_location: 納品場所
+          withholding_tax_entry_method: out
+          amount_excluding_tax_0: 0
+          quotation_date: 2023-04-01
+          amount_tax: 1000
+          partner_id: 1
+          amount_tax_8_reduced: 0
+          partner_title: 御中
+          amount_excluding_tax: 10000
+          id: 101
+          partner_contact_department: 営業部
+          lines:
+            - withholding: true
+              unit: 個
+              reduced_tax_rate: true
+              quantity: 1
+              amount_excluding_tax: 10000
+              description: 切手代
+              id: 1
+              type: item
+              unit_price: "1234567890123.123"
+              tax_rate: 8
+            - withholding: true
+              unit: 個
+              reduced_tax_rate: true
+              quantity: 1
+              amount_excluding_tax: 10000
+              description: 切手代
+              id: 1
+              type: item
+              unit_price: "1234567890123.123"
+              tax_rate: 8
+          quotation_note: 備考
+          amount_tax_10: 1000
+          delivery_deadline: 2023年12月31日
+          amount_excluding_tax_8_reduced: 0
+          partner_address_prefecture_code: 4
+          amount_including_tax_8_reduced: 0
+          partner_address_zipcode: "1410032"
+          company_id: 1
+          quotation_number: Q-0000000001
+          partner_address_street_name2: ビル 1F
+          partner_address_street_name1: 東京都ＸＸ区ＹＹ１−１−１
+          sending_status: sent
+          tax_fraction: omit
+          template_name: 標準の請求書テンプレート
+          amount_withholding_tax: 1000
+          amount_tax_8: 0
+          branch_no: 1
+          tax_entry_method: out
+          cancel_status: canceled
+          total_amount: 11000
+          partner_contact_name: 法人営業担当
+          template_id: 1
+          amount_tax_0: 0
+          amount_including_tax_8: 0
+      properties:
+        quotation:
+          $ref: "#/components/schemas/QuotationResponse_quotation"
+      required:
+        - quotation
+      type: object
+    InvoiceIndexResponse_invoices:
+      example:
+        company_id: 1
+        subject: Webサイト製作費
+        partner_name: freeeパートナー
+        payment_status: settled
+        memo: 社内メモ
+        amount_including_tax: 11000
+        billing_partner_id: 1
+        billing_date: 2023-04-01
+        sending_status: sent
+        amount_withholding_tax: 1000
+        amount_tax: 1000
+        partner_id: 1
+        cancel_status: canceled
+        total_amount: 11000
+        amount_excluding_tax: 10000
+        template_id: 1
+        id: 101
+        deal_id: 1
+        invoice_number: INV-0000000001
+        payment_date: 2023-04-01
+        deal_status: registered
+      properties:
+        id:
+          description: 請求書ID
+          example: 101
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        company_id:
+          description: 事業所ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        invoice_number:
+          description: 請求書番号
+          example: INV-0000000001
+          maxLength: 255
+          type: string
+        subject:
+          description: 件名
+          example: Webサイト製作費
+          maxLength: 255
+          type: string
+        template_id:
+          description: 帳票テンプレートID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        billing_date:
+          description: 請求日
+          example: "2023-04-01"
+          format: date
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+          type: string
+        payment_date:
+          description: 入金期日
+          example: "2023-04-01"
+          format: date
+          nullable: true
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+          type: string
+        memo:
+          description: 社内メモ
+          example: 社内メモ
+          maxLength: 2000
+          type: string
+        sending_status:
+          description: "送付ステータス（sent: 送付済み、 unsent: 送付待ち）"
+          enum:
+            - sent
+            - unsent
+          example: sent
+          type: string
+        payment_status:
+          description: "入金ステータス（unsettled: 入金待ち, settled: 入金済み）"
+          enum:
+            - settled
+            - unsettled
+          example: settled
+          type: string
+        cancel_status:
+          description: "取消済み（canceled: 該当する、 uncanceled: 該当しない）"
+          enum:
+            - canceled
+            - uncanceled
+          example: canceled
+          type: string
+        deal_status:
+          description: "取引ステータス（registered: 登録済み、 unregistered: 登録待ち）"
+          enum:
+            - registered
+            - unregistered
+          example: registered
+          type: string
+        deal_id:
+          description: 取引ID （deal_statusがunregisteredの場合、nullになります。）
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          nullable: true
+          type: integer
+        total_amount:
+          description: 合計金額
+          example: 11000
+          format: double
+          type: number
+        amount_withholding_tax:
+          description: 源泉徴収税
+          example: 1000
+          nullable: true
+          type: number
+        amount_including_tax:
+          description: 税込金額
+          example: 11000
+          format: double
+          type: number
+        amount_excluding_tax:
+          description: 小計（税別）
+          example: 10000
+          type: number
+        amount_tax:
+          description: 消費税額
+          example: 1000
+          type: number
+        partner_id:
+          description: 取引先ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        billing_partner_id:
+          description: 請求先ID（請求先IDが入力された場合は取引先IDより優先されます。）
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          nullable: true
+          type: integer
+        partner_name:
+          description: 取引先名
+          example: freeeパートナー
+          maxLength: 255
+          type: string
+      required:
+        - amount_excluding_tax
+        - amount_including_tax
+        - amount_tax
+        - billing_date
+        - cancel_status
+        - company_id
+        - deal_status
+        - id
+        - invoice_number
+        - memo
+        - partner_id
+        - payment_status
+        - sending_status
+        - subject
+        - total_amount
+      type: object
+    badRequest_errors:
+      properties:
+        type:
+          type: string
+        messages:
+          items:
+            example: リクエストの形式が不正です。
+            type: string
+          type: array
+      type: object
+    forbiddenError_errors:
+      properties:
+        type:
+          type: string
+        messages:
+          items:
+            example: アクセス権限がありません。
+            type: string
+          type: array
+      type: object
+    internalServerError_errors:
+      properties:
+        type:
+          example: internal_server_error
+          type: string
+        messages:
+          items:
+            example: エラーが発生しました。再試行しても解消しない場合は、サポートセンターまでご連絡ください。
+            type: string
+          type: array
+      type: object
+    InvoiceRequest_lines:
+      example:
+        withholding: true
+        unit: 個
+        reduced_tax_rate: false
+        quantity: 1
+        sales_date: 2023-04-01
+        description: 切手代
+        unit_price: "1234567890123.123"
+        tax_rate: 8
+      properties:
+        description:
+          description: 摘要（品名）
+          example: 切手代
+          maxLength: 255
+          minLength: 1
+          type: string
+        sales_date:
+          description: 取引日
+          example: "2023-04-01"
+          format: date
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+          type: string
+        unit:
+          description: 明細の単位名
+          example: 個
+          maxLength: 255
+          minLength: 1
+          type: string
+        quantity:
+          description: 明細の数量 (整数部は8桁まで、小数部は3桁まで)
+          example: 1
+          maximum: 99999999.999
+          minimum: -99999999.999
+          type: number
+        unit_price:
+          description: 明細の単価 (整数部は13桁まで、小数部は3桁まで)
+          example: "1234567890123.123"
+          pattern: ^\-?[0-9]{0,13}(\.[0-9]{1,3})?$
+          type: string
+        tax_rate:
+          description: 税率（%）
+          enum:
+            - 0
+            - 8
+            - 10
+          example: 8
+          type: integer
+        reduced_tax_rate:
+          default: false
+          description: "軽減税率対象（true: 対象、 false: 対象外）trueはtax_rate:8の時のみ指定可能です。"
+          example: false
+          type: boolean
+        withholding:
+          description: 源泉徴収対象
+          example: true
+          type: boolean
+      required:
+        - quantity
+        - tax_rate
+      type: object
+    InvoiceResponse_invoice_template:
+      description: 帳票テンプレート情報（帳票テンプレート作成の際に設定できる項目です。）
+      example:
+        company_description: 〒141-0032　東京都品川区大崎1-2-2アートヴィレッジ大崎セントラルタワー 21階
+        company_name: freee株式会社
+        title: 請求書
+        invoice_registration_number: T1000000000001
+        message: メッセージ
+        bank_account_to_transfer: freee銀行 第一営業支店 1234567
+      properties:
+        title:
+          description: 請求書タイトル
+          example: 請求書
+          type: string
+        invoice_registration_number:
+          description: |
+            インボイス制度適格請求書発行事業者登録番号
+            - 先頭T数字13桁の固定14桁の文字列
+            <a target="_blank" href="https://www.invoice-kohyo.nta.go.jp/index.html">国税庁インボイス制度適格請求書発行事業者公表サイト</a>
+          example: T1000000000001
+          type: string
+        company_name:
+          description: 自社名
+          example: freee株式会社
+          type: string
+        company_description:
+          description: 自社情報
+          example: 〒141-0032　東京都品川区大崎1-2-2アートヴィレッジ大崎セントラルタワー 21階
+          type: string
+        bank_account_to_transfer:
+          description: 振込先
+          example: freee銀行 第一営業支店 1234567
+          type: string
+        message:
+          description: メッセージ
+          example: メッセージ
+          type: string
+      type: object
+    InvoiceResponse_invoice_lines:
+      example:
+        withholding: true
+        unit: 個
+        reduced_tax_rate: true
+        quantity: 1
+        sales_date: 2023-04-01
+        amount_excluding_tax: 10000
+        description: 切手代
+        id: 1
+        type: item
+        unit_price: "1234567890123.123"
+        tax_rate: 8
+      properties:
+        id:
+          description: 明細行ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        type:
+          description: |
+            明細の種類
+            - item: 品目行
+            - text: テキスト行
+              - textの時はsales_date、quantity、unit_price、tax_rate、amount_excluding_taxはnullになります。
+          enum:
+            - item
+            - text
+          example: item
+          type: string
+        description:
+          description: 摘要（品名）
+          example: 切手代
+          maxLength: 255
+          type: string
+        sales_date:
+          description: 取引日
+          example: "2023-04-01"
+          format: date
+          nullable: true
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+          type: string
+        unit:
+          description: 明細の単位名
+          example: 個
+          maxLength: 255
+          type: string
+        quantity:
+          description: 明細の数量 (整数部は8桁まで、小数部は3桁まで)
+          example: 1
+          maximum: 99999999.999
+          minimum: -99999999.999
+          nullable: true
+          type: number
+        unit_price:
+          description: 明細の単価 (整数部は13桁まで、小数部は3桁まで)
+          example: "1234567890123.123"
+          nullable: true
+          type: string
+        tax_rate:
+          description: 税率（%）
+          enum:
+            - 0
+            - 8
+            - 10
+          example: 8
+          nullable: true
+          type: integer
+        reduced_tax_rate:
+          description: "軽減税率対象（true: 対象、 false: 対象外）"
+          example: true
+          type: boolean
+        withholding:
+          description: 源泉徴収対象
+          example: true
+          type: boolean
+        amount_excluding_tax:
+          description: 税別金額
+          example: 10000
+          format: double
+          nullable: true
+          type: number
+      required:
+        - description
+        - id
+        - type
+        - withholding
+      type: object
+    InvoiceResponse_invoice:
+      example:
+        amount_including_tax_0: 0
+        subject: Webサイト製作費
+        partner_name: freeeパートナー
+        memo: 社内メモ
+        amount_excluding_tax_8: 0
+        amount_excluding_tax_10: 10000
+        invoice_note: 備考
+        withholding_tax_entry_method: out
+        amount_excluding_tax_0: 0
+        amount_tax_8_reduced: 0
+        partner_title: 御中
+        amount_excluding_tax: 10000
+        id: 101
+        deal_id: 1
+        invoice_number: INV-0000000001
+        payment_date: 2023-04-01
+        amount_tax_10: 1000
+        amount_excluding_tax_8_reduced: 0
+        amount_including_tax_8_reduced: 0
+        partner_address_street_name2: ビル 1F
+        partner_address_street_name1: 東京都ＸＸ区ＹＹ１−１−１
+        sending_status: sent
+        cancel_status: canceled
+        total_amount: 11000
+        amount_including_tax_8: 0
+        template:
+          company_description: 〒141-0032　東京都品川区大崎1-2-2アートヴィレッジ大崎セントラルタワー 21階
+          company_name: freee株式会社
+          title: 請求書
+          invoice_registration_number: T1000000000001
+          message: メッセージ
+          bank_account_to_transfer: freee銀行 第一営業支店 1234567
+        company_contact_name: 法人営業担当
+        created_at: 2000-01-23 04:56:07
+        amount_including_tax_10: 10000
+        amount_including_tax: 11000
+        amount_tax: 1000
+        partner_id: 1
+        partner_contact_department: 営業部
+        lines:
+          - withholding: true
+            unit: 個
+            reduced_tax_rate: true
+            quantity: 1
+            sales_date: 2023-04-01
+            amount_excluding_tax: 10000
+            description: 切手代
+            id: 1
+            type: item
+            unit_price: "1234567890123.123"
+            tax_rate: 8
+          - withholding: true
+            unit: 個
+            reduced_tax_rate: true
+            quantity: 1
+            sales_date: 2023-04-01
+            amount_excluding_tax: 10000
+            description: 切手代
+            id: 1
+            type: item
+            unit_price: "1234567890123.123"
+            tax_rate: 8
+        deal_status: registered
+        partner_address_prefecture_code: 4
+        partner_address_zipcode: "1410032"
+        company_id: 1
+        payment_status: settled
+        billing_partner_id: 1
+        billing_date: 2023-04-01
+        tax_fraction: omit
+        template_name: 標準の請求書テンプレート
+        amount_withholding_tax: 1000
+        amount_tax_8: 0
+        branch_no: 1
+        tax_entry_method: out
+        partner_contact_name: 法人営業担当
+        template_id: 1
+        amount_tax_0: 0
+      properties:
+        id:
+          description: 請求書ID
+          example: 101
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        company_id:
+          description: 事業所ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        invoice_number:
+          description: 請求書番号
+          example: INV-0000000001
+          maxLength: 255
+          type: string
+        branch_no:
+          description: 枝番
+          example: 1
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+          type: integer
+        subject:
+          description: 件名
+          example: Webサイト製作費
+          maxLength: 255
+          type: string
+        template_id:
+          description: 帳票テンプレートID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        template_name:
+          description: 帳票テンプレート名
+          example: 標準の請求書テンプレート
+          maxLength: 255
+          type: string
+        billing_date:
+          description: 請求日
+          example: "2023-04-01"
+          format: date
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+          type: string
+        payment_date:
+          description: 入金期日
+          example: "2023-04-01"
+          format: date
+          nullable: true
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+          type: string
+        invoice_note:
+          description: 備考
+          example: 備考
+          maxLength: 4000
+          type: string
+        memo:
+          description: 社内メモ
+          example: 社内メモ
+          maxLength: 2000
+          type: string
+        sending_status:
+          description: "送付ステータス（sent: 送付済み、 unsent: 送付待ち）"
+          enum:
+            - sent
+            - unsent
+          example: sent
+          type: string
+        payment_status:
+          description: "入金ステータス（unsettled: 入金待ち, settled: 入金済み）"
+          enum:
+            - settled
+            - unsettled
+          example: settled
+          type: string
+        cancel_status:
+          description: "取消済み（canceled: 該当する、 uncanceled: 該当しない）"
+          enum:
+            - canceled
+            - uncanceled
+          example: canceled
+          type: string
+        deal_status:
+          description: "取引ステータス（registered: 登録済み、 unregistered: 登録待ち）"
+          enum:
+            - registered
+            - unregistered
+          example: registered
+          type: string
+        deal_id:
+          description: 取引ID （deal_statusがunregisteredの場合、nullになります。）
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          nullable: true
+          type: integer
+        tax_entry_method:
+          description: "消費税の内税・外税区分（in: 税込表示（内税）、out: 税別表示（外税））"
+          enum:
+            - in
+            - out
+          example: out
+          nullable: true
+          type: string
+        tax_fraction:
+          description: "消費税端数の計算方法（omit: 切り捨て、round_up: 切り上げ、round: 四捨五入）"
+          enum:
+            - omit
+            - round_up
+            - round
+          example: omit
+          nullable: true
+          type: string
+        withholding_tax_entry_method:
+          description: "源泉徴収の計算方法（in: 税込み価格で計算、out: 税別価格で計算）"
+          enum:
+            - in
+            - out
+          example: out
+          nullable: true
+          type: string
+        total_amount:
+          description: 合計金額
+          example: 11000
+          format: double
+          type: number
+        created_at:
+          description: 作成日時
+          format: date-time
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$
+          type: string
+        amount_withholding_tax:
+          description: 源泉徴収税
+          example: 1000
+          nullable: true
+          type: number
+        amount_including_tax:
+          description: 税込金額
+          example: 11000
+          format: double
+          type: number
+        amount_excluding_tax:
+          description: 小計（税別）
+          example: 10000
+          type: number
+        amount_tax:
+          description: 消費税額
+          example: 1000
+          type: number
+        amount_including_tax_10:
+          description: 10%対象 税込
+          example: 10000
+          format: double
+          nullable: true
+          type: number
+        amount_excluding_tax_10:
+          description: 10%対象 税抜
+          example: 10000
+          format: double
+          nullable: true
+          type: number
+        amount_tax_10:
+          description: 10%対象 消費税
+          example: 1000
+          format: double
+          nullable: true
+          type: number
+        amount_including_tax_8:
+          description: 8%対象 税込
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_excluding_tax_8:
+          description: 8%対象 税抜
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_tax_8:
+          description: 8%対象 消費税
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_including_tax_8_reduced:
+          description: 軽減税率8%対象 税込
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_excluding_tax_8_reduced:
+          description: 軽減税率8%対象 税抜
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_tax_8_reduced:
+          description: 軽減税率8%対象 消費税
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_including_tax_0:
+          description: 0%対象 税込
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_excluding_tax_0:
+          description: 0%対象 税抜
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_tax_0:
+          description: 0%対象 消費税
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        partner_id:
+          description: 取引先ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        billing_partner_id:
+          description: 請求先ID（請求先IDが入力された場合は取引先IDより優先されます。）
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          nullable: true
+          type: integer
+        partner_name:
+          description: 取引先名
+          example: freeeパートナー
+          maxLength: 255
+          type: string
+        partner_title:
+          description: 敬称（御中、様、（空白）の3つから選択）
+          enum:
+            - 御中
+            - 様
+            - （空白）
+          example: 御中
+          type: string
+        partner_address_zipcode:
+          description: 郵便番号
+          example: "1410032"
+          maxLength: 10
+          type: string
+        partner_address_prefecture_code:
+          description: "都道府県コード（-1: 設定しない、0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄）"
+          example: 4
+          maximum: 46
+          minimum: -1
+          type: integer
+        partner_address_street_name1:
+          description: 取引先 市区町村・番地
+          example: 東京都ＸＸ区ＹＹ１−１−１
+          maxLength: 255
+          type: string
+        partner_address_street_name2:
+          description: 取引先 建物名・部屋番号など
+          example: ビル 1F
+          maxLength: 255
+          type: string
+        partner_contact_department:
+          description: 取引先部署
+          example: 営業部
+          maxLength: 255
+          type: string
+        partner_contact_name:
+          description: 取引先担当者名
+          example: 法人営業担当
+          maxLength: 255
+          type: string
+        company_contact_name:
+          description: 自社担当者名
+          example: 法人営業担当
+          maxLength: 255
+          type: string
+        template:
+          $ref: "#/components/schemas/InvoiceResponse_invoice_template"
+        lines:
+          description: 請求書の明細行
+          items:
+            $ref: "#/components/schemas/InvoiceResponse_invoice_lines"
+          type: array
+      required:
+        - amount_excluding_tax
+        - amount_including_tax
+        - amount_tax
+        - billing_date
+        - cancel_status
+        - company_id
+        - created_at
+        - deal_status
+        - id
+        - invoice_note
+        - invoice_number
+        - lines
+        - memo
+        - partner_id
+        - payment_status
+        - sending_status
+        - subject
+        - total_amount
+      type: object
+    notfoundError_errors:
+      properties:
+        type:
+          example: not_found
+          type: string
+        messages:
+          items:
+            example: 存在しないか既に削除されたレコードです。
+            type: string
+          type: array
+      type: object
+    TemplateIndexResponse_templates:
+      example:
+        name: 標準の請求書テンプレート
+        id: 101
+      properties:
+        id:
+          description: 帳票テンプレートID
+          example: 101
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        name:
+          description: 帳票テンプレート名
+          example: 標準の請求書テンプレート
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+        - id
+        - name
+      type: object
+    QuotationIndexResponse_quotations:
+      example:
+        company_id: 1
+        quotation_number: Q-0000000001
+        subject: Webサイト製作費
+        partner_name: freeeパートナー
+        memo: 社内メモ
+        amount_including_tax: 11000
+        expiration_date: 2023-04-01
+        sending_status: sent
+        quotation_date: 2023-04-01
+        amount_withholding_tax: 1000
+        amount_tax: 1000
+        partner_id: 1
+        cancel_status: canceled
+        total_amount: 11000
+        amount_excluding_tax: 10000
+        template_id: 1
+        id: 101
+      properties:
+        id:
+          description: 見積書ID
+          example: 101
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        company_id:
+          description: 事業所ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        quotation_number:
+          description: 見積書番号
+          example: Q-0000000001
+          maxLength: 255
+          type: string
+        subject:
+          description: 件名
+          example: Webサイト製作費
+          maxLength: 255
+          type: string
+        template_id:
+          description: 帳票テンプレートID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        quotation_date:
+          description: 見積日
+          example: "2023-04-01"
+          format: date
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+          type: string
+        expiration_date:
+          description: 有効期限
+          example: "2023-04-01"
+          format: date
+          nullable: true
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+          type: string
+        memo:
+          description: 社内メモ
+          example: 社内メモ
+          maxLength: 2000
+          type: string
+        sending_status:
+          description: "送付ステータス（sent: 送付済み、 unsent: 送付待ち）"
+          enum:
+            - sent
+            - unsent
+          example: sent
+          type: string
+        cancel_status:
+          description: "取消済み（canceled: 該当する、 uncanceled: 該当しない）"
+          enum:
+            - canceled
+            - uncanceled
+          example: canceled
+          type: string
+        total_amount:
+          description: 合計金額
+          example: 11000
+          format: double
+          type: number
+        amount_withholding_tax:
+          description: 源泉徴収税
+          example: 1000
+          nullable: true
+          type: number
+        amount_including_tax:
+          description: 税込金額
+          example: 11000
+          format: double
+          type: number
+        amount_excluding_tax:
+          description: 小計（税別）
+          example: 10000
+          type: number
+        amount_tax:
+          description: 消費税額
+          example: 1000
+          type: number
+        partner_id:
+          description: 取引先ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        partner_name:
+          description: 取引先名
+          example: freeeパートナー
+          maxLength: 255
+          type: string
+      required:
+        - amount_excluding_tax
+        - amount_including_tax
+        - amount_tax
+        - cancel_status
+        - company_id
+        - id
+        - memo
+        - partner_id
+        - quotation_date
+        - quotation_number
+        - sending_status
+        - subject
+        - total_amount
+      type: object
+    QuotationRequest_lines:
+      example:
+        withholding: true
+        unit: 個
+        reduced_tax_rate: false
+        quantity: 1
+        description: 切手代
+        unit_price: "1234567890123.123"
+        tax_rate: 8
+      properties:
+        description:
+          description: 摘要（品名）
+          example: 切手代
+          maxLength: 255
+          minLength: 1
+          type: string
+        unit:
+          description: 明細の単位名
+          example: 個
+          maxLength: 255
+          minLength: 1
+          type: string
+        quantity:
+          description: 明細の数量 (整数部は8桁まで、小数部は3桁まで)
+          example: 1
+          maximum: 99999999.999
+          minimum: -99999999.999
+          type: number
+        unit_price:
+          description: 明細の単価 (整数部は13桁まで、小数部は3桁まで)
+          example: "1234567890123.123"
+          pattern: ^\-?[0-9]{0,13}(\.[0-9]{1,3})?$
+          type: string
+        tax_rate:
+          description: 税率（%）
+          enum:
+            - 0
+            - 8
+            - 10
+          example: 8
+          type: integer
+        reduced_tax_rate:
+          default: false
+          description: "軽減税率対象（true: 対象、 false: 対象外）trueはtax_rate:8の時のみ指定可能です。"
+          example: false
+          type: boolean
+        withholding:
+          description: 源泉徴収対象
+          example: true
+          type: boolean
+      required:
+        - quantity
+        - tax_rate
+      type: object
+    QuotationResponse_quotation_template:
+      description: 帳票テンプレート情報（帳票テンプレート作成の際に設定できる項目です。）
+      example:
+        company_description: 〒141-0032　東京都品川区大崎1-2-2アートヴィレッジ大崎セントラルタワー 21階
+        company_name: freee株式会社
+        title: 見積書
+        message: メッセージ
+      properties:
+        title:
+          description: 見積書タイトル
+          example: 見積書
+          type: string
+        company_name:
+          description: 自社名
+          example: freee株式会社
+          type: string
+        company_description:
+          description: 自社情報
+          example: 〒141-0032　東京都品川区大崎1-2-2アートヴィレッジ大崎セントラルタワー 21階
+          type: string
+        message:
+          description: メッセージ
+          example: メッセージ
+          type: string
+      type: object
+    QuotationResponse_quotation_lines:
+      example:
+        withholding: true
+        unit: 個
+        reduced_tax_rate: true
+        quantity: 1
+        amount_excluding_tax: 10000
+        description: 切手代
+        id: 1
+        type: item
+        unit_price: "1234567890123.123"
+        tax_rate: 8
+      properties:
+        id:
+          description: 明細行ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        type:
+          description: |
+            明細の種類
+            - item: 品目行
+            - text: テキスト行
+              - textの時はsales_date、quantity、unit_price、tax_rate、amount_excluding_taxはnullになります。
+          enum:
+            - item
+            - text
+          example: item
+          type: string
+        description:
+          description: 摘要（品名）
+          example: 切手代
+          maxLength: 255
+          type: string
+        unit:
+          description: 明細の単位名
+          example: 個
+          maxLength: 255
+          type: string
+        quantity:
+          description: 明細の数量 (整数部は8桁まで、小数部は3桁まで)
+          example: 1
+          maximum: 99999999.999
+          minimum: -99999999.999
+          nullable: true
+          type: number
+        unit_price:
+          description: 明細の単価 (整数部は13桁まで、小数部は3桁まで)
+          example: "1234567890123.123"
+          nullable: true
+          type: string
+        tax_rate:
+          description: 税率（%）
+          enum:
+            - 0
+            - 8
+            - 10
+          example: 8
+          nullable: true
+          type: integer
+        reduced_tax_rate:
+          description: "軽減税率対象（true: 対象、 false: 対象外）"
+          example: true
+          type: boolean
+        withholding:
+          description: 源泉徴収対象
+          example: true
+          type: boolean
+        amount_excluding_tax:
+          description: 税別金額
+          example: 10000
+          format: double
+          nullable: true
+          type: number
+      required:
+        - description
+        - id
+        - type
+        - withholding
+      type: object
+    QuotationResponse_quotation:
+      example:
+        template:
+          company_description: 〒141-0032　東京都品川区大崎1-2-2アートヴィレッジ大崎セントラルタワー 21階
+          company_name: freee株式会社
+          title: 見積書
+          message: メッセージ
+        company_contact_name: 法人営業担当
+        amount_including_tax_0: 0
+        subject: Webサイト製作費
+        partner_name: freeeパートナー
+        memo: 社内メモ
+        created_at: 2000-01-23 04:56:07
+        amount_including_tax_10: 10000
+        amount_excluding_tax_8: 0
+        amount_including_tax: 11000
+        amount_excluding_tax_10: 10000
+        expiration_date: 2023-04-01
+        delivery_location: 納品場所
+        withholding_tax_entry_method: out
+        amount_excluding_tax_0: 0
+        quotation_date: 2023-04-01
+        amount_tax: 1000
+        partner_id: 1
+        amount_tax_8_reduced: 0
+        partner_title: 御中
+        amount_excluding_tax: 10000
+        id: 101
+        partner_contact_department: 営業部
+        lines:
+          - withholding: true
+            unit: 個
+            reduced_tax_rate: true
+            quantity: 1
+            amount_excluding_tax: 10000
+            description: 切手代
+            id: 1
+            type: item
+            unit_price: "1234567890123.123"
+            tax_rate: 8
+          - withholding: true
+            unit: 個
+            reduced_tax_rate: true
+            quantity: 1
+            amount_excluding_tax: 10000
+            description: 切手代
+            id: 1
+            type: item
+            unit_price: "1234567890123.123"
+            tax_rate: 8
+        quotation_note: 備考
+        amount_tax_10: 1000
+        delivery_deadline: 2023年12月31日
+        amount_excluding_tax_8_reduced: 0
+        partner_address_prefecture_code: 4
+        amount_including_tax_8_reduced: 0
+        partner_address_zipcode: "1410032"
+        company_id: 1
+        quotation_number: Q-0000000001
+        partner_address_street_name2: ビル 1F
+        partner_address_street_name1: 東京都ＸＸ区ＹＹ１−１−１
+        sending_status: sent
+        tax_fraction: omit
+        template_name: 標準の請求書テンプレート
+        amount_withholding_tax: 1000
+        amount_tax_8: 0
+        branch_no: 1
+        tax_entry_method: out
+        cancel_status: canceled
+        total_amount: 11000
+        partner_contact_name: 法人営業担当
+        template_id: 1
+        amount_tax_0: 0
+        amount_including_tax_8: 0
+      properties:
+        id:
+          description: 見積書ID
+          example: 101
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        company_id:
+          description: 事業所ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        quotation_number:
+          description: 見積書番号
+          example: Q-0000000001
+          maxLength: 255
+          type: string
+        branch_no:
+          description: 枝番
+          example: 1
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+          type: integer
+        subject:
+          description: 件名
+          example: Webサイト製作費
+          maxLength: 255
+          type: string
+        template_id:
+          description: 帳票テンプレートID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        template_name:
+          description: 帳票テンプレート名
+          example: 標準の請求書テンプレート
+          maxLength: 255
+          type: string
+        quotation_date:
+          description: 見積日
+          example: "2023-04-01"
+          format: date
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+          type: string
+        expiration_date:
+          description: 有効期限
+          example: "2023-04-01"
+          format: date
+          nullable: true
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+          type: string
+        delivery_deadline:
+          description: 納品期限
+          example: 2023年12月31日
+          maxLength: 255
+          type: string
+        delivery_location:
+          description: 納品場所
+          example: 納品場所
+          maxLength: 255
+          type: string
+        quotation_note:
+          description: 備考
+          example: 備考
+          maxLength: 4000
+          type: string
+        memo:
+          description: 社内メモ
+          example: 社内メモ
+          maxLength: 2000
+          type: string
+        sending_status:
+          description: "送付ステータス（sent: 送付済み、 unsent: 送付待ち）"
+          enum:
+            - sent
+            - unsent
+          example: sent
+          type: string
+        cancel_status:
+          description: "取消済み（canceled: 該当する、 uncanceled: 該当しない）"
+          enum:
+            - canceled
+            - uncanceled
+          example: canceled
+          type: string
+        tax_entry_method:
+          description: "消費税の内税・外税区分（in: 税込表示（内税）、out: 税別表示（外税））"
+          enum:
+            - in
+            - out
+          example: out
+          nullable: true
+          type: string
+        tax_fraction:
+          description: "消費税端数の計算方法（omit: 切り捨て、round_up: 切り上げ、round: 四捨五入）"
+          enum:
+            - omit
+            - round_up
+            - round
+          example: omit
+          nullable: true
+          type: string
+        withholding_tax_entry_method:
+          description: "源泉徴収の計算方法（in: 税込み価格で計算、out: 税別価格で計算）"
+          enum:
+            - in
+            - out
+          example: out
+          nullable: true
+          type: string
+        total_amount:
+          description: 合計金額
+          example: 11000
+          format: double
+          type: number
+        created_at:
+          description: 作成日時
+          format: date-time
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$
+          type: string
+        amount_withholding_tax:
+          description: 源泉徴収税
+          example: 1000
+          nullable: true
+          type: number
+        amount_including_tax:
+          description: 税込金額
+          example: 11000
+          format: double
+          type: number
+        amount_excluding_tax:
+          description: 小計（税別）
+          example: 10000
+          type: number
+        amount_tax:
+          description: 消費税額
+          example: 1000
+          type: number
+        amount_including_tax_10:
+          description: 10%対象 税込
+          example: 10000
+          format: double
+          nullable: true
+          type: number
+        amount_excluding_tax_10:
+          description: 10%対象 税抜
+          example: 10000
+          format: double
+          nullable: true
+          type: number
+        amount_tax_10:
+          description: 10%対象 消費税
+          example: 1000
+          format: double
+          nullable: true
+          type: number
+        amount_including_tax_8:
+          description: 8%対象 税込
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_excluding_tax_8:
+          description: 8%対象 税抜
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_tax_8:
+          description: 8%対象 消費税
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_including_tax_8_reduced:
+          description: 軽減税率8%対象 税込
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_excluding_tax_8_reduced:
+          description: 軽減税率8%対象 税抜
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_tax_8_reduced:
+          description: 軽減税率8%対象 消費税
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_including_tax_0:
+          description: 0%対象 税込
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_excluding_tax_0:
+          description: 0%対象 税抜
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_tax_0:
+          description: 0%対象 消費税
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        partner_id:
+          description: 取引先ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        partner_name:
+          description: 取引先名
+          example: freeeパートナー
+          maxLength: 255
+          type: string
+        partner_title:
+          description: 敬称（御中、様、（空白）の3つから選択）
+          enum:
+            - 御中
+            - 様
+            - （空白）
+          example: 御中
+          type: string
+        partner_address_zipcode:
+          description: 郵便番号
+          example: "1410032"
+          maxLength: 10
+          type: string
+        partner_address_prefecture_code:
+          description: "都道府県コード（-1: 設定しない、0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄）"
+          example: 4
+          maximum: 46
+          minimum: -1
+          type: integer
+        partner_address_street_name1:
+          description: 取引先 市区町村・番地
+          example: 東京都ＸＸ区ＹＹ１−１−１
+          maxLength: 255
+          type: string
+        partner_address_street_name2:
+          description: 取引先 建物名・部屋番号など
+          example: ビル 1F
+          maxLength: 255
+          type: string
+        partner_contact_department:
+          description: 取引先部署
+          example: 営業部
+          maxLength: 255
+          type: string
+        partner_contact_name:
+          description: 取引先担当者名
+          example: 法人営業担当
+          maxLength: 255
+          type: string
+        company_contact_name:
+          description: 自社担当者名
+          example: 法人営業担当
+          maxLength: 255
+          type: string
+        template:
+          $ref: "#/components/schemas/QuotationResponse_quotation_template"
+        lines:
+          description: 請求書の明細行
+          items:
+            $ref: "#/components/schemas/QuotationResponse_quotation_lines"
+          type: array
+      required:
+        - amount_excluding_tax
+        - amount_including_tax
+        - amount_tax
+        - cancel_status
+        - company_id
+        - created_at
+        - delivery_deadline
+        - delivery_location
+        - id
+        - lines
+        - memo
+        - partner_id
+        - quotation_date
+        - quotation_note
+        - quotation_number
+        - sending_status
+        - subject
+        - total_amount
+      type: object
+  securitySchemes:
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.secure.freee.co.jp/public_api/authorize
+          scopes:
+            write: データの書き込み
+            read: データの読み取り
+          tokenUrl: https://accounts.secure.freee.co.jp/public_api/token
+      type: oauth2
