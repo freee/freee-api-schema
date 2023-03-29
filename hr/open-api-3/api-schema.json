@@ -12490,8 +12490,8 @@
           },
           "insurances": {
             "type": "array",
-            "description": "保険料",
             "items": {
+              "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentInsuranceSerializer"
             }
           },
           "housing_loans": {
@@ -13182,6 +13182,264 @@
             "description": "前職の退職日",
             "format": "date",
             "example": "2022-03-31"
+          }
+        }
+      },
+      "ApiV1EmployeeYearendAdjustmentController.update_insurance_response": {
+        "type": "object",
+        "properties": {
+          "insurances": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentInsuranceSerializer"
+            }
+          }
+        }
+      },
+      "ApiV1EmployeeYearendAdjustmentInsuranceSerializer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "保険料id",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "type": {
+            "type": "string",
+            "description": "保険の種類 life_care_pension_insurance: 生命保険・介護医療保険・個人年金保険, earthquake_non_life_insurance: 地震保険・旧長期損害保険, social_insurance: 社会保険, other_insurance: その他の保険（小規模企業共済等）",
+            "enum": [
+              "life_care_pension_insurance",
+              "earthquake_non_life_insurance",
+              "social_insurance",
+              "other_insurance"
+            ]
+          },
+          "category": {
+            "type": "string",
+            "description": "区分<br>\n保険会社等が発行する証明書類に基づいて区分を設定してください。<br>\n保険の種類によって設定可能な値が変わります。<br>\n・life_care_pension_insurance<br>\n　life: 生命保険<br>\n　care: 介護保険<br>\n　pension: 個人年金保険<br>\n・earthquake_non_life_insurance<br>\n　earthquake: 地震保険<br>\n　old_long_term_non_life: 旧長期損害保険<br>\n・social_insurance<br>\n　national_pension: 国民年金<br>\n　national_pension_fund_premium: 国民年金基金<br>\n　national_health: 国民健康保険<br>\n　health: 健康保険<br>\n　care_insurance_deduction_of_pension: 介護保険<br>\n　employee_pension: 厚生年金<br>\n　advanced_elderly_medical: 後期高齢者医療保険<br>\n　none: その他（印刷後に手書き）<br>\n・other_insurance<br>\n　sema: 独立行政法人中小企業基盤整備機構の共済契約の掛金<br>\n　idc: 個人型確定拠出年金（iDeCo）<br>\n　cdc: 企業型確定拠出年金<br>\n　dsma: 心身障害者扶養共済制度に関する契約の掛金<br>",
+            "enum": [
+              "life",
+              "care",
+              "pension",
+              "earthquake",
+              "old_long_term_non_life",
+              "national_pension",
+              "national_pension_fund_premium",
+              "national_health",
+              "care_insurance_deduction_of_pension",
+              "health",
+              "employee_pension",
+              "advanced_elderly_medical",
+              "sema",
+              "idc",
+              "cdc",
+              "dsma",
+              "none"
+            ],
+            "example": "life"
+          },
+          "new_or_old": {
+            "type": "string",
+            "description": "新旧区分<br>\n区分が生命保険または個人年金保険の時のみ、新制度なら new を、旧制度なら old を指定します。<br>\n上記以外の保険では none を指定してください。",
+            "enum": [
+              "new",
+              "old",
+              "none"
+            ]
+          },
+          "company_name": {
+            "type": "string",
+            "description": "保険会社等の名称",
+            "maxLength": 255,
+            "example": "freee生命保険株式会社",
+            "nullable": true
+          },
+          "kind_of_purpose": {
+            "type": "string",
+            "description": "保険等の種類（目的）<br>\n控除証明書に記載されている保険の種類等を転記してください。",
+            "maxLength": 255,
+            "example": "利差配当付終身",
+            "nullable": true
+          },
+          "period": {
+            "type": "string",
+            "description": "保険期間又は年金支払期間",
+            "example": "終身",
+            "nullable": true,
+            "enum": [
+              "終身",
+              "0年",
+              "1年",
+              "2年",
+              "3年",
+              "4年",
+              "5年",
+              "6年",
+              "7年",
+              "8年",
+              "9年",
+              "10年",
+              "11年",
+              "12年",
+              "13年",
+              "14年",
+              "15年",
+              "16年",
+              "17年",
+              "18年",
+              "19年",
+              "20年",
+              "21年",
+              "22年",
+              "23年",
+              "24年",
+              "25年",
+              "26年",
+              "27年",
+              "28年",
+              "29年",
+              "30年",
+              "31年",
+              "32年",
+              "33年",
+              "34年",
+              "35年",
+              "36年",
+              "37年",
+              "38年",
+              "39年",
+              "40年",
+              "41年",
+              "42年",
+              "43年",
+              "44年",
+              "45年",
+              "46年",
+              "47年",
+              "48年",
+              "49年",
+              "50年",
+              "51年",
+              "52年",
+              "53年",
+              "54年",
+              "55年",
+              "56年",
+              "57年",
+              "58年",
+              "59年",
+              "60年",
+              "61年",
+              "62年",
+              "63年",
+              "64年",
+              "65年",
+              "66年",
+              "67年",
+              "68年",
+              "69年",
+              "70年",
+              "71年",
+              "72年",
+              "73年",
+              "74年",
+              "75年",
+              "76年",
+              "77年",
+              "78年",
+              "79年",
+              "80年",
+              "81年",
+              "82年",
+              "83年",
+              "84年",
+              "85年",
+              "86年",
+              "87年",
+              "88年",
+              "89年",
+              "90年",
+              "91年",
+              "92年",
+              "93年",
+              "94年",
+              "95年",
+              "96年",
+              "97年",
+              "98年",
+              "99年",
+              "100年"
+            ]
+          },
+          "policyholder_last_name": {
+            "type": "string",
+            "description": "保険等の契約者 姓",
+            "maxLength": 255,
+            "example": "契約",
+            "nullable": true
+          },
+          "policyholder_first_name": {
+            "type": "string",
+            "description": "保険等の契約者 名",
+            "maxLength": 255,
+            "example": "太郎",
+            "nullable": true
+          },
+          "recipient_last_name": {
+            "type": "string",
+            "description": "保険金等の受取人 姓",
+            "maxLength": 255,
+            "example": "受取",
+            "nullable": true
+          },
+          "recipient_first_name": {
+            "type": "string",
+            "description": "保険金等の受取人 名",
+            "maxLength": 255,
+            "nullable": true,
+            "example": "太郎"
+          },
+          "recipient_relationship": {
+            "type": "string",
+            "description": "保険金等の受取人 あなたとの続柄 myself: 本人, husband: 夫, wife: 妻, father: 父, mother: 母, child: 子, senior_brother: 兄, junior_brother: 弟, senior_sister: 姉, junior_sister: 妹, grandchild: 孫, grandfather: 祖父, grandmother: 祖母, father_in_law: 義父, mother_in_law: 義母, grandfather_in_law: 義祖父, grandmother_in_law: 義祖母, other: その他",
+            "enum": [
+              "myself",
+              "husband",
+              "wife",
+              "father",
+              "mother",
+              "child",
+              "senior_brother",
+              "junior_brother",
+              "senior_sister",
+              "junior_sister",
+              "grandchild",
+              "grandfather",
+              "grandmother",
+              "father_in_law",
+              "mother_in_law",
+              "grandfather_in_law",
+              "grandmother_in_law",
+              "other"
+            ],
+            "example": "child",
+            "nullable": true
+          },
+          "payment_start_date": {
+            "type": "string",
+            "description": "年金の支払開始日 1900年1月1日から現在年+100の12月31日まで登録可能",
+            "format": "date",
+            "pattern": "^[1-2][0-9]{3}-[0-9]{2}-[0-9]{2}$",
+            "example": "2000-04-01",
+            "nullable": true
+          },
+          "amount": {
+            "type": "integer",
+            "description": "保険料額",
+            "example": 1000000,
+            "minimum": 0,
+            "maximum": 99999999
           }
         }
       },
