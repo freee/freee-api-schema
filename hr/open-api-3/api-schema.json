@@ -273,7 +273,7 @@
           "従業員"
         ],
         "summary": "従業員一覧の取得",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した対象年月に事業所に所属する従業員をリストで返します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>管理者権限を持ったユーザーのみ実行可能です。</li>\n  <li>指定した年月に退職済みユーザーは取得できません。</li>\n  <li>保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。(例: 給与計算時の健康保険料の計算方法が自動計算の場合、給与計算時の健康保険料の直接指定金額はnullが返されます)</li>\n  <li>事業所が定額制の健康保険組合に加入している場合、保険料の直接指定金額は無視されnullが返されます。</li>\n  <li>Responsesのprofile_custom_field_groupsは、2023年3月にリリースされる予定の機能に関する項目です。</li>\n</ul>",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した対象年月に事業所に所属する従業員をリストで返します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>管理者権限を持ったユーザーのみ実行可能です。</li>\n  <li>指定した年月に退職済みユーザーは取得できません。</li>\n  <li>保険料計算方法が自動計算の場合、対応する保険料の直接指定金額は無視されnullが返されます。(例: 給与計算時の健康保険料の計算方法が自動計算の場合、給与計算時の健康保険料の直接指定金額はnullが返されます)</li>\n  <li>事業所が定額制の健康保険組合に加入している場合、保険料の直接指定金額は無視されnullが返されます。</li>\n</ul>",
         "operationId": "get_employees",
         "parameters": [
           {
@@ -341,7 +341,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiV1EmployeesController.index_response"
+                  "$ref": "#/components/schemas/ApiV1EmployeesIndexSerializer"
                 }
               }
             }
@@ -7027,6 +7027,22 @@
           }
         }
       },
+      "ApiV1EmployeesIndexSerializer": {
+        "type": "object",
+        "properties": {
+          "employees": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1EmployeeSerializer"
+            }
+          },
+          "total_count": {
+            "type": "integer",
+            "description": "合計件数",
+            "format": "int32"
+          }
+        }
+      },
       "ApiV1GroupsIndexResponse": {
         "type": "object",
         "required": [
@@ -8233,101 +8249,6 @@
             "description": "締め日支払日グループ名(給与計算対象外従業員の場合、nullを返します)",
             "example": "当月締め翌月払い",
             "nullable": true
-          }
-        }
-      },
-      "ApiV1EmployeeIndexSerializer": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "description": "従業員ID",
-            "format": "int32"
-          },
-          "company_id": {
-            "type": "integer",
-            "description": "事業所ID",
-            "format": "int32"
-          },
-          "num": {
-            "type": "string",
-            "description": "従業員番号",
-            "nullable": true
-          },
-          "display_name": {
-            "type": "string",
-            "description": "従業員名（表示名）"
-          },
-          "base_pension_num": {
-            "type": "string",
-            "description": "基礎年金番号",
-            "nullable": true
-          },
-          "employment_insurance_reference_number": {
-            "type": "string",
-            "description": "被保険者番号（雇用保険）"
-          },
-          "birth_date": {
-            "type": "string",
-            "description": "生年月日",
-            "format": "date"
-          },
-          "entry_date": {
-            "type": "string",
-            "description": "入社日",
-            "format": "date"
-          },
-          "retire_date": {
-            "type": "string",
-            "description": "退職日",
-            "format": "date",
-            "nullable": true
-          },
-          "user_id": {
-            "type": "integer",
-            "description": "ユーザーID(従業員詳細未設定の場合、nullになります。)",
-            "format": "int32",
-            "nullable": true
-          },
-          "profile_rule": {
-            "$ref": "#/components/schemas/ApiV1EmployeesProfileRuleSerializer"
-          },
-          "health_insurance_rule": {
-            "$ref": "#/components/schemas/ApiV1EmployeesHealthInsuranceRuleSerializer"
-          },
-          "welfare_pension_insurance_rule": {
-            "$ref": "#/components/schemas/ApiV1EmployeesWelfarePensionInsuranceRuleSerializer"
-          },
-          "dependent_rules": {
-            "type": "array",
-            "description": "家族情報",
-            "items": {
-              "$ref": "#/components/schemas/ApiV1EmployeesDependentRuleSerializer"
-            }
-          },
-          "bank_account_rule": {
-            "$ref": "#/components/schemas/ApiV1EmployeesBankAccountRuleSerializer"
-          },
-          "basic_pay_rule": {
-            "$ref": "#/components/schemas/ApiV1EmployeesBasicPayRuleSerializer"
-          },
-          "payroll_calculation": {
-            "type": "boolean",
-            "description": "給与計算対象従業員の場合trueを返します",
-            "example": true
-          },
-          "company_reference_date_rule_name": {
-            "type": "string",
-            "description": "締め日支払日グループ名(給与計算対象外従業員の場合、nullを返します)",
-            "example": "当月締め翌月払い",
-            "nullable": true
-          },
-          "profile_custom_field_groups": {
-            "type": "array",
-            "description": "カスタム項目のグループ",
-            "items": {
-              "$ref": "#/components/schemas/ApiV1ProfileCustomFieldGroupSerializer"
-            }
           }
         }
       },
@@ -10703,22 +10624,6 @@
             "description": "ファイル名（項目タイプがfile以外の場合、nullを返します）",
             "nullable": true,
             "example": "証明書ファイル.jpeg"
-          }
-        }
-      },
-      "ApiV1EmployeesController.index_response": {
-        "type": "object",
-        "properties": {
-          "employees": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ApiV1EmployeeIndexSerializer"
-            }
-          },
-          "total_count": {
-            "type": "integer",
-            "description": "合計件数",
-            "format": "int32"
           }
         }
       },
