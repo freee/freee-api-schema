@@ -19416,13 +19416,13 @@
           },
           "qualified_invoice": {
             "type": "string",
-            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\n適格請求書等（qualified: 該当する、not_qualified: 該当しない）\n",
+            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\n適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択）\n",
             "enum": [
               "qualified",
-              "not_qualified"
+              "not_qualified",
+              "unselected"
             ],
-            "example": "qualified",
-            "nullable": true
+            "example": "qualified"
           },
           "invoice_registration_number": {
             "type": "string",
@@ -19430,8 +19430,7 @@
             "minLength": 13,
             "pattern": "^T?[1-9][0-9]{12}$",
             "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者登録番号\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
-            "example": "T1000000000001",
-            "nullable": true
+            "example": "T1000000000001"
           },
           "document_type": {
             "type": "string",
@@ -19441,8 +19440,7 @@
               "invoice",
               "other"
             ],
-            "example": "receipt",
-            "nullable": true
+            "example": "receipt"
           }
         }
       },
@@ -31997,7 +31995,7 @@
                 },
                 "purchase_lines": {
                   "type": "array",
-                  "description": "この項目はインボイス制度で利用する項目です。2023年4月上旬から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>\n経費申請の申請行一覧（配列）\n",
+                  "description": "この項目はインボイス制度で利用する項目です。2023年4月下旬から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>\n経費申請の申請行一覧（配列）\n",
                   "items": {
                     "type": "object",
                     "required": [
@@ -32291,7 +32289,7 @@
               },
               "purchase_lines": {
                 "type": "array",
-                "description": "この項目はインボイス制度で利用する項目です。2023年4月上旬から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>\n経費申請の申請行一覧（配列）\n",
+                "description": "この項目はインボイス制度で利用する項目です。2023年4月下旬から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>\n経費申請の申請行一覧（配列）\n",
                 "items": {
                   "type": "object",
                   "required": [
