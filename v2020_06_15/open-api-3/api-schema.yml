@@ -3476,7 +3476,7 @@ paths:
 
         <pre>
         <code>インボイス制度の対応にともない明細行のデータ構造が変更されます。<br>
-        新しいデータ構造は2023年4月上旬から利用できる予定です。利用するにはリクエストヘッダーに以下を指定します。
+        新しいデータ構造は2023年4月下旬から利用できる予定です。利用するにはリクエストヘッダーに以下を指定します。
         Expense-Application-Mode: purchase-lines<br>
         指定がない場合は従来のデータ構造を利用することとなります。<br>
         詳細は、<a href="https://developer.freee.co.jp/news/6369#2-%e7%b5%8c%e8%b2%bb%e7%b2%be%e7%ae%97api%e3%81%ae%e4%bb%95%e6%a7%98%e5%a4%89%e6%9b%b4%ef%bc%88%e7%a0%b4%e5%a3%8a%e7%9a%84%e5%a4%89%e6%9b%b4%ef%bc%89" target="_blank">お知らせ</a>をご覧ください。</code>
@@ -3566,7 +3566,7 @@ paths:
 
         <pre>
         <code>インボイス制度の対応にともない明細行のデータ構造が変更されます。<br>
-        新しいデータ構造は2023年4月上旬から利用できる予定です。利用するにはリクエストヘッダーに以下を指定します。
+        新しいデータ構造は2023年4月下旬から利用できる予定です。利用するにはリクエストヘッダーに以下を指定します。
         Expense-Application-Mode: purchase-lines<br>
         指定がない場合は従来のデータ構造を利用することとなります。<br>
         詳細は、<a href="https://developer.freee.co.jp/news/6369#2-%e7%b5%8c%e8%b2%bb%e7%b2%be%e7%ae%97api%e3%81%ae%e4%bb%95%e6%a7%98%e5%a4%89%e6%9b%b4%ef%bc%88%e7%a0%b4%e5%a3%8a%e7%9a%84%e5%a4%89%e6%9b%b4%ef%bc%89" target="_blank">お知らせ</a>をご覧ください。</code>
@@ -3760,7 +3760,7 @@ paths:
 
         <pre>
         <code>インボイス制度の対応にともない明細行のデータ構造が変更されます。<br>
-        新しいデータ構造は2023年4月上旬から利用できる予定です。利用するにはリクエストヘッダーに以下を指定します。
+        新しいデータ構造は2023年4月下旬から利用できる予定です。利用するにはリクエストヘッダーに以下を指定します。
         Expense-Application-Mode: purchase-lines<br>
         指定がない場合は従来のデータ構造を利用することとなります。<br>
         詳細は、<a href="https://developer.freee.co.jp/news/6369#2-%e7%b5%8c%e8%b2%bb%e7%b2%be%e7%ae%97api%e3%81%ae%e4%bb%95%e6%a7%98%e5%a4%89%e6%9b%b4%ef%bc%88%e7%a0%b4%e5%a3%8a%e7%9a%84%e5%a4%89%e6%9b%b4%ef%bc%89" target="_blank">お知らせ</a>をご覧ください。</code>
@@ -3867,7 +3867,7 @@ paths:
 
         <pre>
         <code>インボイス制度の対応にともない明細行のデータ構造が変更されます。<br>
-        新しいデータ構造は2023年4月上旬から利用できる予定です。利用するにはリクエストヘッダーに以下を指定します。
+        新しいデータ構造は2023年4月下旬から利用できる予定です。利用するにはリクエストヘッダーに以下を指定します。
         Expense-Application-Mode: purchase-lines<br>
         指定がない場合は従来のデータ構造を利用することとなります。<br>
         詳細は、<a href="https://developer.freee.co.jp/news/6369#2-%e7%b5%8c%e8%b2%bb%e7%b2%be%e7%ae%97api%e3%81%ae%e4%bb%95%e6%a7%98%e5%a4%89%e6%9b%b4%ef%bc%88%e7%a0%b4%e5%a3%8a%e7%9a%84%e5%a4%89%e6%9b%b4%ef%bc%89" target="_blank">お知らせ</a>をご覧ください。</code>
@@ -3983,7 +3983,7 @@ paths:
 
         <pre>
         <code>インボイス制度の対応にともない明細行のデータ構造が変更されます。<br>
-        新しいデータ構造は2023年4月上旬から利用できる予定です。利用するにはリクエストヘッダーに以下を指定します。
+        新しいデータ構造は2023年4月下旬から利用できる予定です。利用するにはリクエストヘッダーに以下を指定します。
         Expense-Application-Mode: purchase-lines<br>
         指定がない場合は従来のデータ構造を利用することとなります。<br>
         詳細は、<a href="https://developer.freee.co.jp/news/6369#2-%e7%b5%8c%e8%b2%bb%e7%b2%be%e7%ae%97api%e3%81%ae%e4%bb%95%e6%a7%98%e5%a4%89%e6%9b%b4%ef%bc%88%e7%a0%b4%e5%a3%8a%e7%9a%84%e5%a4%89%e6%9b%b4%ef%bc%89" target="_blank">お知らせ</a>をご覧ください。</code>
@@ -19092,7 +19092,7 @@ components:
               type: string
             purchase_lines:
               description: |
-                この項目はインボイス制度で利用する項目です。2023年4月上旬から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>
+                この項目はインボイス制度で利用する項目です。2023年4月下旬から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>
                 経費申請の申請行一覧（配列）
               items:
                 properties:
@@ -19543,7 +19543,7 @@ components:
                 type: string
               purchase_lines:
                 description: |
-                  この項目はインボイス制度で利用する項目です。2023年4月上旬から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>
+                  この項目はインボイス制度で利用する項目です。2023年4月下旬から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>
                   経費申請の申請行一覧（配列）
                 items:
                   properties:
@@ -26388,7 +26388,6 @@ components:
           - invoice
           - other
           example: receipt
-          nullable: true
           type: string
         invoice_registration_number:
           description: |
@@ -26399,7 +26398,6 @@ components:
           example: T1000000000001
           maxLength: 14
           minLength: 13
-          nullable: true
           pattern: "^T?[1-9][0-9]{12}$"
           type: string
         issue_date:
@@ -26409,12 +26407,12 @@ components:
         qualified_invoice:
           description: |
             この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。
-            適格請求書等（qualified: 該当する、not_qualified: 該当しない）
+            適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択）
           enum:
           - qualified
           - not_qualified
+          - unselected
           example: qualified
-          nullable: true
           type: string
         receipt_metadatum:
           properties:
