@@ -12486,6 +12486,7 @@
             "type": "array",
             "description": "家族情報",
             "items": {
+              "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentDependentSerializer"
             }
           },
           "insurances": {
@@ -12494,10 +12495,19 @@
               "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentInsuranceSerializer"
             }
           },
+          "housing_loan_deduction": {
+            "type": "integer",
+            "description": "住宅借入金等特別控除",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999,
+            "example": 500000
+          },
           "housing_loans": {
             "type": "array",
             "description": "住宅ローン",
             "items": {
+              "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentHousingLoanSerializer"
             }
           },
           "payroll_and_bonus": {
@@ -12516,84 +12526,96 @@
             "description": "確定給与額",
             "format": "int32",
             "minimum": 0,
-            "maximum": 999999999
+            "maximum": 999999999,
+            "example": 10000000
           },
           "fixed_payroll_deduction": {
             "type": "integer",
             "description": "確定給与控除額",
             "format": "int32",
             "minimum": 0,
-            "maximum": 999999999
+            "maximum": 999999999,
+            "example": 1000000
           },
           "fixed_payroll_income_tax": {
             "type": "integer",
             "description": "確定給与所得税額",
             "format": "int32",
             "minimum": 0,
-            "maximum": 999999999
+            "maximum": 999999999,
+            "example": 1000000
           },
           "fixed_bonus": {
             "type": "integer",
             "description": "確定賞与額",
             "format": "int32",
             "minimum": 0,
-            "maximum": 999999999
+            "maximum": 999999999,
+            "example": 10000000
           },
           "fixed_bonus_deduction": {
             "type": "integer",
             "description": "確定賞与控除額",
             "format": "int32",
             "minimum": 0,
-            "maximum": 999999999
+            "maximum": 999999999,
+            "example": 1000000
           },
           "fixed_bonus_income_tax": {
             "type": "integer",
             "description": "確定賞与所得税額",
             "format": "int32",
             "minimum": 0,
-            "maximum": 999999999
+            "maximum": 999999999,
+            "example": 1000000
           },
           "unentered_payroll_amount": {
             "type": "integer",
             "description": "未入力給与額",
             "format": "int32",
             "minimum": 0,
-            "maximum": 999999999
+            "maximum": 999999999,
+            "example": 500000
           },
           "unentered_payroll_deduction_amount": {
             "type": "integer",
             "description": "未入力給与控除額",
             "format": "int32",
             "minimum": 0,
-            "maximum": 999999999
+            "maximum": 999999999,
+            "example": 500000
           },
           "unentered_payroll_income_tax_amount": {
             "type": "integer",
             "description": "未入力給与所得税額",
             "format": "int32",
             "minimum": 0,
-            "maximum": 999999999
+            "maximum": 999999999,
+            "example": 500000
           },
           "unentered_bonus_amount": {
             "type": "integer",
             "description": "未入力賞与額",
             "format": "int32",
             "minimum": 0,
-            "maximum": 999999999
+            "maximum": 999999999,
+            "example": 500000
           },
           "unentered_bonus_deduction_amount": {
             "type": "integer",
             "description": "未入力賞与控除額",
             "format": "int32",
             "minimum": 0,
-            "maximum": 999999999
+            "maximum": 999999999,
+            "example": 500000
           },
           "unentered_bonus_income_tax_amount": {
             "type": "integer",
             "description": "未入力賞与所得税額",
             "format": "int32",
             "minimum": 0,
-            "maximum": 999999999
+            "maximum": 999999999,
+            "example": 500000
           }
         }
       },
@@ -12605,42 +12627,48 @@
             "description": "未入力給与額",
             "format": "int32",
             "minimum": 0,
-            "maximum": 999999999
+            "maximum": 999999999,
+            "example": 1000000
           },
           "unentered_payroll_deduction_amount": {
             "type": "integer",
             "description": "未入力給与控除額",
             "format": "int32",
             "minimum": 0,
-            "maximum": 999999999
+            "maximum": 999999999,
+            "example": 1000000
           },
           "unentered_payroll_income_tax_amount": {
             "type": "integer",
             "description": "未入力給与所得税額",
             "format": "int32",
             "minimum": 0,
-            "maximum": 999999999
+            "maximum": 999999999,
+            "example": 1000000
           },
           "unentered_bonus_amount": {
             "type": "integer",
             "description": "未入力賞与額",
             "format": "int32",
             "minimum": 0,
-            "maximum": 999999999
+            "maximum": 999999999,
+            "example": 1000000
           },
           "unentered_bonus_deduction_amount": {
             "type": "integer",
             "description": "未入力賞与控除額",
             "format": "int32",
             "minimum": 0,
-            "maximum": 999999999
+            "maximum": 999999999,
+            "example": 1000000
           },
           "unentered_bonus_income_tax_amount": {
             "type": "integer",
             "description": "未入力賞与所得税額",
             "format": "int32",
             "minimum": 0,
-            "maximum": 999999999
+            "maximum": 999999999,
+            "example": 1000000
           }
         }
       },
@@ -13517,7 +13545,7 @@
             "format": "int32",
             "minimum": 0,
             "maximum": 999999999,
-            "example": 1
+            "example": 500000
           },
           "housing_loans": {
             "type": "array",
