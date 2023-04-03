@@ -12146,6 +12146,17 @@
       },
       "ApiV1EmployeeYearendAdjustmentEmployeeUpdateRequestSerializer": {
         "type": "object",
+        "required": [
+          "last_name",
+          "first_name",
+          "last_name_kana",
+          "first_name_kana",
+          "zipcode1",
+          "zipcode2",
+          "prefecture_code",
+          "address",
+          "address_kana"
+        ],
         "properties": {
           "last_name": {
             "type": "string",
@@ -12243,17 +12254,19 @@
           },
           "other_company_revenue": {
             "type": "integer",
-            "description": "その他の事業所の給与収入 null不可",
+            "description": "その他の事業所の給与収入",
             "example": 1000000,
             "minimum": 0,
-            "maximum": 2000000000
+            "maximum": 2000000000,
+            "nullable": true
           },
           "all_other_income": {
             "type": "integer",
-            "description": "給与以外の所得 null不可",
+            "description": "給与以外の所得",
             "example": 1000000,
             "minimum": 0,
-            "maximum": 2000000000
+            "maximum": 2000000000,
+            "nullable": true
           },
           "householder": {
             "type": "string",
@@ -12436,14 +12449,16 @@
             "description": "その他の事業所の給与収入",
             "example": 1000000,
             "minimum": 0,
-            "maximum": 2000000000
+            "maximum": 2000000000,
+            "nullable": true
           },
           "all_other_income": {
             "type": "integer",
             "description": "給与以外の所得",
             "example": 1000000,
             "minimum": 0,
-            "maximum": 2000000000
+            "maximum": 2000000000,
+            "nullable": true
           },
           "householder": {
             "type": "string",
@@ -12480,24 +12495,26 @@
         "type": "object",
         "properties": {
           "employee": {
+            "description": "本人情報",
             "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentEmployeeSerializer"
           },
           "dependents": {
             "type": "array",
-            "description": "家族情報",
+            "description": "家族情報(年末調整対象外の場合は取得できません。)",
             "items": {
               "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentDependentSerializer"
             }
           },
           "insurances": {
             "type": "array",
+            "description": "保険料情報(年末調整対象外の場合は取得できません。)",
             "items": {
               "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentInsuranceSerializer"
             }
           },
           "housing_loan_deduction": {
             "type": "integer",
-            "description": "住宅借入金等特別控除",
+            "description": "住宅借入金等特別控除(年末調整対象外の場合は取得できません。)",
             "format": "int32",
             "minimum": 0,
             "maximum": 999999999,
@@ -12505,16 +12522,19 @@
           },
           "housing_loans": {
             "type": "array",
-            "description": "住宅ローン",
+            "description": "住宅ローン(年末調整対象外の場合は取得できません。)",
             "items": {
               "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentHousingLoanSerializer"
             }
           },
           "payroll_and_bonus": {
+            "description": "給与・賞与",
             "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentPayrollAndBonusSerializer"
           },
           "previous_job": {
-            "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentPreviousJobSerializer"
+            "description": "前職情報",
+            "$ref": "#/components/schemas/ApiV1EmployeeYearendAdjustmentPreviousJobSerializer",
+            "nullable": true
           }
         }
       },
@@ -13171,6 +13191,7 @@
       },
       "ApiV1EmployeeYearendAdjustmentPreviousJobSerializer": {
         "type": "object",
+        "nullable": true,
         "properties": {
           "income": {
             "type": "integer",
