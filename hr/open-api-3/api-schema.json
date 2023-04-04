@@ -12257,7 +12257,7 @@
             "description": "その他の事業所の給与収入",
             "example": 1000000,
             "minimum": 0,
-            "maximum": 2000000000,
+            "maximum": 1999999999,
             "nullable": true
           },
           "all_other_income": {
@@ -12265,7 +12265,7 @@
             "description": "給与以外の所得",
             "example": 1000000,
             "minimum": 0,
-            "maximum": 2000000000,
+            "maximum": 1999999999,
             "nullable": true
           },
           "householder": {
@@ -12449,7 +12449,7 @@
             "description": "その他の事業所の給与収入",
             "example": 1000000,
             "minimum": 0,
-            "maximum": 2000000000,
+            "maximum": 1999999999,
             "nullable": true
           },
           "all_other_income": {
@@ -12457,7 +12457,7 @@
             "description": "給与以外の所得",
             "example": 1000000,
             "minimum": 0,
-            "maximum": 2000000000,
+            "maximum": 1999999999,
             "nullable": true
           },
           "householder": {
@@ -12545,7 +12545,7 @@
             "type": "integer",
             "description": "確定給与額",
             "format": "int32",
-            "minimum": 0,
+            "minimum": -999999999,
             "maximum": 999999999,
             "example": 10000000
           },
@@ -12553,7 +12553,7 @@
             "type": "integer",
             "description": "確定給与控除額",
             "format": "int32",
-            "minimum": 0,
+            "minimum": -999999999,
             "maximum": 999999999,
             "example": 1000000
           },
@@ -12561,7 +12561,7 @@
             "type": "integer",
             "description": "確定給与所得税額",
             "format": "int32",
-            "minimum": 0,
+            "minimum": -999999999,
             "maximum": 999999999,
             "example": 1000000
           },
@@ -12569,7 +12569,7 @@
             "type": "integer",
             "description": "確定賞与額",
             "format": "int32",
-            "minimum": 0,
+            "minimum": -999999999,
             "maximum": 999999999,
             "example": 10000000
           },
@@ -12577,7 +12577,7 @@
             "type": "integer",
             "description": "確定賞与控除額",
             "format": "int32",
-            "minimum": 0,
+            "minimum": -999999999,
             "maximum": 999999999,
             "example": 1000000
           },
@@ -12585,7 +12585,7 @@
             "type": "integer",
             "description": "確定賞与所得税額",
             "format": "int32",
-            "minimum": 0,
+            "minimum": -999999999,
             "maximum": 999999999,
             "example": 1000000
           },
@@ -12593,7 +12593,7 @@
             "type": "integer",
             "description": "未入力給与額",
             "format": "int32",
-            "minimum": 0,
+            "minimum": -999999999,
             "maximum": 999999999,
             "example": 500000
           },
@@ -12601,7 +12601,7 @@
             "type": "integer",
             "description": "未入力給与控除額",
             "format": "int32",
-            "minimum": 0,
+            "minimum": -999999999,
             "maximum": 999999999,
             "example": 500000
           },
@@ -12609,7 +12609,7 @@
             "type": "integer",
             "description": "未入力給与所得税額",
             "format": "int32",
-            "minimum": 0,
+            "minimum": -999999999,
             "maximum": 999999999,
             "example": 500000
           },
@@ -12617,7 +12617,7 @@
             "type": "integer",
             "description": "未入力賞与額",
             "format": "int32",
-            "minimum": 0,
+            "minimum": -999999999,
             "maximum": 999999999,
             "example": 500000
           },
@@ -12625,7 +12625,7 @@
             "type": "integer",
             "description": "未入力賞与控除額",
             "format": "int32",
-            "minimum": 0,
+            "minimum": -999999999,
             "maximum": 999999999,
             "example": 500000
           },
@@ -12633,7 +12633,7 @@
             "type": "integer",
             "description": "未入力賞与所得税額",
             "format": "int32",
-            "minimum": 0,
+            "minimum": -999999999,
             "maximum": 999999999,
             "example": 500000
           }
@@ -12646,7 +12646,7 @@
             "type": "integer",
             "description": "未入力給与額",
             "format": "int32",
-            "minimum": 0,
+            "minimum": -999999999,
             "maximum": 999999999,
             "example": 1000000
           },
@@ -12654,7 +12654,7 @@
             "type": "integer",
             "description": "未入力給与控除額",
             "format": "int32",
-            "minimum": 0,
+            "minimum": -999999999,
             "maximum": 999999999,
             "example": 1000000
           },
@@ -12662,7 +12662,7 @@
             "type": "integer",
             "description": "未入力給与所得税額",
             "format": "int32",
-            "minimum": 0,
+            "minimum": -999999999,
             "maximum": 999999999,
             "example": 1000000
           },
@@ -12670,7 +12670,7 @@
             "type": "integer",
             "description": "未入力賞与額",
             "format": "int32",
-            "minimum": 0,
+            "minimum": -999999999,
             "maximum": 999999999,
             "example": 1000000
           },
@@ -12678,7 +12678,7 @@
             "type": "integer",
             "description": "未入力賞与控除額",
             "format": "int32",
-            "minimum": 0,
+            "minimum": -999999999,
             "maximum": 999999999,
             "example": 1000000
           },
@@ -12686,7 +12686,7 @@
             "type": "integer",
             "description": "未入力賞与所得税額",
             "format": "int32",
-            "minimum": 0,
+            "minimum": -999999999,
             "maximum": 999999999,
             "example": 1000000
           }
