@@ -8468,7 +8468,7 @@
           "Journals"
         ],
         "summary": "仕訳帳のダウンロード要求",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ユーザーが所属する事業所の仕訳帳のダウンロードをリクエストします 生成されるファイルに関しては、<a href=\"https://support.freee.co.jp/hc/ja/articles/204599604#2\">ヘルプページ</a>をご参照ください</p>\n\n<p>＊このAPIは無料プランのアカウントではご利用になれません</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n  <li>download_type\n    <ul>\n      <li>generic(freee Webからダウンロードできるものと同じ)</li>\n      <li>csv (yayoi形式)</li>\n      <li>pdf</li>\n    </ul>\n  </li>\n  <li>visible_tags : 指定しない場合は従来の仕様の仕訳帳が出力されます\n    <ul>\n      <li>partner : 取引先タグ</li>\n      <li>item : 品目タグ</li>\n      <li>tag : メモタグ</li>\n      <li>section : 部門タグ</li>\n      <li>description : 備考欄</li>\n      <li>wallet_txn_description : 明細の備考欄</li>\n      <li>\n        segment_1_tag : セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン)<br>\n        segment_2_tag : セグメント2(法人向け エンタープライズプラン)<br>\n        segment_3_tag : セグメント3(法人向け エンタープライズプラン)<br><br>\n        <a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n      </li>\n      <li>all : 指定された場合は上記の設定をすべて有効として扱いますが、セグメント1、セグメント2、セグメント3は含みません。セグメントが必要な場合はallではなく、segment_1_tag, segment_2_tag, segment_3_tagを指定してください。</li>\n    </ul>\n  </li>\n  <li>visible_ids : download_typeがgenericの場合のみ利用可能です\n    <ul>\n      <li>deal_id : 取引ID</li>\n      <li>transfer_id : 取引(振替)ID</li>\n      <li>manual_journal_id : 振替伝票ID</li>\n    </ul>\n  </li>\n\n  <li>id : 受け付けID</li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ユーザーが所属する事業所の仕訳帳のダウンロードをリクエストします。</p>\n\n<p>生成されるファイルのファイル形式と出力項目に関しては、<a href=\"https://support.freee.co.jp/hc/ja/articles/204615564#other\">ヘルプページ</a>をご参照ください。</p>\n\n<p>＊このAPIは無料プランのアカウントではご利用になれません。</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n  <li>download_type\n    <ul>\n      <li>generic <a href=\"https://support.freee.co.jp/hc/ja/articles/204615564#2\">(旧CSV)</a></li>\n      <li>generic_v2 <a href=\"https://support.freee.co.jp/hc/ja/articles/204615564#h_01GEDXEY3SQP8Y7S58CM2H4CKH\">(新CSV（freee汎用形式）)</a></li>\n      <li>csv <a href=\"https://support.freee.co.jp/hc/ja/articles/204599604#2\">(弥生会計)</a></li>\n      <li>yayoi <a href=\"https://support.freee.co.jp/hc/ja/articles/204599604#2\">(弥生会計)</a> ※非推奨 csvを利用してください（同じ出力結果です）</li>\n      <li>pdf <a href=\"https://support.freee.co.jp/hc/ja/articles/204615564#3\">(PDF)</a></li>\n    </ul>\n  </li>\n  <li>encoding : download_typeがgeneric, generic_v2の場合のみ有効で、指定しない場合はsjisになります。無効なdownload_typeのうちcsv, yayoiの場合はsjisでファイル出力されるので、レスポンスでsjisがかえります。\n    <ul>\n      <li>sjis</li>\n      <li>utf-8</li>\n    </ul>\n  </li>\n  <li>visible_tags : download_typeがgeneric, csv, yayoi, pdfの場合のみ有効です。指定しない場合は従来の仕様の仕訳帳が出力されます。\n    <ul>\n      <li>partner : 取引先タグ</li>\n      <li>item : 品目タグ</li>\n      <li>tag : メモタグ</li>\n      <li>section : 部門タグ</li>\n      <li>description : 備考欄</li>\n      <li>wallet_txn_description : 明細の備考欄</li>\n      <li>\n        segment_1_tag : セグメント1(法人向けプロフェッショナル, 法人向けエンタープライズプラン)<br>\n        segment_2_tag : セグメント2(法人向け エンタープライズプラン)<br>\n        segment_3_tag : セグメント3(法人向け エンタープライズプラン)<br><br>\n        <a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n      </li>\n      <li>all : 指定された場合は上記の設定をすべて有効として扱いますが、セグメント1、セグメント2、セグメント3は含みません。セグメントが必要な場合はallではなく、segment_1_tag, segment_2_tag, segment_3_tagを指定してください。</li>\n    </ul>\n  </li>\n  <li>visible_ids : download_typeがgenericの場合のみ有効です。\n    <ul>\n      <li>deal_id : 取引ID</li>\n      <li>transfer_id : 取引(振替)ID</li>\n      <li>manual_journal_id : 振替伝票ID</li>\n    </ul>\n  </li>\n\n  <li>id : 受け付けID</li>\n</ul>",
         "operationId": "get_journals",
         "parameters": [
           {
@@ -8479,10 +8479,23 @@
             "schema": {
               "type": "string",
               "enum": [
+                "generic",
+                "generic_v2",
                 "csv",
-                "pdf",
                 "yayoi",
-                "generic"
+                "pdf"
+              ]
+            }
+          },
+          {
+            "name": "encoding",
+            "in": "query",
+            "description": "文字コード",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "sjis",
+                "utf-8"
               ]
             }
           },
@@ -18845,7 +18858,7 @@
           },
           "qualified_invoice_issuer": {
             "type": "boolean",
-            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者（true: 対象事業者、false: 非対象事業者）\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+            "description": "インボイス制度適格請求書発行事業者（true: 対象事業者、false: 非対象事業者）\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
             "example": false,
             "default": false
           },
@@ -18854,7 +18867,7 @@
             "maxLength": 14,
             "minLength": 13,
             "pattern": "^T?[1-9][0-9]{12}$",
-            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者登録番号\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+            "description": "インボイス制度適格請求書発行事業者登録番号\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
             "example": "T1000000000001",
             "nullable": true
           },
@@ -19117,7 +19130,7 @@
           },
           "qualified_invoice_issuer": {
             "type": "boolean",
-            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者（true: 対象事業者、false: 非対象事業者）\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+            "description": "インボイス制度適格請求書発行事業者（true: 対象事業者、false: 非対象事業者）\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
             "example": false
           },
           "invoice_registration_number": {
@@ -19125,7 +19138,7 @@
             "maxLength": 14,
             "minLength": 13,
             "pattern": "^T?[1-9][0-9]{12}$",
-            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者登録番号\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+            "description": "インボイス制度適格請求書発行事業者登録番号\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
             "example": "T1000000000001",
             "nullable": true
           },
@@ -19338,7 +19351,7 @@
           },
           "qualified_invoice": {
             "type": "string",
-            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\n適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択）\n",
+            "description": "適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択）",
             "enum": [
               "qualified",
               "not_qualified",
@@ -19348,7 +19361,7 @@
           },
           "document_type": {
             "type": "string",
-            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\n書類の種類（receipt: 領収書、invoice: 請求書、other: その他）\n",
+            "description": "書類の種類（receipt: 領収書、invoice: 請求書、other: その他）",
             "enum": [
               "receipt",
               "invoice",
@@ -19412,7 +19425,7 @@
           },
           "qualified_invoice": {
             "type": "string",
-            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\n適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択）\n",
+            "description": "適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択）",
             "enum": [
               "qualified",
               "not_qualified",
@@ -19425,12 +19438,12 @@
             "maxLength": 14,
             "minLength": 13,
             "pattern": "^T?[1-9][0-9]{12}$",
-            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者登録番号\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+            "description": "インボイス制度適格請求書発行事業者登録番号\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
             "example": "T1000000000001"
           },
           "document_type": {
             "type": "string",
-            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\n書類の種類（receipt: 領収書、invoice: 請求書、other: その他）\n",
+            "description": "書類の種類（receipt: 領収書、invoice: 請求書、other: その他）",
             "enum": [
               "receipt",
               "invoice",
@@ -20076,9 +20089,20 @@
                 "description": "ダウンロード形式",
                 "example": "csv",
                 "enum": [
-                  "csv",
                   "generic",
+                  "generic_v2",
+                  "csv",
                   "pdf"
+                ]
+              },
+              "encoding": {
+                "type": "string",
+                "description": "文字コード",
+                "example": "sjis",
+                "nullable": true,
+                "enum": [
+                  "sjis",
+                  "utf-8"
                 ]
               },
               "start_date": {
@@ -20201,9 +20225,20 @@
                 "description": "ダウンロード形式",
                 "example": "csv",
                 "enum": [
-                  "csv",
                   "generic",
+                  "generic_v2",
+                  "csv",
                   "pdf"
+                ]
+              },
+              "encoding": {
+                "type": "string",
+                "description": "文字コード",
+                "example": "sjis",
+                "nullable": true,
+                "enum": [
+                  "sjis",
+                  "utf-8"
                 ]
               },
               "status": {
@@ -30408,12 +30443,12 @@
                 },
                 "qualified_invoice_issuer": {
                   "type": "boolean",
-                  "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者（true: 対象事業者、false: 非対象事業者）\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+                  "description": "インボイス制度適格請求書発行事業者（true: 対象事業者、false: 非対象事業者）\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
                   "example": false
                 },
                 "invoice_registration_number": {
                   "type": "string",
-                  "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者登録番号\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+                  "description": "インボイス制度適格請求書発行事業者登録番号\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
                   "example": "T1000000000001",
                   "nullable": true
                 },
@@ -30676,12 +30711,12 @@
               },
               "qualified_invoice_issuer": {
                 "type": "boolean",
-                "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者（true: 対象事業者、false: 非対象事業者）\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+                "description": "インボイス制度適格請求書発行事業者（true: 対象事業者、false: 非対象事業者）\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
                 "example": false
               },
               "invoice_registration_number": {
                 "type": "string",
-                "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者登録番号\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+                "description": "インボイス制度適格請求書発行事業者登録番号\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
                 "example": "T1000000000001",
                 "nullable": true
               },
@@ -31784,7 +31819,7 @@
           },
           "qualified_invoice": {
             "type": "string",
-            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\n適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択、null: OCR解析結果が保存されている時等）\n",
+            "description": "適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択、null: OCR解析結果が保存されている時等）",
             "enum": [
               "qualified",
               "not_qualified",
@@ -31798,13 +31833,13 @@
             "maxLength": 14,
             "minLength": 14,
             "pattern": "^T[1-9][0-9]{12}$",
-            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\nインボイス制度適格請求書発行事業者登録番号（null: OCR解析結果が保存されている時等）\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+            "description": "インボイス制度適格請求書発行事業者登録番号（null: OCR解析結果が保存されている時等）\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
             "example": "T1000000000001",
             "nullable": true
           },
           "document_type": {
             "type": "string",
-            "description": "この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。\n書類の種類（receipt: 領収書、invoice: 請求書、other: その他、null: OCR解析結果が保存されている時等）\n",
+            "description": "書類の種類（receipt: 領収書、invoice: 請求書、other: その他、null: OCR解析結果が保存されている時等）",
             "enum": [
               "receipt",
               "invoice",
