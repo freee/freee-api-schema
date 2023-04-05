@@ -59,6 +59,10 @@
       "description": "従業員の基本給の操作"
     },
     {
+      "name": "従業員のカスタム項目",
+      "description": "従業員のカスタム項目の操作"
+    },
+    {
       "name": "勤怠",
       "description": "勤怠の操作"
     },
@@ -2013,6 +2017,123 @@
           }
         },
         "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/v1/employees/{employee_id}/profile_custom_fields": {
+      "get": {
+        "tags": [
+          "従業員のカスタム項目"
+        ],
+        "summary": "従業員のカスタム項目の取得",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員・日付のカスタム項目情報を返します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>管理者権限を持ったユーザーのみ実行可能です。</li>\n  <li>指定年月に在籍していない従業員および給与計算対象外の従業員ではデータが存在しないため、空の配列が返ります。</li>\n</ul>",
+        "operationId": "get_employee_profile_custom_fields_rule",
+        "parameters": [
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647,
+              "example": 1
+            }
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "description": "従業員情報を取得したい年",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 2000,
+              "maximum": 2100,
+              "example": 2021
+            }
+          },
+          {
+            "name": "month",
+            "in": "query",
+            "description": "従業員情報を取得したい月<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 12,
+              "example": 1
+            }
+          },
+          {
+            "name": "employee_id",
+            "in": "path",
+            "description": "従業員ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647,
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiV1EmployeesProfileCustomFieldRulesController.index_response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/v1/employees/{employee_id}/work_records/{date}": {
