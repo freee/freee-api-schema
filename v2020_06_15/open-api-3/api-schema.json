@@ -38677,155 +38677,216 @@
           }
         }
       },
-      "fixedAsset": {
+      "fixedAssetResponse": {
         "type": "object",
         "required": [
-          "id",
-          "company_id",
-          "name"
+          "fixed_assets",
+          "fiscal_year",
+          "up_to_date",
+          "up_to_date_reasons"
         ],
         "properties": {
-          "company_id": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 2147483647,
-            "description": "事業所ID",
-            "example": 1
+          "fixed_assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "company_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "事業所ID",
+                  "example": 1
+                },
+                "id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "固定資産ID",
+                  "example": 1
+                },
+                "name": {
+                  "type": "string",
+                  "description": "固定資産名",
+                  "example": "pc"
+                },
+                "management_number": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "管理番号",
+                  "example": "pc-0001"
+                },
+                "account_item_id": {
+                  "type": "integer",
+                  "description": "勘定科目ID",
+                  "example": 22
+                },
+                "section_id": {
+                  "type": "integer",
+                  "nullable": true,
+                  "description": "部門ID",
+                  "example": 0
+                },
+                "item_id": {
+                  "type": "integer",
+                  "nullable": true,
+                  "description": "品目ID",
+                  "example": 0
+                },
+                "depreciation_method": {
+                  "type": "string",
+                  "description": "償却方法:(少額償却: small_sum_method, 一括償却: lump_sum_method, 定額法: straight_line_method, 定率法: multiple_method, 旧定率法: old_multiple_method, 旧定額法: old_straight_line_method, 償却なし: non_depreciate_method, 任意償却: voluntary_method, 即時償却: immediate_method, 均等償却: equal_method)",
+                  "enum": [
+                    "small_sum_method",
+                    "lump_sum_method",
+                    "straight_line_method",
+                    "multiple_method",
+                    "old_multiple_method",
+                    "old_straight_line_method",
+                    "non_depreciate_method",
+                    "voluntary_method",
+                    "immediate_method",
+                    "equal_method"
+                  ],
+                  "example": "straight_line_method"
+                },
+                "depreciation_account_item_id": {
+                  "type": "integer",
+                  "description": "減価償却に使う勘定科目ID",
+                  "example": 99
+                },
+                "prefecture_code": {
+                  "type": "integer",
+                  "minimum": -1,
+                  "maximum": 46,
+                  "description": "都道府県コード（-1: 設定しない、0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
+                  "example": 4,
+                  "nullable": true
+                },
+                "city_name": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "申告先市区町村",
+                  "example": "港区"
+                },
+                "depreciation_amount": {
+                  "type": "integer",
+                  "description": "減価償却費",
+                  "example": "18533"
+                },
+                "acquisition_cost": {
+                  "type": "integer",
+                  "description": "取得価額",
+                  "example": "150000"
+                },
+                "opening_balance": {
+                  "type": "integer",
+                  "description": "期首残高",
+                  "example": "92000"
+                },
+                "undepreciated_balance": {
+                  "type": "integer",
+                  "description": "未償却残高",
+                  "example": "46000"
+                },
+                "opening_accumulated_depreciation": {
+                  "type": "integer",
+                  "description": "期首減価償却累計額",
+                  "example": "100000"
+                },
+                "closing_accumulated_depreciation": {
+                  "type": "integer",
+                  "description": "期末減価償却累計額",
+                  "example": "46000"
+                },
+                "life_years": {
+                  "type": "integer",
+                  "description": "耐用年数",
+                  "example": "5"
+                },
+                "acquisition_date": {
+                  "type": "string",
+                  "description": "取得日",
+                  "format": "date",
+                  "example": "2021-07-13"
+                },
+                "updated_at": {
+                  "type": "string",
+                  "description": "更新日時（ISO8601形式）",
+                  "example": "2021-07-15T18:30:24+09:00"
+                },
+                "depreciation_status": {
+                  "type": "string",
+                  "description": "売却もしくは除却ステータス: (売却: sale, 除却: retirement, 償却済み: depreciated, 償却中: depreciating, 償却なし: non_depreciation)",
+                  "enum": [
+                    "sale",
+                    "retirement",
+                    "depreciated",
+                    "depreciating",
+                    "non_depreciation"
+                  ],
+                  "example": "retire"
+                },
+                "retire_date": {
+                  "type": "string",
+                  "format": "date",
+                  "nullable": true,
+                  "description": "除却日、もしくは売却日",
+                  "example": "2022-03-24"
+                }
+              }
+            }
           },
-          "id": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 2147483647,
-            "description": "固定資産ID",
-            "example": 1
-          },
-          "name": {
-            "type": "string",
-            "description": "固定資産名",
-            "example": "pc"
-          },
-          "management_number": {
-            "type": "string",
-            "nullable": true,
-            "description": "管理番号",
-            "example": "pc-0001"
-          },
-          "account_item_id": {
-            "type": "integer",
-            "description": "勘定科目ID",
-            "example": 22
-          },
-          "section_id": {
-            "type": "integer",
-            "nullable": true,
-            "description": "部門ID",
-            "example": 0
-          },
-          "item_id": {
-            "type": "integer",
-            "nullable": true,
-            "description": "品目ID",
-            "example": 0
-          },
-          "depreciation_method": {
-            "type": "string",
-            "description": "償却方法:(少額償却: small_sum_method, 一括償却: lump_sum_method, 定額法: straight_line_method, 定率法: multiple_method, 旧定率法: old_multiple_method, 旧定額法: old_straight_line_method, 償却なし: non_depreciate_method, 任意償却: voluntary_method, 即時償却: immediate_method, 均等償却: equal_method)",
-            "enum": [
-              "small_sum_method",
-              "lump_sum_method",
-              "straight_line_method",
-              "multiple_method",
-              "old_multiple_method",
-              "old_straight_line_method",
-              "non_depreciate_method",
-              "voluntary_method",
-              "immediate_method",
-              "equal_method"
+          "fiscal_year": {
+            "type": "object",
+            "required": [
+              "start_date",
+              "end_date"
             ],
-            "example": "straight_line_method"
+            "properties": {
+              "start_date": {
+                "type": "string",
+                "description": "会計年度開始日 (yyyy-mm-dd)",
+                "example": "2022-01-01"
+              },
+              "end_date": {
+                "type": "string",
+                "description": "会計年度終了日 (yyyy-mm-dd)",
+                "example": "2022-12-31"
+              }
+            }
           },
-          "depreciation_account_item_id": {
-            "type": "integer",
-            "description": "減価償却に使う勘定科目ID",
-            "example": 99
+          "up_to_date": {
+            "type": "boolean",
+            "description": "集計結果が最新かどうか",
+            "example": true
           },
-          "prefecture_code": {
-            "type": "integer",
-            "minimum": -1,
-            "maximum": 46,
-            "description": "都道府県コード（-1: 設定しない、0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
-            "example": 4,
-            "nullable": true
-          },
-          "city_name": {
-            "type": "string",
-            "nullable": true,
-            "description": "申告先市区町村",
-            "example": "港区"
-          },
-          "depreciation_amount": {
-            "type": "integer",
-            "description": "減価償却費",
-            "example": "18533"
-          },
-          "acquisition_cost": {
-            "type": "integer",
-            "description": "取得価額",
-            "example": "150000"
-          },
-          "opening_balance": {
-            "type": "integer",
-            "description": "期首残高",
-            "example": "92000"
-          },
-          "closing_balance": {
-            "type": "integer",
-            "description": "未償却残高(期末残高)",
-            "example": "46000"
-          },
-          "opening_accumulated_depreciation": {
-            "type": "integer",
-            "description": "期首減価償却累計額",
-            "example": "100000"
-          },
-          "closing_accumulated_depreciation": {
-            "type": "integer",
-            "description": "期末減価償却累計額",
-            "example": "46000"
-          },
-          "life_years": {
-            "type": "integer",
-            "description": "耐用年数",
-            "example": "5"
-          },
-          "acquisition_date": {
-            "type": "string",
-            "description": "取得日",
-            "format": "date",
-            "example": "2021-07-13"
-          },
-          "updated_at": {
-            "type": "string",
-            "description": "更新日",
-            "format": "date",
-            "example": "2021-07-13"
-          },
-          "retire_type": {
-            "type": "string",
-            "description": "売却もしくは除却ステータス: (売却: sell, 除却: retire, 償却中: depreciating)",
-            "enum": [
-              "sell",
-              "retire",
-              "depreciating"
-            ],
-            "example": "retire"
-          },
-          "retire_date": {
-            "type": "string",
-            "format": "date",
-            "nullable": true,
-            "description": "除却日、もしくは売却日",
-            "example": "2022-03-24"
+          "up_to_date_reasons": {
+            "type": "array",
+            "description": "集計が最新でない場合の要因情報",
+            "items": {
+              "type": "object",
+              "required": [
+                "code",
+                "message"
+              ],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "コード",
+                  "example": "depreciation_creating",
+                  "enum": [
+                    "depreciation_creating",
+                    "depreciation_create_error"
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "description": "集計が最新でない理由",
+                  "example": "当期の固定資産の償却作成が完了していないため、正しい集計結果でない可能性があります。"
+                }
+              }
+            }
           }
         }
       }
