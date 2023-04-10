@@ -2123,6 +2123,16 @@
               }
             }
           },
+          "404": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notfoundError"
+                }
+              }
+            }
+          },
           "500": {
             "description": "",
             "content": {
