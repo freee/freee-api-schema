@@ -1004,6 +1004,7 @@ components:
             quantity: 1
             sales_date: "2023-04-01"
             description: 切手代
+            type: item
             unit_price: "1234567890123.123"
             tax_rate: 8
           - withholding: true
@@ -1012,6 +1013,7 @@ components:
             quantity: 1
             sales_date: "2023-04-01"
             description: 切手代
+            type: item
             unit_price: "1234567890123.123"
             tax_rate: 8
         payment_date: "2023-04-01"
@@ -1351,6 +1353,7 @@ components:
             reduced_tax_rate: false
             quantity: 1
             description: 切手代
+            type: item
             unit_price: "1234567890123.123"
             tax_rate: 8
           - withholding: true
@@ -1358,6 +1361,7 @@ components:
             reduced_tax_rate: false
             quantity: 1
             description: 切手代
+            type: item
             unit_price: "1234567890123.123"
             tax_rate: 8
         quotation_note: 備考
@@ -1804,9 +1808,24 @@ components:
         quantity: 1
         sales_date: "2023-04-01"
         description: 切手代
+        type: item
         unit_price: "1234567890123.123"
         tax_rate: 8
       properties:
+        type:
+          default: item
+          description: |
+            明細の種類
+            - item: 品目行
+              - tax_rate、quantityは必須になります。
+            - text: テキスト行
+              - descriptionのみ入力可能です。
+            - 入力がない場合、itemが利用されます。
+          enum:
+            - item
+            - text
+          example: item
+          type: string
         description:
           description: 摘要（品名）
           example: 切手代
@@ -1853,9 +1872,6 @@ components:
           description: 源泉徴収対象
           example: true
           type: boolean
-      required:
-        - quantity
-        - tax_rate
       type: object
     InvoiceResponse_invoice_template:
       description: 帳票テンプレート情報（帳票テンプレート作成の際に設定できる項目です。）
@@ -2556,9 +2572,24 @@ components:
         reduced_tax_rate: false
         quantity: 1
         description: 切手代
+        type: item
         unit_price: "1234567890123.123"
         tax_rate: 8
       properties:
+        type:
+          default: item
+          description: |
+            明細の種類
+            - item: 品目行
+              - tax_rate、quantityは必須になります。
+            - text: テキスト行
+              - descriptionのみ入力可能です。
+            - 入力がない場合、itemが利用されます。
+          enum:
+            - item
+            - text
+          example: item
+          type: string
         description:
           description: 摘要（品名）
           example: 切手代
@@ -2599,9 +2630,6 @@ components:
           description: 源泉徴収対象
           example: true
           type: boolean
-      required:
-        - quantity
-        - tax_rate
       type: object
     QuotationResponse_quotation_template:
       description: 帳票テンプレート情報（帳票テンプレート作成の際に設定できる項目です。）
