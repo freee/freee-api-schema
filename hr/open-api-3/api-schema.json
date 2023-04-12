@@ -12527,6 +12527,7 @@
           },
           "address": {
             "type": "string",
+            "nullable": true,
             "description": "住民票住所の市区町村以降の住所",
             "maxLength": 255,
             "example": "品川区大崎1-2-2"
