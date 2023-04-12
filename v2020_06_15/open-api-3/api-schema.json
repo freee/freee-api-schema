@@ -38889,6 +38889,52 @@
             }
           }
         }
+      },
+      "generalLedgersResponse": {
+        "type": "object",
+        "required": [
+          "general_redgers"
+        ],
+        "properties": {
+          "general_ledgers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "description": "勘定科目ID",
+                  "example": 1
+                },
+                "name": {
+                  "type": "string",
+                  "description": "勘定科目名",
+                  "example": "売掛金"
+                },
+                "total_amount": {
+                  "type": "integer",
+                  "description": "発生額累計",
+                  "example": 100
+                },
+                "final_balance": {
+                  "type": "integer",
+                  "description": "残高",
+                  "example": 100
+                },
+                "debit_amount": {
+                  "type": "integer",
+                  "description": "借方発生額累計",
+                  "example": 100
+                },
+                "credit_amount": {
+                  "type": "integer",
+                  "description": "貸方発生額累計",
+                  "example": 100
+                }
+              }
+            }
+          }
+        }
       }
     },
     "securitySchemes": {
