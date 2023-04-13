@@ -7,6 +7,10 @@ info:
 
     <p>freee請求書のAPI仕様です。</p>
 
+    <b>freee請求書APIを利用するには、freee請求書への登録が必要です。
+
+    登録は<a href="https://www.freee.co.jp/invoice/" target="_blank">freee請求書</a>より行ってください。</b>
+
     </br>
 
     <h3 id="about_authorize">認証について</h3>
