@@ -12945,7 +12945,7 @@
           "Receipts"
         ],
         "summary": "ファイルボックス（証憑ファイル）のアップロード",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ファイルボックス（証憑ファイル）をアップロードする</p>\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>リクエストヘッダーの Content-Type は、multipart/form-dataにのみ対応しています。</li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ファイルボックス（証憑ファイル）をアップロードする</p>\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>リクエストヘッダーの Content-Type は、multipart/form-dataにのみ対応しています。</li>\n  <li>インボイス制度適格請求書発行事業者登録番号はOCR解析結果が採用されます。OCR解析結果を確認する場合は、Web画面にてご確認ください。上書きする場合は、ファイルボックス（証憑ファイル）の更新APIをご利用ください。</li>\n</ul>",
         "operationId": "create_receipt",
         "requestBody": {
           "content": {
