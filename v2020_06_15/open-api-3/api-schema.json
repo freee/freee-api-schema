@@ -18239,7 +18239,7 @@
               "properties": {
                 "line_type": {
                   "type": "string",
-                  "description": "'行の種類 (deal_line: 支払依頼の通常取引行, negative_line: 支払依頼の控除・マイナス行, withholding_tax: 源泉所得税行)'<br>\n'デフォルトは deal_line: 支払依頼の通常取引行 です'<br>\n'※ negative_line は2023年3月下旬から利用できる予定です'\n",
+                  "description": "'行の種類 (deal_line: 支払依頼の通常取引行, negative_line: 支払依頼の控除・マイナス行, withholding_tax: 源泉所得税行)'<br>\n'デフォルトは deal_line: 支払依頼の通常取引行 です'\n",
                   "example": "deal_line",
                   "enum": [
                     "deal_line",
@@ -18524,7 +18524,7 @@
                 },
                 "line_type": {
                   "type": "string",
-                  "description": "'行の種類 (deal_line: 支払依頼の通常取引行, negative_line: 支払依頼の控除・マイナス行, withholding_tax: 源泉所得税行)'<br>\n'デフォルトは deal_line: 支払依頼の通常取引行 です'<br>\n'※ negative_line は2023年3月下旬から利用できる予定です'\n",
+                  "description": "'行の種類 (deal_line: 支払依頼の通常取引行, negative_line: 支払依頼の控除・マイナス行, withholding_tax: 源泉所得税行)'<br>\n'デフォルトは deal_line: 支払依頼の通常取引行 です'\n",
                   "example": "deal_line",
                   "enum": [
                     "deal_line",
@@ -32853,7 +32853,7 @@
                     },
                     "line_type": {
                       "type": "string",
-                      "description": "'行の種類 (deal_line: 支払依頼の通常取引行, negative_line: 支払依頼の控除・マイナス行, withholding_tax: 源泉所得税行)'<br>\n'※ negative_line は2023年3月下旬から利用できる予定です'\n",
+                      "description": "'行の種類 (deal_line: 支払依頼の通常取引行, negative_line: 支払依頼の控除・マイナス行, withholding_tax: 源泉所得税行)'\n",
                       "example": "deal_line",
                       "enum": [
                         "deal_line",
