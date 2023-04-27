@@ -38781,7 +38781,7 @@
                 },
                 "opening_balance": {
                   "type": "integer",
-                  "description": "期首残高",
+                  "description": "期首残高（取得日が会計期間に含まれるとき期首残高は0になります。）",
                   "example": "92000"
                 },
                 "undepreciated_balance": {
