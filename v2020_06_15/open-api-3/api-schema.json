@@ -38771,7 +38771,7 @@
                 },
                 "depreciation_amount": {
                   "type": "integer",
-                  "description": "減価償却費",
+                  "description": "本年分の償却費合計",
                   "example": "18533"
                 },
                 "acquisition_cost": {
@@ -38810,9 +38810,9 @@
                   "format": "date",
                   "example": "2021-07-13"
                 },
-                "updated_at": {
+                "created_at": {
                   "type": "string",
-                  "description": "更新日時（ISO8601形式）",
+                  "description": "作成日時（ISO8601形式）",
                   "example": "2021-07-15T18:30:24+09:00"
                 },
                 "depreciation_status": {
