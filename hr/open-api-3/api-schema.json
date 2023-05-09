@@ -11753,6 +11753,331 @@
           }
         }
       },
+      "ApiV1WorkTimeIndexResponseParams": {
+        "type": "object",
+        "required": [
+          "id",
+          "company_id",
+          "application_number",
+          "applicant_id",
+          "target_date",
+          "clear_work_time",
+          "lateness_mins",
+          "early_leaving_mins",
+          "issue_date",
+          "status",
+          "passed_auto_check"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "申請ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "company_id": {
+            "type": "integer",
+            "description": "事業所ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "application_number": {
+            "type": "integer",
+            "description": "申請No",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "applicant_id": {
+            "type": "integer",
+            "description": "申請者のユーザーID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "approver_ids": {
+            "description": "承認者のユーザーID配列\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した、申請ステータスが承認済み以外の申請\n- 申請が差戻された",
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "description": "承認者のユーザーID",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2147483647,
+              "nullable": true,
+              "example": 1
+            }
+          },
+          "target_date": {
+            "type": "string",
+            "description": "対象日",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "clear_work_time": {
+            "type": "boolean",
+            "description": "勤務時間削除フラグ（false:勤務時間を修正する、true:勤務時間を削除する）"
+          },
+          "clock_in_at": {
+            "type": "string",
+            "description": "勤務開始時間",
+            "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+            "nullable": true,
+            "example": "12:00"
+          },
+          "clock_out_at": {
+            "type": "string",
+            "description": "勤務終了時間",
+            "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+            "nullable": true,
+            "example": "23:59"
+          },
+          "lateness_mins": {
+            "type": "integer",
+            "description": "遅刻分の時間（分単位）",
+            "format": "int32"
+          },
+          "early_leaving_mins": {
+            "type": "integer",
+            "description": "早退分の時間（分単位）",
+            "format": "int32"
+          },
+          "break_records": {
+            "type": "array",
+            "description": "休憩時間のリスト",
+            "items": {
+              "type": "object",
+              "required": [
+                "clock_in_at",
+                "clock_out_at"
+              ],
+              "properties": {
+                "clock_in_at": {
+                  "type": "string",
+                  "description": "開始時刻",
+                  "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+                  "example": "12:00"
+                },
+                "clock_out_at": {
+                  "type": "string",
+                  "description": "終了時刻",
+                  "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+                  "example": "23:59"
+                }
+              }
+            }
+          },
+          "issue_date": {
+            "type": "string",
+            "description": "申請日",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "comment": {
+            "type": "string",
+            "description": "申請理由",
+            "maxLength": 255,
+            "nullable": true,
+            "example": "申請理由"
+          },
+          "status": {
+            "type": "string",
+            "description": "申請ステータス。（draft:下書き、in_progress:申請中、approved:承認済、feedback:差戻し）",
+            "enum": [
+              "draft",
+              "in_progress",
+              "approved",
+              "feedback"
+            ],
+            "example": "in_progress"
+          },
+          "passed_auto_check": {
+            "type": "boolean",
+            "description": "自動チェック結果",
+            "example": true
+          }
+        }
+      },
+      "ApiV1WorkTimeResponseParams": {
+        "type": "object",
+        "required": [
+          "id",
+          "company_id",
+          "application_number",
+          "applicant_id",
+          "target_date",
+          "clear_work_time",
+          "lateness_mins",
+          "early_leaving_mins",
+          "issue_date",
+          "status",
+          "passed_auto_check",
+          "approval_flow_route_id",
+          "approval_flow_route_name",
+          "approval_flow_logs",
+          "current_round"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "申請ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "company_id": {
+            "type": "integer",
+            "description": "事業所ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "application_number": {
+            "type": "integer",
+            "description": "申請No",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "applicant_id": {
+            "type": "integer",
+            "description": "申請者のユーザーID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "approver_ids": {
+            "description": "承認者のユーザーID配列\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した、申請ステータスが承認済み以外の申請\n- 申請が差戻された",
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "description": "承認者のユーザーID",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2147483647,
+              "nullable": true,
+              "example": 1
+            }
+          },
+          "target_date": {
+            "type": "string",
+            "description": "対象日",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "clear_work_time": {
+            "type": "boolean",
+            "description": "勤務時間削除フラグ（false:勤務時間を修正する、true:勤務時間を削除する）",
+            "example": false
+          },
+          "clock_in_at": {
+            "type": "string",
+            "description": "勤務開始時間",
+            "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+            "nullable": true,
+            "example": "12:00"
+          },
+          "clock_out_at": {
+            "type": "string",
+            "description": "勤務終了時間",
+            "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+            "nullable": true,
+            "example": "23:59"
+          },
+          "lateness_mins": {
+            "type": "integer",
+            "description": "遅刻分の時間（分単位）",
+            "format": "int32"
+          },
+          "early_leaving_mins": {
+            "type": "integer",
+            "description": "早退分の時間（分単位）",
+            "format": "int32"
+          },
+          "break_records": {
+            "type": "array",
+            "description": "休憩時間のリスト",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1WorkTimeIndexResponseParams/properties/break_records/items"
+            }
+          },
+          "issue_date": {
+            "type": "string",
+            "description": "申請日",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "comment": {
+            "type": "string",
+            "description": "申請理由",
+            "maxLength": 255,
+            "nullable": true,
+            "example": "申請理由"
+          },
+          "status": {
+            "type": "string",
+            "description": "申請ステータス。（draft:下書き、in_progress:申請中、approved:承認済、feedback:差戻し）",
+            "enum": [
+              "draft",
+              "in_progress",
+              "approved",
+              "feedback"
+            ],
+            "example": "in_progress"
+          },
+          "passed_auto_check": {
+            "type": "boolean",
+            "description": "自動チェック結果",
+            "example": true
+          },
+          "approval_flow_route_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "申請経路ID",
+            "example": 1
+          },
+          "approval_flow_route_name": {
+            "type": "string",
+            "description": "申請経路名",
+            "example": "申請経路"
+          },
+          "approval_flow_logs": {
+            "type": "array",
+            "description": "承認履歴",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1ApprovalFlowLogsParams"
+            }
+          },
+          "current_step_id": {
+            "type": "integer",
+            "description": "現在承認ステップID<br>\n申請を差戻した場合、nullになります。",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1,
+            "nullable": true
+          },
+          "current_round": {
+            "type": "integer",
+            "description": "現在のround。差戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "example": 1
+          }
+        }
+      },
       "ApiV1PaidHolidayIndexResponse": {
         "type": "object",
         "required": [
@@ -13439,21 +13764,21 @@
           },
           "company_name": {
             "type": "string",
-            "description": "保険会社等の名称",
+            "description": "保険会社等の名称<br>\n保険の種類にて、生命保険・介護医療保険・個人年金保険または地震保険・旧長期損害保険を選択している時のみ、入力した値が反映されます。<br>\n上記以外の保険では入力した値は反映されません。",
             "maxLength": 255,
             "example": "freee生命保険株式会社",
             "nullable": true
           },
           "kind_of_purpose": {
             "type": "string",
-            "description": "保険等の種類（目的）<br>\n控除証明書に記載されている保険の種類等を転記してください。",
+            "description": "保険等の種類（目的）<br>\n保険の種類にて、生命保険・介護医療保険・個人年金保険または地震保険・旧長期損害保険を選択している時のみ、入力した値が反映されます。<br>\n上記以外の保険では入力した値は反映されません。",
             "maxLength": 255,
             "example": "利差配当付終身",
             "nullable": true
           },
           "period": {
             "type": "string",
-            "description": "保険期間又は年金支払期間",
+            "description": "保険期間又は年金支払期間<br>\n保険の種類にて、生命保険・介護医療保険・個人年金保険または地震保険・旧長期損害保険を選択している時のみ、入力した値が反映されます。<br>\n上記以外の保険では入力した値は反映されません。",
             "example": "終身",
             "nullable": true,
             "enum": [
@@ -13558,40 +13883,41 @@
               "97年",
               "98年",
               "99年",
-              "100年"
+              "100年",
+              ""
             ]
           },
           "policyholder_last_name": {
             "type": "string",
-            "description": "保険等の契約者 姓",
+            "description": "保険等の契約者 姓<br>\n保険の種類にて、生命保険・介護医療保険・個人年金保険または地震保険・旧長期損害保険を選択している時のみ、入力した値が反映されます。<br>\n上記以外の保険では入力した値は反映されません。",
             "maxLength": 255,
             "example": "契約",
             "nullable": true
           },
           "policyholder_first_name": {
             "type": "string",
-            "description": "保険等の契約者 名",
+            "description": "保険等の契約者 名<br>\n保険の種類にて、生命保険・介護医療保険・個人年金保険または地震保険・旧長期損害保険を選択している時のみ、入力した値が反映されます。<br>\n上記以外の保険では入力した値は反映されません。",
             "maxLength": 255,
             "example": "太郎",
             "nullable": true
           },
           "recipient_last_name": {
             "type": "string",
-            "description": "保険金等の受取人 姓",
+            "description": "保険金等の受取人 姓<br>\n保険の種類にて、生命保険・介護医療保険・個人年金保険、地震保険・旧長期損害保険または社会保険を選択している時のみ、入力した値が反映されます。<br>\n上記以外の保険では入力した値は反映されません。",
             "maxLength": 255,
             "example": "受取",
             "nullable": true
           },
           "recipient_first_name": {
             "type": "string",
-            "description": "保険金等の受取人 名",
+            "description": "保険金等の受取人 名<br>\n保険の種類にて、生命保険・介護医療保険・個人年金保険、地震保険・旧長期損害保険または社会保険を選択している時のみ、入力した値が反映されます。<br>\n上記以外の保険では入力した値は反映されません。",
             "maxLength": 255,
             "nullable": true,
             "example": "太郎"
           },
           "recipient_relationship": {
             "type": "string",
-            "description": "保険金等の受取人 あなたとの続柄 myself: 本人, husband: 夫, wife: 妻, father: 父, mother: 母, child: 子, senior_brother: 兄, junior_brother: 弟, senior_sister: 姉, junior_sister: 妹, grandchild: 孫, grandfather: 祖父, grandmother: 祖母, father_in_law: 義父, mother_in_law: 義母, grandfather_in_law: 義祖父, grandmother_in_law: 義祖母, other: その他, \"\": 空欄",
+            "description": "保険金等の受取人 あなたとの続柄 myself: 本人, husband: 夫, wife: 妻, father: 父, mother: 母, child: 子, senior_brother: 兄, junior_brother: 弟, senior_sister: 姉, junior_sister: 妹, grandchild: 孫, grandfather: 祖父, grandmother: 祖母, father_in_law: 義父, mother_in_law: 義母, grandfather_in_law: 義祖父, grandmother_in_law: 義祖母, other: その他, \"\": 空欄<br>\n保険の種類にて、生命保険・介護医療保険・個人年金保険、地震保険・旧長期損害保険または社会保険を選択している時のみ、入力した値が反映されます。<br>\n上記以外の保険では入力した値は反映されません。",
             "enum": [
               "myself",
               "husband",
@@ -13618,7 +13944,7 @@
           },
           "payment_start_date": {
             "type": "string",
-            "description": "年金の支払開始日 1900年1月1日から現在年+100の12月31日まで登録可能",
+            "description": "年金の支払開始日 1900年1月1日から現在年+100の12月31日まで登録可能。<br>\n区分が個人年金保険の時のみ、入力した値が反映されます。<br>\n上記以外の保険では入力した値は反映されません。",
             "pattern": "^([1-2][0-9]{3}-[0-9]{2}-[0-9]{2})?$",
             "example": "2000-04-01",
             "nullable": true
@@ -13697,21 +14023,21 @@
           },
           "company_name": {
             "type": "string",
-            "description": "保険会社等の名称",
+            "description": "保険会社等の名称<br>\n保険の種類にて、生命保険・介護医療保険・個人年金保険または地震保険・旧長期損害保険を選択している時のみ、入力した値が反映されます。<br>\n上記以外の保険では入力した値は反映されません。",
             "maxLength": 255,
             "example": "freee生命保険株式会社",
             "nullable": true
           },
           "kind_of_purpose": {
             "type": "string",
-            "description": "保険等の種類（目的）<br>\n控除証明書に記載されている保険の種類等を転記してください。",
+            "description": "保険等の種類（目的）<br>\n保険の種類にて、生命保険・介護医療保険・個人年金保険または地震保険・旧長期損害保険を選択している時のみ、入力した値が反映されます。<br>\n上記以外の保険では入力した値は反映されません。",
             "maxLength": 255,
             "example": "利差配当付終身",
             "nullable": true
           },
           "period": {
             "type": "string",
-            "description": "保険期間又は年金支払期間",
+            "description": "保険期間又は年金支払期間<br>\n保険の種類にて、生命保険・介護医療保険・個人年金保険または地震保険・旧長期損害保険を選択している時のみ、入力した値が反映されます。<br>\n上記以外の保険では入力した値は反映されません。",
             "example": "終身",
             "nullable": true,
             "enum": [
@@ -13816,40 +14142,41 @@
               "97年",
               "98年",
               "99年",
-              "100年"
+              "100年",
+              ""
             ]
           },
           "policyholder_last_name": {
             "type": "string",
-            "description": "保険等の契約者 姓",
+            "description": "保険等の契約者 姓<br>\n保険の種類にて、生命保険・介護医療保険・個人年金保険または地震保険・旧長期損害保険を選択している時のみ、入力した値が反映されます。<br>\n上記以外の保険では入力した値は反映されません。",
             "maxLength": 255,
             "example": "契約",
             "nullable": true
           },
           "policyholder_first_name": {
             "type": "string",
-            "description": "保険等の契約者 名",
+            "description": "保険等の契約者 名<br>\n保険の種類にて、生命保険・介護医療保険・個人年金保険または地震保険・旧長期損害保険を選択している時のみ、入力した値が反映されます。<br>\n上記以外の保険では入力した値は反映されません。",
             "maxLength": 255,
             "example": "太郎",
             "nullable": true
           },
           "recipient_last_name": {
             "type": "string",
-            "description": "保険金等の受取人 姓",
+            "description": "保険金等の受取人 姓<br>\n保険の種類にて、生命保険・介護医療保険・個人年金保険、地震保険・旧長期損害保険または社会保険を選択している時のみ、入力した値が反映されます。<br>\n上記以外の保険では入力した値は反映されません。",
             "maxLength": 255,
             "example": "受取",
             "nullable": true
           },
           "recipient_first_name": {
             "type": "string",
-            "description": "保険金等の受取人 名",
+            "description": "保険金等の受取人 名<br>\n保険の種類にて、生命保険・介護医療保険・個人年金保険、地震保険・旧長期損害保険または社会保険を選択している時のみ、入力した値が反映されます。<br>\n上記以外の保険では入力した値は反映されません。",
             "maxLength": 255,
             "nullable": true,
             "example": "太郎"
           },
           "recipient_relationship": {
             "type": "string",
-            "description": "保険金等の受取人 あなたとの続柄 myself: 本人, husband: 夫, wife: 妻, father: 父, mother: 母, child: 子, senior_brother: 兄, junior_brother: 弟, senior_sister: 姉, junior_sister: 妹, grandchild: 孫, grandfather: 祖父, grandmother: 祖母, father_in_law: 義父, mother_in_law: 義母, grandfather_in_law: 義祖父, grandmother_in_law: 義祖母, other: その他, \"\": 空欄",
+            "description": "保険金等の受取人 あなたとの続柄 myself: 本人, husband: 夫, wife: 妻, father: 父, mother: 母, child: 子, senior_brother: 兄, junior_brother: 弟, senior_sister: 姉, junior_sister: 妹, grandchild: 孫, grandfather: 祖父, grandmother: 祖母, father_in_law: 義父, mother_in_law: 義母, grandfather_in_law: 義祖父, grandmother_in_law: 義祖母, other: その他, \"\": 空欄<br>\n保険の種類にて、生命保険・介護医療保険・個人年金保険、地震保険・旧長期損害保険または社会保険を選択している時のみ、入力した値が反映されます。<br>\n上記以外の保険では入力した値は反映されません。",
             "enum": [
               "myself",
               "husband",
@@ -13876,7 +14203,7 @@
           },
           "payment_start_date": {
             "type": "string",
-            "description": "年金の支払開始日 1900年1月1日から現在年+100の12月31日まで登録可能",
+            "description": "年金の支払開始日 1900年1月1日から現在年+100の12月31日まで登録可能。<br>\n区分が個人年金保険の時のみ、入力した値が反映されます。<br>\n上記以外の保険では入力した値は反映されません。",
             "pattern": "^([1-2][0-9]{3}-[0-9]{2}-[0-9]{2})?$",
             "example": "2000-04-01",
             "nullable": true
