@@ -131,6 +131,10 @@
     {
       "name": "Quotations",
       "description": "\n<p>見積書</p>\n"
+    },
+    {
+      "name": "Fixed assets",
+      "description": "\n<p>固定資産台帳</p>\n"
     }
   ],
   "paths": {
@@ -16761,6 +16765,115 @@
           }
         }
       }
+    },
+    "/api/1/fixed_assets": {
+      "get": {
+        "tags": [
+          "Fixed assets"
+        ],
+        "summary": "固定資産一覧の取得",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の固定資産一覧を取得する</p>\n\n<h2 id=\"\">定義</h2>\n<ul>\n  <li><p>target_date : 表示したい会計期間の開始年月日。開始年月日以外を指定した場合は、その日付が含まれる会計期間が対象となります。</p></li>\n  <li><p>depreciation_amount : 本年分の償却費合計</p></li>\n  <li><p>depreciation_method : 償却方法</p></li>\n  <li><p>depreciation_account_item_id : 減価償却に使う勘定科目</p></li>\n  <li><p>acquisition_cost : 取得価額</p></li>\n  <li><p>opening_balance : 期首残高</p></li>\n  <li><p>undepreciated_balance : 未償却残高。土地などの償却しない固定資産はnullが返ります。</p></li>\n  <li><p>opening_accumulated_depreciation : 期首減価償却累計額</p></li>\n  <li><p>closing_accumulated_depreciation : 期末減価償却累計額</p></li>\n</ul>\n<h2 id=\"\">注意点</h2>\n<ul>\n  <li><p>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</p></li>\n</ul>",
+        "operationId": "get_fixed_assets",
+        "parameters": [
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647,
+              "example": 1000001
+            }
+          },
+          {
+            "name": "target_date",
+            "in": "query",
+            "description": "表示したい会計期間の開始年月日。開始年月日以外を指定した場合は、その日付が含まれる会計期間が対象となります。",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            },
+            "example": "2020-01-01"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "取得レコードのオフセット (デフォルト: 0)",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            },
+            "example": 50
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "取得レコードの件数 (デフォルト: 50, 最小: 1, 最大: 200)",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200
+            },
+            "example": 50
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fixedAssetResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -27696,7 +27809,8 @@
                 "minimum": 1,
                 "maximum": 2147483647,
                 "description": "取引先ID",
-                "example": 201
+                "example": 201,
+                "nullable": true
               },
               "partner_code": {
                 "type": "string",
@@ -28085,7 +28199,8 @@
             "minimum": 1,
             "maximum": 2147483647,
             "description": "取引先ID",
-            "example": 201
+            "example": 201,
+            "nullable": true
           },
           "partner_code": {
             "type": "string",
@@ -31090,8 +31205,9 @@
           },
           "balance": {
             "type": "integer",
-            "description": "残高(銀行口座等)",
-            "example": 10000
+            "description": "残高(銀行口座等)(Webで残高未設定で登録した場合や口座明細の作成APIでキーを指定しないで登録した場合などはnullとなります)",
+            "example": 10000,
+            "nullable": true
           },
           "entry_side": {
             "type": "string",
@@ -31228,7 +31344,8 @@
           "description": {
             "type": "string",
             "description": "備考",
-            "example": "備考"
+            "example": "備考",
+            "nullable": true
           }
         }
       },
