@@ -889,6 +889,7 @@ components:
             billing_partner_id: 1
             billing_date: "2023-04-01"
             sending_status: sent
+            partner_display_name: freeeパートナー
             amount_withholding_tax: 1000
             amount_tax: 1000
             partner_id: 1
@@ -910,6 +911,7 @@ components:
             billing_partner_id: 1
             billing_date: "2023-04-01"
             sending_status: sent
+            partner_display_name: freeeパートナー
             amount_withholding_tax: 1000
             amount_tax: 1000
             partner_id: 1
@@ -991,6 +993,7 @@ components:
         partner_address_street_name1: 東京都ＸＸ区ＹＹ１−１−１
         billing_partner_id: 1
         billing_date: "2023-04-01"
+        partner_display_name: freeeパートナー
         tax_fraction: omit
         invoice_note: 備考
         withholding_tax_entry_method: out
@@ -1157,6 +1160,14 @@ components:
           maxLength: 255
           minLength: 1
           type: string
+        partner_display_name:
+          description: |
+            取引先宛名
+            - 帳票の宛名に利用されます。
+            - 入力がない場合、帳票に指定されたbilling_partner_idまたはpartner_idに紐づく取引先名称が利用されます。
+          example: freeeパートナー
+          maxLength: 255
+          type: string
         lines:
           description: 請求書の明細行
           items:
@@ -1211,6 +1222,7 @@ components:
           created_at: "2000-01-23 04:56:07"
           amount_including_tax_10: 10000
           amount_including_tax: 11000
+          partner_display_name: freeeパートナー
           amount_tax: 1000
           partner_id: 1
           partner_contact_department: 営業部
@@ -1295,6 +1307,7 @@ components:
             amount_including_tax: 11000
             expiration_date: "2023-04-01"
             sending_status: sent
+            partner_display_name: freeeパートナー
             quotation_date: "2023-04-01"
             amount_withholding_tax: 1000
             amount_tax: 1000
@@ -1312,6 +1325,7 @@ components:
             amount_including_tax: 11000
             expiration_date: "2023-04-01"
             sending_status: sent
+            partner_display_name: freeeパートナー
             quotation_date: "2023-04-01"
             amount_withholding_tax: 1000
             amount_tax: 1000
@@ -1341,6 +1355,7 @@ components:
         partner_address_street_name1: 東京都ＸＸ区ＹＹ１−１−１
         expiration_date: "2023-04-01"
         delivery_location: 納品場所
+        partner_display_name: freeeパートナー
         tax_fraction: omit
         withholding_tax_entry_method: out
         quotation_date: "2023-04-01"
@@ -1508,6 +1523,14 @@ components:
           maxLength: 255
           minLength: 1
           type: string
+        partner_display_name:
+          description: |
+            取引先宛名
+            - 帳票の宛名に利用されます。
+            - 入力がない場合、帳票に指定されたpartner_idに紐づく取引先名称が利用されます。
+          example: freeeパートナー
+          maxLength: 255
+          type: string
         lines:
           description: 請求書の明細行
           items:
@@ -1526,32 +1549,44 @@ components:
     QuotationResponse:
       example:
         quotation:
-          template:
-            company_description: 〒141-0032　東京都品川区大崎1-2-2アートヴィレッジ大崎セントラルタワー 21階
-            company_name: freee株式会社
-            title: 見積書
-            message: メッセージ
-          company_contact_name: 法人営業担当
           amount_including_tax_0: 0
           subject: Webサイト製作費
           partner_name: freeeパートナー
           memo: 社内メモ
-          created_at: "2000-01-23 04:56:07"
-          amount_including_tax_10: 10000
           amount_excluding_tax_8: 0
-          amount_including_tax: 11000
           amount_excluding_tax_10: 10000
           expiration_date: "2023-04-01"
           delivery_location: 納品場所
           withholding_tax_entry_method: out
           amount_excluding_tax_0: 0
           quotation_date: "2023-04-01"
-          amount_tax: 1000
-          partner_id: 1
           amount_tax_8_reduced: 0
           partner_title: 御中
           amount_excluding_tax: 10000
           id: 101
+          amount_tax_10: 1000
+          delivery_deadline: 2023年12月31日
+          amount_excluding_tax_8_reduced: 0
+          amount_including_tax_8_reduced: 0
+          quotation_number: Q-0000000001
+          partner_address_street_name2: ビル 1F
+          partner_address_street_name1: 東京都ＸＸ区ＹＹ１−１−１
+          sending_status: sent
+          cancel_status: canceled
+          total_amount: 11000
+          amount_including_tax_8: 0
+          template:
+            company_description: 〒141-0032　東京都品川区大崎1-2-2アートヴィレッジ大崎セントラルタワー 21階
+            company_name: freee株式会社
+            title: 見積書
+            message: メッセージ
+          company_contact_name: 法人営業担当
+          created_at: "2000-01-23 04:56:07"
+          amount_including_tax_10: 10000
+          amount_including_tax: 11000
+          partner_display_name: freeeパートナー
+          amount_tax: 1000
+          partner_id: 1
           partner_contact_department: 営業部
           lines:
             - withholding: true
@@ -1575,29 +1610,18 @@ components:
               unit_price: "1234567890123.123"
               tax_rate: 8
           quotation_note: 備考
-          amount_tax_10: 1000
-          delivery_deadline: 2023年12月31日
-          amount_excluding_tax_8_reduced: 0
           partner_address_prefecture_code: 4
-          amount_including_tax_8_reduced: 0
           partner_address_zipcode: "1410032"
           company_id: 1
-          quotation_number: Q-0000000001
-          partner_address_street_name2: ビル 1F
-          partner_address_street_name1: 東京都ＸＸ区ＹＹ１−１−１
-          sending_status: sent
           tax_fraction: omit
           template_name: 標準の請求書テンプレート
           amount_withholding_tax: 1000
           amount_tax_8: 0
           branch_no: 1
           tax_entry_method: out
-          cancel_status: canceled
-          total_amount: 11000
           partner_contact_name: 法人営業担当
           template_id: 1
           amount_tax_0: 0
-          amount_including_tax_8: 0
       properties:
         quotation:
           $ref: "#/components/schemas/QuotationResponse_quotation"
@@ -1615,6 +1639,7 @@ components:
         billing_partner_id: 1
         billing_date: "2023-04-01"
         sending_status: sent
+        partner_display_name: freeeパートナー
         amount_withholding_tax: 1000
         amount_tax: 1000
         partner_id: 1
@@ -1753,6 +1778,13 @@ components:
           type: integer
         partner_name:
           description: 取引先名
+          example: freeeパートナー
+          maxLength: 255
+          type: string
+        partner_display_name:
+          description: |
+            取引先宛名
+            - 帳票の宛名に利用されます。
           example: freeeパートナー
           maxLength: 255
           type: string
@@ -2043,6 +2075,7 @@ components:
         created_at: "2000-01-23 04:56:07"
         amount_including_tax_10: 10000
         amount_including_tax: 11000
+        partner_display_name: freeeパートナー
         amount_tax: 1000
         partner_id: 1
         partner_contact_department: 営業部
@@ -2372,6 +2405,13 @@ components:
           example: 法人営業担当
           maxLength: 255
           type: string
+        partner_display_name:
+          description: |
+            取引先宛名
+            - 帳票の宛名に利用されます。
+          example: freeeパートナー
+          maxLength: 255
+          type: string
         company_contact_name:
           description: 自社担当者名
           example: 法人営業担当
@@ -2446,6 +2486,7 @@ components:
         amount_including_tax: 11000
         expiration_date: "2023-04-01"
         sending_status: sent
+        partner_display_name: freeeパートナー
         quotation_date: "2023-04-01"
         amount_withholding_tax: 1000
         amount_tax: 1000
@@ -2551,6 +2592,13 @@ components:
           type: integer
         partner_name:
           description: 取引先名
+          example: freeeパートナー
+          maxLength: 255
+          type: string
+        partner_display_name:
+          description: |
+            取引先宛名
+            - 帳票の宛名に利用されます。
           example: freeeパートナー
           maxLength: 255
           type: string
@@ -2744,32 +2792,44 @@ components:
       type: object
     QuotationResponse_quotation:
       example:
-        template:
-          company_description: 〒141-0032　東京都品川区大崎1-2-2アートヴィレッジ大崎セントラルタワー 21階
-          company_name: freee株式会社
-          title: 見積書
-          message: メッセージ
-        company_contact_name: 法人営業担当
         amount_including_tax_0: 0
         subject: Webサイト製作費
         partner_name: freeeパートナー
         memo: 社内メモ
-        created_at: "2000-01-23 04:56:07"
-        amount_including_tax_10: 10000
         amount_excluding_tax_8: 0
-        amount_including_tax: 11000
         amount_excluding_tax_10: 10000
         expiration_date: "2023-04-01"
         delivery_location: 納品場所
         withholding_tax_entry_method: out
         amount_excluding_tax_0: 0
         quotation_date: "2023-04-01"
-        amount_tax: 1000
-        partner_id: 1
         amount_tax_8_reduced: 0
         partner_title: 御中
         amount_excluding_tax: 10000
         id: 101
+        amount_tax_10: 1000
+        delivery_deadline: 2023年12月31日
+        amount_excluding_tax_8_reduced: 0
+        amount_including_tax_8_reduced: 0
+        quotation_number: Q-0000000001
+        partner_address_street_name2: ビル 1F
+        partner_address_street_name1: 東京都ＸＸ区ＹＹ１−１−１
+        sending_status: sent
+        cancel_status: canceled
+        total_amount: 11000
+        amount_including_tax_8: 0
+        template:
+          company_description: 〒141-0032　東京都品川区大崎1-2-2アートヴィレッジ大崎セントラルタワー 21階
+          company_name: freee株式会社
+          title: 見積書
+          message: メッセージ
+        company_contact_name: 法人営業担当
+        created_at: "2000-01-23 04:56:07"
+        amount_including_tax_10: 10000
+        amount_including_tax: 11000
+        partner_display_name: freeeパートナー
+        amount_tax: 1000
+        partner_id: 1
         partner_contact_department: 営業部
         lines:
           - withholding: true
@@ -2793,29 +2853,18 @@ components:
             unit_price: "1234567890123.123"
             tax_rate: 8
         quotation_note: 備考
-        amount_tax_10: 1000
-        delivery_deadline: 2023年12月31日
-        amount_excluding_tax_8_reduced: 0
         partner_address_prefecture_code: 4
-        amount_including_tax_8_reduced: 0
         partner_address_zipcode: "1410032"
         company_id: 1
-        quotation_number: Q-0000000001
-        partner_address_street_name2: ビル 1F
-        partner_address_street_name1: 東京都ＸＸ区ＹＹ１−１−１
-        sending_status: sent
         tax_fraction: omit
         template_name: 標準の請求書テンプレート
         amount_withholding_tax: 1000
         amount_tax_8: 0
         branch_no: 1
         tax_entry_method: out
-        cancel_status: canceled
-        total_amount: 11000
         partner_contact_name: 法人営業担当
         template_id: 1
         amount_tax_0: 0
-        amount_including_tax_8: 0
       properties:
         id:
           description: 見積書ID
@@ -3081,6 +3130,13 @@ components:
         partner_contact_name:
           description: 取引先担当者名
           example: 法人営業担当
+          maxLength: 255
+          type: string
+        partner_display_name:
+          description: |
+            取引先宛名
+            - 帳票の宛名に利用されます。
+          example: freeeパートナー
           maxLength: 255
           type: string
         company_contact_name:
