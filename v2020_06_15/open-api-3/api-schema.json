@@ -32255,14 +32255,16 @@
                         "minimum": 1,
                         "maximum": 2147483647,
                         "description": "経費科目ID",
-                        "example": 505
+                        "example": 505,
+                        "nullable": true
                       },
                       "receipt_id": {
                         "type": "integer",
                         "minimum": 1,
                         "maximum": 2147483647,
                         "description": "ファイルボックス（証憑ファイル）ID",
-                        "example": 606
+                        "example": 606,
+                        "nullable": true
                       }
                     }
                   }
