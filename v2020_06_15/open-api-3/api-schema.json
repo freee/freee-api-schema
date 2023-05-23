@@ -39012,7 +39012,7 @@
       "generalLedgersResponse": {
         "type": "object",
         "required": [
-          "general_redgers"
+          "general_ledgers"
         ],
         "properties": {
           "general_ledgers": {
