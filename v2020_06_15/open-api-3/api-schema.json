@@ -135,6 +135,10 @@
     {
       "name": "Fixed assets",
       "description": "\n<p>固定資産台帳</p>\n"
+    },
+    {
+      "name": "General ledgers",
+      "description": "\n<p>総勘定元帳</p>\n"
     }
   ],
   "paths": {
@@ -12766,6 +12770,313 @@
         }
       }
     },
+    "/api/1/reports/general_ledgers": {
+      "get": {
+        "tags": [
+          "General ledgers"
+        ],
+        "summary": "総勘定元帳一覧の取得（β版）",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の総勘定元帳一覧を取得する</p>\n<br>\n※このAPIはβ版として提供しています。\n<ul>\n  <li>このAPIは法人プロフェッショナル・法人エンタープライズに加入している事業所のみが利用できます。</li>\n  <li>利用状況によって事前の告知なく提供プラン・コール数の上限を変更する可能性があります。</li>\n  <li>他エンドポイントと比べてレスポンスタイムが遅い場合があります。</li>\n</ul>\n<h2 id=\"\">注意点</h2>\n<ul>\n<li>segment_tag_2_name、segment_tag_3_nameはエンタープライズプランのみ使用できます。</li>\n</ul>",
+        "operationId": "get_general_ledgers",
+        "parameters": [
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "example": 1000001
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "description": "期間で絞込：開始日 (yyyy-mm-dd)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            },
+            "example": "2020-01-01"
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "description": "期間で絞込：終了日 (yyyy-mm-dd)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            },
+            "example": "2020-01-01"
+          },
+          {
+            "name": "account_item_name",
+            "in": "query",
+            "description": "勘定科目名で絞込",
+            "schema": {
+              "type": "string"
+            },
+            "example": "売掛金"
+          },
+          {
+            "name": "tax_name",
+            "in": "query",
+            "description": "税区分名で絞込",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "課税",
+                "対象外",
+                "非課税",
+                "不課税",
+                "輸出等",
+                "未選択",
+                "課税売上",
+                "輸出売上",
+                "非課売上",
+                "非資売上",
+                "有価譲渡",
+                "対外売上",
+                "課税売返",
+                "輸出売返",
+                "非課売返",
+                "非資売返",
+                "課税売倒",
+                "輸出売倒",
+                "非課売倒",
+                "非資売倒",
+                "課税売回",
+                "課対輸本",
+                "非対輸本",
+                "共対輸本",
+                "課対輸税",
+                "非対輸税",
+                "共対輸税",
+                "地消貨割",
+                "課対仕入",
+                "非対仕入",
+                "共対仕入",
+                "非課仕入",
+                "対外仕入",
+                "課対仕返",
+                "非対仕返",
+                "共対仕返",
+                "非課仕返",
+                "課売上一",
+                "課売上二",
+                "課売上三",
+                "課売上四",
+                "課売上五",
+                "課売上六",
+                "課対輸返",
+                "非対輸返",
+                "共対輸返",
+                "課売返一",
+                "課売返二",
+                "課売返三",
+                "課売返四",
+                "課売返五",
+                "課売返六"
+              ]
+            },
+            "example": "課税"
+          },
+          {
+            "name": "tax_rate",
+            "in": "query",
+            "description": "税率で絞込",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "tax_rate_5",
+                "tax_rate_8",
+                "tax_rate_10",
+                "tax_rate_r8",
+                "tax_rate_5_exempt_80",
+                "tax_rate_5_exempt_50",
+                "tax_rate_8_exempt_80",
+                "tax_rate_8_exempt_50",
+                "tax_rate_10_exempt_80",
+                "tax_rate_10_exempt_50",
+                "tax_rate_r8_exempt_80",
+                "tax_rate_r8_exempt_50"
+              ]
+            },
+            "example": "tax_rate_5"
+          },
+          {
+            "name": "adjustment",
+            "in": "query",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ：only, 決算整理仕訳以外：without）。指定されない場合、決算整理仕訳を含む金額が返却されます。",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "only",
+                "without"
+              ]
+            },
+            "example": "only"
+          },
+          {
+            "name": "cost_allocation",
+            "in": "query",
+            "description": "配賦仕訳で絞込（配賦仕訳のみ：only,配賦仕訳以外：without）。指定されない場合、配賦仕訳を含む金額が返却されます。",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "only",
+                "without"
+              ]
+            },
+            "example": "only"
+          },
+          {
+            "name": "partner_name",
+            "in": "query",
+            "description": "取引先で絞込（未選択を指定すると、取引先が未選択で絞り込めます）",
+            "schema": {
+              "type": "string"
+            },
+            "example": "freeeパートナー"
+          },
+          {
+            "name": "item_name",
+            "in": "query",
+            "description": "品目で絞込（未選択を指定すると、品目が未選択で絞り込めます）",
+            "schema": {
+              "type": "string"
+            },
+            "example": "通勤手当"
+          },
+          {
+            "name": "section_name",
+            "in": "query",
+            "description": "部門で絞込（未選択を指定すると、部門が未選択で絞り込めます）",
+            "schema": {
+              "type": "string"
+            },
+            "example": "営業部"
+          },
+          {
+            "name": "tag_name",
+            "in": "query",
+            "description": "メモタグで絞込<br>\n取引数が多すぎる場合はタイムアウトする場合があります。<br>\nその場合はWeb画面よりPDF/CSV出力をご利用ください。\n",
+            "schema": {
+              "type": "string"
+            },
+            "example": "タグ１"
+          },
+          {
+            "name": "segment_tag_1_name",
+            "in": "query",
+            "description": "セグメント1タグで絞込（未選択を指定すると、セグメント1タグが未選択で絞り込めます）",
+            "schema": {
+              "type": "string"
+            },
+            "example": "セグメント1タグ"
+          },
+          {
+            "name": "segment_tag_2_name",
+            "in": "query",
+            "description": "セグメント2タグで絞込（未選択を指定すると、セグメント2タグが未選択で絞り込めます）",
+            "schema": {
+              "type": "string"
+            },
+            "example": "セグメント2タグ"
+          },
+          {
+            "name": "segment_tag_3_name",
+            "in": "query",
+            "description": "セグメント3タグで絞込（未選択を指定すると、セグメント3タグが未選択で絞り込めます）",
+            "schema": {
+              "type": "string"
+            },
+            "example": "セグメント3タグ"
+          },
+          {
+            "name": "approval_flow_status",
+            "in": "query",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "all",
+                "without_in_progress"
+              ]
+            },
+            "example": "without_in_progress"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/generalLedgersResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/serviceUnavailableError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/1/receipts": {
       "get": {
         "tags": [
@@ -17907,7 +18218,7 @@
           },
           "purchase_lines": {
             "type": "array",
-            "description": "この項目はインボイス制度で利用する項目です。2023年5月下旬から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>\n経費申請の申請行一覧（配列）\n",
+            "description": "経費申請の申請行一覧（配列）",
             "items": {
               "type": "object",
               "properties": {
@@ -18098,7 +18409,7 @@
           },
           "purchase_lines": {
             "type": "array",
-            "description": "この項目はインボイス制度で利用する項目です。2023年5月下旬から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>\n経費申請の申請行一覧（配列）\n",
+            "description": "経費申請の申請行一覧（配列）",
             "items": {
               "type": "object",
               "properties": {
@@ -32143,7 +32454,7 @@
                 },
                 "purchase_lines": {
                   "type": "array",
-                  "description": "この項目はインボイス制度で利用する項目です。2023年5月下旬から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>\n経費申請の申請行一覧（配列）\n",
+                  "description": "経費申請の申請行一覧（配列）",
                   "items": {
                     "type": "object",
                     "required": [
@@ -32439,7 +32750,7 @@
               },
               "purchase_lines": {
                 "type": "array",
-                "description": "この項目はインボイス制度で利用する項目です。2023年5月下旬から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>\n経費申請の申請行一覧（配列）\n",
+                "description": "経費申請の申請行一覧（配列）",
                 "items": {
                   "type": "object",
                   "required": [
