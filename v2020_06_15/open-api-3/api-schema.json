@@ -17907,7 +17907,7 @@
           },
           "purchase_lines": {
             "type": "array",
-            "description": "この項目はインボイス制度で利用する項目です。2023年5月下旬から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>\n経費申請の申請行一覧（配列）\n",
+            "description": "経費申請の申請行一覧（配列）",
             "items": {
               "type": "object",
               "properties": {
@@ -18098,7 +18098,7 @@
           },
           "purchase_lines": {
             "type": "array",
-            "description": "この項目はインボイス制度で利用する項目です。2023年5月下旬から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>\n経費申請の申請行一覧（配列）\n",
+            "description": "経費申請の申請行一覧（配列）",
             "items": {
               "type": "object",
               "properties": {
@@ -32143,7 +32143,7 @@
                 },
                 "purchase_lines": {
                   "type": "array",
-                  "description": "この項目はインボイス制度で利用する項目です。2023年5月下旬から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>\n経費申請の申請行一覧（配列）\n",
+                  "description": "経費申請の申請行一覧（配列）",
                   "items": {
                     "type": "object",
                     "required": [
@@ -32439,7 +32439,7 @@
               },
               "purchase_lines": {
                 "type": "array",
-                "description": "この項目はインボイス制度で利用する項目です。2023年5月下旬から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br>\n経費申請の申請行一覧（配列）\n",
+                "description": "経費申請の申請行一覧（配列）",
                 "items": {
                   "type": "object",
                   "required": [
