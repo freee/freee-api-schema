@@ -19742,10 +19742,6 @@
             "maxLength": 255,
             "description": "メモ (255文字以内)"
           },
-          "issue_date": {
-            "type": "string",
-            "description": "取引日 (yyyy-mm-dd)"
-          },
           "receipt": {
             "type": "string",
             "description": "証憑ファイル",
@@ -19798,8 +19794,7 @@
       "receiptUpdateParams": {
         "type": "object",
         "required": [
-          "company_id",
-          "issue_date"
+          "company_id"
         ],
         "properties": {
           "company_id": {
@@ -19814,11 +19809,6 @@
             "maxLength": 255,
             "description": "メモ (255文字以内)",
             "example": "メモ"
-          },
-          "issue_date": {
-            "type": "string",
-            "description": "取引日 (yyyy-mm-dd)",
-            "example": "2019-12-17"
           },
           "receipt_metadatum": {
             "type": "object",
@@ -32161,7 +32151,8 @@
           "issue_date": {
             "type": "string",
             "description": "発生日",
-            "example": "2019-12-17"
+            "example": "2019-12-17",
+            "nullable": true
           },
           "origin": {
             "type": "string",
@@ -32182,7 +32173,7 @@
           },
           "created_at": {
             "type": "string",
-            "description": "作成日時（ISO8601形式）",
+            "description": "アップロード日時（ISO8601形式）",
             "example": "2019-12-17T18:30:24+09:00"
           },
           "file_src": {
