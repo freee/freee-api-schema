@@ -18221,6 +18221,9 @@
             "description": "経費申請の申請行一覧（配列）",
             "items": {
               "type": "object",
+              "required": [
+                "transaction_date"
+              ],
               "properties": {
                 "receipt_id": {
                   "type": "integer",
@@ -18412,6 +18415,9 @@
             "description": "経費申請の申請行一覧（配列）",
             "items": {
               "type": "object",
+              "required": [
+                "transaction_date"
+              ],
               "properties": {
                 "id": {
                   "type": "integer",
