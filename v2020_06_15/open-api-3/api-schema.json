@@ -18234,7 +18234,7 @@
                 },
                 "transaction_date": {
                   "type": "string",
-                  "description": "日付 (yyyy-mm-dd)",
+                  "description": "発生日(yyyy-mm-dd)",
                   "example": "2019-12-17"
                 },
                 "expense_application_lines": {
@@ -18429,7 +18429,7 @@
                 },
                 "transaction_date": {
                   "type": "string",
-                  "description": "日付 (yyyy-mm-dd)",
+                  "description": "発生日(yyyy-mm-dd)",
                   "example": "2019-12-17"
                 },
                 "receipt_id": {
@@ -32468,7 +32468,7 @@
                       },
                       "transaction_date": {
                         "type": "string",
-                        "description": "日付 (yyyy-mm-dd)",
+                        "description": "発生日 (yyyy-mm-dd)",
                         "example": "2019-12-17",
                         "nullable": true
                       },
@@ -32764,7 +32764,7 @@
                     },
                     "transaction_date": {
                       "type": "string",
-                      "description": "日付 (yyyy-mm-dd)",
+                      "description": "発生日(yyyy-mm-dd)",
                       "example": "2019-12-17",
                       "nullable": true
                     },
