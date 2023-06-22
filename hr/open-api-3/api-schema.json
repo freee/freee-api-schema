@@ -5107,6 +5107,797 @@
         }
       }
     },
+    "/api/v1/approval_requests/work_times": {
+      "get": {
+        "tags": [
+          "勤務時間修正申請"
+        ],
+        "summary": "勤務時間修正申請一覧の取得",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の指定日付時点における勤務時間修正申請情報をリストで返します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</li>\n  <ul>\n    <li>役職指定（申請者の所属部門）</li>\n    <li>役職指定（申請時に部門指定）</li>\n    <li>部門および役職指定</li>\n  </ul>\n</ul>",
+        "operationId": "get_approval_requests_work_times",
+        "parameters": [
+          {
+            "name": "company_id",
+            "in": "query",
+            "required": true,
+            "description": "事業所ID",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "example": 1
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "申請ステータス\n- `draft` - 下書き\n- `in_progress` - 申請中\n- `approved` - 承認済\n- `feedback` - 差戻し",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "draft",
+                "in_progress",
+                "approved",
+                "feedback"
+              ],
+              "example": "in_progress"
+            }
+          },
+          {
+            "name": "application_number",
+            "in": "query",
+            "description": "申請No",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "example": 1
+          },
+          {
+            "name": "start_issue_date",
+            "in": "query",
+            "description": "申請開始日",
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            },
+            "example": "2023-04-01"
+          },
+          {
+            "name": "end_issue_date",
+            "in": "query",
+            "description": "申請終了日",
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            },
+            "example": "2023-04-01"
+          },
+          {
+            "name": "approver_id",
+            "in": "query",
+            "description": "現在承認ステップの承認者のユーザーID\napprover_idに値を指定する場合、指定なしの申請経路を利用した申請は返却されません\n",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "example": 1
+          },
+          {
+            "name": "applicant_id",
+            "in": "query",
+            "description": "申請者のユーザーID",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "example": 1
+          },
+          {
+            "name": "start_target_date",
+            "in": "query",
+            "description": "対象開始日",
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            },
+            "example": "2023-04-01"
+          },
+          {
+            "name": "end_target_date",
+            "in": "query",
+            "description": "対象終了日",
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            },
+            "example": "2023-04-01"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "申請種別\n- all : 全ての勤務時間修正申請を返却します。\n- fix : 勤務時間を修正する申請のみ返却します。\n- clear : 勤務時間を削除する申請のみ返却します。",
+            "schema": {
+              "type": "string",
+              "default": "all",
+              "enum": [
+                "all",
+                "fix",
+                "clear"
+              ],
+              "example": "all"
+            }
+          },
+          {
+            "name": "passed_auto_check",
+            "in": "query",
+            "description": "自動チェック結果\n- trueを指定した場合、自動チェック結果がtrueの申請のみ返却します。\n- falseを指定した場合、自動チェック結果がfalseの申請のみ返却します。\n- キーごと指定しない場合、すべての申請を返却します。",
+            "schema": {
+              "type": "boolean"
+            },
+            "example": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "取得レコードの件数 (デフォルト: 50, 最小: 1, 最大: 100)",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "example": 50
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "取得レコードのオフセット (デフォルト: 0)",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647,
+              "example": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "work_times",
+                    "total_count"
+                  ],
+                  "properties": {
+                    "work_times": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ApiV1WorkTimeIndexResponseParams"
+                      }
+                    },
+                    "total_count": {
+                      "type": "integer",
+                      "description": "合計件数",
+                      "format": "int32",
+                      "minimum": 0,
+                      "maximum": 2147483647,
+                      "example": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "勤務時間修正申請"
+        ],
+        "summary": "勤務時間修正申請の作成",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の勤務時間修正を新規作成します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</li>\n  <ul>\n    <li>役職指定（申請者の所属部門）</li>\n    <li>役職指定（申請時に部門指定）</li>\n    <li>部門および役職指定</li>\n  </ul>\n  <li>申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。</li>\n  <ul>\n    <li>status: draft</li>\n    <li>approval_flow_logs.action: cancel</li>\n  </ul>\n</ul>",
+        "operationId": "create_approval_requests_work_time",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "company_id",
+                  "target_date",
+                  "approval_flow_route_id"
+                ],
+                "properties": {
+                  "company_id": {
+                    "type": "integer",
+                    "description": "事業所ID（必須）",
+                    "format": "int32",
+                    "minimum": 1,
+                    "maximum": 2147483647,
+                    "example": 1
+                  },
+                  "target_date": {
+                    "type": "string",
+                    "description": "対象日（必須）",
+                    "format": "date",
+                    "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                  },
+                  "clear_work_time": {
+                    "type": "boolean",
+                    "description": "false: 勤務時間を修正する  \ntrue: 勤務時間を削除する\n\n勤務時間を削除する場合は以下のパラメータは指定しないでください。\n- clock_in_at\n- clock_out_at\n- lateness_mins\n- early_leaving_mins\n- break_records",
+                    "default": false
+                  },
+                  "clock_in_at": {
+                    "type": "string",
+                    "description": "勤務開始時間（条件付き必須）  \n勤務時間を修正する場合は必須",
+                    "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+                    "example": "12:00"
+                  },
+                  "clock_out_at": {
+                    "type": "string",
+                    "description": "勤務終了時間（条件付き必須）  \n勤務時間を修正する場合は必須",
+                    "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+                    "example": "23:59"
+                  },
+                  "lateness_mins": {
+                    "type": "integer",
+                    "description": "遅刻分の時間（分単位）",
+                    "format": "int32"
+                  },
+                  "early_leaving_mins": {
+                    "type": "integer",
+                    "description": "早退分の時間（分単位）",
+                    "format": "int32"
+                  },
+                  "break_records": {
+                    "type": "array",
+                    "description": "休憩時間のリスト",
+                    "items": {
+                      "$ref": "#/components/schemas/ApiV1WorkTimeIndexResponseParams/properties/break_records/items"
+                    }
+                  },
+                  "comment": {
+                    "type": "string",
+                    "description": "申請理由",
+                    "maxLength": 255,
+                    "example": "申請理由"
+                  },
+                  "approval_flow_route_id": {
+                    "type": "integer",
+                    "description": "申請経路ID（必須）",
+                    "format": "int32",
+                    "minimum": 1,
+                    "maximum": 2147483647,
+                    "example": 1
+                  },
+                  "approver_id": {
+                    "type": "integer",
+                    "description": "承認者のユーザーID",
+                    "format": "int32",
+                    "minimum": 1,
+                    "maximum": 2147483647,
+                    "example": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "work_time"
+                  ],
+                  "properties": {
+                    "work_time": {
+                      "$ref": "#/components/schemas/ApiV1WorkTimeResponseParams"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/approval_requests/work_times/{id}": {
+      "get": {
+        "tags": [
+          "勤務時間修正申請"
+        ],
+        "summary": "勤務時間修正申請の取得",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の勤務時間修正申請情報を取得します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</li>\n  <ul>\n    <li>役職指定（申請者の所属部門）</li>\n    <li>役職指定（申請時に部門指定）</li>\n    <li>部門および役職指定</li>\n  </ul>\n  <li>申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。</li>\n  <ul>\n    <li>status: draft</li>\n    <li>approval_flow_logs.action: cancel</li>\n  </ul>\n</ul>",
+        "operationId": "get_approval_requests_work_time",
+        "parameters": [
+          {
+            "name": "company_id",
+            "in": "query",
+            "required": true,
+            "description": "事業所ID",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "example": 1
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "勤務時間修正申請ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1api~1v1~1approval_requests~1work_times/post/responses/201/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notfoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "勤務時間修正申請"
+        ],
+        "summary": "勤務時間修正申請の更新",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の勤務時間修正申請情報を更新します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</li>\n  <ul>\n    <li>役職指定（申請者の所属部門）</li>\n    <li>役職指定（申請時に部門指定）</li>\n    <li>部門および役職指定</li>\n  </ul>\n  <li>申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。</li>\n  <ul>\n    <li>status: draft</li>\n    <li>approval_flow_logs.action: cancel</li>\n  </ul>\n</ul>",
+        "operationId": "update_approval_requests_work_time",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "勤務時間修正申請ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/paths/~1api~1v1~1approval_requests~1work_times/post/requestBody/content/application~1json/schema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1api~1v1~1approval_requests~1work_times/post/responses/201/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notfoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "勤務時間修正申請"
+        ],
+        "summary": "勤務時間修正申請の削除",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の勤務時間修正申請情報を削除します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</li>\n  <ul>\n    <li>役職指定（申請者の所属部門）</li>\n    <li>役職指定（申請時に部門指定）</li>\n    <li>部門および役職指定</li>\n  </ul>\n</ul>",
+        "operationId": "destroy_approval_requests_work_time",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "勤務時間修正申請ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "example": 1
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "example": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notfoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/approval_requests/work_times/{id}/actions": {
+      "post": {
+        "tags": [
+          "勤務時間修正申請"
+        ],
+        "summary": "勤務時間修正申請の承認操作",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の勤務時間修正申請情報を承認操作します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</li>\n  <ul>\n    <li>役職指定（申請者の所属部門）</li>\n    <li>役職指定（申請時に部門指定）</li>\n    <li>部門および役職指定</li>\n  </ul>\n  <li>申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。</li>\n  <ul>\n    <li>status: draft</li>\n    <li>approval_flow_logs.action: cancel</li>\n  </ul>\n</ul>",
+        "operationId": "action_approval_requests_work_time",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "勤務時間修正申請ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "example": 1
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiV1ApprovalActionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1api~1v1~1approval_requests~1work_times/post/responses/201/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notfoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/approval_requests/paid_holidays": {
       "get": {
         "tags": [
