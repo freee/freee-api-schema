@@ -907,7 +907,7 @@
           "Account items"
         ],
         "summary": "勘定科目の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した勘定科目を更新する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<p>tax_codeは、api/1/taxes/companies/{company_id} で該当事業所の税区分一覧を取得して、availableの値がtrue、かつ”name_ja”に”税率%”を含んでいない税区分を確認して、そのcodeを指定して勘定科目の更新をしてください</p>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した勘定科目を更新する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<p>tax_codeは、指定した事業所の税区分一覧の取得APIでavailableの値がtrue、かつ経過措置税区分ではない5%の税区分を確認して、そのcodeを指定して勘定科目の更新をしてください。例 課対仕入の場合、34を指定してください</p>",
         "operationId": "update_account_item",
         "parameters": [
           {
@@ -1166,7 +1166,7 @@
           "Account items"
         ],
         "summary": "勘定科目の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の勘定科目を作成する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<p>tax_codeは、api/1/taxes/companies/{company_id} で該当事業所の税区分の一覧を取得して、availableの値がtrue、かつ”name_ja”に”税率%”を含んでいない税区分を確認して、そのcodeを指定して勘定科目の作成をしてください</p>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の勘定科目を作成する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<p>tax_codeは、指定した事業所の税区分一覧の取得APIでavailableの値がtrue、かつ経過措置税区分ではない5%の税区分を確認して、そのcodeを指定して勘定科目の作成をしてください。例 課対仕入の場合、34を指定してください</p>",
         "operationId": "create_account_item",
         "requestBody": {
           "description": "勘定科目の作成",
@@ -18899,6 +18899,16 @@
               "savings",
               "other"
             ]
+          },
+          "qualified_invoice_status": {
+            "type": "string",
+            "description": "適格請求書発行事業者（qualified: 該当する、not_qualified: 該当しない、unspecified: 未選択）\n- 支払依頼をインボイス要件をみたす申請として扱うかどうかを表します。\n- qualified_invoice_statusキーをリクエストに含めない場合、unspecifiedが適用されます。\n- issue_dateが2023年9月30日以前の場合、unspecified以外利用できません。\n- インボイス経過措置の税区分の設定が使用する設定になっていない場合、unspecified以外利用できません。\n",
+            "enum": [
+              "qualified",
+              "not_qualified",
+              "unspecified"
+            ],
+            "example": "qualified"
           }
         }
       },
@@ -19176,6 +19186,16 @@
               "savings",
               "other"
             ]
+          },
+          "qualified_invoice_status": {
+            "type": "string",
+            "description": "適格請求書発行事業者（qualified: 該当する、not_qualified: 該当しない、unspecified: 未選択）\n- 支払依頼をインボイス要件をみたす申請として扱うかどうかを表します。\n- qualified_invoice_statusキーをリクエストに含めない場合、unspecifiedが適用されます。\n- issue_dateが2023年9月30日以前の場合、unspecified以外利用できません。\n- インボイス経過措置の税区分の設定が使用する設定になっていない場合、unspecified以外利用できません。\n",
+            "enum": [
+              "qualified",
+              "not_qualified",
+              "unspecified"
+            ],
+            "example": "qualified"
           }
         }
       },
@@ -19920,7 +19940,7 @@
                 "type": "integer",
                 "minimum": 0,
                 "maximum": 2147483647,
-                "description": "税区分コード",
+                "description": "税区分コード 指定できるコードは本APIの注意点をご確認ください。",
                 "example": 1
               },
               "group_name": {
@@ -20351,7 +20371,7 @@
                 "type": "integer",
                 "minimum": 0,
                 "maximum": 2147483647,
-                "description": "税区分コード",
+                "description": "税区分コード 指定できるコードは本APIの注意点をご確認ください。",
                 "example": 1
               },
               "group_name": {
@@ -33673,6 +33693,16 @@
                 "type": "string",
                 "description": "受取人名（カナ）",
                 "example": "フリータロウ"
+              },
+              "qualified_invoice_status": {
+                "type": "string",
+                "description": "適格請求書発行事業者（qualified: 該当する、not_qualified: 該当しない、unspecified: 未選択）\n- 支払依頼をインボイス要件をみたす申請として扱うかどうかを表します。\n",
+                "enum": [
+                  "qualified",
+                  "not_qualified",
+                  "unspecified"
+                ],
+                "example": "qualified"
               }
             }
           }
@@ -33904,6 +33934,16 @@
                   "description": "取引先名",
                   "example": "freee",
                   "nullable": true
+                },
+                "qualified_invoice_status": {
+                  "type": "string",
+                  "description": "適格請求書発行事業者（qualified: 該当する、not_qualified: 該当しない、unspecified: 未選択）\n- 支払依頼をインボイス要件をみたす申請として扱うかどうかを表します。\n",
+                  "enum": [
+                    "qualified",
+                    "not_qualified",
+                    "unspecified"
+                  ],
+                  "example": "qualified"
                 }
               }
             }
