@@ -272,6 +272,10 @@ paths:
       description: |2-
 
         請求書の作成をします。
+
+        account_item_id, tax_code, item_id, section_id, tag_ids, segment_1_tag_id, segment_2_tag_id, segment_3_tag_id は、取引登録の下書き保存で利用されます。
+
+        tag_idsは10個まで設定可能です。
       operationId: invoices/create
       requestBody:
         content:
@@ -395,6 +399,10 @@ paths:
       description: |2-
 
         請求書の更新をします。
+
+        account_item_id, tax_code, item_id, section_id, tag_ids, segment_1_tag_id, segment_2_tag_id, segment_3_tag_id は、取引登録の下書き保存で利用されます。
+
+        tag_idsは10個まで設定可能です。
       operationId: invoices/update
       parameters:
       - description: 請求書ID
@@ -1617,6 +1625,80 @@ components:
           description: 源泉徴収対象
           example: true
           type: boolean
+        account_item_id:
+          description: 勘定科目ID（取引登録の下書き保存で利用されます。）
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        tax_code:
+          description: 税区分コード（取引登録の下書き保存で利用されます。）
+          example: 1
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        item_id:
+          description: 品目ID（取引登録の下書き保存で利用されます。）
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        section_id:
+          description: |
+            部門ID<br>
+            - 取引登録の下書き保存で利用されます。
+            - 親部門は利用できません。
+            - グループ管理で制限された部門は利用できません。
+            <br>
+            <a href="https://support.freee.co.jp/hc/ja/articles/215225263" target="_blank">グループ管理の設定はヘルプページを御覧ください。</a>
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        tag_ids:
+          items:
+            description: メモタグID（10個まで設定可能です。）（取引登録の下書き保存で利用されます。）
+            example: 1
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+          type: array
+        segment_1_tag_id:
+          description: |
+            セグメント１ID<br>
+            - 取引登録の下書き保存で利用されます。
+            - freee会計法人向け プロフェッショナルプラン以上で利用可能です。
+            <br>
+            <a href="https://support.freee.co.jp/hc/ja/articles/360020679611" target="_blank">セグメント（分析用タグ）の設定はヘルプページを御覧ください。</a>
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        segment_2_tag_id:
+          description: |
+            セグメント２ID<br>
+            - 取引登録の下書き保存で利用されます。
+            - freee会計法人向け エンタープライズプランで利用可能です。
+            <br>
+            <a href="https://support.freee.co.jp/hc/ja/articles/360020679611" target="_blank">セグメント（分析用タグ）の設定はヘルプページを御覧ください。</a>
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        segment_3_tag_id:
+          description: |
+            セグメント３ID<br>
+            - 取引登録の下書き保存で利用されます。
+            - freee会計法人向け エンタープライズプランで利用可能です。
+            <br>
+            <a href="https://support.freee.co.jp/hc/ja/articles/360020679611" target="_blank">セグメント（分析用タグ）の設定はヘルプページを御覧ください。</a>
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
       type: object
     InvoiceResponse_invoice_template:
       description: 帳票テンプレート情報（帳票テンプレート作成の際に設定できる項目です。）
@@ -1663,6 +1745,7 @@ components:
             明細の種類
             - item: 品目行
             - text: テキスト行
+            - textの時はsales_date、quantity、unit_price、tax_rate、amount_excluding_tax、account_item_id、tax_code、item_id、section_id、segment_1_tag_id、segment_2_tag_id、segment_3_tag_idはnullになります。
           enum:
           - item
           - text
@@ -1720,6 +1803,66 @@ components:
           format: double
           nullable: true
           type: number
+        account_item_id:
+          description: 勘定科目ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          nullable: true
+          type: integer
+        tax_code:
+          description: 税区分コード
+          example: 1
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+          type: integer
+        item_id:
+          description: 品目ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          nullable: true
+          type: integer
+        section_id:
+          description: 部門ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          nullable: true
+          type: integer
+        tag_ids:
+          items:
+            description: メモタグID
+            example: 1
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+          type: array
+        segment_1_tag_id:
+          description: セグメント１ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          nullable: true
+          type: integer
+        segment_2_tag_id:
+          description: セグメント２ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          nullable: true
+          type: integer
+        segment_3_tag_id:
+          description: セグメント３ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          nullable: true
+          type: integer
       required:
       - description
       - id
