@@ -18237,6 +18237,16 @@
                   "description": "発生日(yyyy-mm-dd)",
                   "example": "2019-12-17"
                 },
+                "sub_receipt_ids": {
+                  "type": "array",
+                  "description": "補足資料（配列）\n  receipt_id（証憑ファイル）を指定してください。\n  receipt_id（証憑ファイル）は5個まで指定できます",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2147483647,
+                    "example": 606
+                  }
+                },
                 "expense_application_lines": {
                   "type": "array",
                   "description": "明細行一覧（配列）",
@@ -18438,6 +18448,16 @@
                   "maximum": 2147483647,
                   "description": "ファイルボックス（証憑ファイル）ID",
                   "example": 606
+                },
+                "sub_receipt_ids": {
+                  "type": "array",
+                  "description": "補足資料（配列）\n  receipt_id（証憑ファイル）を指定してください。\n  receipt_id（証憑ファイル）は5個まで指定できます",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2147483647,
+                    "example": 606
+                  }
                 },
                 "expense_application_lines": {
                   "type": "array",
@@ -32509,6 +32529,16 @@
                         "example": 606,
                         "nullable": true
                       },
+                      "sub_receipt_ids": {
+                        "type": "array",
+                        "description": "補足資料（配列）\n  receipt_id（証憑ファイル）を指定してください。",
+                        "items": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 2147483647,
+                          "example": 606
+                        }
+                      },
                       "expense_application_lines": {
                         "type": "array",
                         "description": "明細行一覧（配列）",
@@ -32804,6 +32834,16 @@
                       "description": "ファイルボックス（証憑ファイル）ID",
                       "example": 606,
                       "nullable": true
+                    },
+                    "sub_receipt_ids": {
+                      "type": "array",
+                      "description": "補足資料（配列）\n  receipt_id（証憑ファイル）を指定してください。",
+                      "items": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 2147483647,
+                        "example": 606
+                      }
                     },
                     "expense_application_lines": {
                       "type": "array",
