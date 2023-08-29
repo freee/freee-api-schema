@@ -1062,15 +1062,6 @@ components:
           maximum: 9223372036854775807
           minimum: 1
           type: integer
-        billing_partner_id:
-          description: |
-            請求先ID（請求先IDが入力された場合は取引先IDより優先されます。）<br>
-            <a href='https://support.freee.co.jp/hc/ja/articles/12515437008409-取引先を登録する#:~:text=取引先に支払う）-,請求設定,-外税／内' target='_blank'>請求設定に関してはヘルプページを御覧ください。</a>
-          example: 1
-          format: int64
-          maximum: 9223372036854775807
-          minimum: 1
-          type: integer
         partner_title:
           description: 敬称（御中、様、（空白）の3つから選択）
           enum:
@@ -1120,7 +1111,7 @@ components:
           description: |
             取引先宛名
             - 帳票の宛名に利用されます。
-            - 入力がない場合、帳票に指定されたbilling_partner_idまたはpartner_idに紐づく取引先名称が利用されます。
+            - 入力がない場合、帳票に指定されたpartner_idに紐づく取引先名称が利用されます。
           example: freeeパートナー
           maxLength: 255
           type: string
@@ -1128,7 +1119,7 @@ components:
           description: |
             取引先口座
             - payment_typeがdirect_debitの場合に指定可能です。
-            - 入力がない場合またはpayment_typeがtransferの場合、帳票に指定されたbilling_partner_idまたはpartner_idに紐づく取引先口座が利用されます。
+            - 入力がない場合またはpayment_typeがtransferの場合、帳票に指定されたpartner_idに紐づく取引先口座が利用されます。
           example: freee銀行 freee支店 普通 1234567 freee
           maxLength: 255
           type: string
@@ -1487,13 +1478,6 @@ components:
           example: 1000
           type: number
         partner_id:
-          description: 取引先ID
-          example: 1
-          format: int64
-          maximum: 9223372036854775807
-          minimum: 1
-          type: integer
-        billing_partner_id:
           description: 請求先ID（請求先IDが入力された場合は取引先IDより優先されます。）
           example: 1
           format: int64
@@ -2115,14 +2099,6 @@ components:
           maximum: 9223372036854775807
           minimum: 1
           type: integer
-        billing_partner_id:
-          description: 請求先ID（請求先IDが入力された場合は取引先IDより優先されます。）
-          example: 1
-          format: int64
-          maximum: 9223372036854775807
-          minimum: 1
-          nullable: true
-          type: integer
         partner_name:
           description: |
             取引先名
@@ -2538,14 +2514,6 @@ components:
           format: int64
           maximum: 9223372036854775807
           minimum: 1
-          type: integer
-        billing_partner_id:
-          description: 請求先ID（請求先IDが入力された場合は取引先IDより優先されます。）
-          example: 1
-          format: int64
-          maximum: 9223372036854775807
-          minimum: 1
-          nullable: true
           type: integer
         partner_name:
           description: |
