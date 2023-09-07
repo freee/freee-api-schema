@@ -22,123 +22,123 @@
   "tags": [
     {
       "name": "Partners",
-      "description": "\n<p>取引先</p>\n"
+      "description": "<p>取引先</p>"
     },
     {
       "name": "Selectables",
-      "description": "\n<p>フォーム用選択項目情報</p>\n"
+      "description": "<p>フォーム用選択項目情報</p>"
     },
     {
       "name": "Account items",
-      "description": "\n<p>勘定科目</p>\n"
+      "description": "<p>勘定科目</p>"
     },
     {
       "name": "Tags",
-      "description": "\n<p>メモタグ</p>\n"
+      "description": "<p>メモタグ</p>"
     },
     {
       "name": "Sections",
-      "description": "\n<p>部門</p>\n"
+      "description": "<p>部門</p>"
     },
     {
       "name": "Invoices",
-      "description": "\n<p>請求書</p>\n"
+      "description": "<p>請求書</p>"
     },
     {
       "name": "Deals",
-      "description": "\n<p>取引（収入・支出）</p>\n"
+      "description": "<p>取引（収入・支出）</p>"
     },
     {
       "name": "Payments",
-      "description": "\n<p>取引（収入・支出）の支払行</p>\n"
+      "description": "<p>取引（収入・支出）の支払行</p>"
     },
     {
       "name": "Renews",
-      "description": "\n<p>取引（収入・支出）の+更新</p>\n"
+      "description": "<p>取引（収入・支出）の+更新</p>"
     },
     {
       "name": "ManualJournals",
-      "description": "\n<p>振替伝票</p>\n"
+      "description": "<p>振替伝票</p>"
     },
     {
       "name": "Users",
-      "description": "\n<p>ユーザー</p>\n"
+      "description": "<p>ユーザー</p>"
     },
     {
       "name": "Companies",
-      "description": "\n<p>事業所</p>\n"
+      "description": "<p>事業所</p>"
     },
     {
       "name": "Items",
-      "description": "\n<p>品目</p>\n"
+      "description": "<p>品目</p>"
     },
     {
       "name": "Taxes",
-      "description": "\n<p>税区分</p>\n"
+      "description": "<p>税区分</p>"
     },
     {
       "name": "Walletables",
-      "description": "\n<p>口座</p>\n"
+      "description": "<p>口座</p>"
     },
     {
       "name": "Banks",
-      "description": "\n<p>連携サービス</p>\n"
+      "description": "<p>連携サービス</p>"
     },
     {
       "name": "Transfers",
-      "description": "\n<p>取引（振替）</p>\n"
+      "description": "<p>取引（振替）</p>"
     },
     {
       "name": "Wallet txns",
-      "description": "\n<p>口座明細</p>\n"
+      "description": "<p>口座明細</p>"
     },
     {
       "name": "Journals",
-      "description": "\n<p>仕訳帳</p>\n"
+      "description": "<p>仕訳帳</p>"
     },
     {
       "name": "Trial balance",
-      "description": "\n<p>試算表</p>\n"
+      "description": "<p>試算表</p>"
     },
     {
       "name": "Receipts",
-      "description": "\n<p>ファイルボックス（証憑ファイル）</p>\n"
+      "description": "<p>ファイルボックス（証憑ファイル）</p>"
     },
     {
       "name": "Expense applications",
-      "description": "\n<p>経費精算</p>\n"
+      "description": "<p>経費精算</p>"
     },
     {
       "name": "Expense application line templates",
-      "description": "\n<p>経費科目</p>\n"
+      "description": "<p>経費科目</p>"
     },
     {
       "name": "Payment requests",
-      "description": "\n<p>支払依頼</p>\n"
+      "description": "<p>支払依頼</p>"
     },
     {
       "name": "Approval requests",
-      "description": "\n<p>各種申請</p>\n"
+      "description": "<p>各種申請</p>"
     },
     {
       "name": "Approval flow routes",
-      "description": "\n<p>申請経路</p>\n"
+      "description": "<p>申請経路</p>"
     },
     {
       "name": "Segment tags",
-      "description": "\n<p>セグメントタグ</p>\n"
+      "description": "<p>セグメントタグ</p>"
     },
     {
       "name": "Quotations",
-      "description": "\n<p>見積書</p>\n"
+      "description": "<p>見積書</p>"
     },
     {
       "name": "Fixed assets",
-      "description": "\n<p>固定資産台帳</p>\n"
+      "description": "<p>固定資産台帳</p>"
     },
     {
       "name": "General ledgers",
-      "description": "\n<p>総勘定元帳</p>\n"
+      "description": "<p>総勘定元帳</p>"
     }
   ],
   "paths": {
@@ -18663,7 +18663,7 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 2147483647,
-            "description": "各種申請ID\n- 経費申請に紐付ける各種申請IDを指定します\n- 閲覧権限のある承認済みの既存各種申請IDのみ指定ができます\n- 既に経費申請に紐付いている各種申請との関連は解除されます\n- 経費申請に紐付く各種申請を解除する場合はnullを指定してください\n",
+            "description": "各種申請ID\n- 経費申請に関連付ける各種申請IDを指定します\n- 閲覧権限のある承認済みの既存各種申請IDのみ指定ができます\n- 既に経費申請に紐付いている各種申請との関連は解除されます\n- 経費申請に紐付く各種申請を解除する場合はnullを指定してください\n",
             "example": 1,
             "nullable": true
           }
