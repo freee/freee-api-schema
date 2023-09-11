@@ -984,6 +984,14 @@ components:
           maximum: 9223372036854775807
           minimum: 1
           type: integer
+        invoice_number:
+          description: |
+            請求書番号<br>
+            - 採番の設定が、[自動採番する]の場合、指定できません。
+            - 採番の設定が、[自動採番する]以外の場合、必須になります。
+          example: INV-0000000001
+          maxLength: 255
+          type: string
         branch_no:
           description: 枝番
           example: 1
@@ -1200,6 +1208,14 @@ components:
           maximum: 9223372036854775807
           minimum: 1
           type: integer
+        quotation_number:
+          description: |
+            見積書番号<br>
+            - 採番の設定が、[自動採番する]の場合、指定できません。
+            - 採番の設定が、[自動採番する]以外の場合、必須になります。
+          example: Q-0000000001
+          maxLength: 255
+          type: string
         branch_no:
           description: 枝番
           example: 1
