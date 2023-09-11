@@ -1063,10 +1063,14 @@ components:
           minimum: 1
           type: integer
         partner_title:
-          description: 敬称（御中、様、（空白）の3つから選択）
+          description: |
+            敬称（御中、様、(空白)の3つから選択）<br>
+            - [非推奨]全角カッコの（空白）は削除予定です。
+            - 全角カッコの（空白）を指定した場合、はレスポンスは、半角カッコの(空白)になります。
           enum:
           - 御中
           - 様
+          - "(空白)"
           - "（空白）"
           example: 御中
           type: string
@@ -1276,10 +1280,14 @@ components:
           minimum: 1
           type: integer
         partner_title:
-          description: 敬称（御中、様、（空白）の3つから選択）
+          description: |
+            敬称（御中、様、(空白)の3つから選択）<br>
+            - [非推奨]全角カッコの（空白）は削除予定です。
+            - 全角カッコの（空白）を指定した場合、はレスポンスは、半角カッコの(空白)になります。
           enum:
           - 御中
           - 様
+          - "(空白)"
           - "（空白）"
           example: 御中
           type: string
@@ -2107,11 +2115,11 @@ components:
           maxLength: 255
           type: string
         partner_title:
-          description: 敬称（御中、様、（空白）の3つから選択）
+          description: 敬称（御中、様、(空白)の3つから選択）
           enum:
           - 御中
           - 様
-          - "（空白）"
+          - "(空白)"
           example: 御中
           type: string
         partner_address_zipcode:
@@ -2523,11 +2531,11 @@ components:
           maxLength: 255
           type: string
         partner_title:
-          description: 敬称（御中、様、（空白）の3つから選択）
+          description: 敬称（御中、様、(空白)の3つから選択）
           enum:
           - 御中
           - 様
-          - "（空白）"
+          - "(空白)"
           example: 御中
           type: string
         partner_address_zipcode:
@@ -3139,11 +3147,11 @@ components:
           maxLength: 255
           type: string
         partner_title:
-          description: 敬称（御中、様、（空白）の3つから選択）
+          description: 敬称（御中、様、(空白)の3つから選択）
           enum:
           - 御中
           - 様
-          - "（空白）"
+          - "(空白)"
           example: 御中
           type: string
         partner_address_zipcode:
@@ -3519,11 +3527,11 @@ components:
           maxLength: 255
           type: string
         partner_title:
-          description: 敬称（御中、様、（空白）の3つから選択）
+          description: 敬称（御中、様、(空白)の3つから選択）
           enum:
           - 御中
           - 様
-          - "（空白）"
+          - "(空白)"
           example: 御中
           type: string
         partner_address_zipcode:
