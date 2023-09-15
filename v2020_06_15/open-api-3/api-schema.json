@@ -32227,12 +32227,6 @@
             "description": "MIMEタイプ",
             "example": "image/png"
           },
-          "issue_date": {
-            "type": "string",
-            "description": "発生日",
-            "example": "2019-12-17",
-            "nullable": true
-          },
           "origin": {
             "type": "string",
             "description": "アップロード元種別",
@@ -32254,12 +32248,6 @@
             "type": "string",
             "description": "アップロード日時（ISO8601形式）",
             "example": "2019-12-17T18:30:24+09:00"
-          },
-          "file_src": {
-            "type": "string",
-            "description": "ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。）\n<br>\n<br>\nfile_srcは廃止予定の属性になります。<br>\nfile_srcに替わり、証憑ファイルのダウンロード APIをご利用ください。<br>\n証憑ファイルのダウンロードAPIを利用することで、以下のようになります。\n<ul>\n  <li>アプリケーション利用者はfreee APIアプリケーションにログインしていれば、証憑ダウンロード毎にfreeeに改めてログインすることなくファイルが参照できるようになります。</li>\n</ul>",
-            "example": "https://www.freee.co.jp/api/p/receipts/revisions/1234xxxxx/download",
-            "deprecated": true
           },
           "user": {
             "type": "object",
