@@ -6502,8 +6502,8 @@
         "tags": [
           "Taxes"
         ],
-        "summary": "税区分一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>税区分一覧を取得する</p>",
+        "summary": "税区分一覧の取得（廃止予定）",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>税区分一覧を取得する</p>\n\n<h2 id=\"\">注意点</h2>\n\n<p>このAPIは廃止予定のため非推奨です。api/1/taxes/companies/{company_id}（指定した事業所の税区分一覧の取得）をご利用ください。</p>",
         "operationId": "get_tax_codes",
         "responses": {
           "200": {
