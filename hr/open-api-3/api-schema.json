@@ -5080,6 +5080,16 @@
               }
             }
           },
+          "404": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notfoundError"
+                }
+              }
+            }
+          },
           "500": {
             "description": "",
             "content": {
@@ -6517,6 +6527,16 @@
               }
             }
           },
+          "404": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notfoundError"
+                }
+              }
+            }
+          },
           "500": {
             "description": "",
             "content": {
@@ -7178,6 +7198,16 @@
               }
             }
           },
+          "404": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notfoundError"
+                }
+              }
+            }
+          },
           "500": {
             "description": "",
             "content": {
@@ -7835,6 +7865,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notfoundError"
                 }
               }
             }
