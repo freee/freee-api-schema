@@ -13225,7 +13225,7 @@
           },
           "hourly_paid_holiday_mins": {
             "type": "integer",
-            "description": "時間休を利用した時間（分単位）",
+            "description": "有給休暇の時間休を利用した時間（分単位）",
             "format": "int32"
           },
           "is_absence": {
@@ -14645,7 +14645,7 @@
           },
           "paid_holiday": {
             "type": "number",
-            "description": "この日の有休取得数。0.5日単位で指定します。",
+            "description": "この日の有休取得日数。0.5日単位で指定します。",
             "format": "float",
             "minimum": 0,
             "maximum": 1
