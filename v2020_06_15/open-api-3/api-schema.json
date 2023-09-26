@@ -18566,6 +18566,14 @@
             "description": "経費申請のステータス<br>\nfalseを指定した時は申請中（in_progress）で経費申請を更新します。<br>\ntrueを指定した時は下書き（draft）で経費申請を更新します。<br>\n未指定の時は下書きとみなして経費申請を更新します。\n",
             "example": true
           },
+          "parent_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "親申請ID(法人向け プロフェッショナルプラン, 法人向け エンタープライズプラン)<br>\n<ul>\n  <li>承認済みの既存各種申請IDのみ指定可能です。</li>\n  <li>各種申請一覧APIを利用して取得してください。</li>\n</ul>\n",
+            "example": 2,
+            "nullable": true
+          },
           "segment_1_tag_id": {
             "type": "integer",
             "format": "int64",
@@ -33139,6 +33147,14 @@
                 "description": "現在のround。差し戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。",
                 "example": 1
               },
+              "parent_id": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 2147483647,
+                "description": "親申請ID。各種申請が使用可能なプランの時のみレスポンスに含まれます。",
+                "example": 2,
+                "nullable": true
+              },
               "segment_1_tag_id": {
                 "type": "integer",
                 "format": "int64",
@@ -35458,7 +35474,8 @@
           "approval_request_id",
           "sweeep_document_id",
           "sweeep_document_code",
-          "sweeep_document_path"
+          "sweeep_document_path",
+          "company_id"
         ],
         "properties": {
           "approval_request_id": {
@@ -35482,6 +35499,13 @@
             "type": "string",
             "description": "リンク用パス",
             "example": "/requests/246/d03be356-edac-4f43-8af3-50dbafb6ef6d"
+          },
+          "company_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "事業所ID",
+            "example": 1
           }
         }
       },
