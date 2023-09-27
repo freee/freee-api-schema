@@ -30690,6 +30690,43 @@
           }
         }
       },
+      "conflictError": {
+        "type": "object",
+        "properties": {
+          "status_code": {
+            "type": "integer",
+            "example": 409
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "required": [
+                "messages",
+                "type"
+              ],
+              "type": "object",
+              "properties": {
+                "messages": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "リクエストが競合しました。"
+                  }
+                },
+                "type": {
+                  "type": "string",
+                  "example": "validation",
+                  "enum": [
+                    "status",
+                    "validation",
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
       "tooManyRequestsError": {
         "type": "object",
         "required": [
