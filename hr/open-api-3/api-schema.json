@@ -3946,6 +3946,16 @@
             "example": true
           },
           {
+            "name": "employee_ids",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "maxLength": 8192,
+              "example": 12345
+            },
+            "description": "取得対象とする従業員IDを指定することができます。指定しない場合は全従業員が対象となります。"
+          },
+          {
             "name": "limit",
             "in": "query",
             "description": "取得レコードの件数 (デフォルト: 50, 最小: 1, 最大: 100)",
