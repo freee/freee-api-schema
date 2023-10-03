@@ -3950,10 +3950,9 @@
             "in": "query",
             "schema": {
               "type": "string",
-              "maxLength": 8192,
-              "example": 12345
+              "maxLength": 8192
             },
-            "description": "取得対象とする従業員IDを指定することができます。指定しない場合は全従業員が対象となります。"
+            "description": "取得対象とする従業員IDを指定することができます。指定しない場合は全従業員が対象となります。\n(例:1,2,3,4,5)\n"
           },
           {
             "name": "limit",
@@ -11999,6 +11998,24 @@
             "type": "boolean",
             "description": "給与計算対象従業員の場合trueを返します",
             "example": true
+          },
+          "closing_day": {
+            "type": "integer",
+            "description": "締め日(給与計算対象外従業員の場合、nullを返します)",
+            "example": 31,
+            "nullable": true
+          },
+          "pay_day": {
+            "type": "integer",
+            "description": "支払日(給与計算対象外従業員の場合、nullを返します)",
+            "example": 15,
+            "nullable": true
+          },
+          "month_of_pay_day": {
+            "type": "string",
+            "description": "翌月払いか、当月払いか(給与計算対象外従業員の場合、nullを返します)",
+            "example": "next_month",
+            "nullable": true
           }
         }
       },
@@ -14813,7 +14830,7 @@
           },
           "total_deemed_paid_overtime_except_normal_work_mins": {
             "type": "integer",
-            "description": "支給対象の法定内残業時間（分）（裁量労働制でのみ使用）",
+            "description": "支給対象の時間外労働時間（分）（裁量労働制でのみ使用）",
             "minimum": 0,
             "maximum": 2147483647
           }
