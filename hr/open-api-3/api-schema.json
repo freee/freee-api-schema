@@ -12185,6 +12185,37 @@
             "nullable": true,
             "maxLength": 255,
             "example": "test@example.com"
+          },
+          "householder_name": {
+            "type": "string",
+            "description": "世帯主の名前<br>世帯主の続柄に myself:本人 を指定している場合は、世帯主の名前は自動で従業員名で更新するため指定できません。",
+            "maxLength": 255,
+            "example": "山田 吾郎"
+          },
+          "householder": {
+            "type": "string",
+            "description": "世帯主の続柄 myself:本人, husband:夫, wife:妻, father:父, mother:母, child:子供, senior_brother:兄, junior_brother:弟, senior_sister:姉, junior_sister:妹, grandchild:孫, grandfather:祖父, grandmother:祖母, father_in_law:義父, mother_in_law:義母, grandfather_in_law:義祖父, grandmother_in_law:義祖母, other:その他",
+            "enum": [
+              "myself",
+              "husband",
+              "wife",
+              "father",
+              "mother",
+              "child",
+              "senior_brother",
+              "junior_brother",
+              "senior_sister",
+              "junior_sister",
+              "grandchild",
+              "grandfather",
+              "grandmother",
+              "father_in_law",
+              "mother_in_law",
+              "grandfather_in_law",
+              "grandmother_in_law",
+              "other"
+            ],
+            "example": "father"
           }
         }
       },
@@ -12650,6 +12681,37 @@
             "nullable": true,
             "maxLength": 255,
             "example": "test@example.com"
+          },
+          "householder_name": {
+            "type": "string",
+            "description": "世帯主の名前 世帯主の続柄がmyselfの場合は空白",
+            "maxLength": 255,
+            "example": "山田 吾郎"
+          },
+          "householder": {
+            "type": "string",
+            "description": "世帯主の続柄 myself:本人, husband:夫, wife:妻, father:父, mother:母, child:子供, senior_brother:兄, junior_brother:弟, senior_sister:姉, junior_sister:妹, grandchild:孫, grandfather:祖父, grandmother:祖母, father_in_law:義父, mother_in_law:義母, grandfather_in_law:義祖父, grandmother_in_law:義祖母, other:その他",
+            "enum": [
+              "myself",
+              "husband",
+              "wife",
+              "father",
+              "mother",
+              "child",
+              "senior_brother",
+              "junior_brother",
+              "senior_sister",
+              "junior_sister",
+              "grandchild",
+              "grandfather",
+              "grandmother",
+              "father_in_law",
+              "mother_in_law",
+              "grandfather_in_law",
+              "grandmother_in_law",
+              "other"
+            ],
+            "example": "father"
           }
         },
         "nullable": true
