@@ -30513,6 +30513,18 @@
                       "description": "ショートカット２ (20文字以内)",
                       "example": "123",
                       "nullable": true
+                    },
+                    "indent_count": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "description": "<a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/209093566\">部門階層</a>\n<br>\n※ indent_count が 0 のときは第一階層の親部門です。\n",
+                      "example": 0
+                    },
+                    "parent_id": {
+                      "type": "integer",
+                      "description": "<a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/209093566\">親部門ID</a>\n<br>\n※ parent_id が null のときは第一階層の親部門です。\n",
+                      "example": 1,
+                      "nullable": true
                     }
                   }
                 }
