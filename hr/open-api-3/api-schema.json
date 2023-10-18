@@ -17285,6 +17285,17 @@
             ],
             "description": "非居住者である親族の条件 none: なし, over_16_to_under_30_or_over_70: 16歳以上30歳未満又は70歳以上, study_abroad: 留学, handicapped: 障害者, over_38_man: 38万円以上の支払 続柄が「配偶者」または「同居・別居」が「同居」、「別居(国内)」の場合は登録不可",
             "format": "string"
+          },
+          "is_resident_tax_only_deduction": {
+            "type": "boolean",
+            "description": "住民税のみの控除対象かどうか"
+          },
+          "retirement_income": {
+            "type": "integer",
+            "description": "退職所得",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
           }
         }
       },
@@ -17464,6 +17475,17 @@
             ],
             "description": "非居住者である親族の条件 none: なし, over_16_to_under_30_or_over_70: 16歳以上30歳未満又は70歳以上, study_abroad: 留学, handicapped: 障害者, over_38_man: 38万円以上の支払 続柄が「配偶者」または「同居・別居」が「同居」、「別居(国内)」の場合は登録不可",
             "format": "string"
+          },
+          "is_resident_tax_only_deduction": {
+            "type": "boolean",
+            "description": "住民税のみの控除対象かどうか"
+          },
+          "retirement_income": {
+            "type": "integer",
+            "description": "退職所得",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999999999
           }
         }
       },
@@ -18174,12 +18196,13 @@
           },
           "specific_case_type": {
             "type": "string",
-            "description": "特定取得/特別特定取得 not_qualified: 該当しない, specified: 特定取得, special_specified_or_special_exception: 特別特定取得または特別特例取得, exception_special_exception: 特例特別特例取得",
+            "description": "特定取得/特別特定取得 not_qualified: 該当しない, specified: 特定取得, special_specified_or_special_exception: 特別特定取得または特別特例取得, exception_special_exception: 特例特別特例取得 special_residential_house 特家",
             "enum": [
               "not_qualified",
               "specified",
               "special_specified_or_special_exception",
-              "exception_special_exception"
+              "exception_special_exception",
+              "special_residential_house"
             ]
           }
         }
@@ -18240,12 +18263,13 @@
           },
           "specific_case_type": {
             "type": "string",
-            "description": "特定取得/特別特定取得 not_qualified: 該当しない, specified: 特定取得, special_specified_or_special_exception: 特別特定取得または特別特例取得, exception_special_exception: 特例特別特例取得",
+            "description": "特定取得/特別特定取得 not_qualified: 該当しない, specified: 特定取得, special_specified_or_special_exception: 特別特定取得または特別特例取得, exception_special_exception: 特例特別特例取得 special_residential_house 特家",
             "enum": [
               "not_qualified",
               "specified",
               "special_specified_or_special_exception",
-              "exception_special_exception"
+              "exception_special_exception",
+              "special_residential_house"
             ]
           }
         }
