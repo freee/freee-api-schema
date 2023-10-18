@@ -18655,7 +18655,7 @@
           }
         }
       },
-      "expenseApplicationParentApprovalRequestUpdateParams": {
+      "expenseApplicationParentApprovableRequestUpdateParams": {
         "type": "object",
         "required": [
           "company_id",
