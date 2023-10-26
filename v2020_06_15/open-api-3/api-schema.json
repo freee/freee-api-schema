@@ -34072,6 +34072,15 @@
                     "unspecified"
                   ],
                   "example": "qualified"
+                },
+                "input_mode": {
+                  "type": "string",
+                  "description": "内税/外税（inclusive: 内税、exclusive: 外税）\n外税の支払依頼は他のエンドポイントで利用できないため、Web 画面からご確認ください。",
+                  "enum": [
+                    "inclusive",
+                    "exclusive"
+                  ],
+                  "example": "inclusive"
                 }
               }
             }
