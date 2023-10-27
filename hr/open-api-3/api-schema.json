@@ -337,6 +337,16 @@
               "maximum": 2147483647,
               "example": 0
             }
+          },
+          {
+            "name": "with_no_payroll_calculation",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "trueを指定すると給与計算対象外の従業員情報をレスポンスに含めます。",
+            "example": true
           }
         ],
         "responses": {
@@ -12691,6 +12701,7 @@
           "householder": {
             "type": "string",
             "description": "世帯主の続柄 myself:本人, husband:夫, wife:妻, father:父, mother:母, child:子供, senior_brother:兄, junior_brother:弟, senior_sister:姉, junior_sister:妹, grandchild:孫, grandfather:祖父, grandmother:祖母, father_in_law:義父, mother_in_law:義母, grandfather_in_law:義祖父, grandmother_in_law:義祖母, other:その他",
+            "nullable": true,
             "enum": [
               "myself",
               "husband",
