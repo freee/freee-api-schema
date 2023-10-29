@@ -20350,6 +20350,14 @@
                 "example": "売掛金",
                 "nullable": true
               },
+              "group_id": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 2147483647,
+                "description": "決算書表示項目ID（小カテゴリー）",
+                "example": 1234,
+                "nullable": true
+              },
               "corresponding_income_name": {
                 "type": "string",
                 "description": "収入取引相手勘定科目名",
