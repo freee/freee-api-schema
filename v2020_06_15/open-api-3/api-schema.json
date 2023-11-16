@@ -35476,6 +35476,78 @@
           }
         }
       },
+      "purchaseRequestFormIndexResponse": {
+        "type": "object",
+        "required": [
+          "purchase_request_forms"
+        ],
+        "properties": {
+          "purchase_request_forms": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "company_id",
+                "name",
+                "description",
+                "status",
+                "created_date",
+                "form_order",
+                "route_setting_count"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "申請フォームID",
+                  "example": 1
+                },
+                "company_id": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "description": "事業所ID",
+                  "example": 1
+                },
+                "name": {
+                  "type": "string",
+                  "description": "申請フォームの名前",
+                  "example": "申請フォームの名前"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "申請フォームの説明",
+                  "example": "申請フォームの説明"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "ステータス(draft: 申請で使用しない、active: 申請で使用する)",
+                  "example": "active",
+                  "enum": [
+                    "draft",
+                    "active"
+                  ]
+                },
+                "created_date": {
+                  "type": "string",
+                  "description": "作成日時",
+                  "example": "2019-12-17T13:47:24+09:00"
+                },
+                "form_order": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1000,
+                  "description": "表示順（申請者が選択する申請フォームの表示順を設定できます。小さい数ほど上位に表示されます。（0を除く整数のみ。マイナス不可）未入力の場合、表示順が後ろになります。同じ数字が入力された場合、登録順で表示されます。）",
+                  "example": 1,
+                  "nullable": true
+                }
+              }
+            }
+          }
+        }
+      },
       "approvalFlowRoutesIndexResponse": {
         "type": "object",
         "required": [
