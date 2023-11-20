@@ -1057,6 +1057,23 @@ components:
           - out
           example: out
           type: string
+        include_amount_brought_forward:
+          default: false
+          description: |
+            繰越金額を含めるかどうか（true: 含める、false: 含めない）<br>
+            - 含める場合は、amount_brought_forwardに繰越金額を指定することができます。
+            - 含める場合でamount_brought_forwardの指定がない場合は、 帳票に指定されたpartner_idに紐づく未決済残高が繰越金額として利用されます。
+          example: false
+          type: boolean
+        amount_brought_forward:
+          description: |
+            繰越金額<br>
+            include_amount_brought_forward に true を指定する場合のみ、指定できます。
+          example: 10000
+          format: int64
+          maximum: 999999999999
+          minimum: -999999999999
+          type: integer
         invoice_note:
           description: 備考
           example: 備考
@@ -1550,6 +1567,14 @@ components:
           description: 消費税額
           example: 1000
           type: number
+        amount_brought_forward:
+          description: 繰越金額
+          example: 10000
+          format: double
+          maximum: 999999999999
+          minimum: -999999999999
+          nullable: true
+          type: number
         partner_id:
           description: 取引先ID
           example: 1
@@ -1579,6 +1604,7 @@ components:
           maxLength: 255
           type: string
       required:
+      - amount_brought_forward
       - amount_excluding_tax
       - amount_including_tax
       - amount_tax
@@ -2178,6 +2204,14 @@ components:
           format: double
           nullable: true
           type: number
+        amount_brought_forward:
+          description: 繰越金額
+          example: 10000
+          format: double
+          maximum: 999999999999
+          minimum: -999999999999
+          nullable: true
+          type: number
         partner_id:
           description: 取引先ID
           example: 1
@@ -2258,6 +2292,7 @@ components:
             "$ref": "#/components/schemas/InvoiceResponse_invoice_lines"
           type: array
       required:
+      - amount_brought_forward
       - amount_excluding_tax
       - amount_including_tax
       - amount_tax
@@ -2601,6 +2636,14 @@ components:
           format: double
           nullable: true
           type: number
+        amount_brought_forward:
+          description: 繰越金額
+          example: 10000
+          format: double
+          maximum: 999999999999
+          minimum: -999999999999
+          nullable: true
+          type: number
         partner_id:
           description: 取引先ID
           example: 1
@@ -2681,6 +2724,7 @@ components:
             "$ref": "#/components/schemas/InvoiceShowResponse_invoice_lines"
           type: array
       required:
+      - amount_brought_forward
       - amount_excluding_tax
       - amount_including_tax
       - amount_tax
