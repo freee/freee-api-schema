@@ -2162,7 +2162,7 @@
           "勤怠"
         ],
         "summary": "勤怠の取得",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員・日付の勤怠情報を返します。</p>",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員・日付の勤怠情報を返します。</p>\n<a href=\"https://developer.freee.co.jp/news/6774\" target=\"_blank\">API仕様の変更について</a>",
         "operationId": "get_employee_work_record",
         "parameters": [
           {
@@ -2262,7 +2262,7 @@
           "勤怠"
         ],
         "summary": "勤怠の更新",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員の勤怠情報を更新します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>振替出勤・振替休日・代休出勤・代休・特別休暇の登録はAPIでは行うことができません。</li>\n</ul>\n\n<h2 id=\"_2\">examples</h2>\n<ul>\n  <li>出勤日について出退勤時刻および休憩時間を更新する場合は以下のようなパラメータをリクエストします。\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2017-05-25 12:00:00\",\n            \"clock_out_at\": \"2017-05-25 13:00:00\"\n          }\n        ],\n        \"clock_in_at\": \"2017-05-25 09:10:00\",\n        \"clock_out_at\": \"2017-05-25 18:20:00\"\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>勤務パターンや既定の所定労働時間を変更する場合は use_default_work_pattern に false を指定するとともに、各設定を上書きするパラメータをリクエストします。\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2017-05-25 12:00:00\",\n            \"clock_out_at\": \"2017-05-25 13:00:00\"\n          }\n        ],\n        \"clock_in_at\": \"2017-05-25 09:10:00\",\n        \"clock_out_at\": \"2017-05-25 18:20:00\",\n        \"day_pattern\": \"normal_day\",\n        \"normal_work_clock_in_at\": \"2017-05-25 11:00:00\",\n        \"normal_work_clock_out_at\": \"2017-12-20 20:00:00\",\n        \"normal_work_mins\": 0,\n        \"use_default_work_pattern\": false\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>有給取得時の連携について半休の場合は通常勤務のように勤務開始・終了時間を指定しつつ、加えて以下の２つの要素を指定することで API での勤怠をつけることができます。\n    <ul>\n      <li>paid_holiday (半休の場合は 0.5 とします)</li>\n      <li>normal_work_mins_by_paid_holiday (半休により計上される所定労働時間を分で指定します)</li>\n    </ul>\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2017-05-25 12:00:00\",\n            \"clock_out_at\": \"2017-05-25 13:00:00\"\n          }\n        ],\n        \"clock_in_at\": \"2017-05-25 09:10:00\",\n        \"clock_out_at\": \"2017-05-25 18:20:00\",\n        \"paid_holiday\": 0.5,\n        \"normal_work_mins_by_paid_holiday\": 240\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>欠勤を付ける場合は company_idとis_absence 以外のパラメータは必要ありません。\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"is_absence\": true\n      }\n      </code>\n    </pre>\n  </li>\n\n</ul>",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員の勤怠情報を更新します。</p>\n<a href=\"https://developer.freee.co.jp/news/6774\" target=\"_blank\">API仕様の変更について</a>\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>振替出勤・振替休日・代休出勤・代休の登録はAPIでは行うことができません。</li>\n</ul>\n\n<h2 id=\"_2\">examples</h2>\n<ul>\n  <li>出勤日について出退勤時刻および休憩時間を更新する場合は以下のようなパラメータをリクエストします。\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2017-05-25 12:00:00\",\n            \"clock_out_at\": \"2017-05-25 13:00:00\"\n          }\n        ],\n        \"clock_in_at\": \"2017-05-25 09:10:00\",\n        \"clock_out_at\": \"2017-05-25 18:20:00\"\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>勤務パターンや既定の所定労働時間を変更する場合は use_default_work_pattern に false を指定するとともに、各設定を上書きするパラメータをリクエストします。\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2017-05-25 12:00:00\",\n            \"clock_out_at\": \"2017-05-25 13:00:00\"\n          }\n        ],\n        \"clock_in_at\": \"2017-05-25 09:10:00\",\n        \"clock_out_at\": \"2017-05-25 18:20:00\",\n        \"day_pattern\": \"normal_day\",\n        \"normal_work_clock_in_at\": \"2017-05-25 11:00:00\",\n        \"normal_work_clock_out_at\": \"2017-12-20 20:00:00\",\n        \"normal_work_mins\": 0,\n        \"use_default_work_pattern\": false\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>有給取得時の連携について半休の場合は通常勤務のように勤務開始・終了時間を指定しつつ、加えて以下の要素を指定することで API での勤怠をつけることができます。\n    <ul>\n      <li>half_paid_holiday_mins (半休により計上される所定労働時間を分で指定します)</li>\n    </ul>\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2023-12-22 12:00:00\",\n            \"clock_out_at\": \"2023-12-22 13:00:00\"\n          }\n        ],\n        \"clock_in_at\": \"2023-12-22 09:10:00\",\n        \"clock_out_at\": \"2023-12-22 14:20:00\",\n        \"half_paid_holiday_mins\": 240\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>特別休暇取得時の連携について全休の場合は以下の要素を指定することで API での勤怠をつけることができます。\n    <ul>\n      <li>special_holiday (全休の場合1.0を指定します)</li>\n      <li>special_holiday_setting_id (特別休暇設定IDを指定します)</li>\n    </ul>\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"special_holiday\": 1.0\n        \"special_holiday_setting_id\": 1\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>特別休暇取得時の連携について時間休の場合は通常勤務のように勤務開始・終了時間を指定しつつ、加えて以下の要素を指定することで API での勤怠をつけることができます。\n    <ul>\n      <li>special_holiday_setting_id (特別休暇設定IDを指定します)</li>\n      <li>hourly_special_holiday_mins (時間休により計上される所定労働時間を分で指定します)</li>\n    </ul>\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2023-12-22 12:00:00\",\n            \"clock_out_at\": \"2023-12-22 13:00:00\"\n          }\n        ],\n        \"clock_in_at\": \"2023-12-22 09:00:00\",\n        \"clock_out_at\": \"2023-12-22 16:00:00\",\n        \"special_holiday_setting_id\": 1,\n        \"hourly_special_holiday_mins\": 120\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>欠勤を付ける場合は company_idとis_absence 以外のパラメータは必要ありません。\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"is_absence\": true\n      }\n      </code>\n    </pre>\n  </li>\n\n</ul>",
         "operationId": "update_employee_work_record",
         "parameters": [
           {
@@ -2469,7 +2469,7 @@
           "勤怠情報サマリ"
         ],
         "summary": "勤怠情報月次サマリの取得",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員、月の勤怠情報のサマリを返します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>work_recordsオプションにtrueを指定することで、明細となる日次の勤怠情報もあわせて返却します。</li>\n</ul>",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員、月の勤怠情報のサマリを返します。</p>\n<a href=\"https://developer.freee.co.jp/news/6774\" target=\"_blank\">API仕様の変更について</a>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>work_recordsオプションにtrueを指定することで、明細となる日次の勤怠情報もあわせて返却します。</li>\n</ul>",
         "operationId": "get_employee_work_record_summary",
         "parameters": [
           {
@@ -13323,9 +13323,24 @@
             "description": "早退分の時間（分単位）",
             "format": "int32"
           },
+          "half_paid_holiday_mins": {
+            "type": "integer",
+            "description": "有給休暇の半休を利用した時間（分単位）",
+            "format": "int32"
+          },
+          "half_special_holiday_mins": {
+            "type": "integer",
+            "description": "特別休暇の半休を利用した時間（分単位）",
+            "format": "int32"
+          },
           "hourly_paid_holiday_mins": {
             "type": "integer",
             "description": "有給休暇の時間休を利用した時間（分単位）",
+            "format": "int32"
+          },
+          "hourly_special_holiday_mins": {
+            "type": "integer",
+            "description": "特別休暇の時間休を利用した時間（分単位）",
             "format": "int32"
           },
           "is_absence": {
@@ -13361,8 +13376,9 @@
           },
           "normal_work_mins_by_paid_holiday": {
             "type": "integer",
-            "description": "有給によって計上される所定労働時間（分）",
-            "format": "int32"
+            "description": "有給によって計上される所定労働時間（分）<br> （API仕様の変更により廃止する予定です。有給休暇によって計上される所定労働時間はhalf_paid_holiday_mins、もしくはhourly_paid_holiday_minsを参照してください。）",
+            "format": "int32",
+            "deprecated": true
           },
           "note": {
             "type": "string",
@@ -13373,6 +13389,17 @@
             "type": "number",
             "description": "この日に対する有給取得日数。半休の場合は0.5が入ります。時間休の場合はhourly_paid_holiday_minsを所定労働時間で割った値が入るため、実際の時間を確認するにはhourly_paid_holiday_minsを参照してください。",
             "format": "float"
+          },
+          "special_holiday": {
+            "type": "number",
+            "description": "この日に対する特別休暇取得日数。半休の場合は0.5が入ります。時間休の場合はhourly_special_holiday_minsを所定労働時間で割った値が入るため、実際の時間を確認するにはhourly_special_holiday_minsを参照してください。",
+            "format": "float"
+          },
+          "special_holiday_setting_id": {
+            "type": "integer",
+            "description": "特別休暇設定ID",
+            "format": "int32",
+            "nullable": true
           },
           "use_attendance_deduction": {
             "type": "boolean",
@@ -14733,10 +14760,11 @@
           },
           "normal_work_mins_by_paid_holiday": {
             "type": "integer",
-            "description": "有給によって計上される所定労働時間（分）",
+            "description": "有給によって計上される所定労働時間（分）<br> （API仕様の変更により廃止する予定です。有給休暇（半休）に更新する場合はhalf_paid_holiday_minsを使用してください。）",
             "format": "int32",
             "minimum": 0,
-            "maximum": 1440
+            "maximum": 1440,
+            "deprecated": true
           },
           "note": {
             "type": "string",
@@ -14745,10 +14773,54 @@
           },
           "paid_holiday": {
             "type": "number",
-            "description": "この日の有休取得日数。0.5日単位で指定します。",
+            "description": "この日の有休取得日数。1日単位で指定します。",
             "format": "float",
             "minimum": 0,
             "maximum": 1
+          },
+          "half_paid_holiday_mins": {
+            "type": "integer",
+            "description": "有給休暇の半休を利用した時間（分単位）",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1440
+          },
+          "hourly_paid_holiday_mins": {
+            "type": "integer",
+            "description": "有給休暇の時間休を利用した時間（分単位）",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1440
+          },
+          "special_holiday": {
+            "type": "number",
+            "description": "この日の特別休暇取得日数。1日単位で指定します。",
+            "enum": [
+              0,
+              1
+            ]
+          },
+          "special_holiday_setting_id": {
+            "type": "integer",
+            "description": "特別休暇設定ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true
+          },
+          "half_special_holiday_mins": {
+            "type": "integer",
+            "description": "特別休暇の半休を利用した時間（分単位）",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1440
+          },
+          "hourly_special_holiday_mins": {
+            "type": "integer",
+            "description": "特別休暇の時間休を利用した時間（分単位）",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1440
           },
           "use_attendance_deduction": {
             "type": "boolean",
