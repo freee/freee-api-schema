@@ -14402,6 +14402,107 @@
         }
       }
     },
+    "/api/1/expense_applications/{id}/parent_approvable_requests": {
+      "put": {
+        "tags": [
+          "Expense applications"
+        ],
+        "summary": "経費申請に関連付ける各種申請の更新",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費申請に関連付ける各種申請の更新を行う</p>\n\n<p>経費精算APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計経費精算APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、経費申請に関連付ける各種申請を更新することができます。</li>\n  <li>本APIでは、status(申請ステータス): in_progress:申請中, approved:承認済みのみ更新可能です。</li>\n  <li>parent_idにnullを指定すると、現在設定されている各種申請との関連付けを解除できます。</li>\n  <li>\n    申請ステータスが申請中の経費申請に対して関連付ける各種申請を更新するためには、以下の全てに当てはまる必要があります。\n    <ul>\n      <li>現在の承認ステップで承認者として指定されている、または代理承認ができる</li>\n      <li>申請フォームの設定で、承認者による経費申請に関連付ける各種申請の更新が許可されている</li>\n    </ul>\n  </li>\n  <li>\n    申請ステータスが承認済みの経費申請に対して関連付ける各種申請を更新するためには、以下の全てに当てはまる必要があります。\n    <ul>\n      <li>経費精算に対する閲覧および編集の権限を持ち、自分の経費申請のみに限定する制限がかかっていない</li>\n      <li>申請フォームの設定で、管理者による経費申請に関連付ける各種申請の更新が許可されている</li>\n    </ul>\n  </li>\n  <li>\n    申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している経費申請は本API経由で更新ができません。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n  </li>\n  <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は関連付ける各種申請を更新できません。</li>\n  <li>申請フォームの設定はWeb画面よりご利用ください。</li>\n  <li>個人アカウントの場合は、ご利用になれません。</li>\n  <li>法人アカウントの場合は、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li>\n</ul>",
+        "operationId": "update_expense_application_parent_approvable_requests",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "経費申請ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "経費申請に関連付ける各種申請の更新",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/expenseApplicationParentApprovableRequestUpdateParams"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/expenseApplicationParentApprovableRequestUpdateParams"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/expenseApplicationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/1/expense_application_line_templates": {
       "get": {
         "tags": [
@@ -35576,12 +35677,12 @@
           "sweeep_document_id": {
             "type": "string",
             "description": "sweeepの請求書ID",
-            "example": 1
+            "example": "1"
           },
           "sweeep_document_code": {
             "type": "string",
             "description": "表示用の書類コード",
-            "example": 1
+            "example": "1"
           },
           "sweeep_document_path": {
             "type": "string",
