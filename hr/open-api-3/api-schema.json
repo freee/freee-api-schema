@@ -11382,8 +11382,6 @@
           "application_number",
           "applicant_id",
           "target_date",
-          "start_at",
-          "end_at",
           "issue_date",
           "status",
           "revoke_status",
@@ -11443,13 +11441,13 @@
           },
           "start_at": {
             "type": "string",
-            "description": "取得予定開始時間",
+            "description": "取得予定開始時間（必須）",
             "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
             "example": "12:00"
           },
           "end_at": {
             "type": "string",
-            "description": "取得予定終了時間",
+            "description": "取得予定終了時間（必須）",
             "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
             "example": "23:59"
           },
@@ -11502,8 +11500,6 @@
           "application_number",
           "applicant_id",
           "target_date",
-          "start_at",
-          "end_at",
           "issue_date",
           "status",
           "revoke_status",
@@ -11567,13 +11563,13 @@
           },
           "start_at": {
             "type": "string",
-            "description": "取得予定開始時間",
+            "description": "取得予定開始時間（必須）",
             "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
             "example": "12:00"
           },
           "end_at": {
             "type": "string",
-            "description": "取得予定終了時間",
+            "description": "取得予定終了時間（必須）",
             "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
             "example": "23:59"
           },
@@ -16206,8 +16202,6 @@
         "required": [
           "company_id",
           "target_date",
-          "start_at",
-          "end_at",
           "approval_flow_route_id"
         ],
         "properties": {
