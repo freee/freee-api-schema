@@ -1050,6 +1050,15 @@ components:
           - round
           example: omit
           type: string
+        line_amount_fraction:
+          description: '金額端数の計算方法（omit: 切り捨て、round_up: 切り上げ、round: 四捨五入）'
+          enum:
+          - omit
+          - round_up
+          - round
+          example: round_up
+          nullable: true
+          type: string
         withholding_tax_entry_method:
           description: '源泉徴収の計算方法（in: 税込み価格で計算、out: 税別価格で計算）'
           enum:
@@ -1062,7 +1071,7 @@ components:
           description: |
             繰越金額を含めるかどうか（true: 含める、false: 含めない）<br>
             - 含める場合は、amount_brought_forwardに繰越金額を指定することができます。
-            - 含める場合でamount_brought_forwardの指定がない場合は、 帳票に指定されたpartner_idに紐づく未決済残高が繰越金額として利用されます。
+            - 含める場合でamount_brought_forwardの指定がない場合は、 帳票に指定されたpartner_id, partner_codeに紐づく未決済残高が繰越金額として利用されます。
           example: false
           type: boolean
         amount_brought_forward:
@@ -1089,12 +1098,20 @@ components:
         partner_id:
           description: |
             取引先ID<br>
+            取引先IDと取引先コードはどちらか一方を必ず指定してください。<br>
             <a href='https://support.freee.co.jp/hc/ja/articles/12515437008409-取引先を登録する#:~:text=確認ください。-,取引先役割,-種別' target='_blank'>取引先役割に関してはヘルプページを御覧ください。</a>
           example: 1
           format: int64
           maximum: 9223372036854775807
           minimum: 1
           type: integer
+        partner_code:
+          description: |
+            取引先コード<br>
+            取引先コードと取引先IDはどちらか一方を必ず指定してください。<br>
+            <a href='https://support.freee.co.jp/hc/ja/articles/12515437008409-取引先を登録する#:~:text=確認ください。-,取引先役割,-種別' target='_blank'>取引先役割に関してはヘルプページを御覧ください。</a>
+          example: code001
+          type: string
         partner_title:
           description: |
             敬称（御中、様、(空白)の3つから選択）
@@ -1110,7 +1127,7 @@ components:
         partner_address_zipcode:
           description: |
             郵便番号
-            - 入力がない場合、帳票に指定されたpartner_idに紐づく郵便番号が利用されます。
+            - 入力がない場合、帳票に指定されたpartner_id, partner_codeに紐づく郵便番号が利用されます。
           example: '1410032'
           maxLength: 10
           minLength: 1
@@ -1119,7 +1136,7 @@ components:
         partner_address_prefecture_code:
           description: |
             都道府県コード（-1: 設定しない、0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄）
-            - 入力がない場合、帳票に指定されたpartner_idに紐づく都道府県コードが利用されます。
+            - 入力がない場合、帳票に指定されたpartner_id, partner_codeに紐づく都道府県コードが利用されます。
           example: 4
           maximum: 46
           minimum: -1
@@ -1127,7 +1144,7 @@ components:
         partner_address_street_name1:
           description: |
             取引先 市区町村・番地
-            - 入力がない場合、帳票に指定されたpartner_idに紐づく取引先 市区町村・番地が利用されます。
+            - 入力がない場合、帳票に指定されたpartner_id, partner_codeに紐づく取引先 市区町村・番地が利用されます。
           example: 東京都ＸＸ区ＹＹ１−１−１
           maxLength: 255
           minLength: 1
@@ -1135,7 +1152,7 @@ components:
         partner_address_street_name2:
           description: |
             取引先 建物名・部屋番号など
-            - 入力がない場合、帳票に指定されたpartner_idに紐づく取引先 建物名・部屋番号などが利用されます。
+            - 入力がない場合、帳票に指定されたpartner_id, partner_codeに紐づく取引先 建物名・部屋番号などが利用されます。
           example: ビル 1F
           maxLength: 255
           minLength: 1
@@ -1143,7 +1160,7 @@ components:
         partner_contact_department:
           description: |
             取引先部署
-            - 入力がない場合、帳票に指定されたpartner_idに紐づく取引先部署が利用されます。
+            - 入力がない場合、帳票に指定されたpartner_id, partner_codeに紐づく取引先部署が利用されます。
           example: 営業部
           maxLength: 255
           minLength: 1
@@ -1151,7 +1168,7 @@ components:
         partner_contact_name:
           description: |
             取引先担当者名
-            - 入力がない場合、帳票に指定されたpartner_idに紐づく取引先担当者名が利用されます。
+            - 入力がない場合、帳票に指定されたpartner_id, partner_codeに紐づく取引先担当者名が利用されます。
           example: 法人営業担当
           maxLength: 255
           minLength: 1
@@ -1160,7 +1177,7 @@ components:
           description: |
             取引先宛名
             - 帳票の宛名に利用されます。
-            - 入力がない場合、帳票に指定されたpartner_idに紐づく取引先名称が利用されます。
+            - 入力がない場合、帳票に指定されたpartner_id, partner_codeに紐づく取引先名称が利用されます。
           example: freeeパートナー
           maxLength: 255
           type: string
@@ -1168,7 +1185,7 @@ components:
           description: |
             取引先口座
             - payment_typeがdirect_debitの場合に指定可能です。
-            - 入力がない場合またはpayment_typeがtransferの場合、帳票に指定されたpartner_idに紐づく取引先口座が利用されます。
+            - 入力がない場合またはpayment_typeがtransferの場合、帳票に指定されたpartner_id, partner_codeに紐づく取引先口座が利用されます。
           example: freee銀行 freee支店 普通 1234567 freee
           maxLength: 255
           type: string
@@ -1186,7 +1203,6 @@ components:
       - billing_date
       - company_id
       - lines
-      - partner_id
       - partner_title
       - tax_entry_method
       - tax_fraction
@@ -1309,6 +1325,15 @@ components:
           - round
           example: omit
           type: string
+        line_amount_fraction:
+          description: '金額端数の計算方法（omit: 切り捨て、round_up: 切り上げ、round: 四捨五入）'
+          enum:
+          - omit
+          - round_up
+          - round
+          example: round_up
+          nullable: true
+          type: string
         withholding_tax_entry_method:
           description: '源泉徴収の計算方法（in: 税込み価格で計算、out: 税別価格で計算）'
           enum:
@@ -1331,12 +1356,20 @@ components:
         partner_id:
           description: |
             取引先ID<br>
+            取引先IDと取引先コードはどちらか一方を必ず指定してください。<br>
             <a href='https://support.freee.co.jp/hc/ja/articles/12515437008409-取引先を登録する#:~:text=確認ください。-,取引先役割,-種別' target='_blank'>取引先役割に関してはヘルプページを御覧ください。</a>
           example: 1
           format: int64
           maximum: 9223372036854775807
           minimum: 1
           type: integer
+        partner_code:
+          description: |
+            取引先コード<br>
+            取引先コードと取引先IDはどちらか一方を必ず指定してください。<br>
+            <a href='https://support.freee.co.jp/hc/ja/articles/12515437008409-取引先を登録する#:~:text=確認ください。-,取引先役割,-種別' target='_blank'>取引先役割に関してはヘルプページを御覧ください。</a>
+          example: code001
+          type: string
         partner_title:
           description: |
             敬称（御中、様、(空白)の3つから選択）
@@ -1352,7 +1385,7 @@ components:
         partner_address_zipcode:
           description: |
             郵便番号
-            - 入力がない場合、帳票に指定されたpartner_idに紐づく郵便番号が利用されます。
+            - 入力がない場合、帳票に指定されたpartner_id, partner_codeに紐づく郵便番号が利用されます。
           example: '1410032'
           maxLength: 10
           minLength: 1
@@ -1361,7 +1394,7 @@ components:
         partner_address_prefecture_code:
           description: |
             都道府県コード（-1: 設定しない、0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄）
-            - 入力がない場合、帳票に指定されたpartner_idに紐づく都道府県コードが利用されます。
+            - 入力がない場合、帳票に指定されたpartner_id, partner_codeに紐づく都道府県コードが利用されます。
           example: 4
           maximum: 46
           minimum: -1
@@ -1369,7 +1402,7 @@ components:
         partner_address_street_name1:
           description: |
             取引先 市区町村・番地
-            - 入力がない場合、帳票に指定されたpartner_idに紐づく取引先 市区町村・番地が利用されます。
+            - 入力がない場合、帳票に指定されたpartner_id, partner_codeに紐づく取引先 市区町村・番地が利用されます。
           example: 東京都ＸＸ区ＹＹ１−１−１
           maxLength: 255
           minLength: 1
@@ -1377,7 +1410,7 @@ components:
         partner_address_street_name2:
           description: |
             取引先 建物名・部屋番号など
-            - 入力がない場合、帳票に指定されたpartner_idに紐づく取引先 建物名・部屋番号などが利用されます。
+            - 入力がない場合、帳票に指定されたpartner_id, partner_codeに紐づく取引先 建物名・部屋番号などが利用されます。
           example: ビル 1F
           maxLength: 255
           minLength: 1
@@ -1385,7 +1418,7 @@ components:
         partner_contact_department:
           description: |
             取引先部署
-            - 入力がない場合、帳票に指定されたpartner_idに紐づく取引先部署が利用されます。
+            - 入力がない場合、帳票に指定されたpartner_id, partner_codeに紐づく取引先部署が利用されます。
           example: 営業部
           maxLength: 255
           minLength: 1
@@ -1393,7 +1426,7 @@ components:
         partner_contact_name:
           description: |
             取引先担当者名
-            - 入力がない場合、帳票に指定されたpartner_idに紐づく取引先担当者名が利用されます。
+            - 入力がない場合、帳票に指定されたpartner_id, partner_codeに紐づく取引先担当者名が利用されます。
           example: 法人営業担当
           maxLength: 255
           minLength: 1
@@ -1402,7 +1435,7 @@ components:
           description: |
             取引先宛名
             - 帳票の宛名に利用されます。
-            - 入力がない場合、帳票に指定されたpartner_idに紐づく取引先名称が利用されます。
+            - 入力がない場合、帳票に指定されたpartner_id, partner_codeに紐づく取引先名称が利用されます。
           example: freeeパートナー
           maxLength: 255
           type: string
@@ -1419,7 +1452,6 @@ components:
       required:
       - company_id
       - lines
-      - partner_id
       - partner_title
       - quotation_date
       - tax_entry_method
@@ -1582,6 +1614,11 @@ components:
           maximum: 9223372036854775807
           minimum: 1
           type: integer
+        partner_code:
+          description: 取引先コード
+          example: code001
+          nullable: true
+          type: string
         partner_name:
           description: |
             取引先名
@@ -2219,6 +2256,11 @@ components:
           maximum: 9223372036854775807
           minimum: 1
           type: integer
+        partner_code:
+          description: 取引先コード
+          example: code001
+          nullable: true
+          type: string
         partner_name:
           description: |
             取引先名
@@ -2651,6 +2693,11 @@ components:
           maximum: 9223372036854775807
           minimum: 1
           type: integer
+        partner_code:
+          description: 取引先コード
+          example: code001
+          nullable: true
+          type: string
         partner_name:
           description: |
             取引先名
@@ -2868,6 +2915,11 @@ components:
           maximum: 9223372036854775807
           minimum: 1
           type: integer
+        partner_code:
+          description: 取引先コード
+          example: code001
+          nullable: true
+          type: string
         partner_name:
           description: |
             取引先名
@@ -3275,6 +3327,11 @@ components:
           maximum: 9223372036854775807
           minimum: 1
           type: integer
+        partner_code:
+          description: 取引先コード
+          example: code001
+          nullable: true
+          type: string
         partner_name:
           description: |
             取引先名
@@ -3655,6 +3712,11 @@ components:
           maximum: 9223372036854775807
           minimum: 1
           type: integer
+        partner_code:
+          description: 取引先コード
+          example: code001
+          nullable: true
+          type: string
         partner_name:
           description: |
             取引先名
