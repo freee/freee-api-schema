@@ -13405,6 +13405,11 @@
             "type": "boolean",
             "description": "デフォルトの勤務時間設定を使っているかどうか"
           },
+          "use_half_compensatory_holiday": {
+            "type": "boolean",
+            "description": "代休の半休を利用したかどうか",
+            "example": false
+          },
           "total_overtime_work_mins": {
             "type": "integer",
             "description": "時間外労働時間（分）（Webの勤怠登録画面にて詳細項目の「勤務時間の長さを自動で計算しない」にチェックを入れた場合0が返却されます。時間外労働時間はtotal_overtime_except_normal_work_minsを参照してください。）",
