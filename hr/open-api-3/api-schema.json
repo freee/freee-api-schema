@@ -11782,7 +11782,7 @@
           },
           "role": {
             "type": "string",
-            "description": "事業所におけるロール。\n- `company_admin`: 管理者\n- `self_only`: 一般\n- `clerk`: 事務担当者\n\n[各権限でできることは各アカウントの権限についてのヘルプページを参照してください。](https://support.freee.co.jp/hc/ja/articles/204087410-%E6%93%8D%E4%BD%9C%E6%A8%A9%E9%99%90%E3%82%92%E7%AE%A1%E7%90%86%E3%81%99%E3%82%8B#3)",
+            "description": "事業所におけるロール。\n- `company_admin`: 管理者\n- `self_only`: 一般または勤怠部門管理者\n- `clerk`: 事務担当者\n\n[各権限でできることは各アカウントの権限についてのヘルプページを参照してください。](https://support.freee.co.jp/hc/ja/articles/204087410-%E6%93%8D%E4%BD%9C%E6%A8%A9%E9%99%90%E3%82%92%E7%AE%A1%E7%90%86%E3%81%99%E3%82%8B#3)",
             "enum": [
               "company_admin",
               "self_only",
@@ -18353,6 +18353,293 @@
               "exception_special_exception",
               "special_residential_house"
             ]
+          }
+        }
+      },
+      "ApiV1EmployeesAssignedAttendanceTagSerializer": {
+        "type": "object",
+        "required": [
+          "attendance_tag",
+          "amount"
+        ],
+        "properties": {
+          "attendance_tag": {
+            "type": "object",
+            "required": [
+              "id",
+              "company_id",
+              "name",
+              "description",
+              "max_amount",
+              "published",
+              "is_employee_usable"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "勤怠タグ付与ID",
+                "format": "int32",
+                "minimum": 1,
+                "maximum": 2147483647,
+                "example": 1
+              },
+              "company_id": {
+                "type": "integer",
+                "description": "事業所ID",
+                "format": "int32",
+                "minimum": 1,
+                "maximum": 2147483647,
+                "example": 1
+              },
+              "name": {
+                "type": "string",
+                "description": "勤怠タグ名称",
+                "example": "勤怠タグの名称"
+              },
+              "description": {
+                "type": "string",
+                "description": "勤怠タグ備考",
+                "example": "勤怠タグの備考"
+              },
+              "max_amount": {
+                "type": "integer",
+                "description": "勤怠タグ回数上限",
+                "format": "int32",
+                "minimum": 1,
+                "maximum": 999,
+                "example": 1
+              },
+              "published": {
+                "type": "boolean",
+                "description": "勤怠タグ公開ステータス",
+                "example": true
+              },
+              "is_employee_usable": {
+                "type": "boolean",
+                "description": "対象従業員が利用可能かどうか",
+                "example": true
+              }
+            }
+          },
+          "amount": {
+            "type": "integer",
+            "description": "勤怠タグ回数",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999,
+            "example": 1
+          }
+        }
+      },
+      "ApiV1EmployeesAttendanceTagsController.index_response": {
+        "type": "object",
+        "properties": {
+          "employee_attendance_tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1EmployeesAttendanceTagSerializer"
+            }
+          }
+        }
+      },
+      "ApiV1EmployeesAttendanceTagsController.show_response": {
+        "type": "object",
+        "properties": {
+          "employee_attendance_tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1EmployeesAssignedAttendanceTagSerializer"
+            }
+          }
+        }
+      },
+      "ApiV1EmployeesAttendanceTagsController.update_body": {
+        "type": "object",
+        "required": [
+          "company_id",
+          "employee_attendance_tags"
+        ],
+        "properties": {
+          "company_id": {
+            "type": "integer",
+            "description": "事業所ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "employee_attendance_tags": {
+            "type": "array",
+            "description": "更新対象の勤怠タグのリスト",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1EmployeesAttendanceTagUpdateRequestSerializer"
+            }
+          }
+        }
+      },
+      "ApiV1EmployeesAttendanceTagSummariesController.update_response": {
+        "type": "object",
+        "properties": {
+          "employee_attendance_tag_summaries": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "attendance_tag",
+                "amount"
+              ],
+              "properties": {
+                "attendance_tag": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "company_id",
+                    "name",
+                    "description",
+                    "max_amount",
+                    "published",
+                    "is_employee_usable"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "description": "勤怠タグ付与ID",
+                      "format": "int32",
+                      "minimum": 1,
+                      "maximum": 2147483647,
+                      "example": 1
+                    },
+                    "company_id": {
+                      "type": "integer",
+                      "description": "事業所ID",
+                      "format": "int32",
+                      "minimum": 1,
+                      "maximum": 2147483647,
+                      "example": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "勤怠タグ名称",
+                      "example": "勤怠タグの名称"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "勤怠タグ備考",
+                      "example": "勤怠タグの備考"
+                    },
+                    "max_amount": {
+                      "type": "integer",
+                      "description": "勤怠タグ回数上限",
+                      "format": "int32",
+                      "minimum": 1,
+                      "maximum": 999,
+                      "example": 1
+                    },
+                    "published": {
+                      "type": "boolean",
+                      "description": "勤怠タグ公開ステータス",
+                      "example": true
+                    },
+                    "is_employee_usable": {
+                      "type": "boolean",
+                      "description": "対象従業員が利用可能かどうか",
+                      "example": true
+                    }
+                  }
+                },
+                "amount": {
+                  "type": "integer",
+                  "description": "勤怠タグ回数",
+                  "format": "int32",
+                  "minimum": 0,
+                  "maximum": 999,
+                  "example": 1
+                }
+              }
+            }
+          }
+        }
+      },
+      "ApiV1EmployeesAttendanceTagSerializer": {
+        "type": "object",
+        "required": [
+          "id",
+          "company_id",
+          "name",
+          "description",
+          "max_amount",
+          "published",
+          "is_employee_usable"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "勤怠タグ付与ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "company_id": {
+            "type": "integer",
+            "description": "事業所ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "勤怠タグ名称",
+            "example": "勤怠タグの名称"
+          },
+          "description": {
+            "type": "string",
+            "description": "勤怠タグ備考",
+            "example": "勤怠タグの備考"
+          },
+          "max_amount": {
+            "type": "integer",
+            "description": "勤怠タグ回数上限",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 999,
+            "example": 1
+          },
+          "published": {
+            "type": "boolean",
+            "description": "勤怠タグ公開ステータス",
+            "example": true
+          },
+          "is_employee_usable": {
+            "type": "boolean",
+            "description": "対象従業員が利用可能かどうか",
+            "example": true
+          }
+        }
+      },
+      "ApiV1EmployeesAttendanceTagUpdateRequestSerializer": {
+        "type": "object",
+        "required": [
+          "attendance_tag_id",
+          "amount"
+        ],
+        "properties": {
+          "attendance_tag_id": {
+            "type": "integer",
+            "description": "勤怠タグID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "amount": {
+            "type": "integer",
+            "description": "勤怠タグ回数",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 999,
+            "example": 1
           }
         }
       },
