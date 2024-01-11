@@ -8966,7 +8966,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -9186,7 +9186,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -9406,7 +9406,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -9626,7 +9626,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -9858,7 +9858,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -10090,7 +10090,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -10320,7 +10320,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -10558,7 +10558,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -10796,7 +10796,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -11034,7 +11034,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -11266,7 +11266,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -11498,7 +11498,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -11730,7 +11730,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -11960,7 +11960,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -12198,7 +12198,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -12436,7 +12436,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -12674,7 +12674,7 @@
           {
             "name": "adjustment",
             "in": "query",
-            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳以外: withoutが指定されます。",
+            "description": "決算整理仕訳で絞込（決算整理仕訳のみ: only, 決算整理仕訳以外: without）。指定されない場合、決算整理仕訳を含む金額が返却されます。",
             "schema": {
               "type": "string",
               "enum": [
