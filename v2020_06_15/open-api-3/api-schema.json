@@ -7204,7 +7204,7 @@
                   ],
                   "properties": {
                     "walletable": {
-                      "$ref": "#/components/schemas/walletable"
+                      "$ref": "#/components/schemas/walletableUpdateResponse"
                     },
                     "meta": {
                       "type": "object",
@@ -18123,6 +18123,58 @@
             "maximum": 2147483647,
             "description": "事業所ID",
             "example": 1
+          }
+        }
+      },
+      "walletableUpdateResponse": {
+        "type": "object",
+        "required": [
+          "bank_id",
+          "id",
+          "name",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "口座ID",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255,
+            "description": "口座名 (255文字以内)",
+            "example": "freee銀行"
+          },
+          "bank_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "サービスID",
+            "example": 3,
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "description": "口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
+            "example": "bank_account",
+            "enum": [
+              "bank_account",
+              "credit_card",
+              "wallet"
+            ]
+          },
+          "last_balance": {
+            "type": "integer",
+            "description": "同期残高",
+            "example": 1565583
+          },
+          "walletable_balance": {
+            "type": "integer",
+            "description": "登録残高",
+            "example": 1340261
           }
         }
       },
