@@ -14777,7 +14777,8 @@
             "description": "この日の有休取得日数。1日単位で指定します。",
             "format": "float",
             "minimum": 0,
-            "maximum": 1
+            "maximum": 1,
+            "example": "1.0"
           },
           "half_paid_holiday_mins": {
             "type": "integer",
