@@ -14729,7 +14729,7 @@
           },
           "is_absence": {
             "type": "boolean",
-            "description": "欠勤かどうか\n\nis_absenceにtrueを指定すると、以下のパラーメータについて、指定した値が反映されず無視されます。\n- break_records\n  - clock_in_at\n  - clock_out_at\n- clock_in_at\n- clock_out_at\n- early_leaving_mins\n- lateness_mins\n- normal_work_clock_in_at\n- normal_work_clock_out_at\n- normal_work_mins\n- normal_work_mins_by_paid_holiday\n- paid_holiday"
+            "description": "欠勤かどうか\n\nis_absenceにtrueを指定すると、以下のパラーメータについて、指定した値が反映されず無視されます。\n- break_records\n  - clock_in_at\n  - clock_out_at\n- clock_in_at\n- clock_out_at\n- early_leaving_mins\n- lateness_mins\n- normal_work_clock_in_at\n- normal_work_clock_out_at\n- normal_work_mins\n- normal_work_mins_by_paid_holiday\n- paid_holiday\n- half_paid_holiday_mins\n- hourly_paid_holiday_mins\n- special_holiday\n- special_holiday_setting_id\n- half_special_holiday_mins\n- hourly_special_holiday_mins"
           },
           "lateness_mins": {
             "type": "integer",
@@ -15078,6 +15078,14 @@
             "items": {
               "$ref": "#/components/schemas/ApiV1SalariesEmployeePayrollStatementSerializer"
             }
+          },
+          "total_count": {
+            "type": "integer",
+            "description": "指定した年月に支払いのある給与明細の合計件数",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "example": 1
           }
         }
       },
