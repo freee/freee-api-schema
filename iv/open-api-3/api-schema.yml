@@ -106,6 +106,8 @@ tags:
   name: Invoices
 - description: 見積書
   name: Quotations
+- description: 納品書
+  name: DeliverySlips
 paths:
   "/invoices":
     get:
@@ -907,6 +909,404 @@ paths:
         '
       tags:
       - Quotations
+  "/delivery_slips":
+    get:
+      description: 納品書の一覧を返します。
+      operationId: delivery_slips/index
+      parameters:
+      - description: 事業所ID
+        example: 1
+        in: query
+        name: company_id
+        required: true
+        schema:
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+      - description: 納品書番号
+        example: DEL-0000000001
+        in: query
+        name: delivery_slip_number
+        schema:
+          maxLength: 255
+          minLength: 1
+          type: string
+      - description: 件名
+        example: Webサイト製作費
+        in: query
+        name: subject
+        schema:
+          maxLength: 255
+          minLength: 1
+          type: string
+      - description: 取引先ID（半角数字のidを半角カンマ区切りスペースなしで指定してください。最大3件まで指定できます。）
+        example: 12
+        in: query
+        name: partner_ids
+        schema:
+          maxLength: 255
+          type: string
+      - description: "(リリース予定)入金ステータス（unsettled: 入金待ち, settled: 入金済み）"
+        example: settled
+        in: query
+        name: payment_status
+        schema:
+          enum:
+          - settled
+          - unsettled
+          type: string
+      - description: "(リリース予定)取引ステータス（registered: 登録済み、 unregistered: 登録待ち）"
+        example: registered
+        in: query
+        name: deal_status
+        schema:
+          enum:
+          - registered
+          - unregistered
+          type: string
+      - description: '送付ステータス（sent: 送付済み、 unsent: 送付待ち）'
+        example: sent
+        in: query
+        name: sending_status
+        schema:
+          enum:
+          - sent
+          - unsent
+          type: string
+      - description: '取消済み（canceled: 該当する、 uncanceled: 該当しない）'
+        example: canceled
+        in: query
+        name: cancel_status
+        schema:
+          enum:
+          - canceled
+          - uncanceled
+          type: string
+      - description: 納品日の開始日
+        example: '2023-04-01'
+        in: query
+        name: start_delivery_slip_date
+        schema:
+          format: date
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+      - description: 納品日の開始日
+        example: '2023-04-01'
+        in: query
+        name: end_delivery_slip_date
+        schema:
+          format: date
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+      - description: '取得レコードの件数 (デフォルト: 20, 最小: 1, 最大: 100)'
+        example: 20
+        in: query
+        name: limit
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+      - description: '取得レコードのオフセット (デフォルト: 0)'
+        example: 0
+        in: query
+        name: offset
+        schema:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/DeliverySlipIndexResponse"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/badRequest"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      summary: '納品書一覧の取得
+
+        '
+      tags:
+      - DeliverySlips
+    post:
+      description: |2-
+
+        納品書の作成をします。
+
+        issue_date, account_item_id, tax_code, item_id, section_id, tag_ids, segment_1_tag_id, segment_2_tag_id, segment_3_tag_id は、取引登録の下書き保存で利用されます。
+
+        tag_idsは10個まで設定可能です。
+      operationId: delivery_slips/create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/DeliverySlipRequest"
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/DeliverySlipResponse"
+          description: 'successful operation
+
+            '
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/badRequest"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      summary: '納品書の作成
+
+        '
+      tags:
+      - DeliverySlips
+  "/delivery_slips/{id}":
+    get:
+      description: 指定されたIDの納品書を返します。
+      operationId: delivery_slips/show
+      parameters:
+      - description: 事業所ID
+        example: 1
+        in: query
+        name: company_id
+        required: true
+        schema:
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+      - description: 納品書ID
+        example: 1
+        in: path
+        name: id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/DeliverySlipShowResponse"
+          description: 'successful operation
+
+            '
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/badRequest"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+          description: ''
+        '404':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/notfoundError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      summary: '納品書の取得
+
+        '
+      tags:
+      - DeliverySlips
+    put:
+      description: |2-
+
+        納品書の更新をします。
+
+        issue_date, account_item_id, tax_code, item_id, section_id, tag_ids, segment_1_tag_id, segment_2_tag_id, segment_3_tag_id は、取引登録の下書き保存で利用されます。
+
+        tag_idsは10個まで設定可能です。
+      operationId: delivery_slips/update
+      parameters:
+      - description: 納品書ID
+        example: 1
+        in: path
+        name: id
+        required: true
+        schema:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/DeliverySlipRequest"
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/DeliverySlipResponse"
+          description: 'successful operation
+
+            '
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/badRequest"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+          description: ''
+        '404':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/notfoundError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      summary: '納品書の更新
+
+        '
+      tags:
+      - DeliverySlips
+  "/delivery_slips/templates":
+    get:
+      description: 使用可能な納品書の帳票テンプレート一覧を返します。
+      operationId: delivery_slips/templates/index
+      parameters:
+      - description: 事業所ID
+        example: 1
+        in: query
+        name: company_id
+        required: true
+        schema:
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/TemplateIndexResponse"
+          description: successful operation
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/badRequest"
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/unauthorizedError"
+          description: ''
+        '403':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/forbiddenError"
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/accessDeniedError"
+          description: ''
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/internalServerError"
+          description: ''
+      summary: '使用可能な納品書の帳票テンプレート一覧の取得
+
+        '
+      tags:
+      - DeliverySlips
 components:
   schemas:
     InvoiceIndexResponse:
@@ -1471,6 +1871,227 @@ components:
           "$ref": "#/components/schemas/QuotationShowResponse_quotation"
       required:
       - quotation
+      type: object
+    DeliverySlipIndexResponse:
+      properties:
+        delivery_slips:
+          items:
+            "$ref": "#/components/schemas/DeliverySlipIndexResponse_delivery_slips"
+          type: array
+      required:
+      - delivery_slips
+      type: object
+    DeliverySlipRequest:
+      properties:
+        company_id:
+          description: 事業所ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        template_id:
+          description: 帳票テンプレートID（指定しない場合、事業所の既定のテンプレートが指定されます。）
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        delivery_slip_number:
+          description: |
+            納品書番号<br>
+            - 採番の設定が、[自動採番する]の場合、指定できません。
+            - 採番の設定が、[自動採番する]以外の場合、必須になります。
+          example: DEL-0000000001
+          maxLength: 255
+          type: string
+        branch_no:
+          description: 枝番
+          example: 1
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        delivery_slip_date:
+          description: 納品日
+          example: '2023-04-01'
+          format: date
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+        issue_date:
+          description: |
+            発生日（取引登録の下書き保存で利用されます。）
+            - 入力がない場合、納品日が補完されます。
+          example: '2023-04-01'
+          format: date
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+        subject:
+          description: 件名
+          example: Webサイト製作費
+          maxLength: 255
+          minLength: 1
+          type: string
+        tax_entry_method:
+          description: '消費税の内税・外税区分（in: 税込表示（内税）、out: 税別表示（外税））'
+          enum:
+          - in
+          - out
+          example: out
+          type: string
+        tax_fraction:
+          description: '消費税端数の計算方法（omit: 切り捨て、round_up: 切り上げ、round: 四捨五入）'
+          enum:
+          - omit
+          - round_up
+          - round
+          example: omit
+          type: string
+        line_amount_fraction:
+          description: '金額端数の計算方法（omit: 切り捨て、round_up: 切り上げ、round: 四捨五入）'
+          enum:
+          - omit
+          - round_up
+          - round
+          example: round_up
+          nullable: true
+          type: string
+        withholding_tax_entry_method:
+          description: '源泉徴収の計算方法（in: 税込み価格で計算、out: 税別価格で計算）'
+          enum:
+          - in
+          - out
+          example: out
+          type: string
+        delivery_slip_note:
+          description: 備考
+          example: 備考
+          maxLength: 4000
+          minLength: 1
+          type: string
+        memo:
+          description: 社内メモ
+          example: 社内メモ
+          maxLength: 2000
+          minLength: 1
+          type: string
+        partner_id:
+          description: |
+            取引先ID<br>
+            取引先IDと取引先コードはどちらか一方を必ず指定してください。<br>
+            <a href='https://support.freee.co.jp/hc/ja/articles/12515437008409-取引先を登録する#:~:text=確認ください。-,取引先役割,-種別' target='_blank'>取引先役割に関してはヘルプページを御覧ください。</a>
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        partner_code:
+          description: |
+            取引先コード<br>
+            取引先コードと取引先IDはどちらか一方を必ず指定してください。<br>
+            <a href='https://support.freee.co.jp/hc/ja/articles/12515437008409-取引先を登録する#:~:text=確認ください。-,取引先役割,-種別' target='_blank'>取引先役割に関してはヘルプページを御覧ください。</a>
+          example: code001
+          type: string
+        partner_title:
+          description: |
+            敬称（御中、様、(空白)の3つから選択）
+            - [非推奨]全角カッコの（空白）は削除予定です。
+            - 全角カッコの（空白）を指定した場合、はレスポンスは、半角カッコの(空白)になります。
+          enum:
+          - 御中
+          - 様
+          - "(空白)"
+          - "（空白）"
+          example: 御中
+          type: string
+        partner_address_zipcode:
+          description: |
+            郵便番号
+            - 入力がない場合、帳票に指定されたpartner_id, partner_codeに紐づく郵便番号が利用されます。
+          example: '1410032'
+          maxLength: 10
+          minLength: 1
+          pattern: "^[0-9]{3}[\\-]?[0-9]{4}$"
+          type: string
+        partner_address_prefecture_code:
+          description: |
+            都道府県コード（-1: 設定しない、0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄）
+            - 入力がない場合、帳票に指定されたpartner_id, partner_codeに紐づく都道府県コードが利用されます。
+          example: 4
+          maximum: 46
+          minimum: -1
+          type: integer
+        partner_address_street_name1:
+          description: |
+            取引先 市区町村・番地
+            - 入力がない場合、帳票に指定されたpartner_id, partner_codeに紐づく取引先 市区町村・番地が利用されます。
+          example: 東京都ＸＸ区ＹＹ１−１−１
+          maxLength: 255
+          minLength: 1
+          type: string
+        partner_address_street_name2:
+          description: |
+            取引先 建物名・部屋番号など
+            - 入力がない場合、帳票に指定されたpartner_id, partner_codeに紐づく取引先 建物名・部屋番号などが利用されます。
+          example: ビル 1F
+          maxLength: 255
+          minLength: 1
+          type: string
+        partner_contact_department:
+          description: |
+            取引先部署
+            - 入力がない場合、帳票に指定されたpartner_id, partner_codeに紐づく取引先部署が利用されます。
+          example: 営業部
+          maxLength: 255
+          minLength: 1
+          type: string
+        partner_contact_name:
+          description: |
+            取引先担当者名
+            - 入力がない場合、帳票に指定されたpartner_id, partner_codeに紐づく取引先担当者名が利用されます。
+          example: 法人営業担当
+          maxLength: 255
+          minLength: 1
+          type: string
+        partner_display_name:
+          description: |
+            取引先宛名
+            - 帳票の宛名に利用されます。
+            - 入力がない場合、帳票に指定されたpartner_id, partner_codeに紐づく取引先名称が利用されます。
+          example: freeeパートナー
+          maxLength: 255
+          type: string
+        company_contact_name:
+          description: 自社担当者(デフォルトは表示ユーザー名が補完されます)
+          example: 法人営業担当
+          maxLength: 255
+          type: string
+        lines:
+          description: 納品書の明細行
+          items:
+            "$ref": "#/components/schemas/DeliverySlipRequest_lines"
+          type: array
+      required:
+      - company_id
+      - delivery_slip_date
+      - lines
+      - partner_title
+      - tax_entry_method
+      - tax_fraction
+      - withholding_tax_entry_method
+      type: object
+    DeliverySlipResponse:
+      properties:
+        delivery_slip:
+          "$ref": "#/components/schemas/DeliverySlipResponse_delivery_slip"
+      required:
+      - delivery_slip
+      type: object
+    DeliverySlipShowResponse:
+      properties:
+        delivery_slip:
+          "$ref": "#/components/schemas/DeliverySlipShowResponse_delivery_slip"
+      required:
+      - delivery_slip
       type: object
     InvoiceIndexResponse_invoices:
       properties:
@@ -3798,6 +4419,1220 @@ components:
       - quotation_date
       - quotation_note
       - quotation_number
+      - sending_status
+      - subject
+      - total_amount
+      type: object
+    DeliverySlipIndexResponse_delivery_slips:
+      properties:
+        id:
+          description: 納品書ID
+          example: 101
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        company_id:
+          description: 事業所ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        delivery_slip_number:
+          description: 納品書番号
+          example: DEL-0000000001
+          maxLength: 255
+          type: string
+        subject:
+          description: 件名
+          example: Webサイト製作費
+          maxLength: 255
+          type: string
+        template_id:
+          description: 帳票テンプレートID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        delivery_slip_date:
+          description: 納品日
+          example: '2023-04-01'
+          format: date
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+        issue_date:
+          description: 発生日
+          example: '2023-04-01'
+          format: date
+          nullable: true
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+        memo:
+          description: 社内メモ
+          example: 社内メモ
+          maxLength: 2000
+          type: string
+        sending_status:
+          description: '送付ステータス（sent: 送付済み、 unsent: 送付待ち）'
+          enum:
+          - sent
+          - unsent
+          example: sent
+          type: string
+        payment_status:
+          description: "(リリース予定)入金ステータス（unsettled: 入金待ち, settled: 入金済み）"
+          enum:
+          - settled
+          - unsettled
+          example: settled
+          type: string
+        cancel_status:
+          description: '取消済み（canceled: 該当する、 uncanceled: 該当しない）'
+          enum:
+          - canceled
+          - uncanceled
+          example: canceled
+          type: string
+        deal_status:
+          description: "(リリース予定)取引ステータス（registered: 登録済み、 unregistered: 登録待ち）"
+          enum:
+          - registered
+          - unregistered
+          example: registered
+          type: string
+        deal_id:
+          description: "(リリース予定)取引ID （deal_statusがunregisteredの場合、nullになります。）"
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          nullable: true
+          type: integer
+        total_amount:
+          description: 合計金額
+          example: 11000
+          format: double
+          type: number
+        amount_withholding_tax:
+          description: 源泉所得税
+          example: 1000
+          nullable: true
+          type: number
+        amount_including_tax:
+          description: 税込金額
+          example: 11000
+          format: double
+          type: number
+        amount_excluding_tax:
+          description: 小計（税別）
+          example: 10000
+          type: number
+        amount_tax:
+          description: 消費税額
+          example: 1000
+          type: number
+        partner_id:
+          description: 取引先ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        partner_code:
+          description: 取引先コード
+          example: code001
+          nullable: true
+          type: string
+        partner_name:
+          description: |
+            取引先名
+            - partner_nameに空文字が戻る場合は、対象レコードをweb画面から更新するか、freee請求書APIから更新すると解消されます。
+          example: freeeパートナー
+          maxLength: 255
+          type: string
+        partner_display_name:
+          description: |
+            取引先宛名
+            - 帳票の宛名に利用されます。
+          example: freeeパートナー
+          maxLength: 255
+          type: string
+        company_contact_name:
+          description: '自社担当者 (デフォルト: 表示ユーザー名)
+
+            '
+          example: 法人営業担当
+          maxLength: 255
+          type: string
+      required:
+      - amount_excluding_tax
+      - amount_including_tax
+      - amount_tax
+      - cancel_status
+      - company_id
+      - deal_status
+      - delivery_slip_date
+      - delivery_slip_number
+      - id
+      - memo
+      - partner_id
+      - payment_status
+      - sending_status
+      - subject
+      - total_amount
+      type: object
+    DeliverySlipRequest_lines:
+      properties:
+        type:
+          default: item
+          description: |
+            明細の種類
+            - item: 品目行
+              - tax_rate、quantityは必須になります。
+            - text: テキスト行
+              - descriptionのみ入力可能です。
+            - 入力がない場合、itemが利用されます。
+          enum:
+          - item
+          - text
+          example: item
+          type: string
+        description:
+          description: 摘要（品名）
+          example: 切手代
+          maxLength: 255
+          minLength: 1
+          type: string
+        unit:
+          description: 明細の単位名
+          example: 個
+          maxLength: 255
+          minLength: 1
+          type: string
+        quantity:
+          description: 明細の数量 (整数部は8桁まで、小数部は3桁まで)
+          example: 1
+          maximum: 99999999.999
+          minimum: -99999999.999
+          type: number
+        unit_price:
+          description: 明細の単価 (整数部は13桁まで、小数部は3桁まで)
+          example: '1234567890123.123'
+          pattern: "^\\-?[0-9]{0,13}(\\.[0-9]{1,3})?$"
+          type: string
+        tax_rate:
+          description: 税率（%）（帳票の税額計算に用います。）
+          enum:
+          - 0
+          - 8
+          - 10
+          example: 8
+          type: integer
+        reduced_tax_rate:
+          default: false
+          description: '軽減税率対象（true: 対象、 false: 対象外）trueはtax_rate:8の時のみ指定可能です。'
+          example: false
+          type: boolean
+        withholding:
+          description: 源泉徴収対象
+          example: true
+          type: boolean
+        account_item_id:
+          description: 勘定科目ID（取引登録の下書き保存で利用されます。）
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        tax_code:
+          description: 税区分コード（取引登録の下書き保存で利用されます。）
+          example: 1
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        item_id:
+          description: 品目ID（取引登録の下書き保存で利用されます。）
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        section_id:
+          description: |
+            部門ID<br>
+            - 取引登録の下書き保存で利用されます。
+            - 親部門は利用できません。
+            - グループ管理で制限された部門は利用できません。
+            <br>
+            <a href="https://support.freee.co.jp/hc/ja/articles/215225263" target="_blank">グループ管理の設定はヘルプページを御覧ください。</a>
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        tag_ids:
+          items:
+            description: メモタグID（10個まで設定可能です。）（取引登録の下書き保存で利用されます。）
+            example: 1
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+          type: array
+        segment_1_tag_id:
+          description: |
+            セグメント１ID<br>
+            - 取引登録の下書き保存で利用されます。
+            - freee会計法人向け プロフェッショナルプラン以上で利用可能です。
+            <br>
+            <a href="https://support.freee.co.jp/hc/ja/articles/360020679611" target="_blank">セグメント（分析用タグ）の設定はヘルプページを御覧ください。</a>
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        segment_2_tag_id:
+          description: |
+            セグメント２ID<br>
+            - 取引登録の下書き保存で利用されます。
+            - freee会計法人向け エンタープライズプランで利用可能です。
+            <br>
+            <a href="https://support.freee.co.jp/hc/ja/articles/360020679611" target="_blank">セグメント（分析用タグ）の設定はヘルプページを御覧ください。</a>
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        segment_3_tag_id:
+          description: |
+            セグメント３ID<br>
+            - 取引登録の下書き保存で利用されます。
+            - freee会計法人向け エンタープライズプランで利用可能です。
+            <br>
+            <a href="https://support.freee.co.jp/hc/ja/articles/360020679611" target="_blank">セグメント（分析用タグ）の設定はヘルプページを御覧ください。</a>
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+      type: object
+    DeliverySlipResponse_delivery_slip_template:
+      description: 帳票テンプレート情報（帳票テンプレート作成の際に設定できる項目です。）
+      properties:
+        title:
+          description: 納品書タイトル
+          example: 納品書
+          type: string
+        invoice_registration_number:
+          description: |
+            インボイス制度適格請求書発行事業者登録番号
+            - 先頭T数字13桁の固定14桁の文字列
+            <a target="_blank" href="https://www.invoice-kohyo.nta.go.jp/index.html">国税庁インボイス制度適格請求書発行事業者公表サイト</a>
+          example: T1000000000001
+          type: string
+        company_name:
+          description: 自社名
+          example: freee株式会社
+          type: string
+        company_description:
+          description: 自社情報
+          example: "〒141-0032　東京都品川区大崎1-2-2アートヴィレッジ大崎セントラルタワー 21階"
+          type: string
+        message:
+          description: メッセージ
+          example: メッセージ
+          type: string
+      type: object
+    DeliverySlipResponse_delivery_slip_lines:
+      properties:
+        id:
+          description: 明細行ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        type:
+          description: |
+            明細の種類
+            - item: 品目行
+            - text: テキスト行
+            - textの時はquantity、unit_price、tax_rate、amount_excluding_tax、account_item_id、tax_code、item_id、section_id、segment_1_tag_id、segment_2_tag_id、segment_3_tag_idはnullになります。
+          enum:
+          - item
+          - text
+          example: item
+          type: string
+        description:
+          description: 摘要（品名）
+          example: 切手代
+          maxLength: 255
+          type: string
+        unit:
+          description: 明細の単位名
+          example: 個
+          maxLength: 255
+          type: string
+        quantity:
+          description: 明細の数量 (整数部は8桁まで、小数部は3桁まで)
+          example: 1
+          maximum: 99999999.999
+          minimum: -99999999.999
+          nullable: true
+          type: number
+        unit_price:
+          description: 明細の単価 (整数部は13桁まで、小数部は3桁まで)
+          example: '1234567890123.123'
+          nullable: true
+          type: string
+        tax_rate:
+          description: 税率（%）
+          enum:
+          - 0
+          - 8
+          - 10
+          example: 8
+          nullable: true
+          type: integer
+        reduced_tax_rate:
+          description: '軽減税率対象（true: 対象、 false: 対象外）'
+          example: true
+          type: boolean
+        withholding:
+          description: 源泉徴収対象
+          example: true
+          type: boolean
+        amount_excluding_tax:
+          description: 税別金額
+          example: 10000
+          format: double
+          nullable: true
+          type: number
+        account_item_id:
+          description: 勘定科目ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          nullable: true
+          type: integer
+        tax_code:
+          description: 税区分コード
+          example: 1
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+          type: integer
+        item_id:
+          description: 品目ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          nullable: true
+          type: integer
+        section_id:
+          description: 部門ID
+          example: 1
+          maximum: 2147483647
+          minimum: 1
+          nullable: true
+          type: integer
+        tag_ids:
+          items:
+            description: メモタグID
+            example: 1
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+          type: array
+        segment_1_tag_id:
+          description: セグメント１ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          nullable: true
+          type: integer
+        segment_2_tag_id:
+          description: セグメント２ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          nullable: true
+          type: integer
+        segment_3_tag_id:
+          description: セグメント３ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          nullable: true
+          type: integer
+      required:
+      - description
+      - id
+      - type
+      - withholding
+      type: object
+    DeliverySlipResponse_delivery_slip:
+      properties:
+        id:
+          description: 納品書ID
+          example: 101
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        company_id:
+          description: 事業所ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        delivery_slip_number:
+          description: 納品書番号
+          example: DEL-0000000001
+          maxLength: 255
+          type: string
+        branch_no:
+          description: 枝番
+          example: 1
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+          type: integer
+        subject:
+          description: 件名
+          example: Webサイト製作費
+          maxLength: 255
+          type: string
+        template_id:
+          description: 帳票テンプレートID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        template_name:
+          description: 帳票テンプレート名
+          example: 標準の納品書テンプレート
+          maxLength: 255
+          type: string
+        delivery_slip_date:
+          description: 納品日
+          example: '2023-04-01'
+          format: date
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+        issue_date:
+          description: 発生日
+          example: '2023-04-01'
+          format: date
+          nullable: true
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+        payment_date:
+          description: |
+            期日
+            - payment_typeがtransferの場合、入金期日に該当します。
+            - payment_typeがdirect_debitの場合、振替日に該当します。
+          example: '2023-04-01'
+          format: date
+          nullable: true
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+        payment_type:
+          description: '入金方法 (振込: transfer, 振替: direct_debit)'
+          enum:
+          - transfer
+          - direct_debit
+          example: transfer
+          type: string
+        delivery_slip_note:
+          description: 備考
+          example: 備考
+          maxLength: 4000
+          type: string
+        memo:
+          description: 社内メモ
+          example: 社内メモ
+          maxLength: 2000
+          type: string
+        sending_status:
+          description: '送付ステータス（sent: 送付済み、 unsent: 送付待ち）'
+          enum:
+          - sent
+          - unsent
+          example: sent
+          type: string
+        payment_status:
+          description: "(リリース予定)入金ステータス（unsettled: 入金待ち, settled: 入金済み）"
+          enum:
+          - settled
+          - unsettled
+          example: settled
+          type: string
+        cancel_status:
+          description: '取消済み（canceled: 該当する、 uncanceled: 該当しない）'
+          enum:
+          - canceled
+          - uncanceled
+          example: canceled
+          type: string
+        deal_status:
+          description: "(リリース予定)取引ステータス（registered: 登録済み、 unregistered: 登録待ち）"
+          enum:
+          - registered
+          - unregistered
+          example: registered
+          type: string
+        deal_id:
+          description: "(リリース予定)取引ID （deal_statusがunregisteredの場合、nullになります。）"
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          nullable: true
+          type: integer
+        tax_entry_method:
+          description: '消費税の内税・外税区分（in: 税込表示（内税）、out: 税別表示（外税））'
+          enum:
+          - in
+          - out
+          example: out
+          nullable: true
+          type: string
+        tax_fraction:
+          description: '消費税端数の計算方法（omit: 切り捨て、round_up: 切り上げ、round: 四捨五入）'
+          enum:
+          - omit
+          - round_up
+          - round
+          example: omit
+          nullable: true
+          type: string
+        line_amount_fraction:
+          description: '金額端数の計算方法（omit: 切り捨て、round_up: 切り上げ、round: 四捨五入）'
+          enum:
+          - omit
+          - round_up
+          - round
+          example: round_up
+          nullable: true
+          type: string
+        withholding_tax_entry_method:
+          description: '源泉徴収の計算方法（in: 税込み価格で計算、out: 税別価格で計算）'
+          enum:
+          - in
+          - out
+          example: out
+          nullable: true
+          type: string
+        total_amount:
+          description: 合計金額
+          example: 11000
+          format: double
+          type: number
+        created_at:
+          description: 作成日時
+          format: date-time
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$"
+          type: string
+        amount_withholding_tax:
+          description: 源泉所得税
+          example: 1000
+          nullable: true
+          type: number
+        amount_including_tax:
+          description: 税込金額
+          example: 11000
+          format: double
+          type: number
+        amount_excluding_tax:
+          description: 小計（税別）
+          example: 10000
+          type: number
+        amount_tax:
+          description: 消費税額
+          example: 1000
+          type: number
+        amount_including_tax_10:
+          description: 10%対象 税込
+          example: 10000
+          format: double
+          nullable: true
+          type: number
+        amount_excluding_tax_10:
+          description: 10%対象 税抜
+          example: 10000
+          format: double
+          nullable: true
+          type: number
+        amount_tax_10:
+          description: 10%対象 消費税
+          example: 1000
+          format: double
+          nullable: true
+          type: number
+        amount_including_tax_8:
+          description: 8%対象 税込
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_excluding_tax_8:
+          description: 8%対象 税抜
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_tax_8:
+          description: 8%対象 消費税
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_including_tax_8_reduced:
+          description: 軽減税率8%対象 税込
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_excluding_tax_8_reduced:
+          description: 軽減税率8%対象 税抜
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_tax_8_reduced:
+          description: 軽減税率8%対象 消費税
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_including_tax_0:
+          description: 0%対象 税込
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_excluding_tax_0:
+          description: 0%対象 税抜
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_tax_0:
+          description: 0%対象 消費税
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        partner_id:
+          description: 取引先ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        partner_code:
+          description: 取引先コード
+          example: code001
+          nullable: true
+          type: string
+        partner_name:
+          description: |
+            取引先名
+            - partner_nameに空文字が戻る場合は、対象レコードをweb画面から更新するか、freee請求書APIから更新すると解消されます。
+          example: freeeパートナー
+          maxLength: 255
+          type: string
+        partner_title:
+          description: 敬称（御中、様、(空白)の3つから選択）
+          enum:
+          - 御中
+          - 様
+          - "(空白)"
+          example: 御中
+          type: string
+        partner_address_zipcode:
+          description: 郵便番号
+          example: '1410032'
+          maxLength: 10
+          type: string
+        partner_address_prefecture_code:
+          description: '都道府県コード（-1: 設定しない、0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄）'
+          example: 4
+          maximum: 46
+          minimum: -1
+          type: integer
+        partner_address_street_name1:
+          description: 取引先 市区町村・番地
+          example: 東京都ＸＸ区ＹＹ１−１−１
+          maxLength: 255
+          type: string
+        partner_address_street_name2:
+          description: 取引先 建物名・部屋番号など
+          example: ビル 1F
+          maxLength: 255
+          type: string
+        partner_contact_department:
+          description: 取引先部署
+          example: 営業部
+          maxLength: 255
+          type: string
+        partner_contact_name:
+          description: 取引先担当者名
+          example: 法人営業担当
+          maxLength: 255
+          type: string
+        partner_display_name:
+          description: |
+            取引先宛名
+            - 帳票の宛名に利用されます。
+          example: freeeパートナー
+          maxLength: 255
+          type: string
+        partner_bank_account:
+          description: '取引先口座
+
+            '
+          example: freee銀行 freee支店 普通 1234567 freee
+          maxLength: 255
+          type: string
+        company_contact_name:
+          description: 自社担当者名
+          example: 法人営業担当
+          maxLength: 255
+          type: string
+        template:
+          "$ref": "#/components/schemas/DeliverySlipResponse_delivery_slip_template"
+        lines:
+          description: 納品書の明細行
+          items:
+            "$ref": "#/components/schemas/DeliverySlipResponse_delivery_slip_lines"
+          type: array
+      required:
+      - amount_excluding_tax
+      - amount_including_tax
+      - amount_tax
+      - cancel_status
+      - company_id
+      - created_at
+      - deal_status
+      - delivery_slip_date
+      - delivery_slip_note
+      - delivery_slip_number
+      - id
+      - lines
+      - memo
+      - partner_id
+      - payment_status
+      - sending_status
+      - subject
+      - total_amount
+      type: object
+    DeliverySlipShowResponse_delivery_slip_lines:
+      properties:
+        id:
+          description: 明細行ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        type:
+          description: |
+            明細の種類
+            - item: 品目行
+            - text: テキスト行
+              - textの時はquantity、unit_price、tax_rate、amount_excluding_taxはnullになります。
+          enum:
+          - item
+          - text
+          example: item
+          type: string
+        description:
+          description: 摘要（品名）
+          example: 切手代
+          maxLength: 255
+          type: string
+        unit:
+          description: 明細の単位名
+          example: 個
+          maxLength: 255
+          type: string
+        quantity:
+          description: 明細の数量 (整数部は8桁まで、小数部は3桁まで)
+          example: 1
+          maximum: 99999999.999
+          minimum: -99999999.999
+          nullable: true
+          type: number
+        unit_price:
+          description: 明細の単価 (整数部は13桁まで、小数部は3桁まで)
+          example: '1234567890123.123'
+          nullable: true
+          type: string
+        tax_rate:
+          description: 税率（%）
+          enum:
+          - 0
+          - 8
+          - 10
+          example: 8
+          nullable: true
+          type: integer
+        reduced_tax_rate:
+          description: '軽減税率対象（true: 対象、 false: 対象外）'
+          example: true
+          type: boolean
+        withholding:
+          description: 源泉徴収対象
+          example: true
+          type: boolean
+        amount_excluding_tax:
+          description: 税別金額
+          example: 10000
+          format: double
+          nullable: true
+          type: number
+      required:
+      - description
+      - id
+      - type
+      - withholding
+      type: object
+    DeliverySlipShowResponse_delivery_slip:
+      properties:
+        id:
+          description: 納品書ID
+          example: 101
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        company_id:
+          description: 事業所ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        delivery_slip_number:
+          description: 納品書番号
+          example: DEL-0000000001
+          maxLength: 255
+          type: string
+        branch_no:
+          description: 枝番
+          example: 1
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+          type: integer
+        subject:
+          description: 件名
+          example: Webサイト製作費
+          maxLength: 255
+          type: string
+        template_id:
+          description: 帳票テンプレートID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        template_name:
+          description: 帳票テンプレート名
+          example: 標準の納品書テンプレート
+          maxLength: 255
+          type: string
+        delivery_slip_date:
+          description: 請求日
+          example: '2023-04-01'
+          format: date
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+        issue_date:
+          description: 発生日
+          example: '2023-04-01'
+          format: date
+          nullable: true
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          type: string
+        delivery_slip_note:
+          description: 備考
+          example: 備考
+          maxLength: 4000
+          type: string
+        memo:
+          description: 社内メモ
+          example: 社内メモ
+          maxLength: 2000
+          type: string
+        sending_status:
+          description: '送付ステータス（sent: 送付済み、 unsent: 送付待ち）'
+          enum:
+          - sent
+          - unsent
+          example: sent
+          type: string
+        payment_status:
+          description: "(リリース予定)入金ステータス（unsettled: 入金待ち, settled: 入金済み）"
+          enum:
+          - settled
+          - unsettled
+          example: settled
+          type: string
+        cancel_status:
+          description: '取消済み（canceled: 該当する、 uncanceled: 該当しない）'
+          enum:
+          - canceled
+          - uncanceled
+          example: canceled
+          type: string
+        deal_status:
+          description: "(リリース予定)取引ステータス（registered: 登録済み、 unregistered: 登録待ち）"
+          enum:
+          - registered
+          - unregistered
+          example: registered
+          type: string
+        deal_id:
+          description: "(リリース予定)取引ID （deal_statusがunregisteredの場合、nullになります。）"
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          nullable: true
+          type: integer
+        tax_entry_method:
+          description: '消費税の内税・外税区分（in: 税込表示（内税）、out: 税別表示（外税））'
+          enum:
+          - in
+          - out
+          example: out
+          nullable: true
+          type: string
+        tax_fraction:
+          description: '消費税端数の計算方法（omit: 切り捨て、round_up: 切り上げ、round: 四捨五入）'
+          enum:
+          - omit
+          - round_up
+          - round
+          example: omit
+          nullable: true
+          type: string
+        line_amount_fraction:
+          description: '金額端数の計算方法（omit: 切り捨て、round_up: 切り上げ、round: 四捨五入）'
+          enum:
+          - omit
+          - round_up
+          - round
+          example: round_up
+          nullable: true
+          type: string
+        withholding_tax_entry_method:
+          description: '源泉徴収の計算方法（in: 税込み価格で計算、out: 税別価格で計算）'
+          enum:
+          - in
+          - out
+          example: out
+          nullable: true
+          type: string
+        total_amount:
+          description: 合計金額
+          example: 11000
+          format: double
+          type: number
+        created_at:
+          description: 作成日時
+          format: date-time
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$"
+          type: string
+        amount_withholding_tax:
+          description: 源泉所得税
+          example: 1000
+          nullable: true
+          type: number
+        amount_including_tax:
+          description: 税込金額
+          example: 11000
+          format: double
+          type: number
+        amount_excluding_tax:
+          description: 小計（税別）
+          example: 10000
+          type: number
+        amount_tax:
+          description: 消費税額
+          example: 1000
+          type: number
+        amount_including_tax_10:
+          description: 10%対象 税込
+          example: 10000
+          format: double
+          nullable: true
+          type: number
+        amount_excluding_tax_10:
+          description: 10%対象 税抜
+          example: 10000
+          format: double
+          nullable: true
+          type: number
+        amount_tax_10:
+          description: 10%対象 消費税
+          example: 1000
+          format: double
+          nullable: true
+          type: number
+        amount_including_tax_8:
+          description: 8%対象 税込
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_excluding_tax_8:
+          description: 8%対象 税抜
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_tax_8:
+          description: 8%対象 消費税
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_including_tax_8_reduced:
+          description: 軽減税率8%対象 税込
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_excluding_tax_8_reduced:
+          description: 軽減税率8%対象 税抜
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_tax_8_reduced:
+          description: 軽減税率8%対象 消費税
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_including_tax_0:
+          description: 0%対象 税込
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_excluding_tax_0:
+          description: 0%対象 税抜
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        amount_tax_0:
+          description: 0%対象 消費税
+          example: 0
+          format: double
+          nullable: true
+          type: number
+        partner_id:
+          description: 取引先ID
+          example: 1
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 1
+          type: integer
+        partner_code:
+          description: 取引先コード
+          example: code001
+          nullable: true
+          type: string
+        partner_name:
+          description: |
+            取引先名
+            - partner_nameに空文字が戻る場合は、対象レコードをweb画面から更新するか、freee請求書APIから更新すると解消されます。
+          example: freeeパートナー
+          maxLength: 255
+          type: string
+        partner_title:
+          description: 敬称（御中、様、(空白)の3つから選択）
+          enum:
+          - 御中
+          - 様
+          - "(空白)"
+          example: 御中
+          type: string
+        partner_address_zipcode:
+          description: 郵便番号
+          example: '1410032'
+          maxLength: 10
+          type: string
+        partner_address_prefecture_code:
+          description: '都道府県コード（-1: 設定しない、0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄）'
+          example: 4
+          maximum: 46
+          minimum: -1
+          type: integer
+        partner_address_street_name1:
+          description: 取引先 市区町村・番地
+          example: 東京都ＸＸ区ＹＹ１−１−１
+          maxLength: 255
+          type: string
+        partner_address_street_name2:
+          description: 取引先 建物名・部屋番号など
+          example: ビル 1F
+          maxLength: 255
+          type: string
+        partner_contact_department:
+          description: 取引先部署
+          example: 営業部
+          maxLength: 255
+          type: string
+        partner_contact_name:
+          description: 取引先担当者名
+          example: 法人営業担当
+          maxLength: 255
+          type: string
+        partner_display_name:
+          description: |
+            取引先宛名
+            - 帳票の宛名に利用されます。
+          example: freeeパートナー
+          maxLength: 255
+          type: string
+        company_contact_name:
+          description: 自社担当者名
+          example: 法人営業担当
+          maxLength: 255
+          type: string
+        template:
+          "$ref": "#/components/schemas/DeliverySlipResponse_delivery_slip_template"
+        lines:
+          description: 納品書の明細行
+          items:
+            "$ref": "#/components/schemas/DeliverySlipShowResponse_delivery_slip_lines"
+          type: array
+      required:
+      - amount_excluding_tax
+      - amount_including_tax
+      - amount_tax
+      - cancel_status
+      - company_id
+      - created_at
+      - deal_status
+      - delivery_slip_date
+      - delivery_slip_note
+      - delivery_slip_number
+      - id
+      - lines
+      - memo
+      - partner_id
+      - payment_status
       - sending_status
       - subject
       - total_amount
