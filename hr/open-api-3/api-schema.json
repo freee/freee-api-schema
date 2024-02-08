@@ -13370,12 +13370,6 @@
             "description": "所定労働時間",
             "format": "int32"
           },
-          "normal_work_mins_by_paid_holiday": {
-            "type": "integer",
-            "description": "有給によって計上される所定労働時間（分）<br> （API仕様の変更により廃止する予定です。有給休暇によって計上される所定労働時間はhalf_paid_holiday_mins、もしくはhourly_paid_holiday_minsを参照してください。）",
-            "format": "int32",
-            "deprecated": true
-          },
           "note": {
             "type": "string",
             "description": "勤怠メモ",
@@ -14729,7 +14723,7 @@
           },
           "is_absence": {
             "type": "boolean",
-            "description": "欠勤かどうか\n\nis_absenceにtrueを指定すると、以下のパラーメータについて、指定した値が反映されず無視されます。\n- break_records\n  - clock_in_at\n  - clock_out_at\n- clock_in_at\n- clock_out_at\n- early_leaving_mins\n- lateness_mins\n- normal_work_clock_in_at\n- normal_work_clock_out_at\n- normal_work_mins\n- normal_work_mins_by_paid_holiday\n- paid_holiday\n- half_paid_holiday_mins\n- hourly_paid_holiday_mins\n- special_holiday\n- special_holiday_setting_id\n- half_special_holiday_mins\n- hourly_special_holiday_mins"
+            "description": "欠勤かどうか\n\nis_absenceにtrueを指定すると、以下のパラーメータについて、指定した値が反映されず無視されます。\n- break_records\n  - clock_in_at\n  - clock_out_at\n- clock_in_at\n- clock_out_at\n- early_leaving_mins\n- lateness_mins\n- normal_work_clock_in_at\n- normal_work_clock_out_at\n- normal_work_mins\n- paid_holiday\n- half_paid_holiday_mins\n- hourly_paid_holiday_mins\n- special_holiday\n- special_holiday_setting_id\n- half_special_holiday_mins\n- hourly_special_holiday_mins"
           },
           "lateness_mins": {
             "type": "integer",
@@ -14759,14 +14753,6 @@
             "minimum": 0,
             "maximum": 1440
           },
-          "normal_work_mins_by_paid_holiday": {
-            "type": "integer",
-            "description": "有給によって計上される所定労働時間（分）<br> （API仕様の変更により廃止する予定です。有給休暇（半休）に更新する場合はhalf_paid_holiday_minsを使用してください。）",
-            "format": "int32",
-            "minimum": 0,
-            "maximum": 1440,
-            "deprecated": true
-          },
           "note": {
             "type": "string",
             "description": "勤怠メモ",
@@ -14776,8 +14762,10 @@
             "type": "number",
             "description": "この日の有休取得日数。1日単位で指定します。",
             "format": "float",
-            "minimum": 0,
-            "maximum": 1,
+            "enum": [
+              0,
+              1
+            ],
             "example": "1.0"
           },
           "half_paid_holiday_mins": {
@@ -14797,10 +14785,12 @@
           "special_holiday": {
             "type": "number",
             "description": "この日の特別休暇取得日数。1日単位で指定します。",
+            "format": "float",
             "enum": [
               0,
               1
-            ]
+            ],
+            "example": "1.0"
           },
           "special_holiday_setting_id": {
             "type": "integer",
