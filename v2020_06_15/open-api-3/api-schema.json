@@ -3998,7 +3998,7 @@
             "schema": {
               "type": "integer",
               "minimum": 1,
-              "maximum": 2147483647
+              "maximum": 9223372036854775807
             }
           },
           {
@@ -4009,7 +4009,7 @@
             "schema": {
               "type": "integer",
               "minimum": 1,
-              "maximum": 2147483647
+              "maximum": 9223372036854775807
             }
           }
         ],
@@ -4098,7 +4098,7 @@
             "schema": {
               "type": "integer",
               "minimum": 1,
-              "maximum": 2147483647
+              "maximum": 9223372036854775807
             }
           },
           {
@@ -4109,7 +4109,7 @@
             "schema": {
               "type": "integer",
               "minimum": 1,
-              "maximum": 2147483647
+              "maximum": 9223372036854775807
             }
           },
           {
@@ -32737,7 +32737,7 @@
                 "deal_id": {
                   "type": "integer",
                   "minimum": 1,
-                  "maximum": 2147483647,
+                  "maximum": 9223372036854775807,
                   "description": "取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)",
                   "example": 1,
                   "nullable": true
@@ -32990,7 +32990,7 @@
               "deal_id": {
                 "type": "integer",
                 "minimum": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854775807,
                 "description": "取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)",
                 "example": 1,
                 "nullable": true
@@ -33500,7 +33500,7 @@
               "deal_id": {
                 "type": "integer",
                 "minimum": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854775807,
                 "description": "取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)",
                 "example": 1,
                 "nullable": true
@@ -33884,7 +33884,7 @@
                 "deal_id": {
                   "type": "integer",
                   "minimum": 1,
-                  "maximum": 2147483647,
+                  "maximum": 9223372036854775807,
                   "description": "取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)",
                   "example": 1,
                   "nullable": true
@@ -34794,7 +34794,7 @@
                 "deal_id": {
                   "type": "integer",
                   "minimum": 1,
-                  "maximum": 2147483647,
+                  "maximum": 9223372036854775807,
                   "description": "取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)",
                   "example": 1,
                   "nullable": true
@@ -35216,7 +35216,7 @@
               "deal_id": {
                 "type": "integer",
                 "minimum": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854775807,
                 "description": "取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)",
                 "example": 1,
                 "nullable": true
@@ -36143,7 +36143,7 @@
                 "deal_id": {
                   "type": "integer",
                   "minimum": 1,
-                  "maximum": 2147483647,
+                  "maximum": 9223372036854775807,
                   "description": "取引ID (invoice_statusがsubmitted, unsubmittedの時IDが表示されます)",
                   "nullable": true,
                   "example": 1
@@ -36724,7 +36724,7 @@
               "deal_id": {
                 "type": "integer",
                 "minimum": 1,
-                "maximum": 2147483647,
+                "maximum": 9223372036854775807,
                 "description": "取引ID (invoice_statusがsubmitted, unsubmittedの時IDが表示されます)",
                 "nullable": true,
                 "example": 1
