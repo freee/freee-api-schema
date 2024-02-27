@@ -7739,7 +7739,7 @@
           "残業申請"
         ],
         "summary": "残業申請の作成",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の残業申請を新規作成します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</li>\n  <ul>\n    <li>役職指定（申請者の所属部門）</li>\n    <li>役職指定（申請時に部門指定）</li>\n    <li>部門および役職指定</li>\n  </ul>\n  <li>申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。</li>\n  <ul>\n    <li>status: draft</li>\n    <li>approval_flow_logs.action: cancel</li>\n  </ul>\n</ul>",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の残業申請を新規作成します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>申請の内容を勤怠に反映させるかの設定次第でリクエスト時に指定するパラメータが異なります。残業申請に必要な設定情報の取得APIで確認してください。</li>\n  <ul>\n    <li>勤怠に反映する設定の場合</li>\n    <ul>\n      <li>設定情報の取得APIで受け取った値を用いてパラメータを指定します。</li>\n      <li>早出（early_work_start_at, early_work_end_at）か残業（overtime_work_start_at, overtime_work_end_at）のどちらか、もしくは両方を指定してください。</li>\n      <ul>\n        <li>早出・残業両方とも指定しなかった場合は取り消し申請となります。対象日の承認済み残業申請は全て取り消され、打刻データがあれば勤怠に反映し直します。</li>\n      </ul>\n      <li>早出の終了時刻（early_work_end_at）は所定の出勤時刻と同じ、残業の開始時刻（overtime_work_start_at）は所定の退勤時刻と同じ時刻を指定する必要があります。</li>\n      <li>早出・残業の時刻に指定できる分の単位はそれぞれ設定（early_work_mins_unit, overtime_work_mins_unit）の通りです。</li>\n    </ul>\n    <li>勤怠に反映しない設定の場合</li>\n    <ul>\n      <li>残業開始（start_at）と残業終了（end_at）を指定してください。</li>\n    </ul>\n  </ul>\n  <li>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</li>\n  <ul>\n    <li>役職指定（申請者の所属部門）</li>\n    <li>役職指定（申請時に部門指定）</li>\n    <li>部門および役職指定</li>\n  </ul>\n  <li>申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。</li>\n  <ul>\n    <li>status: draft</li>\n    <li>approval_flow_logs.action: cancel</li>\n  </ul>\n</ul>",
         "operationId": "create_approval_requests_overtime_work",
         "requestBody": {
           "content": {
@@ -7915,7 +7915,7 @@
           "残業申請"
         ],
         "summary": "残業申請の更新",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の残業申請情報を更新します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</li>\n  <ul>\n    <li>役職指定（申請者の所属部門）</li>\n    <li>役職指定（申請時に部門指定）</li>\n    <li>部門および役職指定</li>\n  </ul>\n  <li>申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。</li>\n  <ul>\n    <li>status: draft</li>\n    <li>approval_flow_logs.action: cancel</li>\n  </ul>\n</ul>",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の残業申請情報を更新します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>申請の内容を勤怠に反映させるかの設定次第でリクエスト時に指定するパラメータが異なります。残業申請に必要な設定情報の取得APIで確認してください。</li>\n  <ul>\n    <li>勤怠に反映する設定の場合</li>\n    <ul>\n      <li>設定情報の取得APIで受け取った値を用いてパラメータを指定します。</li>\n      <li>早出（early_work_start_at, early_work_end_at）か残業（overtime_work_start_at, overtime_work_end_at）のどちらか、もしくは両方を指定してください。</li>\n      <ul>\n        <li>早出・残業両方とも指定しなかった場合は取り消し申請となります。対象日の承認済み残業申請は全て取り消され、打刻データがあれば勤怠に反映し直します。</li>\n      </ul>\n      <li>早出の終了時刻（early_work_end_at）は所定の出勤時刻と同じ、残業の開始時刻（overtime_work_start_at）は所定の退勤時刻と同じ時刻を指定する必要があります。</li>\n      <li>早出・残業の時刻に指定できる分の単位はそれぞれ設定（early_work_mins_unit, overtime_work_mins_unit）の通りです。</li>\n    </ul>\n    <li>勤怠に反映しない設定の場合</li>\n    <ul>\n      <li>残業開始（start_at）と残業終了（end_at）を指定してください。</li>\n    </ul>\n  </ul>\n  <li>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</li>\n  <ul>\n    <li>役職指定（申請者の所属部門）</li>\n    <li>役職指定（申請時に部門指定）</li>\n    <li>部門および役職指定</li>\n  </ul>\n  <li>申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。</li>\n  <ul>\n    <li>status: draft</li>\n    <li>approval_flow_logs.action: cancel</li>\n  </ul>\n</ul>",
         "operationId": "update_approval_requests_overtime_work",
         "parameters": [
           {
@@ -8140,6 +8140,153 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ApiV1OvertimeWorkResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notfoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/approval_requests/overtime_works/setting": {
+      "get": {
+        "tags": [
+          "残業申請"
+        ],
+        "summary": "残業申請に必要な設定情報の取得",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員・日付の残業申請に必要な設定情報を取得します。</p>\n<ul>\n  <li>取得できる設定の一覧</li>\n  <ul>\n    <li>勤怠カレンダーに申請を反映するかどうかの設定</li>\n    <ul>\n      <li>この設定により、残業申請の作成や更新のリクエスト時に使用するパラメータが変わります。詳細は、残業申請の作成や更新の仕様を参照してください。</li>\n    </ul>\n    <li>所定の出退勤時間</li>\n    <ul>\n      <li>反映あり申請の場合、残業申請の作成や更新のリクエスト時に所定の出退勤時間が必要になります。詳細は、残業申請の作成や更新の仕様を参照してください。</li>\n    </ul>\n    <li>申請で指定できる分の単位</li>\n    <ul>\n      <li>反映あり申請の場合、勤務賃金設定の申請の単位設定によって、残業申請できる分単位が変わります。</li>\n    </ul>\n  </ul>\n</ul>",
+        "operationId": "get_approval_requests_overtime_work_setting",
+        "parameters": [
+          {
+            "name": "company_id",
+            "in": "query",
+            "required": true,
+            "description": "事業所ID",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "example": 1
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "対象日(YYYY-MM-DD)(例:2018-08-01)\n- 申請の対象日を指定してください。",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "2018-08-01"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "start_at": {
+                      "description": "所定出勤時刻",
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "12:00"
+                    },
+                    "end_at": {
+                      "description": "所定退勤時刻",
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "23:59"
+                    },
+                    "should_reflect_in_work_record": {
+                      "description": "勤務カレンダーに反映するかどうか",
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "early_work_mins_unit": {
+                      "description": "早出に指定できる分の単位",
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "example": [
+                          0,
+                          15,
+                          30,
+                          45
+                        ]
+                      }
+                    },
+                    "overtime_work_mins_unit": {
+                      "description": "残業に指定できる分の単位",
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "example": [
+                          0,
+                          30
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "should_reflect_in_work_record"
+                  ]
                 }
               }
             }
@@ -14910,7 +15057,7 @@
           },
           "num_absences": {
             "type": "number",
-            "description": "欠勤日数",
+            "description": "控除対象の欠勤日数\n\nフレックスタイム制の場合は、指定した値が反映されず無視されます。",
             "format": "float",
             "minimum": 0,
             "maximum": 31
@@ -14930,7 +15077,7 @@
           },
           "total_lateness_mins_for_deduction": {
             "type": "integer",
-            "description": "控除対象の遅刻時間（分）",
+            "description": "控除対象の遅刻時間（分）\n\nフレックスタイム制と裁量労働制の場合は、指定した値が反映されず無視されます。",
             "minimum": 0,
             "maximum": 2147483647
           },
@@ -14942,7 +15089,7 @@
           },
           "total_early_leaving_mins_for_deduction": {
             "type": "integer",
-            "description": "控除対象の早退時間（分）",
+            "description": "控除対象の早退時間（分）\n\nフレックスタイム制と裁量労働制の場合は、指定した値が反映されず無視されます。",
             "minimum": 0,
             "maximum": 2147483647
           },
@@ -16929,6 +17076,10 @@
             "description": "世帯主の名前",
             "maxLength": 255,
             "example": "山田 太郎"
+          },
+          "is_calc_income_tax": {
+            "type": "boolean",
+            "description": "所得税の計算対象かどうか"
           }
         }
       },
@@ -18376,7 +18527,7 @@
             "properties": {
               "id": {
                 "type": "integer",
-                "description": "勤怠タグ付与ID",
+                "description": "勤怠タグID",
                 "format": "int32",
                 "minimum": 1,
                 "maximum": 2147483647,
@@ -18490,7 +18641,7 @@
         "properties": {
           "id": {
             "type": "integer",
-            "description": "勤怠タグ付与ID",
+            "description": "勤怠タグID",
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
@@ -18626,7 +18777,7 @@
             "properties": {
               "id": {
                 "type": "integer",
-                "description": "勤怠タグ付与ID",
+                "description": "勤怠タグID",
                 "format": "int32",
                 "minimum": 1,
                 "maximum": 2147483647,
