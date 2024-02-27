@@ -16929,6 +16929,10 @@
             "description": "世帯主の名前",
             "maxLength": 255,
             "example": "山田 太郎"
+          },
+          "is_calc_income_tax": {
+            "type": "boolean",
+            "description": "所得税の計算対象かどうか"
           }
         }
       },
