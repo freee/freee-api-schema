@@ -956,7 +956,7 @@ paths:
           - settled
           - unsettled
           type: string
-      - description: "(リリース予定)取引ステータス（registered: 登録済み、 unregistered: 登録待ち）"
+      - description: '取引ステータス（registered: 登録済み、 unregistered: 登録待ち）'
         example: registered
         in: query
         name: deal_status
@@ -4496,14 +4496,14 @@ components:
           example: canceled
           type: string
         deal_status:
-          description: "(リリース予定)取引ステータス（registered: 登録済み、 unregistered: 登録待ち）"
+          description: '取引ステータス（registered: 登録済み、 unregistered: 登録待ち）'
           enum:
           - registered
           - unregistered
           example: registered
           type: string
         deal_id:
-          description: "(リリース予定)取引ID （deal_statusがunregisteredの場合、nullになります。）"
+          description: 取引ID （deal_statusがunregisteredの場合、nullになります。）
           example: 1
           format: int64
           maximum: 9223372036854775807
@@ -4979,14 +4979,14 @@ components:
           example: canceled
           type: string
         deal_status:
-          description: "(リリース予定)取引ステータス（registered: 登録済み、 unregistered: 登録待ち）"
+          description: '取引ステータス（registered: 登録済み、 unregistered: 登録待ち）'
           enum:
           - registered
           - unregistered
           example: registered
           type: string
         deal_id:
-          description: "(リリース予定)取引ID （deal_statusがunregisteredの場合、nullになります。）"
+          description: 取引ID （deal_statusがunregisteredの場合、nullになります。）
           example: 1
           format: int64
           maximum: 9223372036854775807
@@ -5392,14 +5392,14 @@ components:
           example: canceled
           type: string
         deal_status:
-          description: "(リリース予定)取引ステータス（registered: 登録済み、 unregistered: 登録待ち）"
+          description: '取引ステータス（registered: 登録済み、 unregistered: 登録待ち）'
           enum:
           - registered
           - unregistered
           example: registered
           type: string
         deal_id:
-          description: "(リリース予定)取引ID （deal_statusがunregisteredの場合、nullになります。）"
+          description: 取引ID （deal_statusがunregisteredの場合、nullになります。）
           example: 1
           format: int64
           maximum: 9223372036854775807
