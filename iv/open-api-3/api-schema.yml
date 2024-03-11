@@ -70,7 +70,7 @@ info:
     </br>
 
     <h3 id="api_rate_limit">API使用制限</h3>
-    <p>APIリクエストは1時間で5000回を上限としています。API使用ステータスはレスポンスヘッダに付与されます。</p>
+    <p>API使用ステータスはレスポンスヘッダに付与されます。</p>
     <pre><code>X-Ratelimit-Limit:5000
     X-Ratelimit-Remaining:4998
     X-Ratelimit-Reset:2018-01-01T12:00:00.000000Z
@@ -91,6 +91,24 @@ info:
     </table>
 
     <p>上記に加え、freeeは一定期間に過度のアクセスを検知した場合、APIアクセスをコントロールする場合があります。<br> その際のhttp status codeは403となります。制限がかかってから10分程度が過ぎると再度使用することができるようになります。</p>
+
+    <h4 id="plan_api_rate_limit">プラン別のAPI Rate Limit</h4>
+    <table border="1">
+      <tbody>
+        <tr>
+          <th style="padding: 10px"><strong>freee請求書プラン名</strong></th>
+          <th style="padding: 10px"><strong>事業所とアプリケーション毎に1時間でのAPIコール数</strong></th>
+        </tr>
+        <tr>
+          <td style="padding: 10px">スタンダード</td>
+          <td style="padding: 10px">5,000</td>
+        </tr>
+        <tr>
+          <td style="padding: 10px">無料</td>
+          <td style="padding: 10px">3,000</td>
+        </tr>
+      </tbody>
+    </table>
   license:
     name: "© 2023 freee K.K."
   title: freee請求書 API
@@ -947,7 +965,7 @@ paths:
         schema:
           maxLength: 255
           type: string
-      - description: "(リリース予定)入金ステータス（unsettled: 入金待ち, settled: 入金済み）"
+      - description: '入金ステータス（unsettled: 入金待ち, settled: 入金済み）'
         example: settled
         in: query
         name: payment_status
@@ -4482,7 +4500,7 @@ components:
           example: sent
           type: string
         payment_status:
-          description: "(リリース予定)入金ステータス（unsettled: 入金待ち, settled: 入金済み）"
+          description: '入金ステータス（unsettled: 入金待ち, settled: 入金済み）'
           enum:
           - settled
           - unsettled
@@ -4965,7 +4983,7 @@ components:
           example: sent
           type: string
         payment_status:
-          description: "(リリース予定)入金ステータス（unsettled: 入金待ち, settled: 入金済み）"
+          description: '入金ステータス（unsettled: 入金待ち, settled: 入金済み）'
           enum:
           - settled
           - unsettled
@@ -5378,7 +5396,7 @@ components:
           example: sent
           type: string
         payment_status:
-          description: "(リリース予定)入金ステータス（unsettled: 入金待ち, settled: 入金済み）"
+          description: '入金ステータス（unsettled: 入金待ち, settled: 入金済み）'
           enum:
           - settled
           - unsettled
