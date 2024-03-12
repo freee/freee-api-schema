@@ -2162,7 +2162,7 @@
           "勤怠"
         ],
         "summary": "勤怠の取得",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員・日付の勤怠情報を返します。</p>\n<a href=\"https://developer.freee.co.jp/news/6774\" target=\"_blank\">API仕様の変更について</a>",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員・日付の勤怠情報を返します。</p>",
         "operationId": "get_employee_work_record",
         "parameters": [
           {
@@ -2262,7 +2262,7 @@
           "勤怠"
         ],
         "summary": "勤怠の更新",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員の勤怠情報を更新します。</p>\n<a href=\"https://developer.freee.co.jp/news/6774\" target=\"_blank\">API仕様の変更について</a>\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>振替出勤・振替休日・代休出勤・代休の登録はAPIでは行うことができません。</li>\n</ul>\n\n<h2 id=\"_2\">examples</h2>\n<ul>\n  <li>出勤日について出退勤時刻および休憩時間を更新する場合は以下のようなパラメータをリクエストします。\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2017-05-25 12:00:00\",\n            \"clock_out_at\": \"2017-05-25 13:00:00\"\n          }\n        ],\n        \"clock_in_at\": \"2017-05-25 09:10:00\",\n        \"clock_out_at\": \"2017-05-25 18:20:00\"\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>勤務パターンや既定の所定労働時間を変更する場合は use_default_work_pattern に false を指定するとともに、各設定を上書きするパラメータをリクエストします。\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2017-05-25 12:00:00\",\n            \"clock_out_at\": \"2017-05-25 13:00:00\"\n          }\n        ],\n        \"clock_in_at\": \"2017-05-25 09:10:00\",\n        \"clock_out_at\": \"2017-05-25 18:20:00\",\n        \"day_pattern\": \"normal_day\",\n        \"normal_work_clock_in_at\": \"2017-05-25 11:00:00\",\n        \"normal_work_clock_out_at\": \"2017-12-20 20:00:00\",\n        \"normal_work_mins\": 0,\n        \"use_default_work_pattern\": false\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>有給取得時の連携について半休の場合は通常勤務のように勤務開始・終了時間を指定しつつ、加えて以下の要素を指定することで API での勤怠をつけることができます。\n    <ul>\n      <li>half_paid_holiday_mins (半休により計上される所定労働時間を分で指定します)</li>\n    </ul>\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2023-12-22 12:00:00\",\n            \"clock_out_at\": \"2023-12-22 13:00:00\"\n          }\n        ],\n        \"clock_in_at\": \"2023-12-22 09:10:00\",\n        \"clock_out_at\": \"2023-12-22 14:20:00\",\n        \"half_paid_holiday_mins\": 240\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>特別休暇取得時の連携について全休の場合は以下の要素を指定することで API での勤怠をつけることができます。\n    <ul>\n      <li>special_holiday (全休の場合1.0を指定します)</li>\n      <li>special_holiday_setting_id (特別休暇設定IDを指定します)</li>\n    </ul>\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"special_holiday\": 1.0\n        \"special_holiday_setting_id\": 1\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>特別休暇取得時の連携について時間休の場合は通常勤務のように勤務開始・終了時間を指定しつつ、加えて以下の要素を指定することで API での勤怠をつけることができます。\n    <ul>\n      <li>special_holiday_setting_id (特別休暇設定IDを指定します)</li>\n      <li>hourly_special_holiday_mins (時間休により計上される所定労働時間を分で指定します)</li>\n    </ul>\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2023-12-22 12:00:00\",\n            \"clock_out_at\": \"2023-12-22 13:00:00\"\n          }\n        ],\n        \"clock_in_at\": \"2023-12-22 09:00:00\",\n        \"clock_out_at\": \"2023-12-22 16:00:00\",\n        \"special_holiday_setting_id\": 1,\n        \"hourly_special_holiday_mins\": 120\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>欠勤を付ける場合は company_idとis_absence 以外のパラメータは必要ありません。\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"is_absence\": true\n      }\n      </code>\n    </pre>\n  </li>\n\n</ul>",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員の勤怠情報を更新します。</p>\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>振替出勤・振替休日・代休出勤・代休の登録はAPIでは行うことができません。</li>\n</ul>\n\n<h2 id=\"_2\">examples</h2>\n<ul>\n  <li>出勤日について出退勤時刻および休憩時間を更新する場合は以下のようなパラメータをリクエストします。\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2017-05-25 12:00:00\",\n            \"clock_out_at\": \"2017-05-25 13:00:00\"\n          }\n        ],\n        \"clock_in_at\": \"2017-05-25 09:10:00\",\n        \"clock_out_at\": \"2017-05-25 18:20:00\"\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>勤務パターンや既定の所定労働時間を変更する場合は use_default_work_pattern に false を指定するとともに、各設定を上書きするパラメータをリクエストします。\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2017-05-25 12:00:00\",\n            \"clock_out_at\": \"2017-05-25 13:00:00\"\n          }\n        ],\n        \"clock_in_at\": \"2017-05-25 09:10:00\",\n        \"clock_out_at\": \"2017-05-25 18:20:00\",\n        \"day_pattern\": \"normal_day\",\n        \"normal_work_clock_in_at\": \"2017-05-25 11:00:00\",\n        \"normal_work_clock_out_at\": \"2017-12-20 20:00:00\",\n        \"normal_work_mins\": 0,\n        \"use_default_work_pattern\": false\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>有給取得時の連携について半休の場合は通常勤務のように勤務開始・終了時間を指定しつつ、加えて以下の要素を指定することで API での勤怠をつけることができます。\n    <ul>\n      <li>half_paid_holiday_mins (半休により計上される所定労働時間を分で指定します)</li>\n    </ul>\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2023-12-22 12:00:00\",\n            \"clock_out_at\": \"2023-12-22 13:00:00\"\n          }\n        ],\n        \"clock_in_at\": \"2023-12-22 09:10:00\",\n        \"clock_out_at\": \"2023-12-22 14:20:00\",\n        \"half_paid_holiday_mins\": 240\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>特別休暇取得時の連携について全休の場合は以下の要素を指定することで API での勤怠をつけることができます。\n    <ul>\n      <li>special_holiday (全休の場合1.0を指定します)</li>\n      <li>special_holiday_setting_id (特別休暇設定IDを指定します)</li>\n    </ul>\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"special_holiday\": 1.0\n        \"special_holiday_setting_id\": 1\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>特別休暇取得時の連携について時間休の場合は通常勤務のように勤務開始・終了時間を指定しつつ、加えて以下の要素を指定することで API での勤怠をつけることができます。\n    <ul>\n      <li>special_holiday_setting_id (特別休暇設定IDを指定します)</li>\n      <li>hourly_special_holiday_mins (時間休により計上される所定労働時間を分で指定します)</li>\n    </ul>\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2023-12-22 12:00:00\",\n            \"clock_out_at\": \"2023-12-22 13:00:00\"\n          }\n        ],\n        \"clock_in_at\": \"2023-12-22 09:00:00\",\n        \"clock_out_at\": \"2023-12-22 16:00:00\",\n        \"special_holiday_setting_id\": 1,\n        \"hourly_special_holiday_mins\": 120\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>欠勤を付ける場合は company_idとis_absence 以外のパラメータは必要ありません。\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"is_absence\": true\n      }\n      </code>\n    </pre>\n  </li>\n\n</ul>",
         "operationId": "update_employee_work_record",
         "parameters": [
           {
@@ -2469,7 +2469,7 @@
           "勤怠情報サマリ"
         ],
         "summary": "勤怠情報月次サマリの取得",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員、月の勤怠情報のサマリを返します。</p>\n<a href=\"https://developer.freee.co.jp/news/6774\" target=\"_blank\">API仕様の変更について</a>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>work_recordsオプションにtrueを指定することで、明細となる日次の勤怠情報もあわせて返却します。</li>\n</ul>",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員、月の勤怠情報のサマリを返します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>work_recordsオプションにtrueを指定することで、明細となる日次の勤怠情報もあわせて返却します。</li>\n</ul>",
         "operationId": "get_employee_work_record_summary",
         "parameters": [
           {
@@ -3393,6 +3393,581 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/employees/{employee_id}/attendance_tag_summaries/{year}/{month}": {
+      "get": {
+        "tags": [
+          "勤怠タグサマリ"
+        ],
+        "summary": "勤怠タグ月次サマリの取得",
+        "description": "<h2 id=\"\">概要</h2>\n<p>\n  指定した従業員・年月の勤怠タグサマリを更新します。<br />\n  年月は給与支払い月を指定してください。\n</p>",
+        "operationId": "get_employees_attendance_tag_summaries",
+        "parameters": [
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "name": "employee_id",
+            "in": "path",
+            "description": "従業員ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "name": "year",
+            "in": "path",
+            "description": "勤怠タグサマリを取得したい年",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 2000,
+              "maximum": 2100,
+              "example": 2021
+            }
+          },
+          {
+            "name": "month",
+            "in": "path",
+            "description": "勤怠タグサマリを取得したい月",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 12,
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiV1EmployeesAttendanceTagSummariesController.show_response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notfoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "勤怠タグサマリ"
+        ],
+        "summary": "勤怠タグ月次サマリの更新",
+        "description": "<h2 id=\"\">概要</h2>\n<p>\n  指定した従業員・年月の勤怠タグサマリを更新します。<br />\n  年月は給与支払い月を指定してください。\n</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>管理者権限を持ったユーザーのみ実行可能です。</li>\n  <li>指定した従業員・年月の勤怠タグサマリが存在する場合は、上書き更新されます。</li>\n  <li>指定がなかった勤怠タグは自動的に0が設定されます。</li>\n</ul>",
+        "operationId": "update_employees_attendance_tag_summaries",
+        "parameters": [
+          {
+            "name": "employee_id",
+            "in": "path",
+            "description": "従業員ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "name": "year",
+            "in": "path",
+            "description": "勤怠タグサマリを更新したい年",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 2000,
+              "maximum": 2100,
+              "example": 2021
+            }
+          },
+          {
+            "name": "month",
+            "in": "path",
+            "description": "勤怠タグサマリを更新したい月",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 12,
+              "example": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiV1EmployeesAttendanceTagSummariesController.update_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiV1EmployeesAttendanceTagSummariesController.update_response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notfoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/employees/{employee_id}/attendance_tags": {
+      "get": {
+        "tags": [
+          "勤怠タグ"
+        ],
+        "summary": "勤怠タグ一覧の取得",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員の利用可能な勤怠タグの一覧を返します。</p>",
+        "operationId": "get_employees_attendance_tags",
+        "parameters": [
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "name": "employee_id",
+            "in": "path",
+            "description": "従業員ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiV1EmployeesAttendanceTagsController.index_response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notfoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/employees/{employee_id}/attendance_tags/{date}": {
+      "get": {
+        "tags": [
+          "勤怠タグ"
+        ],
+        "summary": "勤怠タグと利用回数の取得",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員・日付の勤怠タグと利用回数の一覧を返します。</p>",
+        "operationId": "get_employees_attendance_tags_by_date",
+        "parameters": [
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "name": "employee_id",
+            "in": "path",
+            "description": "従業員ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "description": "対象年月日(YYYY-MM-DD)(例:2018-08-01)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiV1EmployeesAttendanceTagsController.show_response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notfoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "勤怠タグ"
+        ],
+        "summary": "勤怠タグの更新",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員・日付の勤怠タグを更新します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>指定した従業員・日付の勤怠タグが存在する場合は、上書き更新されます。</li>\n  <li>指定がなかった勤怠タグは削除されます。</li>\n</ul>",
+        "operationId": "update_employees_attendance_tags",
+        "parameters": [
+          {
+            "name": "employee_id",
+            "in": "path",
+            "description": "従業員ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "description": "更新対象年月日(YYYY-MM-DD)(例:2018-08-01)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiV1EmployeesAttendanceTagsController.update_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "employee_attendance_tags": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ApiV1EmployeesAssignedAttendanceTagSerializer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accessDeniedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notfoundError"
                 }
               }
             }
