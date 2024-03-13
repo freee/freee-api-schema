@@ -947,7 +947,7 @@ paths:
         schema:
           maxLength: 255
           type: string
-      - description: "(リリース予定)入金ステータス（unsettled: 入金待ち, settled: 入金済み）"
+      - description: '入金ステータス（unsettled: 入金待ち, settled: 入金済み）'
         example: settled
         in: query
         name: payment_status
@@ -4482,7 +4482,7 @@ components:
           example: sent
           type: string
         payment_status:
-          description: "(リリース予定)入金ステータス（unsettled: 入金待ち, settled: 入金済み）"
+          description: '入金ステータス（unsettled: 入金待ち, settled: 入金済み）'
           enum:
           - settled
           - unsettled
@@ -4965,7 +4965,7 @@ components:
           example: sent
           type: string
         payment_status:
-          description: "(リリース予定)入金ステータス（unsettled: 入金待ち, settled: 入金済み）"
+          description: '入金ステータス（unsettled: 入金待ち, settled: 入金済み）'
           enum:
           - settled
           - unsettled
@@ -5378,7 +5378,7 @@ components:
           example: sent
           type: string
         payment_status:
-          description: "(リリース予定)入金ステータス（unsettled: 入金待ち, settled: 入金済み）"
+          description: '入金ステータス（unsettled: 入金待ち, settled: 入金済み）'
           enum:
           - settled
           - unsettled
