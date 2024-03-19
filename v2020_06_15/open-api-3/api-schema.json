@@ -6033,7 +6033,7 @@
           "Items"
         ],
         "summary": "品目一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目一覧を取得する</p>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目一覧を取得する</p>\n<p>事業所の設定から品目コードの利用を有効にしている場合、レスポンスで品目コード(code)を返します</p>",
         "operationId": "get_items",
         "parameters": [
           {
@@ -6081,6 +6081,14 @@
               "type": "integer",
               "minimum": 1,
               "maximum": 3000
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "description": "品目コード",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -6153,7 +6161,7 @@
           "Items"
         ],
         "summary": "品目の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目を作成する</p>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目を作成する</p>\n\n<ul>\n  <li>codeを利用するには、事業所の設定から品目コードの利用を有効にする必要があります。</li>\n  <li>品目コードの利用を有効にしている場合は、\n    <ul>\n      <li>codeの指定は必須です。</li>\n      <li>name、codeそれぞれ重複不可です。</li>\n    </ul>\n  </li>\n</ul>",
         "operationId": "create_item",
         "requestBody": {
           "description": "品目の作成",
@@ -6231,7 +6239,7 @@
           "Items"
         ],
         "summary": "品目の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目を取得する</p>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目を取得する</p>\n<p>事業所の設定から品目コードの利用を有効にしている場合、レスポンスで品目コード(code)を返します</p>",
         "operationId": "get_item",
         "parameters": [
           {
@@ -6325,7 +6333,7 @@
           "Items"
         ],
         "summary": "品目の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目を更新する</p>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目を更新する</p>\n<ul>\n  <li>codeを利用するには、事業所の設定から品目コードの利用を有効にする必要があります。</li>\n  <li>品目コードの利用を有効にしている場合は、\n    <ul>\n      <li>codeの指定は必須です。</li>\n      <li>name、codeそれぞれ重複不可です。</li>\n    </ul>\n  </li>\n</ul>",
         "operationId": "update_item",
         "parameters": [
           {
@@ -18056,6 +18064,13 @@
             "maxLength": 20,
             "description": "ショートカット２ (20文字以内)",
             "example": "202"
+          },
+          "code": {
+            "type": "string",
+            "maxLength": 20,
+            "description": "品目コード",
+            "example": "code001",
+            "pattern": "^[0-9a-zA-Z_-]+$"
           }
         }
       },
@@ -29596,6 +29611,14 @@
             "type": "string",
             "description": "ショートカット２ (20文字以内)",
             "example": 201,
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "maxLength": 20,
+            "description": "品目コード",
+            "example": "code001",
+            "pattern": "^[0-9a-zA-Z_-]+$",
             "nullable": true
           }
         }
