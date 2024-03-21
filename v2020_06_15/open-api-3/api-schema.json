@@ -18068,7 +18068,7 @@
           "code": {
             "type": "string",
             "maxLength": 20,
-            "description": "品目コード",
+            "description": "品目コード（品目コードの利用を有効にしている場合は、codeの指定が必須です）",
             "example": "code001",
             "pattern": "^[0-9a-zA-Z_-]+$"
           }
