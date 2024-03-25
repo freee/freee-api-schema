@@ -35337,7 +35337,7 @@
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 2147483647,
-                  "description": "適用された経路数",
+                  "description": "適用された経路数（ユーザーが利用できない経路を除く）",
                   "example": 1
                 }
               }
@@ -35516,7 +35516,7 @@
                 "type": "integer",
                 "minimum": 0,
                 "maximum": 2147483647,
-                "description": "適用された経路数",
+                "description": "適用された経路数（ユーザーが利用できない経路を除く）",
                 "example": 1
               }
             }
