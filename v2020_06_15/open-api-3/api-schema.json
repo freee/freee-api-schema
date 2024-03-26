@@ -6854,7 +6854,9 @@
             "name": "with_balance",
             "in": "query",
             "description": "残高情報を含める",
+            "example": false,
             "schema": {
+              "default": false,
               "type": "boolean"
             }
           },
@@ -6869,6 +6871,17 @@
                 "credit_card",
                 "wallet"
               ]
+            }
+          },
+          {
+            "name": "with_sync_status",
+            "in": "query",
+            "x-undocumented": true,
+            "description": "sync_statusを含める",
+            "schema": {
+              "default": false,
+              "example": false,
+              "type": "boolean"
             }
           }
         ],
@@ -7055,6 +7068,17 @@
                 "credit_card",
                 "wallet"
               ]
+            }
+          },
+          {
+            "name": "with_sync_status",
+            "in": "query",
+            "x-undocumented": true,
+            "description": "sync_statusを含める",
+            "schema": {
+              "default": false,
+              "example": false,
+              "type": "boolean"
             }
           },
           {
