@@ -2092,12 +2092,12 @@ components:
           type: string
         company_name:
           description: 自社名を上書きする場合に指定します。
-          example: freee株式会社
+          example: freee K.K.
           maxLength: 255
           type: string
         company_description:
           description: 自社説明を上書きする場合に指定します。
-          example: freee株式会社
+          example: freee K.K.
           maxLength: 255
           type: string
         lines:
@@ -2998,7 +2998,7 @@ components:
           type: string
         company_name:
           description: 自社名
-          example: freee株式会社
+          example: freee K.K.
           maxLength: 255
           type: string
         company_description:
@@ -3445,6 +3445,19 @@ components:
           description: 自社担当者名
           example: 法人営業担当
           maxLength: 255
+          type: string
+        company_name:
+          description: 自社名 (上書きした場合のみ反映されます、デフォルトがテンプレートの自社名になり。)
+          example: freee K.K.
+          maxLength: 255
+          type: string
+        company_description:
+          description: 自社情報 (上書きした場合のみ反映されます、デフォルトがテンプレートの自社情報になり。)
+          example: "〒141-0032　東京都品川区大崎1-2-2アートヴィレッジ大崎セントラルタワー 21階"
+          type: string
+        bank_account_to_transfer:
+          description: 振込先
+          example: freee K.K.銀行 第一営業支店 1234567
           type: string
         template:
           "$ref": "#/components/schemas/InvoiceResponse_invoice_template"
@@ -4103,7 +4116,7 @@ components:
           type: string
         company_name:
           description: 自社名
-          example: freee株式会社
+          example: freee K.K.
           maxLength: 255
           type: string
         company_description:
@@ -4494,6 +4507,16 @@ components:
         company_contact_name:
           description: 自社担当者名
           example: 法人営業担当
+          maxLength: 255
+          type: string
+        company_name:
+          description: 自社名 (上書きした場合のみ反映されます、デフォルトがテンプレートの自社名になり。)
+          example: freee K.K.
+          maxLength: 255
+          type: string
+        company_description:
+          description: 自社情報 (上書きした場合のみ反映されます、デフォルトがテンプレートの自社情報になり。)
+          example: "〒141-0032　東京都品川区大崎1-2-2アートヴィレッジ大崎セントラルタワー 21階"
           maxLength: 255
           type: string
         template:
@@ -5332,6 +5355,15 @@ components:
           example: 法人営業担当
           maxLength: 255
           type: string
+        company_name:
+          description: 自社名
+          example: freee K.K.
+          maxLength: 255
+          type: string
+        company_description:
+          description: 自社情報
+          example: "〒141-0032　東京都品川区大崎1-2-2アートヴィレッジ大崎セントラルタワー 21階"
+          type: string
         template:
           "$ref": "#/components/schemas/DeliverySlipResponse_delivery_slip_template"
         lines:
@@ -5736,6 +5768,16 @@ components:
         company_contact_name:
           description: 自社担当者名
           example: 法人営業担当
+          maxLength: 255
+          type: string
+        company_name:
+          description: 自社名 (上書きした場合のみ反映されます、デフォルトがテンプレートの自社名になり。)
+          example: freee K.K.
+          maxLength: 255
+          type: string
+        company_description:
+          description: 自社情報 (上書きした場合のみ反映されます、デフォルトがテンプレートの自社情報になり。)
+          example: "〒141-0032　東京都品川区大崎1-2-2アートヴィレッジ大崎セントラルタワー 21階"
           maxLength: 255
           type: string
         template:
