@@ -813,7 +813,7 @@
           "Account items"
         ],
         "summary": "勘定科目の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した勘定科目を取得する</p>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した勘定科目を取得する</p>\n<p>事業所の設定で勘定科目コードを使用する設定にしている場合、レスポンスで勘定科目コード(code)を返します</p>",
         "operationId": "get_account_item",
         "parameters": [
           {
@@ -907,7 +907,7 @@
           "Account items"
         ],
         "summary": "勘定科目の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した勘定科目を更新する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<p>tax_codeは、指定した事業所の税区分一覧の取得APIでavailableの値がtrue、かつ経過措置税区分ではない5%の税区分を確認して、そのcodeを指定して勘定科目の更新をしてください。例 課対仕入の場合、34を指定してください</p>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した勘定科目を更新する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<p>tax_codeは、指定した事業所の税区分一覧の取得APIでavailableの値がtrue、かつ経過措置税区分ではない5%の税区分を確認して、そのcodeを指定して勘定科目の更新をしてください。例 課対仕入の場合、34を指定してください</p>\n<ul>\n  <li>codeを利用するには、事業所の設定で勘定科目コードを使用する設定にする必要があります。</li>\n  <li>勘定科目コードの利用を有効にしている場合は、\n    <ul>\n      <li>codeの指定は必須です。</li>\n      <li>name、codeそれぞれ重複不可です。</li>\n    </ul>\n  </li>\n</ul>",
         "operationId": "update_account_item",
         "parameters": [
           {
@@ -1005,7 +1005,7 @@
           "Account items"
         ],
         "summary": "勘定科目の削除",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した勘定科目を削除する</p>\n<h2 id=\"\">注意点</h2>\n<ul>\n<li>削除できる勘定科目は、追加で作成したカスタム勘定科目のみです。</li>\n<li>デフォルトで存在する勘定科目や口座の勘定科目は削除できません。</li></ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した勘定科目を削除する</p>\n<h2 id=\"\">注意点</h2>\n<ul>\n  <li>削除できる勘定科目は、追加で作成したカスタム勘定科目のみです。</li>\n  <li>デフォルトで存在する勘定科目や口座の勘定科目は削除できません。</li>\n</ul>\n<ul>\n  <li>codeを利用するには、事業所の設定で勘定科目コードを使用する設定にする必要があります。</li>\n  <li>勘定科目コードの利用を有効にしている場合は、\n    <ul>\n      <li>codeの指定は必須です。</li>\n      <li>name、codeそれぞれ重複不可です。</li>\n    </ul>\n  </li>\n</ul>",
         "operationId": "destroy_account_item",
         "parameters": [
           {
@@ -1085,7 +1085,7 @@
           "Account items"
         ],
         "summary": "勘定科目一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の勘定科目一覧を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>default_tax_code : リクエストした日時を基準とした税区分コード</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<p>default_tax_code は勘定科目作成・更新時に利用するものではありません</p>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の勘定科目一覧を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>default_tax_code : リクエストした日時を基準とした税区分コード</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<p>default_tax_code は勘定科目作成・更新時に利用するものではありません</p>\n<p>事業所の設定で勘定科目コードを使用する設定にしている場合、レスポンスで勘定科目コード(code)を返します</p>",
         "operationId": "get_account_items",
         "parameters": [
           {
@@ -6033,7 +6033,7 @@
           "Items"
         ],
         "summary": "品目一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目一覧を取得する</p>\n<p>事業所の設定から品目コードの利用を有効にしている場合、レスポンスで品目コード(code)を返します</p>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目一覧を取得する</p>\n<p>事業所の設定で品目コードを使用する設定にしている場合、レスポンスで品目コード(code)を返します</p>",
         "operationId": "get_items",
         "parameters": [
           {
@@ -6081,14 +6081,6 @@
               "type": "integer",
               "minimum": 1,
               "maximum": 3000
-            }
-          },
-          {
-            "name": "code",
-            "in": "query",
-            "description": "品目コード",
-            "schema": {
-              "type": "string"
             }
           }
         ],
@@ -6161,7 +6153,7 @@
           "Items"
         ],
         "summary": "品目の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目を作成する</p>\n\n<ul>\n  <li>codeを利用するには、事業所の設定から品目コードの利用を有効にする必要があります。</li>\n  <li>品目コードの利用を有効にしている場合は、\n    <ul>\n      <li>codeの指定は必須です。</li>\n      <li>name、codeそれぞれ重複不可です。</li>\n    </ul>\n  </li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目を作成する</p>\n\n<ul>\n  <li>codeを利用するには、事業所の設定で品目コードを使用する設定にする必要があります。</li>\n  <li>品目コードの利用を有効にしている場合は、\n    <ul>\n      <li>codeの指定は必須です。</li>\n      <li>name、codeそれぞれ重複不可です。</li>\n    </ul>\n  </li>\n</ul>",
         "operationId": "create_item",
         "requestBody": {
           "description": "品目の作成",
@@ -6239,7 +6231,7 @@
           "Items"
         ],
         "summary": "品目の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目を取得する</p>\n<p>事業所の設定から品目コードの利用を有効にしている場合、レスポンスで品目コード(code)を返します</p>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目を取得する</p>\n<p>事業所の設定で品目コードを使用する設定にしている場合、レスポンスで品目コード(code)を返します</p>",
         "operationId": "get_item",
         "parameters": [
           {
@@ -6333,7 +6325,7 @@
           "Items"
         ],
         "summary": "品目の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目を更新する</p>\n<ul>\n  <li>codeを利用するには、事業所の設定から品目コードの利用を有効にする必要があります。</li>\n  <li>品目コードの利用を有効にしている場合は、\n    <ul>\n      <li>codeの指定は必須です。</li>\n      <li>name、codeそれぞれ重複不可です。</li>\n    </ul>\n  </li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目を更新する</p>\n<ul>\n  <li>codeを利用するには、事業所の設定で品目コードを使用する設定にする必要があります。</li>\n  <li>品目コードの利用を有効にしている場合は、\n    <ul>\n      <li>codeの指定は必須です。</li>\n      <li>name、codeそれぞれ重複不可です。</li>\n    </ul>\n  </li>\n</ul>",
         "operationId": "update_item",
         "parameters": [
           {
@@ -18070,7 +18062,7 @@
           "code": {
             "type": "string",
             "maxLength": 20,
-            "description": "品目コード（品目コードの利用を有効にしている場合は、codeの指定が必須です）",
+            "description": "品目コード (品目コードを使用する設定の場合は、codeの指定が必須です)",
             "example": "code001",
             "pattern": "^[0-9a-zA-Z_-]+$"
           }
@@ -20068,8 +20060,15 @@
               "shortcut_num": {
                 "type": "string",
                 "maxLength": 20,
-                "description": "ショートカット2(勘定科目コード)(20文字以内)",
+                "description": "ショートカット2 (20文字以内)",
                 "example": "999"
+              },
+              "code": {
+                "type": "string",
+                "maxLength": 20,
+                "description": "勘定科目コード (勘定科目コードを使用する設定の場合は、codeの指定が必須です)",
+                "example": "999",
+                "pattern": "^[0-9a-zA-Z_-]+$"
               },
               "tax_code": {
                 "type": "integer",
@@ -20197,7 +20196,14 @@
                 "shortcut_num": {
                   "type": "string",
                   "maxLength": 20,
-                  "description": "ショートカット2(勘定科目コード) (20文字以内)",
+                  "description": "ショートカット2 (20文字以内)",
+                  "example": "123",
+                  "nullable": true
+                },
+                "code": {
+                  "type": "string",
+                  "maxLength": 20,
+                  "description": "勘定科目コード",
                   "example": "123",
                   "nullable": true
                 },
@@ -20352,8 +20358,15 @@
               "shortcut_num": {
                 "type": "string",
                 "maxLength": 20,
-                "description": "ショートカット2(勘定科目コード) (20文字以内)",
+                "description": "ショートカット2 (20文字以内)",
                 "example": "123"
+              },
+              "code": {
+                "type": "string",
+                "maxLength": 20,
+                "description": "勘定科目コード",
+                "example": "123",
+                "nullable": true
               },
               "searchable": {
                 "type": "integer",
@@ -20515,8 +20528,15 @@
               "shortcut_num": {
                 "type": "string",
                 "maxLength": 20,
-                "description": "ショートカット2(勘定科目コード)(20文字以内)",
+                "description": "ショートカット2 (20文字以内)",
                 "example": "999"
+              },
+              "code": {
+                "type": "string",
+                "maxLength": 20,
+                "description": "勘定科目コード (勘定科目コードを使用する設定の場合は、codeの指定が必須です)",
+                "example": "999",
+                "pattern": "^[0-9a-zA-Z_-]+$"
               },
               "tax_code": {
                 "type": "integer",
