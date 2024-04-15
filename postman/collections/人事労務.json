@@ -52,7 +52,7 @@
 															"host": [
 																"{{baseUrl}}"
 															],
-															"path": [
+															"path": [											
 																"api",
 																"v1",
 																"companies",
@@ -248,11 +248,6 @@
 																			"description": "取得レコードの件数 (デフォルト: 50, 最小: 1, 最大: 100)",
 																			"key": "limit",
 																			"value": "50"
-																		},
-																		{
-																			"description": "取得レコードのオフセット (デフォルト: 0)",
-																			"key": "offset",
-																			"value": "0"
 																		},
 																		{
 																			"description": "trueを指定すると給与計算対象外の従業員情報をレスポンスに含めます。",
