@@ -91,6 +91,16 @@ info:
     </table>
 
     <p>上記に加え、freeeは一定期間に過度のアクセスを検知した場合、APIアクセスをコントロールする場合があります。<br> その際のhttp status codeは403となります。制限がかかってから10分程度が過ぎると再度使用することができるようになります。</p>
+
+    </br>
+
+    <h3 id="accounting_master_items">会計マスタ項目</h3>
+
+    <p>freee請求書APIのリクエストパラメータに、会計マスタ項目（例：<a href="https://developer.freee.co.jp/reference/iv/reference#operations-tag-Invoices">POST/invoices請求書の作成</a> 取引先ID）があります。会計マスタ項目の詳細は<a href="https://developer.freee.co.jp/guideline/master-guideline">会計マスタガイドラインを参照ください</a>。</p>
+
+    <p>会計のマスタ項目はfreee会計APIのエンドポイントにて取得可能です（例：<a href="https://developer.freee.co.jp/reference/accounting/reference#operations-tag-Partners">Partners 取引先</a>）。freee会計APIのエンドポイントの詳細は<a href="https://developer.freee.co.jp/reference/accounting/reference">会計APIリファレンスを参照ください</a>。</p>
+
+    </br>
   license:
     name: "© 2023 freee K.K."
   title: freee請求書 API
