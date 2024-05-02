@@ -29790,6 +29790,7 @@
             "items": {
               "type": "object",
               "required": [
+                "company_number",
                 "display_name",
                 "id",
                 "name",
@@ -29821,6 +29822,11 @@
                   "example": "freee事務所",
                   "nullable": true
                 },
+                "company_number": {
+                  "type": "string",
+                  "description": "事業所番号（ハイフン無し）",
+                  "example": "1234567890"
+                },
                 "role": {
                   "type": "string",
                   "description": "ユーザーの権限",
@@ -29848,6 +29854,7 @@
             "type": "object",
             "required": [
               "amount_fraction",
+              "company_number",
               "contact_name",
               "corporate_number",
               "display_name",
@@ -29861,6 +29868,7 @@
               "minus_format",
               "name",
               "name_kana",
+              "org_code",
               "phone1",
               "phone2",
               "prefecture_code",
@@ -29957,6 +29965,18 @@
                 "maximum": 1,
                 "description": "マイナスの表示方法（0: -、 1: △）",
                 "example": 0
+              },
+              "org_code": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 2,
+                "description": "事業所種別コード（1: 法人、 2: 個人事業主）",
+                "example": 1
+              },
+              "company_number": {
+                "type": "string",
+                "description": "事業所番号（ハイフン無し）",
+                "example": "1234567890"
               },
               "role": {
                 "type": "string",
