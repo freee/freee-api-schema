@@ -15580,7 +15580,9 @@
             "description": "事業所ID",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
             }
           },
           {
@@ -15603,7 +15605,9 @@
             "name": "application_number",
             "in": "query",
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
             },
             "description": "申請No.",
             "example": 2
@@ -15621,7 +15625,9 @@
             "name": "form_id",
             "in": "query",
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
             },
             "description": "申請フォームID"
           },
@@ -15645,7 +15651,9 @@
             "name": "applicant_id",
             "in": "query",
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
             },
             "description": "申請者のユーザーID"
           },
@@ -15675,7 +15683,9 @@
             "name": "approver_id",
             "in": "query",
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
             },
             "description": "承認者のユーザーID\n承認者指定時には申請ステータスが申請中のものだけが取得可能です。",
             "example": 1
@@ -15686,6 +15696,7 @@
             "description": "取得レコードのオフセット (デフォルト: 0)",
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 0,
               "maximum": 2147483647
             }
@@ -15696,6 +15707,7 @@
             "description": "取得レコードの件数 (デフォルト: 50, 最小: 1, 最大: 500)",
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 1,
               "maximum": 500
             }
@@ -15866,7 +15878,9 @@
             "description": "各種申請ID",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
             }
           },
           {
@@ -15875,7 +15889,9 @@
             "description": "事業所ID",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
             }
           }
         ],
@@ -15956,7 +15972,9 @@
             "description": "各種申請ID",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
             }
           }
         ],
@@ -16053,7 +16071,9 @@
             "description": "各種申請ID",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
             }
           },
           {
@@ -16062,7 +16082,9 @@
             "description": "事業所ID",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
             }
           }
         ],
@@ -16140,7 +16162,9 @@
             "description": "各種申請ID",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
             }
           }
         ],
@@ -16239,7 +16263,9 @@
             "description": "事業所ID",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
             }
           }
         ],
@@ -16322,7 +16348,9 @@
             "description": "申請フォームID",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
             }
           },
           {
@@ -16331,7 +16359,9 @@
             "description": "事業所ID",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
             }
           }
         ],
@@ -33883,6 +33913,8 @@
         "properties": {
           "company_id": {
             "type": "integer",
+            "format": "int64",
+            "minimum": 1,
             "description": "事業所ID",
             "example": 1
           },
@@ -33893,16 +33925,22 @@
           },
           "approval_flow_route_id": {
             "type": "integer",
+            "format": "int64",
+            "minimum": 1,
             "description": "申請経路ID",
             "example": 1
           },
           "form_id": {
             "type": "integer",
+            "format": "int64",
+            "minimum": 1,
             "description": "申請フォームID",
             "example": 1
           },
           "approver_id": {
             "type": "integer",
+            "format": "int64",
+            "minimum": 1,
             "description": "承認者のユーザーID",
             "example": 1
           },
@@ -33913,6 +33951,8 @@
           },
           "parent_id": {
             "type": "integer",
+            "format": "int64",
+            "minimum": 1,
             "description": "親申請ID(既存各種申請IDのみ指定可能です。)",
             "example": 2
           },
@@ -33923,6 +33963,8 @@
               "properties": {
                 "id": {
                   "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
                   "description": "項目ID",
                   "example": 1
                 },
@@ -33962,6 +34004,8 @@
         "properties": {
           "company_id": {
             "type": "integer",
+            "format": "int64",
+            "minimum": 1,
             "description": "事業所ID",
             "example": 1
           },
@@ -33972,11 +34016,15 @@
           },
           "approval_flow_route_id": {
             "type": "integer",
+            "format": "int64",
+            "minimum": 1,
             "description": "申請経路ID",
             "example": 1
           },
           "approver_id": {
             "type": "integer",
+            "format": "int64",
+            "minimum": 1,
             "description": "承認者のユーザーID",
             "example": 1
           },
@@ -33992,6 +34040,8 @@
               "properties": {
                 "id": {
                   "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
                   "description": "項目ID",
                   "example": 1
                 },
@@ -34031,6 +34081,8 @@
         "properties": {
           "company_id": {
             "type": "integer",
+            "format": "int64",
+            "minimum": 1,
             "description": "事業所ID",
             "example": 1
           },
@@ -34049,6 +34101,8 @@
           },
           "target_step_id": {
             "type": "integer",
+            "format": "int64",
+            "minimum": 1,
             "description": "対象承認ステップID 各種申請の取得APIレスポンス.current_step_idを送信してください。",
             "example": 1
           },
@@ -34061,6 +34115,8 @@
           },
           "next_approver_id": {
             "type": "integer",
+            "format": "int64",
+            "minimum": 1,
             "description": "次ステップの承認者のユーザーID",
             "example": 1,
             "nullable": true
@@ -34389,11 +34445,15 @@
               "properties": {
                 "id": {
                   "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
                   "description": "各種申請ID",
                   "example": 1
                 },
                 "company_id": {
                   "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
                   "description": "事業所ID",
                   "example": 1
                 },
@@ -34409,6 +34469,8 @@
                 },
                 "applicant_id": {
                   "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
                   "description": "申請者のユーザーID",
                   "example": 1
                 },
@@ -34442,6 +34504,8 @@
                     "properties": {
                       "id": {
                         "type": "integer",
+                        "format": "int64",
+                        "minimum": 1,
                         "description": "項目ID",
                         "example": 1
                       },
@@ -34472,17 +34536,21 @@
                 },
                 "form_id": {
                   "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
                   "description": "申請フォームID",
                   "example": 1
                 },
                 "current_step_id": {
                   "type": "integer",
+                  "format": "int64",
                   "description": "現在承認ステップID",
                   "example": 1,
                   "nullable": true
                 },
                 "current_round": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 0,
                   "maximum": 2147483647,
                   "description": "現在のround。差し戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。",
@@ -34490,12 +34558,16 @@
                 },
                 "deal_id": {
                   "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
                   "description": "取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)",
                   "example": 1,
                   "nullable": true
                 },
                 "manual_journal_id": {
                   "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
                   "description": "振替伝票のID (申請ステータス:statusがapprovedで、関連する振替伝票が存在する時のみmanual_journal_idが表示されます)\n\n<a href=\"https://support.freee.co.jp/hc/ja/articles/115003827683-#5\" target=\"_blank\">承認された各種申請から支払依頼等を作成する</a>\n",
                   "example": 1,
                   "nullable": true
@@ -34547,11 +34619,15 @@
             "properties": {
               "id": {
                 "type": "integer",
+                "format": "int64",
+                "minimum": 1,
                 "description": "各種申請ID",
                 "example": 1
               },
               "company_id": {
                 "type": "integer",
+                "format": "int64",
+                "minimum": 1,
                 "description": "事業所ID",
                 "example": 1
               },
@@ -34567,6 +34643,8 @@
               },
               "applicant_id": {
                 "type": "integer",
+                "format": "int64",
+                "minimum": 1,
                 "description": "申請者のユーザーID",
                 "example": 1
               },
@@ -34585,11 +34663,15 @@
                   "properties": {
                     "step_id": {
                       "type": "integer",
+                      "format": "int64",
+                      "minimum": 1,
                       "description": "承認ステップID",
                       "example": 1
                     },
                     "user_id": {
                       "type": "integer",
+                      "format": "int64",
+                      "minimum": 1,
                       "description": "承認者のユーザーID\n下記の場合はnullになります。\n<ul>\n  <li>resource_type:selected_userの場合で承認者未指定時</li>\n  <li>resource_type:or_positionで前stepで部門未指定の場合</li>\n</ul>",
                       "example": 1,
                       "nullable": true
@@ -34657,6 +34739,8 @@
                   "properties": {
                     "id": {
                       "type": "integer",
+                      "format": "int64",
+                      "minimum": 1,
                       "description": "項目ID",
                       "example": 1
                     },
@@ -34687,11 +34771,15 @@
               },
               "form_id": {
                 "type": "integer",
+                "format": "int64",
+                "minimum": 1,
                 "description": "申請フォームID",
                 "example": 1
               },
               "approval_flow_route_id": {
                 "type": "integer",
+                "format": "int64",
+                "minimum": 1,
                 "description": "申請経路ID",
                 "example": 1
               },
@@ -34713,6 +34801,8 @@
                     },
                     "user_id": {
                       "type": "integer",
+                      "format": "int64",
+                      "minimum": 1,
                       "description": "ユーザーID",
                       "example": 1
                     },
@@ -34750,6 +34840,8 @@
                     },
                     "user_id": {
                       "type": "integer",
+                      "format": "int64",
+                      "minimum": 1,
                       "description": "ユーザーID",
                       "example": 1
                     },
@@ -34763,12 +34855,15 @@
               },
               "current_step_id": {
                 "type": "integer",
+                "format": "int64",
+                "minimum": 1,
                 "description": "現在承認ステップID",
                 "example": 1,
                 "nullable": true
               },
               "current_round": {
                 "type": "integer",
+                "format": "int64",
                 "minimum": 0,
                 "maximum": 2147483647,
                 "description": "現在のround。差し戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。",
@@ -34791,11 +34886,14 @@
                       "properties": {
                         "id": {
                           "type": "integer",
+                          "format": "int64",
+                          "minimum": 1,
                           "description": "項目ID",
                           "example": 1
                         },
                         "order": {
                           "type": "integer",
+                          "format": "int64",
                           "minimum": 0,
                           "maximum": 2147483647,
                           "description": "順序",
@@ -34852,6 +34950,7 @@
                               },
                               "order": {
                                 "type": "integer",
+                                "format": "int64",
                                 "minimum": 1,
                                 "maximum": 2147483647,
                                 "description": "順序",
@@ -34863,6 +34962,7 @@
                         },
                         "max_amount": {
                           "type": "integer",
+                          "format": "int64",
                           "minimum": 0,
                           "maximum": 2147483647,
                           "description": "上限金額",
@@ -34871,6 +34971,7 @@
                         },
                         "min_amount": {
                           "type": "integer",
+                          "format": "int64",
                           "minimum": 0,
                           "maximum": 2147483647,
                           "description": "下限金額",
@@ -34884,12 +34985,16 @@
               },
               "deal_id": {
                 "type": "integer",
+                "format": "int64",
+                "minimum": 1,
                 "description": "取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)",
                 "example": 1,
                 "nullable": true
               },
               "manual_journal_id": {
                 "type": "integer",
+                "format": "int64",
+                "minimum": 1,
                 "description": "振替伝票のID (申請ステータス:statusがapprovedで、関連する振替伝票が存在する時のみmanual_journal_idが表示されます)\n\n<a href=\"https://support.freee.co.jp/hc/ja/articles/115003827683-#5\" target=\"_blank\">承認された各種申請から支払依頼等を作成する</a>\n",
                 "example": 1,
                 "nullable": true
@@ -34931,11 +35036,15 @@
               "properties": {
                 "id": {
                   "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
                   "description": "申請フォームID",
                   "example": 1
                 },
                 "company_id": {
                   "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
                   "description": "事業所ID",
                   "example": 1
                 },
@@ -34965,6 +35074,7 @@
                 },
                 "form_order": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 1,
                   "maximum": 1000,
                   "description": "表示順（申請者が選択する申請フォームの表示順を設定できます。小さい数ほど上位に表示されます。（0を除く整数のみ。マイナス不可）未入力の場合、表示順が後ろになります。同じ数字が入力された場合、登録順で表示されます。）",
@@ -34973,6 +35083,7 @@
                 },
                 "route_setting_count": {
                   "type": "integer",
+                  "format": "int64",
                   "minimum": 0,
                   "maximum": 2147483647,
                   "description": "適用された経路数（ユーザーが利用できない経路を除く）",
@@ -35004,11 +35115,15 @@
             "properties": {
               "id": {
                 "type": "integer",
+                "format": "int64",
+                "minimum": 1,
                 "description": "申請フォームID",
                 "example": 1
               },
               "company_id": {
                 "type": "integer",
+                "format": "int64",
+                "minimum": 1,
                 "description": "事業所ID",
                 "example": 1
               },
@@ -35038,6 +35153,7 @@
               },
               "form_order": {
                 "type": "integer",
+                "format": "int64",
                 "minimum": 1,
                 "maximum": 1000,
                 "description": "表示順（申請者が選択する申請フォームの表示順を設定できます。小さい数ほど上位に表示されます。（0を除く整数のみ。マイナス不可）未入力の場合、表示順が後ろになります。同じ数字が入力された場合、登録順で表示されます。）",
@@ -35055,12 +35171,15 @@
                   "properties": {
                     "id": {
                       "type": "integer",
+                      "format": "int64",
+                      "minimum": 1,
                       "description": "項目ID",
                       "example": 1
                     },
                     "order": {
                       "type": "integer",
-                      "minimum": 0,
+                      "format": "int64",
+                      "minimum": 1,
                       "maximum": 2147483647,
                       "description": "順序",
                       "example": 1
@@ -35116,6 +35235,7 @@
                           },
                           "order": {
                             "type": "integer",
+                            "format": "int64",
                             "minimum": 1,
                             "maximum": 2147483647,
                             "description": "順序",
@@ -35127,6 +35247,7 @@
                     },
                     "max_amount": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 0,
                       "maximum": 2147483647,
                       "description": "上限金額",
@@ -35135,6 +35256,7 @@
                     },
                     "min_amount": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": 0,
                       "maximum": 2147483647,
                       "description": "下限金額",
@@ -35146,6 +35268,7 @@
               },
               "route_setting_count": {
                 "type": "integer",
+                "format": "int64",
                 "minimum": 0,
                 "maximum": 2147483647,
                 "description": "適用された経路数（ユーザーが利用できない経路を除く）",
