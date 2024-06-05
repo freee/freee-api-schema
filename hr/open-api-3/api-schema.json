@@ -31,6 +31,10 @@
       "description": "ログインユーザーの取得"
     },
     {
+      "name": "従業員の特別休暇",
+      "description": "従業員の特別休暇の操作"
+    },
+    {
       "name": "従業員",
       "description": "従業員の操作"
     },
@@ -85,6 +89,50 @@
     {
       "name": "所属",
       "description": "所属の操作"
+    },
+    {
+      "name": "勤怠タグサマリ",
+      "description": "勤怠タグサマリの操作"
+    },
+    {
+      "name": "勤怠タグ",
+      "description": "勤怠タグの操作"
+    },
+    {
+      "name": "部門",
+      "description": "部門の操作"
+    },
+    {
+      "name": "役職",
+      "description": "役職の操作"
+    },
+    {
+      "name": "月次勤怠締め申請",
+      "description": "月次勤怠締め申請の操作"
+    },
+    {
+      "name": "勤務時間修正申請",
+      "description": "勤務時間修正申請の操作"
+    },
+    {
+      "name": "有給申請",
+      "description": "有給申請の操作"
+    },
+    {
+      "name": "特別休暇申請",
+      "description": "特別休暇申請の操作"
+    },
+    {
+      "name": "残業申請",
+      "description": "残業申請の操作"
+    },
+    {
+      "name": "申請経路",
+      "description": "申請経路の操作"
+    },
+    {
+      "name": "年末調整",
+      "description": "年末調整の操作"
     }
   ],
   "paths": {
@@ -6131,16 +6179,6 @@
               "maximum": 2147483647,
               "example": 0
             }
-          },
-          {
-            "name": "use_48h_time_notation",
-            "x-undocumented": true,
-            "in": "query",
-            "description": "時間表記を48時間形式で返却するか\n- `true` を指定した場合、時間表記を48時間形式で返却します。（推奨）\n- `false` を指定した場合、時間表記を24時間形式で返却します。",
-            "schema": {
-              "type": "boolean",
-              "default": false
-            }
           }
         ],
         "responses": {
@@ -6270,14 +6308,6 @@
                     "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
                     "example": "23:59"
                   },
-                  "work_records": {
-                    "type": "array",
-                    "description": "勤務時間のリスト",
-                    "items": {
-                      "$ref": "#/components/schemas/ApiV1WorkTimeIndexResponseParams/properties/work_records/items"
-                    },
-                    "x-undocumented": true
-                  },
                   "lateness_mins": {
                     "type": "integer",
                     "description": "遅刻分の時間（分単位）",
@@ -6316,12 +6346,6 @@
                     "minimum": 1,
                     "maximum": 2147483647,
                     "example": 1
-                  },
-                  "use_48h_time_notation": {
-                    "x-undocumented": true,
-                    "description": "時間表記を48時間形式で返却するか\n- `true` を指定した場合、時間表記を48時間形式で返却します。（推奨）\n- `false` を指定した場合、時間表記を24時間形式で返却します。",
-                    "type": "boolean",
-                    "default": false
                   }
                 }
               }
@@ -6425,16 +6449,6 @@
               "type": "integer",
               "minimum": 1,
               "maximum": 2147483647
-            }
-          },
-          {
-            "name": "use_48h_time_notation",
-            "x-undocumented": true,
-            "in": "query",
-            "description": "時間表記を48時間形式で返却するか\n- `true` を指定した場合、時間表記を48時間形式で返却します。（推奨）\n- `false` を指定した場合、時間表記を24時間形式で返却します。",
-            "schema": {
-              "type": "boolean",
-              "default": false
             }
           }
         ],
