@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "freee会計 API",
-    "description": "\n<hr />\n<h2 id=\"start_guide\">スタートガイド</h2>\n\n<p>freee API開発がはじめての方は<a href=\"https://developer.freee.co.jp/getting-started\">freee API スタートガイド</a>を参照してください。</p>\n\n<hr />\n<h2 id=\"specification\">お知らせ</h2>\n\n<p>\n<b>インボイス制度に伴い、freee会計の帳票機能がfreee請求書に移行します。これに伴い、2023年10月にfreee会計の「請求書の作成、見積書の作成」エンドポイントは廃止、freee請求書APIに移行する予定です。詳細は<a href=\"https://developer.freee.co.jp/news/6369\" target=\"_blank\"> freee会計 APIの仕様変更（インボイス制度対応）について</a>をご確認ください。</b>\n</p>\n\n<h2 id=\"specification\">仕様</h2>\n\n<h3 id=\"api_endpoint\">APIエンドポイント</h3>\n\n<p>https://api.freee.co.jp/ (httpsのみ)</p>\n\n<h3 id=\"about_authorize\">認証について</h3>\n<p>OAuth2.0を利用します。<a href=\"https://developer.freee.co.jp/reference/#%e8%aa%8d%e8%a8%bc\" target=\"_blank\">詳細はリファレンスの認証に関する記載を参照してください。</a></p>\n\n<h3 id=\"data_format\">データフォーマット</h3>\n\n<p>リクエスト、レスポンスともにJSON形式をサポートしていますが、詳細は、API毎の説明欄（application/jsonなど）を確認してください。</p>\n\n<h3 id=\"compatibility\">後方互換性ありの変更</h3>\n\n<p>freeeでは、APIを改善していくために以下のような変更は後方互換性ありとして通知なく変更を入れることがあります。アプリケーション実装者は以下を踏まえて開発を行ってください。</p>\n\n<ul>\n<li>新しいAPIリソース・エンドポイントの追加</li>\n<li>既存のAPIに対して必須ではない新しいリクエストパラメータの追加</li>\n<li>既存のAPIレスポンスに対する新しいプロパティの追加</li>\n<li>既存のAPIレスポンスに対するプロパティの順番の入れ変え</li>\n<li>keyとなっているidやcodeの長さの変更（長くする）</li>\n<li>エラーメッセージの変更</li>\n</ul>\n\n<h3 id=\"common_response_header\">共通レスポンスヘッダー</h3>\n\n<p>すべてのAPIのレスポンスには以下のHTTPヘッダーが含まれます。</p>\n\n<ul>\n<li>\n<p>X-Freee-Request-ID</p>\n<ul>\n<li>各リクエスト毎に発行されるID</li>\n</ul>\n</li>\n</ul>\n\n<h3 id=\"common_error_response\">共通エラーレスポンス</h3>\n\n<ul>\n<li>\n<p>ステータスコードはレスポンス内のJSONに含まれる他、HTTPヘッダにも含まれる</p>\n</li>\n<li>\n<p>一部のエラーレスポンスにはエラーコードが含まれます。<br>詳細は、<a href=\"https://developer.freee.co.jp/tips/faq/40x-checkpoint\">HTTPステータスコード400台エラー時のチェックポイント</a>を参照してください</p>\n</li>\n<p>type</p>\n\n<ul>\n<li>status : HTTPステータスコードの説明</li>\n\n<li>validation : エラーの詳細の説明（開発者向け）</li>\n</ul>\n</li>\n</ul>\n\n<p>レスポンスの例</p>\n\n<pre><code>  {\n    &quot;status_code&quot; : 400,\n    &quot;errors&quot; : [\n      {\n        &quot;type&quot; : &quot;status&quot;,\n        &quot;messages&quot; : [&quot;不正なリクエストです。&quot;]\n      },\n      {\n        &quot;type&quot; : &quot;validation&quot;,\n        &quot;messages&quot; : [&quot;Date は不正な日付フォーマットです。入力例：2019-12-17&quot;]\n      }\n    ]\n  }</code></pre>\n\n</br>\n\n<h3 id=\"api_rate_limit\">API 使用制限</h3>\n\n  <p>freeeは一定期間に過度のアクセスを検知した場合、APIアクセスをコントロールする場合があります。</p>\n  <p>その際のhttp status codeは403となります。制限がかかってから10分程度が過ぎると再度使用することができるようになります。</p>\n\n<h4 id=\"reports_api_endpoint\">/reportsと/receipts/{id}/downloadエンドポイント</h4>\n\n<p>freeeはエンドポイント毎に一定頻度以上のアクセスを検知した場合、APIアクセスをコントロールする場合があります。その際のhttp status codeは429（too many requests）となります。</p>\n<ul>\n  <li>/reports:1秒に10回まで</li>\n  <li>/receipts/{id}/download:1秒に3回まで</li>\n</ul>\n\n<p>http status codeが429となった場合、API使用ステータスはレスポンスヘッダに付与されます。</p>\n<pre><code>x-ratelimit-limit:10\nx-ratelimit-remaining:1\nx-ratelimit-reset:2023-01-13T10:22:29+09:00\n</code></pre>\n\n<br> 各ヘッダの意味は次のとおりです。</p>\n\n<table border=\"1\">\n  <tbody>\n    <tr>\n      <th style=\"padding: 10px\"><strong>ヘッダ名</strong></th>\n      <th style=\"padding: 10px\"><strong>説明</strong></th>\n    </tr>\n    <tr><td style=\"padding: 10px\">x-ratelimit-limit</td><td style=\"padding: 10px\">使用回数の上限</td></tr>\n    <tr><td style=\"padding: 10px\">x-ratelimit-remaining</td><td style=\"padding: 10px\">残り使用回数</td></tr>\n    <tr><td style=\"padding: 10px\">x-ratelimit-reset</td><td style=\"padding: 10px\">使用回数がリセットされる時刻</td></tr>\n  </tbody>\n</table>\n\n</br>\n\n<h3 id=\"plan_api_rate_limit\">プランごとの API 使用制限</h3>\n  <table border=\"1\">\n    <tbody>\n      <tr>\n        <th style=\"padding: 10px\"><strong>freee会計プラン名</strong></th>\n        <th style=\"padding: 10px\"><strong>事業所とアプリケーション毎に、1日のAPIコール数の上限</strong></th>\n      </tr>\n      <tr>\n        <td style=\"padding: 10px\">法人エンタープライズプラン</td>\n        <td style=\"padding: 10px\">10,000</td>\n      </tr>\n      <tr>\n        <td style=\"padding: 10px\">法人アドバンスプラン（および旧法人プロフェッショナルプラン）</td>\n        <td style=\"padding: 10px\">5,000</td>\n      </tr>\n      <tr>\n        <td style=\"padding: 10px\">上記以外</td>\n        <td style=\"padding: 10px\">3,000</td>\n      </tr>\n    </tbody>\n  </table>\n\n<h3 id=\"available_apis_by_plan\">プランごとの利用可能 API</h3>\n<p>契約プランごとにご利用可能な freee 会計 API は異なります。 freee 会計の Web 版でご利用いただける機能について、 freee 会計 API でもご利用いただけます。</p>\n<p>例えば法人スタータープラン、旧法人ベーシックプランをご契約いただいている場合、 Web 版では経費精算機能をご利用いただけますので、 API でも経費精算 API をご利用可能です。</p>\n<p>ただし以下の API は例外です。</p>\n<ul>\n  <li>総勘定元帳API：旧法人プロフェッショナルプラン、旧法人エンタープライズプラン、法人アドバンスプラン、新法人エンタープライズプランに加入している事業所のみがご利用可能です。</li>\n  <li>固定資産台帳API：旧法人エンタープライズプラン、新法人エンタープライズプランに加入している事業所のみがご利用可能です。</li>\n</ul>\n<p>詳しくは、<a href=\"https://support.freee.co.jp/hc/ja/articles/213726523--個人-freee会計のプランについて\" target=\"_blank\">【個人】freee会計のプランについて</a> 並びに <a href=\"https://support.freee.co.jp/hc/ja/articles/202849000--法人-freee会計のプランについて\" target=\"_blank\">【法人】freee会計のプランについて</a>をご確認ください。</p>\n\n<h3 id=\"webhook\">Webhookについて</h3>\n\n<p>詳細は<a href=\"https://developer.freee.co.jp/docs/accounting/webhook\" target=\"_blank\">会計Webhook概要</a>を参照してください。</p>\n\n<hr />\n<h2 id=\"contact\">連絡先</h2>\n\n<p>ご不明点、ご要望等は <a href=\"https://support.freee.co.jp/hc/ja/requests/new\">freee サポートデスクへのお問い合わせフォーム</a> からご連絡ください。</p>\n<hr />&copy; Since 2013 freee K.K.",
+    "description": "\n<hr />\n<h2 id=\"start_guide\">スタートガイド</h2>\n\n<p>freee API開発がはじめての方は<a href=\"https://developer.freee.co.jp/getting-started\">freee API スタートガイド</a>を参照してください。</p>\n\n<hr />\n<h2 id=\"specification\">お知らせ</h2>\n\n<p>\n<b>インボイス制度に伴い、freee会計の帳票機能がfreee請求書に移行します。これに伴い、2023年10月にfreee会計の「請求書の作成、見積書の作成」エンドポイントは廃止、freee請求書APIに移行する予定です。詳細は<a href=\"https://developer.freee.co.jp/news/6369\" target=\"_blank\"> freee会計 APIの仕様変更（インボイス制度対応）について</a>をご確認ください。</b>\n</p>\n\n<h2 id=\"specification\">仕様</h2>\n\n<h3 id=\"api_endpoint\">APIエンドポイント</h3>\n\n<p>https://api.freee.co.jp/ (httpsのみ)</p>\n\n<h3 id=\"about_authorize\">認証について</h3>\n<p>OAuth2.0を利用します。<a href=\"https://developer.freee.co.jp/reference/#%e8%aa%8d%e8%a8%bc\" target=\"_blank\">詳細はリファレンスの認証に関する記載を参照してください。</a></p>\n\n<h3 id=\"data_format\">データフォーマット</h3>\n\n<p>リクエスト、レスポンスともにJSON形式をサポートしていますが、詳細は、API毎の説明欄（application/jsonなど）を確認してください。</p>\n\n<h3 id=\"compatibility\">後方互換性ありの変更</h3>\n\n<p>freeeでは、APIを改善していくために以下のような変更は後方互換性ありとして通知なく変更を入れることがあります。アプリケーション実装者は以下を踏まえて開発を行ってください。</p>\n\n<ul>\n<li>新しいAPIリソース・エンドポイントの追加</li>\n<li>既存のAPIに対して必須ではない新しいリクエストパラメータの追加</li>\n<li>既存のAPIレスポンスに対する新しいプロパティの追加</li>\n<li>既存のAPIレスポンスに対するプロパティの順番の入れ変え</li>\n<li>keyとなっているidやcodeの長さの変更（長くする）</li>\n<li>エラーメッセージの変更</li>\n</ul>\n\n<h3 id=\"common_response_header\">共通レスポンスヘッダー</h3>\n\n<p>すべてのAPIのレスポンスには以下のHTTPヘッダーが含まれます。</p>\n\n<ul>\n<li>\n<p>X-Freee-Request-ID</p>\n<ul>\n<li>各リクエスト毎に発行されるID</li>\n</ul>\n</li>\n</ul>\n\n<h3 id=\"common_error_response\">共通エラーレスポンス</h3>\n\n<ul>\n<li>\n<p>ステータスコードはレスポンス内のJSONに含まれる他、HTTPヘッダにも含まれる</p>\n</li>\n<li>\n<p>一部のエラーレスポンスにはエラーコードが含まれます。<br>詳細は、<a href=\"https://developer.freee.co.jp/tips/faq/40x-checkpoint\">HTTPステータスコード400台エラー時のチェックポイント</a>を参照してください</p>\n</li>\n<p>type</p>\n\n<ul>\n<li>status : HTTPステータスコードの説明</li>\n\n<li>validation : エラーの詳細の説明（開発者向け）</li>\n</ul>\n</li>\n</ul>\n\n<p>レスポンスの例</p>\n\n<pre><code>  {\n    &quot;status_code&quot; : 400,\n    &quot;errors&quot; : [\n      {\n        &quot;type&quot; : &quot;status&quot;,\n        &quot;messages&quot; : [&quot;不正なリクエストです。&quot;]\n      },\n      {\n        &quot;type&quot; : &quot;validation&quot;,\n        &quot;messages&quot; : [&quot;Date は不正な日付フォーマットです。入力例：2019-12-17&quot;]\n      }\n    ]\n  }</code></pre>\n\n</br>\n\n<h3 id=\"api_rate_limit\">API 使用制限</h3>\n\n  <p>freeeは一定期間に過度のアクセスを検知した場合、APIアクセスをコントロールする場合があります。</p>\n  <p>その際のhttp status codeは403となります。制限がかかってから10分程度が過ぎると再度使用することができるようになります。</p>\n\n<h4 id=\"reports_api_endpoint\">/reportsと/receipts/{id}/downloadエンドポイント</h4>\n\n<p>freeeはエンドポイント毎に一定頻度以上のアクセスを検知した場合、APIアクセスをコントロールする場合があります。その際のhttp status codeは429（too many requests）となります。</p>\n<ul>\n  <li>/reports:1秒に10回まで</li>\n  <li>/receipts/{id}/download:1秒に3回まで</li>\n</ul>\n\n<p>http status codeが429となった場合、API使用ステータスはレスポンスヘッダに付与されます。</p>\n<pre><code>x-ratelimit-limit:10\nx-ratelimit-remaining:1\nx-ratelimit-reset:2023-01-13T10:22:29+09:00\n</code></pre>\n\n<br> 各ヘッダの意味は次のとおりです。</p>\n\n<table border=\"1\">\n  <tbody>\n    <tr>\n      <th style=\"padding: 10px\"><strong>ヘッダ名</strong></th>\n      <th style=\"padding: 10px\"><strong>説明</strong></th>\n    </tr>\n    <tr><td style=\"padding: 10px\">x-ratelimit-limit</td><td style=\"padding: 10px\">使用回数の上限</td></tr>\n    <tr><td style=\"padding: 10px\">x-ratelimit-remaining</td><td style=\"padding: 10px\">残り使用回数</td></tr>\n    <tr><td style=\"padding: 10px\">x-ratelimit-reset</td><td style=\"padding: 10px\">使用回数がリセットされる時刻</td></tr>\n  </tbody>\n</table>\n\n</br>\n\n<h3 id=\"plan_api_rate_limit\">プランごとの API 使用制限</h3>\n  <table border=\"1\">\n    <tbody>\n      <tr>\n        <th style=\"padding: 10px\"><strong>freee会計プラン名</strong></th>\n        <th style=\"padding: 10px\"><strong>事業所とアプリケーション毎に、1日のAPIコール数の上限</strong></th>\n      </tr>\n      <tr>\n        <td style=\"padding: 10px\">法人エンタープライズプラン</td>\n        <td style=\"padding: 10px\">10,000</td>\n      </tr>\n      <tr>\n        <td style=\"padding: 10px\">法人アドバンスプラン（および旧法人プロフェッショナルプラン）</td>\n        <td style=\"padding: 10px\">5,000</td>\n      </tr>\n      <tr>\n        <td style=\"padding: 10px\">上記以外</td>\n        <td style=\"padding: 10px\">3,000</td>\n      </tr>\n    </tbody>\n  </table>\n\n<h3 id=\"available_apis_by_plan\">プランごとの利用可能 API</h3>\n<p>契約プランごとにご利用可能な freee 会計 API は異なります。 freee 会計の Web 版でご利用いただける機能について、 freee 会計 API でもご利用いただけます。</p>\n<p>例えば法人スタータープラン、旧法人ベーシックプランをご契約いただいている場合、 Web 版では経費精算機能をご利用いただけますので、 API でも経費精算 API をご利用可能です。</p>\n<p>ただし以下の API は例外です。</p>\n<ul>\n  <li>総勘定元帳API：旧法人プロフェッショナルプラン、旧法人エンタープライズプラン、法人アドバンスプラン、新法人エンタープライズプランに加入している事業所のみがご利用可能です。</li>\n  <li>固定資産台帳API：旧法人エンタープライズプラン、新法人エンタープライズプランに加入している事業所のみがご利用可能です。</li>\n</ul>\n<p>詳しくは、<a href=\"https://support.freee.co.jp/hc/ja/articles/213726523--個人-freee会計のプランについて\" target=\"_blank\">【個人】freee会計のプランについて</a> 並びに <a href=\"https://support.freee.co.jp/hc/ja/articles/202849000--法人-freee会計のプランについて\" target=\"_blank\">【法人】freee会計のプランについて</a>をご確認ください。</p>\n\n<h3 id=\"available_parameters_by_plan\">プランごとの利用可能パラメータ</h3>\n<p>ご利用可能な freee 会計 API であっても、契約プランごとに利用可能なパラメータは異なります。</p>\n<table border=\"1\">\n  <thead>\n    <tr>\n      <th>パラメータ</th>\n      <th>説明</th>\n      <th>利用可能プラン</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>segment_1_tag</td>\n      <td>セグメント１タグ</td>\n      <td>法人アドバンスプラン<br />法人エンタープライズプラン<br />旧法人プロフェッショナルプラン</td>\n    </tr>\n    <tr>\n      <td>segment_2_tag</td>\n      <td>セグメント２タグ</td>\n      <td>法人アドバンスプラン<br />法人エンタープライズプラン</td>\n    </tr>\n    <tr>\n      <td>segment_3_tag</td>\n      <td>セグメント３タグ</td>\n      <td>法人アドバンスプラン<br />法人エンタープライズプラン</td>\n    </tr>\n    <tr>\n      <td>segment_1_tag_id</td>\n      <td>セグメント１タグID</td>\n      <td>法人アドバンスプラン<br />法人エンタープライズプラン<br />旧法人プロフェッショナルプラン</td>\n    </tr>\n    <tr>\n      <td>segment_2_tag_id</td>\n      <td>セグメント２タグID</td>\n      <td>法人アドバンスプラン<br />法人エンタープライズプラン</td>\n    </tr>\n    <tr>\n      <td>segment_3_tag_id</td>\n      <td>セグメント３タグID</td>\n      <td>法人アドバンスプラン<br />法人エンタープライズプラン</td>\n    </tr>\n    <tr>\n      <td>segment_1_tag_name</td>\n      <td>セグメント１タグ名</td>\n      <td>法人アドバンスプラン<br />法人エンタープライズプラン<br />旧法人プロフェッショナルプラン</td>\n    </tr>\n    <tr>\n      <td>segment_2_tag_name</td>\n      <td>セグメント２タグ名</td>\n      <td>法人アドバンスプラン<br />法人エンタープライズプラン</td>\n    </tr>\n    <tr>\n      <td>segment_3_tag_name</td>\n      <td>セグメント３タグ名</td>\n      <td>法人アドバンスプラン<br />法人エンタープライズプラン</td>\n    </tr>\n    <tr>\n      <td>segment_id</td>\n      <td>セグメントID（1, 2, 3 のいずれか）</td>\n      <td>法人アドバンスプラン<br />法人エンタープライズプラン<br />旧法人プロフェッショナルプラン<br />旧法人プロフェッショナルプランにつきましては、 1 のみ指定可能です。</td>\n    </tr>\n  </tbody>\n</table>\n\n<h3 id=\"webhook\">Webhookについて</h3>\n\n<p>詳細は<a href=\"https://developer.freee.co.jp/docs/accounting/webhook\" target=\"_blank\">会計Webhook概要</a>を参照してください。</p>\n\n<hr />\n<h2 id=\"contact\">連絡先</h2>\n\n<p>ご不明点、ご要望等は <a href=\"https://support.freee.co.jp/hc/ja/requests/new\">freee サポートデスクへのお問い合わせフォーム</a> からご連絡ください。</p>\n<hr />&copy; Since 2013 freee K.K.",
     "version": "v1.0",
     "x-copyright": "&copy; Since 2013 freee K.K."
   },
@@ -152,7 +152,7 @@
           "Partners"
         ],
         "summary": "取引先一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引先一覧を取得する</p>\n<ul>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）は旧法人プロフェッショナルプラン以上で利用可能です。</li></ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引先一覧を取得する</p>\n<ul>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）は法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で利用可能です。</li></ul>",
         "operationId": "get_partners",
         "parameters": [
           {
@@ -271,7 +271,7 @@
           "Partners"
         ],
         "summary": "取引先の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引先を作成する</p>\n<ul>\n<li>取引先名称（name）は重複不可です。</li>\n<li>codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</li>\n<li>取引先コードの利用を有効にしている場合は、\n  <ul>\n    <li>codeの指定は必須です。</li>\n    <li>name、codeそれぞれ重複不可です。</li>\n  </ul>\n</li>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）は旧法人プロフェッショナルプラン以上で利用可能です。</li></ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引先を作成する</p>\n<ul>\n<li>取引先名称（name）は重複不可です。</li>\n<li>codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</li>\n<li>取引先コードの利用を有効にしている場合は、\n  <ul>\n    <li>codeの指定は必須です。</li>\n    <li>name、codeそれぞれ重複不可です。</li>\n  </ul>\n</li>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）は法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で利用可能です。</li></ul>",
         "operationId": "create_partner",
         "requestBody": {
           "description": "取引先の作成",
@@ -349,7 +349,7 @@
           "Partners"
         ],
         "summary": "取引先の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引先を取得する</p>\n<ul>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）は旧法人プロフェッショナルプラン以上で利用可能です。</li></ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引先を取得する</p>\n<ul>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）は法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で利用可能です。</li></ul>",
         "operationId": "get_partner",
         "parameters": [
           {
@@ -443,7 +443,7 @@
           "Partners"
         ],
         "summary": "取引先の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した取引先の情報を更新する</p>\n<ul>\n<li>取引先名称（name）は重複不可です。</li>\n<li>codeを指定、更新することはできません。</li>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）は旧法人プロフェッショナルプラン以上で利用可能です。</li>\n<li>支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）にnull型を入力することにより、期日を未設定に変更可能です。</li></ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した取引先の情報を更新する</p>\n<ul>\n<li>取引先名称（name）は重複不可です。</li>\n<li>codeを指定、更新することはできません。</li>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）は法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で利用可能です。</li>\n<li>支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）にnull型を入力することにより、期日を未設定に変更可能です。</li></ul>",
         "operationId": "update_partner",
         "parameters": [
           {
@@ -633,7 +633,7 @@
           "Partners"
         ],
         "summary": "取引先の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>取引先コードをキーに、指定した取引先の情報を更新する</p>\n<ul>\n<li>このAPIを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</li>\n<li>コードを日本語に設定している場合は、URLエンコードしてURLに含めるようにしてください。</li>\n<li>取引先名称（name）は重複不可です。</li>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）は旧法人プロフェッショナルプラン以上で利用可能です。</li>\n<li>支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）にnull型を入力することにより、期日を未設定に変更可能です。</li></ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>取引先コードをキーに、指定した取引先の情報を更新する</p>\n<ul>\n<li>このAPIを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</li>\n<li>コードを日本語に設定している場合は、URLエンコードしてURLに含めるようにしてください。</li>\n<li>取引先名称（name）は重複不可です。</li>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）は法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で利用可能です。</li>\n<li>支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）にnull型を入力することにより、期日を未設定に変更可能です。</li></ul>",
         "operationId": "update_partner_by_code",
         "parameters": [
           {
@@ -1733,7 +1733,7 @@
           "Sections"
         ],
         "summary": "部門一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の部門一覧を取得する</p>\n<p>事業所の設定で部門コードを使用する設定にしている場合、レスポンスで部門コード(code)を返します</p>\n\n<h2 id=\"_2\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/sections?company_id=1</p>\n</blockquote>\n\n<pre><code>// プレミアムプラン、旧法人ベーシックプラン以上\n{\n  &quot;sections&quot; : [\n    {\n      &quot;id&quot; : 101,\n      &quot;company_id&quot; : 1,\n      &quot;name&quot; : &quot;開発部門&quot;,\n      &quot;long_name&quot;: &quot;開発部門&quot;,\n      &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n      &quot;shortcut2&quot; : &quot;123&quot;,\n      &quot;indent_count&quot;: 1,\n      &quot;parent_id&quot;: 11\n    },\n    ...\n  ]\n}\n// それ以外のプラン\n{\n  &quot;sections&quot; : [\n    {\n      &quot;id&quot; : 101,\n      &quot;company_id&quot; : 1,\n      &quot;name&quot; : &quot;開発部門&quot;,\n      &quot;long_name&quot;: &quot;開発部門&quot;,\n      &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n      &quot;shortcut2&quot; : &quot;123&quot;\n    },\n    ...\n  ]\n}</code></pre>\n",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の部門一覧を取得する</p>\n<p>事業所の設定で部門コードを使用する設定にしている場合、レスポンスで部門コード(code)を返します</p>\n\n<h2 id=\"_2\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/sections?company_id=1</p>\n</blockquote>\n\n<pre><code>// プレミアムプラン、法人スタンダードプラン（および旧法人ベーシックプラン）以上\n{\n  &quot;sections&quot; : [\n    {\n      &quot;id&quot; : 101,\n      &quot;company_id&quot; : 1,\n      &quot;name&quot; : &quot;開発部門&quot;,\n      &quot;long_name&quot;: &quot;開発部門&quot;,\n      &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n      &quot;shortcut2&quot; : &quot;123&quot;,\n      &quot;indent_count&quot;: 1,\n      &quot;parent_id&quot;: 11\n    },\n    ...\n  ]\n}\n// それ以外のプラン\n{\n  &quot;sections&quot; : [\n    {\n      &quot;id&quot; : 101,\n      &quot;company_id&quot; : 1,\n      &quot;name&quot; : &quot;開発部門&quot;,\n      &quot;long_name&quot;: &quot;開発部門&quot;,\n      &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n      &quot;shortcut2&quot; : &quot;123&quot;\n    },\n    ...\n  ]\n}</code></pre>\n",
         "operationId": "get_sections",
         "parameters": [
           {
@@ -1817,7 +1817,7 @@
           "Sections"
         ],
         "summary": "部門の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の部門を作成する</p>\n<p>codeを利用するには、事業所の設定で部門コードを使用する設定にする必要があります。</p>\n\n<h2 id=\"_2\">レスポンスの例</h2>\n\n<pre><code>// プレミアムプラン、旧法人ベーシックプラン以上\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;,\n    &quot;indent_count&quot;: 1,\n    &quot;parent_id&quot;: 101\n  }\n}\n// それ以外のプラン\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;\n  }\n}</code></pre>\n",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の部門を作成する</p>\n<p>codeを利用するには、事業所の設定で部門コードを使用する設定にする必要があります。</p>\n\n<h2 id=\"_2\">レスポンスの例</h2>\n\n<pre><code>// プレミアムプラン、法人スタンダードプラン（および旧法人ベーシックプラン）以上\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;,\n    &quot;indent_count&quot;: 1,\n    &quot;parent_id&quot;: 101\n  }\n}\n// それ以外のプラン\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;\n  }\n}</code></pre>\n",
         "operationId": "create_section",
         "requestBody": {
           "description": "部門の作成",
@@ -1895,7 +1895,7 @@
           "Sections"
         ],
         "summary": "部門の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の部門を取得する</p>\n<p>事業所の設定で部門コードを使用する設定にしている場合、レスポンスで部門コード(code)を返します</p>\n\n<h2 id=\"_2\">レスポンスの例</h2>\n\n<pre><code>// プレミアムプラン、旧法人ベーシックプラン以上\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;long_name&quot;: &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;,\n    &quot;indent_count&quot;: 1,\n    &quot;parent_id&quot;: 101\n  }\n}\n// それ以外のプラン\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;long_name&quot;: &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;\n  }\n}</code></pre>\n",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の部門を取得する</p>\n<p>事業所の設定で部門コードを使用する設定にしている場合、レスポンスで部門コード(code)を返します</p>\n\n<h2 id=\"_2\">レスポンスの例</h2>\n\n<pre><code>// プレミアムプラン、法人スタンダードプラン（および旧法人ベーシックプラン）以上\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;long_name&quot;: &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;,\n    &quot;indent_count&quot;: 1,\n    &quot;parent_id&quot;: 101\n  }\n}\n// それ以外のプラン\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;long_name&quot;: &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;\n  }\n}</code></pre>\n",
         "operationId": "get_section",
         "parameters": [
           {
@@ -1989,7 +1989,7 @@
           "Sections"
         ],
         "summary": "部門の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の部門を更新する</p>\n<p>codeを利用するには、事業所の設定で部門コードを使用する設定にする必要があります。</p>\n\n<h2 id=\"_2\">レスポンスの例</h2>\n\n<pre><code>// プレミアムプラン、旧法人ベーシックプラン以上\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;long_name&quot;: &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;,\n    &quot;indent_count&quot;: 1,\n    &quot;parent_id&quot;: 101\n  }\n}\n// それ以外のプラン\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;long_name&quot;: &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;\n  }\n}</code></pre>\n",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の部門を更新する</p>\n<p>codeを利用するには、事業所の設定で部門コードを使用する設定にする必要があります。</p>\n\n<h2 id=\"_2\">レスポンスの例</h2>\n\n<pre><code>// プレミアムプラン、法人スタンダードプラン（および旧法人ベーシックプラン）以上\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;long_name&quot;: &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;,\n    &quot;indent_count&quot;: 1,\n    &quot;parent_id&quot;: 101\n  }\n}\n// それ以外のプラン\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;long_name&quot;: &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;\n  }\n}</code></pre>\n",
         "operationId": "update_section",
         "parameters": [
           {
@@ -3269,7 +3269,7 @@
           "Deals"
         ],
         "summary": "取引（収入・支出）一覧の取得",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入・支出）一覧を取得する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>details : 取引の明細行</p>\n</li>\n<li>\n<p>accruals : 取引の債権債務行</p>\n</li>\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n<li>\n<p>registered_from</p>\n<ul>\n<li>all : すべての取引</li>\n<li>me : 自身が登録した取引</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>セグメントタグ情報は旧法人プロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、旧法人プロフェッショナルプランの場合は1つ、法人エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</li>\n</ul>",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入・支出）一覧を取得する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>details : 取引の明細行</p>\n</li>\n<li>\n<p>accruals : 取引の債権債務行</p>\n</li>\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n<li>\n<p>registered_from</p>\n<ul>\n<li>all : すべての取引</li>\n<li>me : 自身が登録した取引</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>セグメントタグ情報は法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で利用可能です。利用可能なセグメントの数は、法人アドバンスプラン（および旧法人プロフェッショナルプラン）の場合は1つ、法人エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</li>\n</ul>",
         "operationId": "get_deals",
         "parameters": [
           {
@@ -3524,7 +3524,7 @@
           "Deals"
         ],
         "summary": "取引（収入・支出）の作成",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入・支出）を作成する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>ref_number : 管理番号</p>\n</li>\n<li>\n<p>details : 取引の明細行(最大40行)</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>receipt_ids : ファイルボックス（証憑ファイル）ID</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n    <li><p>本APIでは+更新行(renews)の操作ができません。取引（収入・支出）の+更新の作成APIをご利用ください。</p></li>\n    <li><p>セグメントタグ情報は旧法人プロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、旧法人プロフェッショナルプランの場合は1つ、法人エンタープライズプランの場合は3つです。</p></li>\n    <li>\n        <p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</p></li>\n    <li>\n        <p>本APIでは取引の明細行(details)は、最大40行までになります。</p>\n    </li>\n</ul>\n",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入・支出）を作成する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>ref_number : 管理番号</p>\n</li>\n<li>\n<p>details : 取引の明細行(最大40行)</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>receipt_ids : ファイルボックス（証憑ファイル）ID</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n    <li><p>本APIでは+更新行(renews)の操作ができません。取引（収入・支出）の+更新の作成APIをご利用ください。</p></li>\n    <li><p>セグメントタグ情報は法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で利用可能です。利用可能なセグメントの数は、法人アドバンスプラン（および旧法人プロフェッショナルプラン）の場合は1つ、法人エンタープライズプランの場合は3つです。</p></li>\n    <li>\n        <p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</p></li>\n    <li>\n        <p>本APIでは取引の明細行(details)は、最大40行までになります。</p>\n    </li>\n</ul>\n",
         "operationId": "create_deal",
         "requestBody": {
           "description": "取引（収入・支出）の作成",
@@ -3612,7 +3612,7 @@
           "Deals"
         ],
         "summary": "取引（収入・支出）の取得",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入・支出）を取得する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>details : 取引の明細行</p>\n</li>\n<li>\n<p>accruals : 取引の債権債務行</p>\n</li>\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>セグメントタグ情報は旧法人プロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、旧法人プロフェッショナルプランの場合は1つ、法人エンタープライズプランの場合は3つです。</li>\n</ul>",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入・支出）を取得する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>details : 取引の明細行</p>\n</li>\n<li>\n<p>accruals : 取引の債権債務行</p>\n</li>\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n<li>セグメントタグ情報は法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で利用可能です。利用可能なセグメントの数は、法人アドバンスプラン（および旧法人プロフェッショナルプラン）の場合は1つ、法人エンタープライズプランの場合は3つです。</li>\n</ul>",
         "operationId": "get_deal",
         "parameters": [
           {
@@ -3717,7 +3717,7 @@
           "Deals"
         ],
         "summary": "取引（収入・支出）の更新",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入・支出）を更新する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>details : 取引の明細行(最大40行)</p>\n</li>\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n<li>\n<p>receipt_ids : ファイルボックス（証憑ファイル）ID</p>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n    <li><p>本APIでは支払行(payments)の操作ができません。取引（収入・支出）の支払行の作成・更新・削除APIをご利用ください。</p></li>\n    <li><p>本APIでは+更新行(renews)の操作ができません。取引（収入・支出）の+更新の作成・更新・削除APIをご利用ください。</p></li>\n    <li><p>本APIでは収入／支出の切替えができません。既存の取引を削除後、再度作成してください。</p></li>\n    <li><p>本APIで取引を更新すると、消費税の計算方法は必ず内税方式が選択されます。</p></li>\n    <li><p>セグメントタグ情報は旧法人プロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、旧法人プロフェッショナルプランの場合は1つ、法人エンタープライズプランの場合は3つです。</p></li>\n    <li><p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</p></li>\n    <li><p>freee請求書から登録された取引は品目・部門・メモタグ・セグメント1、2、3のみ更新可能です。</p></li>\n    <li>\n        <p>本APIでは取引の明細行(details)は、最大40行までになります。</p>\n    </li>\n</ul>",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入・支出）を更新する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>details : 取引の明細行(最大40行)</p>\n</li>\n<li>\n<p>renews : 取引の+更新行</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n<li>\n<p>receipt_ids : ファイルボックス（証憑ファイル）ID</p>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n    <li><p>本APIでは支払行(payments)の操作ができません。取引（収入・支出）の支払行の作成・更新・削除APIをご利用ください。</p></li>\n    <li><p>本APIでは+更新行(renews)の操作ができません。取引（収入・支出）の+更新の作成・更新・削除APIをご利用ください。</p></li>\n    <li><p>本APIでは収入／支出の切替えができません。既存の取引を削除後、再度作成してください。</p></li>\n    <li><p>本APIで取引を更新すると、消費税の計算方法は必ず内税方式が選択されます。</p></li>\n    <li><p>セグメントタグ情報は法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で利用可能です。利用可能なセグメントの数は、法人アドバンスプラン（および旧法人プロフェッショナルプラン）の場合は1つ、法人エンタープライズプランの場合は3つです。</p></li>\n    <li><p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</p></li>\n    <li><p>freee請求書から登録された取引は品目・部門・メモタグ・セグメント1、2、3のみ更新可能です。</p></li>\n    <li>\n        <p>本APIでは取引の明細行(details)は、最大40行までになります。</p>\n    </li>\n</ul>",
         "operationId": "update_deal",
         "parameters": [
           {
@@ -4507,7 +4507,7 @@
           "ManualJournals"
         ],
         "summary": "振替伝票一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の振替伝票一覧を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>adjustment : 決算整理仕訳フラグ（true: 決算整理仕訳, false: 日常仕訳）</p>\n</li>\n\n<li>\n<p>txn_number : 仕訳番号</p>\n</li>\n\n<li>\n<p>details : 振替伝票の貸借行</p>\n</li>\n\n<li>\n<p>entry_side : 貸借区分</p>\n\n<ul>\n<li>credit : 貸方</li>\n\n<li>debit : 借方</li>\n</ul>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>振替伝票は売掛・買掛レポートには反映されません。債権・債務データの登録は取引(Deals)をお使いください。</li>\n<li>事業所の仕訳番号形式が有効な場合のみ、レスポンスで仕訳番号(txn_number)を返します。</li>\n<li>セグメントタグ情報は旧法人プロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、旧法人プロフェッショナルプランの場合は1つ、法人エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</li></ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の振替伝票一覧を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>adjustment : 決算整理仕訳フラグ（true: 決算整理仕訳, false: 日常仕訳）</p>\n</li>\n\n<li>\n<p>txn_number : 仕訳番号</p>\n</li>\n\n<li>\n<p>details : 振替伝票の貸借行</p>\n</li>\n\n<li>\n<p>entry_side : 貸借区分</p>\n\n<ul>\n<li>credit : 貸方</li>\n\n<li>debit : 借方</li>\n</ul>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>振替伝票は売掛・買掛レポートには反映されません。債権・債務データの登録は取引(Deals)をお使いください。</li>\n<li>事業所の仕訳番号形式が有効な場合のみ、レスポンスで仕訳番号(txn_number)を返します。</li>\n<li>セグメントタグ情報は法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で利用可能です。利用可能なセグメントの数は、法人アドバンスプラン（および旧法人プロフェッショナルプラン）の場合は1つ、法人エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</li></ul>",
         "operationId": "get_manual_journals",
         "parameters": [
           {
@@ -4622,7 +4622,7 @@
           {
             "name": "segment_1_tag_id",
             "in": "query",
-            "description": "セグメント１IDで絞込（0を指定すると、セグメント１が未選択の貸借行を絞り込めます）",
+            "description": "セグメント１タグIDで絞込（0を指定すると、セグメント１タグが未選択の貸借行を絞り込めます）",
             "schema": {
               "type": "integer",
               "format": "int64",
@@ -4632,7 +4632,7 @@
           {
             "name": "segment_2_tag_id",
             "in": "query",
-            "description": "セグメント２IDで絞込（0を指定すると、セグメント２が未選択の貸借行を絞り込めます）",
+            "description": "セグメント２タグIDで絞込（0を指定すると、セグメント２タグが未選択の貸借行を絞り込めます）",
             "schema": {
               "type": "integer",
               "format": "int64",
@@ -4642,7 +4642,7 @@
           {
             "name": "segment_3_tag_id",
             "in": "query",
-            "description": "セグメント３IDで絞込（0を指定すると、セグメント３が未選択の貸借行を絞り込めます）",
+            "description": "セグメント３タグIDで絞込（0を指定すると、セグメント３タグが未選択の貸借行を絞り込めます）",
             "schema": {
               "type": "integer",
               "format": "int64",
@@ -4786,7 +4786,7 @@
           "ManualJournals"
         ],
         "summary": "振替伝票の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の振替伝票を作成する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>adjustment : 決算整理仕訳フラグ（true: 決算整理仕訳, false: 日常仕訳）</p>\n</li>\n\n<li>\n<p>txn_number : 仕訳番号</p>\n</li>\n\n<li>\n<p>details : 振替伝票の貸借行</p>\n</li>\n\n<li>\n<p>entry_side : 貸借区分</p>\n\n<ul>\n<li>credit : 貸方</li>\n\n<li>debit : 借方</li>\n</ul>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>振替伝票は売掛・買掛レポートには反映されません。債権・債務データの登録は取引(Deals)をお使いください。</li>\n<li>事業所の仕訳番号形式が有効な場合のみ、レスポンスで仕訳番号(txn_number)を返します。</li>\n<li>貸借合わせて100行まで仕訳行を登録できます。</li>\n<li>セグメントタグ情報は旧法人プロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、旧法人プロフェッショナルプランの場合は1つ、法人エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</li></ul>\n\n",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の振替伝票を作成する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>adjustment : 決算整理仕訳フラグ（true: 決算整理仕訳, false: 日常仕訳）</p>\n</li>\n\n<li>\n<p>txn_number : 仕訳番号</p>\n</li>\n\n<li>\n<p>details : 振替伝票の貸借行</p>\n</li>\n\n<li>\n<p>entry_side : 貸借区分</p>\n\n<ul>\n<li>credit : 貸方</li>\n\n<li>debit : 借方</li>\n</ul>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>振替伝票は売掛・買掛レポートには反映されません。債権・債務データの登録は取引(Deals)をお使いください。</li>\n<li>事業所の仕訳番号形式が有効な場合のみ、レスポンスで仕訳番号(txn_number)を返します。</li>\n<li>貸借合わせて100行まで仕訳行を登録できます。</li>\n<li>セグメントタグ情報は法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で利用可能です。利用可能なセグメントの数は、法人アドバンスプラン（および旧法人プロフェッショナルプラン）の場合は1つ、法人エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</li></ul>\n\n",
         "operationId": "create_manual_journal",
         "requestBody": {
           "description": "振替伝票の作成",
@@ -4874,7 +4874,7 @@
           "ManualJournals"
         ],
         "summary": "振替伝票の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の振替伝票を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul> <li> <p>issue_date : 発生日</p> </li>\n<li> <p>adjustment : 決算整理仕訳フラグ（true: 決算整理仕訳, false: 日常仕訳）</p> </li>\n<li> <p>txn_number : 仕訳番号</p> </li>\n<li> <p>details : 振替伝票の貸借行</p> </li>\n<li> <p>entry_side : 貸借区分</p>\n<ul> <li>credit : 貸方</li>\n<li>debit : 借方</li> </ul> </li>\n<li> <p>amount : 金額</p> </li> </ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>振替伝票は売掛・買掛レポートには反映されません。債権・債務データの登録は取引(Deals)をお使いください。</li>\n<li>事業所の仕訳番号形式が有効な場合のみ、レスポンスで仕訳番号(txn_number)を返します。</li>\n<li>セグメントタグ情報は旧法人プロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、旧法人プロフェッショナルプランの場合は1つ、法人エンタープライズプランの場合は3つです。</li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の振替伝票を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul> <li> <p>issue_date : 発生日</p> </li>\n<li> <p>adjustment : 決算整理仕訳フラグ（true: 決算整理仕訳, false: 日常仕訳）</p> </li>\n<li> <p>txn_number : 仕訳番号</p> </li>\n<li> <p>details : 振替伝票の貸借行</p> </li>\n<li> <p>entry_side : 貸借区分</p>\n<ul> <li>credit : 貸方</li>\n<li>debit : 借方</li> </ul> </li>\n<li> <p>amount : 金額</p> </li> </ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>振替伝票は売掛・買掛レポートには反映されません。債権・債務データの登録は取引(Deals)をお使いください。</li>\n<li>事業所の仕訳番号形式が有効な場合のみ、レスポンスで仕訳番号(txn_number)を返します。</li>\n<li>セグメントタグ情報は法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で利用可能です。利用可能なセグメントの数は、法人アドバンスプラン（および旧法人プロフェッショナルプラン）の場合は1つ、法人エンタープライズプランの場合は3つです。</li>\n</ul>",
         "operationId": "get_manual_journal",
         "parameters": [
           {
@@ -4967,7 +4967,7 @@
           "ManualJournals"
         ],
         "summary": "振替伝票の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の振替伝票を更新する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>adjustment : 決算整理仕訳フラグ（true: 決算整理仕訳, false: 日常仕訳）</p>\n</li>\n\n<li>\n<p>txn_number : 仕訳番号</p>\n</li>\n\n<li>\n<p>details : 振替伝票の貸借行</p>\n</li>\n\n<li>\n<p>entry_side : 貸借区分</p>\n\n<ul>\n<li>credit : 貸方</li>\n\n<li>debit : 借方</li>\n</ul>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>振替伝票は売掛・買掛レポートには反映されません。債権・債務データの登録は取引(Deals)をお使いください。</li>\n\n<li>事業所の仕訳番号形式が有効な場合のみ、レスポンスで仕訳番号(txn_number)を返します。</li>\n<li>貸借合わせて100行まで仕訳行を登録できます。</li>\n\n<li>detailsに含まれない既存の貸借行は削除されます。更新後も残したい行は、必ず貸借行IDを指定してdetailsに含めてください。</li>\n\n<li>detailsに含まれる貸借行IDの指定がある行は、更新行として扱われ更新されます。</li>\n\n<li>detailsに含まれる貸借行IDの指定がない行は、新規行として扱われ追加されます。</li>\n<li>セグメントタグ情報は旧法人プロフェッショナルプラン以上で利用可能です。利用可能なセグメントの数は、旧法人プロフェッショナルプランの場合は1つ、法人エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</li></ul>\n\n",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の振替伝票を更新する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>adjustment : 決算整理仕訳フラグ（true: 決算整理仕訳, false: 日常仕訳）</p>\n</li>\n\n<li>\n<p>txn_number : 仕訳番号</p>\n</li>\n\n<li>\n<p>details : 振替伝票の貸借行</p>\n</li>\n\n<li>\n<p>entry_side : 貸借区分</p>\n\n<ul>\n<li>credit : 貸方</li>\n\n<li>debit : 借方</li>\n</ul>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>振替伝票は売掛・買掛レポートには反映されません。債権・債務データの登録は取引(Deals)をお使いください。</li>\n\n<li>事業所の仕訳番号形式が有効な場合のみ、レスポンスで仕訳番号(txn_number)を返します。</li>\n<li>貸借合わせて100行まで仕訳行を登録できます。</li>\n\n<li>detailsに含まれない既存の貸借行は削除されます。更新後も残したい行は、必ず貸借行IDを指定してdetailsに含めてください。</li>\n\n<li>detailsに含まれる貸借行IDの指定がある行は、更新行として扱われ更新されます。</li>\n\n<li>detailsに含まれる貸借行IDの指定がない行は、新規行として扱われ追加されます。</li>\n<li>セグメントタグ情報は法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で利用可能です。利用可能なセグメントの数は、法人アドバンプスラン（および旧法人プロフェッショナルプラン）の場合は1つ、法人エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</li></ul>\n\n",
         "operationId": "update_manual_journal",
         "parameters": [
           {
@@ -8493,7 +8493,7 @@
           "Journals"
         ],
         "summary": "仕訳帳のダウンロード要求",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ユーザーが所属する事業所の仕訳帳のダウンロードをリクエストします。</p>\n\n<p>生成されるファイルのファイル形式と出力項目に関しては、<a href=\"https://support.freee.co.jp/hc/ja/articles/204615564#other\">ヘルプページ</a>をご参照ください。</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n  <li>download_type\n    <ul>\n      <li>generic <a href=\"https://support.freee.co.jp/hc/ja/articles/204615564#2\">(旧CSV)</a></li>\n      <li>generic_v2 <a href=\"https://support.freee.co.jp/hc/ja/articles/204615564#h_01GEDXEY3SQP8Y7S58CM2H4CKH\">(新CSV（freee汎用形式）)</a></li>\n      <li>csv <a href=\"https://support.freee.co.jp/hc/ja/articles/204599604#2\">(弥生会計)</a></li>\n      <li>pdf <a href=\"https://support.freee.co.jp/hc/ja/articles/204615564#3\">(PDF)</a></li>\n    </ul>\n  </li>\n  <li>encoding : download_typeがgeneric, generic_v2の場合のみ有効で、指定しない場合はsjisになります。無効なdownload_typeのうちcsvの場合はsjisでファイル出力されるので、レスポンスでsjisがかえります。\n    <ul>\n      <li>sjis</li>\n      <li>utf-8</li>\n    </ul>\n  </li>\n  <li>visible_tags : download_typeがgeneric, csv, pdfの場合のみ有効です。指定しない場合は従来の仕様の仕訳帳が出力されます。\n    <ul>\n      <li>partner : 取引先タグ</li>\n      <li>item : 品目タグ</li>\n      <li>tag : メモタグ</li>\n      <li>section : 部門タグ</li>\n      <li>description : 備考欄</li>\n      <li>wallet_txn_description : 明細の備考欄</li>\n      <li>\n        segment_1_tag : セグメント1(旧法人プロフェッショナル, 法人エンタープライズプラン)<br>\n        segment_2_tag : セグメント2(法人エンタープライズプラン)<br>\n        segment_3_tag : セグメント3(法人エンタープライズプラン)<br><br>\n        <a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n      </li>\n      <li>all : 指定された場合は上記の設定をすべて有効として扱いますが、セグメント1、セグメント2、セグメント3は含みません。セグメントが必要な場合はallではなく、segment_1_tag, segment_2_tag, segment_3_tagを指定してください。</li>\n    </ul>\n  </li>\n  <li>visible_ids : download_typeがgenericの場合のみ有効です。\n    <ul>\n      <li>deal_id : 取引ID</li>\n      <li>transfer_id : 取引(振替)ID</li>\n      <li>manual_journal_id : 振替伝票ID</li>\n    </ul>\n  </li>\n\n  <li>id : 受け付けID</li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ユーザーが所属する事業所の仕訳帳のダウンロードをリクエストします。</p>\n\n<p>生成されるファイルのファイル形式と出力項目に関しては、<a href=\"https://support.freee.co.jp/hc/ja/articles/204615564#other\">ヘルプページ</a>をご参照ください。</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n  <li>download_type\n    <ul>\n      <li>generic <a href=\"https://support.freee.co.jp/hc/ja/articles/204615564#2\">(旧CSV)</a></li>\n      <li>generic_v2 <a href=\"https://support.freee.co.jp/hc/ja/articles/204615564#h_01GEDXEY3SQP8Y7S58CM2H4CKH\">(新CSV（freee汎用形式）)</a></li>\n      <li>csv <a href=\"https://support.freee.co.jp/hc/ja/articles/204599604#2\">(弥生会計)</a></li>\n      <li>pdf <a href=\"https://support.freee.co.jp/hc/ja/articles/204615564#3\">(PDF)</a></li>\n    </ul>\n  </li>\n  <li>encoding : download_typeがgeneric, generic_v2の場合のみ有効で、指定しない場合はsjisになります。無効なdownload_typeのうちcsvの場合はsjisでファイル出力されるので、レスポンスでsjisがかえります。\n    <ul>\n      <li>sjis</li>\n      <li>utf-8</li>\n    </ul>\n  </li>\n  <li>visible_tags : download_typeがgeneric, csv, pdfの場合のみ有効です。指定しない場合は従来の仕様の仕訳帳が出力されます。\n    <ul>\n      <li>partner : 取引先タグ</li>\n      <li>item : 品目タグ</li>\n      <li>tag : メモタグ</li>\n      <li>section : 部門タグ</li>\n      <li>description : 備考欄</li>\n      <li>wallet_txn_description : 明細の備考欄</li>\n      <li>\n        segment_1_tag : セグメント１タグ<br>\n        segment_2_tag : セグメント２タグ<br>\n        segment_3_tag : セグメント３タグ<br><br>\n        <a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n      </li>\n      <li>all : 指定された場合は上記の設定をすべて有効として扱いますが、セグメント１タグ、セグメント２タグ、セグメント３タグは含みません。セグメントが必要な場合はallではなく、segment_1_tag, segment_2_tag, segment_3_tagを指定してください。</li>\n    </ul>\n  </li>\n  <li>visible_ids : download_typeがgenericの場合のみ有効です。\n    <ul>\n      <li>deal_id : 取引ID</li>\n      <li>transfer_id : 取引(振替)ID</li>\n      <li>manual_journal_id : 振替伝票ID</li>\n    </ul>\n  </li>\n\n  <li>id : 受け付けID</li>\n</ul>",
         "operationId": "get_journals",
         "parameters": [
           {
@@ -8928,7 +8928,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(旧法人プロフェッショナルプラン, 法人エンタープライズプラン): segment_1_tag, セグメント2(法人エンタープライズプラン):segment_2_tag, セグメント3(法人エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない\n",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない\n",
             "schema": {
               "type": "string",
               "enum": [
@@ -8995,7 +8995,7 @@
           {
             "name": "approval_flow_status",
             "in": "query",
-            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、旧法人プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
             "schema": {
               "type": "string",
               "enum": [
@@ -9151,7 +9151,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(旧法人プロフェッショナルプラン, 法人エンタープライズプラン): segment_1_tag, セグメント2(法人エンタープライズプラン):segment_2_tag, セグメント3(法人エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -9218,7 +9218,7 @@
           {
             "name": "approval_flow_status",
             "in": "query",
-            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、旧法人プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
             "schema": {
               "type": "string",
               "enum": [
@@ -9374,7 +9374,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(旧法人プロフェッショナルプラン, 法人エンタープライズプラン): segment_1_tag, セグメント2(法人エンタープライズプラン):segment_2_tag, セグメント3(法人エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -9441,7 +9441,7 @@
           {
             "name": "approval_flow_status",
             "in": "query",
-            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、旧法人プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
             "schema": {
               "type": "string",
               "enum": [
@@ -9521,7 +9521,7 @@
           "Trial balance"
         ],
         "summary": "損益計算書の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の損益計算書を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>opening_balance : 期首残高</p></li>\n  <li><p>debit_amount : 借方金額</p></li>\n  <li><p>credit_amount:  貸方金額</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n  <li><p>composition_ratio : 構成比</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>配賦仕訳の絞り込み（cost_allocation）は旧法人ベーシックプラン以上で利用可能です。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl?company_id=1&amp;fiscal_year=2019&amp;breakdown_display_type=partner</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;breakdown_display_type&quot; : &quot;partner&quot;,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;opening_balance&quot; : 100000,\n        &quot;debit_amount&quot; : 50000,\n        &quot;credit_amount&quot; : 20000,\n        &quot;closing_balance&quot; : 130000,\n        &quot;composition_ratio&quot; : 0.25\n        &quot;partners&quot; : [{\n          &quot;id&quot; : 123,\n          &quot;name&quot; : &quot;freee&quot;,\n          &quot;opening_balance&quot; : 100000,\n          &quot;debit_amount&quot; : 50000,\n          &quot;credit_amount&quot; : 20000,\n          &quot;closing_balance&quot; : 130000,\n          &quot;composition_ratio&quot; : 0.25\n          },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の損益計算書を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>opening_balance : 期首残高</p></li>\n  <li><p>debit_amount : 借方金額</p></li>\n  <li><p>credit_amount:  貸方金額</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n  <li><p>composition_ratio : 構成比</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>配賦仕訳の絞り込み（cost_allocation）は法人スタンダードプラン（および旧法人ベーシックプラン）以上で利用可能です。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl?company_id=1&amp;fiscal_year=2019&amp;breakdown_display_type=partner</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;breakdown_display_type&quot; : &quot;partner&quot;,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;opening_balance&quot; : 100000,\n        &quot;debit_amount&quot; : 50000,\n        &quot;credit_amount&quot; : 20000,\n        &quot;closing_balance&quot; : 130000,\n        &quot;composition_ratio&quot; : 0.25\n        &quot;partners&quot; : [{\n          &quot;id&quot; : 123,\n          &quot;name&quot; : &quot;freee&quot;,\n          &quot;opening_balance&quot; : 100000,\n          &quot;debit_amount&quot; : 50000,\n          &quot;credit_amount&quot; : 20000,\n          &quot;closing_balance&quot; : 130000,\n          &quot;composition_ratio&quot; : 0.25\n          },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
         "operationId": "get_trial_pl",
         "parameters": [
           {
@@ -9597,7 +9597,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(旧法人プロフェッショナルプラン, 法人エンタープライズプラン): segment_1_tag, セグメント2(法人エンタープライズプラン):segment_2_tag, セグメント3(法人エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -9676,7 +9676,7 @@
           {
             "name": "approval_flow_status",
             "in": "query",
-            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、旧法人プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
             "schema": {
               "type": "string",
               "enum": [
@@ -9756,7 +9756,7 @@
           "Trial balance"
         ],
         "summary": "損益計算書(前年比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の損益計算書(前年比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>last_year_closing_balance:  前年度期末残高</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n  <li><p>year_on_year : 前年比</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>配賦仕訳の絞り込み（cost_allocation）は旧法人ベーシックプラン以上で利用可能です。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n  <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n    <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_two_years?company_id=1&amp;fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_two_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の損益計算書(前年比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>last_year_closing_balance:  前年度期末残高</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n  <li><p>year_on_year : 前年比</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>配賦仕訳の絞り込み（cost_allocation）は法人スタンダードプラン（および旧法人ベーシックプラン）以上で利用可能です。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n  <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n    <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_two_years?company_id=1&amp;fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_two_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
         "operationId": "get_trial_pl_two_years",
         "parameters": [
           {
@@ -9832,7 +9832,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(旧法人プロフェッショナルプラン, 法人エンタープライズプラン): segment_1_tag, セグメント2(法人エンタープライズプラン):segment_2_tag, セグメント3(法人エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -9911,7 +9911,7 @@
           {
             "name": "approval_flow_status",
             "in": "query",
-            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、旧法人プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
             "schema": {
               "type": "string",
               "enum": [
@@ -9991,7 +9991,7 @@
           "Trial balance"
         ],
         "summary": "損益計算書(３期間比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の損益計算書(３期間比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>two_years_before_closing_balance:  前々年度期末残高</p></li>\n  <li><p>last_year_closing_balance:  前年度期末残高</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n  <li><p>year_on_year : 前年比</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>配賦仕訳の絞り込み（cost_allocation）は旧法人ベーシックプラン以上で利用可能です。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_three_years?company_id=1&fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_three_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;two_year_before_closing_balance&quot; : 50000,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の損益計算書(３期間比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>two_years_before_closing_balance:  前々年度期末残高</p></li>\n  <li><p>last_year_closing_balance:  前年度期末残高</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n  <li><p>year_on_year : 前年比</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>配賦仕訳の絞り込み（cost_allocation）は法人スタンダードプラン（および旧法人ベーシックプラン）以上で利用可能です。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_three_years?company_id=1&fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_three_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;two_year_before_closing_balance&quot; : 50000,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
         "operationId": "get_trial_pl_three_years",
         "parameters": [
           {
@@ -10067,7 +10067,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(旧法人プロフェッショナルプラン, 法人エンタープライズプラン): segment_1_tag, セグメント2(法人エンタープライズプラン):segment_2_tag, セグメント3(法人エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -10146,7 +10146,7 @@
           {
             "name": "approval_flow_status",
             "in": "query",
-            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、旧法人プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
             "schema": {
               "type": "string",
               "enum": [
@@ -10226,7 +10226,7 @@
           "Trial balance"
         ],
         "summary": "損益計算書(部門比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の損益計算書(部門比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>配賦仕訳の絞り込み（cost_allocation）は旧法人ベーシックプラン以上で利用可能です。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_sections?company_id=1&amp;section_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_sections&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;section_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;sections&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;営業部&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;広報部&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;人事部&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の損益計算書(部門比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>配賦仕訳の絞り込み（cost_allocation）は法人スタンダードプラン（および旧法人ベーシックプラン）以上で利用可能です。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_sections?company_id=1&amp;section_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_sections&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;section_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;sections&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;営業部&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;広報部&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;人事部&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
         "operationId": "get_trial_pl_sections",
         "parameters": [
           {
@@ -10311,7 +10311,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(旧法人プロフェッショナルプラン, 法人エンタープライズプラン): segment_1_tag, セグメント2(法人エンタープライズプラン):segment_2_tag, セグメント3(法人エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -10379,7 +10379,7 @@
           {
             "name": "approval_flow_status",
             "in": "query",
-            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、旧法人プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
             "schema": {
               "type": "string",
               "enum": [
@@ -10458,8 +10458,8 @@
         "tags": [
           "Trial balance"
         ],
-        "summary": "損益計算書(セグメント1比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の損益計算書(セグメント1比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_segment_1_tags?company_id=1&amp;segment_1_tag_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_segment_1_tags&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;segment_1_tag_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;segment_1_tags&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;プロジェクトA&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;プロジェクトB&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;プロジェクトC&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "summary": "損益計算書(セグメント１比較)の取得",
+        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の損益計算書(セグメント１比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>配賦仕訳の絞り込み（cost_allocation）は法人スタンダードプラン（および旧法人ベーシックプラン）以上で利用可能です。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_segment_1_tags?company_id=1&amp;segment_1_tag_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_segment_1_tags&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;segment_1_tag_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;segment_1_tags&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;プロジェクトA&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;プロジェクトB&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;プロジェクトC&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
         "operationId": "get_trial_pl_segment_1_tags",
         "parameters": [
           {
@@ -10476,7 +10476,7 @@
           {
             "name": "segment_1_tag_ids",
             "in": "query",
-            "description": "出力するセグメント1タグの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択のセグメントで比較できます）",
+            "description": "出力するセグメント１タグIDの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択のセグメントで比較できます）",
             "required": true,
             "schema": {
               "type": "string"
@@ -10620,7 +10620,7 @@
           {
             "name": "approval_flow_status",
             "in": "query",
-            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、旧法人プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
             "schema": {
               "type": "string",
               "enum": [
@@ -10699,8 +10699,8 @@
         "tags": [
           "Trial balance"
         ],
-        "summary": "損益計算書(セグメント2比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の損益計算書(セグメント2比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_segment_2_tags?company_id=1&amp;segment_2_tag_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_segment_2_tags&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;segment_2_tag_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;segment_2_tags&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;プロジェクトA&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;プロジェクトB&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;プロジェクトC&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "summary": "損益計算書(セグメント２比較)の取得",
+        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の損益計算書(セグメント２比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>配賦仕訳の絞り込み（cost_allocation）は法人スタンダードプラン（および旧法人ベーシックプラン）以上で利用可能です。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_segment_2_tags?company_id=1&amp;segment_2_tag_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_segment_2_tags&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;segment_2_tag_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;segment_2_tags&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;プロジェクトA&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;プロジェクトB&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;プロジェクトC&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
         "operationId": "get_trial_pl_segment_2_tags",
         "parameters": [
           {
@@ -10717,7 +10717,7 @@
           {
             "name": "segment_2_tag_ids",
             "in": "query",
-            "description": "出力するセグメント2タグの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択のセグメントで比較できます）",
+            "description": "出力するセグメント２タグIDの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択のセグメントで比較できます）",
             "required": true,
             "schema": {
               "type": "string"
@@ -10861,7 +10861,7 @@
           {
             "name": "approval_flow_status",
             "in": "query",
-            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、旧法人プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
             "schema": {
               "type": "string",
               "enum": [
@@ -10940,8 +10940,8 @@
         "tags": [
           "Trial balance"
         ],
-        "summary": "損益計算書(セグメント3比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の損益計算書(セグメント3比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_segment_3_tags?company_id=1&amp;segment_3_tag_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_segment_3_tags&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;segment_3_tag_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;segment_3_tags&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;プロジェクトA&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;プロジェクトB&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;プロジェクトC&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "summary": "損益計算書(セグメント３比較)の取得",
+        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の損益計算書(セグメント３比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>配賦仕訳の絞り込み（cost_allocation）は法人スタンダードプラン（および旧法人ベーシックプラン）以上で利用可能です。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_pl_segment_3_tags?company_id=1&amp;segment_3_tag_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_pl_segment_3_tags&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;segment_3_tag_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;売上高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;営業収益&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;segment_3_tags&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;プロジェクトA&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;プロジェクトB&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;プロジェクトC&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
         "operationId": "get_trial_pl_segment_3_tags",
         "parameters": [
           {
@@ -10958,7 +10958,7 @@
           {
             "name": "segment_3_tag_ids",
             "in": "query",
-            "description": "出力するセグメント3タグの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択のセグメントで比較できます）",
+            "description": "出力するセグメント３タグIDの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択のセグメントで比較できます）",
             "required": true,
             "schema": {
               "type": "string"
@@ -11102,7 +11102,7 @@
           {
             "name": "approval_flow_status",
             "in": "query",
-            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、旧法人プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
             "schema": {
               "type": "string",
               "enum": [
@@ -11182,7 +11182,7 @@
           "Trial balance"
         ],
         "summary": "製造原価報告書の取得",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の製造原価報告書を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>opening_balance : 期首残高</p></li>\n  <li><p>debit_amount : 借方金額</p></li>\n  <li><p>credit_amount:  貸方金額</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n  <li><p>composition_ratio : 構成比</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>配賦仕訳の絞り込み（cost_allocation）は旧法人ベーシックプラン以上で利用可能です。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_cr?company_id=1&amp;fiscal_year=2019&amp;breakdown_display_type=partner</p>\n</blockquote>\n<pre><code>{\n  &quot;trial_cr&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;breakdown_display_type&quot; : &quot;partner&quot;,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,\n        &quot;opening_balance&quot; : 100000,\n        &quot;debit_amount&quot; : 50000,\n        &quot;credit_amount&quot; : 20000,\n        &quot;closing_balance&quot; : 130000,\n        &quot;composition_ratio&quot; : 0.25\n        &quot;partners&quot; : [{\n          &quot;id&quot; : 123,\n          &quot;name&quot; : &quot;freee&quot;,\n          &quot;opening_balance&quot; : 100000,\n          &quot;debit_amount&quot; : 50000,\n          &quot;credit_amount&quot; : 20000,\n          &quot;closing_balance&quot; : 130000,\n          &quot;composition_ratio&quot; : 0.25\n          },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の製造原価報告書を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>opening_balance : 期首残高</p></li>\n  <li><p>debit_amount : 借方金額</p></li>\n  <li><p>credit_amount:  貸方金額</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n  <li><p>composition_ratio : 構成比</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>配賦仕訳の絞り込み（cost_allocation）は法人スタンダードプラン（および旧法人ベーシックプラン）以上で利用可能です。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_cr?company_id=1&amp;fiscal_year=2019&amp;breakdown_display_type=partner</p>\n</blockquote>\n<pre><code>{\n  &quot;trial_cr&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;breakdown_display_type&quot; : &quot;partner&quot;,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,\n        &quot;opening_balance&quot; : 100000,\n        &quot;debit_amount&quot; : 50000,\n        &quot;credit_amount&quot; : 20000,\n        &quot;closing_balance&quot; : 130000,\n        &quot;composition_ratio&quot; : 0.25\n        &quot;partners&quot; : [{\n          &quot;id&quot; : 123,\n          &quot;name&quot; : &quot;freee&quot;,\n          &quot;opening_balance&quot; : 100000,\n          &quot;debit_amount&quot; : 50000,\n          &quot;credit_amount&quot; : 20000,\n          &quot;closing_balance&quot; : 130000,\n          &quot;composition_ratio&quot; : 0.25\n          },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
         "operationId": "get_trial_cr",
         "parameters": [
           {
@@ -11258,7 +11258,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(旧法人プロフェッショナルプラン, 法人エンタープライズプラン): segment_1_tag, セグメント2(法人エンタープライズプラン):segment_2_tag, セグメント3(法人エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -11337,7 +11337,7 @@
           {
             "name": "approval_flow_status",
             "in": "query",
-            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト), 全てのステータス: all)<br>\nプレミアムプラン、旧法人プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト), 全てのステータス: all)<br>\nプレミアムプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
             "schema": {
               "type": "string",
               "enum": [
@@ -11417,7 +11417,7 @@
           "Trial balance"
         ],
         "summary": "製造原価報告書(前年比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の製造原価報告書(前年比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>last_year_closing_balance:  前年度期末残高</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n  <li><p>year_on_year : 前年比</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>配賦仕訳の絞り込み（cost_allocation）は旧法人ベーシックプラン以上で利用可能です。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_cr_two_years?company_id=1&amp;fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_cr_two_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の製造原価報告書(前年比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>last_year_closing_balance:  前年度期末残高</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n  <li><p>year_on_year : 前年比</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>配賦仕訳の絞り込み（cost_allocation）は法人スタンダードプラン（および旧法人ベーシックプラン）以上で利用可能です。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_cr_two_years?company_id=1&amp;fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_cr_two_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
         "operationId": "get_trial_cr_two_years",
         "parameters": [
           {
@@ -11493,7 +11493,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(旧法人プロフェッショナルプラン, 法人エンタープライズプラン): segment_1_tag, セグメント2(法人エンタープライズプラン):segment_2_tag, セグメント3(法人エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -11572,7 +11572,7 @@
           {
             "name": "approval_flow_status",
             "in": "query",
-            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト), 全てのステータス: all)<br>\nプレミアムプラン、旧法人プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト), 全てのステータス: all)<br>\nプレミアムプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
             "schema": {
               "type": "string",
               "enum": [
@@ -11652,7 +11652,7 @@
           "Trial balance"
         ],
         "summary": "製造原価報告書(３期間比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の製造原価報告書(３期間比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>two_years_before_closing_balance:  前々年度期末残高</p></li>\n  <li><p>last_year_closing_balance:  前年度期末残高</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n  <li><p>year_on_year : 前年比</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>配賦仕訳の絞り込み（cost_allocation）は旧法人ベーシックプラン以上で利用可能です。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_cr_three_years?company_id=1&fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_cr_three_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,\n        &quot;two_year_before_closing_balance&quot; : 50000,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の製造原価報告書(３期間比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>two_years_before_closing_balance:  前々年度期末残高</p></li>\n  <li><p>last_year_closing_balance:  前年度期末残高</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n  <li><p>year_on_year : 前年比</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>配賦仕訳の絞り込み（cost_allocation）は法人スタンダードプラン（および旧法人ベーシックプラン）以上で利用可能です。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_cr_three_years?company_id=1&fiscal_year=2019</p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_cr_three_years&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,\n        &quot;two_year_before_closing_balance&quot; : 50000,\n        &quot;last_year_closing_balance&quot; : 25000,\n        &quot;closing_balance&quot; : 100000,\n        &quot;year_on_year&quot; : 0.85\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
         "operationId": "get_trial_cr_three_years",
         "parameters": [
           {
@@ -11728,7 +11728,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(旧法人プロフェッショナルプラン, 法人エンタープライズプラン): segment_1_tag, セグメント2(法人エンタープライズプラン):segment_2_tag, セグメント3(法人エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -11807,7 +11807,7 @@
           {
             "name": "approval_flow_status",
             "in": "query",
-            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト), 全てのステータス: all)<br>\nプレミアムプラン、旧法人プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト), 全てのステータス: all)<br>\nプレミアムプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
             "schema": {
               "type": "string",
               "enum": [
@@ -11887,7 +11887,7 @@
           "Trial balance"
         ],
         "summary": "製造原価報告書(部門比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の製造原価報告書(部門比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>配賦仕訳の絞り込み（cost_allocation）は旧法人ベーシックプラン以上で利用可能です。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_cr_sections?company_id=1&amp;section_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_cr_sections&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;section_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;sections&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;営業部&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;広報部&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;人事部&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の製造原価報告書(部門比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>配賦仕訳の絞り込み（cost_allocation）は法人スタンダードプラン（および旧法人ベーシックプラン）以上で利用可能です。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_cr_sections?company_id=1&amp;section_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_cr_sections&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;section_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;sections&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;営業部&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;広報部&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;人事部&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
         "operationId": "get_trial_cr_sections",
         "parameters": [
           {
@@ -11972,7 +11972,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(旧法人プロフェッショナルプラン, 法人エンタープライズプラン): segment_1_tag, セグメント2(法人エンタープライズプラン):segment_2_tag, セグメント3(法人エンタープライズプラン): segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -12040,7 +12040,7 @@
           {
             "name": "approval_flow_status",
             "in": "query",
-            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、旧法人プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
             "schema": {
               "type": "string",
               "enum": [
@@ -12119,8 +12119,8 @@
         "tags": [
           "Trial balance"
         ],
-        "summary": "製造原価報告書(セグメント1比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の製造原価報告書(セグメント1比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_cr_segment_1_tags?company_id=1&amp;segment_1_tag_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_cr_segment_1_tags&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;segment_1_tag_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;segment_1_tags&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;プロジェクトA&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;プロジェクトB&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;プロジェクトC&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "summary": "製造原価報告書(セグメント１比較)の取得",
+        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の製造原価報告書(セグメント１比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_cr_segment_1_tags?company_id=1&amp;segment_1_tag_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_cr_segment_1_tags&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;segment_1_tag_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;segment_1_tags&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;プロジェクトA&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;プロジェクトB&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;プロジェクトC&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
         "operationId": "get_trial_cr_segment_1_tags",
         "parameters": [
           {
@@ -12137,7 +12137,7 @@
           {
             "name": "segment_1_tag_ids",
             "in": "query",
-            "description": "出力するセグメント1タグの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択のセグメントで比較できます）",
+            "description": "出力するセグメント１タグIDの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択のセグメントで比較できます）",
             "required": true,
             "schema": {
               "type": "string"
@@ -12281,7 +12281,7 @@
           {
             "name": "approval_flow_status",
             "in": "query",
-            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、旧法人プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
             "schema": {
               "type": "string",
               "enum": [
@@ -12360,8 +12360,8 @@
         "tags": [
           "Trial balance"
         ],
-        "summary": "製造原価報告書(セグメント2比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の製造原価報告書(セグメント2比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_cr_segment_2_tags?company_id=1&amp;segment_2_tag_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_cr_segment_2_tags&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;segment_2_tag_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;segment_2_tags&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;プロジェクトA&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;プロジェクトB&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;プロジェクトC&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "summary": "製造原価報告書(セグメント２比較)の取得",
+        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の製造原価報告書(セグメント２比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_cr_segment_2_tags?company_id=1&amp;segment_2_tag_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_cr_segment_2_tags&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;segment_2_tag_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;segment_2_tags&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;プロジェクトA&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;プロジェクトB&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;プロジェクトC&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
         "operationId": "get_trial_cr_segment_2_tags",
         "parameters": [
           {
@@ -12378,7 +12378,7 @@
           {
             "name": "segment_2_tag_ids",
             "in": "query",
-            "description": "出力するセグメント2タグの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択のセグメントで比較できます）",
+            "description": "出力するセグメント２タグIDの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択のセグメントで比較できます）",
             "required": true,
             "schema": {
               "type": "string"
@@ -12522,7 +12522,7 @@
           {
             "name": "approval_flow_status",
             "in": "query",
-            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、旧法人プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
             "schema": {
               "type": "string",
               "enum": [
@@ -12601,8 +12601,8 @@
         "tags": [
           "Trial balance"
         ],
-        "summary": "製造原価報告書(セグメント3比較)の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の製造原価報告書(セグメント3比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_cr_segment_3_tags?company_id=1&amp;segment_3_tag_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_cr_segment_3_tags&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;segment_3_tag_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;segment_3_tags&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;プロジェクトA&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;プロジェクトB&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;プロジェクトC&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
+        "summary": "製造原価報告書(セグメント３比較)の取得",
+        "description": "\n<h2 id=\"\">概要</h2>\n<p>指定した事業所の製造原価報告書(セグメント３比較)を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li><p>created_at : 作成日時</p></li>\n  <li><p>account_item_name : 勘定科目名</p></li>\n  <li><p>hierarchy_level: 階層レベル</p></li>\n  <li><p>parent_account_category_name: 上位勘定科目カテゴリー名</p></li>\n  <li><p>closing_balance : 期末残高</p></li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li>会計年度が指定されない場合、現在の会計年度がデフォルトとなります。</li>\n  <li>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</li>\n  <li>partner_codeとpartner_idは同時に指定することはできません。</li>\n  <li>start_date / end_date を指定した場合、以下を同時に指定することはできません。\n  <ul>\n    <li>fiscal_year</li>\n    <li>start_month</li>\n    <li>end_month</li>\n  </ul>\n  </li>\n  <li>0を指定すると未選択で絞り込めます\n  <ul>\n    <li>partner_idに0を指定して絞り込んだ場合\n    <ul>\n      <li>取引先が設定されていない取引、振替伝票の金額がレスポンスに返却されます</li>\n    </ul>\n    </li>\n  </ul>\n  </li>\n</ul>\n\n<h2 id=\"_4\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/reports/trial_cr_segment_3_tags?company_id=1&amp;segment_3_tag_ids=1,2,3&amp;fiscal_year=2019</p></p>\n</blockquote>\n\n<pre><code>{\n  &quot;trial_cr_segment_3_tags&quot; :\n    {\n      &quot;company_id&quot; : 1,\n      &quot;segment_3_tag_ids&quot; : &quot;1,2,3&quot;,\n      &quot;fiscal_year&quot; : 2019,\n      &quot;created_at&quot; : &quot;2019-12-17 12:00:50&quot\n      &quot;balances&quot; : [{\n        &quot;account_item_id&quot; : 1500,\n        &quot;account_item_name&quot; : &quot;[製]期首材料棚卸高&quot;,\n        &quot;hierarchy_level&quot; : 2,\n        &quot;account_category_name&quot; : &quot;期首原材料棚卸&quot;,\n        &quot;closing_balance&quot; : 1000000,\n        &quot;segment_3_tags&quot; : [{\n          &quot;id&quot;: 1\n          &quot;name&quot;: &quot;プロジェクトA&quot;,\n          &quot;closing_balance&quot; : 100000\n        },\n        {\n          &quot;id&quot;: 2\n          &quot;name&quot;: &quot;プロジェクトB&quot;,\n          &quot;closing_balance&quot; : 200000\n        },\n        {\n          &quot;id&quot;: 3\n          &quot;name&quot;: &quot;プロジェクトC&quot;,\n          &quot;closing_balance&quot; : 300000\n        },\n        ...\n        ]\n      },\n      ...\n      ]\n    }\n}</code></pre>\n",
         "operationId": "get_trial_cr_segment_3_tags",
         "parameters": [
           {
@@ -12619,7 +12619,7 @@
           {
             "name": "segment_3_tag_ids",
             "in": "query",
-            "description": "出力するセグメント3タグの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択のセグメントで比較できます）",
+            "description": "出力するセグメント３タグIDの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択のセグメントで比較できます）",
             "required": true,
             "schema": {
               "type": "string"
@@ -12763,7 +12763,7 @@
           {
             "name": "approval_flow_status",
             "in": "query",
-            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、旧法人プロフェッショナルプラン以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
+            "description": "承認ステータスで絞込 (未承認を除く: without_in_progress (デフォルト)、全てのステータス: all)<br>\nプレミアムプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で指定可能です。<br>\n事業所の設定から仕訳承認フローの利用を有効にした場合に指定可能です。\n",
             "schema": {
               "type": "string",
               "enum": [
@@ -12843,7 +12843,7 @@
           "General ledgers"
         ],
         "summary": "総勘定元帳一覧の取得（β版）",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の総勘定元帳一覧を取得する</p>\n<br>\n※このAPIはβ版として提供しています。\n<ul>\n  <li>このAPIは法人アドバンスプラン（および旧法人プロフェッショナルプラン）・法人エンタープライズプランに加入している事業所のみが利用できます。</li>\n  <li>利用状況よって事前の告知なく提供プラン・コール数の上限を変更する可能性があります。</li>\n  <li>他エンドポイントと比べてレスポンスタイムが遅い場合があります。</li>\n</ul>\n<h2 id=\"\">注意点</h2>\n<ul>\n<li>segment_tag_2_name、segment_tag_3_nameは法人エンタープライズプランのみ使用できます。</li>\n</ul>",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の総勘定元帳一覧を取得する</p>\n<br>\n※このAPIはβ版として提供しています。\n<ul>\n  <li>このAPIは法人アドバンスプラン（および旧法人プロフェッショナルプラン）・法人エンタープライズプランに加入している事業所のみが利用できます。</li>\n  <li>利用状況によって事前の告知なく提供プラン・コール数の上限を変更する可能性があります。</li>\n  <li>他エンドポイントと比べてレスポンスタイムが遅い場合があります。</li>\n</ul>",
         "operationId": "get_general_ledgers",
         "parameters": [
           {
@@ -13042,29 +13042,29 @@
           {
             "name": "segment_tag_1_name",
             "in": "query",
-            "description": "セグメント1タグで絞込（未選択を指定すると、セグメント1タグが未選択で絞り込めます）",
+            "description": "セグメント１タグ名で絞込（未選択を指定すると、セグメント１タグが未選択で絞り込めます）",
             "schema": {
               "type": "string"
             },
-            "example": "セグメント1タグ"
+            "example": "セグメント１タグ"
           },
           {
             "name": "segment_tag_2_name",
             "in": "query",
-            "description": "セグメント2タグで絞込（未選択を指定すると、セグメント2タグが未選択で絞り込めます）",
+            "description": "セグメント２タグ名で絞込（未選択を指定すると、セグメント２タグが未選択で絞り込めます）",
             "schema": {
               "type": "string"
             },
-            "example": "セグメント2タグ"
+            "example": "セグメント２タグ"
           },
           {
             "name": "segment_tag_3_name",
             "in": "query",
-            "description": "セグメント3タグで絞込（未選択を指定すると、セグメント3タグが未選択で絞り込めます）",
+            "description": "セグメント３タグ名で絞込（未選択を指定すると、セグメント３タグが未選択で絞り込めます）",
             "schema": {
               "type": "string"
             },
-            "example": "セグメント3タグ"
+            "example": "セグメント３タグ"
           },
           {
             "name": "approval_flow_status",
@@ -16876,7 +16876,7 @@
           {
             "name": "segment_id",
             "in": "path",
-            "description": "セグメントID（1,2,3のいずれか）\n該当プラン以外で参照した場合にはエラーとなります。\n  1: 旧法人プロフェッショナル, 法人エンタープライズプラン\n  2,3: 法人エンタープライズプラン\n",
+            "description": "セグメントID（1,2,3のいずれか）\n該当プラン以外で参照した場合にはエラーとなります。\n",
             "required": true,
             "schema": {
               "type": "integer",
@@ -16983,7 +16983,7 @@
           {
             "name": "segment_id",
             "in": "path",
-            "description": "セグメントID（1,2,3のいずれか）\n該当プラン以外で参照した場合にはエラーとなります。\n  1: 旧法人プロフェッショナル, 法人エンタープライズプラン\n  2,3: 法人エンタープライズプラン\n",
+            "description": "セグメントID（1,2,3のいずれか）\n該当プラン以外で参照した場合にはエラーとなります。\n",
             "required": true,
             "schema": {
               "type": "integer",
@@ -17075,7 +17075,7 @@
           {
             "name": "segment_id",
             "in": "path",
-            "description": "セグメントID（1,2,3のいずれか）\n該当プラン以外で参照した場合にはエラーとなります。\n  1: 旧法人プロフェッショナル, 法人エンタープライズプラン\n  2,3: 法人エンタープライズプラン\n",
+            "description": "セグメントID（1,2,3のいずれか）\n該当プラン以外で参照した場合にはエラーとなります。\n",
             "required": true,
             "schema": {
               "type": "integer",
@@ -17176,7 +17176,7 @@
           {
             "name": "segment_id",
             "in": "path",
-            "description": "セグメントID（1,2,3のいずれか）\n該当プラン以外で参照した場合にはエラーとなります。\n  1: 旧法人プロフェッショナル, 法人エンタープライズプラン\n  2,3: 法人エンタープライズプラン\n",
+            "description": "セグメントID（1,2,3のいずれか）\n該当プラン以外で参照した場合にはエラーとなります。\n",
             "required": true,
             "schema": {
               "type": "integer",
@@ -17617,21 +17617,21 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント１ID",
+                  "description": "セグメント１タグID",
                   "example": 1
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント２ID",
+                  "description": "セグメント２タグID",
                   "example": 1
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント３ID",
+                  "description": "セグメント３タグID",
                   "example": 1
                 },
                 "description": {
@@ -17826,21 +17826,21 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント１ID",
+                  "description": "セグメント１タグID",
                   "example": 1
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント２ID",
+                  "description": "セグメント２タグID",
                   "example": 1
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント３ID",
+                  "description": "セグメント３タグID",
                   "example": 1
                 },
                 "description": {
@@ -17984,21 +17984,21 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント１ID",
+                  "description": "セグメント１タグID",
                   "example": 1
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント２ID",
+                  "description": "セグメント２タグID",
                   "example": 1
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント３ID",
+                  "description": "セグメント３タグID",
                   "example": 1
                 },
                 "description": {
@@ -18143,21 +18143,21 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント１ID",
+                  "description": "セグメント１タグID",
                   "example": 1
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント２ID",
+                  "description": "セグメント２タグID",
                   "example": 1
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント３ID",
+                  "description": "セグメント３タグID",
                   "example": 1
                 },
                 "description": {
@@ -18604,7 +18604,7 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "申請経路ID<br>\n<ul>\n    <li>経費申請のステータスを申請中として作成する場合は、必ず指定してください。</li>\n    <li>指定する申請経路IDは、申請経路APIを利用して取得してください。</li>\n    <li>\n        未指定の場合は、基本経路を設定している事業所では基本経路が、基本経路を設定していない事業所では利用可能な申請経路の中から最初の申請経路が自動的に使用されます。\n        <ul>\n           <li>意図しない申請経路を持った経費申請の作成を防ぐために、使用する申請経路IDを指定することを推奨します。</li>\n        </ul>\n    </li>\n    <li>\n        旧法人ベーシックプランの事業所では以下のデフォルトで用意された申請経路のみ指定できます\n        <ul>\n        <li>指定なし</li>\n        <li>承認者を指定</li>\n        </ul>\n    </li>\n</ul>\n",
+            "description": "申請経路ID<br>\n<ul>\n    <li>経費申請のステータスを申請中として作成する場合は、必ず指定してください。</li>\n    <li>指定する申請経路IDは、申請経路APIを利用して取得してください。</li>\n    <li>\n        未指定の場合は、基本経路を設定している事業所では基本経路が、基本経路を設定していない事業所では利用可能な申請経路の中から最初の申請経路が自動的に使用されます。\n        <ul>\n           <li>意図しない申請経路を持った経費申請の作成を防ぐために、使用する申請経路IDを指定することを推奨します。</li>\n        </ul>\n    </li>\n    <li>\n        法人スタータープラン、法人スタンダードプラン（および旧法人ベーシックプラン）の事業所では以下のデフォルトで用意された申請経路のみ指定できます\n        <ul>\n        <li>指定なし</li>\n        <li>承認者を指定</li>\n        </ul>\n    </li>\n</ul>\n",
             "example": 1
           },
           "approver_id": {
@@ -18623,28 +18623,28 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "親申請ID(旧法人プロフェッショナル, 法人エンタープライズプラン)<br>\n<ul>\n  <li>承認済みの既存各種申請IDのみ指定可能です。</li>\n  <li>各種申請一覧APIを利用して取得してください。</li>\n</ul>\n",
+            "description": "親申請ID(法人アドバンスプラン（および旧法人プロフェッショナルプラン）, 法人エンタープライズプラン)<br>\n<ul>\n  <li>承認済みの既存各種申請IDのみ指定可能です。</li>\n  <li>各種申請一覧APIを利用して取得してください。</li>\n</ul>\n",
             "example": 2
           },
           "segment_1_tag_id": {
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "セグメント１ID(旧法人プロフェッショナル, 法人エンタープライズプラン)<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+            "description": "セグメント１タグID<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
             "example": 1
           },
           "segment_2_tag_id": {
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "セグメント２ID(法人エンタープライズプラン)<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+            "description": "セグメント２タグID<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
             "example": 2
           },
           "segment_3_tag_id": {
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "セグメント３ID(法人エンタープライズプラン)<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+            "description": "セグメント３タグID<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
             "example": 3
           }
         }
@@ -18779,7 +18779,7 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "申請経路ID<br>\n<ul>\n    <li>経費申請のステータスを申請中として作成する場合は、必ず指定してください。</li>\n    <li>指定する申請経路IDは、申請経路APIを利用して取得してください。</li>\n    <li>\n        未指定の場合は、基本経路を設定している事業所では基本経路が、基本経路を設定していない事業所では利用可能な申請経路の中から最初の申請経路が自動的に使用されます。\n        <ul>\n          <li>意図しない申請経路を持った経費申請の作成を防ぐために、使用する申請経路IDを指定することを推奨します。</li>\n        </ul>\n    </li>\n    <li>\n        旧法人ベーシックプランの事業所では以下のデフォルトで用意された申請経路のみ指定できます\n        <ul>\n        <li>指定なし</li>\n        <li>承認者を指定</li>\n        </ul>\n    </li>\n</ul>\n",
+            "description": "申請経路ID<br>\n<ul>\n    <li>経費申請のステータスを申請中として作成する場合は、必ず指定してください。</li>\n    <li>指定する申請経路IDは、申請経路APIを利用して取得してください。</li>\n    <li>\n        未指定の場合は、基本経路を設定している事業所では基本経路が、基本経路を設定していない事業所では利用可能な申請経路の中から最初の申請経路が自動的に使用されます。\n        <ul>\n          <li>意図しない申請経路を持った経費申請の作成を防ぐために、使用する申請経路IDを指定することを推奨します。</li>\n        </ul>\n    </li>\n    <li>\n        法人スタータープラン、法人スタンダードプラン（および旧法人ベーシックプラン）の事業所では以下のデフォルトで用意された申請経路のみ指定できます\n        <ul>\n        <li>指定なし</li>\n        <li>承認者を指定</li>\n        </ul>\n    </li>\n</ul>\n",
             "example": 1
           },
           "approver_id": {
@@ -18798,7 +18798,7 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "親申請ID(旧法人プロフェッショナルプラン, 法人エンタープライズプラン)<br>\n<ul>\n  <li>承認済みの既存各種申請IDのみ指定可能です。</li>\n  <li>各種申請一覧APIを利用して取得してください。</li>\n</ul>\n",
+            "description": "親申請ID(法人アドバンスプラン（および旧法人プロフェッショナルプラン）, 法人エンタープライズプラン)<br>\n<ul>\n  <li>承認済みの既存各種申請IDのみ指定可能です。</li>\n  <li>各種申請一覧APIを利用して取得してください。</li>\n</ul>\n",
             "example": 2,
             "nullable": true
           },
@@ -18806,21 +18806,21 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "セグメント１ID(旧法人プロフェッショナル, 法人エンタープライズプラン)<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+            "description": "セグメント１タグID<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
             "example": 1
           },
           "segment_2_tag_id": {
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "セグメント２ID(法人エンタープライズプラン)<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+            "description": "セグメント２タグID<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
             "example": 2
           },
           "segment_3_tag_id": {
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "セグメント３ID(法人エンタープライズプラン)<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+            "description": "セグメント３タグID<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
             "example": 3
           }
         }
@@ -19016,21 +19016,21 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント１ID<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+                  "description": "セグメント１タグID<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
                   "example": 1
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント２ID(法人エンタープライズプラン)<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+                  "description": "セグメント２タグID<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
                   "example": 1
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント３ID(法人エンタープライズプラン)<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+                  "description": "セグメント３タグID<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
                   "example": 1
                 }
               }
@@ -19054,7 +19054,7 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "親申請ID(法人エンタープライズプラン、旧法人プロフェッショナルプラン)<br>\n<ul>\n  <li>承認済みの既存各種申請IDのみ指定可能です。</li>\n  <li>各種申請一覧APIを利用して取得してください。</li>\n</ul>\n",
+            "description": "親申請ID(法人エンタープライズプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）)<br>\n<ul>\n  <li>承認済みの既存各種申請IDのみ指定可能です。</li>\n  <li>各種申請一覧APIを利用して取得してください。</li>\n</ul>\n",
             "example": 2,
             "nullable": true
           },
@@ -19307,21 +19307,21 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント１ID<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+                  "description": "セグメント１タグID<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
                   "example": 1
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント２ID(法人エンタープライズプラン)<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+                  "description": "セグメント２タグID<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
                   "example": 1
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント３ID(法人エンタープライズプラン)<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+                  "description": "セグメント３タグID<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
                   "example": 1
                 }
               }
@@ -21162,7 +21162,7 @@
               },
               "breakdown_display_type": {
                 "type": "string",
-                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(旧法人プロフェッショナル, 法人エンタープライズプラン): segment_1_tag, セグメント2(法人エンタープライズプラン):segment_2_tag, セグメント3(法人エンタープライズプラン): segment_3_tag）(条件に指定した時のみ含まれる）",
+                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag）(条件に指定した時のみ含まれる）",
                 "enum": [
                   "partner",
                   "item",
@@ -21714,7 +21714,7 @@
               },
               "breakdown_display_type": {
                 "type": "string",
-                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(旧法人プロフェッショナル, 法人エンタープライズプラン): segment_1_tag, セグメント2(法人エンタープライズプラン):segment_2_tag, セグメント3(法人エンタープライズプラン): segment_3_tag）(条件に指定した時のみ含まれる）",
+                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag）(条件に指定した時のみ含まれる）",
                 "enum": [
                   "partner",
                   "item",
@@ -22182,7 +22182,7 @@
               },
               "breakdown_display_type": {
                 "type": "string",
-                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(旧法人プロフェッショナル, 法人エンタープライズプラン): segment_1_tag, セグメント2(法人エンタープライズプラン):segment_2_tag, セグメント3(法人エンタープライズプラン): segment_3_tag）(条件に指定した時のみ含まれる）",
+                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag）(条件に指定した時のみ含まれる）",
                 "enum": [
                   "partner",
                   "item",
@@ -22692,7 +22692,7 @@
               },
               "breakdown_display_type": {
                 "type": "string",
-                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(旧法人プロフェッショナル, 法人エンタープライズプラン): segment_1_tag, セグメント2(法人エンタープライズプラン):segment_2_tag, セグメント3(法人エンタープライズプラン): segment_3_tag）(条件に指定した時のみ含まれる）",
+                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag）(条件に指定した時のみ含まれる）",
                 "enum": [
                   "partner",
                   "item",
@@ -23253,7 +23253,7 @@
               },
               "breakdown_display_type": {
                 "type": "string",
-                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(旧法人プロフェッショナル, 法人エンタープライズプラン): segment_1_tag, セグメント2(法人エンタープライズプラン):segment_2_tag, セグメント3(法人エンタープライズプラン): segment_3_tag）(条件に指定した時のみ含まれる）",
+                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag）(条件に指定した時のみ含まれる）",
                 "enum": [
                   "partner",
                   "item",
@@ -23730,7 +23730,7 @@
               },
               "breakdown_display_type": {
                 "type": "string",
-                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(旧法人プロフェッショナル, 法人エンタープライズプラン): segment_1_tag, セグメント2(法人エンタープライズプラン):segment_2_tag, セグメント3(法人エンタープライズプラン): segment_3_tag）(条件に指定した時のみ含まれる）",
+                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag）(条件に指定した時のみ含まれる）",
                 "enum": [
                   "partner",
                   "item",
@@ -24255,7 +24255,7 @@
               },
               "breakdown_display_type": {
                 "type": "string",
-                "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(旧法人プロフェッショナル, 法人エンタープライズプラン): segment_1_tag, セグメント2(法人エンタープライズプラン):segment_2_tag, セグメント3(法人エンタープライズプラン): segment_3_tag）(条件に指定した時のみ含まれる）",
+                "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag）(条件に指定した時のみ含まれる）",
                 "enum": [
                   "partner",
                   "item",
@@ -24608,7 +24608,7 @@
               },
               "segment_1_tag_ids": {
                 "type": "string",
-                "description": "出力するセグメント1の指定",
+                "description": "セグメント１タグID",
                 "example": "123"
               },
               "fiscal_year": {
@@ -24743,7 +24743,7 @@
                     },
                     "segment_1_tags": {
                       "type": "array",
-                      "description": "セグメント1タグ",
+                      "description": "セグメント１タグ",
                       "items": {
                         "type": "object",
                         "required": [
@@ -24754,12 +24754,12 @@
                             "type": "integer",
                             "format": "int64",
                             "minimum": 1,
-                            "description": "セグメント1タグID",
+                            "description": "セグメント１タグID",
                             "example": 1
                           },
                           "name": {
                             "type": "string",
-                            "description": "セグメント1タグ名",
+                            "description": "セグメント１タグ名",
                             "example": "プロジェクトA"
                           },
                           "closing_balance": {
@@ -24951,7 +24951,7 @@
               },
               "segment_2_tag_ids": {
                 "type": "string",
-                "description": "出力するセグメント2の指定",
+                "description": "セグメント２タグID",
                 "example": "123"
               },
               "fiscal_year": {
@@ -25086,7 +25086,7 @@
                     },
                     "segment_2_tags": {
                       "type": "array",
-                      "description": "セグメント2タグ",
+                      "description": "セグメント２タグ",
                       "items": {
                         "type": "object",
                         "required": [
@@ -25097,12 +25097,12 @@
                             "type": "integer",
                             "format": "int64",
                             "minimum": 1,
-                            "description": "セグメント2タグID",
+                            "description": "セグメント２タグID",
                             "example": 1
                           },
                           "name": {
                             "type": "string",
-                            "description": "セグメント2タグ名",
+                            "description": "セグメント２タグ名",
                             "example": "プロジェクトA"
                           },
                           "closing_balance": {
@@ -25294,7 +25294,7 @@
               },
               "segment_3_tag_ids": {
                 "type": "string",
-                "description": "出力するセグメント3の指定",
+                "description": "セグメント３タグID",
                 "example": "123"
               },
               "fiscal_year": {
@@ -25429,7 +25429,7 @@
                     },
                     "segment_3_tags": {
                       "type": "array",
-                      "description": "セグメント3タグ",
+                      "description": "セグメント３タグ",
                       "items": {
                         "type": "object",
                         "required": [
@@ -25440,12 +25440,12 @@
                             "type": "integer",
                             "format": "int64",
                             "minimum": 1,
-                            "description": "セグメント3タグID",
+                            "description": "セグメント３タグID",
                             "example": 1
                           },
                           "name": {
                             "type": "string",
-                            "description": "セグメント3タグ名",
+                            "description": "セグメント３タグ名",
                             "example": "プロジェクトA"
                           },
                           "closing_balance": {
@@ -25676,7 +25676,7 @@
               },
               "breakdown_display_type": {
                 "type": "string",
-                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(旧法人プロフェッショナル, 法人エンタープライズプラン): segment_1_tag, セグメント2(法人エンタープライズプラン):segment_2_tag, セグメント3(法人エンタープライズプラン): segment_3_tag）(条件に指定した時のみ含まれる）",
+                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag）(条件に指定した時のみ含まれる）",
                 "enum": [
                   "partner",
                   "item",
@@ -26237,7 +26237,7 @@
               },
               "breakdown_display_type": {
                 "type": "string",
-                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(旧法人プロフェッショナル, 法人エンタープライズプラン): segment_1_tag, セグメント2(法人エンタープライズプラン):segment_2_tag, セグメント3(法人エンタープライズプラン): segment_3_tag）(条件に指定した時のみ含まれる）",
+                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag）(条件に指定した時のみ含まれる）",
                 "enum": [
                   "partner",
                   "item",
@@ -26713,7 +26713,7 @@
               },
               "breakdown_display_type": {
                 "type": "string",
-                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント1(旧法人プロフェッショナル, 法人エンタープライズプラン): segment_1_tag, セグメント2(法人エンタープライズプラン):segment_2_tag, セグメント3(法人エンタープライズプラン): segment_3_tag）(条件に指定した時のみ含まれる）",
+                "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag）(条件に指定した時のみ含まれる）",
                 "enum": [
                   "partner",
                   "item",
@@ -27238,7 +27238,7 @@
               },
               "breakdown_display_type": {
                 "type": "string",
-                "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント1(旧法人プロフェッショナル, 法人エンタープライズプラン): segment_1_tag, セグメント2(法人エンタープライズプラン):segment_2_tag, セグメント3(法人エンタープライズプラン): segment_3_tag）(条件に指定した時のみ含まれる）",
+                "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag）(条件に指定した時のみ含まれる）",
                 "enum": [
                   "partner",
                   "item",
@@ -27591,7 +27591,7 @@
               },
               "segment_1_tag_ids": {
                 "type": "string",
-                "description": "出力するセグメント1の指定",
+                "description": "セグメント１タグID",
                 "example": "123"
               },
               "fiscal_year": {
@@ -27726,7 +27726,7 @@
                     },
                     "segment_1_tags": {
                       "type": "array",
-                      "description": "セグメント1タグ",
+                      "description": "セグメント１タグ",
                       "items": {
                         "type": "object",
                         "required": [
@@ -27737,12 +27737,12 @@
                             "type": "integer",
                             "format": "int64",
                             "minimum": 1,
-                            "description": "セグメント1タグID",
+                            "description": "セグメント１タグID",
                             "example": 1
                           },
                           "name": {
                             "type": "string",
-                            "description": "セグメント1タグ名",
+                            "description": "セグメント１タグ名",
                             "example": "プロジェクトA"
                           },
                           "closing_balance": {
@@ -27934,7 +27934,7 @@
               },
               "segment_2_tag_ids": {
                 "type": "string",
-                "description": "出力するセグメント2の指定",
+                "description": "セグメント２タグID",
                 "example": "123"
               },
               "fiscal_year": {
@@ -28069,7 +28069,7 @@
                     },
                     "segment_2_tags": {
                       "type": "array",
-                      "description": "セグメント2タグ",
+                      "description": "セグメント２タグ",
                       "items": {
                         "type": "object",
                         "required": [
@@ -28080,12 +28080,12 @@
                             "type": "integer",
                             "format": "int64",
                             "minimum": 1,
-                            "description": "セグメント2タグID",
+                            "description": "セグメント２タグID",
                             "example": 1
                           },
                           "name": {
                             "type": "string",
-                            "description": "セグメント2タグ名",
+                            "description": "セグメント２タグ名",
                             "example": "プロジェクトA"
                           },
                           "closing_balance": {
@@ -28277,7 +28277,7 @@
               },
               "segment_3_tag_ids": {
                 "type": "string",
-                "description": "出力するセグメント3の指定",
+                "description": "セグメント３タグID",
                 "example": "123"
               },
               "fiscal_year": {
@@ -28412,7 +28412,7 @@
                     },
                     "segment_3_tags": {
                       "type": "array",
-                      "description": "セグメント3タグ",
+                      "description": "セグメント３タグ",
                       "items": {
                         "type": "object",
                         "required": [
@@ -28423,12 +28423,12 @@
                             "type": "integer",
                             "format": "int64",
                             "minimum": 1,
-                            "description": "セグメント3タグID",
+                            "description": "セグメント３タグID",
                             "example": 1
                           },
                           "name": {
                             "type": "string",
-                            "description": "セグメント3タグ名",
+                            "description": "セグメント３タグ名",
                             "example": "プロジェクトA"
                           },
                           "closing_balance": {
@@ -28645,7 +28645,7 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "親部門ID (プレミアムプラン、旧法人ベーシックプラン以上)",
+            "description": "親部門ID (プレミアムプラン、法人スタンダードプラン（および旧法人ベーシックプラン）以上)",
             "example": 101
           }
         }
@@ -28908,7 +28908,7 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
-                      "description": "セグメント１ID",
+                      "description": "セグメント１タグID",
                       "example": 1,
                       "nullable": true
                     },
@@ -28916,7 +28916,7 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
-                      "description": "セグメント２ID",
+                      "description": "セグメント２タグID",
                       "example": 1,
                       "nullable": true
                     },
@@ -28924,7 +28924,7 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
-                      "description": "セグメント３ID",
+                      "description": "セグメント３タグID",
                       "example": 1,
                       "nullable": true
                     },
@@ -29294,21 +29294,21 @@
                 "segment_1_tag_id": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "セグメント１ID",
+                  "description": "セグメント１タグID",
                   "example": 1,
                   "nullable": true
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "セグメント２ID",
+                  "description": "セグメント２タグID",
                   "example": 1,
                   "nullable": true
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "セグメント３ID",
+                  "description": "セグメント３タグID",
                   "example": 1,
                   "nullable": true
                 },
@@ -30313,13 +30313,13 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント１ID",
+                  "description": "セグメント１タグID",
                   "example": 1,
                   "nullable": true
                 },
                 "segment_1_tag_name": {
                   "type": "string",
-                  "description": "セグメント１",
+                  "description": "セグメント１タグ名",
                   "example": "セグメント１",
                   "nullable": true
                 },
@@ -30327,13 +30327,13 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント２ID",
+                  "description": "セグメント２タグID",
                   "example": 1,
                   "nullable": true
                 },
                 "segment_2_tag_name": {
                   "type": "string",
-                  "description": "セグメント２",
+                  "description": "セグメント２タグ名",
                   "example": "セグメント２",
                   "nullable": true
                 },
@@ -30341,13 +30341,13 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント３ID",
+                  "description": "セグメント３タグID",
                   "example": 1,
                   "nullable": true
                 },
                 "segment_3_tag_name": {
                   "type": "string",
-                  "description": "セグメント３",
+                  "description": "セグメント３タグ名",
                   "example": "セグメント３",
                   "nullable": true
                 },
@@ -33362,7 +33362,7 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント１ID",
+                  "description": "セグメント１タグID",
                   "example": 1,
                   "nullable": true
                 },
@@ -33370,7 +33370,7 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント２ID",
+                  "description": "セグメント２タグID",
                   "example": 2,
                   "nullable": true
                 },
@@ -33378,7 +33378,7 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント３ID",
+                  "description": "セグメント３タグID",
                   "example": 3,
                   "nullable": true
                 }
@@ -33759,7 +33759,7 @@
                 "type": "integer",
                 "format": "int64",
                 "minimum": 1,
-                "description": "セグメント１ID。セグメント１が使用可能なプランの時のみレスポンスに含まれます。",
+                "description": "セグメント１タグID",
                 "example": 1,
                 "nullable": true
               },
@@ -33767,7 +33767,7 @@
                 "type": "integer",
                 "format": "int64",
                 "minimum": 1,
-                "description": "セグメント２ID。セグメント２が使用可能なプランの時のみレスポンスに含まれます。",
+                "description": "セグメント２タグID",
                 "example": 2,
                 "nullable": true
               },
@@ -33775,7 +33775,7 @@
                 "type": "integer",
                 "format": "int64",
                 "minimum": 1,
-                "description": "セグメント３ID。セグメント３が使用可能なプランの時のみレスポンスに含まれます。",
+                "description": "セグメント３タグID",
                 "example": 3,
                 "nullable": true
               }
@@ -34047,7 +34047,7 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
-                      "description": "セグメント１ID。セグメント１が使用可能なプランの時のみレスポンスに含まれます。",
+                      "description": "セグメント１タグID",
                       "example": 1,
                       "nullable": true
                     },
@@ -34055,7 +34055,7 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
-                      "description": "セグメント２ID。セグメント２が使用可能なプランの時のみレスポンスに含まれます。",
+                      "description": "セグメント２タグID",
                       "example": 1,
                       "nullable": true
                     },
@@ -34063,7 +34063,7 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
-                      "description": "セグメント３ID。セグメント３が使用可能なプランの時のみレスポンスに含まれます。",
+                      "description": "セグメント３タグID",
                       "example": 1,
                       "nullable": true
                     }
@@ -35012,21 +35012,21 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント１ID",
+                  "description": "セグメント１タグID",
                   "example": 1
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント２ID",
+                  "description": "セグメント２タグID",
                   "example": 1
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント３ID",
+                  "description": "セグメント３タグID",
                   "example": 1
                 },
                 "description": {
@@ -35133,21 +35133,21 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント１ID",
+                  "description": "セグメント１タグID",
                   "example": 1
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント２ID",
+                  "description": "セグメント２タグID",
                   "example": 1
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント３ID",
+                  "description": "セグメント３タグID",
                   "example": 1
                 },
                 "description": {
@@ -36919,13 +36919,13 @@
                         "type": "integer",
                         "format": "int64",
                         "minimum": 1,
-                        "description": "セグメント１ID",
+                        "description": "セグメント１タグID",
                         "example": 1,
                         "nullable": true
                       },
                       "segment_1_tag_name": {
                         "type": "string",
-                        "description": "セグメント１",
+                        "description": "セグメント１タグ名",
                         "example": "セグメント１",
                         "nullable": true
                       },
@@ -36933,13 +36933,13 @@
                         "type": "integer",
                         "format": "int64",
                         "minimum": 1,
-                        "description": "セグメント２ID",
+                        "description": "セグメント２タグID",
                         "example": 1,
                         "nullable": true
                       },
                       "segment_2_tag_name": {
                         "type": "string",
-                        "description": "セグメント２",
+                        "description": "セグメント２タグ名",
                         "example": "セグメント２",
                         "nullable": true
                       },
@@ -36947,13 +36947,13 @@
                         "type": "integer",
                         "format": "int64",
                         "minimum": 1,
-                        "description": "セグメント３ID",
+                        "description": "セグメント３タグID",
                         "example": 1,
                         "nullable": true
                       },
                       "segment_3_tag_name": {
                         "type": "string",
-                        "description": "セグメント３",
+                        "description": "セグメント３タグ名",
                         "example": "セグメント３",
                         "nullable": true
                       }
@@ -37504,13 +37504,13 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
-                      "description": "セグメント１ID",
+                      "description": "セグメント１タグID",
                       "example": 1,
                       "nullable": true
                     },
                     "segment_1_tag_name": {
                       "type": "string",
-                      "description": "セグメント１",
+                      "description": "セグメント１タグ名",
                       "example": "セグメント１",
                       "nullable": true
                     },
@@ -37518,13 +37518,13 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
-                      "description": "セグメント２ID",
+                      "description": "セグメント２タグID",
                       "example": 1,
                       "nullable": true
                     },
                     "segment_2_tag_name": {
                       "type": "string",
-                      "description": "セグメント２",
+                      "description": "セグメント２タグ名",
                       "example": "セグメント２",
                       "nullable": true
                     },
@@ -37532,13 +37532,13 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
-                      "description": "セグメント３ID",
+                      "description": "セグメント３タグID",
                       "example": 1,
                       "nullable": true
                     },
                     "segment_3_tag_name": {
                       "type": "string",
-                      "description": "セグメント３",
+                      "description": "セグメント３タグ名",
                       "example": "セグメント３",
                       "nullable": true
                     }
@@ -37904,21 +37904,21 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント１ID",
+                  "description": "セグメント１タグID",
                   "example": 1
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント２ID",
+                  "description": "セグメント２タグID",
                   "example": 1
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント３ID",
+                  "description": "セグメント３タグID",
                   "example": 1
                 }
               }
@@ -38238,21 +38238,21 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント１ID",
+                  "description": "セグメント１タグID",
                   "example": 1
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント２ID",
+                  "description": "セグメント２タグID",
                   "example": 1
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント３ID",
+                  "description": "セグメント３タグID",
                   "example": 1
                 }
               }
@@ -38682,13 +38682,13 @@
                         "type": "integer",
                         "format": "int64",
                         "minimum": 1,
-                        "description": "セグメント１ID",
+                        "description": "セグメント１タグID",
                         "example": 1,
                         "nullable": true
                       },
                       "segment_1_tag_name": {
                         "type": "string",
-                        "description": "セグメント１",
+                        "description": "セグメント１タグ名",
                         "example": "セグメント１",
                         "nullable": true
                       },
@@ -38696,13 +38696,13 @@
                         "type": "integer",
                         "format": "int64",
                         "minimum": 1,
-                        "description": "セグメント２ID",
+                        "description": "セグメント２タグID",
                         "example": 1,
                         "nullable": true
                       },
                       "segment_2_tag_name": {
                         "type": "string",
-                        "description": "セグメント２",
+                        "description": "セグメント２タグ名",
                         "example": "セグメント２",
                         "nullable": true
                       },
@@ -38710,13 +38710,13 @@
                         "type": "integer",
                         "format": "int64",
                         "minimum": 1,
-                        "description": "セグメント３ID",
+                        "description": "セグメント３タグID",
                         "example": 1,
                         "nullable": true
                       },
                       "segment_3_tag_name": {
                         "type": "string",
-                        "description": "セグメント３",
+                        "description": "セグメント３タグ名",
                         "example": "セグメント３",
                         "nullable": true
                       }
@@ -39187,13 +39187,13 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
-                      "description": "セグメント１ID",
+                      "description": "セグメント１タグID",
                       "example": 1,
                       "nullable": true
                     },
                     "segment_1_tag_name": {
                       "type": "string",
-                      "description": "セグメント１",
+                      "description": "セグメント１タグ名",
                       "example": "セグメント１",
                       "nullable": true
                     },
@@ -39201,13 +39201,13 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
-                      "description": "セグメント２ID",
+                      "description": "セグメント２タグID",
                       "example": 1,
                       "nullable": true
                     },
                     "segment_2_tag_name": {
                       "type": "string",
-                      "description": "セグメント２",
+                      "description": "セグメント２タグ名",
                       "example": "セグメント２",
                       "nullable": true
                     },
@@ -39215,13 +39215,13 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
-                      "description": "セグメント３ID",
+                      "description": "セグメント３タグID",
                       "example": 1,
                       "nullable": true
                     },
                     "segment_3_tag_name": {
                       "type": "string",
-                      "description": "セグメント３",
+                      "description": "セグメント３タグ名",
                       "example": "セグメント３",
                       "nullable": true
                     }
@@ -39556,21 +39556,21 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント１ID",
+                  "description": "セグメント１タグID",
                   "example": 1
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント２ID",
+                  "description": "セグメント２タグID",
                   "example": 1
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント３ID",
+                  "description": "セグメント３タグID",
                   "example": 1
                 }
               }
@@ -39852,21 +39852,21 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント１ID",
+                  "description": "セグメント１タグID",
                   "example": 1
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント２ID",
+                  "description": "セグメント２タグID",
                   "example": 1
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント３ID",
+                  "description": "セグメント３タグID",
                   "example": 1
                 }
               }
