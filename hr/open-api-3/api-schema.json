@@ -15728,14 +15728,14 @@
           },
           "num_absences": {
             "type": "number",
-            "description": "控除対象の欠勤日数\n\nフレックスタイム制の場合は、指定した値が反映されず無視されます。",
+            "description": "欠勤日数",
             "format": "float",
             "minimum": 0,
             "maximum": 31
           },
           "num_absences_for_deduction": {
             "type": "number",
-            "description": "控除対象の欠勤日数",
+            "description": "控除対象の欠勤日数\n\nフレックスタイム制の場合は、指定した値が反映されず無視されます。",
             "format": "float",
             "minimum": 0,
             "maximum": 9999.999
