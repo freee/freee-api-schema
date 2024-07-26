@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   contact:
     name: freee請求書問い合わせ
-    url: https://support.freee.co.jp/hc/ja/requests/new
+    url: https://freee.my.site.com/HelpCenter/s
   description: |2
 
     <p>freee請求書のAPI仕様です。</p>
