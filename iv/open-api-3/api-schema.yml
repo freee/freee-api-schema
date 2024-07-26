@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   contact:
     name: freee請求書問い合わせ
-    url: https://support.freee.co.jp/hc/ja/requests/new
+    url: https://freee.my.site.com/HelpCenter/s
   description: |2
 
     <p>freee請求書のAPI仕様です。</p>
@@ -2813,6 +2813,15 @@ components:
           example: omit
           nullable: true
           type: string
+        line_amount_fraction:
+          description: '金額端数の計算方法（omit: 切り捨て、round_up: 切り上げ、round: 四捨五入）'
+          enum:
+          - omit
+          - round_up
+          - round
+          example: round_up
+          nullable: true
+          type: string
         withholding_tax_entry_method:
           description: '源泉徴収の計算方法（in: 税込み価格で計算、out: 税別価格で計算）'
           enum:
@@ -3261,6 +3270,15 @@ components:
           - round_up
           - round
           example: omit
+          nullable: true
+          type: string
+        line_amount_fraction:
+          description: '金額端数の計算方法（omit: 切り捨て、round_up: 切り上げ、round: 四捨五入）'
+          enum:
+          - omit
+          - round_up
+          - round
+          example: round_up
           nullable: true
           type: string
         withholding_tax_entry_method:
@@ -3946,6 +3964,15 @@ components:
           example: omit
           nullable: true
           type: string
+        line_amount_fraction:
+          description: '金額端数の計算方法（omit: 切り捨て、round_up: 切り上げ、round: 四捨五入）'
+          enum:
+          - omit
+          - round_up
+          - round
+          example: round_up
+          nullable: true
+          type: string
         withholding_tax_entry_method:
           description: '源泉徴収の計算方法（in: 税込み価格で計算、out: 税別価格で計算）'
           enum:
@@ -4339,6 +4366,15 @@ components:
           - round_up
           - round
           example: omit
+          nullable: true
+          type: string
+        line_amount_fraction:
+          description: '金額端数の計算方法（omit: 切り捨て、round_up: 切り上げ、round: 四捨五入）'
+          enum:
+          - omit
+          - round_up
+          - round
+          example: round_up
           nullable: true
           type: string
         withholding_tax_entry_method:
