@@ -26,6 +26,7 @@ jobs:
       product: accounting
       download-url: https://raw.githubusercontent.com/freee/freee-api-schema/master/v2020_06_15/open-api-3/api-schema.json
       collection-id: 77985c23-b135-4b1b-898f-7f4890e2bb0b,
+      postman-api-key: ${{ secrets.POSTMAN_API_KEY }}
     steps:
       - uses: actions/checkout@v4
       - name: restore node_modules
@@ -38,11 +39,10 @@ jobs:
         run: curl -o tmp/${{ env.product }}/oas.json --create-dirs ${{ env.download-url }}
       - name: remove urlencoded
         run: bash ./script/remove_urlencoded.sh
-      - run: ls -a node_modules/
       - name: generate collection
         run: node_modules/.bin/openapi2postmanv2 -s tmp/${{ env.product }}/oas.json -o tmp/${{ env.product }}/collection.json -p -O folderStrategy=Tags,requestParametersResolution=Example,optimizeConversion=false,stackLimit=50,enableOptionalParameters=false
       - name: update collection
-        run: node script/update-postman-collection.js ${{ env.product }} ${{ env.collection-id }}
+        run: node script/update-postman-collection.js ${{ env.product }} ${{ env.collection-id }} ${{ env.postman-api-key }}
 
   update-hr-postman-collection:
     runs-on: ubuntu-latest
@@ -51,6 +51,7 @@ jobs:
       product: hr
       download-url: https://raw.githubusercontent.com/freee/freee-api-schema/master/hr/open-api-3/api-schema.json
       collection-id: 7ba7d5ed-5cdd-4946-8922-cbee12187829,
+      postman-api-key: ${{ secrets.POSTMAN_API_KEY }}
     steps:
       - uses: actions/checkout@v4
       - name: restore node_modules
@@ -64,4 +65,4 @@ jobs:
       - name: generate collection
         run: node_modules/.bin/openapi2postmanv2 -s tmp/${{ env.product }}/oas.json -o tmp/${{ env.product }}/collection.json -p -O folderStrategy=Tags,requestParametersResolution=Example,optimizeConversion=false,stackLimit=50,enableOptionalParameters=false
       - name: update collection
-        run: node script/update-postman-collection.js ${{ env.product }} ${{ env.collection-id }}
+        run: node script/update-postman-collection.js ${{ env.product }} ${{ env.collection-id }} ${{ env.postman-api-key }}

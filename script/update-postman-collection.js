@@ -2,6 +2,7 @@ const axios = require('axios');
 const fs = require('fs')
 const product = process.argv[2]
 const collectionID = process.argv[3]
+const apiKey = process.argv[4]
 
 // 配置されているjsonからとってくる
 const bufferData = fs.readFileSync(`tmp/${product}/collection.json`)
@@ -18,7 +19,7 @@ const config = {
   url: 'https://api.getpostman.com/collections/' + collectionID,
   headers: { 
     'Content-Type': 'application/json', 
-    'X-API-Key': 'xxxxx'
+    'X-API-Key': apiKey
   },
   data : updateCollection
 };
