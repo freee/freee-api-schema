@@ -19771,6 +19771,11 @@
             "description": "取引先名 (255文字以内、重複不可)",
             "example": "新しい取引先"
           },
+          "available": {
+            "type": "boolean",
+            "description": "true: 使用可能、false: 使用停止",
+            "example": false
+          },
           "shortcut1": {
             "type": "string",
             "maxLength": 255,
@@ -31545,7 +31550,7 @@
                 },
                 "available": {
                   "type": "boolean",
-                  "description": "取引先の使用設定（true: 使用する、false: 使用しない）\n<br>\n<ul>\n  <li>\n    本APIでpartnerを作成した場合はtrueになります。\n  </li>\n  <li>\n    falseにする場合はWeb画面から変更できます。\n  </li>\n  <li>\n    trueの場合、Web画面での取引登録時などに入力候補として表示されます。\n  </li>\n  <li>\n    falseの場合、取引先自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入・支出）の作成APIなどでfalseの取引先をパラメータに指定すれば、取引などにfalseの取引先を設定できます。\n  </li>\n</ul>"
+                  "description": "true: 使用可能、false: 使用停止\n<br>\n<ul>\n  <li>\n    本APIでpartnerを作成した場合はtrueになります。\n  </li>\n  <li>\n    trueの場合、Web画面での取引登録時などに入力候補として表示されます。\n  </li>\n  <li>\n    falseの場合、取引先自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入・支出）の作成APIなどでfalseの取引先をパラメータに指定すれば、取引などにfalseの取引先を設定できます。\n  </li>\n</ul>"
                 },
                 "shortcut1": {
                   "type": "string",
@@ -31815,7 +31820,7 @@
               },
               "available": {
                 "type": "boolean",
-                "description": "取引先の使用設定（true: 使用する、false: 使用しない）\n<br>\n<ul>\n  <li>\n    本APIでpartnerを作成した場合はtrueになります。\n  </li>\n  <li>\n    falseにする場合はWeb画面から変更できます。\n  </li>\n  <li>\n    trueの場合、Web画面での取引登録時などに入力候補として表示されます。\n  </li>\n  <li>\n    falseの場合、取引先自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入・支出）の作成APIなどでfalseの取引先をパラメータに指定すれば、取引などにfalseの取引先を設定できます。\n  </li>\n</ul>"
+                "description": "true: 使用可能、false: 使用停止\n<br>\n<ul>\n  <li>\n    本APIでpartnerを作成した場合はtrueになります。\n  </li>\n  <li>\n    trueの場合、Web画面での取引登録時などに入力候補として表示されます。\n  </li>\n  <li>\n    falseの場合、取引先自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入・支出）の作成APIなどでfalseの取引先をパラメータに指定すれば、取引などにfalseの取引先を設定できます。\n  </li>\n</ul>"
               },
               "shortcut1": {
                 "type": "string",
