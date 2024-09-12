@@ -16,9 +16,9 @@ const updateCollection = {
 const config = {
   method: 'put',
   maxBodyLength: Infinity,
-  url: 'https://api.getpostman.com/collections/' + collectionID,
+  url: `https://api.getpostman.com/collections/${collectionID}`,
   headers: { 
-    'Content-Type': 'application/json', 
+    'Content-Type': 'application/json',
     'X-API-Key': apiKey
   },
   data : updateCollection
