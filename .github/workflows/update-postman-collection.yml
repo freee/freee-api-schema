@@ -17,7 +17,7 @@ jobs:
           key: ${{ runner.os }}-nodemodule
       - name: set up tool
         if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
-        run: npm install openapi-to-postmanv2 && npm install axios
+        run: npm install openapi-to-postmanv2@4.24.0 && npm install axios@1.7.7
 
   update-accounting-postman-collection:
     runs-on: ubuntu-latest
@@ -40,7 +40,7 @@ jobs:
       - name: remove urlencoded
         run: bash ./script/remove_urlencoded.sh
       - name: generate collection
-        run: node_modules/.bin/openapi2postmanv2 -s tmp/${{ env.product }}/oas.json -o tmp/${{ env.product }}/collection.json -p -O folderStrategy=Tags,requestParametersResolution=Example,optimizeConversion=false,stackLimit=50,enableOptionalParameters=false
+        run: node_modules/.bin/openapi2postmanv2 -s tmp/${{ env.product }}/oas.json -o tmp/${{ env.product }}/collection.json -p -O folderStrategy=Tags,parametersResolution=Example,stackLimit=50,enableOptionalParameters=false
       - name: update collection
         run: node script/update-postman-collection.js ${{ env.product }} ${{ env.collection-id }} ${{ env.postman-api-key }}
 
@@ -63,6 +63,6 @@ jobs:
       - name: download schema
         run: curl -o tmp/${{ env.product }}/oas.json --create-dirs ${{ env.download-url }}
       - name: generate collection
-        run: node_modules/.bin/openapi2postmanv2 -s tmp/${{ env.product }}/oas.json -o tmp/${{ env.product }}/collection.json -p -O folderStrategy=Tags,requestParametersResolution=Example,optimizeConversion=false,stackLimit=50,enableOptionalParameters=false
+        run: node_modules/.bin/openapi2postmanv2 -s tmp/${{ env.product }}/oas.json -o tmp/${{ env.product }}/collection.json -p -O folderStrategy=Tags,parametersResolution=Example,stackLimit=50,enableOptionalParameters=false
       - name: update collection
         run: node script/update-postman-collection.js ${{ env.product }} ${{ env.collection-id }} ${{ env.postman-api-key }}
