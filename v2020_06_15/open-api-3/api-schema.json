@@ -6834,7 +6834,7 @@
           "Walletables"
         ],
         "summary": "口座一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の口座一覧を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>type\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n\n<li>walletable_balance : 登録残高</li>\n\n<li>last_balance : 同期残高</li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の口座一覧を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>type\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n\n<li>walletable_balance : 登録残高</li>\n\n<li>last_balance : 同期残高</li>\n\n<li>last_synced_at : 最終同期成功日時</li>\n\n<li>sync_status : 同期ステータス</li>\n</ul>",
         "operationId": "get_walletables",
         "parameters": [
           {
@@ -6849,16 +6849,6 @@
             }
           },
           {
-            "name": "with_balance",
-            "in": "query",
-            "description": "残高情報を含める",
-            "example": false,
-            "schema": {
-              "default": false,
-              "type": "boolean"
-            }
-          },
-          {
             "name": "type",
             "in": "query",
             "description": "口座種別（bank_account : 銀行口座, credit_card : クレジットカード, wallet : その他の決済口座）",
@@ -6869,6 +6859,36 @@
                 "credit_card",
                 "wallet"
               ]
+            }
+          },
+          {
+            "name": "with_balance",
+            "in": "query",
+            "description": "残高情報を含める",
+            "example": false,
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "with_last_synced_at",
+            "in": "query",
+            "description": "最終同期成功日時を含める",
+            "example": false,
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "with_sync_status",
+            "in": "query",
+            "description": "同期ステータスを含める",
+            "example": false,
+            "schema": {
+              "default": false,
+              "type": "boolean"
             }
           }
         ],
@@ -7029,7 +7049,7 @@
           "Walletables"
         ],
         "summary": "口座の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の口座を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>type\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n\n<li>walletable_balance : 登録残高</li>\n\n<li>last_balance : 同期残高</li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の口座を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>type\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n\n<li>walletable_balance : 登録残高</li>\n\n<li>last_balance : 同期残高</li>\n\n<li>last_synced_at : 最終同期成功日時</li>\n\n<li>sync_status : 同期ステータス</li>\n</ul>",
         "operationId": "get_walletable",
         "parameters": [
           {
@@ -7066,6 +7086,26 @@
               "type": "integer",
               "format": "int64",
               "minimum": 1
+            }
+          },
+          {
+            "name": "with_last_synced_at",
+            "in": "query",
+            "description": "最終同期成功日時を含める",
+            "example": false,
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "with_sync_status",
+            "in": "query",
+            "description": "同期ステータスを含める",
+            "example": false,
+            "schema": {
+              "default": false,
+              "type": "boolean"
             }
           }
         ],
@@ -32181,6 +32221,24 @@
               "bank_account",
               "credit_card",
               "wallet"
+            ]
+          },
+          "last_synced_at": {
+            "type": "string",
+            "description": "最終同期成功日時（ISO8601形式）",
+            "example": "2019-01-01T00:00:00+09:00",
+            "nullable": true
+          },
+          "sync_status": {
+            "type": "string",
+            "description": "口座の同期ステータス(success: 同期成功, disabled: 同期設定なし, syncing: 同期中, token_refresh_error: トークンリフレッシュエラー, other_error: その他のエラー、freee会計画面上でご確認ください)",
+            "example": "success",
+            "enum": [
+              "success",
+              "disabled",
+              "syncing",
+              "token_refresh_error",
+              "other_error"
             ]
           },
           "last_balance": {
