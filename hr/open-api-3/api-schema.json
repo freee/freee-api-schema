@@ -10091,7 +10091,7 @@
           "年末調整"
         ],
         "summary": "年末調整従業員保険料情報の更新",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員の保険料情報を更新します。</p>\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>本APIは、年末調整が確定済みの従業員には非対応です。</li>\n</ul>",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員の保険料情報を更新します。</p>\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>本APIは、年末調整が確定済みの従業員には非対応です。</li>\n  <li>certification_type=\"xml\"の場合、recipient_first_name、recipient_last_name、recipient_relationshipのみが更新の対象となります。</li>\n</ul>",
         "operationId": "put_yearend_adjustment_insurances",
         "parameters": [
           {
@@ -12940,9 +12940,13 @@
           },
           "employment_type": {
             "type": "string",
-            "description": "雇用形態 board-member: 役員, (空文字列): 役員以外",
+            "description": "雇用形態 board-member: 役員, regular: 正社員, fixed-term: 契約社員, part-time: アルバイト・パート, temporary: 派遣社員, (空文字列): その他",
             "enum": [
               "board-member",
+              "regular",
+              "fixed-term",
+              "part-time",
+              "temporary",
               ""
             ]
           },
@@ -13451,7 +13455,7 @@
           },
           "employment_type": {
             "type": "string",
-            "description": "雇用形態 board-member: 役員, (空文字列): 役員以外",
+            "description": "雇用形態 board-member: 役員, regular: 正社員, fixed-term: 契約社員, part-time: アルバイト・パート, temporary: 派遣社員, (空文字列): その他",
             "nullable": true
           },
           "title": {
@@ -17694,7 +17698,7 @@
           },
           "employment_type": {
             "type": "string",
-            "description": "雇用形態 board-member: 役員, (空文字列): 役員以外",
+            "description": "雇用形態 board-member: 役員, regular: 正社員, fixed-term: 契約社員, part-time: アルバイト・パート, temporary: 派遣社員, (空文字列): その他",
             "nullable": true
           },
           "title": {
@@ -19115,6 +19119,14 @@
             "example": 1000000,
             "minimum": 0,
             "maximum": 99999999
+          },
+          "certification_type": {
+            "type": "string",
+            "description": "電子的控除証明書などの認証方法を利用した場合、その認証方法が反映されます。<br>\nxml: 電子的控除証明書を利用。証明書画像データの提出が免除されます。またrecipient_first_name、recipient_last_name、recipient_relationship以外のカラムが更新不可となります。",
+            "enum": [
+              "xml"
+            ],
+            "nullable": true
           }
         }
       },
