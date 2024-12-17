@@ -32231,13 +32231,14 @@
           },
           "sync_status": {
             "type": "string",
-            "description": "口座の同期ステータス(success: 同期成功, disabled: 同期設定なし, syncing: 同期中, token_refresh_error: トークンリフレッシュエラー, other_error: その他のエラー、freee会計画面上でご確認ください)",
+            "description": "口座の同期ステータス(success: 同期成功, disabled: 同期設定なし, syncing: 同期中, token_refresh_error: トークンリフレッシュエラー, unsupported: 同期非対応, other_error: その他のエラー、freee会計画面上でご確認ください)",
             "example": "success",
             "enum": [
               "success",
               "disabled",
               "syncing",
               "token_refresh_error",
+              "unsupported",
               "other_error"
             ]
           },
