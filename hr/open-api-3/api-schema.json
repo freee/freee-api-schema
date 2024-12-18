@@ -12586,12 +12586,7 @@
           },
           "role": {
             "type": "string",
-            "description": "事業所におけるロール。\n- `company_admin`: 管理者\n- `self_only`: 一般または勤怠部門管理者\n- `clerk`: 事務担当者\n\n[各権限でできることは各アカウントの権限についてのヘルプページを参照してください。](https://support.freee.co.jp/hc/ja/articles/204087410-%E6%93%8D%E4%BD%9C%E6%A8%A9%E9%99%90%E3%82%92%E7%AE%A1%E7%90%86%E3%81%99%E3%82%8B#3)",
-            "enum": [
-              "company_admin",
-              "self_only",
-              "clerk"
-            ]
+            "description": "事業所におけるロール。\n\n- `company_admin`: 管理者\n- `self_only`: 一般または勤怠部門管理者\n- `clerk`: 事務担当者\n- `physician`: 産業医\n\n[各権限でできることは各アカウントの権限についてのヘルプページを参照してください。](https://support.freee.co.jp/hc/ja/articles/204087410#3)"
           },
           "external_cid": {
             "type": "string",
