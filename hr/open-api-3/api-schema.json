@@ -20,9 +20,7 @@
   ],
   "security": [
     {
-      "bearer": [
-
-      ]
+      "bearer": []
     }
   ],
   "tags": [
@@ -11064,6 +11062,16 @@
             "format": "date",
             "example": "2020-01-01"
           },
+          "main_duty": {
+            "type": "string",
+            "enum": [
+              "unspecified",
+              "sub_duty",
+              "main_duty"
+            ],
+            "description": "主務",
+            "example": "main_duty"
+          },
           "group_id": {
             "type": "integer",
             "description": "部門ID",
@@ -13335,6 +13343,10 @@
             "minimum": 1,
             "maximum": 2147483647,
             "example": 58000
+          },
+          "health_insurance_qualification_required": {
+            "type": "boolean",
+            "description": "健康保険の資格確認書の発行が必要かどうか"
           }
         }
       },
@@ -13715,6 +13727,10 @@
             "format": "date",
             "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
             "example": "2021-04-01"
+          },
+          "health_insurance_qualification_required": {
+            "type": "boolean",
+            "description": "健康保険の資格確認書の発行が必要かどうか"
           },
           "phone_type": {
             "type": "string",
@@ -14496,6 +14512,10 @@
             "description": "賞与計算時の健康保険料の計算方法",
             "example": "manual"
           },
+          "health_insurance_qualification_required": {
+            "type": "boolean",
+            "description": "健康保険の資格確認書の発行が必要かどうか"
+          },
           "manual_health_insurance_amount_of_employee_salary": {
             "type": "integer",
             "format": "int32",
@@ -14798,6 +14818,10 @@
             "description": "雇用保険受給開始年月日 employment_insurance_receive_statusが未選択、無しの場合は指定できません。",
             "format": "date",
             "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "health_insurance_qualification_required": {
+            "type": "boolean",
+            "description": "健康保険の資格確認書の発行が必要かどうか"
           },
           "phone_type": {
             "type": "string",
