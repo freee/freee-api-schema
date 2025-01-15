@@ -12594,7 +12594,7 @@
           },
           "role": {
             "type": "string",
-            "description": "事業所におけるロール。\n\n- `company_admin`: 管理者\n- `self_only`: 一般または勤怠部門管理者\n- `clerk`: 事務担当者\n- `physician`: 産業医\n\n[各権限でできることは各アカウントの権限についてのヘルプページを参照してください。](https://support.freee.co.jp/hc/ja/articles/204087410#3)"
+            "description": "事業所におけるロール。\n\n- `company_admin`: 管理者\n- `self_only`: 一般または勤怠部門管理者\n- `clerk`: 事務担当者\n- `physician`: 産業医\n- `shift_admin`: AIシフト担当者\n\n[各権限でできることは各アカウントの権限についてのヘルプページを参照してください。](https://support.freee.co.jp/hc/ja/articles/204087410#3)"
           },
           "external_cid": {
             "type": "string",
