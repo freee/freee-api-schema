@@ -14073,13 +14073,13 @@
           },
           "total_deemed_paid_excess_statutory_work_mins": {
             "type": "integer",
-            "description": "支給対象の法定内残業時間（分）",
+            "description": "みなし外の法定内残業時間（分）",
             "format": "int32",
             "nullable": true
           },
           "total_deemed_paid_overtime_except_normal_work_mins": {
             "type": "integer",
-            "description": "支給対象の時間外労働時間（分）",
+            "description": "みなし外の時間外労働時間（分）",
             "format": "int32",
             "nullable": true
           }
@@ -15802,13 +15802,13 @@
           },
           "total_deemed_paid_excess_statutory_work_mins": {
             "type": "integer",
-            "description": "支給対象の法定内残業時間（分）（裁量労働制でのみ使用）",
+            "description": "みなし外の法定内残業時間（分）（裁量労働制でのみ使用）",
             "minimum": 0,
             "maximum": 2147483647
           },
           "total_deemed_paid_overtime_except_normal_work_mins": {
             "type": "integer",
-            "description": "支給対象の時間外労働時間（分）（裁量労働制でのみ使用）",
+            "description": "みなし外の時間外労働時間（分）（裁量労働制でのみ使用）",
             "minimum": 0,
             "maximum": 2147483647
           }
