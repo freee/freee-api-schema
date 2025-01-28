@@ -2251,7 +2251,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiV1EmployeesWorkRecordSerializer"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiV1EmployeesWorkRecordSerializer"
+                    },
+                    {
+                      "$ref": "#/components/schemas/LegacyApiV1EmployeesWorkRecordSerializer"
+                    }
+                  ]
                 }
               }
             }
@@ -2308,7 +2315,7 @@
           "勤怠"
         ],
         "summary": "勤怠の更新",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員の勤怠情報を更新します。</p>\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>振替出勤・振替休日・代休出勤・代休の登録はAPIでは行うことができません。</li>\n</ul>\n\n<h2 id=\"_2\">examples</h2>\n<ul>\n  <li>出勤日について出退勤時刻および休憩時間を更新する場合は以下のようなパラメータをリクエストします。\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2017-05-25 12:00:00\",\n            \"clock_out_at\": \"2017-05-25 13:00:00\"\n          }\n        ],\n        \"work_record_segments\": [\n          {\n            \"clock_in_at\": \"2017-05-25 09:10:00\",\n            \"clock_out_at\": \"2017-05-25 18:20:00\"\n          }\n        ]\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>勤務パターンや既定の所定労働時間を変更する場合は use_default_work_pattern に false を指定するとともに、各設定を上書きするパラメータをリクエストします。\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2017-05-25 12:00:00\",\n            \"clock_out_at\": \"2017-05-25 13:00:00\"\n          }\n        ],\n        \"work_record_segments\": [\n          {\n            \"clock_in_at\": \"2017-05-25 09:10:00\",\n            \"clock_out_at\": \"2017-05-25 18:20:00:00\"\n          }\n        ],\n        \"day_pattern\": \"normal_day\",\n        \"normal_work_clock_in_at\": \"2017-05-25 11:00:00\",\n        \"normal_work_clock_out_at\": \"2017-12-20 20:00:00\",\n        \"normal_work_mins\": 0,\n        \"use_default_work_pattern\": false\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>有給取得時の連携について半休の場合は通常勤務のように勤務開始・終了時間を指定しつつ、加えて以下の要素を指定することで API での勤怠をつけることができます。\n    <ul>\n      <li>half_paid_holiday_mins (半休により計上される所定労働時間を分で指定します)</li>\n    </ul>\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2023-12-22 12:00:00\",\n            \"clock_out_at\": \"2023-12-22 13:00:00\"\n          }\n        ],\n        \"work_record_segments\": [\n          {\n            \"clock_in_at\": \"2017-05-25 09:10:00\",\n            \"clock_out_at\": \"2017-05-25 18:20:00:00\"\n          }\n        ],\n        \"half_paid_holiday_mins\": 240\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>有給取得時の連携について午前休または午後休の場合は通常勤務のように勤務開始・終了時間を指定しつつ、加えて以下の要素を指定することで API での勤怠をつけることができます。\n    <ul>\n      <li>half_holiday_type (morning_off または afternoon_off を指定します)</li>\n    </ul>\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2023-12-22 16:00:00\",\n            \"clock_out_at\": \"2023-12-22 16:30:00\"\n          }\n        ],\n        \"clock_in_at\": \"2023-12-22 14:00:00\",\n        \"clock_out_at\": \"2023-12-22 18:00:00\",\n        \"half_holiday_type\": \"morning_off\"\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>特別休暇取得時の連携について全休の場合は以下の要素を指定することで API での勤怠をつけることができます。\n    <ul>\n      <li>special_holiday (全休の場合1.0を指定します)</li>\n      <li>special_holiday_setting_id (特別休暇設定IDを指定します)</li>\n    </ul>\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"special_holiday\": 1.0\n        \"special_holiday_setting_id\": 1\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>特別休暇取得時の連携について時間休の場合は通常勤務のように勤務開始・終了時間を指定しつつ、加えて以下の要素を指定することで API での勤怠をつけることができます。\n    <ul>\n      <li>special_holiday_setting_id (特別休暇設定IDを指定します)</li>\n      <li>hourly_special_holiday_mins (時間休により計上される所定労働時間を分で指定します)</li>\n    </ul>\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2023-12-22 12:00:00\",\n            \"clock_out_at\": \"2023-12-22 13:00:00\"\n          }\n        ],\n        \"work_record_segments\": [\n          {\n            \"clock_in_at\": \"2017-05-25 09:10:00\",\n            \"clock_out_at\": \"2017-05-25 18:20:00:00\"\n          }\n        ],\n        \"special_holiday_setting_id\": 1,\n        \"hourly_special_holiday_mins\": 120\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>特別休暇取得時の連携について午前休または午後休の場合は通常勤務のように勤務開始・終了時間を指定しつつ、加えて以下の要素を指定することで API での勤怠をつけることができます。\n    <ul>\n      <li>special_holiday_setting_id (特別休暇設定IDを指定します)</li>\n      <li>half_holiday_type (morning_off または afternoon_off を指定します)</li>\n    </ul>\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2023-12-22 12:00:00\",\n            \"clock_out_at\": \"2023-12-22 12:30:00\"\n          }\n        ],\n        \"clock_in_at\": \"2023-12-22 09:00:00\",\n        \"clock_out_at\": \"2023-12-22 13:00:00\",\n        \"special_holiday_setting_id\": 1,\n        \"half_holiday_type\": \"afternoon_off\"\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>欠勤を付ける場合は company_idとis_absence 以外のパラメータは必要ありません。\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"is_absence\": true\n      }\n      </code>\n    </pre>\n  </li>\n\n</ul>",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員の勤怠情報を更新します。</p>\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>振替出勤・振替休日・代休出勤・代休の登録はAPIでは行うことができません。</li>\n</ul>\n\n<h2 id=\"_2\">examples</h2>\n<ul>\n  <li>出勤日について出退勤時刻および休憩時間を更新する場合は以下のようなパラメータをリクエストします。\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2017-05-25 12:00:00\",\n            \"clock_out_at\": \"2017-05-25 13:00:00\"\n          }\n        ],\n        \"work_record_segments\": [\n          {\n            \"clock_in_at\": \"2017-05-25 09:10:00\",\n            \"clock_out_at\": \"2017-05-25 18:20:00\"\n          }\n        ]\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>勤務パターンや既定の所定労働時間を変更する場合は use_default_work_pattern に false を指定するとともに、各設定を上書きするパラメータをリクエストします。\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2017-05-25 12:00:00\",\n            \"clock_out_at\": \"2017-05-25 13:00:00\"\n          }\n        ],\n        \"work_record_segments\": [\n          {\n            \"clock_in_at\": \"2017-05-25 09:10:00\",\n            \"clock_out_at\": \"2017-05-25 18:20:00:00\"\n          }\n        ],\n        \"day_pattern\": \"normal_day\",\n        \"normal_work_clock_in_at\": \"2017-05-25 11:00:00\",\n        \"normal_work_clock_out_at\": \"2017-12-20 20:00:00\",\n        \"normal_work_mins\": 0,\n        \"use_default_work_pattern\": false\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>有給取得時の連携について半休の場合は通常勤務のように勤務開始・終了時間を指定しつつ、加えて以下の要素を指定することで API での勤怠をつけることができます。\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2023-12-22 12:00:00\",\n            \"clock_out_at\": \"2023-12-22 13:00:00\"\n          }\n        ],\n        \"work_record_segments\": [\n          {\n            \"clock_in_at\": \"2017-05-25 09:10:00\",\n            \"clock_out_at\": \"2017-05-25 18:20:00:00\"\n          }\n        ],\n        \"paid_holidays\": [\n          {\n            \"type\": \"half\"\n            \"mins\": 240\n          }\n        ]\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>有給取得時の連携について午前休または午後休の場合は通常勤務のように勤務開始・終了時間を指定しつつ、加えて以下の要素を指定することで API での勤怠をつけることができます。\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2023-12-22 16:00:00\",\n            \"clock_out_at\": \"2023-12-22 16:30:00\"\n          }\n        ],\n        \"clock_in_at\": \"2023-12-22 14:00:00\",\n        \"clock_out_at\": \"2023-12-22 18:00:00\",\n        \"paid_holidays\": [\n          {\n            \"type\": \"morning_off\"\n          }\n        ]\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>有給取得時の連携について半日単位の年次有給休暇と時間単位の年次有給休暇を同日に取得する場合は通常勤務のように勤務開始・終了時間を指定しつつ、加えて以下の要素を指定することで API での勤怠をつけることができます。\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2023-12-22 16:00:00\",\n            \"clock_out_at\": \"2023-12-22 16:30:00\"\n          }\n        ],\n        \"clock_in_at\": \"2023-12-22 14:00:00\",\n        \"clock_out_at\": \"2023-12-22 18:00:00\",\n        \"paid_holidays\": [\n          {\n            \"type\": \"half\",\n            \"mins\": 240\n          },\n          {\n            \"type\": \"hourly\",\n            \"mins\": 120\n          },\n        ]\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>特別休暇取得時の連携について全休の場合は以下の要素を指定することで API での勤怠をつけることができます。\n    <ul>\n      <li>special_holiday (全休の場合1.0を指定します)</li>\n      <li>special_holiday_setting_id (特別休暇設定IDを指定します)</li>\n    </ul>\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"special_holiday\": 1.0\n        \"special_holiday_setting_id\": 1\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>特別休暇取得時の連携について時間休の場合は通常勤務のように勤務開始・終了時間を指定しつつ、加えて以下の要素を指定することで API での勤怠をつけることができます。\n    <ul>\n      <li>special_holiday_setting_id (特別休暇設定IDを指定します)</li>\n      <li>hourly_special_holiday_mins (時間休により計上される所定労働時間を分で指定します)</li>\n    </ul>\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2023-12-22 12:00:00\",\n            \"clock_out_at\": \"2023-12-22 13:00:00\"\n          }\n        ],\n        \"work_record_segments\": [\n          {\n            \"clock_in_at\": \"2017-05-25 09:10:00\",\n            \"clock_out_at\": \"2017-05-25 18:20:00:00\"\n          }\n        ],\n        \"special_holiday_setting_id\": 1,\n        \"hourly_special_holiday_mins\": 120\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>特別休暇取得時の連携について午前休または午後休の場合は通常勤務のように勤務開始・終了時間を指定しつつ、加えて以下の要素を指定することで API での勤怠をつけることができます。\n    <ul>\n      <li>special_holiday_setting_id (特別休暇設定IDを指定します)</li>\n      <li>half_holiday_type (morning_off または afternoon_off を指定します)</li>\n    </ul>\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"break_records\": [\n          {\n            \"clock_in_at\": \"2023-12-22 12:00:00\",\n            \"clock_out_at\": \"2023-12-22 12:30:00\"\n          }\n        ],\n        \"clock_in_at\": \"2023-12-22 09:00:00\",\n        \"clock_out_at\": \"2023-12-22 13:00:00\",\n        \"special_holiday_setting_id\": 1,\n        \"half_holiday_type\": \"afternoon_off\"\n      }\n      </code>\n    </pre>\n  </li>\n\n  <li>欠勤を付ける場合は company_idとis_absence 以外のパラメータは必要ありません。\n    <pre>\n      <code>\n      {\n        \"company_id\": 1,\n        \"is_absence\": true\n      }\n      </code>\n    </pre>\n  </li>\n\n</ul>",
         "operationId": "update_employee_work_record",
         "parameters": [
           {
@@ -2338,7 +2345,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ApiV1EmployeesWorkRecordsController.update_body"
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/ApiV1EmployeesWorkRecordsController.update_body"
+                  },
+                  {
+                    "$ref": "#/components/schemas/LegacyApiV1EmployeesWorkRecordsController.update_body"
+                  }
+                ]
               }
             }
           },
@@ -7054,7 +7068,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ApiV1PaidHolidayRequest"
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/ApiV1PaidHolidayRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/LegacyApiV1PaidHolidayRequest"
+                  }
+                ]
               }
             }
           }
@@ -7243,7 +7264,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ApiV1PaidHolidayRequest"
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/ApiV1PaidHolidayRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/LegacyApiV1PaidHolidayRequest"
+                  }
+                ]
               }
             }
           }
@@ -11888,6 +11916,151 @@
           "application_number",
           "applicant_id",
           "target_date",
+          "issue_date",
+          "status",
+          "revoke_status",
+          "passed_auto_check",
+          "values"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "申請ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "company_id": {
+            "type": "integer",
+            "description": "事業所ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "application_number": {
+            "type": "integer",
+            "description": "申請No",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "applicant_id": {
+            "type": "integer",
+            "description": "申請者のユーザーID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "approver_ids": {
+            "description": "承認者のユーザーID配列<br>\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した、申請ステータスが承認済み以外の申請\n- 申請が差戻された",
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "description": "承認者のユーザーID",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2147483647,
+              "nullable": true,
+              "example": 1
+            }
+          },
+          "target_date": {
+            "type": "string",
+            "description": "対象日",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "type"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "取得単位。（full:全休、half:半休、morning:午前休、 afternoon:午後休、hourly:時間休）",
+                  "enum": [
+                    "full",
+                    "half",
+                    "morning",
+                    "afternoon",
+                    "hourly"
+                  ],
+                  "nullable": false,
+                  "example": "half"
+                },
+                "start_at": {
+                  "type": "string",
+                  "description": "取得予定開始時間",
+                  "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+                  "nullable": true,
+                  "example": "12:00"
+                },
+                "end_at": {
+                  "type": "string",
+                  "description": "取得予定終了時間",
+                  "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+                  "nullable": true,
+                  "example": "23:59"
+                }
+              }
+            }
+          },
+          "issue_date": {
+            "type": "string",
+            "description": "申請日",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "comment": {
+            "type": "string",
+            "description": "申請理由",
+            "maxLength": 255,
+            "nullable": true,
+            "example": "申請理由"
+          },
+          "status": {
+            "type": "string",
+            "description": "申請ステータス。（draft:下書き、in_progress:申請中、approved:承認済、feedback:差戻し）",
+            "enum": [
+              "draft",
+              "in_progress",
+              "approved",
+              "feedback"
+            ],
+            "example": "in_progress"
+          },
+          "revoke_status": {
+            "type": "string",
+            "description": "取消申請ステータス。（null:取消申請されてない、revoking:取消中、revoked:取消済）",
+            "enum": [
+              "revoking",
+              "revoked"
+            ],
+            "nullable": true,
+            "example": "revoking"
+          },
+          "passed_auto_check": {
+            "type": "boolean",
+            "description": "自動チェック結果",
+            "example": true
+          }
+        }
+      },
+      "LegacyApiV1PaidHolidayIndexResponseParams": {
+        "type": "object",
+        "required": [
+          "id",
+          "company_id",
+          "application_number",
+          "applicant_id",
+          "target_date",
           "holiday_type",
           "issue_date",
           "status",
@@ -11948,7 +12121,7 @@
           },
           "holiday_type": {
             "type": "string",
-            "description": "取得単位。（full:全休、half:半休、morning:午前休、 afternoon:午後休、hour:時間休）",
+            "description": "[deprecated] 取得単位。（full:全休、half:半休、morning:午前休、 afternoon:午後休、hour:時間休）※ 削除予定のため paid_holiday->values->type を参照してください",
             "enum": [
               "full",
               "half",
@@ -11960,14 +12133,14 @@
           },
           "start_at": {
             "type": "string",
-            "description": "取得予定開始時間",
+            "description": "[deprecated] 取得予定開始時間 ※ 削除予定のため paid_holiday->values->start_at を参照してください",
             "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
             "nullable": true,
             "example": "12:00"
           },
           "end_at": {
             "type": "string",
-            "description": "取得予定終了時間",
+            "description": "[deprecated] 取得予定終了時間 ※ 削除予定のため paid_holiday->values->end_at を参照してください",
             "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
             "nullable": true,
             "example": "23:59"
@@ -12014,6 +12187,191 @@
         }
       },
       "ApiV1PaidHolidayResponseParams": {
+        "type": "object",
+        "required": [
+          "id",
+          "company_id",
+          "application_number",
+          "applicant_id",
+          "target_date",
+          "issue_date",
+          "status",
+          "revoke_status",
+          "passed_auto_check",
+          "approval_flow_route_id",
+          "approval_flow_route_name",
+          "approval_flow_logs",
+          "current_round",
+          "values"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "申請ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "company_id": {
+            "type": "integer",
+            "description": "事業所ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "application_number": {
+            "type": "integer",
+            "description": "申請No",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "applicant_id": {
+            "type": "integer",
+            "description": "申請者のユーザーID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "approver_ids": {
+            "description": "承認者のユーザーID配列<br>\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した、申請ステータスが承認済み以外の申請\n- 申請が差戻された",
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "description": "承認者のユーザーID",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2147483647,
+              "nullable": true,
+              "example": 1
+            }
+          },
+          "target_date": {
+            "type": "string",
+            "description": "対象日",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "type"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "取得単位。（full:全休、half:半休、morning:午前休、 afternoon:午後休、hourly:時間休）",
+                  "enum": [
+                    "full",
+                    "half",
+                    "morning",
+                    "afternoon",
+                    "hourly"
+                  ],
+                  "nullable": false,
+                  "example": "half"
+                },
+                "start_at": {
+                  "type": "string",
+                  "description": "取得予定開始時間",
+                  "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+                  "nullable": true,
+                  "example": "12:00"
+                },
+                "end_at": {
+                  "type": "string",
+                  "description": "取得予定終了時間",
+                  "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+                  "nullable": true,
+                  "example": "23:59"
+                }
+              }
+            }
+          },
+          "issue_date": {
+            "type": "string",
+            "description": "申請日",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "comment": {
+            "type": "string",
+            "description": "申請理由",
+            "maxLength": 255,
+            "nullable": true,
+            "example": "申請理由"
+          },
+          "status": {
+            "type": "string",
+            "description": "申請ステータス。（draft:下書き、in_progress:申請中、approved:承認済、feedback:差戻し）",
+            "enum": [
+              "draft",
+              "in_progress",
+              "approved",
+              "feedback"
+            ],
+            "example": "in_progress"
+          },
+          "revoke_status": {
+            "type": "string",
+            "description": "取消申請ステータス。（null:取消申請されてない、revoking:取消中、revoked:取消済）",
+            "enum": [
+              "revoking",
+              "revoked"
+            ],
+            "nullable": true,
+            "example": "revoking"
+          },
+          "passed_auto_check": {
+            "type": "boolean",
+            "description": "自動チェック結果",
+            "example": true
+          },
+          "approval_flow_route_id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "description": "申請経路ID",
+            "example": 1
+          },
+          "approval_flow_route_name": {
+            "type": "string",
+            "description": "申請経路名",
+            "example": "申請経路"
+          },
+          "approval_flow_logs": {
+            "type": "array",
+            "description": "承認履歴",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1ApprovalFlowLogsParams"
+            }
+          },
+          "current_step_id": {
+            "type": "integer",
+            "description": "現在承認ステップID<br>\n申請を差戻した場合、nullになります。",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1,
+            "nullable": true
+          },
+          "current_round": {
+            "type": "integer",
+            "description": "現在のround。差戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "example": 1
+          }
+        }
+      },
+      "LegacyApiV1PaidHolidayResponseParams": {
         "type": "object",
         "required": [
           "id",
@@ -12085,7 +12443,7 @@
           },
           "holiday_type": {
             "type": "string",
-            "description": "取得単位。（full:全休、half:半休、morning:午前休、 afternoon:午後休、hour:時間休）",
+            "description": "[deprecated] 取得単位。（full:全休、half:半休、morning:午前休、 afternoon:午後休、hour:時間休）※ 削除予定のため paid_holiday->values->type を参照してください",
             "enum": [
               "full",
               "half",
@@ -12097,14 +12455,14 @@
           },
           "start_at": {
             "type": "string",
-            "description": "取得予定開始時間",
+            "description": "[deprecated] 取得予定開始時間 ※ 削除予定のため paid_holiday->values->start_at を参照してください",
             "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
             "nullable": true,
             "example": "12:00"
           },
           "end_at": {
             "type": "string",
-            "description": "取得予定終了時間",
+            "description": "[deprecated] 取得予定終了時間 ※ 削除予定のため paid_holiday->values->end_at を参照してください",
             "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
             "nullable": true,
             "example": "23:59"
@@ -14062,7 +14420,14 @@
             "type": "array",
             "description": "日々の勤怠情報",
             "items": {
-              "$ref": "#/components/schemas/ApiV1EmployeesWorkRecordSerializer"
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ApiV1EmployeesWorkRecordSerializer"
+                },
+                {
+                  "$ref": "#/components/schemas/LegacyApiV1EmployeesWorkRecordSerializer"
+                }
+              ]
             }
           },
           "total_shortage_work_mins": {
@@ -14145,9 +14510,220 @@
             "description": "早退分の時間（分単位）",
             "format": "int32"
           },
+          "half_special_holiday_mins": {
+            "type": "integer",
+            "description": "特別休暇の半休を利用した時間（分単位）",
+            "format": "int32"
+          },
+          "hourly_special_holiday_mins": {
+            "type": "integer",
+            "description": "特別休暇の時間休を利用した時間（分単位）",
+            "format": "int32"
+          },
+          "is_absence": {
+            "type": "boolean",
+            "description": "欠勤かどうか",
+            "example": false
+          },
+          "is_editable": {
+            "type": "boolean",
+            "description": "勤怠データが編集可能かどうか"
+          },
+          "lateness_mins": {
+            "type": "integer",
+            "description": "遅刻分の時間（分単位）",
+            "format": "int32"
+          },
+          "normal_work_clock_in_at": {
+            "type": "string",
+            "description": "所定労働開始時刻",
+            "format": "date-time",
+            "nullable": true
+          },
+          "normal_work_clock_out_at": {
+            "type": "string",
+            "description": "所定労働終了時刻",
+            "format": "date-time",
+            "nullable": true
+          },
+          "normal_work_mins": {
+            "type": "integer",
+            "description": "所定労働時間",
+            "format": "int32"
+          },
+          "note": {
+            "type": "string",
+            "description": "勤怠メモ",
+            "maxLength": 255
+          },
+          "paid_holidays": {
+            "type": "array",
+            "description": "年次有給休暇の実績",
+            "items": {
+              "type": "object",
+              "required": [
+                "type",
+                "mins",
+                "days"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "有給休暇の種別取得単位（full:全休、half:半休、morning_off:午前休、 afternoon_off:午後休、hourly:時間休）",
+                  "enum": [
+                    "full",
+                    "half",
+                    "morning_off",
+                    "afternoon_off",
+                    "hourly"
+                  ],
+                  "nullable": false,
+                  "example": "half"
+                },
+                "mins": {
+                  "type": "integer",
+                  "description": "年次有給休暇の休暇時間（分単位）",
+                  "format": "int32",
+                  "example": 240
+                },
+                "days": {
+                  "type": "number",
+                  "description": "年次有給休暇の消化日数（全休：1, 半日単位：0.5, 時間休：0）",
+                  "format": "float",
+                  "example": 0.5
+                }
+              }
+            }
+          },
+          "special_holiday": {
+            "type": "number",
+            "description": "この日に対する特別休暇取得日数。半休の場合は0.5が入ります。時間休の場合はhourly_special_holiday_minsを所定労働時間で割った値が入るため、実際の時間を確認するにはhourly_special_holiday_minsを参照してください。",
+            "format": "float"
+          },
+          "special_holiday_setting_id": {
+            "type": "integer",
+            "description": "特別休暇設定ID",
+            "format": "int32",
+            "nullable": true
+          },
+          "use_attendance_deduction": {
+            "type": "boolean",
+            "description": "欠勤・遅刻・早退を控除対象時間に算入するかどうか"
+          },
+          "use_default_work_pattern": {
+            "type": "boolean",
+            "description": "デフォルトの勤務時間設定を使っているかどうか"
+          },
+          "use_half_compensatory_holiday": {
+            "type": "boolean",
+            "description": "代休の半休を利用したかどうか",
+            "example": false
+          },
+          "total_overtime_work_mins": {
+            "type": "integer",
+            "description": "時間外労働時間（分）（Webの勤怠登録画面にて詳細項目の「勤務時間の長さを自動で計算しない」にチェックを入れた場合0が返却されます。時間外労働時間はtotal_overtime_except_normal_work_minsを参照してください。）",
+            "format": "int32"
+          },
+          "total_holiday_work_mins": {
+            "type": "integer",
+            "description": "休日労働時間（分）",
+            "format": "int32"
+          },
+          "total_latenight_work_mins": {
+            "type": "integer",
+            "description": "深夜労働時間（分）",
+            "format": "int32"
+          },
+          "not_auto_calc_work_time": {
+            "type": "boolean",
+            "description": "勤怠登録時に勤務時間の長さを自動で計算しないかどうか",
+            "example": false
+          },
+          "total_excess_statutory_work_mins": {
+            "type": "integer",
+            "description": "法定内残業時間（分）",
+            "format": "int32"
+          },
+          "total_latenight_excess_statutory_work_mins": {
+            "type": "integer",
+            "description": "深夜の法定内残業時間（分）",
+            "format": "int32"
+          },
+          "total_overtime_except_normal_work_mins": {
+            "type": "integer",
+            "description": "所定外法定外労働時間（分）",
+            "format": "int32"
+          },
+          "total_latenight_overtime_except_normal_work_min": {
+            "type": "integer",
+            "description": "深夜の所定外法定外労働時間（分）",
+            "format": "int32"
+          }
+        }
+      },
+      "LegacyApiV1EmployeesWorkRecordSerializer": {
+        "type": "object",
+        "properties": {
+          "break_records": {
+            "type": "array",
+            "description": "休憩時間のリスト",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1EmployeesWorkRecordTimeRangeResponseSerializer"
+            }
+          },
+          "work_record_segments": {
+            "type": "array",
+            "description": "出退勤のリスト\n  - 登録されている全ての出退勤時間のリストを返します。",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1EmployeesWorkRecordTimeRangeResponseSerializer"
+            }
+          },
+          "clock_in_at": {
+            "type": "string",
+            "description": "出勤時刻\n  - 出勤時刻を返します。出退勤が複数登録されている場合は、最初の出退勤の出勤時間を返します。",
+            "format": "date-time",
+            "nullable": true
+          },
+          "clock_out_at": {
+            "type": "string",
+            "description": "退勤時刻\n  - 退勤時刻を返します。出退勤が複数登録されている場合は、最後の出退勤の退勤時間を返します。",
+            "format": "date-time",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "description": "対象日付",
+            "format": "date-time"
+          },
+          "day_pattern": {
+            "type": "string",
+            "description": "勤務パターン\n- normal_day: 所定労働日\n- prescribed_holiday: 所定休日\n- legal_holiday: 法定休日",
+            "enum": [
+              "normal_day",
+              "prescribed_holiday",
+              "legal_holiday"
+            ]
+          },
+          "schedule_pattern": {
+            "type": "string",
+            "description": "スケジュールパターン\n- substitute_holiday_work: 振替出勤\n- substitute_holiday: 振替休日\n- compensatory_holiday_work: 代休出勤\n- compensatory_holiday: 代休\n- special_holiday: 特別休暇",
+            "enum": [
+              "",
+              "substitute_holiday_work",
+              "substitute_holiday",
+              "compensatory_holiday_work",
+              "compensatory_holiday",
+              "special_holiday"
+            ]
+          },
+          "early_leaving_mins": {
+            "type": "integer",
+            "description": "早退分の時間（分単位）",
+            "format": "int32"
+          },
           "half_paid_holiday_mins": {
             "type": "integer",
-            "description": "有給休暇の半休を利用した時間（分単位）",
+            "description": "[deprecated] 有給休暇の半休を利用した時間（分単位）※ 削除予定のため paid_holidays を参照してください",
             "format": "int32"
           },
           "half_special_holiday_mins": {
@@ -14157,7 +14733,7 @@
           },
           "hourly_paid_holiday_mins": {
             "type": "integer",
-            "description": "有給休暇の時間休を利用した時間（分単位）",
+            "description": "[deprecated] 有給休暇の時間休を利用した時間（分単位）※ 削除予定のため paid_holidays を参照してください",
             "format": "int32"
           },
           "hourly_special_holiday_mins": {
@@ -14203,7 +14779,7 @@
           },
           "paid_holiday": {
             "type": "number",
-            "description": "この日に対する有給取得日数。半休の場合は0.5が入ります。時間休の場合はhourly_paid_holiday_minsを所定労働時間で割った値が入るため、実際の時間を確認するにはhourly_paid_holiday_minsを参照してください。",
+            "description": "[deprecated] この日に対する有給取得日数。半休の場合は0.5が入ります。時間休の場合はhourly_paid_holiday_minsを所定労働時間で割った値が入るため、実際の時間を確認するにはhourly_paid_holiday_minsを参照してください。※ 削除予定のため paid_holidays を参照してください",
             "format": "float"
           },
           "special_holiday": {
@@ -15564,6 +16140,169 @@
           },
           "is_absence": {
             "type": "boolean",
+            "description": "欠勤かどうか\n\nis_absenceにtrueを指定すると、以下のパラーメータについて、指定した値が反映されず無視されます。\n- break_records\n  - clock_in_at\n  - clock_out_at\n- clock_in_at\n- clock_out_at\n- early_leaving_mins\n- lateness_mins\n- normal_work_clock_in_at\n- normal_work_clock_out_at\n- normal_work_mins\n- paid_holidays\n- special_holiday\n- special_holiday_setting_id\n- half_special_holiday_mins\n- hourly_special_holiday_mins"
+          },
+          "lateness_mins": {
+            "type": "integer",
+            "description": "遅刻分の時間（分単位）",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1440
+          },
+          "normal_work_clock_in_at": {
+            "type": "string",
+            "description": "所定労働開始時刻。指定しない場合はデフォルト設定が使用されます。（デフォルト設定は従業員に設定した勤務賃金設定の出退勤時刻と労働時間の設定を参照して値が決まります。）",
+            "format": "date-time",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+            "example": "2018-07-31 08:00:00"
+          },
+          "normal_work_clock_out_at": {
+            "type": "string",
+            "description": "所定労働終了時刻。指定しない場合はデフォルト設定が使用されます。（デフォルト設定は従業員に設定した勤務賃金設定の出退勤時刻と労働時間の設定を参照して値が決まります。）",
+            "format": "date-time",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+            "example": "2018-07-31 08:00:00"
+          },
+          "normal_work_mins": {
+            "type": "integer",
+            "description": "所定労働時間。指定しない場合はデフォルト設定が使用されます。（デフォルト設定は従業員に設定した勤務賃金設定の出退勤時刻と労働時間の設定を参照して値が決まります。）",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1440
+          },
+          "note": {
+            "type": "string",
+            "description": "勤怠メモ",
+            "maxLength": 255
+          },
+          "paid_holidays": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "type"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "有給休暇の種別を指定します（全休：full, 半休：half, 午前休：morning_off, 午後休：afternoon_off, 時間休：hourly）",
+                  "enum": [
+                    "full",
+                    "half",
+                    "morning_off",
+                    "afternoon_off",
+                    "hourly"
+                  ],
+                  "nullable": false,
+                  "example": "half"
+                },
+                "mins": {
+                  "type": "integer",
+                  "description": "有給休暇を利用した時間（分単位） ※ 全休の場合や午前休、午後休の場合にはこちらの値は参照されません",
+                  "format": "int32",
+                  "minimum": 0
+                }
+              }
+            }
+          },
+          "special_holiday": {
+            "type": "number",
+            "description": "この日の特別休暇取得日数。1日単位で指定します。",
+            "format": "float",
+            "enum": [
+              0,
+              1
+            ],
+            "example": "1.0"
+          },
+          "special_holiday_setting_id": {
+            "type": "integer",
+            "description": "特別休暇設定ID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true
+          },
+          "half_special_holiday_mins": {
+            "type": "integer",
+            "description": "特別休暇の半休を利用した時間（分単位）",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1440
+          },
+          "hourly_special_holiday_mins": {
+            "type": "integer",
+            "description": "特別休暇の時間休を利用した時間（分単位）",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1440
+          },
+          "use_attendance_deduction": {
+            "type": "boolean",
+            "description": "欠勤・遅刻・早退を控除対象時間に算入するかどうか"
+          },
+          "use_default_work_pattern": {
+            "type": "boolean",
+            "description": "デフォルトの勤務設定を使うかどうか。\n\ntrueを指定した場合、以下のパラメータについて、指定した値に関係なく、従業員に設定した勤務賃金設定の休日の設定を参照して値が決まります\n- day_pattern\n\ntrueを指定した場合、以下のパラメータについて、指定した値に関係なく、従業員に設定した勤務賃金設定の出退勤時刻と労働時間の設定を参照して値が決まります。\n- normal_work_clock_in_at\n- normal_work_clock_out_at\n- normal_work_mins"
+          }
+        }
+      },
+      "LegacyApiV1EmployeesWorkRecordsController.update_body": {
+        "type": "object",
+        "properties": {
+          "company_id": {
+            "type": "integer",
+            "description": "事業所ID（必須）",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "break_records": {
+            "type": "array",
+            "description": "休憩時間のリスト",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1EmployeesWorkRecordTimeRangeSerializer"
+            }
+          },
+          "work_record_segments": {
+            "type": "array",
+            "description": "出退勤のリスト",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1EmployeesWorkRecordTimeRangeSerializer"
+            }
+          },
+          "clock_in_at": {
+            "type": "string",
+            "description": "出勤時刻  \n\n複数の出退勤を指定できないため非推奨です。 `work_record_segments` を利用してください。",
+            "format": "date-time",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+            "example": "2018-07-31 08:00:00"
+          },
+          "clock_out_at": {
+            "type": "string",
+            "description": "退勤時刻\n\n複数の出退勤を指定できないため非推奨です。 `work_record_segments` を利用してください。",
+            "format": "date-time",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+            "example": "2018-07-31 08:00:00"
+          },
+          "day_pattern": {
+            "type": "string",
+            "description": "勤務パターン（所定労働日: normal_day, 所定休日: prescribed_holiday, 法定休日: legal_holiday）\n\nprescribed_holiday、legal_holidayを指定すると、以下のパラメータについて、指定した値が反映されず無視されます。\n- early_leaving_mins\n- lateness_mins\n- paid_holiday",
+            "enum": [
+              "normal_day",
+              "prescribed_holiday",
+              "legal_holiday"
+            ]
+          },
+          "early_leaving_mins": {
+            "type": "integer",
+            "description": "早退分の時間（分単位）",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1440
+          },
+          "is_absence": {
+            "type": "boolean",
             "description": "欠勤かどうか\n\nis_absenceにtrueを指定すると、以下のパラーメータについて、指定した値が反映されず無視されます。\n- break_records\n  - clock_in_at\n  - clock_out_at\n- clock_in_at\n- clock_out_at\n- early_leaving_mins\n- lateness_mins\n- normal_work_clock_in_at\n- normal_work_clock_out_at\n- normal_work_mins\n- paid_holiday\n- half_paid_holiday_mins\n- hourly_paid_holiday_mins\n- special_holiday\n- special_holiday_setting_id\n- half_special_holiday_mins\n- hourly_special_holiday_mins"
           },
           "lateness_mins": {
@@ -15601,7 +16340,7 @@
           },
           "paid_holiday": {
             "type": "number",
-            "description": "この日の有休取得日数。1日単位で指定します。",
+            "description": "[deprecated] この日の有休取得日数。1日単位で指定します。 ※ paid_holidays を指定する場合にはこちらの値は参照されません ※ 削除予定のため paid_holidays->type を指定してください",
             "format": "float",
             "enum": [
               0,
@@ -15611,14 +16350,14 @@
           },
           "half_paid_holiday_mins": {
             "type": "integer",
-            "description": "有給休暇の半休を利用した時間（分単位）",
+            "description": "[deprecated] 有給休暇の半休を利用した時間（分単位） ※ paid_holidaysを指定する場合にはこちらの値は参照されません ※ 削除予定のためpaid_holidays->mins を指定してください",
             "format": "int32",
             "minimum": 0,
             "maximum": 1440
           },
           "hourly_paid_holiday_mins": {
             "type": "integer",
-            "description": "有給休暇の時間休を利用した時間（分単位）",
+            "description": "[deprecated] morning_off または afternoon_off を指定します ※ paid_holidaysを指定する場合にはこちらの値は参照使用されません ※ 削除予定のため paid_holidays->type を指定してください",
             "format": "int32",
             "minimum": 0,
             "maximum": 1440
@@ -16503,7 +17242,14 @@
           "paid_holidays": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ApiV1PaidHolidayIndexResponseParams"
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ApiV1PaidHolidayIndexResponseParams"
+                },
+                {
+                  "$ref": "#/components/schemas/LegacyApiV1PaidHolidayIndexResponseParams"
+                }
+              ]
             }
           },
           "total_count": {
@@ -16523,11 +17269,104 @@
         ],
         "properties": {
           "paid_holiday": {
-            "$ref": "#/components/schemas/ApiV1PaidHolidayResponseParams"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ApiV1PaidHolidayResponseParams"
+              },
+              {
+                "$ref": "#/components/schemas/LegacyApiV1PaidHolidayResponseParams"
+              }
+            ]
           }
         }
       },
       "ApiV1PaidHolidayRequest": {
+        "type": "object",
+        "required": [
+          "company_id",
+          "target_date",
+          "approval_flow_route_id",
+          "values"
+        ],
+        "properties": {
+          "company_id": {
+            "type": "integer",
+            "description": "事業所ID（必須）",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "target_date": {
+            "type": "string",
+            "description": "対象日（必須）",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+            "example": "2018-07-31"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "type"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "取得単位。（full:全休、half:半休、morning:午前休、 afternoon:午後休、hourly:時間休）",
+                  "enum": [
+                    "full",
+                    "half",
+                    "morning",
+                    "afternoon",
+                    "hourly"
+                  ],
+                  "nullable": false,
+                  "example": "half"
+                },
+                "start_at": {
+                  "type": "string",
+                  "description": "取得予定開始時間 ※ 全休の場合や午前休、午後休の場合にはこちらの値は参照されません",
+                  "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+                  "nullable": true,
+                  "example": "12:00"
+                },
+                "end_at": {
+                  "type": "string",
+                  "description": "取得予定終了時間 ※ 全休の場合や午前休、午後休の場合にはこちらの値は参照されません",
+                  "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$",
+                  "nullable": true,
+                  "example": "23:59"
+                }
+              }
+            }
+          },
+          "comment": {
+            "type": "string",
+            "description": "申請理由",
+            "maxLength": 255,
+            "example": "申請理由"
+          },
+          "approval_flow_route_id": {
+            "type": "integer",
+            "description": "申請経路ID（必須）",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          },
+          "approver_id": {
+            "type": "integer",
+            "description": "承認者のユーザーID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1
+          }
+        }
+      },
+      "LegacyApiV1PaidHolidayRequest": {
         "type": "object",
         "required": [
           "company_id",
@@ -16553,7 +17392,7 @@
           },
           "holiday_type": {
             "type": "string",
-            "description": "取得単位（必須）（full:全休、half:半休、morning:午前休、 afternoon:午後休、hour:時間休）",
+            "description": "[deprecated] 取得単位。（full:全休、half:半休、morning:午前休、 afternoon:午後休、hour:時間休） ※ paid_holidays->values を指定している場合にはこちらの値は参照されません ※ 削除予定のためvalues->type を指定してください",
             "enum": [
               "full",
               "half",
@@ -16565,13 +17404,13 @@
           },
           "start_at": {
             "type": "string",
-            "description": "取得予定開始時間",
+            "description": "[deprecated] 取得予定開始時間 ※ paid_holidays->values を指定している場合にはこちらの値は参照されません ※ 削除予定のため values->start_at を指定してください",
             "pattern": "^[0-9]{2}:[0-9]{2}?$",
             "example": "12:00"
           },
           "end_at": {
             "type": "string",
-            "description": "取得予定終了時間",
+            "description": "[deprecated] 取得予定終了時間 ※ paid_holidays->values を指定している場合にはこちらの値は参照されません ※ 削除予定のため values->end_at を指定してください",
             "pattern": "^[0-9]{2}:[0-9]{2}?$",
             "example": "23:59"
           },
