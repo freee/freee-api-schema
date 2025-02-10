@@ -571,8 +571,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -1038,8 +1037,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -1671,8 +1669,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -2105,8 +2102,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -2667,8 +2663,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -3207,8 +3202,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -3845,8 +3839,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -4445,8 +4438,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -5093,8 +5085,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -6447,8 +6438,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -7368,8 +7358,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -8047,8 +8036,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -8467,8 +8455,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -13657,8 +13644,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -14351,8 +14337,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -15017,8 +15002,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -15655,8 +15639,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -16338,8 +16321,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -17247,8 +17229,7 @@
         "responses": {
           "204": {
             "description": "",
-            "content": {
-            }
+            "content": {}
           },
           "400": {
             "description": "",
@@ -20116,8 +20097,8 @@
           "receipt_metadatum_amount": {
             "type": "integer",
             "format": "int64",
-            "minimum": -9223372036854775808,
-            "maximum": 9223372036854775807,
+            "minimum": -999999999999,
+            "maximum": 999999999999,
             "nullable": true,
             "description": "金額",
             "example": 5250
@@ -20182,8 +20163,8 @@
               "amount": {
                 "type": "integer",
                 "format": "int64",
-                "minimum": -9223372036854775808,
-                "maximum": 9223372036854775807,
+                "minimum": -999999999999,
+                "maximum": 999999999999,
                 "nullable": true,
                 "description": "金額",
                 "example": 5250
