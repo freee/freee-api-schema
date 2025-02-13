@@ -152,7 +152,7 @@
           "Partners"
         ],
         "summary": "取引先一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引先一覧を取得する</p>\n<ul>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）は法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で利用可能です。</li></ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の取引先一覧を取得する</p>\n<ul>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）は法人スタータープラン（および旧法人プロフェッショナルプラン）以上で利用可能です。</li></ul>",
         "operationId": "get_partners",
         "parameters": [
           {
