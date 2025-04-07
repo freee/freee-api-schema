@@ -4661,7 +4661,7 @@
           {
             "name": "comment_important",
             "in": "query",
-            "description": "重要コメント付きの振替伝票を絞込",
+            "description": "お気に入りコメント付きの振替伝票を絞込",
             "schema": {
               "type": "boolean"
             }
@@ -13239,7 +13239,7 @@
           {
             "name": "comment_important",
             "in": "query",
-            "description": "trueの時、重要コメント付きが対象",
+            "description": "trueの時、お気に入りコメント付きが対象",
             "schema": {
               "type": "boolean"
             }
