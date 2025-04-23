@@ -2895,7 +2895,7 @@
           "タイムレコーダー(打刻)"
         ],
         "summary": "打刻の登録",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員の打刻情報を登録します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>休憩開始の連続や退勤のみなど、整合性の取れていない打刻は登録できません。\n打刻可能種別の取得APIを呼ぶことで、その従業員がその時点で登録可能な打刻種別が取得できます。</li>\n\n  <li>出勤の打刻は</li>\n  <ul>\n    <li>前日の出勤時刻から24時間以内の場合、前日の退勤打刻が必須です。</li>\n    <li> 前日の出勤時刻から24時間経過している場合は、前日の退勤打刻がなくとも出勤打刻を登録することができます。</li>\n  </ul>\n\n  <li>退勤の打刻は</li>\n  <ul>\n    <li><a href=\\\"https://support.freee.co.jp/hc/ja/articles/900004490226-%E5%8B%A4%E6%80%A0%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A%E3%82%92%E8%A1%8C%E3%81%86#h_01EYPYTR9HZ7YB8V5F18VMD1BT\"target=\\\"_blank\\\">『退勤を自動打刻する』</a>の設定を使用している場合は、出勤打刻から24時間経過しても退勤打刻がない場合に、退勤打刻が自動で登録されます。</li>\n    <li>すでに登録されている退勤打刻よりも後の時刻であれば上書き登録することができます。</li>\n  </ul>\n\n  <li>打刻が日をまたぐ場合は、base_date(打刻日)に前日の日付を指定してください。</li>\n\n  <li>datetime(打刻日時)を指定できるのは管理者か事務担当者の権限を持ったユーザーのみです。</li>\n</ul>",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員の打刻情報を登録します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>休憩開始の連続や退勤のみなど、整合性の取れていない打刻は登録できません。\n打刻可能種別の取得APIを呼ぶことで、その従業員がその時点で登録可能な打刻種別が取得できます。</li>\n\n  <li>出勤の打刻は</li>\n  <ul>\n    <li>前日の出勤時刻から24時間以内の場合、前日の退勤打刻が必須です。</li>\n    <li> 前日の出勤時刻から24時間経過している場合は、前日の退勤打刻がなくとも出勤打刻を登録することができます。</li>\n  </ul>\n\n  <li>退勤の打刻は</li>\n  <ul>\n    <li><a href=\\\"https://support.freee.co.jp/hc/ja/articles/900004490226-%E5%8B%A4%E6%80%A0%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A%E3%82%92%E8%A1%8C%E3%81%86#h_01EYPYTR9HZ7YB8V5F18VMD1BT\"target=\\\"_blank\\\">『退勤を自動打刻する』</a>の設定を使用している場合は、出勤打刻から24時間経過しても退勤打刻がない場合に、退勤打刻が自動で登録されます。</li>\n    <li>すでに登録されている退勤打刻よりも後の時刻であれば上書き登録することができます。</li>\n  </ul>\n\n  <li>打刻が日をまたぐ場合は、base_date(打刻日)に前日の日付を指定してください。</li>\n\n  <li>datetime(打刻日時)を指定できるのは管理者の権限を持ったユーザーのみです。</li>\n</ul>",
         "operationId": "create_employee_time_clock",
         "parameters": [
           {
@@ -12917,7 +12917,7 @@
           },
           "role": {
             "type": "string",
-            "description": "事業所におけるロール。\n\n- `company_admin`: 管理者\n- `self_only`: 一般または勤怠部門管理者\n- `clerk`: 事務担当者\n- `physician`: 産業医\n- `shift_admin`: AIシフト担当者\n\n[各権限でできることは各アカウントの権限についてのヘルプページを参照してください。](https://support.freee.co.jp/hc/ja/articles/204087410#3)"
+            "description": "事業所におけるロール。\n\n- `company_admin`: 管理者\n- `self_only`: 一般または勤怠部門管理者\n- `clerk`: 事務担当者\n- `physician`: 産業医\n- `shift_admin`: AIシフト担当者\n- `time_clock_device_setter`: 打刻機設定者\n\n[各権限でできることは各アカウントの権限についてのヘルプページを参照してください。](https://support.freee.co.jp/hc/ja/articles/204087410#3)"
           },
           "external_cid": {
             "type": "string",
