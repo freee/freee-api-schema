@@ -70,9 +70,9 @@ info:
     </br>
 
     <h3 id="api_rate_limit">API使用制限</h3>
-    <p>APIリクエストは1時間で5000回を上限としています。API使用ステータスはレスポンスヘッダに付与されます。</p>
-    <pre><code>X-Ratelimit-Limit:5000
-    X-Ratelimit-Remaining:4998
+    <p>APIリクエストは1時間で3000回、1分で50回を上限としています。API使用ステータスはレスポンスヘッダに付与されます。</p>
+    <pre><code>X-Ratelimit-Limit:3000
+    X-Ratelimit-Remaining:2998
     X-Ratelimit-Reset:2018-01-01T12:00:00.000000Z
     </code></pre>
 
@@ -1609,6 +1609,18 @@ components:
           example: freeeパートナー
           maxLength: 255
           type: string
+        partner_sending_method:
+          description: |
+            取引先への送付方法
+            - 一括送付時に取引先マスタに登録された送付方法以外を利用したい場合に指定します。
+            - 入力がない場合、取引先マスタに登録された送付方法で一括送付を行います。
+          enum:
+          - email
+          - posting
+          - email_and_posting
+          example: email
+          nullable: true
+          type: string
         partner_bank_account:
           description: |
             取引先口座
@@ -1900,6 +1912,18 @@ components:
           example: freeeパートナー
           maxLength: 255
           type: string
+        partner_sending_method:
+          description: |
+            取引先への送付方法
+            - 一括送付時に取引先マスタに登録された送付方法以外を利用したい場合に指定します。
+            - 入力がない場合、取引先マスタに登録された送付方法で一括送付を行います。
+          enum:
+          - email
+          - posting
+          - email_and_posting
+          example: email
+          nullable: true
+          type: string
         company_contact_name:
           description: 自社担当者(デフォルトは操作者の表示ユーザー名が補完されます)
           example: 法人営業担当
@@ -2148,6 +2172,15 @@ components:
             - 入力がない場合、帳票に指定されたpartner_id, partner_codeに紐づく取引先名称が利用されます。
           example: freeeパートナー
           maxLength: 255
+          type: string
+        partner_sending_method:
+          description: 取引先への送付方法
+          enum:
+          - email
+          - posting
+          - email_and_posting
+          example: email
+          nullable: true
           type: string
         company_contact_name:
           description: 自社担当者(デフォルトは表示ユーザー名が補完されます)
@@ -3074,6 +3107,15 @@ components:
             '
           example: freee銀行 freee支店 普通 1234567 freee
           maxLength: 255
+          type: string
+        partner_sending_method:
+          description: 取引先への送付方法
+          enum:
+          - email
+          - posting
+          - email_and_posting
+          example: email
+          nullable: true
           type: string
         company_contact_name:
           description: 自社担当者名
@@ -4222,6 +4264,15 @@ components:
             - 帳票の宛名に利用されます。
           example: freeeパートナー
           maxLength: 255
+          type: string
+        partner_sending_method:
+          description: 取引先への送付方法
+          enum:
+          - email
+          - posting
+          - email_and_posting
+          example: email
+          nullable: true
           type: string
         company_contact_name:
           description: 自社担当者名
@@ -5484,6 +5535,15 @@ components:
             '
           example: freee銀行 freee支店 普通 1234567 freee
           maxLength: 255
+          type: string
+        partner_sending_method:
+          description: 取引先への送付方法
+          enum:
+          - email
+          - posting
+          - email_and_posting
+          example: email
+          nullable: true
           type: string
         company_contact_name:
           description: 自社担当者名
