@@ -70,9 +70,9 @@ info:
     </br>
 
     <h3 id="api_rate_limit">API使用制限</h3>
-    <p>APIリクエストは1時間で5000回を上限としています。API使用ステータスはレスポンスヘッダに付与されます。</p>
-    <pre><code>X-Ratelimit-Limit:5000
-    X-Ratelimit-Remaining:4998
+    <p>APIリクエストは1時間で3000回、1分で50回を上限としています。API使用ステータスはレスポンスヘッダに付与されます。</p>
+    <pre><code>X-Ratelimit-Limit:3000
+    X-Ratelimit-Remaining:2998
     X-Ratelimit-Reset:2018-01-01T12:00:00.000000Z
     </code></pre>
 
