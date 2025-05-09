@@ -17578,7 +17578,6 @@
             "items": {
               "required": [
                 "tax_code",
-                "account_item_id",
                 "amount"
               ],
               "type": "object",
@@ -30563,8 +30562,8 @@
                 },
                 "company_number": {
                   "type": "string",
-                  "description": "事業所番号（ハイフン無し）",
-                  "example": "1234567890"
+                  "description": "事業所番号（ハイフン無し)(半角英数字10桁)",
+                  "example": "97e576421b"
                 },
                 "role": {
                   "type": "string",
@@ -30716,8 +30715,8 @@
               },
               "company_number": {
                 "type": "string",
-                "description": "事業所番号（ハイフン無し）",
-                "example": "1234567890"
+                "description": "事業所番号（ハイフン無し)(半角英数字10桁)",
+                "example": "97e576421b"
               },
               "role": {
                 "type": "string",
