@@ -17578,6 +17578,7 @@
             "items": {
               "required": [
                 "tax_code",
+                "account_item_id",
                 "amount"
               ],
               "type": "object",
