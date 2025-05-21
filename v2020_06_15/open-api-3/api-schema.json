@@ -13351,7 +13351,7 @@
           "Receipts"
         ],
         "summary": "ファイルボックス（証憑ファイル）のアップロード",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ファイルボックス（証憑ファイル）をアップロードする</p>\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>リクエストヘッダーの Content-Type は、multipart/form-dataにのみ対応しています。</li>\n  <li>インボイス制度適格請求書発行事業者登録番号はOCR解析結果が採用されます。OCR解析結果を確認する場合は、Web画面にてご確認ください。上書きする場合は、ファイルボックス（証憑ファイル）の更新APIをご利用ください。</li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ファイルボックス（証憑ファイル）をアップロードする</p>\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>リクエストヘッダーの Content-Type は、multipart/form-dataにのみ対応しています。</li>\n  <li>インボイス制度適格請求書発行事業者登録番号はOCR解析結果が採用されます。OCR解析結果を確認する場合は、Web画面にてご確認ください。上書きする場合は、ファイルボックス（証憑ファイル）の更新APIをご利用ください。</li>\n  <li>以下の制限を満たさない場合アップロードに失敗します。</li>\n  <ul>\n      <li>ファイルサイズの制限： 64MBまで</li>\n      <li>月間アップロード容量の制限： 月間合計10GBまで</li>\n      <li>1分間あたりのアップロード数制限： 300ファイルまで</li>\n      <li>プランによる月間アップロード数の制限： 以下のリンクからご確認ください</li>\n      <ul>\n          <li>\n              <a href=\"https://support.freee.co.jp/hc/ja/articles/213726523--%E5%80%8B%E4%BA%BA-freee%E4%BC%9A%E8%A8%88%E3%81%AE%E3%83%97%E3%83%A9%E3%83%B3%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6\" target=\"_blank\">【個人】freee会計のプランについて</a>\n          </li>\n          <li>\n              <a href=\"https://support.freee.co.jp/hc/ja/articles/27975180546713--%E6%B3%95%E4%BA%BA-freee%E4%BC%9A%E8%A8%88%E3%81%AE%E3%83%97%E3%83%A9%E3%83%B3%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6-2024%E5%B9%B47%E6%9C%88%E4%BB%A5%E9%99%8D\" target=\"_blank\">【法人】freee会計のプランについて（2024年7月以降）</a>\n          </li>\n      </ul>\n  </ul>\n</ul>",
         "operationId": "create_receipt",
         "requestBody": {
           "content": {
@@ -17578,7 +17578,6 @@
             "items": {
               "required": [
                 "tax_code",
-                "account_item_id",
                 "amount"
               ],
               "type": "object",
@@ -28888,6 +28887,12 @@
                       "description": "勘定科目ID",
                       "example": 803
                     },
+                    "account_item_code": {
+                      "type": "string",
+                      "description": "勘定科目コード",
+                      "example": "code001",
+                      "nullable": true
+                    },
                     "tax_code": {
                       "type": "integer",
                       "format": "int64",
@@ -28904,12 +28909,24 @@
                       "example": 501,
                       "nullable": true
                     },
+                    "item_code": {
+                      "type": "string",
+                      "description": "品目コード",
+                      "example": "code001",
+                      "nullable": true
+                    },
                     "section_id": {
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
                       "description": "部門ID",
                       "example": 1,
+                      "nullable": true
+                    },
+                    "section_code": {
+                      "type": "string",
+                      "description": "部門コード",
+                      "example": "code001",
                       "nullable": true
                     },
                     "tag_ids": {
@@ -28934,6 +28951,12 @@
                       "example": 1,
                       "nullable": true
                     },
+                    "segment_1_tag_code": {
+                      "type": "string",
+                      "description": "セグメント１タグコード",
+                      "example": "code001",
+                      "nullable": true
+                    },
                     "segment_2_tag_id": {
                       "type": "integer",
                       "format": "int64",
@@ -28942,12 +28965,24 @@
                       "example": 1,
                       "nullable": true
                     },
+                    "segment_2_tag_code": {
+                      "type": "string",
+                      "description": "セグメント２タグコード",
+                      "example": "code001",
+                      "nullable": true
+                    },
                     "segment_3_tag_id": {
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
                       "description": "セグメント３タグID",
                       "example": 1,
+                      "nullable": true
+                    },
+                    "segment_3_tag_code": {
+                      "type": "string",
+                      "description": "セグメント３タグコード",
+                      "example": "code001",
                       "nullable": true
                     },
                     "amount": {
