@@ -6319,7 +6319,7 @@
         "tags": [
           "Items"
         ],
-        "summary": "品目の更新",
+        "summary": "品目の更新（存在しない場合は作成）",
         "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の品目を更新する</p>\n<p>codeを利用するには、事業所の設定で品目コードを使用する設定にする必要があります。</p>",
         "operationId": "update_item",
         "parameters": [
@@ -6336,7 +6336,7 @@
           }
         ],
         "requestBody": {
-          "description": "品目の更新",
+          "description": "品目の更新（存在しない場合は作成）",
           "content": {
             "application/json": {
               "schema": {
