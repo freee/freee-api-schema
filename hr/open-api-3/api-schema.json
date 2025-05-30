@@ -12917,11 +12917,11 @@
           },
           "role": {
             "type": "string",
-            "description": "事業所におけるロール。\n\n- `company_admin`: 管理者\n- `self_only`: 一般または勤怠部門管理者\n- `clerk`: 事務担当者\n- `physician`: 産業医\n- `shift_admin`: AIシフト担当者\n- `time_clock_device_setter`: 打刻機設定者\n\n[各権限でできることは各アカウントの権限についてのヘルプページを参照してください。](https://support.freee.co.jp/hc/ja/articles/204087410#3)"
+            "description": "事業所におけるロール。\n\n- `company_admin`: 管理者\n- `self_only`: 一般または勤怠部門管理者\n- `physician`: 産業医\n- `shift_admin`: AIシフト担当者\n- `time_clock_device_setter`: 打刻機設定者\n\n[各権限でできることは各アカウントの権限についてのヘルプページを参照してください。](https://support.freee.co.jp/hc/ja/articles/204087410#3)"
           },
           "external_cid": {
             "type": "string",
-            "description": "事業所番号(半角数字10桁)"
+            "description": "事業所番号(半角英数字10桁)"
           },
           "employee_id": {
             "type": "integer",
