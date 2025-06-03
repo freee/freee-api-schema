@@ -8951,7 +8951,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない\n",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で5,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が5,000以上、品目の登録数が4,999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない\n",
             "schema": {
               "type": "string",
               "enum": [
@@ -9174,7 +9174,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で5,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が5,000以上、品目の登録数が4,999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -9397,7 +9397,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で5,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が5,000以上、品目の登録数が4,999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -9620,7 +9620,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で5,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が5,000以上、品目の登録数が4,999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -9855,7 +9855,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で5,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が5,000以上、品目の登録数が4,999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -10090,7 +10090,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で5,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が5,000以上、品目の登録数が4,999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -10334,7 +10334,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、セグメント の各項目が単独で5,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が5,000以上、品目の登録数が4,999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -10567,7 +10567,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門 の各項目が単独で5,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が5,000以上、品目の登録数が4,999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -10808,7 +10808,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門 の各項目が単独で5,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が5,000以上、品目の登録数が4,999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -11049,7 +11049,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門 の各項目が単独で5,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が5,000以上、品目の登録数が4,999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -11281,7 +11281,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で5,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が5,000以上、品目の登録数が4,999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -11516,7 +11516,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で5,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が5,000以上、品目の登録数が4,999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -11751,7 +11751,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門、セグメント の各項目が単独で5,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が5,000以上、品目の登録数が4,999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -11995,7 +11995,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、セグメント の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 勘定科目: account_item, セグメント１タグ: segment_1_tag, セグメント２タグ: segment_2_tag, セグメント３タグ: segment_3_tag） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、セグメント の各項目が単独で5,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が5,000以上、品目の登録数が4,999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -12228,7 +12228,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門 の各項目が単独で5,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が5,000以上、品目の登録数が4,999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -12469,7 +12469,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門 の各項目が単独で5,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が5,000以上、品目の登録数が4,999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
@@ -12710,7 +12710,7 @@
           {
             "name": "breakdown_display_type",
             "in": "query",
-            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門 の各項目が単独で1,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が1,000以上、品目の登録数が999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
+            "description": "内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item） ※勘定科目はaccount_item_display_typeが「group」の時のみ指定できます。\n\n取引先、品目、部門 の各項目が単独で5,000以上登録されている場合は、breakdown_display_type で該当項目を指定するとエラーになります。\n\n例）取引先の登録数が5,000以上、品目の登録数が4,999以下の場合\n* breakdown_display_type: 取引先を指定 → エラーになる\n* breakdown_display_type: 品目を指定 → エラーにならない",
             "schema": {
               "type": "string",
               "enum": [
