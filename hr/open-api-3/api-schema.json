@@ -11262,6 +11262,11 @@
             "nullable": true,
             "description": "控除額合計"
           },
+          "total_deduction_employer_share": {
+            "type": "string",
+            "nullable": true,
+            "description": "法定福利費の会社負担分の合計（健康保険、厚生年金、雇用保険等）"
+          },
           "net_payment_amount": {
             "type": "string",
             "nullable": true,
@@ -11306,7 +11311,14 @@
           },
           "deductions": {
             "type": "array",
-            "description": "控除項目（所得税、住民税、社会保険料等）",
+            "description": "控除項目（健康保険、厚生年金、雇用保険等）",
+            "items": {
+              "$ref": "#/components/schemas/ApiV1EmployeePayrollStatementsEmployeePayrollStatementItemSerializer"
+            }
+          },
+          "deductions_employer_share": {
+            "type": "array",
+            "description": "法定福利費の会社負担分（健康保険、厚生年金、雇用保険等）",
             "items": {
               "$ref": "#/components/schemas/ApiV1EmployeePayrollStatementsEmployeePayrollStatementItemSerializer"
             }
