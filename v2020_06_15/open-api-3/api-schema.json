@@ -3400,17 +3400,6 @@
             }
           },
           {
-            "name": "registered_from",
-            "in": "query",
-            "description": "取引登録元アプリで絞込（me: 本APIを叩くアプリ自身から登録した取引のみ）",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "me"
-              ]
-            }
-          },
-          {
             "name": "accruals",
             "in": "query",
             "description": "取引の債権債務行の表示（without: 表示しない(デフォルト), with: 表示する）",
