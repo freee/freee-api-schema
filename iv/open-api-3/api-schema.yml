@@ -70,10 +70,13 @@ info:
     </br>
 
     <h3 id="api_rate_limit">API使用制限</h3>
-    <p>APIリクエストは1時間で3000回、1分で50回を上限としています。API使用ステータスはレスポンスヘッダに付与されます。</p>
-    <pre><code>X-Ratelimit-Limit:3000
-    X-Ratelimit-Remaining:2998
-    X-Ratelimit-Reset:2018-01-01T12:00:00.000000Z
+    <p>APIリクエストは1時間で1500回、1分で30回を上限としています。API使用ステータスはレスポンスヘッダに付与されます。</p>
+    <pre><code>X-RateLimit-Limit:1500
+    X-RateLimit-Remaining:1798
+    X-RateLimit-Reset:2018-01-01T12:00:00.000000Z
+    X-Ratelimit-Limit-Minute:30
+    X-Ratelimit-Remaining-Minute:29
+    X-Ratelimit-Reset-Minute:2018-01-01T12:00:00.000000Z
     </code></pre>
 
     <br> 各ヘッダの意味は次のとおりです。</p>
@@ -87,6 +90,9 @@ info:
         <tr><td style="padding: 10px">X-RateLimit-Limit</td><td style="padding: 10px">使用回数の上限</td></tr>
         <tr><td style="padding: 10px">X-RateLimit-Remaining</td><td style="padding: 10px">残り使用回数</td></tr>
         <tr><td style="padding: 10px">X-RateLimit-Reset</td><td style="padding: 10px">使用回数がリセットされる時刻</td></tr>
+        <tr><td style="padding: 10px">X-Ratelimit-Limit-Minute</td><td style="padding: 10px">1分間の使用回数の上限</td></tr>
+        <tr><td style="padding: 10px">X-Ratelimit-Remaining-Minute</td><td style="padding: 10px">1分間の残り使用回数</td></tr>
+        <tr><td style="padding: 10px">X-Ratelimit-Reset-Minute</td><td style="padding: 10px">1分間の使用回数がリセットされる時刻</td></tr>
       </tbody>
     </table>
 
