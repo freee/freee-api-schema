@@ -725,409 +725,6 @@
         }
       }
     },
-    "/api/1/partners/upsert_by_code": {
-      "put": {
-        "tags": [
-          "Partners"
-        ],
-        "summary": "取引先の更新（存在しない場合は作成）",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>取引先コードをキーに、指定した取引先の情報を更新（存在しない場合は作成）する</p>\n<ul>\n<li>このAPIを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</li>\n<li>取引先名称（name）は重複不可です。</li>\n<li>振込元口座ID（payer_walletable_id）, 振込手数料負担（transfer_fee_handling_side）, 支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）は法人スタータープラン（および旧法人プロフェッショナルプラン）以上で利用可能です。</li>\n<li>支払期日設定（payment_term_attributes）, 請求の入金期日設定（invoice_payment_term_attributes）にnull型を入力することにより、期日を未設定に変更可能です。</li></ul>",
-        "operationId": "api/v1/partners#upsert_by_code",
-        "requestBody": {
-          "description": "取引先の更新（存在しない場合は作成）",
-          "content": {
-            "application/json": {
-              "schema": {
-                "required": [
-                  "code",
-                  "company_id",
-                  "partner"
-                ],
-                "type": "object",
-                "properties": {
-                  "code": {
-                    "type": "string",
-                    "maxLength": 255,
-                    "description": "取引先コード",
-                    "example": "code001"
-                  },
-                  "company_id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "minimum": 1,
-                    "description": "事業所ID",
-                    "example": 1
-                  },
-                  "partner": {
-                    "type": "object",
-                    "required": [
-                      "name"
-                    ],
-                    "properties": {
-                      "name": {
-                        "type": "string",
-                        "maxLength": 255,
-                        "description": "取引先名 (255文字以内、重複不可)",
-                        "example": "新しい取引先"
-                      },
-                      "available": {
-                        "type": "boolean",
-                        "description": "true: 使用可能、false: 使用停止",
-                        "example": false
-                      },
-                      "shortcut1": {
-                        "type": "string",
-                        "maxLength": 255,
-                        "description": "ショートカット１ (255文字以内)",
-                        "example": "NEWPARTNER"
-                      },
-                      "shortcut2": {
-                        "type": "string",
-                        "maxLength": 255,
-                        "description": "ショートカット２ (255文字以内)",
-                        "example": "502"
-                      },
-                      "org_code": {
-                        "type": "integer",
-                        "format": "int64",
-                        "description": "事業所種別（null: 未設定、1: 法人、2: 個人）",
-                        "example": 1,
-                        "enum": [
-                          1,
-                          2
-                        ],
-                        "nullable": true
-                      },
-                      "country_code": {
-                        "type": "string",
-                        "description": "地域（JP: 国内、ZZ:国外）、指定しない場合JPになります。",
-                        "example": "JP",
-                        "enum": [
-                          "JP",
-                          "ZZ"
-                        ]
-                      },
-                      "long_name": {
-                        "type": "string",
-                        "maxLength": 255,
-                        "description": "正式名称（255文字以内）",
-                        "example": "新しい取引先正式名称"
-                      },
-                      "name_kana": {
-                        "type": "string",
-                        "maxLength": 255,
-                        "description": "カナ名称（255文字以内）",
-                        "example": "アタラシイトリヒキサキメイショウ"
-                      },
-                      "default_title": {
-                        "type": "string",
-                        "description": "敬称（御中、様、(空白)の3つから選択）",
-                        "example": "御中"
-                      },
-                      "phone": {
-                        "type": "string",
-                        "description": "電話番号",
-                        "example": "03-1234-xxxx"
-                      },
-                      "contact_name": {
-                        "type": "string",
-                        "maxLength": 255,
-                        "description": "担当者 氏名 (255文字以内)",
-                        "example": "営業担当"
-                      },
-                      "email": {
-                        "type": "string",
-                        "maxLength": 255,
-                        "description": "担当者 メールアドレス (255文字以内)",
-                        "example": "contact@example.com"
-                      },
-                      "payer_walletable_id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "minimum": 1,
-                        "description": "振込元口座ID（一括振込ファイル用）:（walletableのtypeが'bank_account'のidのみ指定できます。また、未設定にする場合は、nullを指定してください。）",
-                        "example": 1,
-                        "nullable": true
-                      },
-                      "transfer_fee_handling_side": {
-                        "type": "string",
-                        "description": "振込手数料負担（一括振込ファイル用）: (振込元(当方): payer, 振込先(先方): payee)、指定しない場合payerになります。",
-                        "example": "payer",
-                        "enum": [
-                          "payer",
-                          "payee"
-                        ]
-                      },
-                      "qualified_invoice_issuer": {
-                        "type": "boolean",
-                        "description": "インボイス制度適格請求書発行事業者（true: 対象事業者、false: 非対象事業者）\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
-                        "example": false
-                      },
-                      "invoice_registration_number": {
-                        "type": "string",
-                        "maxLength": 14,
-                        "minLength": 13,
-                        "pattern": "^T?[1-9][0-9]{12}$",
-                        "description": "インボイス制度適格請求書発行事業者登録番号\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
-                        "example": "T1000000000001",
-                        "nullable": true
-                      },
-                      "address_attributes": {
-                        "type": "object",
-                        "properties": {
-                          "zipcode": {
-                            "type": "string",
-                            "maxLength": 8,
-                            "description": "郵便番号（8文字以内）",
-                            "example": "000-0000"
-                          },
-                          "prefecture_code": {
-                            "type": "integer",
-                            "format": "int64",
-                            "minimum": -1,
-                            "maximum": 46,
-                            "description": "都道府県コード（-1: 設定しない、0: 北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
-                            "example": 4
-                          },
-                          "street_name1": {
-                            "type": "string",
-                            "maxLength": 255,
-                            "description": "市区町村・番地（255文字以内）",
-                            "example": "ＸＸ区ＹＹ１−１−１"
-                          },
-                          "street_name2": {
-                            "type": "string",
-                            "maxLength": 255,
-                            "description": "建物名・部屋番号など（255文字以内）",
-                            "example": "ビル１Ｆ"
-                          }
-                        }
-                      },
-                      "partner_doc_setting_attributes": {
-                        "type": "object",
-                        "properties": {
-                          "sending_method": {
-                            "type": "string",
-                            "description": "請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送、null:設定しない)",
-                            "example": "posting",
-                            "enum": [
-                              "email",
-                              "posting",
-                              "email_and_posting"
-                            ],
-                            "nullable": true
-                          }
-                        }
-                      },
-                      "partner_bank_account_attributes": {
-                        "type": "object",
-                        "properties": {
-                          "bank_name": {
-                            "type": "string",
-                            "description": "銀行名",
-                            "example": "freee銀行"
-                          },
-                          "bank_name_kana": {
-                            "type": "string",
-                            "description": "銀行名（カナ）",
-                            "example": "フリーギンコウ"
-                          },
-                          "bank_code": {
-                            "type": "string",
-                            "description": "銀行コード",
-                            "example": "0001"
-                          },
-                          "branch_name": {
-                            "type": "string",
-                            "description": "支店名",
-                            "example": "銀座支店"
-                          },
-                          "branch_kana": {
-                            "type": "string",
-                            "description": "支店名（カナ）",
-                            "example": "ギンザシテン"
-                          },
-                          "branch_code": {
-                            "type": "string",
-                            "description": "支店番号",
-                            "example": "101"
-                          },
-                          "account_type": {
-                            "type": "string",
-                            "description": "口座種別(ordinary:普通、checking：当座、earmarked：納税準備預金、savings：貯蓄、other:その他)、指定しない場合ordinaryになります。",
-                            "example": "ordinary",
-                            "enum": [
-                              "ordinary",
-                              "checking",
-                              "earmarked",
-                              "savings",
-                              "other"
-                            ]
-                          },
-                          "account_number": {
-                            "type": "string",
-                            "description": "口座番号",
-                            "example": "1010101"
-                          },
-                          "long_account_name": {
-                            "type": "string",
-                            "description": "受取人名",
-                            "example": "freee太郎"
-                          },
-                          "account_name": {
-                            "type": "string",
-                            "description": "受取人名（カナ）",
-                            "example": "フリータロウ"
-                          }
-                        }
-                      },
-                      "payment_term_attributes": {
-                        "type": "object",
-                        "properties": {
-                          "cutoff_day": {
-                            "type": "integer",
-                            "format": "int64",
-                            "minimum": 1,
-                            "maximum": 32,
-                            "description": "締め日（29, 30, 31日の末日を指定する場合は、32を指定してください。）",
-                            "example": 15
-                          },
-                          "additional_months": {
-                            "type": "integer",
-                            "format": "int64",
-                            "minimum": 0,
-                            "maximum": 6,
-                            "description": "支払月（当月を指定する場合は、0を指定してください。）",
-                            "example": 1
-                          },
-                          "fixed_day": {
-                            "type": "integer",
-                            "format": "int64",
-                            "minimum": 1,
-                            "maximum": 32,
-                            "description": "支払日（29, 30, 31日の末日を指定する場合は、32を指定してください。）",
-                            "example": 32
-                          }
-                        },
-                        "nullable": true
-                      },
-                      "invoice_payment_term_attributes": {
-                        "type": "object",
-                        "properties": {
-                          "cutoff_day": {
-                            "type": "integer",
-                            "format": "int64",
-                            "minimum": 1,
-                            "maximum": 32,
-                            "description": "締め日（29, 30, 31日の末日を指定する場合は、32を指定してください。）",
-                            "example": 15
-                          },
-                          "additional_months": {
-                            "type": "integer",
-                            "format": "int64",
-                            "minimum": 0,
-                            "maximum": 6,
-                            "description": "入金月（当月を指定する場合は、0を指定してください。）",
-                            "example": 1
-                          },
-                          "fixed_day": {
-                            "type": "integer",
-                            "format": "int64",
-                            "minimum": 1,
-                            "maximum": 32,
-                            "description": "入金日（29, 30, 31日の末日を指定する場合は、32を指定してください。）",
-                            "example": 32
-                          }
-                        },
-                        "nullable": true
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/paths/~1api~11~1partners~1upsert_by_code/put/requestBody/content/application~1json/schema"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/partnerResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/partnerResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/badRequestError"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/unauthorizedError"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/forbiddenError"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/badRequestNotFoundError"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/internalServerError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/1/forms/selectables": {
       "get": {
         "tags": [
@@ -1512,22 +1109,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "start_update_date",
-            "in": "query",
-            "description": "更新日で絞込：開始日(yyyy-mm-dd)",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "end_update_date",
-            "in": "query",
-            "description": "更新日で絞込：終了日(yyyy-mm-dd)",
-            "schema": {
-              "type": "string"
-            }
           }
         ],
         "responses": {
@@ -1653,235 +1234,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/internalServerError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/1/account_items/code/upsert": {
-      "put": {
-        "tags": [
-          "Account items"
-        ],
-        "summary": "勘定科目の更新（存在しない場合は作成）",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>勘定科目コードをキーに、指定した勘定科目の情報を更新（存在しない場合は作成）する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<p>tax_codeは、指定した事業所の税区分一覧の取得APIでavailableの値がtrue、かつ経過措置税区分ではない5%の税区分を確認して、そのcodeを指定して勘定科目の更新をしてください。例 課対仕入の場合、34を指定してください</p>\n<p>codeを利用するには、事業所の設定で勘定科目コードを使用する設定にする必要があります。</p>",
-        "operationId": "api/v1/account_items#upsert_by_code",
-        "parameters": null,
-        "requestBody": {
-          "description": "勘定科目の更新（存在しない場合は作成）",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "code",
-                  "company_id",
-                  "account_item"
-                ],
-                "properties": {
-                  "code": {
-                    "type": "string",
-                    "maxLength": 20,
-                    "description": "勘定科目コード",
-                    "example": "999",
-                    "pattern": "^[0-9a-zA-Z_-]+$"
-                  },
-                  "company_id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "minimum": 1,
-                    "description": "事業所ID",
-                    "example": 1
-                  },
-                  "account_item": {
-                    "type": "object",
-                    "required": [
-                      "account_category_id",
-                      "corresponding_expense_id",
-                      "corresponding_income_id",
-                      "group_name",
-                      "tax_code"
-                    ],
-                    "properties": {
-                      "name": {
-                        "type": "string",
-                        "maxLength": 30,
-                        "description": "勘定科目名 (30文字以内)\n口座に紐付かない勘定科目の更新時は必須です。\n口座に紐付く勘定科目の更新時は指定することができません。\n",
-                        "example": "新しい勘定科目"
-                      },
-                      "shortcut": {
-                        "type": "string",
-                        "maxLength": 20,
-                        "description": "ショートカット1 (20文字以内)",
-                        "example": "NEWACCOUNTITEM"
-                      },
-                      "shortcut_num": {
-                        "type": "string",
-                        "maxLength": 20,
-                        "description": "ショートカット2 (20文字以内)",
-                        "example": "999"
-                      },
-                      "tax_code": {
-                        "type": "integer",
-                        "format": "int64",
-                        "minimum": 0,
-                        "maximum": 2147483647,
-                        "description": "税区分コード 指定できるコードは本APIの注意点をご確認ください。",
-                        "example": 1
-                      },
-                      "group_name": {
-                        "type": "string",
-                        "description": "決算書表示名（小カテゴリー） Selectablesフォーム用選択項目情報エンドポイント(account_groups.name)で取得可能です",
-                        "example": "その他預金"
-                      },
-                      "account_category_id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "minimum": 1,
-                        "description": "勘定科目カテゴリーID Selectablesフォーム用選択項目情報エンドポイント(account_groups.account_category_id)で取得可能です",
-                        "example": 1
-                      },
-                      "corresponding_income_id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "minimum": 1,
-                        "description": "収入取引相手勘定科目ID",
-                        "example": 1
-                      },
-                      "corresponding_expense_id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "minimum": 1,
-                        "description": "支出取引相手勘定科目ID",
-                        "example": 1
-                      },
-                      "accumulated_dep_account_item_id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "minimum": 1,
-                        "description": "減価償却累計額勘定科目ID（法人のみ利用可能）",
-                        "example": 1
-                      },
-                      "searchable": {
-                        "type": "integer",
-                        "format": "int64",
-                        "minimum": 2,
-                        "maximum": 3,
-                        "description": "検索可能:2, 検索不可：3(登録時未指定の場合は2で登録されます。更新時未指定の場合はsearchableは変更されません。)",
-                        "example": 2
-                      },
-                      "items": {
-                        "type": "array",
-                        "description": "品目",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "integer",
-                              "format": "int64",
-                              "minimum": 1,
-                              "example": 1
-                            }
-                          }
-                        }
-                      },
-                      "partners": {
-                        "type": "array",
-                        "description": "取引先",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "integer",
-                              "format": "int64",
-                              "minimum": 1,
-                              "example": 1
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/paths/~1api~11~1account_items~1code~1upsert/put/requestBody/content/application~1json/schema"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/accountItemResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/accountItemResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/badRequestError"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/unauthorizedError"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/forbiddenError"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/internalServerError"
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/serviceUnavailableError"
                 }
               }
             }
@@ -2391,22 +1743,6 @@
               "format": "int64",
               "minimum": 1
             }
-          },
-          {
-            "name": "start_update_date",
-            "in": "query",
-            "description": "更新日で絞込：開始日(yyyy-mm-dd)",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "end_update_date",
-            "in": "query",
-            "description": "更新日で絞込：終了日(yyyy-mm-dd)",
-            "schema": {
-              "type": "string"
-            }
           }
         ],
         "responses": {
@@ -2767,154 +2103,6 @@
           "204": {
             "description": "",
             "content": {}
-          },
-          "400": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/badRequestError"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/unauthorizedError"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/forbiddenError"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/internalServerError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/1/sections/code/upsert": {
-      "put": {
-        "tags": [
-          "Sections"
-        ],
-        "summary": "部門の更新（存在しない場合は作成）",
-        "description": "<h2 id=\"\">概要</h2>\n<p>部門コードをキーに、指定した部門の情報を更新（存在しない場合は作成）する</p>\n<h2 id=\"_1\">注意点</h2>\n<p>codeを利用するには、事業所の設定で部門コードを使用する設定にする必要があります。</p>",
-        "operationId": "api/v1/sections#upsert_by_code",
-        "requestBody": {
-          "description": "部門の更新（存在しない場合は作成）",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "company_id",
-                  "code",
-                  "section"
-                ],
-                "properties": {
-                  "company_id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "minimum": 1,
-                    "description": "事業所ID",
-                    "example": 1
-                  },
-                  "code": {
-                    "type": "string",
-                    "maxLength": 20,
-                    "description": "部門コード",
-                    "example": "code001",
-                    "pattern": "^[0-9a-zA-Z_-]+$"
-                  },
-                  "section": {
-                    "type": "object",
-                    "required": [
-                      "name"
-                    ],
-                    "properties": {
-                      "name": {
-                        "type": "string",
-                        "maxLength": 30,
-                        "description": "部門名 (30文字以内)",
-                        "example": "開発部門"
-                      },
-                      "long_name": {
-                        "type": "string",
-                        "maxLength": 255,
-                        "description": "正式名称 (255文字以内)",
-                        "example": "xxxx開発部門"
-                      },
-                      "shortcut1": {
-                        "type": "string",
-                        "maxLength": 20,
-                        "description": "ショートカット１ (20文字以内)",
-                        "example": "DEVELOPER"
-                      },
-                      "shortcut2": {
-                        "type": "string",
-                        "maxLength": 20,
-                        "description": "ショートカット２ (20文字以内)",
-                        "example": "123"
-                      },
-                      "parent_code": {
-                        "type": "string",
-                        "maxLength": 20,
-                        "description": "親部門コード。親部門コードの値が空の場合は、codeで指定した部門が親部門になる。",
-                        "example": "code001",
-                        "pattern": "^[0-9a-zA-Z_-]+$"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/paths/~1api~11~1sections~1code~1upsert/put/requestBody/content/application~1json/schema"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/sectionResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/sectionResponse"
-                }
-              }
-            }
           },
           "400": {
             "description": "",
@@ -4319,7 +3507,7 @@
           "Deals"
         ],
         "summary": "取引（収入・支出）の作成",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入・支出）を作成する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>ref_number : 管理番号</p>\n</li>\n<li>\n<p>details : 取引の明細行(最大40行)</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>receipt_ids : ファイルボックス（証憑ファイル）ID</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n    <li><p>本APIでは+更新行(renews)の操作ができません。取引（収入・支出）の+更新の作成APIをご利用ください。</p></li>\n    <li><p>セグメントタグ情報は法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で利用可能です。利用可能なセグメントの数は、法人アドバンスプラン（および旧法人プロフェッショナルプラン）の場合は1つ、法人エンタープライズプランの場合は3つです。</p></li>\n    <li>\n        <p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</p></li>\n    <li>\n        <p>account_item_codeを利用するには、事業所の設定から勘定科目コードの利用を有効にする必要があります。またaccount_item_codeとaccount_item_idは同時に指定することはできません。</p></li>\n    <li>\n        <p>item_codeを利用するには、事業所の設定から品目コードの利用を有効にする必要があります。またitem_codeとitem_idは同時に指定することはできません。</p></li>\n    <li>\n        <p>section_codeを利用するには、事業所の設定から部門コードの利用を有効にする必要があります。またsection_codeとsection_idは同時に指定することはできません。</p></li>\n    <li>\n        <p>segment_1_tag_codeを利用するには、事業所の設定からセグメントタグコードの利用を有効にする必要があります。またsegment_1_tag_codeとsegment_1_tag_idは同時に指定することはできません。</p></li>\n    <li>\n        <p>segment_2_tag_codeを利用するには、事業所の設定からセグメントタグコードの利用を有効にする必要があります。またsegment_2_tag_codeとsegment_2_tag_idは同時に指定することはできません。</p></li>\n    <li>\n        <p>segment_3_tag_codeを利用するには、事業所の設定からセグメントタグコードの利用を有効にする必要があります。またsegment_3_tag_codeとsegment_3_tag_idは同時に指定することはできません。</p></li>\n    <li>\n        <p>本APIでは取引の明細行(details)は、最大40行までになります。</p>\n    </li>\n</ul>\n",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の取引（収入・支出）を作成する</p>\n<h2 id=\"_2\">定義</h2>\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n<li>\n<p>due_date : 支払期日</p>\n</li>\n<li>\n<p>amount : 金額</p>\n</li>\n<li>\n<p>due_amount : 支払残額</p>\n</li>\n<li>\n<p>type</p>\n<ul>\n<li>income : 収入</li>\n<li>expense : 支出</li>\n</ul>\n</li>\n<li>\n<p>ref_number : 管理番号</p>\n</li>\n<li>\n<p>details : 取引の明細行(最大40行)</p>\n</li>\n<li>\n<p>payments : 取引の支払行</p>\n</li>\n<li>\n<p>receipt_ids : ファイルボックス（証憑ファイル）ID</p>\n</li>\n<li>\n<p>from_walletable_type</p>\n<ul>\n<li>bank_account : 銀行口座</li>\n<li>credit_card : クレジットカード</li>\n<li>wallet : 現金</li>\n<li>private_account_item : プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n    <li><p>本APIでは+更新行(renews)の操作ができません。取引（収入・支出）の+更新の作成APIをご利用ください。</p></li>\n    <li><p>セグメントタグ情報は法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で利用可能です。利用可能なセグメントの数は、法人アドバンスプラン（および旧法人プロフェッショナルプラン）の場合は1つ、法人エンタープライズプランの場合は3つです。</p></li>\n    <li>\n        <p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</p></li>\n    <li>\n        <p>本APIでは取引の明細行(details)は、最大40行までになります。</p>\n    </li>\n</ul>\n",
         "operationId": "create_deal",
         "requestBody": {
           "description": "取引（収入・支出）の作成",
@@ -7294,141 +6482,6 @@
         }
       }
     },
-    "/api/1/items/code/upsert": {
-      "put": {
-        "tags": [
-          "Items"
-        ],
-        "summary": "品目の更新（作成）",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>品目コードをキーに、指定した品目の情報を更新（存在しない場合は作成）する</p>\n<p>codeを利用するには、事業所の設定で品目コードを使用する設定にする必要があります。</p>",
-        "operationId": "api/v1/items#upsert_by_code",
-        "requestBody": {
-          "description": "品目の更新（作成）",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "code",
-                  "company_id",
-                  "item"
-                ],
-                "properties": {
-                  "code": {
-                    "type": "string",
-                    "maxLength": 20,
-                    "description": "品目コード",
-                    "example": "code001",
-                    "pattern": "^[0-9a-zA-Z_-]+$"
-                  },
-                  "company_id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "minimum": 1,
-                    "description": "事業所ID",
-                    "example": 1
-                  },
-                  "item": {
-                    "type": "object",
-                    "required": [
-                      "name"
-                    ],
-                    "properties": {
-                      "name": {
-                        "type": "string",
-                        "maxLength": 30,
-                        "description": "品目名 (30文字以内)",
-                        "example": "新しい品目"
-                      },
-                      "shortcut1": {
-                        "type": "string",
-                        "maxLength": 20,
-                        "description": "ショートカット１ (20文字以内)",
-                        "example": "NEWITEM"
-                      },
-                      "shortcut2": {
-                        "type": "string",
-                        "maxLength": 20,
-                        "description": "ショートカット２ (20文字以内)",
-                        "example": "202"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/paths/~1api~11~1items~1code~1upsert/put/requestBody/content/application~1json/schema"
-              }
-            }
-          },
-          "required": false
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/itemResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/itemResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/badRequestError"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/unauthorizedError"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/forbiddenError"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/internalServerError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/1/taxes/codes": {
       "get": {
         "tags": [
@@ -7815,22 +6868,6 @@
             "schema": {
               "default": false,
               "type": "boolean"
-            }
-          },
-          {
-            "name": "start_update_date",
-            "in": "query",
-            "description": "更新日で絞込：開始日(yyyy-mm-dd)",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "end_update_date",
-            "in": "query",
-            "description": "更新日で絞込：終了日(yyyy-mm-dd)",
-            "schema": {
-              "type": "string"
             }
           }
         ],
@@ -17876,22 +16913,6 @@
               "minimum": 1,
               "maximum": 500
             }
-          },
-          {
-            "name": "start_update_date",
-            "in": "query",
-            "description": "更新日で絞込：開始日(yyyy-mm-dd)",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "end_update_date",
-            "in": "query",
-            "description": "更新日で絞込：終了日(yyyy-mm-dd)",
-            "schema": {
-              "type": "string"
-            }
           }
         ],
         "responses": {
@@ -18198,161 +17219,6 @@
           "204": {
             "description": "",
             "content": {}
-          },
-          "400": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/badRequestError"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/unauthorizedError"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/forbiddenError"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/internalServerError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/1/segments/{segment_id}/tags/code/upsert": {
-      "put": {
-        "tags": [
-          "Segment tags"
-        ],
-        "summary": "セグメントタグの更新（作成）",
-        "description": "\n  <h2 id=\"\">概要</h2>\n\n  <p>セグメントタグコードをキーに、指定したセグメントタグの情報を更新（存在しない場合は作成）する</p>\n\n  <h2 id=\"\">注意点</h2>\n\n  <ul>\n    <li>codeを利用するには、事業所の設定でセグメントタグコードを使用する設定にする必要があります。</li>\n  </ul>",
-        "operationId": "upsert_segment_tag",
-        "parameters": [
-          {
-            "name": "segment_id",
-            "in": "path",
-            "description": "セグメントID（1,2,3のいずれか）\n該当プラン以外で参照した場合にはエラーとなります。\n",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64",
-              "minimum": 1,
-              "maximum": 3
-            }
-          }
-        ],
-        "requestBody": {
-          "description": "セグメントタグの更新（存在しない場合は作成）",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "company_id",
-                  "code",
-                  "segment_tag"
-                ],
-                "properties": {
-                  "company_id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "minimum": 1,
-                    "description": "事業所ID",
-                    "example": 1
-                  },
-                  "code": {
-                    "type": "string",
-                    "maxLength": 20,
-                    "description": "セグメントタグコード",
-                    "example": "code001",
-                    "pattern": "^[0-9a-zA-Z_-]+$"
-                  },
-                  "segment_tag": {
-                    "type": "object",
-                    "required": [
-                      "name"
-                    ],
-                    "properties": {
-                      "name": {
-                        "maxLength": 30,
-                        "type": "string",
-                        "description": "セグメントタグ名 (30文字以内)",
-                        "example": "プロジェクトA"
-                      },
-                      "description": {
-                        "maxLength": 30,
-                        "type": "string",
-                        "description": "備考 (30文字以内)",
-                        "example": "備考"
-                      },
-                      "shortcut1": {
-                        "type": "string",
-                        "maxLength": 20,
-                        "description": "ショートカット１ (20文字以内)",
-                        "example": "A"
-                      },
-                      "shortcut2": {
-                        "type": "string",
-                        "maxLength": 20,
-                        "description": "ショートカット２ (20文字以内)",
-                        "example": "123"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/paths/~1api~11~1segments~1%7Bsegment_id%7D~1tags~1code~1upsert/put/requestBody/content/application~1json/schema"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/segmentTagResponse"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/segmentTagResponse"
-                }
-              }
-            }
           },
           "400": {
             "description": "",
@@ -18720,11 +17586,6 @@
                   "description": "勘定科目ID",
                   "example": 1
                 },
-                "account_item_code": {
-                  "type": "string",
-                  "description": "勘定科目コード",
-                  "example": "code001"
-                },
                 "amount": {
                   "type": "integer",
                   "format": "int64",
@@ -18740,22 +17601,12 @@
                   "description": "品目ID",
                   "example": 1
                 },
-                "item_code": {
-                  "type": "string",
-                  "description": "品目コード",
-                  "example": "code001"
-                },
                 "section_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
                   "description": "部門ID",
                   "example": 1
-                },
-                "section_code": {
-                  "type": "string",
-                  "description": "部門コード",
-                  "example": "code001"
                 },
                 "tag_ids": {
                   "type": "array",
@@ -18774,11 +17625,6 @@
                   "description": "セグメント１タグID",
                   "example": 1
                 },
-                "segment_1_tag_code": {
-                  "type": "string",
-                  "description": "セグメント１タグコード",
-                  "example": "code001"
-                },
                 "segment_2_tag_id": {
                   "type": "integer",
                   "format": "int64",
@@ -18786,22 +17632,12 @@
                   "description": "セグメント２タグID",
                   "example": 1
                 },
-                "segment_2_tag_code": {
-                  "type": "string",
-                  "description": "セグメント２タグコード",
-                  "example": "code001"
-                },
                 "segment_3_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
                   "description": "セグメント３タグID",
                   "example": 1
-                },
-                "segment_3_tag_code": {
-                  "type": "string",
-                  "description": "セグメント３タグコード",
-                  "example": "code001"
                 },
                 "description": {
                   "type": "string",
@@ -21627,11 +20463,6 @@
                   "description": "支出取引相手勘定科目ID",
                   "example": 1,
                   "nullable": true
-                },
-                "update_date": {
-                  "type": "string",
-                  "description": "更新日(yyyy-mm-dd)",
-                  "example": "2020-06-15"
                 }
               }
             }
@@ -29906,11 +28737,6 @@
             "description": "<a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/209093566\">親部門ID</a>\n<br>\n※ parent_id が null のときは第一階層の親部門です。\n",
             "example": 1,
             "nullable": true
-          },
-          "update_date": {
-            "type": "string",
-            "description": "更新日(yyyy-mm-dd)",
-            "example": "2020-06-15"
           }
         }
       },
@@ -33432,11 +32258,6 @@
             "format": "int64",
             "description": "登録残高",
             "example": 1340261
-          },
-          "update_date": {
-            "type": "string",
-            "description": "更新日(yyyy-mm-dd)",
-            "example": "2020-06-15"
           }
         }
       },
@@ -37600,11 +36421,6 @@
             "example": "code001",
             "pattern": "^[0-9a-zA-Z_-]+$",
             "nullable": true
-          },
-          "update_date": {
-            "type": "string",
-            "description": "更新日(yyyy-mm-dd)",
-            "example": "2020-06-15"
           }
         }
       },
