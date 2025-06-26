@@ -360,7 +360,7 @@
               "maximum": 12
             },
             "example": 1,
-            "description": "従業員情報を取得したい月<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>"
+            "description": "従業員情報を取得したい月<br>\n締め日支払い日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>"
           },
           {
             "name": "limit",
@@ -573,7 +573,7 @@
               "maximum": 12
             },
             "example": 1,
-            "description": "従業員情報を取得したい月<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>"
+            "description": "従業員情報を取得したい月<br>\n締め日支払い日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>"
           },
           {
             "name": "id",
@@ -885,7 +885,7 @@
           {
             "name": "month",
             "in": "query",
-            "description": "従業員情報を取得したい月<br>\n締日支払日設定が翌月払いの従業員情報の場合は、指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>",
+            "description": "従業員情報を取得したい月<br>\n締め日支払い日設定が翌月払いの従業員情報の場合は、指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1089,7 +1089,7 @@
           {
             "name": "month",
             "in": "query",
-            "description": "従業員情報を取得したい月<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>",
+            "description": "従業員情報を取得したい月<br>\n締め日支払い日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1294,7 +1294,7 @@
           {
             "name": "month",
             "in": "query",
-            "description": "従業員情報を取得したい月<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>",
+            "description": "従業員情報を取得したい月<br>\n締め日支払い日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1496,7 +1496,7 @@
           {
             "name": "month",
             "in": "query",
-            "description": "従業員情報を取得したい月<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>",
+            "description": "従業員情報を取得したい月<br>\n締め日支払い日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1700,7 +1700,7 @@
           {
             "name": "month",
             "in": "query",
-            "description": "従業員情報を取得したい月<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>",
+            "description": "従業員情報を取得したい月<br>\n締め日支払い日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1904,7 +1904,7 @@
           {
             "name": "month",
             "in": "query",
-            "description": "従業員情報を取得したい月<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>",
+            "description": "従業員情報を取得したい月<br>\n締め日支払い日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>",
             "required": true,
             "schema": {
               "type": "integer",
@@ -2111,7 +2111,7 @@
           {
             "name": "month",
             "in": "query",
-            "description": "従業員情報を取得したい月<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>",
+            "description": "従業員情報を取得したい月<br>\n締め日支払い日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が検索結果として返します。<br>\n翌月払いの従業員の2022/01の従業員情報を取得する場合は、year=2021,month=12を指定してください。<br>",
             "required": true,
             "schema": {
               "type": "integer",
@@ -4173,7 +4173,7 @@
           "給与明細"
         ],
         "summary": "給与明細の取得",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員ID、年月の給与明細を返します。</p>\n<p>指定した年月に支払いのある給与明細が返されます。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>複数時給を設定している場合はpaymentsに内訳が返されます。</li>\n  <li>管理者権限を持ったユーザーのみ実行可能です。</li>\n  <li>給与計算中の場合は、各パラメータはnullおよび空配列が返ります。</li>\n</ul>\n\n<h2 id=\"_2\">examples</h2>\n<pre>\n  <code>\n  {\n  \"employee_payroll_statement\": {\n    \"id\": 1,\n    \"company_id\": 1,\n    \"employee_id\": 1,\n    \"employee_name\": \"給与 太郎\",\n    \"employee_display_name\": \"給与 太郎\",\n    \"employee_num\": \"001\",\n    \"pay_date\": \"2018-02-25\",\n    \"start_date\": \"2018-02-01\",\n    \"closing_date\": \"2018-02-28\",\n    \"variable_pay_start_date\": \"2018-01-01\",\n    \"variable_pay_closing_date\": \"2018-01-31\",\n    \"fixed\": true,\n    \"calc_status\": \"calculated\",\n    \"calculated_at\": \"2018-09-27T05:06:45.315Z\",\n    \"pay_calc_type\": \"monthly\",\n    \"board_member_remuneration_amount\": \"400000.0\",\n    \"basic_pay_amount\": \"300000.0\",\n    \"work_days\": \"21.0\",\n    \"normal_work_time\": \"8.0\",\n    \"normal_work_days\": \"21.0\",\n    \"work_mins_by_paid_holiday\": \"480.0\",\n    \"num_paid_holidays\": \"1.0\",\n    \"is_board_member\": true,\n    \"total_attendance_deduction_amount\": \"0.0\",\n    \"total_allowance_amount\": \"0.0\",\n    \"total_deduction_amount\": \"23830.0\",\n    \"net_payment_amount\": \"277170.0\",\n    \"gross_payment_amount\": \"301000.0\",\n    \"total_worked_days_count\": \"21.0\",\n    \"total_taxable_payment_amount\": \"301000.0\",\n    \"total_expense_amount\": \"0.0\",\n    \"total_transfer_amount\": \"277170.0\",\n    \"total_annual_payment_amount\": \"600000.0\",\n    \"payments\": [{ \"name\": \"基本給\", \"amount\": \"300000.0\"},{ \"name\": \"残業代\", \"amount\": \"1000.0\"}],\n    \"deductions\": [{\"name\": \"所得税\", \"amount\": \"7000.0\"}, {\"name\": \"健康保険料\", \"amount\": \"16830.0\"}],\n    \"attendances\": [{\"name\": \"遅刻・早退\", \"time\": \"0.0\", \"amount\": \"0.0\"}],\n    \"overtime_pays\": [{ \"name\": \"時間外労働\", \"time\": \"60.0\", \"amount\": \"1000.0\", \"code\": null }, { \"name\": \"カスタム固定残業代\", \"time\": null, \"amount\": \"10000.0\", \"code\": \"a001\" }],\n    \"remark\": \"備考\"\n    }\n  }\n  </code>\n</pre>",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した従業員ID、年月の給与明細を返します。</p>\n<p>指定した年月に支払いのある給与明細が返されます。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>複数時給を設定している場合はpaymentsに内訳が返されます。</li>\n  <li>管理者権限を持ったユーザーのみ実行可能です。</li>\n  <li>給与計算中の場合は、各パラメータはnullおよび空配列が返ります。</li>\n</ul>\n\n<h2 id=\"_2\">examples</h2>\n<pre>\n  <code>\n  {\n  \"employee_payroll_statement\": {\n    \"id\": 1,\n    \"company_id\": 1,\n    \"employee_id\": 1,\n    \"employee_name\": \"給与 太郎\",\n    \"employee_display_name\": \"給与 太郎\",\n    \"employee_num\": \"001\",\n    \"pay_date\": \"2018-02-25\",\n    \"start_date\": \"2018-02-01\",\n    \"closing_date\": \"2018-02-28\",\n    \"variable_pay_start_date\": \"2018-01-01\",\n    \"variable_pay_closing_date\": \"2018-01-31\",\n    \"fixed\": true,\n    \"calc_status\": \"calculated\",\n    \"calculated_at\": \"2018-09-27T05:06:45.315Z\",\n    \"pay_calc_type\": \"monthly\",\n    \"board_member_remuneration_amount\": \"400000.0\",\n    \"basic_pay_amount\": \"300000.0\",\n    \"work_days\": \"21.0\",\n    \"normal_work_time\": \"8.0\",\n    \"normal_work_days\": \"21.0\",\n    \"work_mins_by_paid_holiday\": \"480.0\",\n    \"num_paid_holidays\": \"1.0\",\n    \"is_board_member\": true,\n    \"total_attendance_deduction_amount\": \"0.0\",\n    \"total_allowance_amount\": \"0.0\",\n    \"total_deduction_amount\": \"23830.0\",\n    \"total_deduction_employer_share\": \"16830.0\",\n    \"net_payment_amount\": \"277170.0\",\n    \"gross_payment_amount\": \"301000.0\",\n    \"total_worked_days_count\": \"21.0\",\n    \"total_taxable_payment_amount\": \"301000.0\",\n    \"total_expense_amount\": \"0.0\",\n    \"total_transfer_amount\": \"277170.0\",\n    \"total_annual_payment_amount\": \"600000.0\",\n    \"payments\": [{ \"name\": \"基本給\", \"amount\": \"300000.0\"},{ \"name\": \"残業代\", \"amount\": \"1000.0\"}],\n    \"deductions\": [{\"name\": \"所得税\", \"amount\": \"7000.0\"}, {\"name\": \"健康保険料\", \"amount\": \"16830.0\"}],\n    \"deductions_emloyers_share\": [{\"name\": \"健康保険料(会社負担分)\", \"amount\": \"16830.0\"}],\n    \"attendances\": [{\"name\": \"遅刻・早退\", \"time\": \"0.0\", \"amount\": \"0.0\"}],\n    \"overtime_pays\": [{ \"name\": \"時間外労働\", \"time\": \"60.0\", \"amount\": \"1000.0\", \"code\": null }, { \"name\": \"カスタム固定残業代\", \"time\": null, \"amount\": \"10000.0\", \"code\": \"a001\" }],\n    \"remark\": \"備考\"\n    }\n  }\n  </code>\n</pre>",
         "operationId": "get_salaries_employee_payroll_statement",
         "parameters": [
           {
@@ -11055,6 +11055,13 @@
             "format": "date",
             "example": "2020-01-01"
           },
+          "boss_id": {
+            "type": "integer",
+            "description": "上司ID",
+            "format": "int64",
+            "nullable": true,
+            "example": 1
+          },
           "main_duty": {
             "type": "string",
             "enum": [
@@ -12909,7 +12916,7 @@
           },
           "company_reference_date_rule_name": {
             "type": "string",
-            "description": "締め日支払日グループ名(給与計算対象外従業員の場合、nullを返します)",
+            "description": "締め日支払い日グループ名(給与計算対象外従業員の場合、nullを返します)",
             "example": "当月締め翌月払い",
             "nullable": true
           }
@@ -15716,7 +15723,7 @@
           },
           "month": {
             "type": "integer",
-            "description": "更新対象月\n- 給与計算対象の従業員情報の場合は必須になります。\n- 締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が更新されます。\n- 翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。",
+            "description": "更新対象月\n- 給与計算対象の従業員情報の場合は必須になります。\n- 締め日支払い日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が更新されます。\n- 翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。",
             "format": "int32",
             "minimum": 1,
             "maximum": 12,
@@ -15772,7 +15779,7 @@
             "minimum": 1,
             "maximum": 12,
             "example": 1,
-            "description": "更新対象月（必須）<br>\n締日支払日設定が翌月払いの従業員情報の場合は、指定したmonth + 1の値が更新されます。<br>\n翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。<br>",
+            "description": "更新対象月（必須）<br>\n締め日支払い日設定が翌月払いの従業員情報の場合は、指定したmonth + 1の値が更新されます。<br>\n翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。<br>",
             "format": "int32"
           },
           "employee_profile_rule": {
@@ -15823,7 +15830,7 @@
           },
           "month": {
             "type": "integer",
-            "description": "更新対象月（必須）<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が更新されます。<br>\n翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。<br>",
+            "description": "更新対象月（必須）<br>\n締め日支払い日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が更新されます。<br>\n翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。<br>",
             "format": "int32",
             "minimum": 1,
             "maximum": 12,
@@ -15876,7 +15883,7 @@
           },
           "month": {
             "type": "integer",
-            "description": "更新対象月（必須）<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が更新されます。<br>\n翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。<br>",
+            "description": "更新対象月（必須）<br>\n締め日支払い日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が更新されます。<br>\n翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。<br>",
             "format": "int32",
             "minimum": 1,
             "maximum": 12,
@@ -15936,7 +15943,7 @@
           },
           "month": {
             "type": "integer",
-            "description": "更新対象月（必須）<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が更新されます。<br>\n翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。<br>",
+            "description": "更新対象月（必須）<br>\n締め日支払い日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が更新されます。<br>\n翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。<br>",
             "format": "int32",
             "minimum": 1,
             "maximum": 12,
@@ -15993,7 +16000,7 @@
           },
           "month": {
             "type": "integer",
-            "description": "更新対象月（必須）<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が更新されます。<br>\n翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。<br>",
+            "description": "更新対象月（必須）<br>\n締め日支払い日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が更新されます。<br>\n翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。<br>",
             "format": "int32",
             "minimum": 1,
             "maximum": 12,
@@ -16047,7 +16054,7 @@
           },
           "month": {
             "type": "integer",
-            "description": "更新対象月（必須）<br>\n締日支払日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が更新されます<br>\n翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。<br>",
+            "description": "更新対象月（必須）<br>\n締め日支払い日設定が翌月払いの従業員情報の場合は、 指定したmonth + 1の値が更新されます<br>\n翌月払いの従業員の2022/01の従業員情報を更新する場合は、year=2021,month=12を指定してください。<br>",
             "format": "int32",
             "minimum": 1,
             "maximum": 12,
