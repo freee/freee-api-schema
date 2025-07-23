@@ -18301,9 +18301,9 @@
                     ],
                     "properties": {
                       "name": {
-                        "maxLength": 30,
+                        "maxLength": 100,
                         "type": "string",
-                        "description": "セグメントタグ名 (30文字以内)",
+                        "description": "セグメントタグ名 (100文字以内)",
                         "example": "プロジェクトA"
                       },
                       "description": {
@@ -37638,9 +37638,9 @@
             "example": 1
           },
           "name": {
-            "maxLength": 30,
+            "maxLength": 100,
             "type": "string",
-            "description": "セグメントタグ名 (30文字以内)",
+            "description": "セグメントタグ名 (100文字以内)",
             "example": "プロジェクトA"
           },
           "description": {
