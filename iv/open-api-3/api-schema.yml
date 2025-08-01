@@ -70,13 +70,31 @@ info:
     </br>
 
     <h3 id="api_rate_limit">API使用制限</h3>
-    <p>APIリクエストは1時間で1500回、1分で30回を上限としています。API使用ステータスはレスポンスヘッダに付与されます。</p>
+    <p>APIリクエストは、全プラン共通で1時間あたり1500回、1分あたり30回を上限としています。また、契約プランに応じて1日あたりの上限が設定されています。</p>
+
+    <table border="1">
+      <tbody>
+        <tr>
+          <th style="padding: 10px"><strong>freee会計プラン名</strong></th>
+          <th style="padding: 10px"><strong>事業所とアプリケーション毎に、1日のAPIコール数の上限</strong></th>
+        </tr>
+        <tr><td style="padding: 10px">法人エンタープライズプラン</td><td style="padding: 10px">10,000</td></tr>
+        <tr><td style="padding: 10px">法人アドバンスプラン（および旧法人プロフェッショナルプラン）</td><td style="padding: 10px">5,000</td></tr>
+        <tr><td style="padding: 10px">上記以外</td><td style="padding: 10px">3,000</td></tr>
+      </tbody>
+    </table>
+
+    <p>API使用ステータスはレスポンスヘッダに付与されます。</p>
+
     <pre><code>X-RateLimit-Limit:1500
-    X-RateLimit-Remaining:1798
+    X-RateLimit-Remaining:1498
     X-RateLimit-Reset:2018-01-01T12:00:00.000000Z
     X-Ratelimit-Limit-Minute:30
     X-Ratelimit-Remaining-Minute:29
     X-Ratelimit-Reset-Minute:2018-01-01T12:00:00.000000Z
+    X-RateLimit-Limit-Day:3000
+    X-RateLimit-Remaining-Day:2991
+    X-RateLimit-Reset-Day:2018-01-02T00:00:00.000000Z
     </code></pre>
 
     <br> 各ヘッダの意味は次のとおりです。</p>
@@ -87,12 +105,15 @@ info:
           <th style="padding: 10px"><strong>ヘッダ名</strong></th>
           <th style="padding: 10px"><strong>説明</strong></th>
         </tr>
-        <tr><td style="padding: 10px">X-RateLimit-Limit</td><td style="padding: 10px">使用回数の上限</td></tr>
-        <tr><td style="padding: 10px">X-RateLimit-Remaining</td><td style="padding: 10px">残り使用回数</td></tr>
-        <tr><td style="padding: 10px">X-RateLimit-Reset</td><td style="padding: 10px">使用回数がリセットされる時刻</td></tr>
+        <tr><td style="padding: 10px">X-RateLimit-Limit</td><td style="padding: 10px">1時間の使用回数の上限</td></tr>
+        <tr><td style="padding: 10px">X-RateLimit-Remaining</td><td style="padding: 10px">1時間の残り使用回数</td></tr>
+        <tr><td style="padding: 10px">X-RateLimit-Reset</td><td style="padding: 10px">1時間の使用回数がリセットされる時刻</td></tr>
         <tr><td style="padding: 10px">X-Ratelimit-Limit-Minute</td><td style="padding: 10px">1分間の使用回数の上限</td></tr>
         <tr><td style="padding: 10px">X-Ratelimit-Remaining-Minute</td><td style="padding: 10px">1分間の残り使用回数</td></tr>
         <tr><td style="padding: 10px">X-Ratelimit-Reset-Minute</td><td style="padding: 10px">1分間の使用回数がリセットされる時刻</td></tr>
+        <tr><td style="padding: 10px">X-RateLimit-Limit-Day</td><td style="padding: 10px">1日間の使用回数の上限</td></tr>
+        <tr><td style="padding: 10px">X-RateLimit-Remaining-Day</td><td style="padding: 10px">1日間の残り使用回数</td></tr>
+        <tr><td style="padding: 10px">X-Ratelimit-Reset-Day</td><td style="padding: 10px">1日間の使用回数がリセットされる時刻</td></tr>
       </tbody>
     </table>
 
@@ -1501,9 +1522,11 @@ components:
           type: integer
         invoice_note:
           description: 備考
-          example: 備考
+          example: |
+            備考
+            - 入力がない場合、freee請求書Webで設定した、帳票種別ごとの既定のテンプレートの内容が適用されます。
           maxLength: 4000
-          minLength: 1
+          minLength: 0
           type: string
         memo:
           description: 社内メモ
@@ -1804,9 +1827,11 @@ components:
           type: string
         quotation_note:
           description: 備考
-          example: 備考
+          example: |
+            備考
+            - 入力がない場合、freee請求書Webで設定した、帳票種別ごとの既定のテンプレートの内容が適用されます。
           maxLength: 4000
-          minLength: 1
+          minLength: 0
           type: string
         memo:
           description: 社内メモ
@@ -2065,9 +2090,11 @@ components:
           type: string
         delivery_slip_note:
           description: 備考
-          example: 備考
+          example: |
+            備考
+            - 入力がない場合、freee請求書Webで設定した、帳票種別ごとの既定のテンプレートの内容が適用されます。
           maxLength: 4000
-          minLength: 1
+          minLength: 0
           type: string
         memo:
           description: 社内メモ
