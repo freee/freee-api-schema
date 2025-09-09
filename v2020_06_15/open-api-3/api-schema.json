@@ -22175,7 +22175,7 @@
               "status": {
                 "type": "string",
                 "description": "ダウンロードリクエストのステータス",
-                "example": "csv",
+                "example": "enqueued",
                 "enum": [
                   "enqueued",
                   "working",
