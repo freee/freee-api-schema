@@ -11340,7 +11340,7 @@
           "overtime_pays": {
             "type": "array",
             "nullable": true,
-            "description": "時間外労働項目(法定内残業、時間外労働、休日労働、深夜労働等)",
+            "description": "時間外労働項目(法定内残業、時間外労働、法定休日労働、深夜労働等)",
             "items": {
               "$ref": "#/components/schemas/ApiV1EmployeePayrollStatementsEmployeeOvertimePayItemSerializer"
             }
@@ -12936,7 +12936,7 @@
           },
           "role": {
             "type": "string",
-            "description": "事業所におけるロール。\n\n- `company_admin`: 管理者\n- `self_only`: 一般または勤怠部門管理者\n- `physician`: 産業医\n- `shift_admin`: AIシフト担当者\n- `time_clock_device_setter`: 打刻機設定者\n\n[各権限でできることは各アカウントの権限についてのヘルプページを参照してください。](https://support.freee.co.jp/hc/ja/articles/204087410#3)"
+            "description": "事業所におけるロール。\n\n- `company_admin`: 管理者\n- `self_only`: 一般\n- `attendance_manager`: 勤怠管理者\n- `physician`: 産業医\n- `shift_admin`: AIシフト担当者\n- `time_clock_device_setter`: 打刻機設定者\n\n[各権限でできることは各アカウントの権限についてのヘルプページを参照してください。](https://support.freee.co.jp/hc/ja/articles/204087410#3)"
           },
           "external_cid": {
             "type": "string",
@@ -14610,7 +14610,7 @@
           },
           "total_holiday_work_mins": {
             "type": "integer",
-            "description": "休日労働時間（分）",
+            "description": "法定休日労働時間（分）",
             "format": "int32"
           },
           "total_latenight_work_mins": {
@@ -14797,7 +14797,7 @@
           },
           "total_holiday_work_mins": {
             "type": "integer",
-            "description": "休日労働時間（分）",
+            "description": "法定休日労働時間（分）",
             "format": "int32"
           },
           "total_latenight_work_mins": {
