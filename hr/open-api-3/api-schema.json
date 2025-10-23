@@ -19696,6 +19696,11 @@
             "example": 1000000,
             "minimum": 0,
             "maximum": 99999999
+          },
+          "is_group_insurance": {
+            "type": "boolean",
+            "description": "団体保険に該当するかどうか",
+            "nullable": true
           }
         }
       },
@@ -19962,6 +19967,11 @@
             "enum": [
               "xml"
             ],
+            "nullable": true
+          },
+          "is_group_insurance": {
+            "type": "boolean",
+            "description": "団体保険に該当するかどうか",
             "nullable": true
           }
         }
