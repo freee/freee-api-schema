@@ -113,8 +113,8 @@
       "description": "勤務時間修正申請の操作"
     },
     {
-      "name": "有給申請",
-      "description": "有給申請の操作"
+      "name": "有給休暇申請",
+      "description": "有給休暇申請の操作"
     },
     {
       "name": "特別休暇申請",
@@ -6822,10 +6822,10 @@
     "/api/v1/approval_requests/paid_holidays": {
       "get": {
         "tags": [
-          "有給申請"
+          "有給休暇申請"
         ],
-        "summary": "有給申請一覧の取得",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の指定日付時点における有給申請情報をリストで返します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</li>\n  <ul>\n    <li>役職指定（申請者の所属部門）</li>\n    <li>役職指定（申請時に部門指定）</li>\n    <li>部門および役職指定</li>\n  </ul>\n  <li>申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。</li>\n  <ul>\n    <li>status: draft</li>\n    <li>approval_flow_logs.action: cancel</li>\n  </ul>\n</ul>",
+        "summary": "有給休暇申請一覧の取得",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の指定日付時点における有給休暇申請情報をリストで返します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</li>\n  <ul>\n    <li>役職指定（申請者の所属部門）</li>\n    <li>役職指定（申請時に部門指定）</li>\n    <li>部門および役職指定</li>\n  </ul>\n  <li>申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。</li>\n  <ul>\n    <li>status: draft</li>\n    <li>approval_flow_logs.action: cancel</li>\n  </ul>\n</ul>",
         "operationId": "get_approval_requests_paid_holidays",
         "parameters": [
           {
@@ -7024,10 +7024,10 @@
       },
       "post": {
         "tags": [
-          "有給申請"
+          "有給休暇申請"
         ],
-        "summary": "有給申請の作成",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の有給申請を新規作成します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</li>\n  <ul>\n    <li>役職指定（申請者の所属部門）</li>\n    <li>役職指定（申請時に部門指定）</li>\n    <li>部門および役職指定</li>\n  </ul>\n  <li>申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。</li>\n  <ul>\n    <li>status: draft</li>\n    <li>approval_flow_logs.action: cancel</li>\n  </ul>\n</ul>",
+        "summary": "有給休暇申請の作成",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の有給休暇申請を新規作成します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</li>\n  <ul>\n    <li>役職指定（申請者の所属部門）</li>\n    <li>役職指定（申請時に部門指定）</li>\n    <li>部門および役職指定</li>\n  </ul>\n  <li>申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。</li>\n  <ul>\n    <li>status: draft</li>\n    <li>approval_flow_logs.action: cancel</li>\n  </ul>\n</ul>",
         "operationId": "create_approval_requests_paid_holiday",
         "requestBody": {
           "content": {
@@ -7107,10 +7107,10 @@
     "/api/v1/approval_requests/paid_holidays/{id}": {
       "get": {
         "tags": [
-          "有給申請"
+          "有給休暇申請"
         ],
-        "summary": "有給申請の取得",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の有給申請情報を取得します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</li>\n  <ul>\n    <li>役職指定（申請者の所属部門）</li>\n    <li>役職指定（申請時に部門指定）</li>\n    <li>部門および役職指定</li>\n  </ul>\n  <li>申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。</li>\n  <ul>\n    <li>status: draft</li>\n    <li>approval_flow_logs.action: cancel</li>\n  </ul>\n</ul>",
+        "summary": "有給休暇申請の取得",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の有給休暇申請情報を取得します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</li>\n  <ul>\n    <li>役職指定（申請者の所属部門）</li>\n    <li>役職指定（申請時に部門指定）</li>\n    <li>部門および役職指定</li>\n  </ul>\n  <li>申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。</li>\n  <ul>\n    <li>status: draft</li>\n    <li>approval_flow_logs.action: cancel</li>\n  </ul>\n</ul>",
         "operationId": "get_approval_requests_paid_holiday",
         "parameters": [
           {
@@ -7128,7 +7128,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "有給申請ID",
+            "description": "有給休暇申請ID",
             "required": true,
             "schema": {
               "type": "integer",
@@ -7207,16 +7207,16 @@
       },
       "put": {
         "tags": [
-          "有給申請"
+          "有給休暇申請"
         ],
-        "summary": "有給申請の更新",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の有給申請情報を更新します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</li>\n  <ul>\n    <li>役職指定（申請者の所属部門）</li>\n    <li>役職指定（申請時に部門指定）</li>\n    <li>部門および役職指定</li>\n  </ul>\n  <li>申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。</li>\n  <ul>\n    <li>status: draft</li>\n    <li>approval_flow_logs.action: cancel</li>\n  </ul>\n</ul>",
+        "summary": "有給休暇申請の更新",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の有給休暇申請情報を更新します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</li>\n  <ul>\n    <li>役職指定（申請者の所属部門）</li>\n    <li>役職指定（申請時に部門指定）</li>\n    <li>部門および役職指定</li>\n  </ul>\n  <li>申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。</li>\n  <ul>\n    <li>status: draft</li>\n    <li>approval_flow_logs.action: cancel</li>\n  </ul>\n</ul>",
         "operationId": "update_approval_requests_paid_holiday",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "有給申請ID",
+            "description": "有給休暇申請ID",
             "required": true,
             "schema": {
               "type": "integer",
@@ -7311,16 +7311,16 @@
       },
       "delete": {
         "tags": [
-          "有給申請"
+          "有給休暇申請"
         ],
-        "summary": "有給申請の削除",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の有給申請情報を削除します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</li>\n  <ul>\n    <li>役職指定（申請者の所属部門）</li>\n    <li>役職指定（申請時に部門指定）</li>\n    <li>部門および役職指定</li>\n  </ul>\n</ul>",
+        "summary": "有給休暇申請の削除",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の有給休暇申請情報を削除します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</li>\n  <ul>\n    <li>役職指定（申請者の所属部門）</li>\n    <li>役職指定（申請時に部門指定）</li>\n    <li>部門および役職指定</li>\n  </ul>\n</ul>",
         "operationId": "destroy_approval_requests_paid_holiday",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "有給申請ID",
+            "description": "有給休暇申請ID",
             "required": true,
             "schema": {
               "type": "integer",
@@ -7407,16 +7407,16 @@
     "/api/v1/approval_requests/paid_holidays/{id}/actions": {
       "post": {
         "tags": [
-          "有給申請"
+          "有給休暇申請"
         ],
-        "summary": "有給申請の承認操作",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の有給申請情報を承認操作します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</li>\n  <ul>\n    <li>役職指定（申請者の所属部門）</li>\n    <li>役職指定（申請時に部門指定）</li>\n    <li>部門および役職指定</li>\n  </ul>\n  <li>全休の有給申請は承認されると申請者の有給の残数が減ります。</li>\n  <li>半休と時間休の有給申請は承認されても申請者の有給の残数が減らない場合があります。以下の条件を満たす場合、申請者の有給の残数が減ります。</li>\n  <ul>\n    <li>申請承認後、申請者が申請の対象日に出勤打刻と退勤打刻をする。</li>\n    <li>申請承認前に、申請者が申請の対象日に勤怠を登録している。</li>\n  </ul>\n  <li>申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。</li>\n  <ul>\n    <li>status: draft</li>\n    <li>approval_flow_logs.action: cancel</li>\n  </ul>\n</ul>",
+        "summary": "有給休暇申請の承認操作",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の有給休暇申請情報を承認操作します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している申請と申請経路はAPI経由で参照は可能ですが、作成と更新、承認ステータスの変更ができません。</li>\n  <ul>\n    <li>役職指定（申請者の所属部門）</li>\n    <li>役職指定（申請時に部門指定）</li>\n    <li>部門および役職指定</li>\n  </ul>\n  <li>全休の有給休暇申請は承認されると申請者の有給の残数が減ります。</li>\n  <li>半休と時間休の有給休暇申請は承認されても申請者の有給の残数が減らない場合があります。以下の条件を満たす場合、申請者の有給の残数が減ります。</li>\n  <ul>\n    <li>申請承認後、申請者が申請の対象日に出勤打刻と退勤打刻をする。</li>\n    <li>申請承認前に、申請者が申請の対象日に勤怠を登録している。</li>\n  </ul>\n  <li>申請者と承認者が同一ユーザーの場合、feedback(差戻し)をするとレスポンスは以下のようになります。</li>\n  <ul>\n    <li>status: draft</li>\n    <li>approval_flow_logs.action: cancel</li>\n  </ul>\n</ul>",
         "operationId": "action_approval_requests_paid_holiday",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "有給申請ID",
+            "description": "有給休暇申請ID",
             "required": true,
             "schema": {
               "type": "integer",
