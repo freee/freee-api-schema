@@ -2309,16 +2309,18 @@ components:
             期日
             - payment_typeがtransferの場合、入金期日に該当します。
             - payment_typeがdirect_debitの場合、振替日に該当します。
+            - payment_typeがcardの場合、カード支払期日に該当します。
           example: '2023-04-01'
           format: date
           nullable: true
           pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
           type: string
         payment_type:
-          description: '入金方法 (振込: transfer, 振替: direct_debit)'
+          description: '入金方法 (振込: transfer, 振替: direct_debit, カード: card)'
           enum:
           - transfer
           - direct_debit
+          - card
           example: transfer
           type: string
         memo:
@@ -3337,16 +3339,18 @@ components:
             期日
             - payment_typeがtransferの場合、入金期日に該当します。
             - payment_typeがdirect_debitの場合、振替日に該当します。
+            - payment_typeがcardの場合、カード支払期日に該当します。
           example: '2023-04-01'
           format: date
           nullable: true
           pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
           type: string
         payment_type:
-          description: '入金方法 (振込: transfer, 振替: direct_debit)'
+          description: '入金方法 (振込: transfer, 振替: direct_debit, カード: card)'
           enum:
           - transfer
           - direct_debit
+          - card
           example: transfer
           type: string
         invoice_note:
