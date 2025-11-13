@@ -60,7 +60,7 @@ info:
           {
             &quot;codes&quot; : [
               &quot;bad_request&quot;
-            ],  
+            ],
             &quot;messages&quot; : [
               &quot;リクエストの形式が不正です。&quot;
             ]
