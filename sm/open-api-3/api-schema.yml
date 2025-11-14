@@ -7,15 +7,14 @@ info:
     name: サポートデスクへのお問い合わせ
     url: https://accounts.secure.freee.co.jp/contacts?from=sales_management
   license:
-    name: '&copy; Since 2013 freee K.K.'
+    name: © Since 2013 freee K.K.
   description: |-
-    <h1 id="freee_api">freee販売</h1> <hr />
     <h2 id="start_guide">スタートガイド</h2> <p>freee API開発がはじめての方は<a href="https://developer.freee.co.jp/getting-started">freee APIスタートガイド</a>を参照してください。</p>
     <hr />
     <h2 id="specification">仕様</h2>
     <h3 id="api_endpoint">APIエンドポイント</h3> <p>https://api.freee.co.jp/sm (httpsのみ)</p>
-    <h3 id="about_authorize">認証について</h3> <p>OAuth2.0を利用します。<a href="https://developer.freee.co.jp/reference/#%e8%aa%8d%e8%a8%bc"
-        target="_blank">詳細はリファレンスの認証に関する記載を参照してください。</a></p>
+    <h3 id="about_authorize">認証について</h3> <p>OAuth2.0を利用します。詳細は<a href="https://developer.freee.co.jp/reference/#%e8%aa%8d%e8%a8%bc"
+        target="_blank">リファレンスの認証に関する記載</a>を参照してください。</p>
 
     <h3 id="data_format">データフォーマット</h3> <p>リクエスト、レスポンスともにJSON形式をサポートしていますが、詳細は、API毎の説明欄（application/jsonなど）を確認してください。</p>
     <h3 id="compatibility">後方互換性ありの変更</h3> <p>freeeでは、APIを改善していくために以下のような変更は後方互換性ありとして通知なく変更を入れることがあります。アプリケーション実装者は以下を踏まえて開発を行ってください。</p> <ul>
@@ -60,7 +59,7 @@ info:
           {
             &quot;codes&quot; : [
               &quot;bad_request&quot;
-            ],  
+            ],
             &quot;messages&quot; : [
               &quot;リクエストの形式が不正です。&quot;
             ]
@@ -69,9 +68,7 @@ info:
       }  </code></pre>
       <pre><code>  {
         &quot;message&quot; : &quot;ログインをして下さい&quot;,
-        &quot;code&quot; : [
-          &quot;invalid_access_token&quot;
-        ]
+        &quot;code&quot; : &quot;invalid_access_token&quot;
       }  </code></pre>
     </p>
     <h3 id="api_rate_limit">API使用制限</h3> <p>APIリクエストは1分あたり30回、および1時間あたり1500回を上限としています。<br>API使用ステータスはレスポンスヘッダに付与されます。各ヘッダの意味は次のとおりです。</p>
@@ -116,12 +113,12 @@ info:
     <h3 id="available_apis_by_plan">プランごとの利用可能API</h3> <p>すべてのエンドポイントはfreee販売スタンダードプランをご契約の事業所でのみ利用可能です。</p>
     <h3 id="accounting_master_items">会計マスタ項目</h3>
     <p>freee請求書APIのリクエストパラメータに、会計マスタ項目があります。会計マスタ項目の詳細は<a
-        href="https://developer.freee.co.jp/guideline/master-guideline">会計マスタガイドラインを参照ください</a>。</p>
+        href="https://developer.freee.co.jp/guideline/master-guideline">会計マスタガイドライン</a>を参照ください。</p>
 
     <p>会計のマスタ項目はfreee会計APIのエンドポイントにて取得可能です（例：<a
         href="https://developer.freee.co.jp/reference/accounting/reference#operations-tag-Partners">Partners
         取引先</a>）。freee会計APIのエンドポイントの詳細は<a
-        href="https://developer.freee.co.jp/reference/accounting/reference">会計APIリファレンスを参照ください</a>。</p>
+        href="https://developer.freee.co.jp/reference/accounting/reference">会計APIリファレンス</a>を参照ください。</p>
 servers:
   - url: https://api.freee.co.jp/sm
 security:
@@ -133,6 +130,8 @@ tags:
     description: 案件
   - name: sales_orders
     description: 受注
+  - name: master
+    description: 関連マスタ
 paths:
   /businesses:
     get:
@@ -2678,47 +2677,23 @@ components:
       content:
         application/json:
           schema:
-            oneOf:
-              - $ref: '#/components/schemas/ProductError'
-              - $ref: '#/components/schemas/AuthError'
-          examples:
-            product_error:
-              summary: 製品エラー形式
-              value:
-                status_code: 401
-                errors:
-                  - codes:
-                      - unauthorized
-                    messages:
-                      - 認証に失敗しました。
-            auth_error:
-              summary: 認証エラー形式
-              value:
-                message: ログインをして下さい
-                code: invalid_access_token
+            $ref: '#/components/schemas/AuthError'
+          example:
+            message: ログインをして下さい
+            code: invalid_access_token
     ForbiddenErrorResponse:
       description: Forbidden - アクセス権限がない
       content:
         application/json:
           schema:
-            oneOf:
-              - $ref: '#/components/schemas/ProductError'
-              - $ref: '#/components/schemas/AuthError'
-          examples:
-            product_error:
-              summary: 製品エラー形式
-              value:
-                status_code: 403
-                errors:
-                  - codes:
-                      - forbidden
-                    messages:
-                      - アクセス権限がありません。
-            auth_error:
-              summary: 認証エラー形式
-              value:
-                message: アクセス権限がありません
-                code: forbidden
+            $ref: '#/components/schemas/ProductError'
+          example:
+            status_code: 403
+            errors:
+              - codes:
+                  - forbidden
+                messages:
+                  - アクセス権限がありません。
     NotFoundErrorResponse:
       description: Not Found - リソースが存在しない
       content:
