@@ -1222,8 +1222,6 @@ components:
               value: PJ-123456
             - definition_id: 01JPP4FD1CVQWCDSWA90VE1ZTN
               value: 234
-      required:
-        - name
       additionalProperties: false
     CustomField:
       type: object
@@ -1822,7 +1820,7 @@ components:
       description: 金額セット
       additionalProperties: false
     DeliveryProgress:
-      description: '納品ステータス (未納品: todo, 一部納品済: doing, 納品済: done)'
+      description: '納品進捗 (未納品: todo, 一部納品済: doing, 納品済: done)'
       enum:
         - todo
         - doing
@@ -2238,14 +2236,28 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/LineParams'
+      additionalProperties: false
+    SalesOrderMinimalResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 受注ID
+          example: 01JPP4FD1CVQWCDSWA90VE1ZTM
+        registered_at:
+          type: string
+          format: date-time
+          description: 登録日時
+          example: '2025-01-15T10:30:00+09:00'
+        last_updated_at:
+          type: string
+          format: date-time
+          description: 変更日時
+          example: '2025-01-16T14:45:00+09:00'
       required:
-        - sales_order_date
-        - customer_id
-        - billing_creating_method_type
-        - billing_partner_id
-        - collecting_partner_id
-        - collection_method_type
-        - lines
+        - id
+        - registered_at
+        - last_updated_at
       additionalProperties: false
     AmountSetRate:
       description: 税率を含む金額セット
@@ -2326,10 +2338,6 @@ components:
       description: 通常明細詳細
       type: object
       properties:
-        id:
-          description: 明細ID
-          type: string
-          example: 01JPP4FD1CVQWCDSWA90VE1ZTN
         line_no:
           description: 明細行番号
           type: integer
@@ -2467,7 +2475,6 @@ components:
           type: boolean
           example: false
       required:
-        - id
         - line_no
         - line_type
         - deal_line_type
@@ -2479,10 +2486,6 @@ components:
       description: テキスト明細詳細
       type: object
       properties:
-        id:
-          description: 明細ID
-          type: string
-          example: 01JPP4FD1CVQWCDSWA90VE1ZTN
         line_no:
           description: 明細行番号
           type: integer
@@ -2496,7 +2499,6 @@ components:
           type: string
           example: 備考：特急料金が含まれます
       required:
-        - id
         - line_no
         - line_type
         - text
@@ -2919,7 +2921,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/SalesOrderDetail'
+            $ref: '#/components/schemas/SalesOrderMinimalResponse'
   requestBodies:
     BusinessCreateRequest:
       description: 案件登録リクエスト
@@ -2929,6 +2931,9 @@ components:
             allOf:
               - $ref: '#/components/schemas/WithCompanyId'
               - $ref: '#/components/schemas/BusinessRequestBase'
+              - type: object
+                required:
+                  - name
     SalesOrderCreateRequest:
       description: 受注登録リクエスト
       content:
@@ -2937,3 +2942,12 @@ components:
             allOf:
               - $ref: '#/components/schemas/WithCompanyId'
               - $ref: '#/components/schemas/SalesOrderRequestBase'
+              - type: object
+                required:
+                  - sales_order_date
+                  - customer_id
+                  - billing_creating_method_type
+                  - billing_partner_id
+                  - collecting_partner_id
+                  - collection_method_type
+                  - lines
