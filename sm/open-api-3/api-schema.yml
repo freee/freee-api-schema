@@ -1223,6 +1223,28 @@ components:
             - definition_id: 01JPP4FD1CVQWCDSWA90VE1ZTN
               value: 234
       additionalProperties: false
+    BusinessMinimalResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 案件ID
+          example: 01JPP4FD1CVQWCDSWA90VE1ZTM
+        registered_at:
+          type: string
+          format: date-time
+          description: 登録日時
+          example: '2025-04-01T09:00:00+09:00'
+        last_updated_at:
+          type: string
+          format: date-time
+          description: 変更日時
+          example: '2025-04-15T14:30:00+09:00'
+      required:
+        - id
+        - registered_at
+        - last_updated_at
+      additionalProperties: false
     CustomField:
       type: object
       description: カスタム項目
@@ -1820,37 +1842,40 @@ components:
       description: 金額セット
       additionalProperties: false
     DeliveryProgress:
-      description: '納品進捗 (未納品: todo, 一部納品済: doing, 納品済: done)'
+      description: '納品進捗 (未納品: not_delivered, 一部納品済: partially_delivered, 納品済: delivered)'
       enum:
-        - todo
-        - doing
-        - done
+        - not_delivered
+        - partially_delivered
+        - delivered
       type: string
-      example: todo
+      example: not_delivered
     SalesStatus:
-      description: '売上ステータス (未計上: todo, 一部計上済: doing, 計上済: done)'
+      description: '売上ステータス (未計上: not_sold, 一部計上済: partially_sold, 計上済: sold)'
       enum:
-        - todo
-        - doing
-        - done
+        - not_sold
+        - partially_sold
+        - sold
       type: string
-      example: todo
+      example: not_sold
     BillingStatus:
-      description: '請求書送付ステータス (未送付: todo, 一部送付済: doing, 送付済: done)'
+      description: '請求書送付ステータス (未送付: not_billed, 一部送付済: partially_billed, 送付済: billed, 対象外: none)'
       enum:
-        - todo
-        - doing
-        - done
+        - not_billed
+        - partially_billed
+        - billed
+        - none
       type: string
-      example: todo
+      example: not_billed
     CollectionStatus:
-      description: '決済ステータス (未決済: todo, 一部決済済: doing, 決済済: done)'
+      description: '決済ステータス (未決済: not_settled, 一部決済済: partially_settled, 決済済: settled, 無効: invalidated, 対象外: none)'
       enum:
-        - todo
-        - doing
-        - done
+        - not_settled
+        - partially_settled
+        - settled
+        - invalidated
+        - none
       type: string
-      example: todo
+      example: not_settled
     Business:
       description: 案件
       type: object
@@ -2740,7 +2765,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/BusinessDetail'
+            $ref: '#/components/schemas/BusinessMinimalResponse'
     ConflictErrorResponse:
       description: Conflict - リソースの競合
       content:
