@@ -33726,6 +33726,13 @@
         ],
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "description": "会計年度ID",
+            "example": 1
+          },
           "use_industry_template": {
             "type": "boolean",
             "description": "製造業向け機能（true: 使用する、false: 使用しない）",
