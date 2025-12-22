@@ -999,6 +999,26 @@ components:
           $ref: '#/components/schemas/BusinessPhase'
         reporting_section:
           $ref: '#/components/schemas/ReportingSection'
+        registered_at:
+          type: string
+          format: date-time
+          description: 登録日時
+          nullable: true
+          example: '2025-04-01T09:00:00+09:00'
+        registered_by:
+          description: 登録者
+          $ref: '#/components/schemas/Employee'
+          nullable: true
+        last_updated_at:
+          type: string
+          format: date-time
+          description: 変更日時
+          nullable: true
+          example: '2025-04-15T14:30:00+09:00'
+        last_updated_by:
+          description: 変更者
+          $ref: '#/components/schemas/Employee'
+          nullable: true
       required:
         - id
         - name
@@ -1146,12 +1166,14 @@ components:
         code:
           description: 案件コード
           type: string
+          nullable: true
           example: B-0000000001
           maxLength: 50
         business_date:
           description: 案件登録日
           type: string
           format: date
+          nullable: true
           example: '2025-04-01'
         charge_employee_id:
           $ref: '#/components/schemas/ChargeEmployeeId'
@@ -1162,7 +1184,7 @@ components:
           type: integer
           format: int64
           maximum: 9223372036854776000
-          nullable: true
+          default: 0
           example: 6000000
         sales_progression_id:
           description: 受注確度ID
@@ -1412,22 +1434,6 @@ components:
               description: 社内メモ
               nullable: true
               example: 重要顧客案件
-            registered_at:
-              type: string
-              format: date-time
-              description: 登録日時
-              nullable: true
-              example: '2025-04-01T09:00:00+09:00'
-            registered_by:
-              $ref: '#/components/schemas/Employee'
-            last_updated_at:
-              type: string
-              format: date-time
-              description: 変更日時
-              nullable: true
-              example: '2025-04-15T14:30:00+09:00'
-            last_updated_by:
-              $ref: '#/components/schemas/Employee'
             custom_fields:
               type: array
               description: カスタム項目一覧
@@ -1983,12 +1989,17 @@ components:
           maximum: 9223372036854776000
           example: 10000
           nullable: true
+        canceled:
+          description: 取消状態
+          type: boolean
+          example: false
       required:
         - id
         - sales_order_date
         - customer
         - registered_at
         - last_updated_at
+        - canceled
       additionalProperties: false
     BillingCreatingMethodType:
       description: '請求作成方法区分 (自動作成: automatically, 手動作成: manually)'
