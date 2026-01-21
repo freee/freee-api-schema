@@ -34451,7 +34451,8 @@
           "account_item_name",
           "id",
           "name",
-          "tax_name"
+          "tax_name",
+          "source_line_template_id"
         ],
         "properties": {
           "id": {
@@ -34459,6 +34460,13 @@
             "format": "int64",
             "minimum": 1,
             "description": "経費科目ID",
+            "example": 1
+          },
+          "source_line_template_id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "description": "経費科目の元となるテンプレートを識別するID。経費科目の設定を変更しても変わらない固定値",
             "example": 1
           },
           "name": {
