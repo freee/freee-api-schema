@@ -182,7 +182,7 @@ paths:
       - name: payment_status
         in: query
         required: false
-        description: '入金ステータス（unsettled: 入金待ち, settled: 入金済み）'
+        description: '決済ステータス（unsettled: 決済待ち, settled: 決済済み）'
         schema:
           type: string
           enum:
@@ -573,12 +573,13 @@ paths:
       - name: payment_status
         in: query
         required: false
-        description: '入金ステータス（unsettled: 入金待ち, settled: 入金済み）'
+        description: '決済ステータス（unsettled: 決済待ち, settled: 決済済み, canceled: 決済キャンセル）'
         schema:
           type: string
           enum:
           - settled
           - unsettled
+          - canceled
       - name: deal_status
         in: query
         required: false
@@ -1403,7 +1404,7 @@ components:
           enum:
           - settled
           - unsettled
-          description: '入金ステータス（unsettled: 入金待ち, settled: 入金済み）'
+          description: '決済ステータス（unsettled: 決済待ち, settled: 決済済み）'
         cancel_status:
           type: string
           enum:
@@ -1907,7 +1908,7 @@ components:
           enum:
           - settled
           - unsettled
-          description: '入金ステータス（unsettled: 入金待ち, settled: 入金済み）'
+          description: '決済ステータス（unsettled: 決済待ち, settled: 決済済み）'
         cancel_status:
           type: string
           enum:
@@ -2358,7 +2359,7 @@ components:
           enum:
           - settled
           - unsettled
-          description: '入金ステータス（unsettled: 入金待ち, settled: 入金済み）'
+          description: '決済ステータス（unsettled: 決済待ち, settled: 決済済み）'
         cancel_status:
           type: string
           enum:
@@ -2735,7 +2736,8 @@ components:
           enum:
           - settled
           - unsettled
-          description: '入金ステータス（unsettled: 入金待ち, settled: 入金済み）'
+          - canceled
+          description: '決済ステータス（unsettled: 決済待ち, settled: 決済済み, canceled: 決済キャンセル）'
         cancel_status:
           type: string
           enum:
@@ -3295,7 +3297,8 @@ components:
           enum:
           - settled
           - unsettled
-          description: '入金ステータス（unsettled: 入金待ち, settled: 入金済み）'
+          - canceled
+          description: '決済ステータス（unsettled: 決済待ち, settled: 決済済み, canceled: 決済キャンセル）'
         cancel_status:
           type: string
           enum:
@@ -3783,7 +3786,8 @@ components:
           enum:
           - settled
           - unsettled
-          description: '入金ステータス（unsettled: 入金待ち, settled: 入金済み）'
+          - canceled
+          description: '決済ステータス（unsettled: 決済待ち, settled: 決済済み, canceled: 決済キャンセル）'
         cancel_status:
           type: string
           enum:
