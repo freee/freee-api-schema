@@ -1963,6 +1963,10 @@ components:
           description: 取消状態
           example: false
           nullable: true
+        closed:
+          type: boolean
+          description: ロック状態（締め状態）
+          example: false
         customer:
           $ref: '#/components/schemas/Customer'
         sales_progression:
