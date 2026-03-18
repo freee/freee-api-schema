@@ -575,6 +575,10 @@ paths:
           <li><code>number</code>: 数値</li>
           <li><code>date</code>: 日付</li>
           <li><code>enum</code>: プルダウン</li>
+          <li><code>partner</code>: 取引先</li>
+          <li><code>employee</code>: 従業員</li>
+          <li><code>section</code>: 部門</li>
+          <li><code>master_item</code>: 商品</li>
         </ul>
       operationId: get_master_custom_fields_business_definitions
       parameters:
@@ -2255,16 +2259,142 @@ components:
         - registered_at
         - last_updated_at
       additionalProperties: false
+    CustomFieldPartnerValue:
+      type: object
+      description: 取引先型カスタム項目の値
+      properties:
+        type:
+          type: string
+          enum:
+            - partner
+          description: マスタ型の種別
+          example: partner
+        id:
+          type: integer
+          format: int64
+          description: 取引先ID
+          example: 1001
+        name:
+          type: string
+          description: 取引先名
+          example: サンプル取引先
+        code:
+          type: string
+          description: 取引先コード
+          nullable: true
+          example: P-001
+      required:
+        - type
+        - id
+        - name
+      additionalProperties: false
+    CustomFieldEmployeeValue:
+      type: object
+      description: 従業員型カスタム項目の値
+      properties:
+        type:
+          type: string
+          enum:
+            - employee
+          description: マスタ型の種別
+          example: employee
+        id:
+          type: integer
+          format: int64
+          description: 従業員ID
+          example: 101
+        name:
+          type: string
+          description: 従業員名
+          example: サンプル従業員
+      required:
+        - type
+        - id
+        - name
+      additionalProperties: false
+    CustomFieldSectionValue:
+      type: object
+      description: 部門型カスタム項目の値
+      properties:
+        type:
+          type: string
+          enum:
+            - section
+          description: マスタ型の種別
+          example: section
+        id:
+          type: integer
+          format: int64
+          description: 部門ID
+          example: 67890
+        name:
+          type: string
+          description: 部門名
+          example: サンプル部門
+      required:
+        - type
+        - id
+        - name
+      additionalProperties: false
+    CustomFieldMasterItemValue:
+      type: object
+      description: 商品型カスタム項目の値
+      properties:
+        type:
+          type: string
+          enum:
+            - master_item
+          description: マスタ型の種別
+          example: master_item
+        id:
+          type: string
+          description: 商品ID
+          example: 01JPP4FD1CVQWCDSWA90VE1ZTM
+        name:
+          type: string
+          description: 商品名
+          example: サンプル商品
+        code:
+          type: string
+          nullable: true
+          description: 商品コード
+          example: I-001
+      required:
+        - type
+        - id
+        - name
+        - code
+      additionalProperties: false
+    CustomFieldMasterValue:
+      description: マスタ型カスタム項目の値
+      oneOf:
+        - $ref: '#/components/schemas/CustomFieldPartnerValue'
+        - $ref: '#/components/schemas/CustomFieldEmployeeValue'
+        - $ref: '#/components/schemas/CustomFieldSectionValue'
+        - $ref: '#/components/schemas/CustomFieldMasterItemValue'
+      discriminator:
+        propertyName: type
+        mapping:
+          partner: '#/components/schemas/CustomFieldPartnerValue'
+          employee: '#/components/schemas/CustomFieldEmployeeValue'
+          section: '#/components/schemas/CustomFieldSectionValue'
+          master_item: '#/components/schemas/CustomFieldMasterItemValue'
     CustomField:
       type: object
       description: カスタム項目
       properties:
         value:
-          description: カスタム項目の値
+          description: |-
+            カスタム項目の値
+            * 文字列型（text, textarea, date）: 文字列
+            * 数値型（number, amount, quantity）: 数値
+            * プルダウン型（enum）: 選択肢の名称（文字列）
+            * マスタ型（partner, employee, section, master_item）: マスタ情報オブジェクト
           nullable: true
           anyOf:
             - type: string
             - type: number
+            - $ref: '#/components/schemas/CustomFieldMasterValue'
           example: サンプル値
         definition_id:
           type: string
@@ -2432,8 +2562,15 @@ components:
                   definition_id: 01JPP4FD1CVQWCDSWA90VE1ZTM
                   definition_name: カスタム項目1
                 - value: 12345
-                  definition_id: 01JPP4FD1CVQWCDSWA90VE1ZTM
+                  definition_id: 01JPP4FD1CVQWCDSWA90VE1ZTN
                   definition_name: カスタム項目2
+                - value:
+                    type: partner
+                    id: 1001
+                    name: サンプル取引先
+                    code: P-001
+                  definition_id: 01JPP4FD1CVQWCDSWA90VE1ZTO
+                  definition_name: 担当取引先
           required:
             - custom_fields
           additionalProperties: false
@@ -2641,6 +2778,10 @@ components:
             * `number` - 数値
             * `date` - 日付
             * `enum` - プルダウン
+            * `partner` - 取引先
+            * `employee` - 従業員
+            * `section` - 部門
+            * `master_item` - 商品
           enum:
             - text
             - textarea
@@ -2649,6 +2790,10 @@ components:
             - number
             - date
             - enum
+            - partner
+            - employee
+            - section
+            - master_item
           example: text
         required:
           type: boolean
@@ -2786,6 +2931,58 @@ components:
           required:
             - type
             - enumerations
+    PartnerCustomFieldDefinition:
+      allOf:
+        - $ref: '#/components/schemas/CustomFieldDefinitionBase'
+        - type: object
+          additionalProperties: false
+          properties:
+            type:
+              type: string
+              enum:
+                - partner
+              example: partner
+          required:
+            - type
+    EmployeeCustomFieldDefinition:
+      allOf:
+        - $ref: '#/components/schemas/CustomFieldDefinitionBase'
+        - type: object
+          additionalProperties: false
+          properties:
+            type:
+              type: string
+              enum:
+                - employee
+              example: employee
+          required:
+            - type
+    SectionCustomFieldDefinition:
+      allOf:
+        - $ref: '#/components/schemas/CustomFieldDefinitionBase'
+        - type: object
+          additionalProperties: false
+          properties:
+            type:
+              type: string
+              enum:
+                - section
+              example: section
+          required:
+            - type
+    MasterItemCustomFieldDefinition:
+      allOf:
+        - $ref: '#/components/schemas/CustomFieldDefinitionBase'
+        - type: object
+          additionalProperties: false
+          properties:
+            type:
+              type: string
+              enum:
+                - master_item
+              example: master_item
+          required:
+            - type
     CustomFieldDefinition:
       oneOf:
         - $ref: '#/components/schemas/TextCustomFieldDefinition'
@@ -2795,6 +2992,10 @@ components:
         - $ref: '#/components/schemas/NumberCustomFieldDefinition'
         - $ref: '#/components/schemas/DateCustomFieldDefinition'
         - $ref: '#/components/schemas/EnumCustomFieldDefinition'
+        - $ref: '#/components/schemas/PartnerCustomFieldDefinition'
+        - $ref: '#/components/schemas/EmployeeCustomFieldDefinition'
+        - $ref: '#/components/schemas/SectionCustomFieldDefinition'
+        - $ref: '#/components/schemas/MasterItemCustomFieldDefinition'
       discriminator:
         propertyName: type
         mapping:
@@ -2805,6 +3006,10 @@ components:
           number: '#/components/schemas/NumberCustomFieldDefinition'
           date: '#/components/schemas/DateCustomFieldDefinition'
           enum: '#/components/schemas/EnumCustomFieldDefinition'
+          partner: '#/components/schemas/PartnerCustomFieldDefinition'
+          employee: '#/components/schemas/EmployeeCustomFieldDefinition'
+          section: '#/components/schemas/SectionCustomFieldDefinition'
+          master_item: '#/components/schemas/MasterItemCustomFieldDefinition'
     AmountSet:
       type: object
       required:
@@ -4807,6 +5012,30 @@ components:
                   - id: 01JPP4FD1CVQWCDSWA90VE1ZTV
                     name: 低
                     usable: false
+              - id: 01JPP4FD1CVQWCDSWA90VE1ZTW
+                key: custom_field_008
+                display_name: 担当取引先
+                type: partner
+                required: false
+                description: null
+              - id: 01JPP4FD1CVQWCDSWA90VE1ZTX
+                key: custom_field_009
+                display_name: 担当従業員
+                type: employee
+                required: false
+                description: null
+              - id: 01JPP4FD1CVQWCDSWA90VE1ZTY
+                key: custom_field_010
+                display_name: 担当部門
+                type: section
+                required: false
+                description: null
+              - id: 01JPP4FD1CVQWCDSWA90VE1ZTZ
+                key: custom_field_011
+                display_name: 関連商品
+                type: master_item
+                required: false
+                description: null
     SalesOrderIndexResponse:
       description: 受注一覧のレスポンス
       content:
