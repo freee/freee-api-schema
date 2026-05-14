@@ -1960,7 +1960,6 @@ components:
         code:
           type: string
           description: 案件コード
-          nullable: true
           example: B-0000000003
         canceled:
           type: boolean
@@ -2014,6 +2013,7 @@ components:
       required:
         - id
         - name
+        - code
       additionalProperties: false
     PaginationMeta:
       type: object
