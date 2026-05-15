@@ -249,6 +249,13 @@ paths:
           type: integer
           minimum: 0
           maximum: 2147483647
+      - name: sales_management_origin
+        in: query
+        required: false
+        description: freee販売から作成された帳票データを含める。trueを指定する場合はfreee販売から作成された帳票へのアクセス権限が必要です。
+        schema:
+          type: boolean
+          default: false
       responses:
         '200':
           description: The request has succeeded.
@@ -657,6 +664,13 @@ paths:
           type: integer
           minimum: 0
           maximum: 2147483647
+      - name: sales_management_origin
+        in: query
+        required: false
+        description: freee販売から作成された帳票データを含める。trueを指定する場合はfreee販売から作成された帳票へのアクセス権限が必要です。
+        schema:
+          type: boolean
+          default: false
       responses:
         '200':
           description: The request has succeeded.
@@ -1046,6 +1060,13 @@ paths:
           type: integer
           minimum: 0
           maximum: 2147483647
+      - name: sales_management_origin
+        in: query
+        required: false
+        description: freee販売から作成された帳票データを含める。trueを指定する場合はfreee販売から作成された帳票へのアクセス権限が必要です。
+        schema:
+          type: boolean
+          default: false
       responses:
         '200':
           description: The request has succeeded.
@@ -1745,6 +1766,7 @@ components:
       - amount_excluding_tax
       - amount_tax
       - partner_id
+      - report_url
       properties:
         id:
           type: integer
@@ -1875,6 +1897,13 @@ components:
           - undownloaded
           nullable: true
           description: URL共有で送付された送付先のメールのダウンロードステータス
+        report_url:
+          type: string
+          format: uri
+          description: 帳票詳細ページのURL
+        sales_management_origin:
+          type: boolean
+          description: freee販売から作成された帳票かどうか
     DeliverySlipRequest:
       type: object
       required:
@@ -2220,6 +2249,7 @@ components:
       - amount_tax
       - partner_id
       - lines
+      - report_url
       properties:
         id:
           type: integer
@@ -2526,6 +2556,10 @@ components:
           items:
             "$ref": "#/components/schemas/DeliverySlipResponse_delivery_slip_lines"
           description: 納品書の明細行
+        report_url:
+          type: string
+          format: uri
+          description: 帳票詳細ページのURL
     DeliverySlipResponse_delivery_slip_lines:
       type: object
       required:
@@ -2686,6 +2720,7 @@ components:
       - amount_tax
       - partner_id
       - lines
+      - report_url
       properties:
         id:
           type: integer
@@ -2971,6 +3006,13 @@ components:
           - undownloaded
           nullable: true
           description: URL共有で送付された送付先のメールのダウンロードステータス
+        report_url:
+          type: string
+          format: uri
+          description: 帳票詳細ページのURL
+        sales_management_origin:
+          type: boolean
+          description: freee販売から作成された帳票かどうか
     DeliverySlipShowResponse_delivery_slip_lines:
       type: object
       required:
@@ -3060,6 +3102,7 @@ components:
       - amount_tax
       - amount_brought_forward
       - partner_id
+      - report_url
       properties:
         id:
           type: integer
@@ -3215,6 +3258,13 @@ components:
           - undownloaded
           nullable: true
           description: URL共有で送付された送付先のメールのダウンロードステータス
+        report_url:
+          type: string
+          format: uri
+          description: 帳票詳細ページのURL
+        sales_management_origin:
+          type: boolean
+          description: freee販売から作成された帳票かどうか
     InvoiceRequest:
       type: object
       required:
@@ -3609,6 +3659,7 @@ components:
       - amount_brought_forward
       - partner_id
       - lines
+      - report_url
       properties:
         id:
           type: integer
@@ -3926,6 +3977,10 @@ components:
           items:
             "$ref": "#/components/schemas/InvoiceResponse_invoice_lines"
           description: 請求書の明細行
+        report_url:
+          type: string
+          format: uri
+          description: 帳票詳細ページのURL
     InvoiceResponse_invoice_lines:
       type: object
       required:
@@ -4096,6 +4151,7 @@ components:
       - amount_brought_forward
       - partner_id
       - lines
+      - report_url
       properties:
         id:
           type: integer
@@ -4412,6 +4468,13 @@ components:
           - undownloaded
           nullable: true
           description: URL共有で送付された送付先のメールのダウンロードステータス
+        report_url:
+          type: string
+          format: uri
+          description: 帳票詳細ページのURL
+        sales_management_origin:
+          type: boolean
+          description: freee販売から作成された帳票かどうか
     InvoiceShowResponse_invoice_lines:
       type: object
       required:
@@ -4504,6 +4567,7 @@ components:
       - amount_excluding_tax
       - amount_tax
       - partner_id
+      - report_url
       properties:
         id:
           type: integer
@@ -4615,6 +4679,13 @@ components:
           - undownloaded
           nullable: true
           description: URL共有で送付された送付先のメールのダウンロードステータス
+        report_url:
+          type: string
+          format: uri
+          description: 帳票詳細ページのURL
+        sales_management_origin:
+          type: boolean
+          description: freee販売から作成された帳票かどうか
     QuotationRequest:
       type: object
       required:
@@ -4908,6 +4979,7 @@ components:
       - amount_tax
       - partner_id
       - lines
+      - report_url
       properties:
         id:
           type: integer
@@ -5185,6 +5257,10 @@ components:
           items:
             "$ref": "#/components/schemas/QuotationResponse_quotation_lines"
           description: 見積書の明細行
+        report_url:
+          type: string
+          format: uri
+          description: 帳票詳細ページのURL
     QuotationResponse_quotation_lines:
       type: object
       required:
@@ -5289,6 +5365,7 @@ components:
       - amount_tax
       - partner_id
       - lines
+      - report_url
       properties:
         id:
           type: integer
@@ -5563,6 +5640,13 @@ components:
           - undownloaded
           nullable: true
           description: URL共有で送付された送付先のメールのダウンロードステータス
+        report_url:
+          type: string
+          format: uri
+          description: 帳票詳細ページのURL
+        sales_management_origin:
+          type: boolean
+          description: freee販売から作成された帳票かどうか
     QuotationShowResponse_quotation_lines:
       type: object
       required:
@@ -5651,6 +5735,7 @@ components:
       - amount_excluding_tax
       - amount_tax
       - partner_id
+      - report_url
       properties:
         id:
           type: integer
@@ -5781,6 +5866,10 @@ components:
           - undownloaded
           nullable: true
           description: URL共有で送付された送付先のメールのダウンロードステータス
+        report_url:
+          type: string
+          format: uri
+          description: 帳票詳細ページのURL
     ReceiptRequest:
       type: object
       required:
@@ -6102,6 +6191,7 @@ components:
       - amount_tax
       - partner_id
       - lines
+      - report_url
       properties:
         id:
           type: integer
@@ -6373,6 +6463,10 @@ components:
           items:
             "$ref": "#/components/schemas/ReceiptResponse_receipt_lines"
           description: 領収書の明細行
+        report_url:
+          type: string
+          format: uri
+          description: 帳票詳細ページのURL
     ReceiptResponse_receipt_lines:
       type: object
       required:
@@ -6533,6 +6627,7 @@ components:
       - amount_tax
       - partner_id
       - lines
+      - report_url
       properties:
         id:
           type: integer
@@ -6818,6 +6913,10 @@ components:
           - undownloaded
           nullable: true
           description: URL共有で送付された送付先のメールのダウンロードステータス
+        report_url:
+          type: string
+          format: uri
+          description: 帳票詳細ページのURL
     ReceiptShowResponse_receipt_lines:
       type: object
       required:
