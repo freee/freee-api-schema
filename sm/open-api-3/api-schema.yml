@@ -380,6 +380,123 @@ paths:
           $ref: '#/components/responses/TooManyRequestsErrorResponse'
         '500':
           $ref: '#/components/responses/InternalServerErrorResponse'
+  /businesses/{id}/cancellation:
+    post:
+      tags:
+        - businesses
+      summary: 案件取消
+      description: |-
+        <h2 id="">概要</h2>
+        <p>指定されたIDの案件を取消します。
+        </p>
+      operationId: cancel_business
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: 案件ID
+          schema:
+            type: string
+            minLength: 26
+            maxLength: 26
+            example: 01JPP4FD1CVQWCDSWA90VE1ZTM
+      requestBody:
+        $ref: '#/components/requestBodies/BusinessCancelRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/BusinessCancelResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '409':
+          $ref: '#/components/responses/ConflictErrorResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerErrorResponse'
+  /businesses/{id}/close:
+    post:
+      tags:
+        - businesses
+      summary: 案件ロック
+      description: |-
+        <h2 id="">概要</h2>
+        <p>指定されたIDの案件をロックします。
+        </p>
+      operationId: close_business
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: 案件ID
+          schema:
+            type: string
+            minLength: 26
+            maxLength: 26
+            example: 01JPP4FD1CVQWCDSWA90VE1ZTM
+      requestBody:
+        $ref: '#/components/requestBodies/BusinessCloseRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/BusinessCloseResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '409':
+          $ref: '#/components/responses/ConflictErrorResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerErrorResponse'
+  /businesses/{id}/reopen:
+    post:
+      tags:
+        - businesses
+      summary: 案件ロック解除
+      description: |-
+        <h2 id="">概要</h2>
+        <p>指定されたIDの案件ロックを解除します。
+        </p>
+      operationId: reopen_business
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: 案件ID
+          schema:
+            type: string
+            minLength: 26
+            maxLength: 26
+            example: 01JPP4FD1CVQWCDSWA90VE1ZTM
+      requestBody:
+        $ref: '#/components/requestBodies/BusinessReopenRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/BusinessReopenResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '409':
+          $ref: '#/components/responses/ConflictErrorResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerErrorResponse'
   /cost_budgets:
     get:
       tags:
@@ -1613,6 +1730,45 @@ paths:
           $ref: '#/components/responses/TooManyRequestsErrorResponse'
         '500':
           $ref: '#/components/responses/InternalServerErrorResponse'
+  /sales_orders/{id}/cancellation:
+    post:
+      tags:
+        - sales_orders
+      summary: 受注取消
+      description: |-
+        <h2 id="">概要</h2>
+        <p>指定されたIDの受注を取消します。
+        </p>
+      operationId: cancel_sales_order
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: 受注ID
+          schema:
+            type: string
+            minLength: 26
+            maxLength: 26
+            example: 01JPP4FD1CVQWCDSWA90VE1ZTM
+      requestBody:
+        $ref: '#/components/requestBodies/SalesOrderCancelRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/SalesOrderCancelResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '409':
+          $ref: '#/components/responses/ConflictErrorResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerErrorResponse'
   /deliveries:
     get:
       tags:
@@ -1967,6 +2123,143 @@ paths:
           $ref: '#/components/responses/TooManyRequestsErrorResponse'
         '500':
           $ref: '#/components/responses/InternalServerErrorResponse'
+  /deliveries/{id}/cancellation:
+    post:
+      tags:
+        - deliveries
+      summary: 納品取消
+      description: |-
+        <h2 id="">概要</h2>
+        <p>指定されたIDの納品を取消します。
+        </p>
+      operationId: cancel_delivery
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: 納品ID
+          schema:
+            type: string
+            minLength: 26
+            maxLength: 26
+            example: 01JPP4FD1CVQWCDSWA90VE1ZTM
+      requestBody:
+        $ref: '#/components/requestBodies/DeliveryCancelRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeliveryCancelResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '409':
+          $ref: '#/components/responses/ConflictErrorResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerErrorResponse'
+  /deliveries/{id}/delivery_status:
+    put:
+      tags:
+        - deliveries
+      summary: 納品ステータス変更
+      description: |-
+        <h2 id="">概要</h2>
+        <p>指定されたIDの納品の納品ステータスを変更します。</p>
+        <h2 id="_2">定義</h2>
+        <ul>
+        <li>
+        <p>status : 納品ステータス (未納品: not_delivered, 納品済: delivered)</p>
+        </li>
+        </ul>
+      operationId: update_delivery_status
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: 納品ID
+          schema:
+            type: string
+            example: 01JPP4FD1CVQWCDSWA90VE1ZTM
+            maxLength: 26
+            minLength: 26
+      requestBody:
+        description: 納品ステータス変更リクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliveryStatusChangeRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeliveryUpdateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '409':
+          $ref: '#/components/responses/ConflictErrorResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerErrorResponse'
+  /deliveries/{id}/acceptance_status:
+    put:
+      tags:
+        - deliveries
+      summary: 検収ステータス変更
+      description: |-
+        <h2 id="">概要</h2>
+        <p>指定されたIDの納品の検収ステータスを変更します。</p>
+        <h2 id="_2">定義</h2>
+        <ul>
+        <li>
+        <p>status : 検収ステータス (未検収: not_accepted, 検収済: accepted)</p>
+        </li>
+        </ul>
+      operationId: update_acceptance_status
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: 納品ID
+          schema:
+            type: string
+            example: 01JPP4FD1CVQWCDSWA90VE1ZTM
+            maxLength: 26
+            minLength: 26
+      requestBody:
+        description: 検収ステータス変更リクエスト
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptanceStatusChangeRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeliveryUpdateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '409':
+          $ref: '#/components/responses/ConflictErrorResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerErrorResponse'
   /sales:
     get:
       tags:
@@ -2270,6 +2563,45 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/SaleUpdateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '409':
+          $ref: '#/components/responses/ConflictErrorResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerErrorResponse'
+  /sales/{id}/cancellation:
+    post:
+      tags:
+        - sales
+      summary: 売上取消
+      description: |-
+        <h2 id="">概要</h2>
+        <p>指定されたIDの売上を取消します。
+        </p>
+      operationId: cancel_sale
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: 売上ID
+          schema:
+            type: string
+            minLength: 26
+            maxLength: 26
+            example: 01JPP4FD1CVQWCDSWA90VE1ZTM
+      requestBody:
+        $ref: '#/components/requestBodies/SaleCancelRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/SaleCancelResponse'
         '400':
           $ref: '#/components/responses/BadRequestErrorResponse'
         '401':
@@ -6574,6 +6906,28 @@ components:
             - lines
             - recipient_address
           additionalProperties: false
+    DeliveryStatusChangeRequest:
+      description: 納品ステータス変更リクエスト
+      allOf:
+        - $ref: '#/components/schemas/WithCompanyId'
+        - type: object
+          additionalProperties: false
+          properties:
+            delivery_status:
+              $ref: '#/components/schemas/DeliveryStatus'
+          required:
+            - delivery_status
+    AcceptanceStatusChangeRequest:
+      description: 検収ステータス変更リクエスト
+      allOf:
+        - $ref: '#/components/schemas/WithCompanyId'
+        - type: object
+          additionalProperties: false
+          properties:
+            acceptance_status:
+              $ref: '#/components/schemas/AcceptanceStatus'
+          required:
+            - acceptance_status
     BillingCreatingStatus:
       description: |-
         請求登録ステータス (未作成: not_created, 作成済: created, 取消済: canceled, 赤伝作成済: aka_created, 対象外: none)
@@ -7293,6 +7647,24 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/BusinessMinimalResponse'
+    BusinessCancelResponse:
+      description: 案件取消のレスポンス
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BusinessMinimalResponse'
+    BusinessCloseResponse:
+      description: 案件ロックのレスポンス
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BusinessMinimalResponse'
+    BusinessReopenResponse:
+      description: 案件ロック解除のレスポンス
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BusinessMinimalResponse'
     CostBudgetIndexResponse:
       description: 原価予算一覧のレスポンス
       content:
@@ -7561,6 +7933,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/SalesOrderMinimalResponse'
+    SalesOrderCancelResponse:
+      description: 受注取消のレスポンス
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SalesOrderMinimalResponse'
     DeliveryIndexResponse:
       description: 納品一覧のレスポンス
       content:
@@ -7590,6 +7968,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/DeliveryMinimalResponse'
+    DeliveryCancelResponse:
+      description: 納品取消のレスポンス
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DeliveryMinimalResponse'
     SalesIndexResponse:
       description: 売上一覧のレスポンス
       content:
@@ -7615,6 +7999,12 @@ components:
             $ref: '#/components/schemas/SaleMinimalResponse'
     SaleUpdateResponse:
       description: 売上更新のレスポンス
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SaleMinimalResponse'
+    SaleCancelResponse:
+      description: 売上取消のレスポンス
       content:
         application/json:
           schema:
@@ -7681,6 +8071,30 @@ components:
             allOf:
               - $ref: '#/components/schemas/WithCompanyId'
               - $ref: '#/components/schemas/BusinessRequestBase'
+    BusinessCancelRequest:
+      description: 案件取消リクエスト
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WithCompanyId'
+          example:
+            company_id: 1
+    BusinessCloseRequest:
+      description: 案件ロックリクエスト
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WithCompanyId'
+          example:
+            company_id: 1
+    BusinessReopenRequest:
+      description: 案件ロック解除リクエスト
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WithCompanyId'
+          example:
+            company_id: 1
     CostBudgetCreateRequest:
       description: 原価予算登録リクエスト
       content:
@@ -7806,6 +8220,14 @@ components:
                     nullable: false
                     example: 10002
                 additionalProperties: false
+    SalesOrderCancelRequest:
+      description: 受注取消リクエスト
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WithCompanyId'
+          example:
+            company_id: 1
     DeliveryCreateRequest:
       description: 納品登録リクエスト
       content:
@@ -7849,6 +8271,14 @@ components:
                     format: int32
                     nullable: true
                     example: 1
+    DeliveryCancelRequest:
+      description: 納品取消リクエスト
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WithCompanyId'
+          example:
+            company_id: 1
     SaleCreateRequest:
       description: 売上登録リクエスト
       content:
@@ -7903,6 +8333,14 @@ components:
                     nullable: false
                     example: 10002
                 additionalProperties: false
+    SaleCancelRequest:
+      description: 売上取消リクエスト
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WithCompanyId'
+          example:
+            company_id: 1
     OtherCostCreateRequest:
       description: その他原価登録リクエスト
       content:
