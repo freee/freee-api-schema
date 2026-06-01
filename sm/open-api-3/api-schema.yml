@@ -138,6 +138,8 @@ tags:
     description: 納品
   - name: sales
     description: 売上
+  - name: periodic_sales
+    description: 定期売上
   - name: other_costs
     description: その他原価
   - name: master
@@ -151,6 +153,7 @@ paths:
       description: |-
         <h2 id="">概要</h2>
         <p>案件の一覧を取得します。
+
         登録されている案件情報を一覧形式で取得できます。
         各種フィルタ条件を指定することで、特定の条件に合致する案件のみを取得することが可能です。
         </p>
