@@ -32701,8 +32701,7 @@
           "company_id",
           "details",
           "id",
-          "issue_date",
-          "txn_number"
+          "issue_date"
         ],
         "properties": {
           "id": {
