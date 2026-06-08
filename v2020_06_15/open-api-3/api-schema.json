@@ -38759,7 +38759,8 @@
       "purchaseRequestActionCreateParams": {
         "type": "object",
         "required": [
-          "company_id"
+          "company_id",
+          "do_action"
         ],
         "properties": {
           "company_id": {
@@ -38768,6 +38769,33 @@
             "minimum": 1,
             "description": "事業所ID",
             "example": 1
+          },
+          "do_action": {
+            "type": "string",
+            "description": "操作(apply: 申請する、approve: 承認する、reject: 却下する、feedback: 申請者へ差し戻す)",
+            "example": "approve",
+            "enum": [
+              "apply",
+              "approve",
+              "reject",
+              "feedback"
+            ]
+          },
+          "next_approver_id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "description": "次の承認ステップの承認者のユーザーID",
+            "example": 1,
+            "nullable": true
+          },
+          "next_group_id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "description": "次の承認ステップの承認グループID",
+            "example": 1,
+            "nullable": true
           }
         }
       },
