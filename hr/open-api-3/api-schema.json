@@ -105,8 +105,8 @@
       "description": "役職の操作"
     },
     {
-      "name": "手当",
-      "description": "手当の操作"
+      "name": "その他手当",
+      "description": "その他手当の操作"
     },
     {
       "name": "月次勤怠締め申請",
@@ -5175,10 +5175,10 @@
     "/api/v1/allowances": {
       "get": {
         "tags": [
-          "手当"
+          "その他手当"
         ],
-        "summary": "手当一覧の取得",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の手当情報をリストで返します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>管理者権限を持ったユーザーのみ実行可能です。</li>\n</ul>",
+        "summary": "その他手当一覧の取得",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所のその他手当情報をリストで返します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>管理者権限を持ったユーザーのみ実行可能です。</li>\n</ul>",
         "operationId": "get_allowances",
         "parameters": [
           {
@@ -5304,10 +5304,10 @@
       },
       "post": {
         "tags": [
-          "手当"
+          "その他手当"
         ],
-        "summary": "手当の作成",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の手当を新規作成します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>管理者権限を持ったユーザーのみ実行可能です。</li>\n</ul>",
+        "summary": "その他手当の作成",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所のその他手当を新規作成します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>管理者権限を持ったユーザーのみ実行可能です。</li>\n</ul>",
         "operationId": "create_allowance",
         "parameters": [
           {
@@ -5395,16 +5395,16 @@
     "/api/v1/allowances/{id}": {
       "get": {
         "tags": [
-          "手当"
+          "その他手当"
         ],
-        "summary": "手当の取得",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の手当情報を返します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>管理者権限を持ったユーザーのみ実行可能です。</li>\n</ul>",
+        "summary": "その他手当の取得",
+        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所のその他手当情報を返します。</p>\n\n<h2 id=\"_1\">注意点</h2>\n<ul>\n  <li>管理者権限を持ったユーザーのみ実行可能です。</li>\n</ul>",
         "operationId": "get_allowance",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "手当ID",
+            "description": "その他手当ID",
             "required": true,
             "schema": {
               "type": "integer",
@@ -12183,6 +12183,15 @@
             "maximum": 2147483647,
             "example": 1
           },
+          "proxy_applicant_id": {
+            "type": "integer",
+            "description": "代理申請者のユーザーID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true,
+            "example": 1
+          },
           "approver_ids": {
             "description": "承認者のユーザーID配列<br>\n次の場合、空配列になります。\n- 指定なしの申請経路を利用した、申請ステータスが承認済み以外の申請\n- 申請が差戻された",
             "type": "array",
@@ -12274,6 +12283,15 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
+            "example": 1
+          },
+          "proxy_applicant_id": {
+            "type": "integer",
+            "description": "代理申請者のユーザーID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true,
             "example": 1
           },
           "approver_ids": {
@@ -12498,6 +12516,15 @@
             "type": "boolean",
             "description": "自動チェック結果",
             "example": true
+          },
+          "proxy_applicant_id": {
+            "type": "integer",
+            "description": "代理申請者のユーザーID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true,
+            "example": 1
           }
         }
       },
@@ -12631,6 +12658,15 @@
             "type": "boolean",
             "description": "自動チェック結果",
             "example": true
+          },
+          "proxy_applicant_id": {
+            "type": "integer",
+            "description": "代理申請者のユーザーID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true,
+            "example": 1
           }
         }
       },
@@ -12816,6 +12852,15 @@
             "minimum": 0,
             "maximum": 2147483647,
             "example": 1
+          },
+          "proxy_applicant_id": {
+            "type": "integer",
+            "description": "代理申請者のユーザーID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1,
+            "nullable": true
           }
         }
       },
@@ -12989,6 +13034,15 @@
             "minimum": 0,
             "maximum": 2147483647,
             "example": 1
+          },
+          "proxy_applicant_id": {
+            "type": "integer",
+            "description": "代理申請者のユーザーID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1,
+            "nullable": true
           }
         }
       },
@@ -13036,6 +13090,15 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
+            "example": 1
+          },
+          "proxy_applicant_id": {
+            "type": "integer",
+            "description": "代理申請者のユーザーID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true,
             "example": 1
           },
           "approver_ids": {
@@ -13158,6 +13221,15 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 2147483647,
+            "example": 1
+          },
+          "proxy_applicant_id": {
+            "type": "integer",
+            "description": "代理申請者のユーザーID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "nullable": true,
             "example": 1
           },
           "approver_ids": {
@@ -17622,6 +17694,15 @@
             "type": "boolean",
             "description": "自動チェック結果",
             "example": true
+          },
+          "proxy_applicant_id": {
+            "type": "integer",
+            "description": "代理申請者のユーザーID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1,
+            "nullable": true
           }
         }
       },
@@ -17803,6 +17884,15 @@
             "minimum": 0,
             "maximum": 2147483647,
             "example": 1
+          },
+          "proxy_applicant_id": {
+            "type": "integer",
+            "description": "代理申請者のユーザーID",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647,
+            "example": 1,
+            "nullable": true
           }
         }
       },
@@ -18168,6 +18258,15 @@
                   "type": "boolean",
                   "description": "自動チェック結果",
                   "example": true
+                },
+                "proxy_applicant_id": {
+                  "type": "integer",
+                  "description": "代理申請者のユーザーID",
+                  "format": "int32",
+                  "minimum": 1,
+                  "maximum": 2147483647,
+                  "example": 1,
+                  "nullable": true
                 }
               }
             }
@@ -18375,6 +18474,15 @@
                 "minimum": 0,
                 "maximum": 2147483647,
                 "example": 1
+              },
+              "proxy_applicant_id": {
+                "type": "integer",
+                "description": "代理申請者のユーザーID",
+                "format": "int32",
+                "minimum": 1,
+                "maximum": 2147483647,
+                "example": 1,
+                "nullable": true
               }
             }
           }
@@ -21171,7 +21279,7 @@
         "properties": {
           "id": {
             "type": "integer",
-            "description": "手当ID",
+            "description": "その他手当ID",
             "format": "int64"
           },
           "company_id": {
@@ -21181,7 +21289,7 @@
           },
           "name": {
             "type": "string",
-            "description": "手当名"
+            "description": "その他手当名"
           },
           "description": {
             "type": "string",
@@ -21359,7 +21467,7 @@
         "properties": {
           "name": {
             "type": "string",
-            "description": "手当名。最大240文字、同一 frequency 内（salary_this_month/salary_monthly または bonus）で重複不可",
+            "description": "その他手当名。最大240文字、同一 frequency 内（salary_this_month/salary_monthly または bonus）で重複不可",
             "maxLength": 240
           },
           "description": {
