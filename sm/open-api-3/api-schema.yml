@@ -185,6 +185,9 @@ paths:
         <p>customer_ids : 顧客の取引先ID(複数指定可)</p>
         </li>
         <li>
+        <p>code : 案件コード</p>
+        </li>
+        <li>
         <p>canceled : 取消状態(デフォルト:false)</p>
         </li>
         </ul>
@@ -545,6 +548,7 @@ paths:
         <li><p>segment_tag_2_ids : セグメントタグ2 ID(複数指定可)</p></li>
         <li><p>segment_tag_3_ids : セグメントタグ3 ID(複数指定可)</p></li>
         <li><p>business_ids : 案件ID(複数指定可)</p></li>
+        <li><p>cost_budget_no : 原価予算No.</p></li>
         <li><p>start_last_updated_date : 更新日(絞り込み開始)</p></li>
         <li><p>end_last_updated_date : 更新日(絞り込み終了)</p></li>
         <li><p>canceled : 取消状態(デフォルト:false)</p></li>
@@ -1067,6 +1071,9 @@ paths:
         <p>business_ids : 案件ID(複数指定可)</p>
         </li>
         <li>
+        <p>purchase_order_no : 発注No.</p>
+        </li>
+        <li>
         <p>payment_status : 支払ステータス</p>
         </li>
         <li>
@@ -1482,6 +1489,9 @@ paths:
         <p>business_ids : 案件ID(複数指定可)</p>
         </li>
         <li>
+        <p>quotation_no : 見積No.</p>
+        </li>
+        <li>
         <p>quotation_status : 見積ステータス</p>
         </li>
         <li>
@@ -1892,6 +1902,9 @@ paths:
         <p>customer_ids : 顧客の取引先ID(複数指定可)</p>
         </li>
         <li>
+        <p>sales_order_no : 受注No.</p>
+        </li>
+        <li>
         <p>canceled : 取消状態(デフォルト:false)</p>
         </li>
         </ul>
@@ -2253,6 +2266,9 @@ paths:
         </li>
         <li>
         <p>customer_ids : 顧客の取引先ID(複数指定可)</p>
+        </li>
+        <li>
+        <p>delivery_no : 納品No.</p>
         </li>
         <li>
         <p>delivery_status : 納品ステータス</p>
@@ -3101,6 +3117,9 @@ paths:
         <p>business_ids : 案件ID(複数指定可)</p>
         </li>
         <li>
+        <p>other_cost_no : その他原価No.</p>
+        </li>
+        <li>
         <p>start_last_updated_date : 更新日(絞り込み開始)</p>
         </li>
         <li>
@@ -3456,6 +3475,9 @@ paths:
         </li>
         <li>
         <p>business_ids : 案件ID(複数指定可) ※複数の案件が紐づく仕入は本パラメータでヒットしません</p>
+        </li>
+        <li>
+        <p>procurement_no : 仕入No.</p>
         </li>
         <li>
         <p>payment_status : 決済ステータス</p>
@@ -4042,13 +4064,8 @@ components:
       style: form
       explode: true
       schema:
-        type: array
-        items:
-          type: integer
-          format: int64
-          minimum: 1
-          maximum: 9223372036854776000
-          example: 67890
+        allOf:
+          - $ref: '#/components/schemas/ReportingSectionIds'
     supplier_ids:
       name: supplier_ids[]
       description: 仕入先の取引先ID
@@ -4087,13 +4104,8 @@ components:
       style: form
       explode: true
       schema:
-        type: array
-        items:
-          type: integer
-          format: int64
-          minimum: 1
-          maximum: 9223372036854776000
-          example: 1001
+        allOf:
+          - $ref: '#/components/schemas/ReportingSectionIds'
     item_tag_ids:
       name: item_tag_ids[]
       description: 会計品目タグID
@@ -5312,6 +5324,14 @@ components:
           required:
             - custom_fields
           additionalProperties: false
+    ReportingSectionIds:
+      type: array
+      items:
+        type: integer
+        format: int64
+        minimum: 1
+        maximum: 9223372036854776000
+        example: 67890
     DatePeriod:
       type: object
       description: 発生予定期間
