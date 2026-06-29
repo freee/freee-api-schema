@@ -10650,7 +10650,7 @@
           {
             "name": "section_ids",
             "in": "query",
-            "description": "出力する部門の指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択の部門で比較できます。）",
+            "description": "出力する部門の指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。指定できる部門数は1〜5つです。0を指定すると、未選択の部門で比較できます。）",
             "required": true,
             "schema": {
               "type": "string"
@@ -10883,7 +10883,7 @@
           {
             "name": "segment_1_tag_ids",
             "in": "query",
-            "description": "出力するセグメント１タグIDの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択のセグメントで比較できます）",
+            "description": "出力するセグメント１タグIDの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。指定できるセグメント数は1〜5つです。0を指定すると、未選択のセグメントで比較できます）",
             "required": true,
             "schema": {
               "type": "string"
@@ -11124,7 +11124,7 @@
           {
             "name": "segment_2_tag_ids",
             "in": "query",
-            "description": "出力するセグメント２タグIDの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択のセグメントで比較できます）",
+            "description": "出力するセグメント２タグIDの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。指定できるセグメント数は1〜5つです。0を指定すると、未選択のセグメントで比較できます）",
             "required": true,
             "schema": {
               "type": "string"
@@ -11365,7 +11365,7 @@
           {
             "name": "segment_3_tag_ids",
             "in": "query",
-            "description": "出力するセグメント３タグIDの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択のセグメントで比較できます）",
+            "description": "出力するセグメント３タグIDの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。指定できるセグメント数は1〜5つです。0を指定すると、未選択のセグメントで比較できます）",
             "required": true,
             "schema": {
               "type": "string"
@@ -12311,7 +12311,7 @@
           {
             "name": "section_ids",
             "in": "query",
-            "description": "出力する部門の指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択の部門で比較できます）",
+            "description": "出力する部門の指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。指定できる部門数は1〜5つです。0を指定すると、未選択の部門で比較できます）",
             "required": true,
             "schema": {
               "type": "string"
@@ -12544,7 +12544,7 @@
           {
             "name": "segment_1_tag_ids",
             "in": "query",
-            "description": "出力するセグメント１タグIDの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択のセグメントで比較できます）",
+            "description": "出力するセグメント１タグIDの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。指定できるセグメント数は1〜5つです。0を指定すると、未選択のセグメントで比較できます）",
             "required": true,
             "schema": {
               "type": "string"
@@ -12785,7 +12785,7 @@
           {
             "name": "segment_2_tag_ids",
             "in": "query",
-            "description": "出力するセグメント２タグIDの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択のセグメントで比較できます）",
+            "description": "出力するセグメント２タグIDの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。指定できるセグメント数は1〜5つです。0を指定すると、未選択のセグメントで比較できます）",
             "required": true,
             "schema": {
               "type": "string"
@@ -13026,7 +13026,7 @@
           {
             "name": "segment_3_tag_ids",
             "in": "query",
-            "description": "出力するセグメント３タグIDの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。0を指定すると、未選択のセグメントで比較できます）",
+            "description": "出力するセグメント３タグIDの指定（半角数字のidを半角カンマ区切りスペースなしで指定してください。指定できるセグメント数は1〜5つです。0を指定すると、未選択のセグメントで比較できます）",
             "required": true,
             "schema": {
               "type": "string"
@@ -15645,6 +15645,39 @@
               "format": "int64",
               "minimum": 0
             }
+          },
+          {
+            "name": "partner_name",
+            "in": "query",
+            "description": "取引先名で絞込",
+            "schema": {
+              "type": "string"
+            },
+            "example": "株式会社freee"
+          },
+          {
+            "name": "approval_flow_route_id",
+            "in": "query",
+            "description": "申請経路IDで絞込（`/api/1/approval_flow_routes` のレスポンス id と同じ値）",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
+            },
+            "example": 1
+          },
+          {
+            "name": "observing",
+            "in": "query",
+            "description": "'共有された申請の絞り込み (ignore_observing: 共有された申請を含めない, only_observing: 共有された申請のみ)'\n",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ignore_observing",
+                "only_observing"
+              ]
+            },
+            "example": "ignore_observing"
           },
           {
             "name": "offset",
@@ -35702,11 +35735,14 @@
         "required": [
           "depreciation_record_method",
           "indirect_write_off_method",
+          "is_closed",
+          "month_end_date",
           "return_code",
           "sales_tax_business_code",
           "tax_account_method",
           "tax_fraction",
           "tax_method",
+          "temp_month_end_date",
           "use_industry_template"
         ],
         "type": "object",
@@ -35785,6 +35821,23 @@
             "maximum": 3,
             "description": "不動産所得使用区分（0: 一般、3: 一般/不動産） ※個人事業主のみ設定可能",
             "example": 0
+          },
+          "is_closed": {
+            "type": "boolean",
+            "description": "年度締め済みか（true: 年度締め済み、false: 未締め）",
+            "example": false
+          },
+          "month_end_date": {
+            "type": "string",
+            "description": "本締め日",
+            "example": "2020-03-20",
+            "nullable": true
+          },
+          "temp_month_end_date": {
+            "type": "string",
+            "description": "仮締め日",
+            "example": "2020-03-25",
+            "nullable": true
           }
         }
       },
@@ -38753,49 +38806,6 @@
                 "example": 1
               }
             }
-          }
-        }
-      },
-      "purchaseRequestActionCreateParams": {
-        "type": "object",
-        "required": [
-          "company_id",
-          "do_action"
-        ],
-        "properties": {
-          "company_id": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 1,
-            "description": "事業所ID",
-            "example": 1
-          },
-          "do_action": {
-            "type": "string",
-            "description": "操作(apply: 申請する、approve: 承認する、reject: 却下する、feedback: 申請者へ差し戻す)",
-            "example": "approve",
-            "enum": [
-              "apply",
-              "approve",
-              "reject",
-              "feedback"
-            ]
-          },
-          "next_approver_id": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 1,
-            "description": "次の承認ステップの承認者のユーザーID",
-            "example": 1,
-            "nullable": true
-          },
-          "next_group_id": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 1,
-            "description": "次の承認ステップの承認グループID",
-            "example": 1,
-            "nullable": true
           }
         }
       },
