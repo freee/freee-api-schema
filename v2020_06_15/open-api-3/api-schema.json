@@ -9276,7 +9276,7 @@
           {
             "name": "fiscal_year",
             "in": "query",
-            "description": "会計年度",
+            "description": "会計年度（年度の開始日の年）。会計年度の作成後に期間を変更した場合などに、指定した年と実際に集計対象となる会計年度がずれることがあります。意図した期間が集計されない場合は、fiscal_year ではなく start_date・end_date で期間を指定してください。",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -9499,7 +9499,7 @@
           {
             "name": "fiscal_year",
             "in": "query",
-            "description": "会計年度",
+            "description": "会計年度（年度の開始日の年）。会計年度の作成後に期間を変更した場合などに、指定した年と実際に集計対象となる会計年度がずれることがあります。意図した期間が集計されない場合は、fiscal_year ではなく start_date・end_date で期間を指定してください。",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -9722,7 +9722,7 @@
           {
             "name": "fiscal_year",
             "in": "query",
-            "description": "会計年度",
+            "description": "会計年度（年度の開始日の年）。会計年度の作成後に期間を変更した場合などに、指定した年と実際に集計対象となる会計年度がずれることがあります。意図した期間が集計されない場合は、fiscal_year ではなく start_date・end_date で期間を指定してください。",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -9945,7 +9945,7 @@
           {
             "name": "fiscal_year",
             "in": "query",
-            "description": "会計年度",
+            "description": "会計年度（年度の開始日の年）。会計年度の作成後に期間を変更した場合などに、指定した年と実際に集計対象となる会計年度がずれることがあります。意図した期間が集計されない場合は、fiscal_year ではなく start_date・end_date で期間を指定してください。",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -10180,7 +10180,7 @@
           {
             "name": "fiscal_year",
             "in": "query",
-            "description": "会計年度",
+            "description": "会計年度（年度の開始日の年）。会計年度の作成後に期間を変更した場合などに、指定した年と実際に集計対象となる会計年度がずれることがあります。意図した期間が集計されない場合は、fiscal_year ではなく start_date・end_date で期間を指定してください。",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -10415,7 +10415,7 @@
           {
             "name": "fiscal_year",
             "in": "query",
-            "description": "会計年度",
+            "description": "会計年度（年度の開始日の年）。会計年度の作成後に期間を変更した場合などに、指定した年と実際に集計対象となる会計年度がずれることがあります。意図した期間が集計されない場合は、fiscal_year ではなく start_date・end_date で期間を指定してください。",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -10659,7 +10659,7 @@
           {
             "name": "fiscal_year",
             "in": "query",
-            "description": "会計年度",
+            "description": "会計年度（年度の開始日の年）。会計年度の作成後に期間を変更した場合などに、指定した年と実際に集計対象となる会計年度がずれることがあります。意図した期間が集計されない場合は、fiscal_year ではなく start_date・end_date で期間を指定してください。",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -10892,7 +10892,7 @@
           {
             "name": "fiscal_year",
             "in": "query",
-            "description": "会計年度",
+            "description": "会計年度（年度の開始日の年）。会計年度の作成後に期間を変更した場合などに、指定した年と実際に集計対象となる会計年度がずれることがあります。意図した期間が集計されない場合は、fiscal_year ではなく start_date・end_date で期間を指定してください。",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -11133,7 +11133,7 @@
           {
             "name": "fiscal_year",
             "in": "query",
-            "description": "会計年度",
+            "description": "会計年度（年度の開始日の年）。会計年度の作成後に期間を変更した場合などに、指定した年と実際に集計対象となる会計年度がずれることがあります。意図した期間が集計されない場合は、fiscal_year ではなく start_date・end_date で期間を指定してください。",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -11374,7 +11374,7 @@
           {
             "name": "fiscal_year",
             "in": "query",
-            "description": "会計年度",
+            "description": "会計年度（年度の開始日の年）。会計年度の作成後に期間を変更した場合などに、指定した年と実際に集計対象となる会計年度がずれることがあります。意図した期間が集計されない場合は、fiscal_year ではなく start_date・end_date で期間を指定してください。",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -11606,7 +11606,7 @@
           {
             "name": "fiscal_year",
             "in": "query",
-            "description": "会計年度",
+            "description": "会計年度（年度の開始日の年）。会計年度の作成後に期間を変更した場合などに、指定した年と実際に集計対象となる会計年度がずれることがあります。意図した期間が集計されない場合は、fiscal_year ではなく start_date・end_date で期間を指定してください。",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -11841,7 +11841,7 @@
           {
             "name": "fiscal_year",
             "in": "query",
-            "description": "会計年度",
+            "description": "会計年度（年度の開始日の年）。会計年度の作成後に期間を変更した場合などに、指定した年と実際に集計対象となる会計年度がずれることがあります。意図した期間が集計されない場合は、fiscal_year ではなく start_date・end_date で期間を指定してください。",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -12076,7 +12076,7 @@
           {
             "name": "fiscal_year",
             "in": "query",
-            "description": "会計年度",
+            "description": "会計年度（年度の開始日の年）。会計年度の作成後に期間を変更した場合などに、指定した年と実際に集計対象となる会計年度がずれることがあります。意図した期間が集計されない場合は、fiscal_year ではなく start_date・end_date で期間を指定してください。",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -12320,7 +12320,7 @@
           {
             "name": "fiscal_year",
             "in": "query",
-            "description": "会計年度",
+            "description": "会計年度（年度の開始日の年）。会計年度の作成後に期間を変更した場合などに、指定した年と実際に集計対象となる会計年度がずれることがあります。意図した期間が集計されない場合は、fiscal_year ではなく start_date・end_date で期間を指定してください。",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -12553,7 +12553,7 @@
           {
             "name": "fiscal_year",
             "in": "query",
-            "description": "会計年度",
+            "description": "会計年度（年度の開始日の年）。会計年度の作成後に期間を変更した場合などに、指定した年と実際に集計対象となる会計年度がずれることがあります。意図した期間が集計されない場合は、fiscal_year ではなく start_date・end_date で期間を指定してください。",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -12794,7 +12794,7 @@
           {
             "name": "fiscal_year",
             "in": "query",
-            "description": "会計年度",
+            "description": "会計年度（年度の開始日の年）。会計年度の作成後に期間を変更した場合などに、指定した年と実際に集計対象となる会計年度がずれることがあります。意図した期間が集計されない場合は、fiscal_year ではなく start_date・end_date で期間を指定してください。",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -13035,7 +13035,7 @@
           {
             "name": "fiscal_year",
             "in": "query",
-            "description": "会計年度",
+            "description": "会計年度（年度の開始日の年）。会計年度の作成後に期間を変更した場合などに、指定した年と実際に集計対象となる会計年度がずれることがあります。意図した期間が集計されない場合は、fiscal_year ではなく start_date・end_date で期間を指定してください。",
             "schema": {
               "type": "integer",
               "format": "int64"
