@@ -39036,7 +39036,7 @@
                     "example": 1
                   }
                 },
-                "division_tag_1_id": {
+                "segment_1_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
@@ -39044,7 +39044,7 @@
                   "example": 1,
                   "nullable": true
                 },
-                "division_tag_2_id": {
+                "segment_2_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
@@ -39052,7 +39052,7 @@
                   "example": 1,
                   "nullable": true
                 },
-                "division_tag_3_id": {
+                "segment_3_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
