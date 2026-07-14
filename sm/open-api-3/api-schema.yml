@@ -406,7 +406,7 @@ paths:
       summary: 案件取消
       description: |-
         <h2 id="">概要</h2>
-        <p>指定されたIDの案件を取消します。
+        <p>指定されたIDの案件を取り消します。
         </p>
       operationId: cancel_business
       parameters:
@@ -2197,7 +2197,7 @@ paths:
       summary: 受注取消
       description: |-
         <h2 id="">概要</h2>
-        <p>指定されたIDの受注を取消します。
+        <p>指定されたIDの受注を取り消します。
         </p>
       operationId: cancel_sales_order
       parameters:
@@ -2602,7 +2602,7 @@ paths:
       summary: 納品取消
       description: |-
         <h2 id="">概要</h2>
-        <p>指定されたIDの納品を取消します。
+        <p>指定されたIDの納品を取り消します。
         </p>
       operationId: cancel_delivery
       parameters:
@@ -3068,7 +3068,7 @@ paths:
       summary: 売上取消
       description: |-
         <h2 id="">概要</h2>
-        <p>指定されたIDの売上を取消します。
+        <p>指定されたIDの売上を取り消します。
         </p>
       operationId: cancel_sale
       parameters:
@@ -4939,6 +4939,7 @@ components:
         company_id:
           type: integer
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           description: 事業所ID
           example: 1
@@ -4956,6 +4957,7 @@ components:
       description: 顧客の取引先ID
       type: integer
       format: int64
+      minimum: 1
       maximum: 9223372036854775807
       nullable: true
       example: 1001
@@ -4965,6 +4967,7 @@ components:
         ※ 親部門のIDは指定できません
       type: integer
       format: int64
+      minimum: 1
       maximum: 9223372036854775807
       nullable: true
       example: 67890
@@ -5842,7 +5845,7 @@ components:
           format: int64
           minimum: 1
           maximum: 9223372036854775807
-          description: 仕入先ID
+          description: 仕入先の取引先ID
           nullable: true
           example: 1001
         payment_partner_id:
@@ -5850,7 +5853,7 @@ components:
           format: int64
           minimum: 1
           maximum: 9223372036854775807
-          description: 支払先ID
+          description: 支払先の取引先ID
           nullable: true
           example: 1002
         quantity:
@@ -5920,7 +5923,7 @@ components:
           format: int64
           minimum: 1
           maximum: 9223372036854775807
-          description: セグメントタグ1ID
+          description: セグメントタグ1のID
           nullable: true
           example: 12345
         segment_tag_2_id:
@@ -5928,7 +5931,7 @@ components:
           format: int64
           minimum: 1
           maximum: 9223372036854775807
-          description: セグメントタグ2ID
+          description: セグメントタグ2のID
           nullable: true
           example: 12345
         segment_tag_3_id:
@@ -5936,7 +5939,7 @@ components:
           format: int64
           minimum: 1
           maximum: 9223372036854775807
-          description: セグメントタグ3ID
+          description: セグメントタグ3のID
           nullable: true
           example: 12345
     ProcurementCostBudgetCreateRequest:
@@ -5968,7 +5971,7 @@ components:
           nullable: false
           maximum: 999999999999
           minimum: -999999999999
-          description: 金額
+          description: 税抜金額
           example: 10000
       additionalProperties: false
     BasicCostBudgetCreateRequest:
@@ -6816,6 +6819,7 @@ components:
             会計計上部門ID<br>
             ※ 親部門のIDは指定できません
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           type: integer
           nullable: true
@@ -6823,6 +6827,7 @@ components:
         item_tag_id:
           description: 会計品目タグID
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           type: integer
           nullable: true
@@ -6833,6 +6838,7 @@ components:
           nullable: true
           items:
             format: int64
+            minimum: 1
             maximum: 9223372036854775807
             type: integer
             example: 3001
@@ -6920,6 +6926,7 @@ components:
           description: 仕入先の取引先ID
           type: integer
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           example: 1001
         is_qualified_invoice_issuer:
@@ -6952,6 +6959,7 @@ components:
           description: 発注書テンプレートID
           type: integer
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           nullable: true
           example: 10001
@@ -7389,6 +7397,7 @@ components:
           description: 顧客の取引先ID
           type: integer
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           example: 1001
         expires_on:
@@ -7413,6 +7422,7 @@ components:
           description: 見積書テンプレートID
           type: integer
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           nullable: true
           example: 10001
@@ -7686,6 +7696,7 @@ components:
           description: 顧客の取引先ID
           type: integer
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           example: 1001
         sales_on:
@@ -7710,6 +7721,7 @@ components:
           description: 納品書テンプレートID
           type: integer
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           nullable: true
           example: 10001
@@ -7737,12 +7749,14 @@ components:
           description: 請求先の取引先ID
           type: integer
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           example: 1002
         invoice_template_id:
           description: 請求書テンプレートID
           type: integer
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           nullable: true
           example: 10002
@@ -7768,6 +7782,7 @@ components:
           description: 入金元の取引先ID
           type: integer
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           example: 1003
         collection_method_type:
@@ -8134,6 +8149,7 @@ components:
           description: 顧客の取引先ID
           type: integer
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           example: 1001
         delivery_note:
@@ -8146,6 +8162,7 @@ components:
           description: 納品書テンプレートID
           type: integer
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           nullable: true
           example: 10001
@@ -8169,6 +8186,7 @@ components:
           description: 請求書テンプレートID
           type: integer
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           nullable: true
           example: 10002
@@ -8176,6 +8194,7 @@ components:
           description: 請求先の取引先ID
           type: integer
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           example: 1002
         invoice_subject:
@@ -8202,6 +8221,7 @@ components:
           description: 入金元の取引先ID
           type: integer
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           example: 1003
         charge_employee_id:
@@ -8479,6 +8499,7 @@ components:
               description: セグメントタグ1のID
               type: integer
               format: int64
+              minimum: 1
               maximum: 9223372036854775807
               nullable: true
               example: 12345
@@ -8486,6 +8507,7 @@ components:
               description: セグメントタグ2のID
               type: integer
               format: int64
+              minimum: 1
               maximum: 9223372036854775807
               nullable: true
               example: 12345
@@ -8493,6 +8515,7 @@ components:
               description: セグメントタグ3のID
               type: integer
               format: int64
+              minimum: 1
               maximum: 9223372036854775807
               nullable: true
               example: 12345
@@ -8538,6 +8561,7 @@ components:
           description: 顧客の取引先ID
           type: integer
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           example: 1001
         bills_on:
@@ -8550,6 +8574,7 @@ components:
           description: 請求書テンプレートID
           type: integer
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           nullable: true
           example: 10002
@@ -8557,6 +8582,7 @@ components:
           description: 請求先の取引先ID
           type: integer
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           example: 1002
         invoice_subject:
@@ -8583,6 +8609,7 @@ components:
           description: 入金元の取引先ID
           type: integer
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           example: 1003
         charge_employee_id:
@@ -8832,7 +8859,7 @@ components:
               type: integer
               format: int64
               maximum: 9223372036854775807
-              description: 会計取引ID
+              description: 会計の取引ID
               example: 1001
             deal_line_id:
               type: integer
@@ -9083,6 +9110,7 @@ components:
             会計計上部門ID<br>
             ※ 親部門のIDは指定できません
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           type: integer
           nullable: true
@@ -9090,6 +9118,7 @@ components:
         item_tag_id:
           description: 会計品目タグID
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           type: integer
           nullable: true
@@ -9100,26 +9129,30 @@ components:
           nullable: true
           items:
             format: int64
+            minimum: 1
             maximum: 9223372036854775807
             type: integer
             example: 3001
         segment_tag_1_id:
-          description: セグメントタグ1 ID
+          description: セグメントタグ1のID
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           type: integer
           nullable: true
           example: 12345
         segment_tag_2_id:
-          description: セグメントタグ2 ID
+          description: セグメントタグ2のID
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           type: integer
           nullable: true
           example: 12346
         segment_tag_3_id:
-          description: セグメントタグ3 ID
+          description: セグメントタグ3のID
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           type: integer
           nullable: true
@@ -9149,6 +9182,7 @@ components:
           description: 仕入先の取引先ID
           type: integer
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           example: 1001
         is_qualified_invoice_issuer:
@@ -9397,6 +9431,7 @@ components:
             会計計上部門ID<br>
             ※ 親部門のIDは指定できません
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           type: integer
           nullable: true
@@ -9404,6 +9439,7 @@ components:
         item_tag_id:
           description: 会計品目タグID
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           type: integer
           nullable: true
@@ -9414,26 +9450,30 @@ components:
           nullable: true
           items:
             format: int64
+            minimum: 1
             maximum: 9223372036854775807
             type: integer
             example: 3001
         segment_tag_1_id:
-          description: セグメントタグ1 ID
+          description: セグメントタグ1のID
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           type: integer
           nullable: true
           example: 12345
         segment_tag_2_id:
-          description: セグメントタグ2 ID
+          description: セグメントタグ2のID
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           type: integer
           nullable: true
           example: 12346
         segment_tag_3_id:
-          description: セグメントタグ3 ID
+          description: セグメントタグ3のID
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           type: integer
           nullable: true
@@ -9464,6 +9504,7 @@ components:
           description: 仕入先の取引先ID
           type: integer
           format: int64
+          minimum: 1
           maximum: 9223372036854775807
           example: 1001
         is_qualified_invoice_issuer:
@@ -10299,6 +10340,7 @@ components:
                     description: 納品書テンプレートID
                     type: integer
                     format: int64
+                    minimum: 1
                     maximum: 9223372036854775807
                     nullable: false
                     example: 10001
@@ -10306,6 +10348,7 @@ components:
                     description: 請求書テンプレートID
                     type: integer
                     format: int64
+                    minimum: 1
                     maximum: 9223372036854775807
                     nullable: false
                     example: 10002
@@ -10418,6 +10461,7 @@ components:
                     description: 請求書テンプレートID
                     type: integer
                     format: int64
+                    minimum: 1
                     maximum: 9223372036854775807
                     nullable: false
                     example: 10002
@@ -10448,7 +10492,7 @@ components:
                     minLength: 26
                     example: 01JPP4FD1CVQWCDSWA90VE1ZTM
                   amount_excluding_tax:
-                    description: 金額(税抜)
+                    description: 税抜金額
                     type: integer
                     format: int64
                     maximum: 999999999999
@@ -10487,7 +10531,7 @@ components:
                     minLength: 26
                     example: 01JPP4FD1CVQWCDSWA90VE1ZTM
                   amount_excluding_tax:
-                    description: 金額(税抜)
+                    description: 税抜金額
                     type: integer
                     format: int64
                     maximum: 999999999999
