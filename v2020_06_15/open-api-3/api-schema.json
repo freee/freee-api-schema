@@ -7054,7 +7054,7 @@
           {
             "name": "display_category",
             "in": "query",
-            "description": "税区分の表示カテゴリ（ tax_5: 5%表示の税区分、 tax_8: 8%表示の税区分、 tax_r8: 軽減税率8%表示の税区分、 tax_10: 10%表示の税区分、 tax_5_e80: インボイス経過措置5%表示80%控除の税区分、 tax_5_e50: インボイス経過措置5%表示50%控除の税区分、 tax_8_e80: インボイス経過措置8%表示80%控除の税区分、 tax_8_e50: インボイス経過措置8%表示50%控除の税区分、 tax_r8_e80: インボイス経過措置軽減税率8%表示80%控除の税区分、 tax_r8_e50: インボイス経過措置軽減税率8%表示50%控除の税区分、 tax_10_e80: インボイス経過措置10%表示80%控除の税区分、 tax_10_e50: インボイス経過措置10%表示50%控除の税区分）",
+            "description": "税区分の表示カテゴリ（ tax_5: 5%表示の税区分、 tax_8: 8%表示の税区分、 tax_r8: 軽減税率8%表示の税区分、 tax_10: 10%表示の税区分、 tax_5_e80: インボイス経過措置5%表示80%控除の税区分、 tax_5_e70: インボイス経過措置5%表示70%控除の税区分、 tax_5_e50: インボイス経過措置5%表示50%控除の税区分、 tax_5_e30: インボイス経過措置5%表示30%控除の税区分、 tax_8_e80: インボイス経過措置8%表示80%控除の税区分、 tax_8_e70: インボイス経過措置8%表示70%控除の税区分、 tax_8_e50: インボイス経過措置8%表示50%控除の税区分、 tax_8_e30: インボイス経過措置8%表示30%控除の税区分、 tax_r8_e80: インボイス経過措置軽減税率8%表示80%控除の税区分、 tax_r8_e70: インボイス経過措置軽減税率8%表示70%控除の税区分、 tax_r8_e50: インボイス経過措置軽減税率8%表示50%控除の税区分、 tax_r8_e30: インボイス経過措置軽減税率8%表示30%控除の税区分、 tax_10_e80: インボイス経過措置10%表示80%控除の税区分、 tax_10_e70: インボイス経過措置10%表示70%控除の税区分、 tax_10_e50: インボイス経過措置10%表示50%控除の税区分、 tax_10_e30: インボイス経過措置10%表示30%控除の税区分）",
             "schema": {
               "type": "string",
               "enum": [
@@ -7063,13 +7063,21 @@
                 "tax_r8",
                 "tax_10",
                 "tax_5_e80",
+                "tax_5_e70",
                 "tax_5_e50",
+                "tax_5_e30",
                 "tax_8_e80",
+                "tax_8_e70",
                 "tax_8_e50",
+                "tax_8_e30",
                 "tax_r8_e80",
+                "tax_r8_e70",
                 "tax_r8_e50",
+                "tax_r8_e30",
                 "tax_10_e80",
-                "tax_10_e50"
+                "tax_10_e70",
+                "tax_10_e50",
+                "tax_10_e30"
               ]
             }
           },
@@ -7125,7 +7133,7 @@
                           },
                           "display_category": {
                             "type": "string",
-                            "description": "税区分の表示カテゴリ（ tax_5: 5%表示の税区分、 tax_8: 8%表示の税区分、 tax_r8: 軽減税率8%表示の税区分、 tax_10: 10%表示の税区分、 tax_5_e80: インボイス経過措置5%表示80%控除の税区分、 tax_5_e50: インボイス経過措置5%表示50%控除の税区分、 tax_8_e80: インボイス経過措置8%表示80%控除の税区分、 tax_8_e50: インボイス経過措置8%表示50%控除の税区分、 tax_r8_e80: インボイス経過措置軽減税率8%表示80%控除の税区分、 tax_r8_e50: インボイス経過措置軽減税率8%表示50%控除の税区分、 tax_10_e80: インボイス経過措置10%表示80%控除の税区分、 tax_10_e50: インボイス経過措置10%表示50%控除の税区分、 null: 税率未設定税区分）",
+                            "description": "税区分の表示カテゴリ（ tax_5: 5%表示の税区分、 tax_8: 8%表示の税区分、 tax_r8: 軽減税率8%表示の税区分、 tax_10: 10%表示の税区分、 tax_5_e80: インボイス経過措置5%表示80%控除の税区分、 tax_5_e70: インボイス経過措置5%表示70%控除の税区分、 tax_5_e50: インボイス経過措置5%表示50%控除の税区分、 tax_5_e30: インボイス経過措置5%表示30%控除の税区分、 tax_8_e80: インボイス経過措置8%表示80%控除の税区分、 tax_8_e70: インボイス経過措置8%表示70%控除の税区分、 tax_8_e50: インボイス経過措置8%表示50%控除の税区分、 tax_8_e30: インボイス経過措置8%表示30%控除の税区分、 tax_r8_e80: インボイス経過措置軽減税率8%表示80%控除の税区分、 tax_r8_e70: インボイス経過措置軽減税率8%表示70%控除の税区分、 tax_r8_e50: インボイス経過措置軽減税率8%表示50%控除の税区分、 tax_r8_e30: インボイス経過措置軽減税率8%表示30%控除の税区分、 tax_10_e80: インボイス経過措置10%表示80%控除の税区分、 tax_10_e70: インボイス経過措置10%表示70%控除の税区分、 tax_10_e50: インボイス経過措置10%表示50%控除の税区分、 tax_10_e30: インボイス経過措置10%表示30%控除の税区分、 null: 税率未設定税区分）",
                             "example": "tax_8",
                             "enum": [
                               "tax_5",
@@ -7133,13 +7141,21 @@
                               "tax_r8",
                               "tax_10",
                               "tax_5_e80",
+                              "tax_5_e70",
                               "tax_5_e50",
+                              "tax_5_e30",
                               "tax_8_e80",
+                              "tax_8_e70",
                               "tax_8_e50",
+                              "tax_8_e30",
                               "tax_r8_e80",
+                              "tax_r8_e70",
                               "tax_r8_e50",
+                              "tax_r8_e30",
                               "tax_10_e80",
-                              "tax_10_e50"
+                              "tax_10_e70",
+                              "tax_10_e50",
+                              "tax_10_e30"
                             ],
                             "nullable": true
                           },
@@ -13381,13 +13397,21 @@
                 "tax_rate_10",
                 "tax_rate_r8",
                 "tax_rate_5_exempt_80",
+                "tax_rate_5_exempt_70",
                 "tax_rate_5_exempt_50",
+                "tax_rate_5_exempt_30",
                 "tax_rate_8_exempt_80",
+                "tax_rate_8_exempt_70",
                 "tax_rate_8_exempt_50",
+                "tax_rate_8_exempt_30",
                 "tax_rate_10_exempt_80",
+                "tax_rate_10_exempt_70",
                 "tax_rate_10_exempt_50",
+                "tax_rate_10_exempt_30",
                 "tax_rate_r8_exempt_80",
-                "tax_rate_r8_exempt_50"
+                "tax_rate_r8_exempt_70",
+                "tax_rate_r8_exempt_50",
+                "tax_rate_r8_exempt_30"
               ]
             },
             "example": "tax_rate_5"
@@ -32625,6 +32649,150 @@
                                 "type": "string",
                                 "description": "税区分",
                                 "example": "課対仕入（控50）8%（軽）"
+                              }
+                            }
+                          },
+                          "tax_rate_5_exempt_70": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "format": "int64",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入（控70）"
+                              }
+                            }
+                          },
+                          "tax_rate_5_exempt_30": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "format": "int64",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入（控30）"
+                              }
+                            }
+                          },
+                          "tax_rate_8_exempt_70": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "format": "int64",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入（控70）8%"
+                              }
+                            }
+                          },
+                          "tax_rate_8_exempt_30": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "format": "int64",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入（控30）8%"
+                              }
+                            }
+                          },
+                          "tax_rate_10_exempt_70": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "format": "int64",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入（控70）10%"
+                              }
+                            }
+                          },
+                          "tax_rate_10_exempt_30": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "format": "int64",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入（控30）10%"
+                              }
+                            }
+                          },
+                          "tax_rate_r8_exempt_70": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "format": "int64",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入（控70）8%（軽）"
+                              }
+                            }
+                          },
+                          "tax_rate_r8_exempt_30": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "integer",
+                                "format": "int64",
+                                "minimum": 0,
+                                "maximum": 2147483647,
+                                "description": "税区分コード",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "税区分",
+                                "example": "課対仕入（控30）8%（軽）"
                               }
                             }
                           }
