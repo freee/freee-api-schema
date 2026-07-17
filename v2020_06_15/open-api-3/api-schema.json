@@ -35235,7 +35235,8 @@
           "from_walletable_type",
           "id",
           "to_walletable_id",
-          "to_walletable_type"
+          "to_walletable_type",
+          "to_walletables"
         ],
         "properties": {
           "id": {
@@ -35257,7 +35258,8 @@
             "format": "int64",
             "minimum": -9223372036854775808,
             "maximum": 9223372036854775807,
-            "description": "金額",
+            "deprecated": true,
+            "description": "金額。将来廃止予定。振替先の複数指定に対応していないため、to_walletablesの各行amountを利用してください。",
             "example": 5000
           },
           "date": {
@@ -35285,7 +35287,8 @@
           },
           "to_walletable_type": {
             "type": "string",
-            "description": "振替先口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
+            "deprecated": true,
+            "description": "振替先口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)。将来廃止予定。振替先の複数指定に対応していないため、to_walletablesを利用してください。",
             "example": "bank_account",
             "enum": [
               "bank_account",
@@ -35298,14 +35301,62 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "振替先口座ID",
+            "deprecated": true,
+            "description": "振替先口座ID。将来廃止予定。振替先の複数指定に対応していないため、to_walletablesを利用してください。",
             "example": 201
           },
           "description": {
             "type": "string",
-            "description": "備考",
+            "deprecated": true,
+            "description": "備考。将来廃止予定。振替先の複数指定に対応していないため、to_walletablesの各行descriptionを利用してください。",
             "example": "備考",
             "nullable": true
+          },
+          "to_walletables": {
+            "type": "array",
+            "description": "振替先口座行（複数）。各行に振替先口座・金額・備考を持つ。",
+            "items": {
+              "type": "object",
+              "required": [
+                "type",
+                "id",
+                "amount",
+                "description"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "振替先口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
+                  "example": "bank_account",
+                  "enum": [
+                    "bank_account",
+                    "wallet",
+                    "credit_card"
+                  ]
+                },
+                "id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": 1,
+                  "description": "振替先口座ID",
+                  "example": 201
+                },
+                "amount": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": -9223372036854775808,
+                  "maximum": 9223372036854775807,
+                  "description": "金額",
+                  "example": 5000
+                },
+                "description": {
+                  "type": "string",
+                  "description": "備考",
+                  "example": "備考",
+                  "nullable": true
+                }
+              }
+            }
           }
         }
       },
