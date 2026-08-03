@@ -2964,7 +2964,7 @@
           "Invoices"
         ],
         "summary": "請求書一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の請求書一覧を取得する</p>\n",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の請求書一覧を取得する</p>\n\n<h2 id=\"_2\">注意点</h2>\n\n<ul>\n<li>partner_id と partner_code は同時に指定できません。どちらか一方のみ指定してください。</li>\n<li>partner_code は、事業所で取引先コードの利用設定が有効な場合のみ指定できます。無効な事業所で指定した場合はエラーになります。</li>\n<li>APIを利用するユーザーに閲覧権限のない部門が紐づく請求書は、取得結果に含まれません。</li>\n</ul>\n",
         "operationId": "get_invoices",
         "parameters": [
           {
@@ -2981,7 +2981,7 @@
           {
             "name": "partner_id",
             "in": "query",
-            "description": "取引先IDで絞込",
+            "description": "取引先IDで絞込（partner_code と同時に指定することはできません）",
             "schema": {
               "type": "integer",
               "format": "int64",
@@ -2991,7 +2991,7 @@
           {
             "name": "partner_code",
             "in": "query",
-            "description": "取引先コードで絞込",
+            "description": "取引先コードで絞込（事業所で取引先コードの利用設定が有効な場合のみ利用できます。partner_id と同時に指定することはできません）",
             "schema": {
               "type": "string"
             }
@@ -3166,7 +3166,7 @@
           "Invoices"
         ],
         "summary": "請求書の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の請求書を取得する</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の請求書を取得する</p>\n\n<h2 id=\"_2\">注意点</h2>\n\n<ul>\n<li>APIを利用するユーザーに閲覧権限のない部門が紐づく請求書を指定した場合は、存在しない請求書としてエラーになります。</li>\n</ul>",
         "operationId": "get_invoice",
         "parameters": [
           {
@@ -17115,7 +17115,7 @@
           "Purchase requests"
         ],
         "summary": "購買申請一覧の取得",
-        "description": "<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の購買申請一覧を取得する</p>\n\n<h2 id=\"_2\">注意点</h2>",
+        "description": "<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の購買申請一覧を取得する</p>\n\n<h2 id=\"_2\">注意点</h2>\n\n<ul>\n  <li>レスポンスの amount は非推奨です。同じ値を返す budget_amount を使用してください。</li>\n</ul>",
         "operationId": "get_purchase_requests",
         "parameters": [
           {
@@ -17590,7 +17590,7 @@
           "Purchase requests"
         ],
         "summary": "購買申請の申請フォーム一覧の取得",
-        "description": "<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の購買申請の申請フォーム一覧を取得する</p>\n\n<h2 id=\"_2\">注意点</h2>",
+        "description": "<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の購買申請の申請フォーム一覧を取得する</p>\n\n<h2 id=\"_2\">注意点</h2>\n\n<ul>\n  <li>status を指定しない場合、削除済み（deleted）の申請フォームも含めて返します。申請で使用できる申請フォームのみを取得する場合は、status に active を指定してください。</li>\n</ul>",
         "operationId": "get_purchase_requests_forms",
         "parameters": [
           {
@@ -17702,7 +17702,7 @@
           "Purchase requests"
         ],
         "summary": "購買申請の申請フォーム詳細の取得",
-        "description": "<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の購買申請の申請フォーム詳細を取得する</p>\n\n<h2 id=\"_2\">注意点</h2>",
+        "description": "<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の購買申請の申請フォーム詳細を取得する</p>\n\n<h2 id=\"_2\">注意点</h2>\n\n<ul>\n  <li>購買申請の作成・更新時に指定する approval_flow_route_id には、本APIのレスポンスの flow_routes の id を指定してください。申請経路一覧の取得API（/api/1/approval_flow_routes）のレスポンスの id は本APIの flow_routes の src_id に対応しており、flow_routes の id とは異なる値です。</li>\n</ul>",
         "operationId": "get_purchase_requests_form",
         "parameters": [
           {
@@ -19760,10 +19760,10 @@
                           },
                           "adjust_type": {
                             "type": "string",
-                            "description": "調整タイプ\n* within: 範囲内\n* over: 範囲外\n",
+                            "description": "調整タイプ\n* part_payment: 一部入金\n* diff_txn: 差額取引\n",
                             "enum": [
-                              "within",
-                              "over"
+                              "part_payment",
+                              "diff_txn"
                             ]
                           },
                           "tax_code": {
@@ -20252,10 +20252,10 @@
                           },
                           "adjust_type": {
                             "type": "string",
-                            "description": "調整タイプ\n* within: 範囲内\n* over: 範囲外\n",
+                            "description": "調整タイプ\n* part_payment: 一部入金\n* diff_txn: 差額取引\n",
                             "enum": [
-                              "within",
-                              "over"
+                              "part_payment",
+                              "diff_txn"
                             ]
                           },
                           "tax_code": {
@@ -20915,10 +20915,10 @@
                           },
                           "adjust_type": {
                             "type": "string",
-                            "description": "調整タイプ\n* within: 範囲内\n* over: 範囲外\n",
+                            "description": "調整タイプ\n* part_payment: 一部入金\n* diff_txn: 差額取引\n",
                             "enum": [
-                              "within",
-                              "over"
+                              "part_payment",
+                              "diff_txn"
                             ]
                           },
                           "tax_code": {
@@ -41594,7 +41594,7 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "申請経路ID",
+            "description": "申請経路ID（申請フォーム詳細の取得APIのレスポンスの flow_routes の id を指定してください。申請経路一覧の取得API /api/1/approval_flow_routes のレスポンスの id とは異なる値です）",
             "example": 1,
             "nullable": true
           },
@@ -41950,7 +41950,7 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "申請経路ID",
+            "description": "申請経路ID（申請フォーム詳細の取得APIのレスポンスの flow_routes の id を指定してください。申請経路一覧の取得API /api/1/approval_flow_routes のレスポンスの id とは異なる値です）",
             "example": 1,
             "nullable": true
           },
@@ -42564,19 +42564,52 @@
             "items": {
               "type": "object",
               "required": [
+                "booking_date",
+                "company_address1",
+                "company_address2",
+                "company_contact_info",
                 "company_id",
                 "company_name",
+                "company_prefecture_code",
+                "company_prefecture_name",
+                "company_zipcode",
+                "deal_id",
+                "description",
+                "due_date",
                 "id",
+                "invoice_contents",
                 "invoice_layout",
                 "invoice_number",
                 "invoice_status",
                 "issue_date",
+                "mail_sent_at",
+                "message",
+                "notes",
+                "partner_address1",
+                "partner_address2",
+                "partner_code",
+                "partner_contact_info",
+                "partner_display_name",
                 "partner_id",
+                "partner_name",
+                "partner_prefecture_code",
+                "partner_prefecture_name",
+                "partner_title",
+                "partner_zipcode",
+                "payment_bank_info",
+                "payment_date",
+                "payment_status",
                 "payment_type",
                 "posting_status",
+                "sub_total",
                 "tax_entry_method",
+                "title",
                 "total_amount",
-                "total_amount_per_vat_rate"
+                "total_amount_per_vat_rate",
+                "total_vat",
+                "web_confirmed_at",
+                "web_downloaded_at",
+                "web_published_at"
               ],
               "properties": {
                 "id": {
@@ -42608,7 +42641,7 @@
                 },
                 "partner_code": {
                   "type": "string",
-                  "description": "取引先コード",
+                  "description": "取引先コード（事業所で取引先コードの利用設定が有効な場合のみ値が入ります）",
                   "example": "code001",
                   "nullable": true
                 },
@@ -42683,7 +42716,7 @@
                 },
                 "payment_date": {
                   "type": "string",
-                  "description": "入金日",
+                  "description": "入金日 (yyyy-mm-dd)。入金ステータス(payment_status)が settled の場合のみ日付が入ります",
                   "example": "2019-12-17",
                   "nullable": true
                 },
@@ -42925,6 +42958,7 @@
                       },
                       "order": {
                         "type": "integer",
+                        "format": "int64",
                         "minimum": 0,
                         "maximum": 2147483647,
                         "description": "順序",
@@ -43149,19 +43183,53 @@
           "invoice": {
             "type": "object",
             "required": [
+              "booking_date",
+              "company_address1",
+              "company_address2",
+              "company_contact_info",
               "company_id",
               "company_name",
+              "company_prefecture_code",
+              "company_prefecture_name",
+              "company_zipcode",
+              "deal_id",
+              "description",
+              "due_date",
               "id",
+              "invoice_contents",
               "invoice_layout",
               "invoice_number",
               "invoice_status",
               "issue_date",
+              "mail_sent_at",
+              "message",
+              "notes",
+              "partner_address1",
+              "partner_address2",
+              "partner_code",
+              "partner_contact_info",
+              "partner_display_name",
               "partner_id",
+              "partner_name",
+              "partner_prefecture_code",
+              "partner_prefecture_name",
+              "partner_title",
+              "partner_zipcode",
+              "payment_bank_info",
+              "payment_date",
+              "payment_status",
               "payment_type",
               "posting_status",
+              "related_quotation_ids",
+              "sub_total",
               "tax_entry_method",
+              "title",
               "total_amount",
-              "total_amount_per_vat_rate"
+              "total_amount_per_vat_rate",
+              "total_vat",
+              "web_confirmed_at",
+              "web_downloaded_at",
+              "web_published_at"
             ],
             "properties": {
               "id": {
@@ -43192,7 +43260,7 @@
               },
               "partner_code": {
                 "type": "string",
-                "description": "取引先コード",
+                "description": "取引先コード（事業所で取引先コードの利用設定が有効な場合のみ値が入ります）",
                 "example": "code001",
                 "nullable": true
               },
@@ -43267,7 +43335,7 @@
               },
               "payment_date": {
                 "type": "string",
-                "description": "入金日",
+                "description": "入金日 (yyyy-mm-dd)。入金ステータス(payment_status)が settled の場合のみ日付が入ります",
                 "example": "2019-12-17",
                 "nullable": true
               },
