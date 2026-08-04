@@ -37971,7 +37971,7 @@
                     },
                     "resource_type": {
                       "type": "string",
-                      "description": "承認ステップの承認方法\n* ` predefined_user` - メンバー指定 (1人),\n* ` selected_user` - 申請時にメンバー指定\n* ` unspecified` - 指定なし\n* ` and_resource` - メンバー指定 (複数、全員の承認),\n* ` or_resource` - メンバー指定 (複数、1人の承認)\n* ` and_position` - 役職指定 (複数、全員の承認)\n* ` or_position` - 役職指定 (複数、1人の承認)",
+                      "description": "承認ステップの承認方法\n* ` predefined_user` - メンバー指定 (1人),\n* ` selected_user` - 申請時にメンバー指定\n* ` unspecified` - 指定なし\n* ` and_resource` - メンバー指定 (複数、全員の承認),\n* ` or_resource` - メンバー指定 (複数、1人の承認)\n* ` and_position` - 役職指定 (複数、全員の承認)\n* ` or_position` - 役職指定 (複数、1人の承認)\n* ` switchable` - 経路分岐",
                       "enum": [
                         "predefined_user",
                         "selected_user",
@@ -37979,7 +37979,8 @@
                         "and_resource",
                         "or_resource",
                         "and_position",
-                        "or_position"
+                        "or_position",
+                        "switchable"
                       ],
                       "example": "predefined_user"
                     }
