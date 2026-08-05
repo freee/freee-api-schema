@@ -17910,22 +17910,24 @@
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           },
           {
             "name": "included_user_id",
             "in": "query",
-            "description": "経路に含まれるユーザーのユーザーID",
+            "description": "経路に含まれるユーザーのユーザーID（指定したユーザーが承認ステップの承認者に含まれる申請経路に絞り込めます）",
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           },
           {
             "name": "usage",
             "in": "query",
-            "description": "申請種別（各申請種別が使用できる申請経路に絞り込めます。例えば、ApprovalRequest を指定すると、各種申請が使用できる申請経路に絞り込めます。）\n* `TxnApproval` - 仕訳承認\n* `ExpenseApplication` - 経費精算\n* `PaymentRequest` - 支払依頼\n* `ApprovalRequest` - 各種申請\n* `DocApproval` - 請求書等 (見積書・納品書・請求書・発注書)",
+            "description": "申請種別（各申請種別が使用できる申請経路に絞り込めます。例えば、ApprovalRequest を指定すると、各種申請が使用できる申請経路に絞り込めます。未指定の場合は全ての申請種別の申請経路が対象になります。）\n* `TxnApproval` - 仕訳承認\n* `ExpenseApplication` - 経費精算\n* `PaymentRequest` - 支払依頼\n* `ApprovalRequest` - 各種申請\n* `DocApproval` - 請求書等 (見積書・納品書・請求書・発注書)",
             "schema": {
               "type": "string",
               "enum": [
@@ -17935,16 +17937,19 @@
                 "ApprovalRequest",
                 "DocApproval"
               ]
-            }
+            },
+            "example": "ApprovalRequest"
           },
           {
             "name": "request_form_id",
             "in": "query",
-            "description": "申請フォームID request_form_id指定時はusage条件をApprovalRequestに指定してください。指定しない場合無効になります。",
+            "description": "申請フォームID（指定した申請フォームが使用できる申請経路に絞り込めます。usage に ApprovalRequest を指定した場合のみ有効で、usage が ApprovalRequest 以外または未指定の場合、このパラメータは無視されます。指定した申請フォームが存在しない場合や無効な場合は空配列が返ります。）",
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           }
         ],
         "responses": {
@@ -18023,12 +18028,14 @@
           {
             "name": "id",
             "in": "path",
-            "description": "経路申請ID",
+            "description": "申請経路ID",
             "required": true,
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           },
           {
             "name": "company_id",
@@ -18037,8 +18044,10 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           }
         ],
         "responses": {
@@ -18793,7 +18802,7 @@
           "Account groups"
         ],
         "summary": "決算書表示名の作成",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n<p>指定した事業所の決算書表示名を作成する</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n<p>指定した事業所の決算書表示名（小カテゴリー）を作成する</p>\n<p>決算書表示名は、貸借対照表・損益計算書などの決算書上で勘定科目をまとめて表示するための表示名です。勘定科目カテゴリー（中分類）の配下に作成され、勘定科目の作成・更新時に決算書表示名として指定できるようになります。</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>nameは同一年度内で一意である必要があります。すでに存在する決算書表示名と同じnameを指定した場合は400エラーになります。</li>\n  <li>account_category_idには、決算書表示名を配下に作成できる勘定科目カテゴリーのみ指定できます。指定可能な値はSelectablesフォーム用選択項目情報エンドポイント(account_groups.account_category_id)で取得してください。</li>\n  <li>indexを指定しない場合、決算書表示名は同一勘定科目カテゴリー内の末尾に追加されます。</li>\n</ul>",
         "operationId": "create_account_group",
         "requestBody": {
           "content": {
@@ -19733,192 +19742,6 @@
                     "active": {
                       "type": "boolean",
                       "description": "有効/無効\n* true: 有効\n* false: 無効\n"
-                    },
-                    "user_matcher_diff_deals": {
-                      "type": "array",
-                      "description": "消込差額行の配列\nact=6(未決済取引の消込を推測する), 8(一括振込ファイル消込を推測する), 9(一括振込ファイル消込を登録する) の場合のみ差額行が入ります。\nそれ以外の act では空配列です。\nFeatureFlag `ai_agent_user_matcher_scrub` off の事業所ではフィールド自体がレスポンスに含まれません。\n",
-                      "items": {
-                        "type": "object",
-                        "required": [
-                          "id",
-                          "diff_amount_type",
-                          "adjust_type"
-                        ],
-                        "properties": {
-                          "id": {
-                            "type": "integer",
-                            "description": "消込差額行ID"
-                          },
-                          "diff_amount_type": {
-                            "type": "string",
-                            "description": "差額タイプ\n* over: 過大\n* under: 過小\n* under_composite_diff: 複合差額(過小)\n",
-                            "enum": [
-                              "over",
-                              "under",
-                              "under_composite_diff"
-                            ]
-                          },
-                          "adjust_type": {
-                            "type": "string",
-                            "description": "調整タイプ\n* part_payment: 一部入金\n* diff_txn: 差額取引\n",
-                            "enum": [
-                              "part_payment",
-                              "diff_txn"
-                            ]
-                          },
-                          "tax_code": {
-                            "type": "integer",
-                            "nullable": true,
-                            "description": "税区分コード"
-                          },
-                          "tax_name": {
-                            "type": "string",
-                            "nullable": true,
-                            "description": "税区分名"
-                          },
-                          "threshold_amount": {
-                            "type": "integer",
-                            "nullable": true,
-                            "description": "しきい値金額"
-                          },
-                          "deal_description": {
-                            "type": "string",
-                            "nullable": true,
-                            "description": "取引の備考"
-                          },
-                          "account_item": {
-                            "type": "object",
-                            "nullable": true,
-                            "description": "勘定科目",
-                            "properties": {
-                              "id": {
-                                "type": "integer",
-                                "description": "勘定科目ID"
-                              },
-                              "name": {
-                                "type": "string",
-                                "description": "勘定科目名"
-                              }
-                            }
-                          },
-                          "item": {
-                            "type": "object",
-                            "nullable": true,
-                            "description": "品目",
-                            "properties": {
-                              "id": {
-                                "type": "integer",
-                                "description": "品目ID"
-                              },
-                              "name": {
-                                "type": "string",
-                                "description": "品目名"
-                              },
-                              "category_name": {
-                                "type": "string",
-                                "description": "カテゴリ名"
-                              }
-                            }
-                          },
-                          "section": {
-                            "type": "object",
-                            "nullable": true,
-                            "description": "部門",
-                            "properties": {
-                              "id": {
-                                "type": "integer",
-                                "description": "部門ID"
-                              },
-                              "name": {
-                                "type": "string",
-                                "description": "部門名"
-                              },
-                              "category_name": {
-                                "type": "string",
-                                "description": "カテゴリ名"
-                              }
-                            }
-                          },
-                          "division_tag_1": {
-                            "type": "object",
-                            "nullable": true,
-                            "description": "セグメント1タグ",
-                            "properties": {
-                              "id": {
-                                "type": "integer",
-                                "description": "セグメント1タグID"
-                              },
-                              "name": {
-                                "type": "string",
-                                "description": "セグメント1タグ名"
-                              },
-                              "category_name": {
-                                "type": "string",
-                                "description": "カテゴリ名"
-                              }
-                            }
-                          },
-                          "division_tag_2": {
-                            "type": "object",
-                            "nullable": true,
-                            "description": "セグメント2タグ",
-                            "properties": {
-                              "id": {
-                                "type": "integer",
-                                "description": "セグメント2タグID"
-                              },
-                              "name": {
-                                "type": "string",
-                                "description": "セグメント2タグ名"
-                              },
-                              "category_name": {
-                                "type": "string",
-                                "description": "カテゴリ名"
-                              }
-                            }
-                          },
-                          "division_tag_3": {
-                            "type": "object",
-                            "nullable": true,
-                            "description": "セグメント3タグ",
-                            "properties": {
-                              "id": {
-                                "type": "integer",
-                                "description": "セグメント3タグID"
-                              },
-                              "name": {
-                                "type": "string",
-                                "description": "セグメント3タグ名"
-                              },
-                              "category_name": {
-                                "type": "string",
-                                "description": "カテゴリ名"
-                              }
-                            }
-                          },
-                          "tags": {
-                            "type": "array",
-                            "description": "メモタグの配列",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "integer",
-                                  "description": "メモタグID"
-                                },
-                                "name": {
-                                  "type": "string",
-                                  "description": "メモタグ名"
-                                },
-                                "category_name": {
-                                  "type": "string",
-                                  "description": "カテゴリ名"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
                     }
                   }
                 }
@@ -20225,192 +20048,6 @@
                     "active": {
                       "type": "boolean",
                       "description": "有効/無効\n* true: 有効\n* false: 無効\n"
-                    },
-                    "user_matcher_diff_deals": {
-                      "type": "array",
-                      "description": "消込差額行の配列\nact=6(未決済取引の消込を推測する), 8(一括振込ファイル消込を推測する), 9(一括振込ファイル消込を登録する) の場合のみ差額行が入ります。\nそれ以外の act では空配列です。\nFeatureFlag `ai_agent_user_matcher_scrub` off の事業所ではフィールド自体がレスポンスに含まれません。\n",
-                      "items": {
-                        "type": "object",
-                        "required": [
-                          "id",
-                          "diff_amount_type",
-                          "adjust_type"
-                        ],
-                        "properties": {
-                          "id": {
-                            "type": "integer",
-                            "description": "消込差額行ID"
-                          },
-                          "diff_amount_type": {
-                            "type": "string",
-                            "description": "差額タイプ\n* over: 過大\n* under: 過小\n* under_composite_diff: 複合差額(過小)\n",
-                            "enum": [
-                              "over",
-                              "under",
-                              "under_composite_diff"
-                            ]
-                          },
-                          "adjust_type": {
-                            "type": "string",
-                            "description": "調整タイプ\n* part_payment: 一部入金\n* diff_txn: 差額取引\n",
-                            "enum": [
-                              "part_payment",
-                              "diff_txn"
-                            ]
-                          },
-                          "tax_code": {
-                            "type": "integer",
-                            "nullable": true,
-                            "description": "税区分コード"
-                          },
-                          "tax_name": {
-                            "type": "string",
-                            "nullable": true,
-                            "description": "税区分名"
-                          },
-                          "threshold_amount": {
-                            "type": "integer",
-                            "nullable": true,
-                            "description": "しきい値金額"
-                          },
-                          "deal_description": {
-                            "type": "string",
-                            "nullable": true,
-                            "description": "取引の備考"
-                          },
-                          "account_item": {
-                            "type": "object",
-                            "nullable": true,
-                            "description": "勘定科目",
-                            "properties": {
-                              "id": {
-                                "type": "integer",
-                                "description": "勘定科目ID"
-                              },
-                              "name": {
-                                "type": "string",
-                                "description": "勘定科目名"
-                              }
-                            }
-                          },
-                          "item": {
-                            "type": "object",
-                            "nullable": true,
-                            "description": "品目",
-                            "properties": {
-                              "id": {
-                                "type": "integer",
-                                "description": "品目ID"
-                              },
-                              "name": {
-                                "type": "string",
-                                "description": "品目名"
-                              },
-                              "category_name": {
-                                "type": "string",
-                                "description": "カテゴリ名"
-                              }
-                            }
-                          },
-                          "section": {
-                            "type": "object",
-                            "nullable": true,
-                            "description": "部門",
-                            "properties": {
-                              "id": {
-                                "type": "integer",
-                                "description": "部門ID"
-                              },
-                              "name": {
-                                "type": "string",
-                                "description": "部門名"
-                              },
-                              "category_name": {
-                                "type": "string",
-                                "description": "カテゴリ名"
-                              }
-                            }
-                          },
-                          "division_tag_1": {
-                            "type": "object",
-                            "nullable": true,
-                            "description": "セグメント1タグ",
-                            "properties": {
-                              "id": {
-                                "type": "integer",
-                                "description": "セグメント1タグID"
-                              },
-                              "name": {
-                                "type": "string",
-                                "description": "セグメント1タグ名"
-                              },
-                              "category_name": {
-                                "type": "string",
-                                "description": "カテゴリ名"
-                              }
-                            }
-                          },
-                          "division_tag_2": {
-                            "type": "object",
-                            "nullable": true,
-                            "description": "セグメント2タグ",
-                            "properties": {
-                              "id": {
-                                "type": "integer",
-                                "description": "セグメント2タグID"
-                              },
-                              "name": {
-                                "type": "string",
-                                "description": "セグメント2タグ名"
-                              },
-                              "category_name": {
-                                "type": "string",
-                                "description": "カテゴリ名"
-                              }
-                            }
-                          },
-                          "division_tag_3": {
-                            "type": "object",
-                            "nullable": true,
-                            "description": "セグメント3タグ",
-                            "properties": {
-                              "id": {
-                                "type": "integer",
-                                "description": "セグメント3タグID"
-                              },
-                              "name": {
-                                "type": "string",
-                                "description": "セグメント3タグ名"
-                              },
-                              "category_name": {
-                                "type": "string",
-                                "description": "カテゴリ名"
-                              }
-                            }
-                          },
-                          "tags": {
-                            "type": "array",
-                            "description": "メモタグの配列",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "integer",
-                                  "description": "メモタグID"
-                                },
-                                "name": {
-                                  "type": "string",
-                                  "description": "メモタグ名"
-                                },
-                                "category_name": {
-                                  "type": "string",
-                                  "description": "カテゴリ名"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
                     }
                   }
                 }
@@ -20888,192 +20525,6 @@
                     "active": {
                       "type": "boolean",
                       "description": "有効/無効\n* true: 有効\n* false: 無効\n"
-                    },
-                    "user_matcher_diff_deals": {
-                      "type": "array",
-                      "description": "消込差額行の配列\nact=6(未決済取引の消込を推測する), 8(一括振込ファイル消込を推測する), 9(一括振込ファイル消込を登録する) の場合のみ差額行が入ります。\nそれ以外の act では空配列です。\nFeatureFlag `ai_agent_user_matcher_scrub` off の事業所ではフィールド自体がレスポンスに含まれません。\n",
-                      "items": {
-                        "type": "object",
-                        "required": [
-                          "id",
-                          "diff_amount_type",
-                          "adjust_type"
-                        ],
-                        "properties": {
-                          "id": {
-                            "type": "integer",
-                            "description": "消込差額行ID"
-                          },
-                          "diff_amount_type": {
-                            "type": "string",
-                            "description": "差額タイプ\n* over: 過大\n* under: 過小\n* under_composite_diff: 複合差額(過小)\n",
-                            "enum": [
-                              "over",
-                              "under",
-                              "under_composite_diff"
-                            ]
-                          },
-                          "adjust_type": {
-                            "type": "string",
-                            "description": "調整タイプ\n* part_payment: 一部入金\n* diff_txn: 差額取引\n",
-                            "enum": [
-                              "part_payment",
-                              "diff_txn"
-                            ]
-                          },
-                          "tax_code": {
-                            "type": "integer",
-                            "nullable": true,
-                            "description": "税区分コード"
-                          },
-                          "tax_name": {
-                            "type": "string",
-                            "nullable": true,
-                            "description": "税区分名"
-                          },
-                          "threshold_amount": {
-                            "type": "integer",
-                            "nullable": true,
-                            "description": "しきい値金額"
-                          },
-                          "deal_description": {
-                            "type": "string",
-                            "nullable": true,
-                            "description": "取引の備考"
-                          },
-                          "account_item": {
-                            "type": "object",
-                            "nullable": true,
-                            "description": "勘定科目",
-                            "properties": {
-                              "id": {
-                                "type": "integer",
-                                "description": "勘定科目ID"
-                              },
-                              "name": {
-                                "type": "string",
-                                "description": "勘定科目名"
-                              }
-                            }
-                          },
-                          "item": {
-                            "type": "object",
-                            "nullable": true,
-                            "description": "品目",
-                            "properties": {
-                              "id": {
-                                "type": "integer",
-                                "description": "品目ID"
-                              },
-                              "name": {
-                                "type": "string",
-                                "description": "品目名"
-                              },
-                              "category_name": {
-                                "type": "string",
-                                "description": "カテゴリ名"
-                              }
-                            }
-                          },
-                          "section": {
-                            "type": "object",
-                            "nullable": true,
-                            "description": "部門",
-                            "properties": {
-                              "id": {
-                                "type": "integer",
-                                "description": "部門ID"
-                              },
-                              "name": {
-                                "type": "string",
-                                "description": "部門名"
-                              },
-                              "category_name": {
-                                "type": "string",
-                                "description": "カテゴリ名"
-                              }
-                            }
-                          },
-                          "division_tag_1": {
-                            "type": "object",
-                            "nullable": true,
-                            "description": "セグメント1タグ",
-                            "properties": {
-                              "id": {
-                                "type": "integer",
-                                "description": "セグメント1タグID"
-                              },
-                              "name": {
-                                "type": "string",
-                                "description": "セグメント1タグ名"
-                              },
-                              "category_name": {
-                                "type": "string",
-                                "description": "カテゴリ名"
-                              }
-                            }
-                          },
-                          "division_tag_2": {
-                            "type": "object",
-                            "nullable": true,
-                            "description": "セグメント2タグ",
-                            "properties": {
-                              "id": {
-                                "type": "integer",
-                                "description": "セグメント2タグID"
-                              },
-                              "name": {
-                                "type": "string",
-                                "description": "セグメント2タグ名"
-                              },
-                              "category_name": {
-                                "type": "string",
-                                "description": "カテゴリ名"
-                              }
-                            }
-                          },
-                          "division_tag_3": {
-                            "type": "object",
-                            "nullable": true,
-                            "description": "セグメント3タグ",
-                            "properties": {
-                              "id": {
-                                "type": "integer",
-                                "description": "セグメント3タグID"
-                              },
-                              "name": {
-                                "type": "string",
-                                "description": "セグメント3タグ名"
-                              },
-                              "category_name": {
-                                "type": "string",
-                                "description": "カテゴリ名"
-                              }
-                            }
-                          },
-                          "tags": {
-                            "type": "array",
-                            "description": "メモタグの配列",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "integer",
-                                  "description": "メモタグID"
-                                },
-                                "name": {
-                                  "type": "string",
-                                  "description": "メモタグ名"
-                                },
-                                "category_name": {
-                                  "type": "string",
-                                  "description": "カテゴリ名"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
                     }
                   }
                 }
@@ -42224,10 +41675,18 @@
         "properties": {
           "approval_flow_routes": {
             "type": "array",
+            "description": "申請経路の一覧",
             "items": {
               "type": "object",
               "required": [
                 "id",
+                "name",
+                "description",
+                "user_id",
+                "definition_system",
+                "first_step_id",
+                "usages",
+                "request_form_ids",
                 "default_route"
               ],
               "properties": {
@@ -42245,20 +41704,20 @@
                 },
                 "description": {
                   "type": "string",
-                  "description": "申請経路の説明",
+                  "description": "申請経路の説明（未設定の場合は空文字列になります）",
                   "example": "申請経路の説明"
                 },
                 "user_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "更新したユーザーのユーザーID",
+                  "description": "申請経路を作成したユーザーのユーザーID（削除済みのユーザーでもIDは返ります。作成ユーザーが記録されていない場合は null になります）",
                   "example": 1,
                   "nullable": true
                 },
                 "definition_system": {
                   "type": "boolean",
-                  "description": "システム作成の申請経路かどうか",
+                  "description": "システムにより自動作成された申請経路かどうか（true の場合、freee が自動作成した申請経路であることを示します）",
                   "example": true
                 },
                 "first_step_id": {
@@ -42270,7 +41729,7 @@
                 },
                 "usages": {
                   "type": "array",
-                  "description": "申請種別（申請経路を使用できる申請種別を示します。例えば、ApprovalRequest の場合は、各種申請で使用できる申請経路です。）\n* `TxnApproval` - 仕訳承認\n* `ExpenseApplication` - 経費精算\n* `PaymentRequest` - 支払依頼\n* `ApprovalRequest` - 各種申請\n* `DocApproval` - 請求書等 (見積書・納品書・請求書・発注書)",
+                  "description": "申請種別（申請経路を使用できる申請種別を示します。例えば、ApprovalRequest の場合は、各種申請で使用できる申請経路です。）\n* `TxnApproval` - 仕訳承認\n* `ExpenseApplication` - 経費精算\n* `PaymentRequest` - 支払依頼\n* `ApprovalRequest` - 各種申請\n* `DocApproval` - 請求書等 (見積書・納品書・請求書・発注書)\n* `PurchaseRequest` - 購買申請",
                   "items": {
                     "type": "string",
                     "enum": [
@@ -42278,14 +41737,15 @@
                       "ExpenseApplication",
                       "PaymentRequest",
                       "ApprovalRequest",
-                      "DocApproval"
+                      "DocApproval",
+                      "PurchaseRequest"
                     ],
                     "example": "TxnApproval"
                   }
                 },
                 "request_form_ids": {
                   "type": "array",
-                  "description": "申請経路で利用できる申請フォームID配列",
+                  "description": "申請経路で利用できる申請フォームID配列（無効化・削除された申請フォームは含まれません）",
                   "items": {
                     "type": "integer",
                     "format": "int64",
@@ -42314,7 +41774,14 @@
             "type": "object",
             "required": [
               "id",
-              "request_form_ids"
+              "name",
+              "description",
+              "user_id",
+              "definition_system",
+              "first_step_id",
+              "usages",
+              "request_form_ids",
+              "steps"
             ],
             "properties": {
               "id": {
@@ -42331,32 +41798,32 @@
               },
               "description": {
                 "type": "string",
-                "description": "申請経路の説明",
+                "description": "申請経路の説明（未設定の場合は空文字列になります）",
                 "example": "申請経路の説明"
               },
               "user_id": {
                 "type": "integer",
                 "format": "int64",
                 "minimum": 1,
-                "description": "更新したユーザーのユーザーID",
+                "description": "申請経路を作成したユーザーのユーザーID（削除済みのユーザーでもIDは返ります。作成ユーザーが記録されていない場合は null になります）",
                 "example": 1,
                 "nullable": true
               },
               "definition_system": {
                 "type": "boolean",
-                "description": "システム作成の申請経路かどうか",
+                "description": "システムにより自動作成された申請経路かどうか（true の場合、freee が自動作成した申請経路であることを示します）",
                 "example": true
               },
               "first_step_id": {
                 "type": "integer",
                 "format": "int64",
                 "minimum": 1,
-                "description": "最初の承認ステップのID",
+                "description": "最初の承認ステップのID（steps に含まれる先頭の承認ステップのIDと一致します）",
                 "example": 1
               },
               "usages": {
                 "type": "array",
-                "description": "申請種別（申請経路を使用できる申請種別を示します。例えば、ApprovalRequest の場合は、各種申請で使用できる申請経路です。）\n* `TxnApproval` - 仕訳承認\n* `ExpenseApplication` - 経費精算\n* `PaymentRequest` - 支払依頼\n* `ApprovalRequest` - 各種申請\n* `DocApproval` - 請求書等 (見積書・納品書・請求書・発注書)",
+                "description": "申請種別（申請経路を使用できる申請種別を示します。例えば、ApprovalRequest の場合は、各種申請で使用できる申請経路です。）\n* `TxnApproval` - 仕訳承認\n* `ExpenseApplication` - 経費精算\n* `PaymentRequest` - 支払依頼\n* `ApprovalRequest` - 各種申請\n* `DocApproval` - 請求書等 (見積書・納品書・請求書・発注書)\n* `PurchaseRequest` - 購買申請",
                 "items": {
                   "type": "string",
                   "enum": [
@@ -42364,14 +41831,15 @@
                     "ExpenseApplication",
                     "PaymentRequest",
                     "ApprovalRequest",
-                    "DocApproval"
+                    "DocApproval",
+                    "PurchaseRequest"
                   ],
                   "example": "TxnApproval"
                 }
               },
               "request_form_ids": {
                 "type": "array",
-                "description": "申請経路で利用できる申請フォームID配列",
+                "description": "申請経路で利用できる申請フォームID配列（無効化・削除された申請フォームは含まれません）",
                 "items": {
                   "type": "integer",
                   "format": "int64",
@@ -42382,13 +41850,14 @@
               },
               "steps": {
                 "type": "array",
-                "description": "承認ステップ（配列）",
+                "description": "承認ステップ（配列）。承認順に並びます。",
                 "items": {
                   "type": "object",
                   "required": [
                     "id",
                     "next_step_id",
-                    "resource_type"
+                    "resource_type",
+                    "users_ids"
                   ],
                   "properties": {
                     "id": {
@@ -42402,13 +41871,13 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
-                      "description": "次の承認ステップID",
+                      "description": "次の承認ステップID（最後の承認ステップの場合は null になります）",
                       "nullable": true,
                       "example": 2
                     },
                     "resource_type": {
                       "type": "string",
-                      "description": "承認方法( predefined_user: メンバー指定 (1人), selected_user: 申請時にメンバー指定,unspecified: 指定なし, and_resource: メンバー指定 (複数、全員の承認), or_resource: メンバー指定 (複数、1人の承認), and_position: 役職指定 (複数、全員の承認), or_position: 役職指定 (複数、1人の承認), switchable: 条件分岐（金額・役職などの評価値で承認ステップが分岐する） ) ",
+                      "description": "承認方法\n* `predefined_user` - メンバー指定 (1人)\n* `selected_user` - 申請時にメンバー指定\n* `unspecified` - 指定なし\n* `and_resource` - メンバー指定 (複数、全員の承認)\n* `or_resource` - メンバー指定 (複数、1人の承認)\n* `and_position` - 役職指定 (複数、全員の承認)\n* `or_position` - 役職指定 (複数、1人の承認)\n* `switchable` - 条件分岐（金額・役職などの評価値で承認ステップが分岐する）",
                       "enum": [
                         "predefined_user",
                         "selected_user",
@@ -42421,9 +41890,9 @@
                       ],
                       "example": "predefined_user"
                     },
-                    "user_ids": {
+                    "users_ids": {
                       "type": "array",
-                      "description": "承認者のユーザーID (配列)。承認ステップのresource_typeが部門指定、役職指定等の場合は空の配列になります。",
+                      "description": "承認者のユーザーID (配列)。resource_type が predefined_user / and_resource / or_resource の場合に承認者のユーザーIDが入ります。申請経路上で承認者となるメンバーが確定しない resource_type（selected_user / unspecified / and_position / or_position / switchable）の場合は空の配列になります。",
                       "items": {
                         "type": "integer",
                         "format": "int64",
@@ -46376,18 +45845,18 @@
           "name": {
             "type": "string",
             "maxLength": 20,
-            "description": "決算書表示名 (20文字以内)",
+            "description": "決算書表示名 (20文字以内)。同一年度内で一意である必要があります。末尾に半角スペースは指定できません。",
             "example": "新しい決算書表示名"
           },
           "account_category_id": {
             "type": "integer",
-            "description": "勘定科目カテゴリーID Selectablesフォーム用選択項目情報エンドポイント(account_groups.account_category_id)で取得可能です",
+            "description": "勘定科目カテゴリーID。決算書表示名を配下に作成できる勘定科目カテゴリーのみ指定できます。指定可能な値はSelectablesフォーム用選択項目情報エンドポイント(account_groups.account_category_id)で取得可能です。指定できないIDの場合は400エラーになります。",
             "format": "int64",
             "example": 1
           },
           "index": {
             "type": "integer",
-            "description": "表示順",
+            "description": "表示順 (同一勘定科目カテゴリー内の挿入位置、0始まり)。指定した位置に挿入され、同一勘定科目カテゴリー内の他の決算書表示名の表示順は自動で振り直されます。未指定の場合や既存の決算書表示名の数を超える値を指定した場合は末尾に追加されます。",
             "format": "int64",
             "example": 1
           }
@@ -46401,6 +45870,7 @@
         "properties": {
           "account_group": {
             "type": "object",
+            "description": "作成された決算書表示名（小カテゴリー）",
             "required": [
               "company_id",
               "id",
@@ -46435,13 +45905,13 @@
               },
               "account_category_id": {
                 "type": "integer",
-                "description": "勘定科目カテゴリID",
+                "description": "勘定科目カテゴリーID",
                 "example": 1,
                 "format": "int64"
               },
               "index": {
                 "type": "integer",
-                "description": "表示順",
+                "description": "表示順 (同一勘定科目カテゴリー内、0始まり)",
                 "example": 1,
                 "format": "int64"
               }
