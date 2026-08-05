@@ -17910,22 +17910,24 @@
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           },
           {
             "name": "included_user_id",
             "in": "query",
-            "description": "経路に含まれるユーザーのユーザーID",
+            "description": "経路に含まれるユーザーのユーザーID（指定したユーザーが承認ステップの承認者に含まれる申請経路に絞り込めます）",
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           },
           {
             "name": "usage",
             "in": "query",
-            "description": "申請種別（各申請種別が使用できる申請経路に絞り込めます。例えば、ApprovalRequest を指定すると、各種申請が使用できる申請経路に絞り込めます。）\n* `TxnApproval` - 仕訳承認\n* `ExpenseApplication` - 経費精算\n* `PaymentRequest` - 支払依頼\n* `ApprovalRequest` - 各種申請\n* `DocApproval` - 請求書等 (見積書・納品書・請求書・発注書)",
+            "description": "申請種別（各申請種別が使用できる申請経路に絞り込めます。例えば、ApprovalRequest を指定すると、各種申請が使用できる申請経路に絞り込めます。未指定の場合は全ての申請種別の申請経路が対象になります。）\n* `TxnApproval` - 仕訳承認\n* `ExpenseApplication` - 経費精算\n* `PaymentRequest` - 支払依頼\n* `ApprovalRequest` - 各種申請\n* `DocApproval` - 請求書等 (見積書・納品書・請求書・発注書)",
             "schema": {
               "type": "string",
               "enum": [
@@ -17935,16 +17937,19 @@
                 "ApprovalRequest",
                 "DocApproval"
               ]
-            }
+            },
+            "example": "ApprovalRequest"
           },
           {
             "name": "request_form_id",
             "in": "query",
-            "description": "申請フォームID request_form_id指定時はusage条件をApprovalRequestに指定してください。指定しない場合無効になります。",
+            "description": "申請フォームID（指定した申請フォームが使用できる申請経路に絞り込めます。usage に ApprovalRequest を指定した場合のみ有効で、usage が ApprovalRequest 以外または未指定の場合、このパラメータは無視されます。指定した申請フォームが存在しない場合や無効な場合は空配列が返ります。）",
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           }
         ],
         "responses": {
@@ -18023,12 +18028,14 @@
           {
             "name": "id",
             "in": "path",
-            "description": "経路申請ID",
+            "description": "申請経路ID",
             "required": true,
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           },
           {
             "name": "company_id",
@@ -18037,8 +18044,10 @@
             "required": true,
             "schema": {
               "type": "integer",
+              "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           }
         ],
         "responses": {
@@ -41666,10 +41675,18 @@
         "properties": {
           "approval_flow_routes": {
             "type": "array",
+            "description": "申請経路の一覧",
             "items": {
               "type": "object",
               "required": [
                 "id",
+                "name",
+                "description",
+                "user_id",
+                "definition_system",
+                "first_step_id",
+                "usages",
+                "request_form_ids",
                 "default_route"
               ],
               "properties": {
@@ -41687,20 +41704,20 @@
                 },
                 "description": {
                   "type": "string",
-                  "description": "申請経路の説明",
+                  "description": "申請経路の説明（未設定の場合は空文字列になります）",
                   "example": "申請経路の説明"
                 },
                 "user_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "更新したユーザーのユーザーID",
+                  "description": "申請経路を作成したユーザーのユーザーID（削除済みのユーザーでもIDは返ります。作成ユーザーが記録されていない場合は null になります）",
                   "example": 1,
                   "nullable": true
                 },
                 "definition_system": {
                   "type": "boolean",
-                  "description": "システム作成の申請経路かどうか",
+                  "description": "システムにより自動作成された申請経路かどうか（true の場合、freee が自動作成した申請経路であることを示します）",
                   "example": true
                 },
                 "first_step_id": {
@@ -41712,7 +41729,7 @@
                 },
                 "usages": {
                   "type": "array",
-                  "description": "申請種別（申請経路を使用できる申請種別を示します。例えば、ApprovalRequest の場合は、各種申請で使用できる申請経路です。）\n* `TxnApproval` - 仕訳承認\n* `ExpenseApplication` - 経費精算\n* `PaymentRequest` - 支払依頼\n* `ApprovalRequest` - 各種申請\n* `DocApproval` - 請求書等 (見積書・納品書・請求書・発注書)",
+                  "description": "申請種別（申請経路を使用できる申請種別を示します。例えば、ApprovalRequest の場合は、各種申請で使用できる申請経路です。）\n* `TxnApproval` - 仕訳承認\n* `ExpenseApplication` - 経費精算\n* `PaymentRequest` - 支払依頼\n* `ApprovalRequest` - 各種申請\n* `DocApproval` - 請求書等 (見積書・納品書・請求書・発注書)\n* `PurchaseRequest` - 購買申請",
                   "items": {
                     "type": "string",
                     "enum": [
@@ -41720,14 +41737,15 @@
                       "ExpenseApplication",
                       "PaymentRequest",
                       "ApprovalRequest",
-                      "DocApproval"
+                      "DocApproval",
+                      "PurchaseRequest"
                     ],
                     "example": "TxnApproval"
                   }
                 },
                 "request_form_ids": {
                   "type": "array",
-                  "description": "申請経路で利用できる申請フォームID配列",
+                  "description": "申請経路で利用できる申請フォームID配列（無効化・削除された申請フォームは含まれません）",
                   "items": {
                     "type": "integer",
                     "format": "int64",
@@ -41756,7 +41774,14 @@
             "type": "object",
             "required": [
               "id",
-              "request_form_ids"
+              "name",
+              "description",
+              "user_id",
+              "definition_system",
+              "first_step_id",
+              "usages",
+              "request_form_ids",
+              "steps"
             ],
             "properties": {
               "id": {
@@ -41773,32 +41798,32 @@
               },
               "description": {
                 "type": "string",
-                "description": "申請経路の説明",
+                "description": "申請経路の説明（未設定の場合は空文字列になります）",
                 "example": "申請経路の説明"
               },
               "user_id": {
                 "type": "integer",
                 "format": "int64",
                 "minimum": 1,
-                "description": "更新したユーザーのユーザーID",
+                "description": "申請経路を作成したユーザーのユーザーID（削除済みのユーザーでもIDは返ります。作成ユーザーが記録されていない場合は null になります）",
                 "example": 1,
                 "nullable": true
               },
               "definition_system": {
                 "type": "boolean",
-                "description": "システム作成の申請経路かどうか",
+                "description": "システムにより自動作成された申請経路かどうか（true の場合、freee が自動作成した申請経路であることを示します）",
                 "example": true
               },
               "first_step_id": {
                 "type": "integer",
                 "format": "int64",
                 "minimum": 1,
-                "description": "最初の承認ステップのID",
+                "description": "最初の承認ステップのID（steps に含まれる先頭の承認ステップのIDと一致します）",
                 "example": 1
               },
               "usages": {
                 "type": "array",
-                "description": "申請種別（申請経路を使用できる申請種別を示します。例えば、ApprovalRequest の場合は、各種申請で使用できる申請経路です。）\n* `TxnApproval` - 仕訳承認\n* `ExpenseApplication` - 経費精算\n* `PaymentRequest` - 支払依頼\n* `ApprovalRequest` - 各種申請\n* `DocApproval` - 請求書等 (見積書・納品書・請求書・発注書)",
+                "description": "申請種別（申請経路を使用できる申請種別を示します。例えば、ApprovalRequest の場合は、各種申請で使用できる申請経路です。）\n* `TxnApproval` - 仕訳承認\n* `ExpenseApplication` - 経費精算\n* `PaymentRequest` - 支払依頼\n* `ApprovalRequest` - 各種申請\n* `DocApproval` - 請求書等 (見積書・納品書・請求書・発注書)\n* `PurchaseRequest` - 購買申請",
                 "items": {
                   "type": "string",
                   "enum": [
@@ -41806,14 +41831,15 @@
                     "ExpenseApplication",
                     "PaymentRequest",
                     "ApprovalRequest",
-                    "DocApproval"
+                    "DocApproval",
+                    "PurchaseRequest"
                   ],
                   "example": "TxnApproval"
                 }
               },
               "request_form_ids": {
                 "type": "array",
-                "description": "申請経路で利用できる申請フォームID配列",
+                "description": "申請経路で利用できる申請フォームID配列（無効化・削除された申請フォームは含まれません）",
                 "items": {
                   "type": "integer",
                   "format": "int64",
@@ -41824,13 +41850,14 @@
               },
               "steps": {
                 "type": "array",
-                "description": "承認ステップ（配列）",
+                "description": "承認ステップ（配列）。承認順に並びます。",
                 "items": {
                   "type": "object",
                   "required": [
                     "id",
                     "next_step_id",
-                    "resource_type"
+                    "resource_type",
+                    "users_ids"
                   ],
                   "properties": {
                     "id": {
@@ -41844,13 +41871,13 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
-                      "description": "次の承認ステップID",
+                      "description": "次の承認ステップID（最後の承認ステップの場合は null になります）",
                       "nullable": true,
                       "example": 2
                     },
                     "resource_type": {
                       "type": "string",
-                      "description": "承認方法( predefined_user: メンバー指定 (1人), selected_user: 申請時にメンバー指定,unspecified: 指定なし, and_resource: メンバー指定 (複数、全員の承認), or_resource: メンバー指定 (複数、1人の承認), and_position: 役職指定 (複数、全員の承認), or_position: 役職指定 (複数、1人の承認), switchable: 条件分岐（金額・役職などの評価値で承認ステップが分岐する） ) ",
+                      "description": "承認方法\n* `predefined_user` - メンバー指定 (1人)\n* `selected_user` - 申請時にメンバー指定\n* `unspecified` - 指定なし\n* `and_resource` - メンバー指定 (複数、全員の承認)\n* `or_resource` - メンバー指定 (複数、1人の承認)\n* `and_position` - 役職指定 (複数、全員の承認)\n* `or_position` - 役職指定 (複数、1人の承認)\n* `switchable` - 条件分岐（金額・役職などの評価値で承認ステップが分岐する）",
                       "enum": [
                         "predefined_user",
                         "selected_user",
@@ -41863,9 +41890,9 @@
                       ],
                       "example": "predefined_user"
                     },
-                    "user_ids": {
+                    "users_ids": {
                       "type": "array",
-                      "description": "承認者のユーザーID (配列)。承認ステップのresource_typeが部門指定、役職指定等の場合は空の配列になります。",
+                      "description": "承認者のユーザーID (配列)。resource_type が predefined_user / and_resource / or_resource の場合に承認者のユーザーIDが入ります。申請経路上で承認者となるメンバーが確定しない resource_type（selected_user / unspecified / and_position / or_position / switchable）の場合は空の配列になります。",
                       "items": {
                         "type": "integer",
                         "format": "int64",
