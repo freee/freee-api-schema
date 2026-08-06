@@ -1515,7 +1515,8 @@
           {
             "name": "base_date",
             "in": "query",
-            "description": "基準日:指定した場合、勘定科目に紐づく税区分(default_tax_code)が、基準日の税率に基づいて返ります。",
+            "description": "基準日(yyyy-mm-dd)。指定した場合、勘定科目に紐づく税区分(default_tax_code)が、基準日の税率に基づいて返ります。指定しない場合はリクエスト日が基準日になります。",
+            "example": "2020-06-15",
             "schema": {
               "type": "string"
             }
@@ -1523,7 +1524,8 @@
           {
             "name": "start_update_date",
             "in": "query",
-            "description": "更新日で絞込：開始日(yyyy-mm-dd)",
+            "description": "更新日で絞込：開始日(yyyy-mm-dd)。指定した日以降に更新された勘定科目を返します。",
+            "example": "2020-06-01",
             "schema": {
               "type": "string"
             }
@@ -1531,7 +1533,8 @@
           {
             "name": "end_update_date",
             "in": "query",
-            "description": "更新日で絞込：終了日(yyyy-mm-dd)",
+            "description": "更新日で絞込：終了日(yyyy-mm-dd)。指定した日以前に更新された勘定科目を返します。",
+            "example": "2020-06-30",
             "schema": {
               "type": "string"
             }
@@ -1672,7 +1675,7 @@
           "Account items"
         ],
         "summary": "勘定科目の更新（存在しない場合は作成）",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>勘定科目コードをキーに、指定した勘定科目の情報を更新（存在しない場合は作成）する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<p>tax_codeは、指定した事業所の税区分一覧の取得APIでavailableの値がtrue、かつ経過措置税区分ではない5%の税区分を確認して、そのcodeを指定して勘定科目の更新をしてください。例 課対仕入の場合、34を指定してください</p>\n<p>codeを利用するには、事業所の設定で勘定科目コードを使用する設定にする必要があります。</p>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>勘定科目コードをキーに、指定した勘定科目の情報を更新（存在しない場合は作成）する</p>\n<p>リクエストのトップレベルのcodeに指定した勘定科目コードに一致する勘定科目が存在する場合は更新（ステータスコード200）、存在しない場合は作成（ステータスコード201）します</p>\n\n<h2 id=\"_2\">注意点</h2>\n<p>本APIを利用するには、事業所の設定で勘定科目コードを使用する設定にする必要があります。設定が無効の場合はエラー（ステータスコード400）になります。</p>\n<p>更新対象を特定する勘定科目コードはトップレベルのcodeで指定してください。account_item.codeは指定できません（指定した場合はエラーになります）。</p>\n<p>tax_codeは、指定した事業所の税区分一覧の取得APIでavailableの値がtrue、かつ経過措置税区分ではない5%の税区分を確認して、そのcodeを指定して勘定科目の更新をしてください。例 課対仕入の場合、34を指定してください</p>",
         "operationId": "api/v1/account_items#upsert_by_code",
         "requestBody": {
           "content": {
@@ -1688,7 +1691,7 @@
                   "code": {
                     "type": "string",
                     "maxLength": 20,
-                    "description": "勘定科目コード",
+                    "description": "勘定科目コード (20文字以内)。半角英数字・ハイフン・アンダースコアのみ利用できます。このコードをキーに勘定科目を検索し、一致する勘定科目が存在すれば更新、存在しなければ作成します。",
                     "example": "999",
                     "pattern": "^[0-9a-zA-Z_-]+$"
                   },
@@ -1778,7 +1781,7 @@
                       },
                       "items": {
                         "type": "array",
-                        "description": "品目",
+                        "description": "勘定科目に紐付ける品目の一覧",
                         "items": {
                           "type": "object",
                           "properties": {
@@ -1786,6 +1789,7 @@
                               "type": "integer",
                               "format": "int64",
                               "minimum": 1,
+                              "description": "品目ID",
                               "example": 1
                             }
                           }
@@ -1793,7 +1797,7 @@
                       },
                       "partners": {
                         "type": "array",
-                        "description": "取引先",
+                        "description": "勘定科目に紐付ける取引先の一覧",
                         "items": {
                           "type": "object",
                           "properties": {
@@ -1801,6 +1805,7 @@
                               "type": "integer",
                               "format": "int64",
                               "minimum": 1,
+                              "description": "取引先ID",
                               "example": 1
                             }
                           }
@@ -1821,7 +1826,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "既存の勘定科目を更新した場合",
             "content": {
               "application/json": {
                 "schema": {
@@ -1831,7 +1836,7 @@
             }
           },
           "201": {
-            "description": "",
+            "description": "勘定科目を新規に作成した場合",
             "content": {
               "application/json": {
                 "schema": {
@@ -6055,7 +6060,7 @@
           "Companies"
         ],
         "summary": "事業所一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ユーザーが所属する事業所一覧を取得する</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>アクセストークンのユーザーが所属するすべての事業所の一覧を取得する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIで取得できるのは事業所の基本情報（ID・名称・事業所番号・ユーザー権限）のみです。会計年度や設定情報を含む詳細は事業所の取得（GET /api/1/companies/{id}）を利用してください。</li>\n  <li>他のAPIのパラメータとして利用する事業所ID（company_id）は、本APIのレスポンスの id を指定します。</li>\n</ul>",
         "operationId": "get_companies",
         "responses": {
           "200": {
@@ -6117,106 +6122,115 @@
           "Companies"
         ],
         "summary": "事業所の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ユーザーが所属する事業所を取得する</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の詳細情報（名称・連絡先・各種設定・会計年度の一覧）を取得する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>クエリパラメータを指定しない場合は事業所の基本情報と会計年度の一覧のみを返します。勘定科目・税区分コード・品目・取引先・部門・メモタグ・口座の一覧が必要な場合は、details または対応する個別のクエリパラメータを指定してください。</li>\n  <li>details および個別指定のクエリパラメータに指定できる値は true のみです。一覧を含めない場合は、false を指定するのではなくパラメータ自体を省略してください。</li>\n  <li>アクセストークンのユーザーが所属していない事業所IDを指定した場合は 400 (存在しない事業所のid) を返します。所属する事業所のIDは事業所一覧の取得（GET /api/1/companies）で確認できます。</li>\n</ul>",
         "operationId": "get_company",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "事業所ID",
+            "description": "事業所ID。事業所一覧の取得（GET /api/1/companies）のレスポンスの id を指定する",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64"
-            }
+            },
+            "example": 1
           },
           {
             "name": "details",
             "in": "query",
-            "description": "取得情報に勘定科目・税区分コード・品目・取引先・部門・メモタグ・口座の一覧を含める",
+            "description": "true を指定すると、レスポンスに勘定科目 (account_items)・税区分コード (tax_codes)・品目 (items)・取引先 (partners)・部門 (sections)・メモタグ (tags)・口座 (walletables) の一覧をまとめて含める。一覧を含めない場合はパラメータ自体を省略する",
             "schema": {
               "type": "boolean",
               "enum": [
                 true
               ]
-            }
+            },
+            "example": true
           },
           {
             "name": "account_items",
             "in": "query",
-            "description": "取得情報に勘定科目一覧を含める",
+            "description": "true を指定すると、レスポンスに勘定科目一覧 (account_items) を含める",
             "schema": {
               "type": "boolean",
               "enum": [
                 true
               ]
-            }
+            },
+            "example": true
           },
           {
             "name": "taxes",
             "in": "query",
-            "description": "取得情報に税区分コード一覧を含める",
+            "description": "true を指定すると、レスポンスに税区分コード一覧 (tax_codes) を含める",
             "schema": {
               "type": "boolean",
               "enum": [
                 true
               ]
-            }
+            },
+            "example": true
           },
           {
             "name": "items",
             "in": "query",
-            "description": "取得情報に品目一覧を含める",
+            "description": "true を指定すると、レスポンスに品目一覧 (items) を含める",
             "schema": {
               "type": "boolean",
               "enum": [
                 true
               ]
-            }
+            },
+            "example": true
           },
           {
             "name": "partners",
             "in": "query",
-            "description": "取得情報に取引先一覧を含める",
+            "description": "true を指定すると、レスポンスに取引先一覧 (partners) を含める",
             "schema": {
               "type": "boolean",
               "enum": [
                 true
               ]
-            }
+            },
+            "example": true
           },
           {
             "name": "sections",
             "in": "query",
-            "description": "取得情報に部門一覧を含める",
+            "description": "true を指定すると、レスポンスに部門一覧 (sections) を含める",
             "schema": {
               "type": "boolean",
               "enum": [
                 true
               ]
-            }
+            },
+            "example": true
           },
           {
             "name": "tags",
             "in": "query",
-            "description": "取得情報にメモタグ一覧を含める",
+            "description": "true を指定すると、レスポンスにメモタグ一覧 (tags) を含める",
             "schema": {
               "type": "boolean",
               "enum": [
                 true
               ]
-            }
+            },
+            "example": true
           },
           {
             "name": "walletables",
             "in": "query",
-            "description": "取得情報に口座一覧を含める",
+            "description": "true を指定すると、レスポンスに口座一覧 (walletables) を含める",
             "schema": {
               "type": "boolean",
               "enum": [
                 true
               ]
-            }
+            },
+            "example": true
           }
         ],
         "responses": {
@@ -7834,13 +7848,14 @@
           "Banks"
         ],
         "summary": "連携サービス一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>連携しているサービス一覧を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>type\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>freee会計に口座として登録できる連携サービス（銀行口座・クレジットカード・その他の決済口座）の一覧を取得する</p>\n\n<h2 id=\"_2\">注意点</h2>\n\n<ul>\n<li>連携サービスはfreeeが管理する事業所に依存しないマスタデータのため、company_idパラメータの指定は不要です。</li>\n\n<li>typeパラメータは指定必須です。未指定または定義されていない値を指定した場合は、ステータスコード400のエラーが返ります。</li>\n\n<li>取得結果は連携サービス名(カナ)の昇順（name_kanaが同一の場合はidの昇順）で返ります。</li>\n\n<li>取得したidは、口座の作成（POST /api/1/walletables）のbank_idパラメータに指定して利用します。</li>\n</ul>",
         "operationId": "get_banks",
         "parameters": [
           {
             "name": "offset",
             "in": "query",
-            "description": "取得レコードのオフセット (デフォルト: 0)",
+            "description": "取得レコードのオフセット (デフォルト: 0)。limitと組み合わせてページングに利用します。",
+            "example": 0,
             "schema": {
               "type": "integer",
               "format": "int64",
@@ -7852,6 +7867,7 @@
             "name": "limit",
             "in": "query",
             "description": "取得レコードの件数 (デフォルト: 20, 最小: 1, 最大: 500)",
+            "example": 50,
             "schema": {
               "type": "integer",
               "format": "int64",
@@ -7862,7 +7878,8 @@
           {
             "name": "type",
             "in": "query",
-            "description": "サービス種別",
+            "description": "連携サービス種別\n* `bank_account` - 銀行口座\n* `credit_card` - クレジットカード\n* `wallet` - その他の決済口座\n\nこのパラメータは指定必須です。未指定または上記以外の値を指定した場合は、ステータスコード400のエラーが返ります。",
+            "example": "bank_account",
             "schema": {
               "type": "string",
               "enum": [
@@ -7944,14 +7961,15 @@
           "Banks"
         ],
         "summary": "連携サービスの取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>連携しているサービスを取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>type\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定したIDの連携サービス（銀行口座・クレジットカード・その他の決済口座）を取得する</p>\n\n<h2 id=\"_2\">注意点</h2>\n\n<ul>\n<li>連携サービスはfreeeが管理する事業所に依存しないマスタデータのため、company_idパラメータの指定は不要です。</li>\n\n<li>存在しないID、または連携が終了したサービスのIDを指定した場合は、ステータスコード404のエラーが返ります。</li>\n</ul>",
         "operationId": "get_bank",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "連携サービスID",
+            "description": "連携サービスID。連携サービス一覧の取得（GET /api/1/banks）で取得したidを指定します。",
             "required": true,
+            "example": 1,
             "schema": {
               "type": "integer",
               "format": "int64",
@@ -13593,7 +13611,7 @@
           "Receipts"
         ],
         "summary": "ファイルボックス（証憑ファイル）一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のファイルボックス（証憑ファイル）一覧を取得する</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所のファイルボックス（証憑ファイル）一覧を取得する</p>\n<p>アップロード日（start_date〜end_date）の期間を指定して取得します。ファイルの実体（バイナリ）は本APIでは取得できないため、ファイルボックス（証憑ファイル）のダウンロードAPI（GET /api/1/receipts/{id}/download）を利用してください。</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>一度に取得できる件数は最大3000件です（デフォルト: 50件）。それを超えるファイルを取得する場合は、offsetとlimitを利用してページングしてください。</li>\n</ul>",
         "operationId": "get_receipts",
         "parameters": [
           {
@@ -13610,43 +13628,47 @@
           {
             "name": "start_date",
             "in": "query",
-            "description": "アップロード日 (yyyy-mm-dd)",
+            "description": "アップロード日で絞込：開始日 (yyyy-mm-dd)",
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "2020-01-01"
           },
           {
             "name": "end_date",
             "in": "query",
-            "description": "アップロード日 (yyyy-mm-dd)",
+            "description": "アップロード日で絞込：終了日 (yyyy-mm-dd)",
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "2020-01-31"
           },
           {
             "name": "user_name",
             "in": "query",
-            "description": "アップロードしたユーザー名、メールアドレス",
+            "description": "アップロードしたユーザーで絞込。ユーザーの表示名またはメールアドレスの部分一致で指定します。",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "contact@example.com"
           },
           {
             "name": "number",
             "in": "query",
-            "description": "アップロードファイルNo",
+            "description": "アップロードファイルNo（ファイルボックス上でファイルごとに表示される番号）で絞込",
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           },
           {
             "name": "comment_type",
             "in": "query",
-            "description": "posted:コメントあり, raised:未解決, resolved:解決済",
+            "description": "ファイルに付けられたコメントの状態で絞込（posted:コメントあり, raised:未解決, resolved:解決済）",
             "schema": {
               "type": "string",
               "enum": [
@@ -13654,20 +13676,22 @@
                 "raised",
                 "resolved"
               ]
-            }
+            },
+            "example": "posted"
           },
           {
             "name": "comment_important",
             "in": "query",
-            "description": "trueの時、お気に入りコメント付きが対象",
+            "description": "trueを指定した場合、お気に入りコメントが付いたファイルのみが対象になります",
             "schema": {
               "type": "boolean"
-            }
+            },
+            "example": true
           },
           {
             "name": "category",
             "in": "query",
-            "description": "all:すべて、without_deal:未登録、with_expense_application_line:経費申請中, with_deal:登録済み、ignored:無視",
+            "description": "ファイルの取引への登録状態で絞込（all:すべて, without_deal:未登録, with_expense_application_line:経費申請中, with_deal:登録済み, ignored:無視。デフォルト: all）",
             "schema": {
               "type": "string",
               "enum": [
@@ -13677,7 +13701,8 @@
                 "with_deal",
                 "ignored"
               ]
-            }
+            },
+            "example": "all"
           },
           {
             "name": "offset",
@@ -13688,7 +13713,8 @@
               "format": "int64",
               "minimum": 0,
               "maximum": 9223372036854775807
-            }
+            },
+            "example": 0
           },
           {
             "name": "limit",
@@ -13699,7 +13725,8 @@
               "format": "int64",
               "minimum": 1,
               "maximum": 3000
-            }
+            },
+            "example": 50
           }
         ],
         "responses": {
@@ -13771,7 +13798,7 @@
           "Receipts"
         ],
         "summary": "ファイルボックス（証憑ファイル）のアップロード",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ファイルボックス（証憑ファイル）をアップロードする</p>\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>リクエストヘッダーの Content-Type は、multipart/form-dataにのみ対応しています。</li>\n  <li>インボイス制度適格請求書発行事業者登録番号はOCR解析結果が採用されます。OCR解析結果を確認する場合は、Web画面にてご確認ください。上書きする場合は、ファイルボックス（証憑ファイル）の更新APIをご利用ください。</li>\n  <li>以下の制限を満たさない場合アップロードに失敗します。</li>\n  <ul>\n      <li>ファイルサイズの制限： 64MBまで</li>\n      <li>月間アップロード容量の制限： 月間合計10GBまで</li>\n      <li>1分間あたりのアップロード数制限： 300ファイルまで</li>\n      <li>プランによる月間アップロード数の制限： 以下のリンクからご確認ください</li>\n      <ul>\n          <li>\n              <a href=\"https://support.freee.co.jp/hc/ja/articles/213726523--%E5%80%8B%E4%BA%BA-freee%E4%BC%9A%E8%A8%88%E3%81%AE%E3%83%97%E3%83%A9%E3%83%B3%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6\" target=\"_blank\">【個人】freee会計のプランについて</a>\n          </li>\n          <li>\n              <a href=\"https://support.freee.co.jp/hc/ja/articles/27975180546713--%E6%B3%95%E4%BA%BA-freee%E4%BC%9A%E8%A8%88%E3%81%AE%E3%83%97%E3%83%A9%E3%83%B3%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6-2024%E5%B9%B47%E6%9C%88%E4%BB%A5%E9%99%8D\" target=\"_blank\">【法人】freee会計のプランについて（2024年7月以降）</a>\n          </li>\n      </ul>\n  </ul>\n</ul>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>ファイルボックス（証憑ファイル）をアップロードする</p>\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>リクエストヘッダーの Content-Type は、multipart/form-dataにのみ対応しています。</li>\n  <li>インボイス制度適格請求書発行事業者登録番号はOCR解析結果が採用されます。OCR解析結果を確認する場合は、Web画面にてご確認ください。上書きする場合は、ファイルボックス（証憑ファイル）の更新APIをご利用ください。</li>\n  <li>以下の制限を満たさない場合アップロードに失敗します。</li>\n  <ul>\n      <li>ファイルサイズの制限： 64MBまで</li>\n      <li>月間アップロード容量の制限： 月間合計10GBまで</li>\n      <li>1分間あたりのアップロード数制限： 300ファイルまで</li>\n      <li>プランによる月間アップロード数の制限： 以下のリンクからご確認ください</li>\n      <ul>\n          <li>\n              <a href=\"https://support.freee.co.jp/hc/ja/articles/213726523--%E5%80%8B%E4%BA%BA-freee%E4%BC%9A%E8%A8%88%E3%81%AE%E3%83%97%E3%83%A9%E3%83%B3%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6\" target=\"_blank\">【個人】freee会計のプランについて</a>\n          </li>\n          <li>\n              <a href=\"https://support.freee.co.jp/hc/ja/articles/27975180546713--%E6%B3%95%E4%BA%BA-freee%E4%BC%9A%E8%A8%88%E3%81%AE%E3%83%97%E3%83%A9%E3%83%B3%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6-2024%E5%B9%B47%E6%9C%88%E4%BB%A5%E9%99%8D\" target=\"_blank\">【法人】freee会計のプランについて（2024年7月以降）</a>\n          </li>\n      </ul>\n  </ul>\n</ul>",
         "operationId": "create_receipt",
         "requestBody": {
           "content": {
@@ -13843,7 +13870,7 @@
           "Receipts"
         ],
         "summary": "ファイルボックス（証憑ファイル）の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のファイルボックス（証憑ファイル）を取得する</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所のファイルボックス（証憑ファイル）を取得する</p>\n<p>ファイルの実体（バイナリ）は本APIでは取得できないため、ファイルボックス（証憑ファイル）のダウンロードAPI（GET /api/1/receipts/{id}/download）を利用してください。</p>",
         "operationId": "get_receipt",
         "parameters": [
           {
@@ -13937,7 +13964,7 @@
           "Receipts"
         ],
         "summary": "ファイルボックス（証憑ファイル）の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ファイルボックス（証憑ファイル）を更新する</p>\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、証憑ファイルの再アップロードはできません。</li>\n</ul>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>ファイルボックス（証憑ファイル）を更新する</p>\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、証憑ファイルの再アップロードはできません。</li>\n  <li>リクエストボディに含めたフィールドのみが更新されます。含めなかったフィールドの値は変更されません。</li>\n</ul>",
         "operationId": "update_receipt",
         "parameters": [
           {
@@ -14035,7 +14062,7 @@
           "Receipts"
         ],
         "summary": "ファイルボックス（証憑ファイル）の削除",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ファイルボックス（証憑ファイル）を削除する</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>ファイルボックス（証憑ファイル）を削除する</p>",
         "operationId": "destroy_receipt",
         "parameters": [
           {
@@ -14125,7 +14152,7 @@
           "Receipts"
         ],
         "summary": "ファイルボックス（証憑ファイル）のダウンロード",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のファイルボックス（証憑ファイル）をダウンロードする</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所のファイルボックス（証憑ファイル）をダウンロードする</p>\n<p>レスポンスのContent-Typeは、アップロードされたファイルの形式（ファイルボックス（証憑ファイル）の取得APIで返るmime_type）に応じて返ります。</p>",
         "operationId": "download_receipt",
         "parameters": [
           {
@@ -18691,7 +18718,7 @@
           "Fixed assets"
         ],
         "summary": "固定資産一覧の取得",
-        "description": "<h2 id=\"\">概要</h2>\n<p>指定した事業所の固定資産一覧を取得する</p>\n\n<h2 id=\"\">定義</h2>\n<ul>\n  <li>このAPIは法人エンタープライズに加入している事業所のみが利用できます。</li>\n  <li><p>target_date : 表示したい会計期間の開始年月日。開始年月日以外を指定した場合は、その日付が含まれる会計期間が対象となります。</p></li>\n  <li><p>depreciation_amount : 本年分の償却費合計</p></li>\n  <li><p>depreciation_method : 償却方法</p></li>\n  <li><p>depreciation_account_item_id : 減価償却に使う勘定科目</p></li>\n  <li><p>acquisition_cost : 取得価額</p></li>\n  <li><p>opening_balance : 期首残高</p></li>\n  <li><p>undepreciated_balance : 未償却残高。土地などの償却しない固定資産はnullが返ります。</p></li>\n  <li><p>opening_accumulated_depreciation : 期首減価償却累計額</p></li>\n  <li><p>closing_accumulated_depreciation : 期末減価償却累計額</p></li>\n</ul>\n<h2 id=\"\">注意点</h2>\n<ul>\n  <li><p>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</p></li>\n  <li><p>このAPIはfreee会計の固定資産台帳を取得します。freee固定資産で登録した固定資産は取得できませんのでご注意ください。<a href=\"https://docs.google.com/presentation/d/1LDrOH1d8FJeCA_qTJuIXwcou1kh00dCLR_X8nacPb98/edit?usp=sharing\">freee固定資産の詳細はこちらをご覧ください。</a></p></li>\n</ul>",
+        "description": "<h2 id=\"_1\">概要</h2>\n<p>指定した事業所の固定資産一覧を取得する</p>\n<p>target_dateで指定した会計期間に償却データが存在する固定資産を、固定資産IDの昇順で返します。</p>\n\n<h2 id=\"_2\">定義</h2>\n<ul>\n  <li>このAPIは法人エンタープライズに加入している事業所のみが利用できます。</li>\n  <li><p>target_date : 表示したい会計期間の開始年月日。開始年月日以外を指定した場合は、その日付が含まれる会計期間が対象となります。</p></li>\n  <li><p>depreciation_amount : 本年分の償却費合計</p></li>\n  <li><p>depreciation_method : 償却方法</p></li>\n  <li><p>depreciation_account_item_id : 減価償却に使う勘定科目</p></li>\n  <li><p>acquisition_cost : 取得価額</p></li>\n  <li><p>opening_balance : 期首残高</p></li>\n  <li><p>undepreciated_balance : 未償却残高。土地などの償却しない固定資産はnullが返ります。</p></li>\n  <li><p>opening_accumulated_depreciation : 期首減価償却累計額</p></li>\n  <li><p>closing_accumulated_depreciation : 期末減価償却累計額</p></li>\n</ul>\n<h2 id=\"_3\">注意点</h2>\n<ul>\n  <li><p>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</p></li>\n  <li><p>このAPIはfreee会計の固定資産台帳を取得します。freee固定資産で登録した固定資産は取得できませんのでご注意ください。<a href=\"https://docs.google.com/presentation/d/1LDrOH1d8FJeCA_qTJuIXwcou1kh00dCLR_X8nacPb98/edit?usp=sharing\">freee固定資産の詳細はこちらをご覧ください。</a></p></li>\n</ul>",
         "operationId": "get_fixed_assets",
         "parameters": [
           {
@@ -18709,7 +18736,7 @@
           {
             "name": "target_date",
             "in": "query",
-            "description": "表示したい会計期間の開始年月日。開始年月日以外を指定した場合は、その日付が含まれる会計期間が対象となります。",
+            "description": "表示したい会計期間の開始年月日 (yyyy-mm-dd)。開始年月日以外を指定した場合は、その日付が含まれる会計期間が対象となります。",
             "required": true,
             "schema": {
               "type": "string",
@@ -18720,14 +18747,14 @@
           {
             "name": "offset",
             "in": "query",
-            "description": "取得レコードのオフセット (デフォルト: 0)",
+            "description": "取得レコードのオフセット (デフォルト: 0)。2ページ目以降を取得する場合に、先頭からスキップする件数を指定します",
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 0,
               "maximum": 2147483647
             },
-            "example": 50
+            "example": 0
           },
           {
             "name": "limit",
@@ -18884,7 +18911,7 @@
           "User matchers"
         ],
         "summary": "自動登録ルール一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の自動登録ルール一覧を取得する</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の自動登録ルール一覧を取得する</p>\n\n<p>自動登録ルールとは、口座から同期された明細（入出金データ）の内容をもとに、取引や振替の登録・推測を自動で行うためのルールです。</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>activeパラメータを指定しない場合は、有効な自動登録ルールのみが返ります。無効なルールも含めて取得する場合はactive=allを指定してください。</li>\n  <li>一覧は自動登録ルールID（id）の降順で返ります。</li>\n  <li>walletableパラメータは口座名の完全一致で絞り込みます。指定した名前の口座が事業所に存在しない場合は空の一覧が返ります。</li>\n  <li>offsetはlimitの倍数である必要があります。</li>\n</ul>",
         "operationId": "get_user_matchers",
         "parameters": [
           {
@@ -18896,7 +18923,8 @@
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           },
           {
             "name": "limit",
@@ -18908,7 +18936,8 @@
               "minimum": 1,
               "maximum": 100,
               "default": 30
-            }
+            },
+            "example": 50
           },
           {
             "name": "offset",
@@ -18919,28 +18948,31 @@
               "format": "int64",
               "minimum": 0,
               "default": 0
-            }
+            },
+            "example": 30
           },
           {
             "name": "walletable",
             "in": "query",
-            "description": "口座名で絞込",
+            "description": "口座名で絞込 (完全一致)。指定した名前の口座が事業所に存在しない場合は空の一覧が返ります。",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "事業用口座"
           },
           {
             "name": "description",
             "in": "query",
-            "description": "説明文で絞込",
+            "description": "説明文で絞込 (部分一致)",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "スターバックス"
           },
           {
             "name": "active",
             "in": "query",
-            "description": "有効/無効/全てで絞込 (有効: active, 無効: inactive, 全て: all)",
+            "description": "有効/無効/全てで絞込 (有効: active, 無効: inactive, 全て: all)。未指定の場合は有効なルールのみが返ります。",
             "schema": {
               "type": "string",
               "enum": [
@@ -18949,7 +18981,8 @@
                 "all"
               ],
               "default": "active"
-            }
+            },
+            "example": "active"
           },
           {
             "name": "act",
@@ -18973,7 +19006,8 @@
                 11,
                 12
               ]
-            }
+            },
+            "example": 1
           },
           {
             "name": "created_by",
@@ -18986,79 +19020,88 @@
                 0,
                 1
               ]
-            }
+            },
+            "example": 0
           },
           {
             "name": "min_amount",
             "in": "query",
-            "description": "最小金額で絞込",
+            "description": "最小金額で絞込 (単位: 円)。ルールに設定された最小金額(min_amount)が指定値以上のルールを返します。",
             "schema": {
               "type": "integer",
               "format": "int64"
-            }
+            },
+            "example": 1000
           },
           {
             "name": "max_amount",
             "in": "query",
-            "description": "最大金額で絞込",
+            "description": "最大金額で絞込 (単位: 円)。ルールに設定された最大金額(max_amount)が指定値以下のルールを返します。",
             "schema": {
               "type": "integer",
               "format": "int64"
-            }
+            },
+            "example": 10000
           },
           {
             "name": "min_priority",
             "in": "query",
-            "description": "最小優先度で絞込",
+            "description": "最小優先度で絞込。優先度(priority)が指定値以上のルールを返します。",
             "schema": {
               "type": "integer",
               "format": "int64"
-            }
+            },
+            "example": 1
           },
           {
             "name": "max_priority",
             "in": "query",
-            "description": "最大優先度で絞込",
+            "description": "最大優先度で絞込。優先度(priority)が指定値以下のルールを返します。",
             "schema": {
               "type": "integer",
               "format": "int64"
-            }
+            },
+            "example": 10
           },
           {
             "name": "min_corrected_wallet_txn_count",
             "in": "query",
-            "description": "最小正答件数で絞込",
+            "description": "最小正答件数で絞込。適用明細数(corrected_wallet_txn_count)が指定値以上のルールを返します。",
             "schema": {
               "type": "integer",
               "format": "int64"
-            }
+            },
+            "example": 1
           },
           {
             "name": "max_corrected_wallet_txn_count",
             "in": "query",
-            "description": "最大正答件数で絞込",
+            "description": "最大正答件数で絞込。適用明細数(corrected_wallet_txn_count)が指定値以下のルールを返します。",
             "schema": {
               "type": "integer",
               "format": "int64"
-            }
+            },
+            "example": 100
           },
           {
             "name": "min_corrected_wallet_txn_count_percentage",
             "in": "query",
-            "description": "最小正答率で絞込",
+            "description": "最小正答率で絞込 (単位: パーセント)。適用率(corrected_wallet_txn_count_percentage)が指定値以上のルールを返します。",
             "schema": {
               "type": "integer",
               "format": "int64"
-            }
+            },
+            "example": 50
           },
           {
             "name": "max_corrected_wallet_txn_count_percentage",
             "in": "query",
-            "description": "最大正答率で絞込",
+            "description": "最大正答率で絞込 (単位: パーセント)。適用率(corrected_wallet_txn_count_percentage)が指定値以下のルールを返します。",
             "schema": {
               "type": "integer",
               "format": "int64"
-            }
+            },
+            "example": 100
           },
           {
             "name": "card_label_id",
@@ -19067,7 +19110,8 @@
             "schema": {
               "type": "integer",
               "format": "int64"
-            }
+            },
+            "example": 1
           },
           {
             "name": "entry_side_str",
@@ -19079,7 +19123,8 @@
                 "income",
                 "expense"
               ]
-            }
+            },
+            "example": "expense"
           }
         ],
         "responses": {
@@ -19109,7 +19154,10 @@
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "description": "自動登録ルールID"
+                            "format": "int64",
+                            "minimum": 1,
+                            "description": "自動登録ルールID",
+                            "example": 101
                           },
                           "entry_side_str": {
                             "type": "string",
@@ -19117,26 +19165,30 @@
                             "enum": [
                               "income",
                               "expense"
-                            ]
+                            ],
+                            "example": "expense"
                           },
                           "description": {
                             "type": "string",
-                            "description": "説明文"
+                            "description": "説明文。明細の取引内容とのマッチングに使用される文字列です。condition=4(指定なし)の場合は空文字列が返ります。",
+                            "example": "スターバックス"
                           },
                           "condition": {
                             "type": "integer",
-                            "description": "マッチ条件\n* 0: 部分一致\n* 1: 前方一致\n* 2: 後方一致\n* 3: 完全一致\n* 4: 指定なし(wildcard)\n",
+                            "description": "マッチ条件\n* 0: 部分一致(partial)\n* 1: 前方一致(forward)\n* 2: 後方一致(backward)\n* 3: 完全一致(exact)\n* 4: 指定なし(wildcard)\n",
                             "enum": [
                               0,
                               1,
                               2,
                               3,
                               4
-                            ]
+                            ],
+                            "example": 0
                           },
                           "priority": {
                             "type": "integer",
-                            "description": "優先度"
+                            "description": "優先度",
+                            "example": 10
                           },
                           "act": {
                             "type": "integer",
@@ -19155,105 +19207,128 @@
                               10,
                               11,
                               12
-                            ]
+                            ],
+                            "example": 1
                           },
                           "tax_name": {
                             "type": "string",
                             "nullable": true,
-                            "description": "税区分名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                            "description": "税区分名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                            "example": "課対仕入10%"
                           },
                           "min_amount": {
                             "type": "integer",
                             "nullable": true,
-                            "description": "最小金額"
+                            "description": "最小金額 (単位: 円)。ルールが未設定の場合はnullが返ります。",
+                            "example": 1000
                           },
                           "max_amount": {
                             "type": "integer",
                             "nullable": true,
-                            "description": "最大金額"
+                            "description": "最大金額 (単位: 円)。ルールが未設定の場合はnullが返ります。",
+                            "example": 10000
                           },
                           "deal_description": {
                             "type": "string",
                             "nullable": true,
-                            "description": "取引の備考\nact=0,1,2,3の場合のみ値が返ります。act=4,10,11,12では常にnullです。\n"
+                            "description": "取引の備考\nact=0,1,2,3の場合のみ値が返ります。act=4,10,11,12では常にnullです。\n",
+                            "example": "打ち合わせ用コーヒー代"
                           },
                           "walletable": {
                             "type": "string",
                             "nullable": true,
-                            "description": "口座名"
+                            "description": "口座名",
+                            "example": "事業用口座"
                           },
                           "transfer_walletable": {
                             "type": "string",
                             "nullable": true,
-                            "description": "振替先口座名\nact=2,3(振替を推測/登録)の場合のみ値が返ります。\n"
+                            "description": "振替先口座名\nact=2,3(振替を推測/登録)の場合のみ値が返ります。\n",
+                            "example": "事業用クレジットカード"
                           },
                           "account_item_name": {
                             "type": "string",
                             "nullable": true,
-                            "description": "勘定科目名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                            "description": "勘定科目名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                            "example": "会議費"
                           },
                           "partner_name": {
                             "type": "string",
                             "nullable": true,
-                            "description": "取引先名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                            "description": "取引先名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                            "example": "スターバックス"
                           },
                           "item_name": {
                             "type": "string",
                             "nullable": true,
-                            "description": "品目名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                            "description": "品目名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                            "example": "コーヒー豆"
                           },
                           "section_name": {
                             "type": "string",
                             "nullable": true,
-                            "description": "部門名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                            "description": "部門名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                            "example": "営業部"
                           },
                           "division_tag_1_name": {
                             "type": "string",
                             "nullable": true,
-                            "description": "セグメント1タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                            "description": "セグメント1タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                            "example": "東日本"
                           },
                           "division_tag_2_name": {
                             "type": "string",
                             "nullable": true,
-                            "description": "セグメント2タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                            "description": "セグメント2タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                            "example": "小売事業"
                           },
                           "division_tag_3_name": {
                             "type": "string",
                             "nullable": true,
-                            "description": "セグメント3タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                            "description": "セグメント3タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                            "example": "第一営業所"
                           },
                           "default_tag_names": {
                             "type": "array",
                             "nullable": true,
-                            "description": "メモタグ名の配列\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                            "description": "メモタグ名の配列\nact=0,1(取引を推測/登録)の場合のみ値が返ります。メモタグが1つも設定されていない場合はnullが返ります。\n",
                             "items": {
                               "type": "string"
-                            }
+                            },
+                            "example": [
+                              "出張",
+                              "会議"
+                            ]
                           },
                           "last_updated_user_id": {
                             "type": "integer",
                             "nullable": true,
-                            "description": "最終更新ユーザーID\n* 0: freeeシステムによる更新\n"
+                            "description": "最終更新ユーザーID\n* 0: freeeシステムによる更新\n",
+                            "example": 1
                           },
                           "user_name": {
                             "type": "string",
                             "nullable": true,
-                            "description": "最終更新ユーザー名"
+                            "description": "最終更新ユーザー名。表示名が未設定の場合はメールアドレスが返ります。freeeシステムによる更新の場合は「freee」、ユーザー情報を取得できない場合は「-」が返ります。",
+                            "example": "freee 太郎"
                           },
                           "updated_at": {
                             "type": "string",
                             "nullable": true,
-                            "description": "更新日時 (YYYY-MM-DD形式)"
+                            "description": "更新日 (yyyy-mm-dd)",
+                            "example": "2026-08-01"
                           },
                           "corrected_wallet_txn_count": {
                             "type": "integer",
                             "nullable": true,
-                            "description": "適用明細数(正答件数)"
+                            "description": "適用明細数(正答件数)。統計情報が存在しない場合はnullが返ります。",
+                            "example": 10
                           },
                           "corrected_wallet_txn_count_percentage": {
                             "type": "integer",
                             "nullable": true,
-                            "description": "適用率(正答率、パーセント)"
+                            "description": "適用率(正答率、パーセント)。統計情報が存在しない場合はnullが返ります。",
+                            "example": 80
                           },
                           "qualified_invoice_setting": {
                             "type": "string",
@@ -19263,26 +19338,32 @@
                               "non_qualified",
                               "qualified",
                               "depends_on_partner"
-                            ]
+                            ],
+                            "example": "qualified"
                           },
                           "suggest_tax_from_walletable_invoice": {
                             "type": "boolean",
                             "nullable": true,
-                            "description": "購入データ原本に準拠\n* true: 準拠する\n* false: 準拠しない\n"
+                            "description": "購入データ原本に準拠\n* true: 準拠する\n* false: 準拠しない\n",
+                            "example": false
                           },
                           "card_label": {
                             "type": "string",
                             "nullable": true,
-                            "description": "カードラベル"
+                            "description": "カードラベル",
+                            "example": "本人"
                           },
                           "card_label_id": {
                             "type": "integer",
+                            "format": "int64",
                             "nullable": true,
-                            "description": "カードラベルID"
+                            "description": "カードラベルID",
+                            "example": 1
                           },
                           "active": {
                             "type": "boolean",
-                            "description": "有効/無効\n* true: 有効\n* false: 無効\n"
+                            "description": "有効/無効\n* true: 有効\n* false: 無効\n",
+                            "example": true
                           }
                         }
                       }
@@ -19349,7 +19430,7 @@
           "User matchers"
         ],
         "summary": "自動登録ルールの作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の自動登録ルールを作成する</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の自動登録ルールを作成する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>company_idはリクエストボディではなくクエリパラメータで指定します。</li>\n  <li>act=0,1（取引を推測/登録）の場合は、tax_name（税区分名）とaccount_item_name（勘定科目名）の指定が必須です。</li>\n  <li>登録タイプ（act）が5(manual_template), 6(manual_scrub), 7(auto_scrub), 8(manual_output_zengin_scrub), 9(auto_output_zengin_scrub)の自動登録ルールは、このAPIでは作成できません。</li>\n  <li>同じ内容の自動登録ルールが既に存在する場合は、400エラーが返ります。</li>\n</ul>",
         "operationId": "create_user_matcher",
         "parameters": [
           {
@@ -19361,7 +19442,8 @@
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           }
         ],
         "requestBody": {
@@ -19391,11 +19473,13 @@
                       10,
                       11,
                       12
-                    ]
+                    ],
+                    "example": 1
                   },
                   "active": {
                     "type": "boolean",
-                    "description": "有効/無効\n* true: 有効\n* false: 無効\n"
+                    "description": "有効/無効\n* true: 有効\n* false: 無効\n",
+                    "example": true
                   },
                   "condition": {
                     "type": "integer",
@@ -19406,11 +19490,13 @@
                       2,
                       3,
                       4
-                    ]
+                    ],
+                    "example": 0
                   },
                   "description": {
                     "type": "string",
-                    "description": "説明文"
+                    "description": "説明文。明細の取引内容とマッチングする文字列を指定します。condition=4(指定なし)の場合は無視されます。",
+                    "example": "スターバックス"
                   },
                   "entry_side_str": {
                     "type": "string",
@@ -19418,51 +19504,61 @@
                     "enum": [
                       "income",
                       "expense"
-                    ]
+                    ],
+                    "example": "expense"
                   },
                   "priority": {
                     "type": "integer",
-                    "description": "優先度"
+                    "description": "優先度",
+                    "example": 10
                   },
                   "tax_name": {
                     "type": "string",
                     "nullable": true,
-                    "description": "税区分名\nact=0,1(取引を推測/登録)の場合は必須。他のactでは指定しても無視されます。\n"
+                    "description": "税区分名\nact=0,1(取引を推測/登録)の場合は必須。他のactでは指定しても無視されます。\n",
+                    "example": "課対仕入10%"
                   },
                   "walletable": {
                     "type": "string",
                     "nullable": true,
-                    "description": "口座名"
+                    "description": "口座名。事業所に登録されている口座の名前を指定します。",
+                    "example": "事業用口座"
                   },
                   "card_label": {
                     "type": "string",
                     "nullable": true,
-                    "description": "カードラベル"
+                    "description": "カードラベル",
+                    "example": "本人"
                   },
                   "card_label_id": {
                     "type": "integer",
                     "nullable": true,
-                    "description": "カードラベルID"
+                    "description": "カードラベルID",
+                    "example": 1
                   },
                   "transfer_walletable": {
                     "type": "string",
                     "nullable": true,
-                    "description": "振替先口座名\nact=2,3(振替を推測/登録)の場合に使用。他のactでは指定しても無視されます。\n"
+                    "description": "振替先口座名\nact=2,3(振替を推測/登録)の場合に使用。他のactでは指定しても無視されます。\n",
+                    "example": "事業用クレジットカード"
                   },
                   "min_amount": {
                     "type": "integer",
                     "nullable": true,
-                    "description": "最小金額"
+                    "description": "最小金額 (単位: 円)",
+                    "example": 1000
                   },
                   "max_amount": {
                     "type": "integer",
                     "nullable": true,
-                    "description": "最大金額"
+                    "description": "最大金額 (単位: 円)",
+                    "example": 10000
                   },
                   "deal_description": {
                     "type": "string",
                     "nullable": true,
-                    "description": "取引の備考\nact=4,10,11,12(無視/プライベート)では指定しても無視されます。\n"
+                    "description": "取引の備考\nact=4,10,11,12(無視/プライベート)では指定しても無視されます。\n",
+                    "example": "打ち合わせ用コーヒー代"
                   },
                   "qualified_invoice_setting": {
                     "type": "string",
@@ -19472,47 +19568,56 @@
                       "non_qualified",
                       "qualified",
                       "depends_on_partner"
-                    ]
+                    ],
+                    "example": "qualified"
                   },
                   "suggest_tax_from_walletable_invoice": {
                     "type": "boolean",
                     "nullable": true,
-                    "description": "購入データ原本に準拠\n* true: 準拠する\n* false: 準拠しない\nact=0,1(取引を推測/登録)かつ購入データ原本に対応した口座を指定した場合のみ使用可能。それ以外では指定しても無視されます。\n"
+                    "description": "購入データ原本に準拠\n* true: 準拠する\n* false: 準拠しない\nact=0,1(取引を推測/登録)かつ購入データ原本に対応した口座を指定した場合のみ使用可能。それ以外では指定しても無視されます。\n",
+                    "example": false
                   },
                   "account_item_name": {
                     "type": "string",
                     "nullable": true,
-                    "description": "勘定科目名\nact=0,1(取引を推測/登録)の場合は必須。他のactでは指定しても無視されます。\n"
+                    "description": "勘定科目名\nact=0,1(取引を推測/登録)の場合は必須。他のactでは指定しても無視されます。\n",
+                    "example": "会議費"
                   },
                   "partner_name": {
                     "type": "string",
                     "nullable": true,
-                    "description": "取引先名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n"
+                    "description": "取引先名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n",
+                    "example": "スターバックス"
                   },
                   "item_name": {
                     "type": "string",
                     "nullable": true,
-                    "description": "品目名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n"
+                    "description": "品目名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n",
+                    "example": "コーヒー豆"
                   },
                   "section_name": {
                     "type": "string",
                     "nullable": true,
-                    "description": "部門名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n"
+                    "description": "部門名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n",
+                    "example": "営業部"
                   },
                   "division_tag_1_name": {
                     "type": "string",
                     "nullable": true,
-                    "description": "セグメント1タグ名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n"
+                    "description": "セグメント1タグ名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n",
+                    "example": "東日本"
                   },
                   "division_tag_2_name": {
                     "type": "string",
                     "nullable": true,
-                    "description": "セグメント2タグ名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n"
+                    "description": "セグメント2タグ名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n",
+                    "example": "小売事業"
                   },
                   "division_tag_3_name": {
                     "type": "string",
                     "nullable": true,
-                    "description": "セグメント3タグ名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n"
+                    "description": "セグメント3タグ名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n",
+                    "example": "第一営業所"
                   },
                   "default_tag_names": {
                     "type": "array",
@@ -19520,7 +19625,11 @@
                     "description": "メモタグ名の配列\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n",
                     "items": {
                       "type": "string"
-                    }
+                    },
+                    "example": [
+                      "出張",
+                      "会議"
+                    ]
                   }
                 }
               }
@@ -19550,7 +19659,10 @@
                   "properties": {
                     "id": {
                       "type": "integer",
-                      "description": "自動登録ルールID"
+                      "format": "int64",
+                      "minimum": 1,
+                      "description": "自動登録ルールID",
+                      "example": 101
                     },
                     "entry_side_str": {
                       "type": "string",
@@ -19558,11 +19670,13 @@
                       "enum": [
                         "income",
                         "expense"
-                      ]
+                      ],
+                      "example": "expense"
                     },
                     "description": {
                       "type": "string",
-                      "description": "説明文"
+                      "description": "説明文。明細の取引内容とのマッチングに使用される文字列です。condition=4(指定なし)の場合は空文字列が返ります。",
+                      "example": "スターバックス"
                     },
                     "condition": {
                       "type": "integer",
@@ -19573,11 +19687,13 @@
                         2,
                         3,
                         4
-                      ]
+                      ],
+                      "example": 0
                     },
                     "priority": {
                       "type": "integer",
-                      "description": "優先度"
+                      "description": "優先度",
+                      "example": 10
                     },
                     "act": {
                       "type": "integer",
@@ -19591,80 +19707,97 @@
                         10,
                         11,
                         12
-                      ]
+                      ],
+                      "example": 1
                     },
                     "tax_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "税区分名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "税区分名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "課対仕入10%"
                     },
                     "tax_code": {
                       "type": "integer",
                       "nullable": true,
-                      "description": "税区分コード"
+                      "description": "税区分コード。税区分名(tax_name)に対応するコードです。",
+                      "example": 136
                     },
                     "suggested_tax_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "勘定科目の設定に基づいてシステムが推測した税区分名。画面には表示されません。"
+                      "description": "勘定科目の設定に基づいてシステムが推測した税区分名。画面には表示されません。",
+                      "example": "課対仕入10%"
                     },
                     "min_amount": {
                       "type": "integer",
                       "nullable": true,
-                      "description": "最小金額"
+                      "description": "最小金額 (単位: 円)。ルールが未設定の場合はnullが返ります。",
+                      "example": 1000
                     },
                     "max_amount": {
                       "type": "integer",
                       "nullable": true,
-                      "description": "最大金額"
+                      "description": "最大金額 (単位: 円)。ルールが未設定の場合はnullが返ります。",
+                      "example": 10000
                     },
                     "deal_description": {
                       "type": "string",
                       "nullable": true,
-                      "description": "取引の備考\nact=0,1,2,3の場合のみ値が返ります。act=4,10,11,12では常にnullです。\n"
+                      "description": "取引の備考\nact=0,1,2,3の場合のみ値が返ります。act=4,10,11,12では常にnullです。\n",
+                      "example": "打ち合わせ用コーヒー代"
                     },
                     "walletable": {
                       "type": "string",
                       "nullable": true,
-                      "description": "口座名"
+                      "description": "口座名",
+                      "example": "事業用口座"
                     },
                     "transfer_walletable": {
                       "type": "string",
                       "nullable": true,
-                      "description": "振替先口座名\nact=2,3(振替を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "振替先口座名\nact=2,3(振替を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "事業用クレジットカード"
                     },
                     "origin_deal_id": {
                       "type": "integer",
+                      "format": "int64",
                       "nullable": true,
-                      "description": "元取引ID"
+                      "description": "元取引ID。このルールの作成元となった取引のIDです。freeeが自動作成したルールの場合のみ値が返ります。",
+                      "example": 501
                     },
                     "origin_deal_code": {
                       "type": "integer",
                       "nullable": true,
-                      "description": "元取引コード"
+                      "description": "元取引コード",
+                      "example": 12
                     },
                     "last_updated_user_id": {
                       "type": "integer",
-                      "description": "最終更新ユーザーID\n* 0: freeeシステムによる更新\n"
+                      "description": "最終更新ユーザーID\n* 0: freeeシステムによる更新\n",
+                      "example": 1
                     },
                     "user_name": {
                       "type": "string",
-                      "description": "最終更新ユーザー名"
+                      "description": "最終更新ユーザー名。表示名が未設定の場合はメールアドレスが返ります。freeeシステムによる更新の場合は「freee」、ユーザー情報を取得できない場合は「-」が返ります。",
+                      "example": "freee 太郎"
                     },
                     "updated_at": {
                       "type": "string",
                       "nullable": true,
-                      "description": "更新日時 (YYYY-MM-DD形式)"
+                      "description": "更新日 (yyyy-mm-dd)",
+                      "example": "2026-08-01"
                     },
                     "corrected_wallet_txn_count": {
                       "type": "integer",
                       "nullable": true,
-                      "description": "適用明細数(正答件数)"
+                      "description": "適用明細数(正答件数)。統計情報が存在しない場合はnullが返ります。",
+                      "example": 10
                     },
                     "corrected_wallet_txn_count_percentage": {
                       "type": "integer",
                       "nullable": true,
-                      "description": "適用率(正答率、パーセント)"
+                      "description": "適用率(正答率、パーセント)。統計情報が存在しない場合はnullが返ります。",
+                      "example": 80
                     },
                     "qualified_invoice_setting": {
                       "type": "string",
@@ -19674,74 +19807,92 @@
                         "non_qualified",
                         "qualified",
                         "depends_on_partner"
-                      ]
+                      ],
+                      "example": "qualified"
                     },
                     "suggest_tax_from_walletable_invoice": {
                       "type": "boolean",
                       "nullable": true,
-                      "description": "購入データ原本に準拠\n* true: 準拠する\n* false: 準拠しない\n"
+                      "description": "購入データ原本に準拠\n* true: 準拠する\n* false: 準拠しない\n",
+                      "example": false
                     },
                     "walletable_bank_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "口座の銀行名"
+                      "description": "口座の銀行名",
+                      "example": "freee銀行"
                     },
                     "card_label": {
                       "type": "string",
                       "nullable": true,
-                      "description": "カードラベル"
+                      "description": "カードラベル",
+                      "example": "本人"
                     },
                     "card_label_id": {
                       "type": "integer",
+                      "format": "int64",
                       "nullable": true,
-                      "description": "カードラベルID"
+                      "description": "カードラベルID",
+                      "example": 1
                     },
                     "account_item_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "勘定科目名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "勘定科目名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "会議費"
                     },
                     "partner_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "取引先名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "取引先名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "スターバックス"
                     },
                     "item_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "品目名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "品目名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "コーヒー豆"
                     },
                     "section_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "部門名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "部門名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "営業部"
                     },
                     "division_tag_1_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "セグメント1タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "セグメント1タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "東日本"
                     },
                     "division_tag_2_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "セグメント2タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "セグメント2タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "小売事業"
                     },
                     "division_tag_3_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "セグメント3タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "セグメント3タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "第一営業所"
                     },
                     "default_tag_names": {
                       "type": "array",
                       "nullable": true,
-                      "description": "メモタグ名の配列\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "description": "メモタグ名の配列\nact=0,1(取引を推測/登録)の場合のみ値が返ります。メモタグが1つも設定されていない場合はnullが返ります。\n",
                       "items": {
                         "type": "string"
-                      }
+                      },
+                      "example": [
+                        "出張",
+                        "会議"
+                      ]
                     },
                     "active": {
                       "type": "boolean",
-                      "description": "有効/無効\n* true: 有効\n* false: 無効\n"
+                      "description": "有効/無効\n* true: 有効\n* false: 無効\n",
+                      "example": true
                     }
                   }
                 }
@@ -19807,7 +19958,7 @@
           "User matchers"
         ],
         "summary": "自動登録ルールの取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の自動登録ルールを取得する</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の自動登録ルールを取得する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>登録タイプ（act）が5(manual_template), 6(manual_scrub), 7(auto_scrub), 8(manual_output_zengin_scrub), 9(auto_output_zengin_scrub)の自動登録ルールは取得できません。該当するルールのIDを指定した場合は400エラーが返ります。</li>\n</ul>",
         "operationId": "get_user_matcher",
         "parameters": [
           {
@@ -19819,7 +19970,8 @@
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 101
           },
           {
             "name": "company_id",
@@ -19830,7 +19982,8 @@
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           }
         ],
         "responses": {
@@ -19856,7 +20009,10 @@
                   "properties": {
                     "id": {
                       "type": "integer",
-                      "description": "自動登録ルールID"
+                      "format": "int64",
+                      "minimum": 1,
+                      "description": "自動登録ルールID",
+                      "example": 101
                     },
                     "entry_side_str": {
                       "type": "string",
@@ -19864,11 +20020,13 @@
                       "enum": [
                         "income",
                         "expense"
-                      ]
+                      ],
+                      "example": "expense"
                     },
                     "description": {
                       "type": "string",
-                      "description": "説明文"
+                      "description": "説明文。明細の取引内容とのマッチングに使用される文字列です。condition=4(指定なし)の場合は空文字列が返ります。",
+                      "example": "スターバックス"
                     },
                     "condition": {
                       "type": "integer",
@@ -19879,11 +20037,13 @@
                         2,
                         3,
                         4
-                      ]
+                      ],
+                      "example": 0
                     },
                     "priority": {
                       "type": "integer",
-                      "description": "優先度"
+                      "description": "優先度",
+                      "example": 10
                     },
                     "act": {
                       "type": "integer",
@@ -19897,80 +20057,97 @@
                         10,
                         11,
                         12
-                      ]
+                      ],
+                      "example": 1
                     },
                     "tax_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "税区分名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "税区分名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "課対仕入10%"
                     },
                     "tax_code": {
                       "type": "integer",
                       "nullable": true,
-                      "description": "税区分コード"
+                      "description": "税区分コード。税区分名(tax_name)に対応するコードです。",
+                      "example": 136
                     },
                     "suggested_tax_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "勘定科目の設定に基づいてシステムが推測した税区分名。画面には表示されません。"
+                      "description": "勘定科目の設定に基づいてシステムが推測した税区分名。画面には表示されません。",
+                      "example": "課対仕入10%"
                     },
                     "min_amount": {
                       "type": "integer",
                       "nullable": true,
-                      "description": "最小金額"
+                      "description": "最小金額 (単位: 円)。ルールが未設定の場合はnullが返ります。",
+                      "example": 1000
                     },
                     "max_amount": {
                       "type": "integer",
                       "nullable": true,
-                      "description": "最大金額"
+                      "description": "最大金額 (単位: 円)。ルールが未設定の場合はnullが返ります。",
+                      "example": 10000
                     },
                     "deal_description": {
                       "type": "string",
                       "nullable": true,
-                      "description": "取引の備考\nact=0,1,2,3の場合のみ値が返ります。act=4,10,11,12では常にnullです。\n"
+                      "description": "取引の備考\nact=0,1,2,3の場合のみ値が返ります。act=4,10,11,12では常にnullです。\n",
+                      "example": "打ち合わせ用コーヒー代"
                     },
                     "walletable": {
                       "type": "string",
                       "nullable": true,
-                      "description": "口座名"
+                      "description": "口座名",
+                      "example": "事業用口座"
                     },
                     "transfer_walletable": {
                       "type": "string",
                       "nullable": true,
-                      "description": "振替先口座名\nact=2,3(振替を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "振替先口座名\nact=2,3(振替を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "事業用クレジットカード"
                     },
                     "origin_deal_id": {
                       "type": "integer",
+                      "format": "int64",
                       "nullable": true,
-                      "description": "元取引ID"
+                      "description": "元取引ID。このルールの作成元となった取引のIDです。freeeが自動作成したルールの場合のみ値が返ります。",
+                      "example": 501
                     },
                     "origin_deal_code": {
                       "type": "integer",
                       "nullable": true,
-                      "description": "元取引コード"
+                      "description": "元取引コード",
+                      "example": 12
                     },
                     "last_updated_user_id": {
                       "type": "integer",
-                      "description": "最終更新ユーザーID\n* 0: freeeシステムによる更新\n"
+                      "description": "最終更新ユーザーID\n* 0: freeeシステムによる更新\n",
+                      "example": 1
                     },
                     "user_name": {
                       "type": "string",
-                      "description": "最終更新ユーザー名"
+                      "description": "最終更新ユーザー名。表示名が未設定の場合はメールアドレスが返ります。freeeシステムによる更新の場合は「freee」、ユーザー情報を取得できない場合は「-」が返ります。",
+                      "example": "freee 太郎"
                     },
                     "updated_at": {
                       "type": "string",
                       "nullable": true,
-                      "description": "更新日時 (YYYY-MM-DD形式)"
+                      "description": "更新日 (yyyy-mm-dd)",
+                      "example": "2026-08-01"
                     },
                     "corrected_wallet_txn_count": {
                       "type": "integer",
                       "nullable": true,
-                      "description": "適用明細数(正答件数)"
+                      "description": "適用明細数(正答件数)。統計情報が存在しない場合はnullが返ります。",
+                      "example": 10
                     },
                     "corrected_wallet_txn_count_percentage": {
                       "type": "integer",
                       "nullable": true,
-                      "description": "適用率(正答率、パーセント)"
+                      "description": "適用率(正答率、パーセント)。統計情報が存在しない場合はnullが返ります。",
+                      "example": 80
                     },
                     "qualified_invoice_setting": {
                       "type": "string",
@@ -19980,74 +20157,92 @@
                         "non_qualified",
                         "qualified",
                         "depends_on_partner"
-                      ]
+                      ],
+                      "example": "qualified"
                     },
                     "suggest_tax_from_walletable_invoice": {
                       "type": "boolean",
                       "nullable": true,
-                      "description": "購入データ原本に準拠\n* true: 準拠する\n* false: 準拠しない\n"
+                      "description": "購入データ原本に準拠\n* true: 準拠する\n* false: 準拠しない\n",
+                      "example": false
                     },
                     "walletable_bank_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "口座の銀行名"
+                      "description": "口座の銀行名",
+                      "example": "freee銀行"
                     },
                     "card_label": {
                       "type": "string",
                       "nullable": true,
-                      "description": "カードラベル"
+                      "description": "カードラベル",
+                      "example": "本人"
                     },
                     "card_label_id": {
                       "type": "integer",
+                      "format": "int64",
                       "nullable": true,
-                      "description": "カードラベルID"
+                      "description": "カードラベルID",
+                      "example": 1
                     },
                     "account_item_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "勘定科目名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "勘定科目名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "会議費"
                     },
                     "partner_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "取引先名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "取引先名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "スターバックス"
                     },
                     "item_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "品目名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "品目名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "コーヒー豆"
                     },
                     "section_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "部門名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "部門名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "営業部"
                     },
                     "division_tag_1_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "セグメント1タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "セグメント1タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "東日本"
                     },
                     "division_tag_2_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "セグメント2タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "セグメント2タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "小売事業"
                     },
                     "division_tag_3_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "セグメント3タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "セグメント3タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "第一営業所"
                     },
                     "default_tag_names": {
                       "type": "array",
                       "nullable": true,
-                      "description": "メモタグ名の配列\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "description": "メモタグ名の配列\nact=0,1(取引を推測/登録)の場合のみ値が返ります。メモタグが1つも設定されていない場合はnullが返ります。\n",
                       "items": {
                         "type": "string"
-                      }
+                      },
+                      "example": [
+                        "出張",
+                        "会議"
+                      ]
                     },
                     "active": {
                       "type": "boolean",
-                      "description": "有効/無効\n* true: 有効\n* false: 無効\n"
+                      "description": "有効/無効\n* true: 有効\n* false: 無効\n",
+                      "example": true
                     }
                   }
                 }
@@ -20121,7 +20316,7 @@
           "User matchers"
         ],
         "summary": "自動登録ルールの更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の自動登録ルールを更新する</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の自動登録ルールを更新する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIは更新後の状態をすべて指定するPUT APIです。リクエストで指定しなかった任意項目は未設定（null）で上書きされるため、変更しない項目も含めてすべての項目を指定してください。</li>\n  <li>act=0,1（取引を推測/登録）の場合は、tax_name（税区分名）とaccount_item_name（勘定科目名）の指定が必須です。</li>\n  <li>登録タイプ（act）に5(manual_template), 6(manual_scrub), 7(auto_scrub), 8(manual_output_zengin_scrub), 9(auto_output_zengin_scrub)を指定することはできません。</li>\n  <li>更新の結果、同じ内容の自動登録ルールが既に存在する場合は、400エラーが返ります。</li>\n</ul>",
         "operationId": "update_user_matcher",
         "parameters": [
           {
@@ -20133,7 +20328,8 @@
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 101
           },
           {
             "name": "company_id",
@@ -20144,7 +20340,8 @@
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           }
         ],
         "requestBody": {
@@ -20174,11 +20371,13 @@
                       10,
                       11,
                       12
-                    ]
+                    ],
+                    "example": 1
                   },
                   "active": {
                     "type": "boolean",
-                    "description": "有効/無効\n* true: 有効\n* false: 無効\n"
+                    "description": "有効/無効\n* true: 有効\n* false: 無効\n",
+                    "example": true
                   },
                   "condition": {
                     "type": "integer",
@@ -20189,11 +20388,13 @@
                       2,
                       3,
                       4
-                    ]
+                    ],
+                    "example": 0
                   },
                   "description": {
                     "type": "string",
-                    "description": "説明文"
+                    "description": "説明文。明細の取引内容とマッチングする文字列を指定します。condition=4(指定なし)の場合は無視されます。",
+                    "example": "スターバックス"
                   },
                   "entry_side_str": {
                     "type": "string",
@@ -20201,51 +20402,61 @@
                     "enum": [
                       "income",
                       "expense"
-                    ]
+                    ],
+                    "example": "expense"
                   },
                   "priority": {
                     "type": "integer",
-                    "description": "優先度"
+                    "description": "優先度",
+                    "example": 10
                   },
                   "tax_name": {
                     "type": "string",
                     "nullable": true,
-                    "description": "税区分名\nact=0,1(取引を推測/登録)の場合は必須。他のactでは指定しても無視されます。\n"
+                    "description": "税区分名\nact=0,1(取引を推測/登録)の場合は必須。他のactでは指定しても無視されます。\n",
+                    "example": "課対仕入10%"
                   },
                   "walletable": {
                     "type": "string",
                     "nullable": true,
-                    "description": "口座名"
+                    "description": "口座名。事業所に登録されている口座の名前を指定します。",
+                    "example": "事業用口座"
                   },
                   "card_label": {
                     "type": "string",
                     "nullable": true,
-                    "description": "カードラベル"
+                    "description": "カードラベル",
+                    "example": "本人"
                   },
                   "card_label_id": {
                     "type": "integer",
                     "nullable": true,
-                    "description": "カードラベルID"
+                    "description": "カードラベルID",
+                    "example": 1
                   },
                   "transfer_walletable": {
                     "type": "string",
                     "nullable": true,
-                    "description": "振替先口座名\nact=2,3(振替を推測/登録)の場合に使用。他のactでは指定しても無視されます。\n"
+                    "description": "振替先口座名\nact=2,3(振替を推測/登録)の場合に使用。他のactでは指定しても無視されます。\n",
+                    "example": "事業用クレジットカード"
                   },
                   "min_amount": {
                     "type": "integer",
                     "nullable": true,
-                    "description": "最小金額"
+                    "description": "最小金額 (単位: 円)",
+                    "example": 1000
                   },
                   "max_amount": {
                     "type": "integer",
                     "nullable": true,
-                    "description": "最大金額"
+                    "description": "最大金額 (単位: 円)",
+                    "example": 10000
                   },
                   "deal_description": {
                     "type": "string",
                     "nullable": true,
-                    "description": "取引の備考\nact=4,10,11,12(無視/プライベート)では指定しても無視されます。\n"
+                    "description": "取引の備考\nact=4,10,11,12(無視/プライベート)では指定しても無視されます。\n",
+                    "example": "打ち合わせ用コーヒー代"
                   },
                   "qualified_invoice_setting": {
                     "type": "string",
@@ -20255,47 +20466,56 @@
                       "non_qualified",
                       "qualified",
                       "depends_on_partner"
-                    ]
+                    ],
+                    "example": "qualified"
                   },
                   "suggest_tax_from_walletable_invoice": {
                     "type": "boolean",
                     "nullable": true,
-                    "description": "購入データ原本に準拠\n* true: 準拠する\n* false: 準拠しない\nact=0,1(取引を推測/登録)かつ購入データ原本に対応した口座を指定した場合のみ使用可能。それ以外では指定しても無視されます。\n"
+                    "description": "購入データ原本に準拠\n* true: 準拠する\n* false: 準拠しない\nact=0,1(取引を推測/登録)かつ購入データ原本に対応した口座を指定した場合のみ使用可能。それ以外では指定しても無視されます。\n",
+                    "example": false
                   },
                   "account_item_name": {
                     "type": "string",
                     "nullable": true,
-                    "description": "勘定科目名\nact=0,1(取引を推測/登録)の場合は必須。他のactでは指定しても無視されます。\n"
+                    "description": "勘定科目名\nact=0,1(取引を推測/登録)の場合は必須。他のactでは指定しても無視されます。\n",
+                    "example": "会議費"
                   },
                   "partner_name": {
                     "type": "string",
                     "nullable": true,
-                    "description": "取引先名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n"
+                    "description": "取引先名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n",
+                    "example": "スターバックス"
                   },
                   "item_name": {
                     "type": "string",
                     "nullable": true,
-                    "description": "品目名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n"
+                    "description": "品目名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n",
+                    "example": "コーヒー豆"
                   },
                   "section_name": {
                     "type": "string",
                     "nullable": true,
-                    "description": "部門名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n"
+                    "description": "部門名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n",
+                    "example": "営業部"
                   },
                   "division_tag_1_name": {
                     "type": "string",
                     "nullable": true,
-                    "description": "セグメント1タグ名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n"
+                    "description": "セグメント1タグ名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n",
+                    "example": "東日本"
                   },
                   "division_tag_2_name": {
                     "type": "string",
                     "nullable": true,
-                    "description": "セグメント2タグ名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n"
+                    "description": "セグメント2タグ名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n",
+                    "example": "小売事業"
                   },
                   "division_tag_3_name": {
                     "type": "string",
                     "nullable": true,
-                    "description": "セグメント3タグ名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n"
+                    "description": "セグメント3タグ名\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n",
+                    "example": "第一営業所"
                   },
                   "default_tag_names": {
                     "type": "array",
@@ -20303,7 +20523,11 @@
                     "description": "メモタグ名の配列\nact=0,1(取引を推測/登録)の場合のみ使用可能。他のactでは指定しても無視されます。\n指定した名前が登録されていない場合、新規にタグとして作成されます。\n",
                     "items": {
                       "type": "string"
-                    }
+                    },
+                    "example": [
+                      "出張",
+                      "会議"
+                    ]
                   }
                 }
               }
@@ -20333,7 +20557,10 @@
                   "properties": {
                     "id": {
                       "type": "integer",
-                      "description": "自動登録ルールID"
+                      "format": "int64",
+                      "minimum": 1,
+                      "description": "自動登録ルールID",
+                      "example": 101
                     },
                     "entry_side_str": {
                       "type": "string",
@@ -20341,11 +20568,13 @@
                       "enum": [
                         "income",
                         "expense"
-                      ]
+                      ],
+                      "example": "expense"
                     },
                     "description": {
                       "type": "string",
-                      "description": "説明文"
+                      "description": "説明文。明細の取引内容とのマッチングに使用される文字列です。condition=4(指定なし)の場合は空文字列が返ります。",
+                      "example": "スターバックス"
                     },
                     "condition": {
                       "type": "integer",
@@ -20356,11 +20585,13 @@
                         2,
                         3,
                         4
-                      ]
+                      ],
+                      "example": 0
                     },
                     "priority": {
                       "type": "integer",
-                      "description": "優先度"
+                      "description": "優先度",
+                      "example": 10
                     },
                     "act": {
                       "type": "integer",
@@ -20374,80 +20605,97 @@
                         10,
                         11,
                         12
-                      ]
+                      ],
+                      "example": 1
                     },
                     "tax_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "税区分名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "税区分名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "課対仕入10%"
                     },
                     "tax_code": {
                       "type": "integer",
                       "nullable": true,
-                      "description": "税区分コード"
+                      "description": "税区分コード。税区分名(tax_name)に対応するコードです。",
+                      "example": 136
                     },
                     "suggested_tax_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "勘定科目の設定に基づいてシステムが推測した税区分名。画面には表示されません。"
+                      "description": "勘定科目の設定に基づいてシステムが推測した税区分名。画面には表示されません。",
+                      "example": "課対仕入10%"
                     },
                     "min_amount": {
                       "type": "integer",
                       "nullable": true,
-                      "description": "最小金額"
+                      "description": "最小金額 (単位: 円)。ルールが未設定の場合はnullが返ります。",
+                      "example": 1000
                     },
                     "max_amount": {
                       "type": "integer",
                       "nullable": true,
-                      "description": "最大金額"
+                      "description": "最大金額 (単位: 円)。ルールが未設定の場合はnullが返ります。",
+                      "example": 10000
                     },
                     "deal_description": {
                       "type": "string",
                       "nullable": true,
-                      "description": "取引の備考\nact=0,1,2,3の場合のみ値が返ります。act=4,10,11,12では常にnullです。\n"
+                      "description": "取引の備考\nact=0,1,2,3の場合のみ値が返ります。act=4,10,11,12では常にnullです。\n",
+                      "example": "打ち合わせ用コーヒー代"
                     },
                     "walletable": {
                       "type": "string",
                       "nullable": true,
-                      "description": "口座名"
+                      "description": "口座名",
+                      "example": "事業用口座"
                     },
                     "transfer_walletable": {
                       "type": "string",
                       "nullable": true,
-                      "description": "振替先口座名\nact=2,3(振替を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "振替先口座名\nact=2,3(振替を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "事業用クレジットカード"
                     },
                     "origin_deal_id": {
                       "type": "integer",
+                      "format": "int64",
                       "nullable": true,
-                      "description": "元取引ID"
+                      "description": "元取引ID。このルールの作成元となった取引のIDです。freeeが自動作成したルールの場合のみ値が返ります。",
+                      "example": 501
                     },
                     "origin_deal_code": {
                       "type": "integer",
                       "nullable": true,
-                      "description": "元取引コード"
+                      "description": "元取引コード",
+                      "example": 12
                     },
                     "last_updated_user_id": {
                       "type": "integer",
-                      "description": "最終更新ユーザーID\n* 0: freeeシステムによる更新\n"
+                      "description": "最終更新ユーザーID\n* 0: freeeシステムによる更新\n",
+                      "example": 1
                     },
                     "user_name": {
                       "type": "string",
-                      "description": "最終更新ユーザー名"
+                      "description": "最終更新ユーザー名。表示名が未設定の場合はメールアドレスが返ります。freeeシステムによる更新の場合は「freee」、ユーザー情報を取得できない場合は「-」が返ります。",
+                      "example": "freee 太郎"
                     },
                     "updated_at": {
                       "type": "string",
                       "nullable": true,
-                      "description": "更新日時 (YYYY-MM-DD形式)"
+                      "description": "更新日 (yyyy-mm-dd)",
+                      "example": "2026-08-01"
                     },
                     "corrected_wallet_txn_count": {
                       "type": "integer",
                       "nullable": true,
-                      "description": "適用明細数(正答件数)"
+                      "description": "適用明細数(正答件数)。統計情報が存在しない場合はnullが返ります。",
+                      "example": 10
                     },
                     "corrected_wallet_txn_count_percentage": {
                       "type": "integer",
                       "nullable": true,
-                      "description": "適用率(正答率、パーセント)"
+                      "description": "適用率(正答率、パーセント)。統計情報が存在しない場合はnullが返ります。",
+                      "example": 80
                     },
                     "qualified_invoice_setting": {
                       "type": "string",
@@ -20457,74 +20705,92 @@
                         "non_qualified",
                         "qualified",
                         "depends_on_partner"
-                      ]
+                      ],
+                      "example": "qualified"
                     },
                     "suggest_tax_from_walletable_invoice": {
                       "type": "boolean",
                       "nullable": true,
-                      "description": "購入データ原本に準拠\n* true: 準拠する\n* false: 準拠しない\n"
+                      "description": "購入データ原本に準拠\n* true: 準拠する\n* false: 準拠しない\n",
+                      "example": false
                     },
                     "walletable_bank_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "口座の銀行名"
+                      "description": "口座の銀行名",
+                      "example": "freee銀行"
                     },
                     "card_label": {
                       "type": "string",
                       "nullable": true,
-                      "description": "カードラベル"
+                      "description": "カードラベル",
+                      "example": "本人"
                     },
                     "card_label_id": {
                       "type": "integer",
+                      "format": "int64",
                       "nullable": true,
-                      "description": "カードラベルID"
+                      "description": "カードラベルID",
+                      "example": 1
                     },
                     "account_item_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "勘定科目名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "勘定科目名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "会議費"
                     },
                     "partner_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "取引先名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "取引先名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "スターバックス"
                     },
                     "item_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "品目名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "品目名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "コーヒー豆"
                     },
                     "section_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "部門名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "部門名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "営業部"
                     },
                     "division_tag_1_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "セグメント1タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "セグメント1タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "東日本"
                     },
                     "division_tag_2_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "セグメント2タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "セグメント2タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "小売事業"
                     },
                     "division_tag_3_name": {
                       "type": "string",
                       "nullable": true,
-                      "description": "セグメント3タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n"
+                      "description": "セグメント3タグ名\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "example": "第一営業所"
                     },
                     "default_tag_names": {
                       "type": "array",
                       "nullable": true,
-                      "description": "メモタグ名の配列\nact=0,1(取引を推測/登録)の場合のみ値が返ります。\n",
+                      "description": "メモタグ名の配列\nact=0,1(取引を推測/登録)の場合のみ値が返ります。メモタグが1つも設定されていない場合はnullが返ります。\n",
                       "items": {
                         "type": "string"
-                      }
+                      },
+                      "example": [
+                        "出張",
+                        "会議"
+                      ]
                     },
                     "active": {
                       "type": "boolean",
-                      "description": "有効/無効\n* true: 有効\n* false: 無効\n"
+                      "description": "有効/無効\n* true: 有効\n* false: 無効\n",
+                      "example": true
                     }
                   }
                 }
@@ -20598,7 +20864,7 @@
           "User matchers"
         ],
         "summary": "自動登録ルールの削除",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の自動登録ルールを削除する</p>\n\n<p>このAPIでは以下のact(登録タイプ)の自動登録ルールは削除できません: 5(manual_template), 6(manual_scrub), 7(auto_scrub), 8(manual_output_zengin_scrub), 9(auto_output_zengin_scrub)</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の自動登録ルールを削除する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>登録タイプ（act）が5(manual_template), 6(manual_scrub), 7(auto_scrub), 8(manual_output_zengin_scrub), 9(auto_output_zengin_scrub)の自動登録ルールは削除できません。</li>\n</ul>",
         "operationId": "destroy_user_matcher",
         "parameters": [
           {
@@ -20610,7 +20876,8 @@
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 101
           },
           {
             "name": "company_id",
@@ -20621,7 +20888,8 @@
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           }
         ],
         "responses": {
@@ -23465,23 +23733,25 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "事業所ID"
+            "description": "事業所ID",
+            "example": 1
           },
           "description": {
             "type": "string",
             "maxLength": 255,
-            "description": "メモ (255文字以内)"
+            "description": "メモ (255文字以内)",
+            "example": "タクシー利用"
           },
           "receipt": {
             "type": "string",
-            "description": "証憑ファイル",
+            "description": "証憑ファイル（multipart/form-dataのファイルパートとして送信します）",
             "format": "binary"
           },
           "receipt_metadatum_partner_name": {
             "type": "string",
             "maxLength": 255,
             "nullable": true,
-            "description": "発行元",
+            "description": "発行元。本APIではmultipart/form-dataで送信するため、更新APIと異なりreceipt_metadatum_のプレフィックスが付いたフラットなキー名で指定します。",
             "example": "freeeパートナー"
           },
           "receipt_metadatum_issue_date": {
@@ -23496,12 +23766,12 @@
             "minimum": -999999999999,
             "maximum": 999999999999,
             "nullable": true,
-            "description": "金額",
+            "description": "金額（円）",
             "example": 5250
           },
           "qualified_invoice": {
             "type": "string",
-            "description": "適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択）",
+            "description": "適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択）。未指定の場合はOCR解析結果が採用されます。",
             "enum": [
               "qualified",
               "not_qualified",
@@ -23511,7 +23781,7 @@
           },
           "document_type": {
             "type": "string",
-            "description": "書類の種類（receipt: 領収書、invoice: 請求書、other: その他）",
+            "description": "書類の種類（receipt: 領収書、invoice: 請求書、other: その他）。未指定の場合はOCR解析結果が採用されます。",
             "enum": [
               "receipt",
               "invoice",
@@ -23538,10 +23808,11 @@
             "type": "string",
             "maxLength": 255,
             "description": "メモ (255文字以内)",
-            "example": "メモ"
+            "example": "タクシー利用"
           },
           "receipt_metadatum": {
             "type": "object",
+            "description": "電子帳簿保存法の検索要件に対応するメタデータ（発行元・発行日・金額）",
             "properties": {
               "partner_name": {
                 "type": "string",
@@ -23562,7 +23833,7 @@
                 "minimum": -999999999999,
                 "maximum": 999999999999,
                 "nullable": true,
-                "description": "金額",
+                "description": "金額（円）",
                 "example": 5250
               }
             }
@@ -23582,7 +23853,7 @@
             "maxLength": 14,
             "minLength": 13,
             "pattern": "^T?[1-9][0-9]{12}$",
-            "description": "インボイス制度適格請求書発行事業者登録番号\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+            "description": "インボイス制度適格請求書発行事業者登録番号\n- 先頭T数字13桁の14桁の文字列。先頭のTは省略可能です（省略した場合もT付きの登録番号として登録され、レスポンスではT付きの14桁で返ります）\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
             "example": "T1000000000001"
           },
           "document_type": {
@@ -23643,7 +23914,7 @@
               "code": {
                 "type": "string",
                 "maxLength": 20,
-                "description": "勘定科目コード",
+                "description": "勘定科目コード (20文字以内)。半角英数字・ハイフン・アンダースコアのみ利用できます。事業所の設定で勘定科目コードを使用する設定にしている場合のみ有効で、設定が無効の場合は指定しても無視されます。",
                 "example": "999",
                 "pattern": "^[0-9a-zA-Z_-]+$"
               },
@@ -23698,7 +23969,7 @@
               },
               "items": {
                 "type": "array",
-                "description": "品目",
+                "description": "勘定科目に紐付ける品目の一覧",
                 "items": {
                   "type": "object",
                   "properties": {
@@ -23706,6 +23977,7 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
+                      "description": "品目ID",
                       "example": 1
                     }
                   }
@@ -23713,7 +23985,7 @@
               },
               "partners": {
                 "type": "array",
-                "description": "取引先",
+                "description": "勘定科目に紐付ける取引先の一覧",
                 "items": {
                   "type": "object",
                   "properties": {
@@ -23721,6 +23993,7 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
+                      "description": "取引先ID",
                       "example": 1
                     }
                   }
@@ -23744,10 +24017,19 @@
                 "account_category_id",
                 "available",
                 "categories",
+                "corresponding_expense_id",
+                "corresponding_expense_name",
+                "corresponding_income_id",
+                "corresponding_income_name",
                 "default_tax_code",
+                "group_id",
+                "group_name",
                 "id",
                 "name",
+                "shortcut",
+                "shortcut_num",
                 "tax_code",
+                "update_date",
                 "walletable_id"
               ],
               "type": "object",
@@ -23773,28 +24055,28 @@
                 "shortcut": {
                   "type": "string",
                   "maxLength": 20,
-                  "description": "ショートカット1 (20文字以内)",
+                  "description": "ショートカット1 (20文字以内)。未設定の場合はnullが返ります。",
                   "example": "SOFUTO",
                   "nullable": true
                 },
                 "shortcut_num": {
                   "type": "string",
                   "maxLength": 20,
-                  "description": "ショートカット2 (20文字以内)",
+                  "description": "ショートカット2 (20文字以内)。未設定の場合はnullが返ります。",
                   "example": "123",
                   "nullable": true
                 },
                 "code": {
                   "type": "string",
                   "maxLength": 20,
-                  "description": "勘定科目コード",
+                  "description": "勘定科目コード。事業所の設定で勘定科目コードを使用する設定にしている場合のみ返ります。",
                   "example": "123",
                   "nullable": true
                 },
                 "default_tax_code": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "デフォルト設定がされている税区分コード",
+                  "description": "デフォルト設定がされている税区分コード。base_date（未指定の場合はリクエスト日）を基準とした税率に基づく値が返ります。",
                   "example": 34
                 },
                 "account_category": {
@@ -23811,6 +24093,7 @@
                 },
                 "categories": {
                   "type": "array",
+                  "description": "勘定科目カテゴリーの階層（大分類から順）",
                   "items": {
                     "type": "string",
                     "description": "勘定科目カテゴリー",
@@ -23893,11 +24176,21 @@
             "required": [
               "account_category",
               "account_category_id",
+              "accumulated_dep_account_item_id",
+              "accumulated_dep_account_item_name",
               "available",
               "company_id",
+              "corresponding_expense_id",
+              "corresponding_income_id",
+              "group_id",
+              "group_name",
               "id",
+              "items",
               "name",
+              "partners",
               "searchable",
+              "shortcut",
+              "shortcut_num",
               "tax_code",
               "walletable_id"
             ],
@@ -23945,19 +24238,21 @@
               "shortcut": {
                 "type": "string",
                 "maxLength": 20,
-                "description": "ショートカット1 (20文字以内)",
-                "example": "SOFUTO"
+                "description": "ショートカット1 (20文字以内)。未設定の場合はnullが返ります。",
+                "example": "SOFUTO",
+                "nullable": true
               },
               "shortcut_num": {
                 "type": "string",
                 "maxLength": 20,
-                "description": "ショートカット2 (20文字以内)",
-                "example": "123"
+                "description": "ショートカット2 (20文字以内)。未設定の場合はnullが返ります。",
+                "example": "123",
+                "nullable": true
               },
               "code": {
                 "type": "string",
                 "maxLength": 20,
-                "description": "勘定科目コード",
+                "description": "勘定科目コード。事業所の設定で勘定科目コードを使用する設定にしている場合のみ返ります。",
                 "example": "123",
                 "nullable": true
               },
@@ -23966,12 +24261,12 @@
                 "format": "int64",
                 "minimum": 2,
                 "maximum": 3,
-                "description": "検索可能:2, 検索不可：3",
+                "description": "検索可能の設定（2: 検索可能, 3: 検索不可）",
                 "example": 2
               },
               "accumulated_dep_account_item_name": {
                 "type": "string",
-                "description": "減価償却累計額勘定科目（法人のみ利用可能）",
+                "description": "減価償却累計額勘定科目名（法人のみ利用可能）。未設定の場合は空文字が返ります。",
                 "example": "減価償却累計額"
               },
               "accumulated_dep_account_item_id": {
@@ -23984,6 +24279,7 @@
               },
               "items": {
                 "type": "array",
+                "description": "勘定科目に紐付く品目の一覧。紐付く品目がない場合は空配列が返ります。",
                 "items": {
                   "type": "object",
                   "required": [
@@ -24000,7 +24296,7 @@
                     },
                     "name": {
                       "type": "string",
-                      "description": "品目",
+                      "description": "品目名",
                       "example": "住民税"
                     }
                   }
@@ -24008,6 +24304,7 @@
               },
               "partners": {
                 "type": "array",
+                "description": "勘定科目に紐付く取引先の一覧。紐付く取引先がない場合は空配列が返ります。",
                 "items": {
                   "type": "object",
                   "required": [
@@ -24024,7 +24321,7 @@
                     },
                     "name": {
                       "type": "string",
-                      "description": "取引先",
+                      "description": "取引先名",
                       "example": "test"
                     }
                   }
@@ -24084,6 +24381,21 @@
                 "description": "支出取引相手勘定科目ID",
                 "example": 1,
                 "nullable": true
+              },
+              "default_tax_code": {
+                "type": "integer",
+                "format": "int64",
+                "description": "リクエストした日時を基準とした税区分コード。勘定科目の取得API（GET /api/1/account_items/{id}）でのみ返ります。勘定科目の作成・更新時に利用するものではありません。",
+                "example": 34
+              },
+              "categories": {
+                "type": "array",
+                "description": "勘定科目カテゴリーの階層（大分類から順）。勘定科目の取得API（GET /api/1/account_items/{id}）でのみ返ります。",
+                "items": {
+                  "type": "string",
+                  "description": "勘定科目カテゴリー",
+                  "example": "資産"
+                }
               }
             }
           }
@@ -24134,7 +24446,7 @@
               "code": {
                 "type": "string",
                 "maxLength": 20,
-                "description": "勘定科目コード",
+                "description": "勘定科目コード (20文字以内)。半角英数字・ハイフン・アンダースコアのみ利用できます。事業所の設定で勘定科目コードを使用する設定にしている場合のみ有効で、設定が無効の場合は指定しても無視されます。",
                 "example": "999",
                 "pattern": "^[0-9a-zA-Z_-]+$"
               },
@@ -24188,7 +24500,7 @@
               },
               "items": {
                 "type": "array",
-                "description": "品目",
+                "description": "勘定科目に紐付ける品目の一覧",
                 "items": {
                   "type": "object",
                   "properties": {
@@ -24196,6 +24508,7 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
+                      "description": "品目ID",
                       "example": 1
                     }
                   }
@@ -24203,7 +24516,7 @@
               },
               "partners": {
                 "type": "array",
-                "description": "取引先",
+                "description": "勘定科目に紐付ける取引先の一覧",
                 "items": {
                   "type": "object",
                   "properties": {
@@ -24211,6 +24524,7 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
+                      "description": "取引先ID",
                       "example": 1
                     }
                   }
@@ -24223,14 +24537,17 @@
       "bank": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "name",
+          "type",
+          "name_kana"
         ],
         "properties": {
           "id": {
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "連携サービスID",
+            "description": "連携サービスID。口座の作成（POST /api/1/walletables）のbank_idパラメータに指定して利用します。",
             "example": 1
           },
           "name": {
@@ -24240,7 +24557,7 @@
           },
           "type": {
             "type": "string",
-            "description": "連携サービス種別: (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
+            "description": "連携サービス種別\n* `bank_account` - 銀行口座\n* `credit_card` - クレジットカード\n* `wallet` - その他の決済口座",
             "example": "bank_account",
             "enum": [
               "bank_account",
@@ -24250,7 +24567,7 @@
           },
           "name_kana": {
             "type": "string",
-            "description": "連携サービス名(カナ)",
+            "description": "連携サービス名(カナ)。連携サービス一覧の取得（GET /api/1/banks）の取得結果はこの値の昇順で返ります。カナ名が未登録の場合はnullになります。",
             "example": "フリーギンコウ",
             "nullable": true
           }
@@ -34185,6 +34502,7 @@
         "properties": {
           "companies": {
             "type": "array",
+            "description": "アクセストークンのユーザーが所属する事業所の一覧",
             "items": {
               "type": "object",
               "required": [
@@ -34200,35 +34518,35 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "事業所ID",
+                  "description": "事業所ID。他のAPIで事業所を指定するパラメータ（company_id）にはこの値を使用する",
                   "example": 1
                 },
                 "name": {
                   "type": "string",
-                  "description": "事業所名",
+                  "description": "事業所の正式名称 (100文字以内)。未設定の場合は null",
                   "example": "freee事務所",
                   "nullable": true
                 },
                 "name_kana": {
                   "type": "string",
-                  "description": "事業所名（カナ）",
+                  "description": "事業所の正式名称フリガナ (100文字以内)。未設定の場合は null",
                   "example": "フリージムショ",
                   "nullable": true
                 },
                 "display_name": {
                   "type": "string",
-                  "description": "事業所名",
+                  "description": "事業所の表示名。freee上の画面表示に使用される名称",
                   "example": "freee事務所",
                   "nullable": true
                 },
                 "company_number": {
                   "type": "string",
-                  "description": "事業所番号（ハイフン無し)(半角英数字10桁)",
+                  "description": "事業所番号（ハイフン無し・半角英数字10桁）",
                   "example": "97e576421b"
                 },
                 "role": {
                   "type": "string",
-                  "description": "ユーザーの権限\n\n* admin - 管理者\n* simple_accounting - 一般（経理）\n* read_only - 取引登録のみ\n* self_only - 閲覧のみ\n* workflow - 申請・承認",
+                  "description": "アクセストークンのユーザーがこの事業所で持つ権限\n\n* admin - 管理者\n* simple_accounting - 一般（経理）\n* read_only - 取引登録のみ\n* self_only - 閲覧のみ\n* workflow - 申請・承認",
                   "example": "admin",
                   "enum": [
                     "admin",
@@ -34256,6 +34574,7 @@
               "company_number",
               "contact_name",
               "corporate_number",
+              "default_wallet_account_id",
               "display_name",
               "fax",
               "fiscal_years",
@@ -34286,27 +34605,28 @@
                 "type": "integer",
                 "format": "int64",
                 "minimum": 1,
-                "description": "事業所ID",
+                "description": "事業所ID。他のAPIで事業所を指定するパラメータ（company_id）にはこの値を使用する",
                 "example": 1
               },
               "name": {
                 "type": "string",
                 "maxLength": 100,
-                "description": "事業所の正式名称 (100文字以内)",
+                "description": "事業所の正式名称 (100文字以内)。未設定の場合は null",
                 "example": "freee事務所",
                 "nullable": true
               },
               "name_kana": {
                 "type": "string",
                 "maxLength": 100,
-                "description": "正式名称フリガナ (100文字以内)",
+                "description": "事業所の正式名称フリガナ (100文字以内)。未設定の場合は null",
                 "example": "フリージムショ",
                 "nullable": true
               },
               "display_name": {
                 "type": "string",
-                "description": "事業所名",
-                "example": "freee事務所"
+                "description": "事業所の表示名。freee上の画面表示に使用される名称",
+                "example": "freee事務所",
+                "nullable": true
               },
               "tax_at_source_calc_type": {
                 "type": "integer",
@@ -34319,7 +34639,7 @@
               "contact_name": {
                 "type": "string",
                 "maxLength": 50,
-                "description": "担当者名 (50文字以内)",
+                "description": "担当者名 (50文字以内)。未設定の場合は null",
                 "example": "user1",
                 "nullable": true
               },
@@ -34328,13 +34648,13 @@
                 "format": "int64",
                 "minimum": 0,
                 "maximum": 99,
-                "description": "従業員数（0: 経営者のみ、1: 2〜5人、2: 6〜10人、3: 11〜20人、4: 21〜30人、5: 31〜40人、6: 41〜100人、7: 100人以上、13: 21〜50人、14: 51〜100人、15: 101〜300人、16: 501〜1000人、17: 1001人以上、18: 301〜500人",
+                "description": "従業員数（0: 経営者のみ、1: 2〜5人、2: 6〜10人、3: 11〜20人、4: 21〜30人、5: 31〜40人、6: 41〜100人、7: 100人以上、13: 21〜50人、14: 51〜100人、15: 101〜300人、16: 501〜1000人、17: 1001人以上、18: 301〜500人）。未設定の場合は null",
                 "example": 1,
                 "nullable": true
               },
               "corporate_number": {
                 "type": "string",
-                "description": "法人番号 (半角数字13桁、法人のみ)",
+                "description": "法人番号 (半角数字13桁、法人のみ)。未設定の場合および個人事業主の場合は空文字",
                 "example": "1234567890123"
               },
               "txn_number_format": {
@@ -34351,8 +34671,9 @@
                 "type": "integer",
                 "format": "int64",
                 "minimum": 1,
-                "description": "デフォルトの決済口座が紐づく勘定科目ID",
-                "example": 1
+                "description": "デフォルトの決済口座が紐づく勘定科目ID。未設定の場合は null",
+                "example": 1,
+                "nullable": true
               },
               "private_settlement": {
                 "type": "boolean",
@@ -34376,12 +34697,12 @@
               },
               "company_number": {
                 "type": "string",
-                "description": "事業所番号（ハイフン無し)(半角英数字10桁)",
+                "description": "事業所番号（ハイフン無し・半角英数字10桁）",
                 "example": "97e576421b"
               },
               "role": {
                 "type": "string",
-                "description": "ユーザーの権限\n\n* admin - 管理者\n* simple_accounting - 一般（経理）\n* read_only - 取引登録のみ\n* self_only - 閲覧のみ\n* workflow - 申請・承認",
+                "description": "アクセストークンのユーザーがこの事業所で持つ権限\n\n* admin - 管理者\n* simple_accounting - 一般（経理）\n* read_only - 取引登録のみ\n* self_only - 閲覧のみ\n* workflow - 申請・承認",
                 "example": "admin",
                 "enum": [
                   "admin",
@@ -34393,25 +34714,25 @@
               },
               "phone1": {
                 "type": "string",
-                "description": "電話番号１",
+                "description": "電話番号１。未設定の場合は null",
                 "example": "03-1234-xxxx",
                 "nullable": true
               },
               "phone2": {
                 "type": "string",
-                "description": "電話番号２",
+                "description": "電話番号２。未設定の場合は null",
                 "example": "090-1234-xxxx",
                 "nullable": true
               },
               "fax": {
                 "type": "string",
-                "description": "FAX",
+                "description": "FAX番号。未設定の場合は null",
                 "example": "03-1234-xxxx",
                 "nullable": true
               },
               "zipcode": {
                 "type": "string",
-                "description": "郵便番号",
+                "description": "郵便番号。未設定の場合は null",
                 "example": "000-0000",
                 "nullable": true
               },
@@ -34426,13 +34747,13 @@
               },
               "street_name1": {
                 "type": "string",
-                "description": "市区町村・番地",
+                "description": "市区町村・番地。未設定の場合は null",
                 "example": "ＸＸ区ＹＹ１−１−１",
                 "nullable": true
               },
               "street_name2": {
                 "type": "string",
-                "description": "建物名・部屋番号など",
+                "description": "建物名・部屋番号など。未設定の場合は null",
                 "example": "ビル１Ｆ",
                 "nullable": true
               },
@@ -34630,7 +34951,7 @@
               "workflow_setting": {
                 "type": "string",
                 "description": "仕訳承認フロー（enable: 有効、 disable: 無効）",
-                "example": "disabled",
+                "example": "disable",
                 "enum": [
                   "enable",
                   "disable"
@@ -34638,12 +34959,14 @@
               },
               "fiscal_years": {
                 "type": "array",
+                "description": "会計年度の一覧（現在および過去の有効な会計年度）",
                 "items": {
                   "$ref": "#/components/schemas/fiscal_years"
                 }
               },
               "account_items": {
                 "type": "array",
+                "description": "勘定科目の一覧。クエリパラメータ account_items または details に true を指定した場合のみ返る",
                 "items": {
                   "type": "object",
                   "required": [
@@ -34684,6 +35007,7 @@
               },
               "tax_codes": {
                 "type": "array",
+                "description": "税区分コードの一覧。クエリパラメータ taxes または details に true を指定した場合のみ返る",
                 "items": {
                   "type": "object",
                   "required": [
@@ -34715,6 +35039,7 @@
               },
               "items": {
                 "type": "array",
+                "description": "品目の一覧。クエリパラメータ items または details に true を指定した場合のみ返る",
                 "items": {
                   "type": "object",
                   "required": [
@@ -34752,6 +35077,7 @@
               },
               "partners": {
                 "type": "array",
+                "description": "取引先の一覧。クエリパラメータ partners または details に true を指定した場合のみ返る",
                 "items": {
                   "type": "object",
                   "required": [
@@ -34768,7 +35094,7 @@
                     },
                     "code": {
                       "type": "string",
-                      "description": "取引先コード",
+                      "description": "取引先コード。取引先コードの利用設定（use_partner_code）が有効な事業所でのみ返る。未設定の場合は null",
                       "example": "code001",
                       "nullable": true
                     },
@@ -34796,6 +35122,7 @@
               },
               "sections": {
                 "type": "array",
+                "description": "部門の一覧。クエリパラメータ sections または details に true を指定した場合のみ返る",
                 "items": {
                   "type": "object",
                   "required": [
@@ -34834,14 +35161,14 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 0,
-                      "description": "<a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/209093566\">部門階層</a>\n<br>\n※ indent_count が 0 のときは第一階層の親部門です。\n",
+                      "description": "<a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/209093566\">部門階層</a>\n<br>\n※ indent_count が 0 のときは第一階層の親部門です。\n<br>\n※ 部門階層機能が利用できるプラン（法人: ベーシックプラン以上、個人: プレミアムプラン）の場合のみ返ります。\n",
                       "example": 0
                     },
                     "parent_id": {
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
-                      "description": "<a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/209093566\">親部門ID</a>\n<br>\n※ parent_id が null のときは第一階層の親部門です。\n",
+                      "description": "<a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/209093566\">親部門ID</a>\n<br>\n※ parent_id が null のときは第一階層の親部門です。\n<br>\n※ 部門階層機能が利用できるプラン（法人: ベーシックプラン以上、個人: プレミアムプラン）の場合のみ返ります。\n",
                       "example": 1,
                       "nullable": true
                     }
@@ -34850,6 +35177,7 @@
               },
               "tags": {
                 "type": "array",
+                "description": "メモタグの一覧。クエリパラメータ tags または details に true を指定した場合のみ返る",
                 "items": {
                   "type": "object",
                   "required": [
@@ -34889,6 +35217,7 @@
               },
               "walletables": {
                 "type": "array",
+                "description": "口座の一覧（操作ユーザーが利用可能な口座のみ）。クエリパラメータ walletables または details に true を指定した場合のみ返る",
                 "items": {
                   "type": "object",
                   "required": [
@@ -34912,7 +35241,7 @@
                     },
                     "type": {
                       "type": "string",
-                      "description": "口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
+                      "description": "口座区分\n\n* bank_account - 銀行口座\n* credit_card - クレジットカード\n* wallet - 現金",
                       "example": "bank_account",
                       "enum": [
                         "bank_account",
@@ -36682,7 +37011,7 @@
           },
           "status": {
             "type": "string",
-            "description": "ステータス(confirmed:確認済み、deleted:削除済み、ignored:無視)",
+            "description": "ステータス（confirmed:確認済み, deleted:削除済み, ignored:無視）",
             "example": "confirmed",
             "enum": [
               "confirmed",
@@ -36692,12 +37021,12 @@
           },
           "description": {
             "type": "string",
-            "description": "メモ",
+            "description": "メモ。未設定の場合は空文字を返します。",
             "example": "タクシー利用"
           },
           "mime_type": {
             "type": "string",
-            "description": "MIMEタイプ",
+            "description": "ファイルのMIMEタイプ（例：image/png, image/jpeg, application/pdf）。ダウンロードAPIのレスポンスのContent-Typeもこの値になります。",
             "example": "image/png"
           },
           "origin": {
@@ -36724,6 +37053,7 @@
           },
           "user": {
             "type": "object",
+            "description": "ファイルをアップロードしたユーザー",
             "required": [
               "email",
               "id"
@@ -36750,6 +37080,8 @@
           },
           "receipt_metadatum": {
             "type": "object",
+            "nullable": true,
+            "description": "電子帳簿保存法の検索要件に対応するメタデータ（発行元・発行日・金額）",
             "properties": {
               "partner_name": {
                 "type": "string",
@@ -36770,14 +37102,14 @@
                 "minimum": -9223372036854775808,
                 "maximum": 9223372036854775807,
                 "nullable": true,
-                "description": "金額",
+                "description": "金額（円）",
                 "example": 5250
               }
             }
           },
           "qualified_invoice": {
             "type": "string",
-            "description": "適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択、null: OCR解析結果が保存されている時等）",
+            "description": "適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択、null: OCR解析結果が保存されておらず、ユーザーによる手動保存もされていない場合）",
             "enum": [
               "qualified",
               "not_qualified",
@@ -36791,13 +37123,13 @@
             "maxLength": 14,
             "minLength": 14,
             "pattern": "^T[1-9][0-9]{12}$",
-            "description": "インボイス制度適格請求書発行事業者登録番号（null: OCR解析結果が保存されている時等）\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+            "description": "インボイス制度適格請求書発行事業者登録番号（null: OCR解析結果が保存されておらず、ユーザーによる手動保存もされていない場合）\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
             "example": "T1000000000001",
             "nullable": true
           },
           "document_type": {
             "type": "string",
-            "description": "書類の種類（receipt: 領収書、invoice: 請求書、other: その他、null: OCR解析結果が保存されている時等）",
+            "description": "書類の種類（receipt: 領収書、invoice: 請求書、other: その他、null: OCR解析結果が保存されておらず、ユーザーによる手動保存もされていない場合）",
             "enum": [
               "receipt",
               "invoice",
@@ -36822,11 +37154,14 @@
       "fiscal_years": {
         "required": [
           "depreciation_record_method",
+          "end_date",
+          "id",
           "indirect_write_off_method",
           "is_closed",
           "month_end_date",
           "return_code",
           "sales_tax_business_code",
+          "start_date",
           "tax_account_method",
           "tax_fraction",
           "tax_method",
@@ -36854,12 +37189,12 @@
           },
           "start_date": {
             "type": "string",
-            "description": "期首日",
+            "description": "期首日 (yyyy-mm-dd)",
             "example": "2019-12-17"
           },
           "end_date": {
             "type": "string",
-            "description": "期末日",
+            "description": "期末日 (yyyy-mm-dd)",
             "example": "2019-12-17"
           },
           "depreciation_record_method": {
@@ -36917,13 +37252,13 @@
           },
           "month_end_date": {
             "type": "string",
-            "description": "本締め日",
+            "description": "本締め日 (yyyy-mm-dd)。締めが未設定の場合は null",
             "example": "2020-03-20",
             "nullable": true
           },
           "temp_month_end_date": {
             "type": "string",
-            "description": "仮締め日",
+            "description": "仮締め日 (yyyy-mm-dd)。仮締めが未設定の場合は null",
             "example": "2020-03-25",
             "nullable": true
           }
@@ -45559,8 +45894,33 @@
         "properties": {
           "fixed_assets": {
             "type": "array",
+            "description": "固定資産の一覧（固定資産IDの昇順）。指定した会計期間に償却データが存在する固定資産のみが含まれます",
             "items": {
               "type": "object",
+              "required": [
+                "company_id",
+                "id",
+                "name",
+                "management_number",
+                "account_item_id",
+                "section_id",
+                "item_id",
+                "depreciation_method",
+                "depreciation_account_item_id",
+                "prefecture_code",
+                "city_name",
+                "depreciation_amount",
+                "acquisition_cost",
+                "opening_balance",
+                "undepreciated_balance",
+                "opening_accumulated_depreciation",
+                "closing_accumulated_depreciation",
+                "life_years",
+                "acquisition_date",
+                "created_at",
+                "depreciation_status",
+                "retire_date"
+              ],
               "properties": {
                 "company_id": {
                   "type": "integer",
@@ -45584,14 +45944,14 @@
                 "management_number": {
                   "type": "string",
                   "nullable": true,
-                  "description": "管理番号",
+                  "description": "管理番号。事業所内で固定資産を識別するためにユーザーが任意に付与する番号です（未設定の場合はnull）",
                   "example": "pc-0001"
                 },
                 "account_item_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "勘定科目ID",
+                  "description": "勘定科目ID。固定資産の取得を計上している勘定科目です",
                   "example": 22
                 },
                 "section_id": {
@@ -45599,20 +45959,20 @@
                   "format": "int64",
                   "minimum": 1,
                   "nullable": true,
-                  "description": "部門ID",
-                  "example": 0
+                  "description": "部門ID（未設定の場合はnull）",
+                  "example": 1
                 },
                 "item_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
                   "nullable": true,
-                  "description": "品目ID",
-                  "example": 0
+                  "description": "品目ID（未設定の場合はnull）",
+                  "example": 1
                 },
                 "depreciation_method": {
                   "type": "string",
-                  "description": "償却方法:(少額償却: small_sum_method, 一括償却: lump_sum_method, 定額法: straight_line_method, 定率法: multiple_method, 旧定率法: old_multiple_method, 旧定額法: old_straight_line_method, 償却なし: non_depreciate_method, 任意償却: voluntary_method, 即時償却: immediate_method, 均等償却: equal_method)",
+                  "description": "償却方法 (少額償却: small_sum_method, 一括償却: lump_sum_method, 定額法: straight_line_method, 定率法: multiple_method, 旧定率法: old_multiple_method, 旧定額法: old_straight_line_method, 償却なし: non_depreciate_method, 任意償却: voluntary_method, 即時償却: immediate_method, 均等償却: equal_method)",
                   "enum": [
                     "small_sum_method",
                     "lump_sum_method",
@@ -45630,81 +45990,83 @@
                 "depreciation_account_item_id": {
                   "type": "integer",
                   "format": "int64",
-                  "minimum": 1,
-                  "description": "減価償却に使う勘定科目ID",
+                  "minimum": 0,
+                  "description": "減価償却費の計上に使う勘定科目ID（未設定の場合は0）",
                   "example": 99
                 },
                 "prefecture_code": {
                   "type": "integer",
                   "format": "int64",
-                  "minimum": -1,
+                  "minimum": 0,
                   "maximum": 46,
-                  "description": "都道府県コード（-1: 設定しない、0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
+                  "description": "償却資産税の申告先の都道府県コード（未設定の場合はnull）。0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄",
                   "example": 4,
                   "nullable": true
                 },
                 "city_name": {
                   "type": "string",
                   "nullable": true,
-                  "description": "申告先市区町村",
+                  "description": "償却資産税の申告先市区町村（未設定の場合はnull）",
                   "example": "港区"
                 },
                 "depreciation_amount": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "本年分の償却費合計",
-                  "example": "18533"
+                  "description": "本年分の償却費合計（円）。普通償却額と特別償却費の合計です",
+                  "example": 18533
                 },
                 "acquisition_cost": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "取得価額",
-                  "example": "150000"
+                  "description": "取得価額（円）",
+                  "example": 150000
                 },
                 "opening_balance": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "期首残高（取得日が会計期間に含まれるとき期首残高は0になります。）",
-                  "example": "92000"
+                  "description": "期首残高（円）。取得日が指定した会計期間に含まれる場合は0になります",
+                  "example": 92000
                 },
                 "undepreciated_balance": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "未償却残高",
-                  "example": "46000"
+                  "nullable": true,
+                  "description": "未償却残高（円）。土地など償却しない固定資産の場合はnullになります",
+                  "example": 46000
                 },
                 "opening_accumulated_depreciation": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "期首減価償却累計額",
-                  "example": "100000"
+                  "description": "期首減価償却累計額（円）",
+                  "example": 100000
                 },
                 "closing_accumulated_depreciation": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "期末減価償却累計額",
-                  "example": "46000"
+                  "description": "期末減価償却累計額（円）",
+                  "example": 46000
                 },
                 "life_years": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "耐用年数",
-                  "example": "5"
+                  "nullable": true,
+                  "description": "耐用年数（年）（未設定の場合はnull）",
+                  "example": 5
                 },
                 "acquisition_date": {
                   "type": "string",
-                  "description": "取得日",
+                  "description": "取得日 (yyyy-mm-dd)",
                   "format": "date",
                   "example": "2021-07-13"
                 },
                 "created_at": {
                   "type": "string",
-                  "description": "作成日時（ISO8601形式）",
+                  "description": "固定資産をfreeeに登録した日時（ISO8601形式）",
                   "example": "2021-07-15T18:30:24+09:00"
                 },
                 "depreciation_status": {
                   "type": "string",
-                  "description": "売却もしくは除却ステータス: (売却済: sold, 除却済: retired, 償却済: depreciated, 償却中: depreciation, 償却なし: non_depreciation)",
+                  "description": "固定資産の状態 (売却済: sold, 除却済: retired, 償却済: depreciated, 償却中: depreciation, 償却なし: non_depreciation)",
                   "enum": [
                     "sold",
                     "retired",
@@ -45718,7 +46080,7 @@
                   "type": "string",
                   "format": "date",
                   "nullable": true,
-                  "description": "除却日、もしくは売却日",
+                  "description": "除却日、もしくは売却日 (yyyy-mm-dd)。除却・売却されていない場合はnull",
                   "example": "2022-03-24"
                 }
               }
@@ -45726,6 +46088,7 @@
           },
           "fiscal_year": {
             "type": "object",
+            "description": "target_dateで指定した日付が含まれる会計期間。fixed_assetsの償却費や残高はこの会計期間で集計されています",
             "required": [
               "start_date",
               "end_date"
@@ -45733,24 +46096,24 @@
             "properties": {
               "start_date": {
                 "type": "string",
-                "description": "会計年度開始日 (yyyy-mm-dd)",
+                "description": "会計期間の開始日 (yyyy-mm-dd)",
                 "example": "2022-01-01"
               },
               "end_date": {
                 "type": "string",
-                "description": "会計年度終了日 (yyyy-mm-dd)",
+                "description": "会計期間の終了日 (yyyy-mm-dd)",
                 "example": "2022-12-31"
               }
             }
           },
           "up_to_date": {
             "type": "boolean",
-            "description": "集計結果が最新かどうか",
+            "description": "集計結果が最新かどうか。falseの場合は残高の集計が完了していないため、時間を空けて再度取得してください",
             "example": true
           },
           "up_to_date_reasons": {
             "type": "array",
-            "description": "集計が最新でない場合の要因情報",
+            "description": "集計が最新でない場合（up_to_dateがfalseの場合）の要因情報。最新の場合は空配列になります",
             "items": {
               "type": "object",
               "required": [
@@ -45760,7 +46123,7 @@
               "properties": {
                 "code": {
                   "type": "string",
-                  "description": "コード",
+                  "description": "要因コード (償却の作成処理が実行中: depreciation_creating, 償却の作成処理がエラー終了: depreciation_create_error)",
                   "example": "depreciation_creating",
                   "enum": [
                     "depreciation_creating",
@@ -45769,7 +46132,7 @@
                 },
                 "message": {
                   "type": "string",
-                  "description": "集計が最新でない理由",
+                  "description": "集計が最新でない理由の説明",
                   "example": "当期の固定資産の償却作成が完了していないため、正しい集計結果でない可能性があります。"
                 }
               }
