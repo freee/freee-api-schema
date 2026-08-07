@@ -6898,7 +6898,7 @@
           "Taxes"
         ],
         "summary": "税区分一覧の取得（廃止予定）",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>税区分一覧を取得する</p>\n\n<h2 id=\"\">注意点</h2>\n\n<p>このAPIは廃止予定のため非推奨です。api/1/taxes/companies/{company_id}（指定した事業所の税区分一覧の取得）をご利用ください。</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>税区分一覧を取得する</p>\n\n<p>税区分コード（code）は、取引の作成（POST /api/1/deals）や振替伝票の作成（POST /api/1/manual_journals）などで税区分を指定する際に tax_code として利用します。</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>このAPIは廃止予定のため非推奨です。/api/1/taxes/companies/{company_id}（指定した事業所の税区分一覧の取得）をご利用ください。</li>\n  <li>本APIは事業所の設定に依存しない共通の税区分マスタを返します。事業所ごとの使用設定（available）や表示カテゴリ（display_category）を確認する場合は /api/1/taxes/companies/{company_id} をご利用ください。</li>\n  <li>API利用上の非推奨税区分（課税、非課税、不課税、輸出等、未選択、課税8%）は返りません。</li>\n</ul>",
         "operationId": "get_tax_codes",
         "responses": {
           "200": {
@@ -6971,18 +6971,19 @@
           "Taxes"
         ],
         "summary": "税区分の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>税区分を取得する</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定したコードに対応する税区分を取得する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>存在しないコード、またはAPI利用上の非推奨税区分（課税、非課税、不課税、輸出等、未選択、課税8%）のコードを指定した場合は404エラーが返ります。</li>\n</ul>",
         "operationId": "get_tax_code",
         "parameters": [
           {
             "name": "code",
             "in": "path",
-            "description": "税区分コード",
+            "description": "税区分コード。/api/1/taxes/codes（税区分一覧の取得）または /api/1/taxes/companies/{company_id}（指定した事業所の税区分一覧の取得）で取得できる code を指定します。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64"
-            }
+            },
+            "example": 21
           }
         ],
         "responses": {
@@ -7055,24 +7056,25 @@
           "Taxes"
         ],
         "summary": "指定した事業所の税区分一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の税区分一覧を取得する</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の税区分一覧を取得する</p>\n\n<p>税区分コード（code）は、取引の作成（POST /api/1/deals）や振替伝票の作成（POST /api/1/manual_journals）などで税区分を指定する際に tax_code として利用します。事業所で利用できる税区分と使用設定（available）を確認するために本APIをご利用ください。</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>一覧には事業所の設定で「使用しない」となっている税区分も含まれます。available=true を指定すると、使用する設定の税区分のみに絞り込めます。</li>\n  <li>display_category が null の税区分は、税率を持たない税区分（未選択、対象外など）です。</li>\n</ul>",
         "operationId": "get_taxes_companies",
         "parameters": [
           {
             "name": "company_id",
             "in": "path",
-            "description": "事業所ID",
+            "description": "事業所ID。/api/1/companies（事業所一覧の取得）で取得できます。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           },
           {
             "name": "display_category",
             "in": "query",
-            "description": "税区分の表示カテゴリ（ tax_5: 5%表示の税区分、 tax_8: 8%表示の税区分、 tax_r8: 軽減税率8%表示の税区分、 tax_10: 10%表示の税区分、 tax_5_e80: インボイス経過措置5%表示80%控除の税区分、 tax_5_e70: インボイス経過措置5%表示70%控除の税区分、 tax_5_e50: インボイス経過措置5%表示50%控除の税区分、 tax_5_e30: インボイス経過措置5%表示30%控除の税区分、 tax_8_e80: インボイス経過措置8%表示80%控除の税区分、 tax_8_e70: インボイス経過措置8%表示70%控除の税区分、 tax_8_e50: インボイス経過措置8%表示50%控除の税区分、 tax_8_e30: インボイス経過措置8%表示30%控除の税区分、 tax_r8_e80: インボイス経過措置軽減税率8%表示80%控除の税区分、 tax_r8_e70: インボイス経過措置軽減税率8%表示70%控除の税区分、 tax_r8_e50: インボイス経過措置軽減税率8%表示50%控除の税区分、 tax_r8_e30: インボイス経過措置軽減税率8%表示30%控除の税区分、 tax_10_e80: インボイス経過措置10%表示80%控除の税区分、 tax_10_e70: インボイス経過措置10%表示70%控除の税区分、 tax_10_e50: インボイス経過措置10%表示50%控除の税区分、 tax_10_e30: インボイス経過措置10%表示30%控除の税区分）",
+            "description": "指定した表示カテゴリの税区分のみに絞り込みます。未指定の場合は全ての税区分が返ります。税区分の表示カテゴリ（ tax_5: 5%表示の税区分、 tax_8: 8%表示の税区分、 tax_r8: 軽減税率8%表示の税区分、 tax_10: 10%表示の税区分、 tax_5_e80: インボイス経過措置5%表示80%控除の税区分、 tax_5_e70: インボイス経過措置5%表示70%控除の税区分、 tax_5_e50: インボイス経過措置5%表示50%控除の税区分、 tax_5_e30: インボイス経過措置5%表示30%控除の税区分、 tax_8_e80: インボイス経過措置8%表示80%控除の税区分、 tax_8_e70: インボイス経過措置8%表示70%控除の税区分、 tax_8_e50: インボイス経過措置8%表示50%控除の税区分、 tax_8_e30: インボイス経過措置8%表示30%控除の税区分、 tax_r8_e80: インボイス経過措置軽減税率8%表示80%控除の税区分、 tax_r8_e70: インボイス経過措置軽減税率8%表示70%控除の税区分、 tax_r8_e50: インボイス経過措置軽減税率8%表示50%控除の税区分、 tax_r8_e30: インボイス経過措置軽減税率8%表示30%控除の税区分、 tax_10_e80: インボイス経過措置10%表示80%控除の税区分、 tax_10_e70: インボイス経過措置10%表示70%控除の税区分、 tax_10_e50: インボイス経過措置10%表示50%控除の税区分、 tax_10_e30: インボイス経過措置10%表示30%控除の税区分）",
             "schema": {
               "type": "string",
               "enum": [
@@ -7097,15 +7099,17 @@
                 "tax_10_e50",
                 "tax_10_e30"
               ]
-            }
+            },
+            "example": "tax_10"
           },
           {
             "name": "available",
             "in": "query",
-            "description": "税区分の使用設定。true: 使用する、false: 使用しない",
+            "description": "指定した使用設定の税区分のみに絞り込みます。未指定の場合は全ての税区分が返ります。税区分の使用設定（true: 使用する、false: 使用しない）",
             "schema": {
               "type": "boolean"
-            }
+            },
+            "example": true
           }
         ],
         "responses": {
@@ -7136,17 +7140,17 @@
                             "format": "int64",
                             "minimum": 0,
                             "maximum": 2147483647,
-                            "description": "税区分コード",
+                            "description": "税区分コード。取引の作成（POST /api/1/deals）や振替伝票の作成（POST /api/1/manual_journals）などで税区分を指定する際に tax_code として利用します。",
                             "example": 21
                           },
                           "name": {
                             "type": "string",
-                            "description": "税区分名",
+                            "description": "税区分名（システム識別名）",
                             "example": "sales_with_tax"
                           },
                           "name_ja": {
                             "type": "string",
-                            "description": "税区分名（日本語表示用）",
+                            "description": "税区分名（日本語表示用）。freee会計の画面上で表示される名称です。",
                             "example": "課税売上"
                           },
                           "display_category": {
@@ -7179,7 +7183,7 @@
                           },
                           "available": {
                             "type": "boolean",
-                            "description": "税区分の使用設定。true: 使用する、false: 使用しない",
+                            "description": "税区分の使用設定（true: 使用する、false: 使用しない）。事業所の設定（税区分の使用設定および税率別の表示設定）を反映します。false の税区分はfreee会計の画面上の税区分の選択肢に表示されません。",
                             "example": true
                           }
                         }
@@ -15043,7 +15047,7 @@
           "Expense application line templates"
         ],
         "summary": "経費科目一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の経費科目一覧を取得する</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費科目一覧を取得する</p>\n\n<p>経費科目は、経費申請の作成時に申請者が選択する項目で、勘定科目・税区分・品目などの組み合わせをあらかじめ設定したものです。</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>カスタム申請項目を含むなど、Web版freee会計専用の設定を含む経費科目も一覧には含まれます。ただし、これらの経費科目は経費科目の取得・更新APIでは404エラーになります。</li>\n</ul>",
         "operationId": "get_expense_application_line_templates",
         "parameters": [
           {
@@ -15149,6 +15153,7 @@
           "Expense application line templates"
         ],
         "summary": "経費科目の作成",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費科目を作成する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>作成された経費科目のsource_line_template_idには、作成された経費科目自身のIDが設定されます。</li>\n  <li>required_receiptを未指定で作成した場合、添付ファイルは任意（false）になります。</li>\n  <li>item_idで品目を紐付けた場合でも、レスポンスに品目IDは含まれません。</li>\n</ul>",
         "operationId": "create_expense_application_line_template",
         "requestBody": {
           "content": {
@@ -15225,6 +15230,7 @@
           "Expense application line templates"
         ],
         "summary": "経費科目の取得",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費科目を取得する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>\n    以下のいずれかに該当する経費科目はWeb版freee会計専用のため、本APIでは404エラーになります（経費科目一覧の取得APIでは取得できます）。\n    <ul>\n      <li>カスタム申請項目を含む</li>\n      <li>内容の入力設定が「必須」以外</li>\n      <li>金額の設定が「なし」以外</li>\n    </ul>\n  </li>\n</ul>",
         "operationId": "get_expense_application_line_template",
         "parameters": [
           {
@@ -15318,6 +15324,7 @@
           "Expense application line templates"
         ],
         "summary": "経費科目の更新",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費科目を更新する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIはリクエストボディで指定した内容への全置換で更新します。任意パラメータ（item_id, description, line_description, required_receipt）を未指定にした場合、その項目は未設定（required_receiptは任意 = false）にリセットされます。更新前の値を維持したい場合は、経費科目の取得APIで現在の値を確認し、すべてのパラメータを指定してください。</li>\n  <li>\n    以下のいずれかに該当する経費科目はWeb版freee会計専用のため、本APIでは404エラーになります。\n    <ul>\n      <li>カスタム申請項目を含む</li>\n      <li>内容の入力設定が「必須」以外</li>\n      <li>金額の設定が「なし」以外</li>\n    </ul>\n  </li>\n</ul>",
         "operationId": "update_expense_application_line_template",
         "parameters": [
           {
@@ -15415,6 +15422,7 @@
           "Expense application line templates"
         ],
         "summary": "経費科目の削除",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費科目を削除する</p>",
         "operationId": "destroy_expense_application_line_template",
         "parameters": [
           {
@@ -36131,17 +36139,17 @@
             "format": "int64",
             "minimum": 1,
             "maximum": 2147483647,
-            "description": "税区分コード",
+            "description": "税区分コード。取引の作成（POST /api/1/deals）や振替伝票の作成（POST /api/1/manual_journals）などで税区分を指定する際に tax_code として利用します。",
             "example": 21
           },
           "name": {
             "type": "string",
-            "description": "税区分名",
+            "description": "税区分名（システム識別名）",
             "example": "sales_with_tax"
           },
           "name_ja": {
             "type": "string",
-            "description": "税区分名（日本語表示用）",
+            "description": "税区分名（日本語表示用）。freee会計の画面上で表示される名称です。",
             "example": "課税売上"
           }
         }
@@ -37914,7 +37922,12 @@
           "id",
           "name",
           "tax_name",
-          "source_line_template_id"
+          "source_line_template_id",
+          "account_item_id",
+          "tax_code",
+          "description",
+          "line_description",
+          "required_receipt"
         ],
         "properties": {
           "id": {
@@ -37928,7 +37941,7 @@
             "type": "integer",
             "format": "int64",
             "minimum": 0,
-            "description": "経費科目の元となるテンプレートを識別するID。経費科目の設定を変更しても変わらない固定値",
+            "description": "経費科目の元となるテンプレートを識別するID。経費科目の設定（名前や勘定科目など）を変更しても変わらない固定値",
             "example": 1
           },
           "name": {
@@ -37940,12 +37953,12 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "勘定科目ID",
+            "description": "経費科目に紐づく勘定科目のID",
             "example": 1
           },
           "account_item_name": {
             "type": "string",
-            "description": "勘定科目名",
+            "description": "経費科目に紐づく勘定科目の名前",
             "example": "旅費交通費"
           },
           "tax_code": {
@@ -37953,27 +37966,29 @@
             "format": "int64",
             "minimum": 0,
             "maximum": 2147483647,
-            "description": "税区分コード",
+            "description": "経費科目に紐づく税区分コード",
             "example": 1
           },
           "tax_name": {
             "type": "string",
-            "description": "税区分名",
+            "description": "経費科目に紐づく税区分の名前",
             "example": "課対仕入"
           },
           "description": {
             "type": "string",
-            "description": "経費科目の説明",
+            "nullable": true,
+            "description": "経費科目の説明。未設定の場合はnull",
             "example": "電車、バス、飛行機などの交通費"
           },
           "line_description": {
             "type": "string",
-            "description": "内容の補足",
+            "nullable": true,
+            "description": "内容の補足。経費申請の作成時に内容欄へ何を入力すべきかを申請者に案内する文言。未設定の場合はnull",
             "example": "移動区間"
           },
           "required_receipt": {
             "type": "boolean",
-            "description": "添付ファイルの必須/任意",
+            "description": "添付ファイルの必須/任意（true: 経費申請の作成時に領収書などのファイル添付が必須, false: ファイル添付は任意）",
             "example": true
           }
         }
@@ -39327,21 +39342,21 @@
           "name": {
             "type": "string",
             "maxLength": 1000,
-            "description": "経費科目名 (100文字以内)",
+            "description": "経費科目名 (1000文字以内)",
             "example": "交通費"
           },
           "account_item_id": {
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "勘定科目ID",
+            "description": "経費科目に紐付ける勘定科目のID。指定した事業所に存在する勘定科目のIDのみ指定可能です（存在しない場合は400エラー）。勘定科目IDは /account_items のAPIから取得可能です。",
             "example": 1
           },
           "item_id": {
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "品目ID",
+            "description": "経費科目に紐付ける品目のID。指定した事業所に存在する品目のIDのみ指定可能です（存在しない場合は400エラー）。勘定科目と品目の紐付けが設定されている事業所では、指定した勘定科目に紐付く品目のみ指定可能です。品目IDは /items のAPIから取得可能です。なお、レスポンスに品目IDは含まれません。",
             "example": 1
           },
           "tax_code": {
@@ -39349,7 +39364,7 @@
             "format": "int64",
             "minimum": 0,
             "maximum": 2147483647,
-            "description": "税区分コード（税区分のdisplay_categoryがtax_5: 5%表示の税区分, tax_r8: 軽減税率8%表示の税区分に該当するtax_codeのみ利用可能です。税区分のdisplay_categoryは /taxes/companies/{:company_id}のAPIから取得可能です。）",
+            "description": "経費科目に紐付ける税区分コード（税区分のdisplay_categoryがtax_5: 5%表示の税区分, tax_r8: 軽減税率8%表示の税区分に該当するtax_codeのみ利用可能です。それ以外のtax_codeを指定した場合は400エラーになります。税区分のdisplay_categoryは /taxes/companies/{company_id}のAPIから取得可能です。）",
             "example": 1
           },
           "description": {
@@ -39361,7 +39376,7 @@
           "line_description": {
             "type": "string",
             "maxLength": 1000,
-            "description": "内容の補足 (1000文字以内)",
+            "description": "内容の補足 (1000文字以内)。経費申請の作成時に内容欄へ何を入力すべきかを申請者に案内する文言",
             "example": "移動区間"
           },
           "required_receipt": {
