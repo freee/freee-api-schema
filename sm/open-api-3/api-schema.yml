@@ -294,6 +294,9 @@ paths:
         <p>internal_memo : 社内メモ</p>
         </li>
         <li>
+        <p>common_business_id : 紐付ける案件マスタID</p>
+        </li>
+        <li>
         <p>custom_fields : カスタム項目</p>
         </li>
         </ul>
@@ -383,6 +386,7 @@ paths:
         </ul>
         <p>※全ての項目は任意です。更新したい項目のみを送信してください。</p>
         <p>※custom_fieldsを指定した場合、リクエストに含まれないカスタム項目はnullとして扱われます。必須のカスタム項目が指定されていない場合はバリデーションエラーになります。</p>
+        <p>※common_business_id（案件マスタID）はこのAPIでは更新できません。紐付け済みの案件に対して既存と異なる値を指定した場合はエラーになります。</p>
       operationId: update_business
       parameters:
         - name: id
@@ -2793,7 +2797,7 @@ paths:
         <p>billing_status : 請求書送付ステータス</p>
         </li>
         <li>
-        <p>collection_status : 入金ステータス</p>
+        <p>collection_status : 決済ステータス</p>
         </li>
         <li>
         <p>canceled : 取消状態(デフォルト:false)</p>
@@ -4398,6 +4402,10 @@ paths:
         <h2 id="_3">注意点</h2>
         <h3>明細行のpurchase_order_id（発注ID）について</h3>
         <p>linesを指定して明細を更新する場合、各明細行でpurchase_order_idを省略する、またはnullを指定すると発注との紐づけが解除されます。既存の発注との紐づけを維持したい場合は、必ずpurchase_order_idを指定してください。</p>
+        <h3>明細行の受取請求との紐づけについて</h3>
+        <p>既存の明細のいずれかに受取請求が紐づいている仕入の場合、linesを指定して明細を更新しても受取請求との紐づけは維持されます。更新後のすべての明細行に、その受取請求が紐づけられます。明細行単位での指定・解除はできません。</p>
+        <p>また、受取請求が紐づいている仕入に対して、いずれかの明細行でpurchase_order_idを指定した場合はエラー(400)になります。1つの明細行に紐づけられる関連リソースは1つのみのためです。</p>
+        <p>そのため、受取請求が紐づいている仕入では、既存の明細に発注が紐づいていても、linesを指定して更新すると更新後は発注との紐づけが解除されます。</p>
         <h3>適格請求書発行事業者該当フラグ(is_qualified_invoice_issuer)について</h3>
         <p>本フラグの登録時の挙動は、freee会計の「税区分の設定 &gt; インボイス制度関連 &gt; 買い手側対応機能」の設定状況によって変わります。リクエストでの指定値がそのまま登録されるとは限りません。</p>
         <p>登録された値は、免税事業者からの仕入れに係る経過措置に対応した税区分を利用するかどうかの判定に使われます。</p>
@@ -4579,7 +4587,7 @@ paths:
         <p>billing_status : 請求書送付ステータス</p>
         </li>
         <li>
-        <p>collection_status : 入金ステータス</p>
+        <p>collection_status : 決済ステータス</p>
         </li>
         <li>
         <p>canceled : 取消状態(デフォルト:false)</p>
@@ -4668,7 +4676,7 @@ paths:
         <h3>任意項目</h3>
         <ul>
         <li>
-        <p>sales_order_id : 引継元受注ID（受注に紐づける場合）</p>
+        <p>sales_order_id : 受注ID（受注に紐づける場合）</p>
         </li>
         <li>
         <p>accounting_reporting_section_id : 会計計上部門ID</p>
@@ -6102,7 +6110,7 @@ components:
         example: '2025-05-01'
     parameters-collection_status:
       name: collection_status
-      description: '入金ステータス (未決済: not_settled, 一部決済済: partially_settled, 決済済: settled, 無効: invalidated, 対象外: none)'
+      description: '決済ステータス (未決済: not_settled, 一部決済済: partially_settled, 決済済: settled, 無効: invalidated, 対象外: none)'
       in: query
       required: false
       schema:
@@ -6490,6 +6498,13 @@ components:
           $ref: '#/components/schemas/ReportingSectionId'
         internal_memo:
           $ref: '#/components/schemas/InternalMemo'
+        common_business_id:
+          type: string
+          nullable: true
+          description: 紐付ける案件マスタID（ULID形式）。案件登録時のみ指定可能で、案件更新では紐付けの変更はできません（紐付け済みの案件に対して既存と異なる値を指定した場合はエラー）
+          minLength: 26
+          maxLength: 26
+          example: 01JPP4FD1CVQWCDSWA90VE1ZTM
         custom_fields:
           type: array
           nullable: true
@@ -6697,6 +6712,11 @@ components:
         - $ref: '#/components/schemas/BusinessDigest'
         - type: object
           properties:
+            common_business_id:
+              type: string
+              nullable: true
+              description: 紐付けられた案件マスタID（ULID形式）
+              example: 01JPP4FD1CVQWCDSWA90VE1ZTM
             actual_profit:
               type: integer
               format: int64
@@ -9065,7 +9085,7 @@ components:
         business:
           $ref: '#/components/schemas/Business'
         quotation_id:
-          description: 紐づく見積ID
+          description: 見積ID
           type: string
           nullable: true
           maxLength: 26
@@ -9434,7 +9454,7 @@ components:
           example: 01JPP4FD1CVQWCDSWA90VE1ZTM
         sales_order_id:
           type: string
-          description: 紐づく受注ID
+          description: 受注ID
           nullable: true
           example: 01JPP4FD1CVQWCDSWA90VE1ZTM
         delivery_status:
@@ -9943,28 +9963,28 @@ components:
           $ref: '#/components/schemas/CollectionStatus'
         sales_order_id:
           type: string
-          description: 紐づく受注ID
+          description: 受注ID
           nullable: true
           example: 01JPP4FD1CVQWCDSWA90VE1ZTM
           maxLength: 26
           minLength: 26
         delivery_id:
           type: string
-          description: 紐づく納品ID
+          description: 納品ID
           nullable: true
           example: 01JPP4FD1CVQWCDSWA90VE1ZTM
           maxLength: 26
           minLength: 26
         advance_receipt_id:
           type: string
-          description: 紐づく前受金ID
+          description: 前受金ID
           nullable: true
           example: 01JPP4FD1CVQWCDSWA90VE1ZTM
           maxLength: 26
           minLength: 26
         periodic_sales_id:
           type: string
-          description: 紐づく定期売上ID
+          description: 定期売上ID
           nullable: true
           example: 01JPP4FD1CVQWCDSWA90VE1ZTM
           maxLength: 26
@@ -10250,21 +10270,21 @@ components:
           properties:
             sales_order_id:
               type: string
-              description: 紐づく受注ID
+              description: 受注ID
               nullable: true
               example: 01JPP4FD1CVQWCDSWA90VE1ZTM
               maxLength: 26
               minLength: 26
             delivery_id:
               type: string
-              description: 紐づく納品ID
+              description: 納品ID
               nullable: true
               example: 01JPP4FD1CVQWCDSWA90VE1ZTM
               maxLength: 26
               minLength: 26
             advance_receipt_id:
               type: string
-              description: 取り崩し元の前受金ID
+              description: 前受金ID
               nullable: true
               example: 01JPP4FD1CVQWCDSWA90VE1ZTM
               maxLength: 26
@@ -10397,7 +10417,7 @@ components:
           example: 3
         advance_receipt_id:
           type: string
-          description: 紐づく前受金ID（前受金由来の定期売上の場合のみ。それ以外はnull）
+          description: 前受金ID（前受金由来の定期売上の場合のみ。それ以外はnull）
           nullable: true
           example: 01JPP4FD1CVQWCDSWA90VE1ZTM
           maxLength: 26
@@ -10909,7 +10929,7 @@ components:
           example: 01JPP4FD1CVQWCDSWA90VE1ZTM
         advance_receipt_id:
           type: string
-          description: 引継元の前受金ID
+          description: 前受金ID
           nullable: true
           minLength: 26
           maxLength: 26
@@ -11068,7 +11088,7 @@ components:
           example: 01JPP4FD1CVQWCDSWA90VE1ZTM
         advance_receipt_id:
           type: string
-          description: 引継元の前受金ID
+          description: 前受金ID
           nullable: true
           minLength: 26
           maxLength: 26
@@ -12014,7 +12034,8 @@ components:
         purchase_order_id:
           description: |-
             発注ID<br>
-            ※省略した場合、またはnullを指定した場合、発注との紐づけは解除されます。既存の紐づけを維持したい場合は必ず指定してください。
+            ※省略した場合、またはnullを指定した場合、発注との紐づけは解除されます。既存の紐づけを維持したい場合は必ず指定してください。<br>
+            ※既存の明細に受取請求が紐づいている仕入では指定できません。指定した場合はエラー(400)になります。
           type: string
           nullable: true
           maxLength: 26
@@ -12130,7 +12151,9 @@ components:
         internal_memo:
           $ref: '#/components/schemas/InternalMemo'
         lines:
-          description: 明細リスト（指定した場合、既存の明細は全て削除され、新しい明細に置き換えられます）
+          description: |-
+            明細リスト（指定した場合、既存の明細は全て削除され、新しい明細に置き換えられます）<br>
+            ※既存の明細に受取請求が紐づいている場合、更新後のすべての明細行にその受取請求が引き継がれます。
           type: array
           minItems: 1
           maxItems: 500
@@ -12263,7 +12286,7 @@ components:
           nullable: true
           example: '2025-04-30'
         collection_status:
-          description: 入金ステータス
+          description: 決済ステータス
           allOf:
             - $ref: '#/components/schemas/CollectionStatus'
         charge_employee:
@@ -12509,7 +12532,7 @@ components:
         reporting_section_id:
           $ref: '#/components/schemas/ReportingSectionId'
         sales_order_id:
-          description: 引継元受注ID
+          description: 受注ID
           type: string
           nullable: true
           maxLength: 26
@@ -14442,14 +14465,14 @@ components:
                   internal_memo:
                     $ref: '#/components/schemas/InternalMemo'
                   sales_order_id:
-                    description: 引継元受注ID
+                    description: 受注ID
                     type: string
                     maxLength: 26
                     minLength: 26
                     nullable: true
                     example: 01JPP4FD1CVQWCDSWA90VE1ZTM
                   delivery_id:
-                    description: 引継元納品ID
+                    description: 納品ID
                     type: string
                     maxLength: 26
                     minLength: 26
