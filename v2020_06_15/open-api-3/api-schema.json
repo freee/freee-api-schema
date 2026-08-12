@@ -3672,7 +3672,7 @@
           {
             "name": "accruals",
             "in": "query",
-            "description": "取引の債権債務行の表示（without: 表示しない(デフォルト), with: 表示する）",
+            "description": "取引の債権債務行の表示（without: 表示しない(デフォルト), with: 表示する）。withを指定した場合、債権債務行が存在する取引のレスポンスにaccrualsが含まれます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -3881,6 +3881,7 @@
           {
             "name": "id",
             "in": "path",
+            "description": "取引ID",
             "required": true,
             "schema": {
               "type": "integer",
@@ -3891,7 +3892,7 @@
           {
             "name": "accruals",
             "in": "query",
-            "description": "取引の債権債務行の表示（without: 表示しない(デフォルト), with: 表示する）",
+            "description": "取引の債権債務行の表示（without: 表示しない(デフォルト), with: 表示する）。withを指定した場合、債権債務行が存在する取引のレスポンスにaccrualsが含まれます。",
             "schema": {
               "type": "string",
               "enum": [
@@ -4227,6 +4228,16 @@
               }
             }
           },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
+            }
+          },
           "500": {
             "description": "",
             "content": {
@@ -4328,6 +4339,16 @@
               }
             }
           },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
+            }
+          },
           "500": {
             "description": "",
             "content": {
@@ -4378,7 +4399,7 @@
             "schema": {
               "type": "integer",
               "minimum": 1,
-              "format": "int64s"
+              "format": "int64"
             }
           }
         ],
@@ -4419,6 +4440,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/forbiddenError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
                 }
               }
             }
@@ -4559,7 +4590,7 @@
           {
             "name": "payment_id",
             "in": "path",
-            "description": "決済ID",
+            "description": "支払行ID（取引のレスポンスのpayments配列のid）",
             "required": true,
             "schema": {
               "type": "integer",
@@ -4668,7 +4699,7 @@
           {
             "name": "payment_id",
             "in": "path",
-            "description": "決済ID",
+            "description": "支払行ID（取引のレスポンスのpayments配列のid）",
             "required": true,
             "schema": {
               "type": "integer",
@@ -5405,7 +5436,7 @@
           "Users"
         ],
         "summary": "事業所に所属するユーザー一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>事業所に所属するユーザー一覧を取得する</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所に所属するユーザーの一覧を取得する</p>\n\n<p>事業所のメンバーのユーザーID・メールアドレス・氏名を確認できます。取引や申請などの担当者（user_id）を指定する前に、対象ユーザーのIDを調べる用途で使用します。</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>各ユーザーの権限は返りません。ログインユーザー自身の権限を確認する場合は「ログインユーザーの権限の取得 (/api/1/users/capabilities)」を使用してください。</li>\n</ul>",
         "operationId": "get_users",
         "parameters": [
           {
@@ -5417,7 +5448,8 @@
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           },
           {
             "name": "limit",
@@ -5427,8 +5459,10 @@
               "type": "integer",
               "format": "int64",
               "minimum": 1,
-              "maximum": 3000
-            }
+              "maximum": 3000,
+              "default": 50
+            },
+            "example": 50
           }
         ],
         "responses": {
@@ -5512,32 +5546,34 @@
           "Users"
         ],
         "summary": "ログインユーザーの取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ログインユーザーを取得する</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>アクセストークンに紐づくログインユーザーの情報を取得する</p>\n\n<p>API連携アプリの認可後に、操作しているユーザー本人の情報（ユーザーID・メールアドレス・氏名）や、そのユーザーが所属する事業所の一覧を確認する用途で使用します。</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>companiesパラメータを指定しない場合は、ユーザーの基本情報のみが返ります（レスポンスにcompaniesは含まれません）。</li>\n  <li>advisorパラメータはcompaniesと同時に指定してください。companiesを指定せずにadvisorを指定した場合は400エラーになります。</li>\n  <li>companies・advisorはパラメータの指定有無で判定されます。falseを指定した場合もtrueと同様に扱われるため、事業所一覧が不要な場合はパラメータ自体を省略してください。</li>\n</ul>",
         "operationId": "get_users_me",
         "parameters": [
           {
             "name": "companies",
             "in": "query",
-            "description": "取得情報にユーザーが所属する事業所一覧を含める",
+            "description": "ユーザーが所属する事業所一覧をレスポンスに含めるかどうか (true: 含める、未指定: 含めない)。指定有無で判定されるため、falseを指定した場合もtrueと同様に扱われます。",
             "schema": {
               "type": "boolean",
               "enum": [
                 true,
                 false
               ]
-            }
+            },
+            "example": true
           },
           {
             "name": "advisor",
             "in": "query",
-            "description": "取得情報に事業がアドバイザー事象所の場合は事業所毎の一意なプロフィールIDを含める",
+            "description": "事業所ごとのアドバイザープロファイルID (advisor_id) をレスポンスの事業所一覧に含めるかどうか (true: 含める、未指定: 含めない)。companiesと同時に指定してください。指定有無で判定されるため、falseを指定した場合もtrueと同様に扱われます。",
             "schema": {
               "type": "boolean",
               "enum": [
                 true,
                 false
               ]
-            }
+            },
+            "example": true
           }
         ],
         "responses": {
@@ -5608,7 +5644,7 @@
           "Users"
         ],
         "summary": "ログインユーザーの更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ログインユーザーを更新する</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>アクセストークンに紐づくログインユーザーの基本情報（表示名・氏名・カナ氏名）を更新する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>更新できるのはログインユーザー自身の情報のみです。他のユーザーの情報は更新できません（ユーザーIDの指定はありません）。</li>\n  <li>リクエストボディでキーを省略した項目は更新されません。項目を未設定に戻す場合は空文字を指定してください。</li>\n</ul>",
         "operationId": "update_user",
         "requestBody": {
           "content": {
@@ -5695,7 +5731,7 @@
           "Users"
         ],
         "summary": "ログインユーザーの権限の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ログインユーザーの権限を取得する</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所におけるログインユーザーの権限を取得する</p>\n\n<p>機能（レスポンスの各キー）ごとに、閲覧 (read)・作成 (create)・更新 (update)・削除 (destroy) などの操作が許可されているかどうかがbooleanで返ります。APIで取引や申請などを操作する前に、必要な権限があるかを確認する用途で使用します。</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>ログインユーザーが所属していない事業所のcompany_idを指定した場合は404エラーになります。</li>\n  <li>一部の機能では、read/create/update/destroy以外のキー（例: 操作可能な範囲を表すallowed_target、操作可否を表すwrite/confirm）が返ります。各機能のスキーマを参照してください。</li>\n</ul>",
         "operationId": "get_users_capabilities",
         "parameters": [
           {
@@ -5707,12 +5743,13 @@
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           }
         ],
         "responses": {
           "200": {
-            "description": "<p>レスポンスの各キーは以下の項目と対応しています。</p>\n<p>詳細は <a href=\"https://support.freee.co.jp/hc/ja/articles/210265673\">https://support.freee.co.jp/hc/ja/articles/210265673</a> を参照してください。</p>\n<table>\n  <thead>\n    <tr>\n      <th style=\"padding: 5px\">キー</th>\n      <th style=\"padding: 5px\">対応する項目</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td style=\"padding: 5px\">wallet_txns</td>\n      <td style=\"padding: 5px\">自動で経理 / 取得した明細</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">deals</td>\n      <td style=\"padding: 5px\">取引</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">transfers</td>\n      <td style=\"padding: 5px\">口座振替</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">docs</td>\n      <td style=\"padding: 5px\">見積書・納品書・請求書・領収書・発注書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">doc_postings</td>\n      <td style=\"padding: 5px\">(請求書の)郵送</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">receipts</td>\n      <td style=\"padding: 5px\">ファイルボックス</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">receipt_stream_editor</td>\n      <td style=\"padding: 5px\">連続取引登録</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">spreadsheets</td>\n      <td style=\"padding: 5px\">エクセルインポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">expense_applications</td>\n      <td style=\"padding: 5px\">経費精算</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">expense_application_sync_payroll</td>\n      <td style=\"padding: 5px\">経費精算の給与連携</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">payment_requests</td>\n      <td style=\"padding: 5px\">支払依頼</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">approval_requests</td>\n      <td style=\"padding: 5px\">各種申請</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports</td>\n      <td style=\"padding: 5px\">収益 / 費用レポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_income_expense</td>\n      <td style=\"padding: 5px\">損益レポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_receivables</td>\n      <td style=\"padding: 5px\">入金管理レポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_payables</td>\n      <td style=\"padding: 5px\">支払管理レポート(一括振込ファイルを含む)</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_cash_balance</td>\n      <td style=\"padding: 5px\">現預金レポート/資金繰りレポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_managements_planning</td>\n      <td style=\"padding: 5px\">経営プランニング</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_managements_navigation</td>\n      <td style=\"padding: 5px\">経営ナビゲーション</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_custom_reports_aggregate</td>\n      <td style=\"padding: 5px\">カスタムレポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_pl</td>\n      <td style=\"padding: 5px\">損益計算書(月次推移/試算表)</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_bs</td>\n      <td style=\"padding: 5px\">貸借対照表(月次推移/試算表)</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_general_ledgers</td>\n      <td style=\"padding: 5px\">総勘定元帳</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_journals</td>\n      <td style=\"padding: 5px\">仕訳帳</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">manual_journals</td>\n      <td style=\"padding: 5px\">振替伝票</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">fixed_assets</td>\n      <td style=\"padding: 5px\">固定資産台帳</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">inventory_refreshes</td>\n      <td style=\"padding: 5px\">在庫棚卸</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">biz_allocations</td>\n      <td style=\"padding: 5px\">家事按分</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">payment_records</td>\n      <td style=\"padding: 5px\">支払調書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">annual_reports</td>\n      <td style=\"padding: 5px\">決算書、確定申告書類</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">tax_reports</td>\n      <td style=\"padding: 5px\">消費税区分別表・消費税集計表</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">consumption_entries</td>\n      <td style=\"padding: 5px\">消費税申告書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">tax_return</td>\n      <td style=\"padding: 5px\">連携用データ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">account_item_statements</td>\n      <td style=\"padding: 5px\">勘定科目内訳明細書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">month_end</td>\n      <td style=\"padding: 5px\">月締め</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">year_end</td>\n      <td style=\"padding: 5px\">年度締め</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">walletables</td>\n      <td style=\"padding: 5px\">口座 / 口座の同期</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">companies</td>\n      <td style=\"padding: 5px\">事業所の設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">invitations</td>\n      <td style=\"padding: 5px\">メンバー招待</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">access_controls</td>\n      <td style=\"padding: 5px\">権限管理</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">sign_in_logs</td>\n      <td style=\"padding: 5px\">ログイン履歴</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">user_attribute_logs</td>\n      <td style=\"padding: 5px\">ユーザー更新履歴</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">app_role_logs</td>\n      <td style=\"padding: 5px\">権限変更履歴</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">txn_relationship_logs</td>\n      <td style=\"padding: 5px\">仕訳関連履歴</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">backups</td>\n      <td style=\"padding: 5px\">バックアップ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">opening_balances</td>\n      <td style=\"padding: 5px\">開始残高の設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">system_conversion</td>\n      <td style=\"padding: 5px\">乗り換え設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">resets</td>\n      <td style=\"padding: 5px\">リセット</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">partners</td>\n      <td style=\"padding: 5px\">取引先</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">items</td>\n      <td style=\"padding: 5px\">品目</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">sections</td>\n      <td style=\"padding: 5px\">部門</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">tags</td>\n      <td style=\"padding: 5px\">メモタグ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">account_items</td>\n      <td style=\"padding: 5px\">勘定科目</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">taxes</td>\n      <td style=\"padding: 5px\">税区分</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">payroll_item_sets</td>\n      <td style=\"padding: 5px\">給与連携の設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">user_matchers</td>\n      <td style=\"padding: 5px\">自動登録ルール</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">deal_templates</td>\n      <td style=\"padding: 5px\">取引テンプレート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">manual_journal_templates</td>\n      <td style=\"padding: 5px\">振替伝票テンプレート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">cost_allocations</td>\n      <td style=\"padding: 5px\">部門配賦</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">approval_flow_routes</td>\n      <td style=\"padding: 5px\">承認経路</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">expense_application_templates</td>\n      <td style=\"padding: 5px\">経費科目</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">request_forms</td>\n      <td style=\"padding: 5px\">申請フォーム</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">system_messages_for_admin</td>\n      <td style=\"padding: 5px\">管理者向けお知らせ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">company_internal_announcements</td>\n      <td style=\"padding: 5px\"><a href=\"https://support.freee.co.jp/hc/ja/articles/900002322383#:~:text=%E7%A4%BE%E5%86%85%E5%90%91%E3%81%91%E3%81%AE%E3%82%A2%E3%83%8A%E3%82%A6%E3%83%B3%E3%82%B9%E3%82%92%E6%8E%B2%E7%A4%BA%E3%81%A7%E3%81%8D%E3%82%8B%E6%A9%9F%E8%83%BD%E3%81%A7%E3%81%99%E3%80%82\" target=\"_blank\">アナウンス</a></td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">doc_change_logs</td>\n      <td style=\"padding: 5px\">受発注書類変更履歴</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">workflows</td>\n      <td style=\"padding: 5px\">仕訳承認</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">oauth_applications</td>\n      <td style=\"padding: 5px\">アプリ利用</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">oauth_authorizations</td>\n      <td style=\"padding: 5px\">アプリ認可</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">bank_accountant_staff_users</td>\n      <td style=\"padding: 5px\">アドバイザー事業所内でのメンバー管理</td>\n    </tr>\n  </tbody>\n</table>\n",
+            "description": "<p>レスポンスの各キーは以下の項目と対応しています。</p>\n<p>詳細は <a href=\"https://support.freee.co.jp/hc/ja/articles/210265673\">https://support.freee.co.jp/hc/ja/articles/210265673</a> を参照してください。</p>\n<table>\n  <thead>\n    <tr>\n      <th style=\"padding: 5px\">キー</th>\n      <th style=\"padding: 5px\">対応する項目</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td style=\"padding: 5px\">wallet_txns</td>\n      <td style=\"padding: 5px\">自動で経理 / 取得した明細</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">deals</td>\n      <td style=\"padding: 5px\">取引</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">deal_linkage</td>\n      <td style=\"padding: 5px\">取引連携（freee請求書など、freee会計以外から連携させる取引）</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">transfers</td>\n      <td style=\"padding: 5px\">口座振替</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">docs</td>\n      <td style=\"padding: 5px\">見積書・納品書・請求書・領収書・発注書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">doc_postings</td>\n      <td style=\"padding: 5px\">(請求書の)郵送</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">receipts</td>\n      <td style=\"padding: 5px\">ファイルボックス</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">receipt_stream_editor</td>\n      <td style=\"padding: 5px\">連続取引登録</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">spreadsheets</td>\n      <td style=\"padding: 5px\">エクセルインポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">expense_applications</td>\n      <td style=\"padding: 5px\">経費精算</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">expense_application_sync_payroll</td>\n      <td style=\"padding: 5px\">経費精算の給与連携</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">manage_bulk_expense_application_approvals</td>\n      <td style=\"padding: 5px\">経費精算の一括承認</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">payment_requests</td>\n      <td style=\"padding: 5px\">支払依頼</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">payment_request_templates</td>\n      <td style=\"padding: 5px\">支払テンプレート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">approval_requests</td>\n      <td style=\"padding: 5px\">各種申請</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">purchase_requests</td>\n      <td style=\"padding: 5px\">購買申請</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">suspense_payments</td>\n      <td style=\"padding: 5px\">仮払金</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports</td>\n      <td style=\"padding: 5px\">収益 / 費用レポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_income_expense</td>\n      <td style=\"padding: 5px\">損益レポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_receivables</td>\n      <td style=\"padding: 5px\">入金管理レポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_payables</td>\n      <td style=\"padding: 5px\">支払管理レポート(一括振込ファイルを含む)</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_purchase_budgets</td>\n      <td style=\"padding: 5px\">購買進捗モニター</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_cash_balance</td>\n      <td style=\"padding: 5px\">現預金レポート/資金繰りレポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_managements_planning</td>\n      <td style=\"padding: 5px\">経営プランニング</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_managements_navigation</td>\n      <td style=\"padding: 5px\">経営ナビゲーション</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_managements_introduction</td>\n      <td style=\"padding: 5px\">経営プランニング・経営ナビゲーションの紹介ページ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_custom_reports_aggregate</td>\n      <td style=\"padding: 5px\">カスタムレポート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_pl</td>\n      <td style=\"padding: 5px\">損益計算書(月次推移/試算表)</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_bs</td>\n      <td style=\"padding: 5px\">貸借対照表(月次推移/試算表)</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_general_ledgers</td>\n      <td style=\"padding: 5px\">総勘定元帳</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">reports_journals</td>\n      <td style=\"padding: 5px\">仕訳帳</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">manual_journals</td>\n      <td style=\"padding: 5px\">振替伝票</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">fixed_assets</td>\n      <td style=\"padding: 5px\">固定資産台帳</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">inventory_refreshes</td>\n      <td style=\"padding: 5px\">在庫棚卸</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">biz_allocations</td>\n      <td style=\"padding: 5px\">家事按分</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">payment_records</td>\n      <td style=\"padding: 5px\">支払調書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">annual_reports</td>\n      <td style=\"padding: 5px\">決算書、確定申告書類</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">consolidation</td>\n      <td style=\"padding: 5px\">連結会計</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">tax_reports</td>\n      <td style=\"padding: 5px\">消費税区分別表・消費税集計表</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">consumption_entries</td>\n      <td style=\"padding: 5px\">消費税申告書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">tax_return</td>\n      <td style=\"padding: 5px\">連携用データ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">account_item_statements</td>\n      <td style=\"padding: 5px\">勘定科目内訳明細書</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">month_end</td>\n      <td style=\"padding: 5px\">月締め</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">year_end</td>\n      <td style=\"padding: 5px\">年度締め</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">walletables</td>\n      <td style=\"padding: 5px\">口座 / 口座の同期</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">companies</td>\n      <td style=\"padding: 5px\">事業所の設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">invitations</td>\n      <td style=\"padding: 5px\">メンバー招待</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">access_controls</td>\n      <td style=\"padding: 5px\">権限管理</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">sign_in_logs</td>\n      <td style=\"padding: 5px\">ログイン履歴</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">user_attribute_logs</td>\n      <td style=\"padding: 5px\">ユーザー更新履歴</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">app_role_logs</td>\n      <td style=\"padding: 5px\">権限変更履歴</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">txn_relationship_logs</td>\n      <td style=\"padding: 5px\">仕訳関連履歴</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">backups</td>\n      <td style=\"padding: 5px\">バックアップ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">opening_balances</td>\n      <td style=\"padding: 5px\">開始残高の設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">system_conversion</td>\n      <td style=\"padding: 5px\">乗り換え設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">resets</td>\n      <td style=\"padding: 5px\">リセット</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">partners</td>\n      <td style=\"padding: 5px\">取引先</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">items</td>\n      <td style=\"padding: 5px\">品目</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">sections</td>\n      <td style=\"padding: 5px\">部門</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">tags</td>\n      <td style=\"padding: 5px\">メモタグ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">account_items</td>\n      <td style=\"padding: 5px\">勘定科目</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">taxes</td>\n      <td style=\"padding: 5px\">税区分</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">payroll_item_sets</td>\n      <td style=\"padding: 5px\">給与連携の設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">user_matchers</td>\n      <td style=\"padding: 5px\">自動登録ルール</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">deal_templates</td>\n      <td style=\"padding: 5px\">取引テンプレート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">manual_journal_templates</td>\n      <td style=\"padding: 5px\">振替伝票テンプレート</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">cost_allocations</td>\n      <td style=\"padding: 5px\">部門配賦</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">approval_flow_routes</td>\n      <td style=\"padding: 5px\">承認経路</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">expense_application_templates</td>\n      <td style=\"padding: 5px\">経費科目</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">request_forms</td>\n      <td style=\"padding: 5px\">申請フォーム</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">system_messages_for_admin</td>\n      <td style=\"padding: 5px\">管理者向けお知らせ</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">company_internal_announcements</td>\n      <td style=\"padding: 5px\"><a href=\"https://support.freee.co.jp/hc/ja/articles/900002322383#:~:text=%E7%A4%BE%E5%86%85%E5%90%91%E3%81%91%E3%81%AE%E3%82%A2%E3%83%8A%E3%82%A6%E3%83%B3%E3%82%B9%E3%82%92%E6%8E%B2%E7%A4%BA%E3%81%A7%E3%81%8D%E3%82%8B%E6%A9%9F%E8%83%BD%E3%81%A7%E3%81%99%E3%80%82\" target=\"_blank\">アナウンス</a></td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">doc_change_logs</td>\n      <td style=\"padding: 5px\">受発注書類変更履歴</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">entries_reviews</td>\n      <td style=\"padding: 5px\">記帳レビュー</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">freee_cards_stream</td>\n      <td style=\"padding: 5px\">freeeカードで経理</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">proxy_application_settings</td>\n      <td style=\"padding: 5px\">代理申請の設定</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">workflows</td>\n      <td style=\"padding: 5px\">仕訳承認</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">oauth_applications</td>\n      <td style=\"padding: 5px\">アプリ利用</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">oauth_authorizations</td>\n      <td style=\"padding: 5px\">アプリ認可</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">division_tag_1</td>\n      <td style=\"padding: 5px\">セグメント1</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">division_tag_2</td>\n      <td style=\"padding: 5px\">セグメント2</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">division_tag_3</td>\n      <td style=\"padding: 5px\">セグメント3</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">currencies</td>\n      <td style=\"padding: 5px\">外貨（通貨の設定）</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 5px\">bank_accountant_staff_users</td>\n      <td style=\"padding: 5px\">アドバイザー事業所内でのメンバー管理</td>\n    </tr>\n  </tbody>\n</table>\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -5730,20 +5767,29 @@
                     "biz_allocations",
                     "companies",
                     "company_internal_announcements",
+                    "consolidation",
                     "consumption_entries",
                     "cost_allocations",
+                    "currencies",
+                    "deal_linkage",
                     "deal_templates",
                     "deals",
+                    "division_tag_1",
+                    "division_tag_2",
+                    "division_tag_3",
                     "doc_change_logs",
                     "doc_postings",
                     "docs",
+                    "entries_reviews",
                     "expense_application_sync_payroll",
                     "expense_application_templates",
                     "expense_applications",
                     "fixed_assets",
+                    "freee_cards_stream",
                     "inventory_refreshes",
                     "invitations",
                     "items",
+                    "manage_bulk_expense_application_approvals",
                     "manual_journal_templates",
                     "manual_journals",
                     "month_end",
@@ -5752,8 +5798,11 @@
                     "opening_balances",
                     "partners",
                     "payment_records",
+                    "payment_request_templates",
                     "payment_requests",
                     "payroll_item_sets",
+                    "proxy_application_settings",
+                    "purchase_requests",
                     "receipt_stream_editor",
                     "receipts",
                     "reports",
@@ -5763,16 +5812,19 @@
                     "reports_general_ledgers",
                     "reports_income_expense",
                     "reports_journals",
+                    "reports_managements_introduction",
                     "reports_managements_navigation",
                     "reports_managements_planning",
                     "reports_payables",
                     "reports_pl",
+                    "reports_purchase_budgets",
                     "reports_receivables",
                     "request_forms",
                     "resets",
                     "sections",
                     "sign_in_logs",
                     "spreadsheets",
+                    "suspense_payments",
                     "system_conversion",
                     "system_messages_for_admin",
                     "tags",
@@ -5794,6 +5846,9 @@
                     },
                     "deals": {
                       "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
+                    },
+                    "deal_linkage": {
+                      "$ref": "#/components/schemas/userCapability"
                     },
                     "transfers": {
                       "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
@@ -5819,10 +5874,22 @@
                     "expense_application_sync_payroll": {
                       "$ref": "#/components/schemas/userCapabilityJustCreate"
                     },
+                    "manage_bulk_expense_application_approvals": {
+                      "$ref": "#/components/schemas/userCapabilityJustWrite"
+                    },
                     "payment_requests": {
                       "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
                     },
+                    "payment_request_templates": {
+                      "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
+                    },
                     "approval_requests": {
+                      "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
+                    },
+                    "purchase_requests": {
+                      "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
+                    },
+                    "suspense_payments": {
                       "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
                     },
                     "reports": {
@@ -5837,6 +5904,9 @@
                     "reports_payables": {
                       "$ref": "#/components/schemas/userCapabilityJustReadWrite"
                     },
+                    "reports_purchase_budgets": {
+                      "$ref": "#/components/schemas/userCapabilityJustReadWrite"
+                    },
                     "reports_cash_balance": {
                       "$ref": "#/components/schemas/userCapabilityJustRead"
                     },
@@ -5845,6 +5915,9 @@
                     },
                     "reports_managements_navigation": {
                       "$ref": "#/components/schemas/userCapabilityJustReadWrite"
+                    },
+                    "reports_managements_introduction": {
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
                     },
                     "reports_custom_reports_aggregate": {
                       "$ref": "#/components/schemas/userCapabilityJustRead"
@@ -5877,6 +5950,9 @@
                       "$ref": "#/components/schemas/userCapability"
                     },
                     "annual_reports": {
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
+                    },
+                    "consolidation": {
                       "$ref": "#/components/schemas/userCapabilityJustRead"
                     },
                     "tax_reports": {
@@ -5991,6 +6067,27 @@
                       "$ref": "#/components/schemas/userCapability"
                     },
                     "oauth_authorizations": {
+                      "$ref": "#/components/schemas/userCapability"
+                    },
+                    "division_tag_1": {
+                      "$ref": "#/components/schemas/userCapability"
+                    },
+                    "division_tag_2": {
+                      "$ref": "#/components/schemas/userCapability"
+                    },
+                    "division_tag_3": {
+                      "$ref": "#/components/schemas/userCapability"
+                    },
+                    "currencies": {
+                      "$ref": "#/components/schemas/userCapability"
+                    },
+                    "entries_reviews": {
+                      "$ref": "#/components/schemas/userCapabilityJustRead"
+                    },
+                    "freee_cards_stream": {
+                      "$ref": "#/components/schemas/userCapabilityJustConfirm"
+                    },
+                    "proxy_application_settings": {
                       "$ref": "#/components/schemas/userCapability"
                     },
                     "bank_accountant_staff_users": {
@@ -7243,24 +7340,25 @@
           "Walletables"
         ],
         "summary": "口座一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の口座一覧を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>type\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n\n<li>walletable_balance : 登録残高</li>\n\n<li>last_balance : 同期残高</li>\n\n<li>last_synced_at : 最終同期成功日時</li>\n\n<li>sync_status : 同期ステータス</li>\n</ul>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の口座（銀行口座・クレジットカード・その他の決済口座）の一覧を取得する</p>\n\n<p>取得できる口座は、リクエストしたユーザーが所属するグループ管理（work_group）で参照可能な口座に限られます。</p>\n\n<p>ここで取得できる口座IDと種別（type）は、取引の作成（POST /api/1/deals）・口座振替（POST /api/1/transfers）・入出金明細の取得（GET /api/1/wallet_txns）などで from_walletable_type / to_walletable_type と ID を指定する際に利用します。</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>type を指定しない場合は、bank_account・credit_card・wallet の全種別を返します。</li>\n  <li>残高情報（walletable_balance / last_balance）、最終同期成功日時（last_synced_at）、同期ステータス（sync_status）は、いずれもオプションのため、それぞれ with_balance / with_last_synced_at / with_sync_status を true にした場合のみレスポンスに含まれます。</li>\n  <li>同期に対応した金融機関の口座（銀行口座・クレジットカード）は本APIでは作成できません。web画面で登録してください。</li>\n  <li>walletable_balance（登録残高）・last_balance（同期残高）はいずれも円単位です。</li>\n</ul>",
         "operationId": "get_walletables",
         "parameters": [
           {
             "name": "company_id",
             "in": "query",
-            "description": "事業所ID",
+            "description": "事業所ID。/api/1/companies（事業所一覧の取得）で取得できます。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           },
           {
             "name": "type",
             "in": "query",
-            "description": "口座種別（bank_account : 銀行口座, credit_card : クレジットカード, wallet : その他の決済口座）",
+            "description": "口座種別で絞り込みます。未指定の場合は全種別を返します。\n* `bank_account` - 銀行口座\n* `credit_card` - クレジットカード\n* `wallet` - その他の決済口座（現金・電子マネー・売掛/買掛など）",
             "schema": {
               "type": "string",
               "enum": [
@@ -7268,13 +7366,14 @@
                 "credit_card",
                 "wallet"
               ]
-            }
+            },
+            "example": "bank_account"
           },
           {
             "name": "with_balance",
             "in": "query",
-            "description": "残高情報を含める",
-            "example": false,
+            "description": "true を指定すると、レスポンスに walletable_balance（登録残高、円）と last_balance（同期残高、円）を含めます。デフォルトは false です。",
+            "example": true,
             "schema": {
               "default": false,
               "type": "boolean"
@@ -7283,8 +7382,8 @@
           {
             "name": "with_last_synced_at",
             "in": "query",
-            "description": "最終同期成功日時を含める",
-            "example": false,
+            "description": "true を指定すると、レスポンスに last_synced_at（最終同期成功日時、ISO 8601 形式）を含めます。同期成功実績がない場合は null になります。デフォルトは false です。",
+            "example": true,
             "schema": {
               "default": false,
               "type": "boolean"
@@ -7293,8 +7392,8 @@
           {
             "name": "with_sync_status",
             "in": "query",
-            "description": "同期ステータスを含める",
-            "example": false,
+            "description": "true を指定すると、レスポンスに sync_status（同期ステータス）を含めます。デフォルトは false です。",
+            "example": true,
             "schema": {
               "default": false,
               "type": "boolean"
@@ -7303,18 +7402,20 @@
           {
             "name": "start_update_date",
             "in": "query",
-            "description": "更新日で絞込：開始日(yyyy-mm-dd)",
+            "description": "更新日で絞込：開始日（yyyy-mm-dd、JST）。指定した日以降に更新された口座のみを返します。",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "2020-06-01"
           },
           {
             "name": "end_update_date",
             "in": "query",
-            "description": "更新日で絞込：終了日(yyyy-mm-dd)",
+            "description": "更新日で絞込：終了日（yyyy-mm-dd、JST）。指定した日以前に更新された口座のみを返します。",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "2020-06-30"
           }
         ],
         "responses": {
@@ -7330,16 +7431,18 @@
                   "properties": {
                     "walletables": {
                       "type": "array",
+                      "description": "口座一覧",
                       "items": {
                         "$ref": "#/components/schemas/walletable"
                       }
                     },
                     "meta": {
                       "type": "object",
+                      "description": "メタ情報",
                       "properties": {
                         "up_to_date": {
                           "type": "boolean",
-                          "description": "集計結果が最新かどうか",
+                          "description": "集計結果が最新かどうか。false の場合、直近の取引が残高計算に反映されていない可能性があります。",
                           "example": true
                         }
                       }
@@ -7396,7 +7499,7 @@
           "Walletables"
         ],
         "summary": "口座の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の口座を作成する</p>\n\n<h2 id=\"\">注意点</h2>\n<ul><li>同期に対応した口座はこのAPIでは作成できません</li></ul>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n\n<li>\n<p>name : 口座名</p>\n</li>\n\n<li>\n<p>bank_id : 連携サービスID</p>\n</li>\n\n<li>\n<p>is_asset : type:wallet指定時に口座を資産口座とするか負債口座とするか（true: 資産口座 (デフォルト), false: 負債口座）</p>\n</li>\n</ul>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所に口座を作成する</p>\n\n<p>作成した口座は、取引の作成（POST /api/1/deals）や口座振替（POST /api/1/transfers）などで from_walletable_type / to_walletable_type と ID を指定して利用できます。</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>同期に対応した金融機関の口座はこのAPIでは作成できません。web画面で登録してください。</li>\n  <li>type に bank_account / credit_card を指定する場合は bank_id が必須です。type に wallet を指定する場合は bank_id を省略できます。</li>\n  <li>type に wallet を指定し、かつ bank_id を省略した場合のみ、is_asset で資産口座（true）と負債口座（false）を選択できます。bank_id を指定した場合は、資産口座か負債口座かは bank_id で指定したサービスに応じて自動判定され、is_asset は無視されます。</li>\n  <li>既存の口座と重複する口座名を指定した場合は 400 エラーが返ります。</li>\n</ul>",
         "operationId": "create_walletable",
         "requestBody": {
           "content": {
@@ -7473,24 +7576,25 @@
           "Walletables"
         ],
         "summary": "口座の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の口座を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>type\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n\n<li>walletable_balance : 登録残高</li>\n\n<li>last_balance : 同期残高</li>\n\n<li>last_synced_at : 最終同期成功日時</li>\n\n<li>sync_status : 同期ステータス</li>\n</ul>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の口座を1件取得する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>指定した口座が存在しない、またはリクエストしたユーザーのグループ管理（work_group）で参照できない口座を指定した場合は 404 エラーが返ります。</li>\n  <li>残高情報（walletable_balance / last_balance）は常に含まれます。最終同期成功日時（last_synced_at）と同期ステータス（sync_status）は、それぞれ with_last_synced_at / with_sync_status を true にした場合のみレスポンスに含まれます。</li>\n</ul>",
         "operationId": "get_walletable",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "口座ID",
+            "description": "口座ID。/api/1/walletables（口座一覧の取得）で取得できます。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           },
           {
             "name": "type",
             "in": "path",
-            "description": "口座種別（bank_account : 銀行口座, credit_card : クレジットカード, wallet : その他の決済口座）",
+            "description": "口座種別。\n* `bank_account` - 銀行口座\n* `credit_card` - クレジットカード\n* `wallet` - その他の決済口座（現金・電子マネー・売掛/買掛など）",
             "required": true,
             "schema": {
               "type": "string",
@@ -7499,24 +7603,26 @@
                 "credit_card",
                 "wallet"
               ]
-            }
+            },
+            "example": "bank_account"
           },
           {
             "name": "company_id",
             "in": "query",
-            "description": "事業所ID",
+            "description": "事業所ID。/api/1/companies（事業所一覧の取得）で取得できます。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           },
           {
             "name": "with_last_synced_at",
             "in": "query",
-            "description": "最終同期成功日時を含める",
-            "example": false,
+            "description": "true を指定すると、レスポンスに last_synced_at（最終同期成功日時、ISO 8601 形式）を含めます。同期成功実績がない場合は null になります。デフォルトは false です。",
+            "example": true,
             "schema": {
               "default": false,
               "type": "boolean"
@@ -7525,8 +7631,8 @@
           {
             "name": "with_sync_status",
             "in": "query",
-            "description": "同期ステータスを含める",
-            "example": false,
+            "description": "true を指定すると、レスポンスに sync_status（同期ステータス）を含めます。デフォルトは false です。",
+            "example": true,
             "schema": {
               "default": false,
               "type": "boolean"
@@ -7549,10 +7655,11 @@
                     },
                     "meta": {
                       "type": "object",
+                      "description": "メタ情報",
                       "properties": {
                         "up_to_date": {
                           "type": "boolean",
-                          "description": "集計結果が最新かどうか",
+                          "description": "集計結果が最新かどうか。false の場合、直近の取引が残高計算に反映されていない可能性があります。",
                           "example": true
                         }
                       }
@@ -7619,23 +7726,24 @@
           "Walletables"
         ],
         "summary": "口座の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の口座を更新する</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の口座の口座名を更新する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>更新できるのは口座名（name）のみです。type や bank_id、資産/負債区分の変更はできません。</li>\n  <li>既存の口座と重複する口座名を指定した場合は 400 エラーが返ります。</li>\n  <li>指定した口座が存在しない、またはリクエストしたユーザーのグループ管理（work_group）で参照できない口座を指定した場合は 404 エラーが返ります。</li>\n</ul>",
         "operationId": "update_walletable",
         "parameters": [
           {
             "name": "id",
-            "description": "口座ID",
+            "description": "口座ID。/api/1/walletables（口座一覧の取得）で取得できます。",
             "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64"
-            }
+            },
+            "example": 1
           },
           {
             "name": "type",
             "in": "path",
-            "description": "口座種別（bank_account : 銀行口座, credit_card : クレジットカード, wallet : その他の決済口座）",
+            "description": "口座種別。\n* `bank_account` - 銀行口座\n* `credit_card` - クレジットカード\n* `wallet` - その他の決済口座（現金・電子マネー・売掛/買掛など）",
             "required": true,
             "schema": {
               "type": "string",
@@ -7644,7 +7752,8 @@
                 "credit_card",
                 "wallet"
               ]
-            }
+            },
+            "example": "bank_account"
           }
         ],
         "requestBody": {
@@ -7678,10 +7787,11 @@
                     },
                     "meta": {
                       "type": "object",
+                      "description": "メタ情報",
                       "properties": {
                         "up_to_date": {
                           "type": "boolean",
-                          "description": "集計結果が最新かどうか",
+                          "description": "集計結果が最新かどうか。false の場合、直近の取引が残高計算に反映されていない可能性があります。",
                           "example": true
                         }
                       }
@@ -7748,24 +7858,25 @@
           "Walletables"
         ],
         "summary": "口座の削除",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の口座を削除する</p>\n\n<h2 id=\"\">注意点</h2>\n<ul>\n<li>削除を実行するには、当該口座に関連する仕訳データを事前に削除する必要があります。</li>\n<li>当該口座に仕訳が残っていないか確認するには、レポートの「仕訳帳」等を参照し、必要に応じて、「取引」や「口座振替」も削除します。</li>\n\n</ul>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の口座を削除する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>削除を実行するには、当該口座に関連する仕訳データを事前に削除する必要があります。仕訳が残っている場合は 400 エラーが返ります。</li>\n  <li>当該口座に仕訳が残っていないか確認するには、レポートの「仕訳帳」等を参照し、必要に応じて、「取引」や「口座振替」も削除します。</li>\n  <li>指定した口座が存在しない、またはリクエストしたユーザーのグループ管理（work_group）で参照できない口座を指定した場合は 404 エラーが返ります。</li>\n</ul>",
         "operationId": "destroy_walletable",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "口座ID",
+            "description": "口座ID。/api/1/walletables（口座一覧の取得）で取得できます。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           },
           {
             "name": "type",
             "in": "path",
-            "description": "口座種別（bank_account : 銀行口座, credit_card : クレジットカード, wallet : その他の決済口座）",
+            "description": "口座種別。\n* `bank_account` - 銀行口座\n* `credit_card` - クレジットカード\n* `wallet` - その他の決済口座（現金・電子マネー・売掛/買掛など）",
             "required": true,
             "schema": {
               "type": "string",
@@ -7774,18 +7885,20 @@
                 "credit_card",
                 "wallet"
               ]
-            }
+            },
+            "example": "bank_account"
           },
           {
             "name": "company_id",
             "in": "query",
-            "description": "事業所ID",
+            "description": "事業所ID。/api/1/companies（事業所一覧の取得）で取得できます。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           }
         ],
         "responses": {
@@ -20989,12 +21102,12 @@
           },
           "date": {
             "type": "string",
-            "description": "支払日",
+            "description": "支払日 (yyyy-mm-dd)",
             "example": "2019-12-17"
           },
           "from_walletable_type": {
             "type": "string",
-            "description": "口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet, プライベート資金: private_account_item)：payments指定時は必須",
+            "description": "口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet, プライベート資金: private_account_item)",
             "example": "bank_account",
             "enum": [
               "bank_account",
@@ -21007,7 +21120,7 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "口座ID（from_walletable_typeがprivate_account_itemの場合は勘定科目ID）：payments指定時は必須",
+            "description": "口座ID（from_walletable_typeがprivate_account_itemの場合は勘定科目ID）",
             "example": 1
           },
           "amount": {
@@ -21015,7 +21128,7 @@
             "format": "int64",
             "minimum": 1,
             "maximum": 9223372036854775807,
-            "description": "金額",
+            "description": "支払金額（円）",
             "example": 10000
           }
         }
@@ -21059,12 +21172,12 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "取引先ID",
+            "description": "取引先ID。partner_codeと同時に指定することはできません。",
             "example": 1
           },
           "partner_code": {
             "type": "string",
-            "description": "取引先コード",
+            "description": "取引先コード。利用するには事業所の設定で取引先コードの利用を有効にする必要があります。partner_idと同時に指定することはできません。",
             "example": "code001"
           },
           "ref_number": {
@@ -21074,6 +21187,7 @@
           },
           "details": {
             "type": "array",
+            "description": "取引の明細行（最大100行）",
             "items": {
               "required": [
                 "tax_code",
@@ -21093,12 +21207,12 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "勘定科目ID",
+                  "description": "勘定科目ID。account_item_idまたはaccount_item_codeのいずれかの指定が必要です（同時に指定することはできません）。",
                   "example": 1
                 },
                 "account_item_code": {
                   "type": "string",
-                  "description": "勘定科目コード",
+                  "description": "勘定科目コード。利用するには事業所の設定で勘定科目コードの利用を有効にする必要があります。account_item_idまたはaccount_item_codeのいずれかの指定が必要です（同時に指定することはできません）。",
                   "example": "code001"
                 },
                 "amount": {
@@ -21106,31 +21220,31 @@
                   "format": "int64",
                   "minimum": -9223372036854775808,
                   "maximum": 9223372036854775807,
-                  "description": "取引金額（税込で指定してください）<br>\nマイナスの値を指定した場合、控除・マイナス行として登録されます。<br>\n上記以外の値を指定した場合、通常行として登録されます。\n",
+                  "description": "取引金額（円・税込で指定してください）<br>\nマイナスの値を指定した場合、控除・マイナス行として登録されます。<br>\n上記以外の値を指定した場合、通常行として登録されます。\n",
                   "example": 1
                 },
                 "item_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "品目ID",
+                  "description": "品目ID。item_codeと同時に指定することはできません。",
                   "example": 1
                 },
                 "item_code": {
                   "type": "string",
-                  "description": "品目コード",
+                  "description": "品目コード。利用するには事業所の設定で品目コードの利用を有効にする必要があります。item_idと同時に指定することはできません。",
                   "example": "code001"
                 },
                 "section_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "部門ID",
+                  "description": "部門ID。section_codeと同時に指定することはできません。",
                   "example": 1
                 },
                 "section_code": {
                   "type": "string",
-                  "description": "部門コード",
+                  "description": "部門コード。利用するには事業所の設定で部門コードの利用を有効にする必要があります。section_idと同時に指定することはできません。",
                   "example": "code001"
                 },
                 "partner_id": {
@@ -21138,12 +21252,12 @@
                   "format": "int64",
                   "minimum": 0,
                   "nullable": true,
-                  "description": "取引先ID",
+                  "description": "取引先ID。partner_codeと同時に指定することはできません。",
                   "example": 1
                 },
                 "partner_code": {
                   "type": "string",
-                  "description": "取引先コード",
+                  "description": "取引先コード。利用するには事業所の設定で取引先コードの利用を有効にする必要があります。partner_idと同時に指定することはできません。",
                   "nullable": true,
                   "example": "code001"
                 },
@@ -21161,36 +21275,36 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント１タグID",
+                  "description": "セグメント１タグID。セグメントタグが利用可能なプランでのみ指定できます。segment_1_tag_codeと同時に指定することはできません。",
                   "example": 1
                 },
                 "segment_1_tag_code": {
                   "type": "string",
-                  "description": "セグメント１タグコード",
+                  "description": "セグメント１タグコード。利用するには事業所の設定でセグメントタグコードの利用を有効にする必要があります。segment_1_tag_idと同時に指定することはできません。",
                   "example": "code001"
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント２タグID",
+                  "description": "セグメント２タグID。セグメントタグが利用可能なプランでのみ指定できます。segment_2_tag_codeと同時に指定することはできません。",
                   "example": 1
                 },
                 "segment_2_tag_code": {
                   "type": "string",
-                  "description": "セグメント２タグコード",
+                  "description": "セグメント２タグコード。利用するには事業所の設定でセグメントタグコードの利用を有効にする必要があります。segment_2_tag_idと同時に指定することはできません。",
                   "example": "code001"
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント３タグID",
+                  "description": "セグメント３タグID。セグメントタグが利用可能なプランでのみ指定できます。segment_3_tag_codeと同時に指定することはできません。",
                   "example": 1
                 },
                 "segment_3_tag_code": {
                   "type": "string",
-                  "description": "セグメント３タグコード",
+                  "description": "セグメント３タグコード。利用するには事業所の設定でセグメントタグコードの利用を有効にする必要があります。segment_3_tag_idと同時に指定することはできません。",
                   "example": "code001"
                 },
                 "description": {
@@ -21201,7 +21315,7 @@
                 "vat": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "消費税額（指定しない場合は自動で計算されます）。 tax_code で税額が不要な税区分を指定する場合は指定できません。",
+                  "description": "消費税額（円。指定しない場合は自動で計算されます）。 tax_code で税額が不要な税区分を指定する場合は指定できません。",
                   "example": 800
                 }
               }
@@ -21224,7 +21338,7 @@
                   "format": "int64",
                   "minimum": -9223372036854775808,
                   "maximum": 9223372036854775807,
-                  "description": "支払金額：payments指定時は必須",
+                  "description": "支払金額（円）：payments指定時は必須",
                   "example": 5250
                 },
                 "from_walletable_id": {
@@ -21247,7 +21361,7 @@
                 },
                 "date": {
                   "type": "string",
-                  "description": "支払日：payments指定時は必須",
+                  "description": "支払日 (yyyy-mm-dd)：payments指定時は必須",
                   "example": "2019-12-17"
                 }
               }
@@ -21304,12 +21418,12 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "取引先ID",
+            "description": "取引先ID。partner_codeと同時に指定することはできません。",
             "example": 1
           },
           "partner_code": {
             "type": "string",
-            "description": "取引先コード",
+            "description": "取引先コード。利用するには事業所の設定で取引先コードの利用を有効にする必要があります。partner_idと同時に指定することはできません。",
             "example": "code001"
           },
           "ref_number": {
@@ -21319,6 +21433,7 @@
           },
           "details": {
             "type": "array",
+            "description": "取引の明細行（最大100行）。detailsに含まれない既存の取引行は削除されます。更新後も残したい行は、必ず取引行ID（id）を指定してdetailsに含めてください。",
             "items": {
               "required": [
                 "tax_code",
@@ -21354,7 +21469,7 @@
                   "format": "int64",
                   "minimum": -9223372036854775808,
                   "maximum": 9223372036854775807,
-                  "description": "取引金額（税込で指定してください）<br>\nマイナスの値を指定した場合、控除・マイナス行として登録されます。<br>\n上記以外の値を指定した場合、通常行として登録されます。\n",
+                  "description": "取引金額（円・税込で指定してください）<br>\nマイナスの値を指定した場合、控除・マイナス行として登録されます。<br>\n上記以外の値を指定した場合、通常行として登録されます。\n",
                   "example": 1
                 },
                 "item_id": {
@@ -21393,21 +21508,21 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント１タグID",
+                  "description": "セグメント１タグID。セグメントタグが利用可能なプランでのみ指定できます。",
                   "example": 1
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント２タグID",
+                  "description": "セグメント２タグID。セグメントタグが利用可能なプランでのみ指定できます。",
                   "example": 1
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント３タグID",
+                  "description": "セグメント３タグID。セグメントタグが利用可能なプランでのみ指定できます。",
                   "example": 1
                 },
                 "description": {
@@ -21418,7 +21533,7 @@
                 "vat": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "消費税額（指定しない場合は自動で計算されます）。 tax_code で税額が不要な税区分を指定する場合は指定できません。",
+                  "description": "消費税額（円。指定しない場合は自動で計算されます）。 tax_code で税額が不要な税区分を指定する場合は指定できません。",
                   "example": 800
                 }
               }
@@ -21427,7 +21542,7 @@
           "receipt_ids": {
             "type": "array",
             "nullable": true,
-            "description": "ファイルボックス（証憑ファイル）ID（配列）",
+            "description": "ファイルボックス（証憑ファイル）ID（配列）。指定した場合、取引に紐づくファイルはこの配列の内容で置き換えられます。指定しない場合は変更されません。",
             "items": {
               "type": "integer",
               "format": "int64",
@@ -21870,12 +21985,12 @@
           "name": {
             "type": "string",
             "maxLength": 255,
-            "description": "口座名 (255文字以内)",
+            "description": "口座名（255文字以内）。事業所内で既存の口座名と重複する場合は 400 エラーになります。",
             "example": "ＸＸ銀行"
           },
           "type": {
             "type": "string",
-            "description": "口座種別（bank_account : 銀行口座, credit_card : クレジットカード, wallet : その他の決済口座）",
+            "description": "口座種別。\n* `bank_account` - 銀行口座\n* `credit_card` - クレジットカード\n* `wallet` - その他の決済口座（現金・電子マネー・売掛/買掛など）",
             "example": "bank_account",
             "enum": [
               "bank_account",
@@ -21887,7 +22002,7 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "事業所ID",
+            "description": "事業所ID。/api/1/companies（事業所一覧の取得）で取得できます。",
             "example": 1
           },
           "bank_id": {
@@ -21895,12 +22010,12 @@
             "format": "int64",
             "minimum": 1,
             "nullable": true,
-            "description": "連携サービスID（typeにbank_account、credit_cardを指定する場合は必須）",
+            "description": "連携サービスID。/api/1/banks（連携サービス一覧の取得）で取得できます。type に bank_account、credit_card を指定する場合は必須です。type に wallet を指定する場合は省略できます（省略時は連携サービスに紐づかない現金口座などとして作成されます）。",
             "example": 1
           },
           "is_asset": {
             "type": "boolean",
-            "description": "口座を資産口座とするか負債口座とするか（true: 資産口座 (デフォルト), false: 負債口座）<br>\nbank_idを指定しない場合にのみ使われます。<br>\nbank_idを指定する場合には資産口座か負債口座かはbank_idに指定したサービスに応じて決定され、is_assetに指定した値は無視されます。\n",
+            "description": "口座を資産口座（true、デフォルト）とするか負債口座（false）とするか。<br>\ntype に wallet を指定し、かつ bank_id を省略した場合にのみ有効です。<br>\nbank_id を指定した場合は、資産口座か負債口座かは bank_id に指定したサービスに応じて自動判定され、is_asset に指定した値は無視されます。\n",
             "example": true
           }
         }
@@ -21915,14 +22030,14 @@
           "name": {
             "type": "string",
             "maxLength": 255,
-            "description": "口座名 (255文字以内)",
+            "description": "口座名（255文字以内）。事業所内で既存の口座名と重複する場合は 400 エラーになります。type や bank_id、資産/負債区分は更新できません（変更したい場合は口座を作り直してください）。",
             "example": "ＸＸ銀行"
           },
           "company_id": {
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "事業所ID",
+            "description": "事業所ID。/api/1/companies（事業所一覧の取得）で取得できます。",
             "example": 1
           }
         }
@@ -21932,8 +22047,10 @@
         "required": [
           "bank_id",
           "id",
+          "last_balance",
           "name",
-          "type"
+          "type",
+          "walletable_balance"
         ],
         "properties": {
           "id": {
@@ -21946,20 +22063,20 @@
           "name": {
             "type": "string",
             "maxLength": 255,
-            "description": "口座名 (255文字以内)",
+            "description": "口座名（255文字以内）",
             "example": "freee銀行"
           },
           "bank_id": {
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "サービスID",
+            "description": "連携サービスID。type が wallet で連携サービスに紐づかない口座の場合は null になります。",
             "example": 3,
             "nullable": true
           },
           "type": {
             "type": "string",
-            "description": "口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
+            "description": "口座種別。\n* `bank_account` - 銀行口座\n* `credit_card` - クレジットカード\n* `wallet` - その他の決済口座（現金・電子マネー・売掛/買掛など）",
             "example": "bank_account",
             "enum": [
               "bank_account",
@@ -21970,13 +22087,13 @@
           "last_balance": {
             "type": "integer",
             "format": "int64",
-            "description": "同期残高",
+            "description": "同期残高（円）。連携サービスから同期した残高です。",
             "example": 1565583
           },
           "walletable_balance": {
             "type": "integer",
             "format": "int64",
-            "description": "登録残高",
+            "description": "登録残高（円）。freee会計上の取引から計算される、借方を正とする残高です。",
             "example": 1340261
           }
         }
@@ -32532,21 +32649,22 @@
               },
               "due_date": {
                 "type": "string",
-                "description": "支払期日 (yyyy-mm-dd)",
-                "example": "2019-12-17"
+                "description": "支払期日 (yyyy-mm-dd)。支払期日が設定されていない場合はnullを返します。",
+                "example": "2019-12-17",
+                "nullable": true
               },
               "amount": {
                 "type": "integer",
                 "format": "int64",
                 "minimum": -9223372036854775808,
                 "maximum": 9223372036854775807,
-                "description": "金額",
+                "description": "金額（円・税込）",
                 "example": 5250
               },
               "due_amount": {
                 "type": "integer",
                 "format": "int64",
-                "description": "支払残額",
+                "description": "支払残額（円）。決済が完了している場合は0を返します。",
                 "example": 0
               },
               "type": {
@@ -32562,20 +32680,21 @@
                 "type": "integer",
                 "format": "int64",
                 "minimum": 1,
-                "description": "取引先ID",
+                "description": "取引先ID。取引先が設定されていない場合はnullを返します。",
                 "example": 201,
                 "nullable": true
               },
               "partner_code": {
                 "type": "string",
-                "description": "取引先コード",
+                "description": "取引先コード。事業所の設定で取引先コードの利用が無効の場合、または取引先が設定されていない場合はnullを返します。",
                 "example": "code001",
                 "nullable": true
               },
               "ref_number": {
                 "type": "string",
-                "description": "管理番号",
-                "example": "123-456"
+                "description": "管理番号。設定されていない場合はnullを返します。",
+                "example": "123-456",
+                "nullable": true
               },
               "status": {
                 "type": "string",
@@ -32588,7 +32707,7 @@
               },
               "deal_origin_name": {
                 "type": "string",
-                "description": "取引の登録元",
+                "description": "取引の登録元の表示名（例: 手動, freee請求書, 自動で経理, 経費精算）。登録元の機能・連携アプリによって値が異なります。",
                 "example": "手動"
               },
               "details": {
@@ -32609,7 +32728,7 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
-                      "description": "取引行ID",
+                      "description": "取引行ID。取引の更新（PUT /api/1/deals/{id}）で既存の明細行を指定する際に使用します。",
                       "example": 11
                     },
                     "account_item_id": {
@@ -32621,7 +32740,7 @@
                     },
                     "account_item_code": {
                       "type": "string",
-                      "description": "勘定科目コード",
+                      "description": "勘定科目コード。事業所の設定で勘定科目コードの利用が無効の場合はnullを返します。",
                       "example": "code001",
                       "nullable": true
                     },
@@ -32636,13 +32755,13 @@
                     "partner_id": {
                       "type": "integer",
                       "format": "int64",
-                      "description": "取引先ID",
+                      "description": "取引先ID。取引先が設定されていない場合はnullを返します。",
                       "example": 201,
                       "nullable": true
                     },
                     "partner_code": {
                       "type": "string",
-                      "description": "取引先コード",
+                      "description": "取引先コード。事業所の設定で取引先コードの利用が無効の場合、または取引先が設定されていない場合はnullを返します。",
                       "example": "code001",
                       "nullable": true
                     },
@@ -32650,13 +32769,13 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
-                      "description": "品目ID",
+                      "description": "品目ID。品目が設定されていない場合はnullを返します。",
                       "example": 501,
                       "nullable": true
                     },
                     "item_code": {
                       "type": "string",
-                      "description": "品目コード",
+                      "description": "品目コード。事業所の設定で品目コードの利用が無効の場合、または品目が設定されていない場合はnullを返します。",
                       "example": "code001",
                       "nullable": true
                     },
@@ -32664,13 +32783,13 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
-                      "description": "部門ID",
+                      "description": "部門ID。部門が設定されていない場合はnullを返します。",
                       "example": 1,
                       "nullable": true
                     },
                     "section_code": {
                       "type": "string",
-                      "description": "部門コード",
+                      "description": "部門コード。事業所の設定で部門コードの利用が無効の場合、または部門が設定されていない場合はnullを返します。",
                       "example": "code001",
                       "nullable": true
                     },
@@ -32692,13 +32811,13 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
-                      "description": "セグメント１タグID",
+                      "description": "セグメント１タグID。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。セグメント１タグが設定されていない場合はnullを返します。",
                       "example": 1,
                       "nullable": true
                     },
                     "segment_1_tag_code": {
                       "type": "string",
-                      "description": "セグメント１タグコード",
+                      "description": "セグメント１タグコード。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。事業所の設定でセグメントタグコードの利用が無効の場合、またはセグメント１タグが設定されていない場合はnullを返します。",
                       "example": "code001",
                       "nullable": true
                     },
@@ -32706,13 +32825,13 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
-                      "description": "セグメント２タグID",
+                      "description": "セグメント２タグID。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。セグメント２タグが設定されていない場合はnullを返します。",
                       "example": 1,
                       "nullable": true
                     },
                     "segment_2_tag_code": {
                       "type": "string",
-                      "description": "セグメント２タグコード",
+                      "description": "セグメント２タグコード。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。事業所の設定でセグメントタグコードの利用が無効の場合、またはセグメント２タグが設定されていない場合はnullを返します。",
                       "example": "code001",
                       "nullable": true
                     },
@@ -32720,13 +32839,13 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
-                      "description": "セグメント３タグID",
+                      "description": "セグメント３タグID。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。セグメント３タグが設定されていない場合はnullを返します。",
                       "example": 1,
                       "nullable": true
                     },
                     "segment_3_tag_code": {
                       "type": "string",
-                      "description": "セグメント３タグコード",
+                      "description": "セグメント３タグコード。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。事業所の設定でセグメントタグコードの利用が無効の場合、またはセグメント３タグが設定されていない場合はnullを返します。",
                       "example": "code001",
                       "nullable": true
                     },
@@ -32735,13 +32854,13 @@
                       "format": "int64",
                       "minimum": -9223372036854775808,
                       "maximum": 9223372036854775807,
-                      "description": "取引金額",
+                      "description": "取引金額（円・税込）",
                       "example": 5250
                     },
                     "vat": {
                       "type": "integer",
                       "format": "int64",
-                      "description": "消費税額",
+                      "description": "消費税額（円）",
                       "example": 250
                     },
                     "description": {
@@ -32763,7 +32882,7 @@
               },
               "payments": {
                 "type": "array",
-                "description": "取引の支払行",
+                "description": "取引の支払行。支払行が存在しない場合、キー自体がレスポンスに含まれません。",
                 "items": {
                   "type": "object",
                   "required": [
@@ -32776,12 +32895,12 @@
                       "type": "integer",
                       "format": "int64",
                       "minimum": 1,
-                      "description": "取引行ID",
+                      "description": "支払行ID。支払行の更新（PUT /api/1/deals/{id}/payments/{payment_id}）・削除（DELETE /api/1/deals/{id}/payments/{payment_id}）のpayment_idに指定します。",
                       "example": 202
                     },
                     "date": {
                       "type": "string",
-                      "description": "支払日",
+                      "description": "支払日 (yyyy-mm-dd)",
                       "example": "2019-12-17"
                     },
                     "from_walletable_type": {
@@ -32807,7 +32926,7 @@
                       "format": "int64",
                       "minimum": -9223372036854775808,
                       "maximum": 9223372036854775807,
-                      "description": "支払金額",
+                      "description": "支払金額（円）",
                       "example": 5250
                     }
                   }
@@ -32815,11 +32934,12 @@
               },
               "receipts": {
                 "type": "array",
-                "description": "ファイルボックス（証憑ファイル）",
+                "description": "取引に添付されたファイルボックス（証憑ファイル）",
                 "items": {
                   "type": "object",
                   "required": [
                     "created_at",
+                    "file_src",
                     "id",
                     "mime_type",
                     "origin",
@@ -32836,7 +32956,7 @@
                     },
                     "status": {
                       "type": "string",
-                      "description": "ステータス(confirmed:確認済み、deleted:削除済み、ignored:無視)",
+                      "description": "ステータス（confirmed: 確認済み, deleted: 削除済み, ignored: 無視）",
                       "example": "confirmed",
                       "enum": [
                         "confirmed",
@@ -32851,13 +32971,14 @@
                     },
                     "mime_type": {
                       "type": "string",
-                      "description": "MIMEタイプ",
+                      "description": "ファイルのMIMEタイプ（例：image/png, image/jpeg, application/pdf）",
                       "example": "image/png"
                     },
                     "issue_date": {
                       "type": "string",
-                      "description": "発生日",
-                      "example": "2019-12-17"
+                      "description": "発生日 (yyyy-mm-dd)。設定されていない場合はnullを返します。",
+                      "example": "2019-12-17",
+                      "nullable": true
                     },
                     "origin": {
                       "type": "string",
@@ -32876,10 +32997,49 @@
                         "public_api"
                       ]
                     },
+                    "qualified_invoice": {
+                      "type": "string",
+                      "description": "適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択、null: OCR解析結果が保存されておらず、ユーザーによる手動保存もされていない場合）",
+                      "enum": [
+                        "qualified",
+                        "not_qualified",
+                        "unselected"
+                      ],
+                      "example": "qualified",
+                      "nullable": true
+                    },
+                    "invoice_registration_number": {
+                      "type": "string",
+                      "maxLength": 14,
+                      "minLength": 14,
+                      "pattern": "^T[1-9][0-9]{12}$",
+                      "description": "インボイス制度適格請求書発行事業者登録番号（null: OCR解析結果が保存されておらず、ユーザーによる手動保存もされていない場合）\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+                      "example": "T1000000000001",
+                      "nullable": true
+                    },
+                    "document_type": {
+                      "type": "string",
+                      "description": "書類の種類（receipt: 領収書、invoice: 請求書、other: その他、receipt_and_invoice: 領収書・請求書（旧区分）、contract: 契約書（旧区分）、null: OCR解析結果が保存されておらず、ユーザーによる手動保存もされていない場合）。receipt_and_invoiceとcontractは2023年6月に廃止された旧区分で、旧区分のまま保存されている既存ファイルでのみ返ります。",
+                      "enum": [
+                        "receipt",
+                        "invoice",
+                        "other",
+                        "receipt_and_invoice",
+                        "contract"
+                      ],
+                      "example": "receipt",
+                      "nullable": true
+                    },
                     "created_at": {
                       "type": "string",
-                      "description": "作成日時（ISO8601形式）",
+                      "description": "アップロード日時（ISO8601形式）",
                       "example": "2019-12-17T18:30:24+09:00"
+                    },
+                    "file_src": {
+                      "type": "string",
+                      "description": "ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。）\n<br>\n<br>\nfile_srcは廃止予定の属性になります。<br>\nfile_srcに替わり、ファイルボックス（証憑ファイル）のダウンロード APIをご利用ください。<br>\nファイルボックス（証憑ファイル）のダウンロードAPIを利用することで、以下のようになります。\n<ul>\n  <li>アプリケーション利用者はfreee APIアプリケーションにログインしていれば、証憑ダウンロード毎にfreeeに改めてログインすることなくファイルが参照できるようになります。</li>\n</ul>",
+                      "example": "https://www.freee.co.jp/api/p/receipts/revisions/1234xxxxx/download",
+                      "deprecated": true
                     },
                     "user": {
                       "required": [
@@ -32887,6 +33047,7 @@
                         "id"
                       ],
                       "type": "object",
+                      "description": "ファイルをアップロードしたユーザー",
                       "properties": {
                         "id": {
                           "type": "integer",
@@ -32910,6 +33071,7 @@
                     },
                     "receipt_metadatum": {
                       "type": "object",
+                      "description": "電子帳簿保存法の検索要件に対応するメタデータ（発行元・発行日・金額）。電子帳簿保存法対応ファイルボックスの対象ファイルでメタデータが存在する場合のみレスポンスに含まれます。",
                       "properties": {
                         "partner_name": {
                           "type": "string",
@@ -32930,7 +33092,7 @@
                           "minimum": -9223372036854775808,
                           "maximum": 9223372036854775807,
                           "nullable": true,
-                          "description": "金額",
+                          "description": "金額（円）",
                           "example": 5250
                         }
                       }
@@ -32974,21 +33136,22 @@
           },
           "due_date": {
             "type": "string",
-            "description": "支払期日 (yyyy-mm-dd)",
-            "example": "2019-12-17"
+            "description": "支払期日 (yyyy-mm-dd)。支払期日が設定されていない場合はnullを返します。",
+            "example": "2019-12-17",
+            "nullable": true
           },
           "amount": {
             "type": "integer",
             "format": "int64",
             "minimum": -9223372036854775808,
             "maximum": 9223372036854775807,
-            "description": "金額",
+            "description": "金額（円・税込）",
             "example": 5250
           },
           "due_amount": {
             "type": "integer",
             "format": "int64",
-            "description": "支払残額",
+            "description": "支払残額（円）。決済が完了している場合は0を返します。",
             "example": 0
           },
           "type": {
@@ -33003,20 +33166,21 @@
           "partner_id": {
             "type": "integer",
             "format": "int64",
-            "description": "取引先ID",
+            "description": "取引先ID。取引先が設定されていない場合はnullを返します。",
             "example": 201,
             "nullable": true
           },
           "partner_code": {
             "type": "string",
-            "description": "取引先コード",
+            "description": "取引先コード。事業所の設定で取引先コードの利用が無効の場合、または取引先が設定されていない場合はnullを返します。",
             "example": "code001",
             "nullable": true
           },
           "ref_number": {
             "type": "string",
-            "description": "管理番号",
-            "example": "123-456"
+            "description": "管理番号。設定されていない場合はnullを返します。",
+            "example": "123-456",
+            "nullable": true
           },
           "status": {
             "type": "string",
@@ -33029,7 +33193,7 @@
           },
           "deal_origin_name": {
             "type": "string",
-            "description": "取引の登録元",
+            "description": "取引の登録元の表示名（例: 手動, freee請求書, 自動で経理, 経費精算）。登録元の機能・連携アプリによって値が異なります。",
             "example": "手動"
           },
           "details": {
@@ -33049,7 +33213,7 @@
                 "id": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "取引行ID",
+                  "description": "取引行ID。取引の更新（PUT /api/1/deals/{id}）で既存の明細行を指定する際に使用します。",
                   "example": 11
                 },
                 "account_item_id": {
@@ -33057,6 +33221,12 @@
                   "format": "int64",
                   "description": "勘定科目ID",
                   "example": 803
+                },
+                "account_item_code": {
+                  "type": "string",
+                  "description": "勘定科目コード。事業所の設定で勘定科目コードの利用が無効の場合はnullを返します。一覧の取得（GET /api/1/deals）のレスポンスには含まれません。",
+                  "example": "code001",
+                  "nullable": true
                 },
                 "tax_code": {
                   "type": "integer",
@@ -33069,28 +33239,40 @@
                 "partner_id": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "取引先ID",
+                  "description": "取引先ID。取引先が設定されていない場合はnullを返します。",
                   "example": 201,
                   "nullable": true
                 },
                 "partner_code": {
                   "type": "string",
-                  "description": "取引先コード",
+                  "description": "取引先コード。事業所の設定で取引先コードの利用が無効の場合、または取引先が設定されていない場合はnullを返します。",
                   "example": "code001",
                   "nullable": true
                 },
                 "item_id": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "品目ID",
+                  "description": "品目ID。品目が設定されていない場合はnullを返します。",
                   "example": 501,
+                  "nullable": true
+                },
+                "item_code": {
+                  "type": "string",
+                  "description": "品目コード。事業所の設定で品目コードの利用が無効の場合、または品目が設定されていない場合はnullを返します。一覧の取得（GET /api/1/deals）のレスポンスには含まれません。",
+                  "example": "code001",
                   "nullable": true
                 },
                 "section_id": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "部門ID",
+                  "description": "部門ID。部門が設定されていない場合はnullを返します。",
                   "example": 1,
+                  "nullable": true
+                },
+                "section_code": {
+                  "type": "string",
+                  "description": "部門コード。事業所の設定で部門コードの利用が無効の場合、または部門が設定されていない場合はnullを返します。一覧の取得（GET /api/1/deals）のレスポンスには含まれません。",
+                  "example": "code001",
                   "nullable": true
                 },
                 "tag_ids": {
@@ -33109,22 +33291,40 @@
                 "segment_1_tag_id": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "セグメント１タグID",
+                  "description": "セグメント１タグID。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。セグメント１タグが設定されていない場合はnullを返します。",
                   "example": 1,
+                  "nullable": true
+                },
+                "segment_1_tag_code": {
+                  "type": "string",
+                  "description": "セグメント１タグコード。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。事業所の設定でセグメントタグコードの利用が無効の場合、またはセグメント１タグが設定されていない場合はnullを返します。一覧の取得（GET /api/1/deals）のレスポンスには含まれません。",
+                  "example": "code001",
                   "nullable": true
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "セグメント２タグID",
+                  "description": "セグメント２タグID。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。セグメント２タグが設定されていない場合はnullを返します。",
                   "example": 1,
+                  "nullable": true
+                },
+                "segment_2_tag_code": {
+                  "type": "string",
+                  "description": "セグメント２タグコード。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。事業所の設定でセグメントタグコードの利用が無効の場合、またはセグメント２タグが設定されていない場合はnullを返します。一覧の取得（GET /api/1/deals）のレスポンスには含まれません。",
+                  "example": "code001",
                   "nullable": true
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "セグメント３タグID",
+                  "description": "セグメント３タグID。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。セグメント３タグが設定されていない場合はnullを返します。",
                   "example": 1,
+                  "nullable": true
+                },
+                "segment_3_tag_code": {
+                  "type": "string",
+                  "description": "セグメント３タグコード。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。事業所の設定でセグメントタグコードの利用が無効の場合、またはセグメント３タグが設定されていない場合はnullを返します。一覧の取得（GET /api/1/deals）のレスポンスには含まれません。",
+                  "example": "code001",
                   "nullable": true
                 },
                 "amount": {
@@ -33132,13 +33332,13 @@
                   "format": "int64",
                   "minimum": -9223372036854775808,
                   "maximum": 9223372036854775807,
-                  "description": "取引金額",
+                  "description": "取引金額（円・税込）",
                   "example": 5250
                 },
                 "vat": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "消費税額",
+                  "description": "消費税額（円）",
                   "example": 250
                 },
                 "description": {
@@ -33158,9 +33358,135 @@
               }
             }
           },
+          "accruals": {
+            "type": "array",
+            "description": "取引の債権債務行。一覧の取得（GET /api/1/deals）または取引の取得（GET /api/1/deals/{id}）でクエリパラメータaccruals=withを指定し、かつ債権債務行が存在する場合のみレスポンスに含まれます。",
+            "items": {
+              "type": "object",
+              "required": [
+                "account_item_id",
+                "amount",
+                "entry_side",
+                "id",
+                "tax_code",
+                "vat"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "債権債務行ID。+更新の作成（POST /api/1/deals/{id}/renews）のrenew_target_idに指定できます。",
+                  "example": 21
+                },
+                "account_item_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "勘定科目ID",
+                  "example": 803
+                },
+                "tax_code": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": 0,
+                  "maximum": 2147483647,
+                  "description": "税区分コード",
+                  "example": 2
+                },
+                "partner_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "取引先ID。取引先が設定されていない場合はnullを返します。",
+                  "example": 201,
+                  "nullable": true
+                },
+                "partner_code": {
+                  "type": "string",
+                  "description": "取引先コード。事業所の設定で取引先コードの利用が無効の場合、または取引先が設定されていない場合はnullを返します。",
+                  "example": "code001",
+                  "nullable": true
+                },
+                "item_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "品目ID。品目が設定されていない場合はnullを返します。",
+                  "example": 501,
+                  "nullable": true
+                },
+                "section_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "部門ID。部門が設定されていない場合はnullを返します。",
+                  "example": 1,
+                  "nullable": true
+                },
+                "tag_ids": {
+                  "type": "array",
+                  "description": "メモタグID",
+                  "example": [
+                    1,
+                    2,
+                    3
+                  ],
+                  "items": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                },
+                "amount": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": -9223372036854775808,
+                  "maximum": 9223372036854775807,
+                  "description": "金額（円・税込）",
+                  "example": 5250
+                },
+                "vat": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "消費税額（円）",
+                  "example": 250
+                },
+                "description": {
+                  "type": "string",
+                  "description": "備考。設定されていない場合は空文字を返します。",
+                  "example": "備考"
+                },
+                "entry_side": {
+                  "type": "string",
+                  "description": "貸借（貸方: credit, 借方: debit）",
+                  "example": "debit",
+                  "enum": [
+                    "credit",
+                    "debit"
+                  ]
+                },
+                "segment_1_tag_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "セグメント１タグID。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。セグメント１タグが設定されていない場合はnullを返します。",
+                  "example": 1,
+                  "nullable": true
+                },
+                "segment_2_tag_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "セグメント２タグID。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。セグメント２タグが設定されていない場合はnullを返します。",
+                  "example": 1,
+                  "nullable": true
+                },
+                "segment_3_tag_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "セグメント３タグID。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。セグメント３タグが設定されていない場合はnullを返します。",
+                  "example": 1,
+                  "nullable": true
+                }
+              }
+            }
+          },
           "renews": {
             "type": "array",
-            "description": "取引の+更新行",
+            "description": "取引の+更新行。+更新行が存在しない場合、キー自体がレスポンスに含まれません。",
             "items": {
               "type": "object",
               "required": [
@@ -33174,7 +33500,7 @@
                 "id": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "+更新行ID",
+                  "description": "+更新行ID。+更新の更新（PUT /api/1/deals/{id}/renews/{renew_id}）・削除（DELETE /api/1/deals/{id}/renews/{renew_id}）のrenew_idに指定します。",
                   "example": 11
                 },
                 "update_date": {
@@ -33190,7 +33516,7 @@
                 },
                 "renew_target_type": {
                   "type": "string",
-                  "description": "+更新の対象行タイプ",
+                  "description": "+更新の対象行タイプ（detail: 取引の明細行, accrual: 債権債務行, renew: +更新の明細行）",
                   "example": "detail",
                   "enum": [
                     "detail",
@@ -33271,31 +33597,35 @@
                       },
                       "tag_ids": {
                         "type": "array",
+                        "description": "メモタグID",
+                        "example": [
+                          1,
+                          2,
+                          3
+                        ],
                         "items": {
                           "type": "integer",
-                          "format": "int64",
-                          "description": "メモタグID",
-                          "example": 1
+                          "format": "int64"
                         }
                       },
                       "segment_1_tag_id": {
                         "type": "integer",
                         "format": "int64",
-                        "description": "セグメント１ID",
+                        "description": "セグメント１タグID。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。セグメント１タグが設定されていない場合はnullを返します。",
                         "example": 1,
                         "nullable": true
                       },
                       "segment_2_tag_id": {
                         "type": "integer",
                         "format": "int64",
-                        "description": "セグメント２ID",
+                        "description": "セグメント２タグID。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。セグメント２タグが設定されていない場合はnullを返します。",
                         "example": 1,
                         "nullable": true
                       },
                       "segment_3_tag_id": {
                         "type": "integer",
                         "format": "int64",
-                        "description": "セグメント３ID",
+                        "description": "セグメント３タグID。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。セグメント３タグが設定されていない場合はnullを返します。",
                         "example": 1,
                         "nullable": true
                       },
@@ -33304,13 +33634,13 @@
                         "format": "int64",
                         "minimum": -9223372036854775808,
                         "maximum": 9223372036854775807,
-                        "description": "金額（税込で指定してください）",
+                        "description": "金額（円・税込）",
                         "example": 108000
                       },
                       "vat": {
                         "type": "integer",
                         "format": "int64",
-                        "description": "消費税額（指定しない場合は自動で計算されます）",
+                        "description": "消費税額（円）",
                         "example": 8000
                       },
                       "description": {
@@ -33327,7 +33657,7 @@
           },
           "payments": {
             "type": "array",
-            "description": "取引の支払行",
+            "description": "取引の支払行。支払行が存在しない場合、キー自体がレスポンスに含まれません。",
             "items": {
               "type": "object",
               "required": [
@@ -33339,12 +33669,12 @@
                 "id": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "取引行ID",
+                  "description": "支払行ID。支払行の更新（PUT /api/1/deals/{id}/payments/{payment_id}）・削除（DELETE /api/1/deals/{id}/payments/{payment_id}）のpayment_idに指定します。",
                   "example": 202
                 },
                 "date": {
                   "type": "string",
-                  "description": "支払日",
+                  "description": "支払日 (yyyy-mm-dd)",
                   "example": "2019-12-17"
                 },
                 "from_walletable_type": {
@@ -33369,7 +33699,7 @@
                   "format": "int64",
                   "minimum": -9223372036854775808,
                   "maximum": 9223372036854775807,
-                  "description": "支払金額",
+                  "description": "支払金額（円）",
                   "example": 5250
                 }
               }
@@ -33377,7 +33707,7 @@
           },
           "receipts": {
             "type": "array",
-            "description": "ファイルボックス（証憑ファイル）",
+            "description": "取引に添付されたファイルボックス（証憑ファイル）",
             "items": {
               "type": "object",
               "required": [
@@ -33398,7 +33728,7 @@
                 },
                 "status": {
                   "type": "string",
-                  "description": "ステータス(confirmed:確認済み、deleted:削除済み、ignored:無視)",
+                  "description": "ステータス（confirmed: 確認済み, deleted: 削除済み, ignored: 無視）",
                   "example": "confirmed",
                   "enum": [
                     "confirmed",
@@ -33413,13 +33743,14 @@
                 },
                 "mime_type": {
                   "type": "string",
-                  "description": "MIMEタイプ",
+                  "description": "ファイルのMIMEタイプ（例：image/png, image/jpeg, application/pdf）",
                   "example": "image/png"
                 },
                 "issue_date": {
                   "type": "string",
-                  "description": "発生日",
-                  "example": "2019-12-17"
+                  "description": "発生日 (yyyy-mm-dd)。設定されていない場合はnullを返します。",
+                  "example": "2019-12-17",
+                  "nullable": true
                 },
                 "origin": {
                   "type": "string",
@@ -33438,9 +33769,42 @@
                     "public_api"
                   ]
                 },
+                "qualified_invoice": {
+                  "type": "string",
+                  "description": "適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択、null: OCR解析結果が保存されておらず、ユーザーによる手動保存もされていない場合）",
+                  "enum": [
+                    "qualified",
+                    "not_qualified",
+                    "unselected"
+                  ],
+                  "example": "qualified",
+                  "nullable": true
+                },
+                "invoice_registration_number": {
+                  "type": "string",
+                  "maxLength": 14,
+                  "minLength": 14,
+                  "pattern": "^T[1-9][0-9]{12}$",
+                  "description": "インボイス制度適格請求書発行事業者登録番号（null: OCR解析結果が保存されておらず、ユーザーによる手動保存もされていない場合）\n- 先頭T数字13桁の固定14桁の文字列\n<a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a>\n",
+                  "example": "T1000000000001",
+                  "nullable": true
+                },
+                "document_type": {
+                  "type": "string",
+                  "description": "書類の種類（receipt: 領収書、invoice: 請求書、other: その他、receipt_and_invoice: 領収書・請求書（旧区分）、contract: 契約書（旧区分）、null: OCR解析結果が保存されておらず、ユーザーによる手動保存もされていない場合）。receipt_and_invoiceとcontractは2023年6月に廃止された旧区分で、旧区分のまま保存されている既存ファイルでのみ返ります。",
+                  "enum": [
+                    "receipt",
+                    "invoice",
+                    "other",
+                    "receipt_and_invoice",
+                    "contract"
+                  ],
+                  "example": "receipt",
+                  "nullable": true
+                },
                 "created_at": {
                   "type": "string",
-                  "description": "作成日時（ISO8601形式）",
+                  "description": "アップロード日時（ISO8601形式）",
                   "example": "2019-12-17T18:30:24+09:00"
                 },
                 "file_src": {
@@ -33455,6 +33819,7 @@
                     "id"
                   ],
                   "type": "object",
+                  "description": "ファイルをアップロードしたユーザー",
                   "properties": {
                     "id": {
                       "type": "integer",
@@ -33477,6 +33842,7 @@
                 },
                 "receipt_metadatum": {
                   "type": "object",
+                  "description": "電子帳簿保存法の検索要件に対応するメタデータ（発行元・発行日・金額）。電子帳簿保存法対応ファイルボックスの対象ファイルでメタデータが存在する場合のみレスポンスに含まれます。",
                   "properties": {
                     "partner_name": {
                       "type": "string",
@@ -33497,7 +33863,7 @@
                       "minimum": -9223372036854775808,
                       "maximum": 9223372036854775807,
                       "nullable": true,
-                      "description": "金額",
+                      "description": "金額（円）",
                       "example": 5250
                     }
                   }
@@ -36171,33 +36537,34 @@
           "bank_id",
           "id",
           "name",
-          "type"
+          "type",
+          "update_date"
         ],
         "properties": {
           "id": {
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "口座ID",
+            "description": "口座ID。取引の作成（POST /api/1/deals）や口座振替（POST /api/1/transfers）などで from_walletable_type / to_walletable_type と併せて指定します。",
             "example": 1
           },
           "name": {
             "type": "string",
             "maxLength": 255,
-            "description": "口座名 (255文字以内)",
+            "description": "口座名（255文字以内）",
             "example": "freee銀行"
           },
           "bank_id": {
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "サービスID",
+            "description": "連携サービスID。銀行やクレジットカード等のサービス種別を表します。/api/1/banks（連携サービス一覧の取得）で取得できます。type が wallet で連携サービスに紐づかない口座（現金など）の場合は null になります。",
             "example": 3,
             "nullable": true
           },
           "type": {
             "type": "string",
-            "description": "口座区分 (銀行口座: bank_account, クレジットカード: credit_card, その他の決済口座: wallet)",
+            "description": "口座種別。\n* `bank_account` - 銀行口座\n* `credit_card` - クレジットカード\n* `wallet` - その他の決済口座（現金・電子マネー・売掛/買掛など）",
             "example": "bank_account",
             "enum": [
               "bank_account",
@@ -36207,13 +36574,13 @@
           },
           "last_synced_at": {
             "type": "string",
-            "description": "最終同期成功日時（ISO8601形式）",
+            "description": "最終同期成功日時（ISO 8601 形式）。リクエスト時に with_last_synced_at=true を指定した場合のみ返却されます。同期成功実績がない場合や、同期に対応しない口座の場合は null になります。",
             "example": "2019-01-01T00:00:00+09:00",
             "nullable": true
           },
           "sync_status": {
             "type": "string",
-            "description": "口座の同期ステータス(success: 同期成功, disabled: 同期設定なし, syncing: 同期中, token_refresh_error: トークンリフレッシュエラー, unsupported: 同期非対応, other_error: その他のエラー、freee会計画面上でご確認ください)",
+            "description": "口座の同期ステータス。リクエスト時に with_sync_status=true を指定した場合のみ返却されます。\n* `success` - 同期成功\n* `disabled` - 同期設定なし\n* `syncing` - 同期中\n* `token_refresh_error` - トークンリフレッシュエラー\n* `unsupported` - 同期非対応\n* `other_error` - その他のエラー（詳細はfreee会計画面上でご確認ください）",
             "example": "success",
             "enum": [
               "success",
@@ -36227,18 +36594,18 @@
           "last_balance": {
             "type": "integer",
             "format": "int64",
-            "description": "同期残高",
+            "description": "同期残高（円）。連携サービスから同期した残高です。リクエスト時に with_balance=true を指定した場合のみ返却されます。",
             "example": 1565583
           },
           "walletable_balance": {
             "type": "integer",
             "format": "int64",
-            "description": "登録残高",
+            "description": "登録残高（円）。freee会計上の取引から計算される、借方を正とする残高です。リクエスト時に with_balance=true を指定した場合のみ返却されます。",
             "example": 1340261
           },
           "update_date": {
             "type": "string",
-            "description": "更新日(yyyy-mm-dd)",
+            "description": "口座設定の最終更新日（yyyy-mm-dd、JST）",
             "example": "2020-06-15"
           }
         }
@@ -36251,6 +36618,7 @@
         "properties": {
           "walletable": {
             "type": "object",
+            "description": "作成された口座",
             "required": [
               "bank_id",
               "id",
@@ -36267,19 +36635,21 @@
               },
               "name": {
                 "type": "string",
-                "description": "口座名, 最大255文字",
+                "maxLength": 255,
+                "description": "口座名（255文字以内）",
                 "example": "〇〇銀行"
               },
               "bank_id": {
                 "type": "integer",
                 "format": "int64",
                 "minimum": 1,
-                "description": "連携サービスID（typeにbank_account、credit_cardを指定する場合は必須）",
+                "nullable": true,
+                "description": "連携サービスID。type が wallet で bank_id を省略して作成した場合は null になります。",
                 "example": 1
               },
               "type": {
                 "type": "string",
-                "description": "口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
+                "description": "口座種別。\n* `bank_account` - 銀行口座\n* `credit_card` - クレジットカード\n* `wallet` - その他の決済口座（現金・電子マネー・売掛/買掛など）",
                 "example": "bank_account",
                 "enum": [
                   "bank_account",
@@ -36557,31 +36927,31 @@
           "display_name": {
             "type": "string",
             "maxLength": 20,
-            "description": "表示名 (20文字以内)",
+            "description": "表示名 (20文字以内)。キーを省略した場合は更新されません。空文字を指定すると未設定になります。",
             "example": "山田太郎"
           },
           "first_name": {
             "type": "string",
             "maxLength": 20,
-            "description": "氏名（名） (20文字以内)",
+            "description": "氏名（名） (20文字以内)。キーを省略した場合は更新されません。空文字を指定すると未設定になります。",
             "example": "太郎"
           },
           "last_name": {
             "type": "string",
             "maxLength": 20,
-            "description": "氏名（姓） (20文字以内)",
+            "description": "氏名（姓） (20文字以内)。キーを省略した場合は更新されません。空文字を指定すると未設定になります。",
             "example": "山田"
           },
           "first_name_kana": {
             "type": "string",
             "maxLength": 20,
-            "description": "氏名（カナ・名） (20文字以内)",
+            "description": "氏名（カナ・名） (20文字以内)。キーを省略した場合は更新されません。空文字を指定すると未設定になります。",
             "example": "タロウ"
           },
           "last_name_kana": {
             "type": "string",
             "maxLength": 20,
-            "description": "氏名（カナ・姓） (20文字以内)",
+            "description": "氏名（カナ・姓） (20文字以内)。キーを省略した場合は更新されません。空文字を指定すると未設定になります。",
             "example": "ヤマダ"
           }
         }
@@ -36590,7 +36960,12 @@
         "type": "object",
         "required": [
           "email",
-          "id"
+          "id",
+          "display_name",
+          "first_name",
+          "last_name",
+          "first_name_kana",
+          "last_name_kana"
         ],
         "properties": {
           "id": {
@@ -36603,35 +36978,35 @@
           "email": {
             "type": "string",
             "description": "メールアドレス",
-            "example": "example@freee.co.jp"
+            "example": "user@example.com"
           },
           "display_name": {
             "type": "string",
-            "description": "表示名",
+            "description": "表示名。未設定の場合はnullになります。",
             "example": "山田太郎",
             "nullable": true
           },
           "first_name": {
             "type": "string",
-            "description": "氏名（名）",
+            "description": "氏名（名）。未設定の場合はnullになります。",
             "example": "太郎",
             "nullable": true
           },
           "last_name": {
             "type": "string",
-            "description": "氏名（姓）",
+            "description": "氏名（姓）。未設定の場合はnullになります。",
             "example": "山田",
             "nullable": true
           },
           "first_name_kana": {
             "type": "string",
-            "description": "氏名（カナ・名）",
+            "description": "氏名（カナ・名）。未設定の場合はnullになります。",
             "example": "タロウ",
             "nullable": true
           },
           "last_name_kana": {
             "type": "string",
-            "description": "氏名（カナ・姓）",
+            "description": "氏名（カナ・姓）。未設定の場合はnullになります。",
             "example": "ヤマダ",
             "nullable": true
           }
@@ -36639,6 +37014,9 @@
       },
       "userResponse": {
         "type": "object",
+        "required": [
+          "user"
+        ],
         "properties": {
           "user": {
             "$ref": "#/components/schemas/user"
@@ -36655,7 +37033,12 @@
             "type": "object",
             "required": [
               "email",
-              "id"
+              "id",
+              "display_name",
+              "first_name",
+              "last_name",
+              "first_name_kana",
+              "last_name_kana"
             ],
             "properties": {
               "id": {
@@ -36668,40 +37051,41 @@
               "email": {
                 "type": "string",
                 "description": "メールアドレス",
-                "example": "contaxt@example.com"
+                "example": "user@example.com"
               },
               "display_name": {
                 "type": "string",
-                "description": "表示ユーザー名",
+                "description": "表示名。未設定の場合はnullになります。",
                 "example": "フリー太郎",
                 "nullable": true
               },
               "first_name": {
                 "type": "string",
-                "description": "名",
+                "description": "氏名（名）。未設定の場合はnullになります。",
                 "example": "太郎",
                 "nullable": true
               },
               "last_name": {
                 "type": "string",
-                "description": "姓",
+                "description": "氏名（姓）。未設定の場合はnullになります。",
                 "example": "フリー",
                 "nullable": true
               },
               "first_name_kana": {
                 "type": "string",
-                "description": "名（カナ）",
+                "description": "氏名（カナ・名）。未設定の場合はnullになります。",
                 "example": "タロウ",
                 "nullable": true
               },
               "last_name_kana": {
                 "type": "string",
-                "description": "姓（カナ）",
+                "description": "氏名（カナ・姓）。未設定の場合はnullになります。",
                 "example": "フリー",
                 "nullable": true
               },
               "companies": {
                 "type": "array",
+                "description": "ユーザーが所属する事業所の一覧。リクエストでcompanies=trueを指定した場合のみ返ります。",
                 "items": {
                   "type": "object",
                   "required": [
@@ -36720,19 +37104,20 @@
                     },
                     "display_name": {
                       "type": "string",
-                      "description": "表示名",
+                      "description": "事業所の表示名",
                       "example": "freee株式会社"
                     },
                     "role": {
                       "type": "string",
-                      "description": "ユーザーの権限\n<ul>\n<li>admin: 管理者</li>\n<li>simple_accounting: 一般</li>\n<li>self_only: 取引登録のみ</li>\n<li>read_only: 閲覧のみ</li>\n<li>workflow: 申請・承認</li>\n</ul>",
+                      "description": "ユーザーの権限\n<ul>\n<li>admin: 管理者</li>\n<li>simple_accounting: 一般（経理）</li>\n<li>self_only: 取引登録のみ</li>\n<li>read_only: 閲覧のみ</li>\n<li>workflow: 申請・承認</li>\n<li>product_linkage: 一般（経理以外）</li>\n</ul>\nカスタム権限を使用している場合は、複製元となったプリセット権限の値が返ります。カスタム権限かどうかはuse_custom_roleで判定できます。",
                       "example": "admin",
                       "enum": [
                         "admin",
                         "simple_accounting",
                         "self_only",
                         "read_only",
-                        "workflow"
+                        "workflow",
+                        "product_linkage"
                       ]
                     },
                     "use_custom_role": {
@@ -36745,7 +37130,7 @@
                       "format": "int64",
                       "minimum": 1,
                       "nullable": true,
-                      "description": "アドバイザープロファイルID（アドバイザー事業所で無い場合にnullになります）",
+                      "description": "アドバイザープロファイルID。リクエストでcompanies=trueとadvisor=trueを両方指定した場合のみ返ります。アドバイザー事業所でない場合はnullになります。",
                       "example": 1234
                     }
                   }
@@ -36776,6 +37161,16 @@
           "destroy": {
             "type": "boolean",
             "description": "削除",
+            "example": true
+          }
+        }
+      },
+      "userCapabilityJustConfirm": {
+        "type": "object",
+        "properties": {
+          "confirm": {
+            "type": "boolean",
+            "description": "操作",
             "example": true
           }
         }
@@ -36871,6 +37266,16 @@
           "update": {
             "type": "boolean",
             "description": "更新",
+            "example": true
+          }
+        }
+      },
+      "userCapabilityJustWrite": {
+        "type": "object",
+        "properties": {
+          "write": {
+            "type": "boolean",
+            "description": "操作",
             "example": true
           }
         }
@@ -39116,7 +39521,7 @@
                   "format": "int64",
                   "minimum": -9223372036854775808,
                   "maximum": 9223372036854775807,
-                  "description": "取引金額（税込で指定してください）<br>\nマイナスの値を指定した場合、控除・マイナス行として登録されます。<br>\n上記以外の値を指定した場合、通常行として登録されます。\n",
+                  "description": "取引金額（円・税込で指定してください）<br>\nマイナスの値を指定した場合、控除・マイナス行として登録されます。<br>\n上記以外の値を指定した場合、通常行として登録されます。\n",
                   "example": 1080
                 },
                 "vat": {
@@ -39124,7 +39529,7 @@
                   "format": "int64",
                   "minimum": -9223372036854775808,
                   "maximum": 9223372036854775807,
-                  "description": "消費税額（指定しない場合は自動で計算されます）",
+                  "description": "消費税額（円。指定しない場合は自動で計算されます）",
                   "example": 80
                 },
                 "item_id": {
@@ -39245,7 +39650,7 @@
                   "format": "int64",
                   "minimum": -9223372036854775808,
                   "maximum": 9223372036854775807,
-                  "description": "取引金額（税込で指定してください）<br>\nマイナスの値を指定した場合、控除・マイナス行として登録されます。<br>\n上記以外の値を指定した場合、通常行として登録されます。\n",
+                  "description": "取引金額（円・税込で指定してください）<br>\nマイナスの値を指定した場合、控除・マイナス行として登録されます。<br>\n上記以外の値を指定した場合、通常行として登録されます。\n",
                   "example": 1080
                 },
                 "vat": {
@@ -39253,7 +39658,7 @@
                   "format": "int64",
                   "minimum": -9223372036854775808,
                   "maximum": 9223372036854775807,
-                  "description": "消費税額（指定しない場合は自動で計算されます）",
+                  "description": "消費税額（円。指定しない場合は自動で計算されます）",
                   "example": 80
                 },
                 "item_id": {
