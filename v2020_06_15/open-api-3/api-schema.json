@@ -5089,7 +5089,7 @@
           "ManualJournals"
         ],
         "summary": "振替伝票の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の振替伝票を作成する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>adjustment : 決算整理仕訳フラグ（true: 決算整理仕訳, false: 日常仕訳）</p>\n</li>\n\n<li>\n<p>txn_number : 仕訳番号</p>\n</li>\n\n<li>\n<p>ref_number : 管理番号</p>\n</li>\n\n<li>\n<p>details : 振替伝票の貸借行</p>\n</li>\n\n<li>\n<p>entry_side : 貸借区分</p>\n\n<ul>\n<li>credit : 貸方</li>\n\n<li>debit : 借方</li>\n</ul>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>振替伝票は売掛・買掛レポートには反映されません。債権・債務データの登録は取引(Deals)をお使いください。</li>\n<li>事業所の仕訳番号形式が有効な場合のみ、レスポンスで仕訳番号(txn_number)を返します。</li>\n<li>貸借合わせて100行まで仕訳行を登録できます。</li>\n<li>セグメントタグ情報は法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で利用可能です。利用可能なセグメントの数は、法人アドバンスプラン（および旧法人プロフェッショナルプラン）の場合は1つ、法人エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</li></ul>\n\n",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の振替伝票を作成する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>issue_date : 発生日</p>\n</li>\n\n<li>\n<p>adjustment : 決算整理仕訳フラグ（true: 決算整理仕訳, false: 日常仕訳）</p>\n</li>\n\n<li>\n<p>txn_number : 仕訳番号</p>\n</li>\n\n<li>\n<p>ref_number : 管理番号</p>\n</li>\n\n<li>\n<p>details : 振替伝票の貸借行</p>\n</li>\n\n<li>\n<p>entry_side : 貸借区分</p>\n\n<ul>\n<li>credit : 貸方</li>\n\n<li>debit : 借方</li>\n</ul>\n</li>\n\n<li>\n<p>amount : 金額</p>\n</li>\n</ul>\n\n<h2 id=\"_3\">注意点</h2>\n\n<ul>\n<li>振替伝票は売掛・買掛レポートには反映されません。債権・債務データの登録は取引(Deals)をお使いください。</li>\n<li>貸借合わせて100行まで仕訳行を登録できます。</li>\n<li>セグメントタグ情報は法人アドバンスプラン（および旧法人プロフェッショナルプラン）以上で利用可能です。利用可能なセグメントの数は、法人アドバンスプラン（および旧法人プロフェッショナルプラン）の場合は1つ、法人エンタープライズプランの場合は3つです。</li>\n<li>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。またpartner_codeとpartner_idは同時に指定することはできません。</li></ul>\n\n",
         "operationId": "create_manual_journal",
         "requestBody": {
           "content": {
@@ -8664,7 +8664,7 @@
           "Wallet txns"
         ],
         "summary": "口座明細一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の口座明細一覧を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>amount : 明細金額</p>\n</li>\n\n<li>\n<p>due_amount : 取引登録待ち金額</p>\n</li>\n\n<li>\n<p>balance : 残高</p>\n</li>\n\n<li>\n<p>entry_side</p>\n\n<ul>\n<li>income : 入金</li>\n\n<li>expense : 出金</li>\n</ul>\n</li>\n\n<li>\n<p>walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の口座明細（銀行口座・クレジットカード・その他の決済口座の入出金明細）一覧を取得する</p>\n\n<h2 id=\"_2\">注意点</h2>\n\n<ul>\n<li>デフォルトでは取引日（date）の降順で返されます。sort_type に created_at_desc を指定すると、明細の作成日時の降順で返されます。</li>\n<li>取得件数は limit と offset で制御します（デフォルト: 20件、最大: 100件）。</li>\n</ul>\n\n<h2 id=\"_3\">定義</h2>\n\n<ul>\n<li>\n<p>amount : 取引金額（単位: 円）</p>\n</li>\n\n<li>\n<p>due_amount : 取引登録待ち金額（明細に対してまだ取引が登録されていない金額）</p>\n</li>\n\n<li>\n<p>balance : 残高（銀行口座等）</p>\n</li>\n\n<li>\n<p>entry_side</p>\n\n<ul>\n<li>income : 入金</li>\n\n<li>expense : 出金</li>\n</ul>\n</li>\n\n<li>\n<p>walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : 現金・その他の決済口座</li>\n</ul>\n</li>\n</ul>",
         "operationId": "get_wallet_txns",
         "parameters": [
           {
@@ -8676,12 +8676,13 @@
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           },
           {
             "name": "walletable_type",
             "in": "query",
-            "description": "口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet) walletable_type、walletable_idは同時に指定が必要です。",
+            "description": "口座区分で絞り込みます。walletable_type と walletable_id は同時に指定が必要です（片方のみ指定した場合、この条件は無視されます）。\n* `bank_account` - 銀行口座\n* `credit_card` - クレジットカード\n* `wallet` - 現金・その他の決済口座",
             "schema": {
               "type": "string",
               "enum": [
@@ -8689,17 +8690,19 @@
                 "credit_card",
                 "wallet"
               ]
-            }
+            },
+            "example": "bank_account"
           },
           {
             "name": "walletable_id",
             "in": "query",
-            "description": "口座ID walletable_type、walletable_idは同時に指定が必要です。",
+            "description": "口座IDで絞り込みます。walletable_type と walletable_id は同時に指定が必要です（片方のみ指定した場合、この条件は無視されます）。口座IDは口座一覧の取得API（GET /api/1/walletables）で確認できます。",
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           },
           {
             "name": "start_date",
@@ -8707,7 +8710,8 @@
             "description": "取引日で絞込：開始日 (yyyy-mm-dd)",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "2019-12-01"
           },
           {
             "name": "end_date",
@@ -8715,19 +8719,30 @@
             "description": "取引日で絞込：終了日 (yyyy-mm-dd)",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "2019-12-31"
           },
           {
             "name": "entry_side",
             "in": "query",
-            "description": "入金／出金 (入金: income, 出金: expense)",
+            "description": "入金・出金の区分で絞り込みます。\n* `income` - 入金\n* `expense` - 出金",
             "schema": {
               "type": "string",
               "enum": [
                 "income",
                 "expense"
               ]
-            }
+            },
+            "example": "income"
+          },
+          {
+            "name": "sort_type",
+            "in": "query",
+            "description": "並び順の指定（未指定の場合は取引日の降順で返されます）\n* `created_at_desc` - 明細の作成日時の降順",
+            "schema": {
+              "type": "string"
+            },
+            "example": "created_at_desc"
           },
           {
             "name": "offset",
@@ -8738,7 +8753,8 @@
               "format": "int64",
               "minimum": 0,
               "maximum": 9223372036854775807
-            }
+            },
+            "example": 0
           },
           {
             "name": "limit",
@@ -8749,7 +8765,8 @@
               "format": "int64",
               "minimum": 1,
               "maximum": 100
-            }
+            },
+            "example": 20
           }
         ],
         "responses": {
@@ -8821,7 +8838,7 @@
           "Wallet txns"
         ],
         "summary": "口座明細の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の口座明細を作成する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>amount : 明細金額</p>\n</li>\n\n<li>\n<p>due_amount : 取引登録待ち金額</p>\n</li>\n\n<li>\n<p>balance : 残高</p>\n</li>\n\n<li>\n<p>entry_side</p>\n\n<ul>\n<li>income : 入金</li>\n\n<li>expense : 出金</li>\n</ul>\n</li>\n\n<li>\n<p>walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の口座明細を作成する</p>\n\n<h2 id=\"_2\">注意点</h2>\n\n<ul>\n<li>登録時に<a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/202848350-明細の自動登録ルールを設定する\">自動登録ルールの設定</a>の条件に一致した場合はルールが適用され、取引の登録などが自動で行われることがあります。ルールが適用され登録処理が実行された場合、レスポンスの rule_matched が true になります。</li>\n</ul>\n\n<h2 id=\"_3\">定義</h2>\n\n<ul>\n<li>\n<p>amount : 取引金額（単位: 円）</p>\n</li>\n\n<li>\n<p>due_amount : 取引登録待ち金額（明細に対してまだ取引が登録されていない金額）</p>\n</li>\n\n<li>\n<p>balance : 残高（銀行口座等）</p>\n</li>\n\n<li>\n<p>entry_side</p>\n\n<ul>\n<li>income : 入金</li>\n\n<li>expense : 出金</li>\n</ul>\n</li>\n\n<li>\n<p>walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : 現金・その他の決済口座</li>\n</ul>\n</li>\n</ul>",
         "operationId": "create_wallet_txn",
         "requestBody": {
           "content": {
@@ -8898,7 +8915,7 @@
           "Wallet txns"
         ],
         "summary": "口座明細の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の口座明細を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>amount : 明細金額</p>\n</li>\n\n<li>\n<p>due_amount : 取引登録待ち金額</p>\n</li>\n\n<li>\n<p>balance : 残高</p>\n</li>\n\n<li>\n<p>entry_side</p>\n\n<ul>\n<li>income : 入金</li>\n\n<li>expense : 出金</li>\n</ul>\n</li>\n\n<li>\n<p>walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : その他の決済口座</li>\n</ul>\n</li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の口座明細を取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>amount : 取引金額（単位: 円）</p>\n</li>\n\n<li>\n<p>due_amount : 取引登録待ち金額（明細に対してまだ取引が登録されていない金額）</p>\n</li>\n\n<li>\n<p>balance : 残高（銀行口座等）</p>\n</li>\n\n<li>\n<p>entry_side</p>\n\n<ul>\n<li>income : 入金</li>\n\n<li>expense : 出金</li>\n</ul>\n</li>\n\n<li>\n<p>walletable_type</p>\n\n<ul>\n<li>bank_account : 銀行口座</li>\n\n<li>credit_card : クレジットカード</li>\n\n<li>wallet : 現金・その他の決済口座</li>\n</ul>\n</li>\n</ul>",
         "operationId": "get_wallet_txn",
         "parameters": [
           {
@@ -8910,7 +8927,8 @@
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           },
           {
             "name": "company_id",
@@ -8921,7 +8939,8 @@
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           }
         ],
         "responses": {
@@ -9004,7 +9023,8 @@
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           },
           {
             "name": "company_id",
@@ -9015,7 +9035,8 @@
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           }
         ],
         "responses": {
@@ -9082,13 +9103,13 @@
           "Journals"
         ],
         "summary": "仕訳帳のダウンロード要求",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>ユーザーが所属する事業所の仕訳帳のダウンロードをリクエストします。</p>\n\n<p>生成されるファイルのファイル形式と出力項目に関しては、<a href=\"https://support.freee.co.jp/hc/ja/articles/204615564#other\">ヘルプページ</a>をご参照ください。</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n  <li>download_type\n    <ul>\n      <li>generic <a href=\"https://support.freee.co.jp/hc/ja/articles/204615564#2\">(旧CSV)</a></li>\n      <li>generic_v2 <a href=\"https://support.freee.co.jp/hc/ja/articles/204615564#h_01GEDXEY3SQP8Y7S58CM2H4CKH\">(新CSV（freee汎用形式）)</a></li>\n      <li>csv <a href=\"https://support.freee.co.jp/hc/ja/articles/204599604#2\">(弥生会計)</a></li>\n      <li>pdf <a href=\"https://support.freee.co.jp/hc/ja/articles/204615564#3\">(PDF)</a></li>\n    </ul>\n  </li>\n  <li>encoding : download_typeがgeneric, generic_v2の場合のみ有効で、指定しない場合はsjisになります。無効なdownload_typeのうちcsvの場合はsjisでファイル出力されるので、レスポンスでsjisがかえります。\n    <ul>\n      <li>sjis</li>\n      <li>utf-8</li>\n    </ul>\n  </li>\n  <li>visible_tags : download_typeがgeneric, csv, pdfの場合のみ有効です。指定しない場合は従来の仕様の仕訳帳が出力されます。\n    <ul>\n      <li>partner : 取引先タグ</li>\n      <li>item : 品目タグ</li>\n      <li>tag : メモタグ</li>\n      <li>section : 部門タグ</li>\n      <li>description : 備考欄</li>\n      <li>wallet_txn_description : 明細の備考欄</li>\n      <li>\n        segment_1_tag : セグメント１タグ<br>\n        segment_2_tag : セグメント２タグ<br>\n        segment_3_tag : セグメント３タグ<br><br>\n        <a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n      </li>\n      <li>all : 指定された場合は上記の設定をすべて有効として扱いますが、セグメント１タグ、セグメント２タグ、セグメント３タグは含みません。セグメントが必要な場合はallではなく、segment_1_tag, segment_2_tag, segment_3_tagを指定してください。</li>\n    </ul>\n  </li>\n  <li>visible_ids : download_typeがgenericの場合のみ有効です。\n    <ul>\n      <li>deal_id : 取引ID</li>\n      <li>transfer_id : 取引(振替)ID</li>\n      <li>manual_journal_id : 振替伝票ID</li>\n    </ul>\n  </li>\n\n  <li>id : 受け付けID</li>\n</ul>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の仕訳帳ファイルの作成を依頼する（非同期処理）</p>\n\n<p>本APIはファイル作成のリクエストを受け付けるのみで、ファイルは非同期で作成されます。レスポンスの id（受け付けID）を使って、仕訳帳のステータスの取得（GET /api/1/journals/reports/{id}/status）でステータスを確認し、uploaded になったら仕訳帳のダウンロード（GET /api/1/journals/reports/{id}/download）でファイルを取得してください。</p>\n\n<p>生成されるファイルのファイル形式と出力項目に関しては、<a href=\"https://support.freee.co.jp/hc/ja/articles/204615564#other\">ヘルプページ</a>をご参照ください。download_type ごとの詳細は以下をご参照ください。</p>\n\n<ul>\n  <li>generic <a href=\"https://support.freee.co.jp/hc/ja/articles/204615564#2\">(旧CSV)</a></li>\n  <li>generic_v2 <a href=\"https://support.freee.co.jp/hc/ja/articles/204615564#h_01GEDXEY3SQP8Y7S58CM2H4CKH\">(新CSV（freee汎用形式）)</a></li>\n  <li>csv <a href=\"https://support.freee.co.jp/hc/ja/articles/204599604#2\">(弥生会計)</a></li>\n  <li>pdf <a href=\"https://support.freee.co.jp/hc/ja/articles/204615564#3\">(PDF)</a></li>\n</ul>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>start_date・end_date を指定しない場合は、当期の会計年度の開始日・終了日が自動で設定されます。</li>\n  <li>encoding は download_type が generic・generic_v2 の場合のみ指定できます。未指定の場合は sjis になります。download_type が csv・pdf の場合に指定すると 400 エラーになります（csv は常に sjis で出力されるため、レスポンスの encoding には sjis が返ります。pdf の場合は null が返ります）。</li>\n  <li>visible_tags は download_type が generic・csv・pdf の場合のみ指定できます（generic_v2 に指定すると 400 エラーになります）。指定しない場合は従来の仕様の仕訳帳が出力されます。</li>\n  <li>segment_1_tag・segment_2_tag・segment_3_tag は download_type が generic の場合のみ指定でき、対応するセグメントが利用可能なプランの契約と設定を完了している必要があります。詳細は<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a>をご参照ください。</li>\n  <li>visible_ids は download_type が generic の場合のみ指定できます（それ以外に指定すると 400 エラーになります）。</li>\n</ul>",
         "operationId": "get_journals",
         "parameters": [
           {
             "name": "download_type",
             "in": "query",
-            "description": "ダウンロード形式",
+            "description": "ダウンロード形式\n* `generic` - 旧CSV形式\n* `generic_v2` - 新CSV形式（freee汎用形式）\n* `csv` - 弥生会計形式のCSV\n* `pdf` - PDF形式",
             "required": true,
             "schema": {
               "type": "string",
@@ -9098,35 +9119,38 @@
                 "csv",
                 "pdf"
               ]
-            }
+            },
+            "example": "generic"
           },
           {
             "name": "encoding",
             "in": "query",
-            "description": "文字コード",
+            "description": "出力ファイルの文字コード。download_type が generic・generic_v2 の場合のみ指定できます。未指定の場合は sjis になります。\n* `sjis` - Shift_JIS\n* `utf-8` - UTF-8",
             "schema": {
               "type": "string",
               "enum": [
                 "sjis",
                 "utf-8"
               ]
-            }
+            },
+            "example": "utf-8"
           },
           {
             "name": "company_id",
             "in": "query",
-            "description": "事業所ID",
+            "description": "事業所ID。/api/1/companies（事業所一覧の取得）で取得できます。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           },
           {
             "name": "visible_tags[]",
             "in": "query",
-            "description": "補助科目やコメントとして出力する項目",
+            "description": "補助科目やコメントとして出力する項目。download_type が generic・csv・pdf の場合のみ指定できます。\n* `partner` - 取引先タグ\n* `item` - 品目タグ\n* `tag` - メモタグ\n* `section` - 部門タグ\n* `description` - 備考欄\n* `wallet_txn_description` - 明細の備考欄\n* `segment_1_tag` - セグメント１タグ（download_type:generic のみ）\n* `segment_2_tag` - セグメント２タグ（download_type:generic のみ）\n* `segment_3_tag` - セグメント３タグ（download_type:generic のみ）\n* `all` - セグメントタグを除く上記すべてを有効として扱います。セグメントが必要な場合は all ではなく segment_1_tag・segment_2_tag・segment_3_tag を個別に指定してください。",
             "style": "form",
             "explode": true,
             "schema": {
@@ -9146,12 +9170,16 @@
                   "all"
                 ]
               }
-            }
+            },
+            "example": [
+              "partner",
+              "item"
+            ]
           },
           {
             "name": "visible_ids[]",
             "in": "query",
-            "description": "追加出力するID項目",
+            "description": "追加出力するID項目。download_type が generic の場合のみ指定できます。\n* `deal_id` - 取引ID\n* `transfer_id` - 取引（振替）ID\n* `manual_journal_id` - 振替伝票ID",
             "style": "form",
             "explode": true,
             "schema": {
@@ -9164,23 +9192,28 @@
                   "manual_journal_id"
                 ]
               }
-            }
+            },
+            "example": [
+              "deal_id"
+            ]
           },
           {
             "name": "start_date",
             "in": "query",
-            "description": "取得開始日 (yyyy-mm-dd)",
+            "description": "取得開始日（yyyy-mm-dd）。未指定の場合は当期の会計年度の開始日になります。",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "2020-01-01"
           },
           {
             "name": "end_date",
             "in": "query",
-            "description": "取得終了日 (yyyy-mm-dd)",
+            "description": "取得終了日（yyyy-mm-dd）。未指定の場合は当期の会計年度の終了日になります。",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "2020-12-31"
           }
         ],
         "responses": {
@@ -9243,30 +9276,32 @@
           "Journals"
         ],
         "summary": "仕訳帳のステータスの取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>仕訳帳のダウンロードリクエストのステータスを取得する</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>\n<p>status</p>\n\n<ul>\n<li>enqueued : 実行待ち</li>\n\n<li>working : 実行中</li>\n\n<li>uploaded : 準備完了</li>\n</ul>\n</li>\n\n<li>\n<p>id : 受け付けID</p>\n</li>\n</ul>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>仕訳帳のダウンロードリクエストのステータスを取得する</p>\n\n<p>仕訳帳のダウンロード要求（GET /api/1/journals）のレスポンスで返る id（受け付けID）を指定します。status が uploaded になると、レスポンスに download_url（仕訳帳のダウンロード（GET /api/1/journals/reports/{id}/download）のURL）が含まれます。</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>status が failed の場合はファイルの作成に失敗しています。仕訳帳のダウンロード要求（GET /api/1/journals）から再度やり直してください。</li>\n  <li>指定した id が存在しない場合は 404 エラーになります。</li>\n</ul>",
         "operationId": "get_journal_status",
         "parameters": [
           {
             "name": "company_id",
             "in": "query",
-            "description": "事業所ID",
+            "description": "事業所ID。/api/1/companies（事業所一覧の取得）で取得できます。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           },
           {
             "name": "id",
             "in": "path",
-            "description": "受け付けID",
+            "description": "受け付けID。仕訳帳のダウンロード要求（GET /api/1/journals）のレスポンスで返る id を指定します。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           }
         ],
         "responses": {
@@ -9339,30 +9374,32 @@
           "Journals"
         ],
         "summary": "仕訳帳のダウンロード",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>仕訳帳をダウンロードする</p>\n\n<h2 id=\"_2\">定義</h2>\n\n<ul>\n<li>id : 受け付けID</li>\n</ul>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>作成が完了した仕訳帳ファイルをダウンロードする</p>\n\n<p>仕訳帳のステータスの取得（GET /api/1/journals/reports/{id}/status）で status が uploaded になった後に呼び出してください。ファイルは仕訳帳のダウンロード要求（GET /api/1/journals）で指定した download_type に応じて CSV（text/csv）または PDF（application/pdf）で返ります。</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>ファイルの作成が完了していない場合や、指定した id が存在しない場合は 404 エラーになります。</li>\n</ul>",
         "operationId": "download_journal",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "受け付けID",
+            "description": "受け付けID。仕訳帳のダウンロード要求（GET /api/1/journals）のレスポンスで返る id を指定します。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           },
           {
             "name": "company_id",
             "in": "query",
-            "description": "事業所ID",
+            "description": "事業所ID。/api/1/companies（事業所一覧の取得）で取得できます。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 1
           }
         ],
         "responses": {
@@ -15715,7 +15752,8 @@
                 "settled"
               ]
             },
-            "description": "'申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下, feedback:差戻し)、 取引ステータス(unsettled:支払待ち, settled:支払済み)'<br>\napprover_id を指定した場合は無効です。\n"
+            "description": "申請ステータス、または取引ステータス\n申請ステータス:\n* `draft` - 下書き\n* `in_progress` - 申請中\n* `approved` - 承認済\n* `rejected` - 却下\n* `feedback` - 差戻し\n\n取引ステータス (status が `approved` の支払依頼に対して):\n* `unsettled` - 支払待ち\n* `settled` - 支払済み\n\napprover_id を指定した場合は無効です。",
+            "example": "in_progress"
           },
           {
             "name": "start_application_date",
@@ -15793,7 +15831,7 @@
               "format": "int64",
               "minimum": 1
             },
-            "description": "承認者のユーザーID<br>\n'approver_id を指定した場合は、 in_progress: 申請中 の支払依頼のみを返します。'\n",
+            "description": "承認者のユーザーID (`/api/1/users` のレスポンス id と同じ値)\napprover_id を指定した場合は `in_progress` (申請中) の支払依頼のみを返します。",
             "example": 1
           },
           {
@@ -15823,20 +15861,22 @@
           {
             "name": "partner_id",
             "in": "query",
-            "description": "取引先IDで絞込",
+            "description": "取引先IDで絞込（`/api/1/partners` のレスポンス id と同じ値）",
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 1
-            }
+            },
+            "example": 201
           },
           {
             "name": "partner_code",
             "in": "query",
-            "description": "取引先コードで絞込",
+            "description": "取引先コードで絞込。事業所側で「取引先コードを利用する」設定が有効な場合に利用できます。",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "code001"
           },
           {
             "name": "payment_method",
@@ -15851,7 +15891,7 @@
                 "credit_card"
               ]
             },
-            "description": "支払方法で絞込 (none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)",
+            "description": "支払方法で絞込\n* `none` - 指定なし\n* `domestic_bank_transfer` - 国内振込\n* `abroad_bank_transfer` - 国外振込\n* `account_transfer` - 口座振替\n* `credit_card` - クレジットカード",
             "example": "credit_card"
           },
           {
@@ -15884,12 +15924,13 @@
           {
             "name": "section_id",
             "in": "query",
-            "description": "部門IDで絞込",
+            "description": "部門IDで絞込（`/api/1/sections` のレスポンス id と同じ値）",
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 0
-            }
+            },
+            "example": 1
           },
           {
             "name": "partner_name",
@@ -15914,7 +15955,7 @@
           {
             "name": "observing",
             "in": "query",
-            "description": "'共有された申請の絞り込み (ignore_observing: 共有された申請を含めない, only_observing: 共有された申請のみ)'\n",
+            "description": "共有された申請の絞り込み\n* `ignore_observing` - 共有された申請を含めない\n* `only_observing` - 共有された申請のみ",
             "schema": {
               "type": "string",
               "enum": [
@@ -15933,7 +15974,8 @@
               "format": "int64",
               "minimum": 0,
               "maximum": 9223372036854775807
-            }
+            },
+            "example": 0
           },
           {
             "name": "limit",
@@ -15944,7 +15986,8 @@
               "format": "int64",
               "minimum": 1,
               "maximum": 500
-            }
+            },
+            "example": 50
           }
         ],
         "responses": {
@@ -22292,7 +22335,7 @@
         "properties": {
           "entry_side": {
             "type": "string",
-            "description": "入金／出金 (入金: income, 出金: expense)",
+            "description": "入金・出金の区分\n* `income` - 入金\n* `expense` - 出金",
             "example": "income",
             "enum": [
               "income",
@@ -22301,27 +22344,27 @@
           },
           "description": {
             "type": "string",
-            "description": "取引内容",
-            "example": "取引内容"
+            "description": "取引内容（摘要）。未指定の場合は空文字列で登録されます。",
+            "example": "振込 カ）ABC"
           },
           "amount": {
             "type": "integer",
             "format": "int64",
             "minimum": -9223372036854775808,
             "maximum": 9223372036854775807,
-            "description": "取引金額",
+            "description": "取引金額（単位: 円）。入金・出金の区別は entry_side で指定します。",
             "example": 5000
           },
           "walletable_id": {
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "口座ID",
+            "description": "口座ID（walletable_type で指定した口座区分の口座のID）。口座一覧の取得API（GET /api/1/walletables）で確認できます。",
             "example": 1
           },
           "walletable_type": {
             "type": "string",
-            "description": "口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
+            "description": "口座区分\n* `bank_account` - 銀行口座\n* `credit_card` - クレジットカード\n* `wallet` - 現金・その他の決済口座",
             "example": "bank_account",
             "enum": [
               "bank_account",
@@ -22346,7 +22389,7 @@
             "format": "int64",
             "minimum": -9223372036854775808,
             "maximum": 9223372036854775807,
-            "description": "残高 (銀行口座等)",
+            "description": "残高（単位: 円）。指定しない場合、作成された明細の balance は null になります。",
             "example": 10000
           }
         }
@@ -22796,22 +22839,22 @@
           },
           "title": {
             "type": "string",
-            "description": "申請タイトル",
+            "description": "申請タイトル（250文字以内）",
             "example": "仕入代金支払い"
           },
           "application_date": {
             "type": "string",
-            "description": "申請日 (yyyy-mm-dd)<br>\n指定しない場合は当日の日付が登録されます。\n",
+            "description": "申請日 (yyyy-mm-dd)\n指定しない場合は当日の日付が登録されます。",
             "example": "2019-12-17"
           },
           "description": {
             "type": "string",
-            "description": "備考",
+            "description": "備考。未指定の場合は空文字列になります。",
             "example": "◯◯連携先ID: cx12345"
           },
           "payment_request_lines": {
             "type": "array",
-            "description": "支払依頼の項目行一覧（配列）",
+            "description": "支払依頼の項目行一覧（配列）。最大100行までです。\n通常行 (line_type=`deal_line`) を最低1行含める必要があり、控除・マイナス行 (`negative_line`) や源泉所得税行 (`withholding_tax`) だけで構成することはできません。\n申請中 (draft=false) で作成する場合は、通常行の合計金額が控除・マイナス行と源泉所得税行の合計金額より大きい必要があります。",
             "items": {
               "type": "object",
               "required": [
@@ -22820,7 +22863,7 @@
               "properties": {
                 "line_type": {
                   "type": "string",
-                  "description": "'行の種類 (deal_line: 支払依頼の通常取引行, negative_line: 支払依頼の控除・マイナス行, withholding_tax: 源泉所得税行)'<br>\n'デフォルトは deal_line: 支払依頼の通常取引行 です'\n",
+                  "description": "行の種類（デフォルトは `deal_line`）\n* `deal_line` - 支払依頼の通常取引行\n* `negative_line` - 支払依頼の控除・マイナス行\n* `withholding_tax` - 源泉所得税行（1件のみ指定可能）",
                   "example": "deal_line",
                   "enum": [
                     "deal_line",
@@ -22838,14 +22881,14 @@
                   "format": "int64",
                   "minimum": 0,
                   "maximum": 99999999999,
-                  "description": "金額",
+                  "description": "金額（円、税込）。申請中 (draft=false) で作成する場合は0より大きい値を指定してください。",
                   "example": 30000
                 },
                 "account_item_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "勘定科目ID",
+                  "description": "勘定科目ID（`/api/1/account_items` のレスポンス id で取得できます）",
                   "example": 1,
                   "nullable": true
                 },
@@ -22854,26 +22897,26 @@
                   "format": "int64",
                   "minimum": 0,
                   "maximum": 2147483647,
-                  "description": "税区分コード<br>\n勘定科目IDを指定する場合は必須です。\n",
+                  "description": "税区分コード\n勘定科目IDを指定する場合は必須です。税区分コードは `/api/1/taxes/codes` で取得できます。",
                   "example": 1
                 },
                 "item_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "品目ID",
+                  "description": "品目ID（`/api/1/items` のレスポンス id で取得できます）",
                   "example": 1
                 },
                 "section_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "部門ID",
+                  "description": "部門ID（`/api/1/sections` のレスポンス id で取得できます）",
                   "example": 1
                 },
                 "tag_ids": {
                   "type": "array",
-                  "description": "メモタグID",
+                  "description": "メモタグID の配列（`/api/1/tags` のレスポンス id で取得できます）",
                   "example": [
                     1,
                     2,
@@ -22889,21 +22932,21 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント１タグID<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+                  "description": "セグメント１タグID\nセグメントタグ一覧API (`/api/1/segments/{segment_id}/tags`) で取得できます。\n事業所側でセグメント１が利用可能なプラン契約になっている必要があります。\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a>",
                   "example": 1
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント２タグID<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+                  "description": "セグメント２タグID\nセグメントタグ一覧API (`/api/1/segments/{segment_id}/tags`) で取得できます。\n事業所側でセグメント２が利用可能なプラン契約になっている必要があります。\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a>",
                   "example": 1
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント３タグID<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+                  "description": "セグメント３タグID\nセグメントタグ一覧API (`/api/1/segments/{segment_id}/tags`) で取得できます。\n事業所側でセグメント３が利用可能なプラン契約になっている必要があります。\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a>",
                   "example": 1
                 }
               }
@@ -22913,27 +22956,27 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "承認者のユーザーID<br>\n「承認者を指定」の経路を申請経路として使用する場合に指定してください。<br>\n指定する承認者のユーザーIDは、申請経路APIを利用して取得してください。\n",
+            "description": "承認者のユーザーID\n「承認者を指定」の申請経路 (resource_type: `selected_user`) を利用する場合に指定してください。\n指定する承認者のユーザーIDは、申請経路取得API (`/api/1/approval_flow_routes`) のレスポンス steps[].users_ids から取得できます。",
             "example": 1
           },
           "approval_flow_route_id": {
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "申請経路ID<br>\n指定する申請経路IDは、申請経路APIを利用して取得してください。\n",
+            "description": "申請経路ID\n指定する申請経路IDは、申請経路一覧API (`/api/1/approval_flow_routes`) のレスポンス id から取得してください。\nusages に `PaymentRequest` を含む申請経路のみ利用可能です。",
             "example": 1
           },
           "parent_id": {
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "親申請ID(法人エンタープライズプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）)<br>\n<ul>\n  <li>承認済みの既存各種申請IDのみ指定可能です。</li>\n  <li>各種申請一覧APIを利用して取得してください。</li>\n</ul>\n",
+            "description": "親申請ID\n法人エンタープライズプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）で利用できます。\n承認済みの既存各種申請IDのみ指定可能です（各種申請一覧API `/api/1/approval_requests` で取得できます）。",
             "example": 2,
             "nullable": true
           },
           "draft": {
             "type": "boolean",
-            "description": "支払依頼のステータス<br>\nfalseを指定した時は申請中（in_progress）で支払依頼を作成します。<br>\ntrueを指定した時は下書き（draft）で支払依頼を作成します。\n",
+            "description": "支払依頼のステータス\n* `true` - 下書き (draft) で支払依頼を作成します\n* `false` - 申請中 (in_progress) で支払依頼を作成します",
             "example": true
           },
           "document_code": {
@@ -22944,7 +22987,7 @@
           },
           "receipt_ids": {
             "type": "array",
-            "description": "ファイルボックス（証憑ファイル）ID（配列）",
+            "description": "ファイルボックス（証憑ファイル）ID の配列（`/api/1/receipts` で取得できます）",
             "items": {
               "type": "integer",
               "format": "int64",
@@ -22959,13 +23002,13 @@
           },
           "payment_date": {
             "type": "string",
-            "description": "支払期限 (yyyy-mm-dd)",
+            "description": "支払期限 (yyyy-mm-dd)。指定しない場合は null で登録されます。",
             "example": "2019-12-17",
             "nullable": true
           },
           "payment_method": {
             "type": "string",
-            "description": "'支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)'<br>\n'デフォルトは none: 指定なし です。'\n",
+            "description": "支払方法（デフォルトは `none`）\n* `none` - 指定なし\n* `domestic_bank_transfer` - 国内振込\n* `abroad_bank_transfer` - 国外振込\n* `account_transfer` - 口座振替\n* `credit_card` - クレジットカード",
             "example": "none",
             "enum": [
               "none",
@@ -22979,67 +23022,67 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "支払先の取引先ID",
+            "description": "支払先の取引先ID（`/api/1/partners` のレスポンス id で取得できます）",
             "example": 201,
             "nullable": true
           },
           "partner_code": {
             "type": "string",
-            "description": "支払先の取引先コード<br>\n支払先の取引先ID指定時には無効\n",
+            "description": "支払先の取引先コード\npartner_id と同時指定した場合は partner_id が優先され、partner_code は無視されます。\n取引先コードを利用するには事業所側で「取引先コードを利用する」設定が有効になっている必要があります。",
             "example": "code001",
             "nullable": true
           },
           "bank_code": {
             "type": "string",
             "maxLength": 4,
-            "description": "銀行コード（半角数字1桁〜4桁）<br>\n支払先指定時には無効\n",
+            "description": "銀行コード（半角数字1桁〜4桁）\npartner_id / partner_code で支払先を指定した場合は無視され、取引先の振込先口座の値が採用されます。",
             "example": "0001"
           },
           "bank_name": {
             "type": "string",
             "maxLength": 255,
-            "description": "銀行名（255文字以内）<br>\n支払先指定時には無効\n",
+            "description": "銀行名（255文字以内）\npartner_id / partner_code で支払先を指定した場合は無視され、取引先の振込先口座の値が採用されます。",
             "example": "freee銀行"
           },
           "bank_name_kana": {
             "type": "string",
             "maxLength": 15,
-            "description": "銀行名（カナ）（15文字以内）<br>\n支払先指定時には無効\n",
+            "description": "銀行名（カナ）（15文字以内）\npartner_id / partner_code で支払先を指定した場合は無視され、取引先の振込先口座の値が採用されます。",
             "example": "フリーギンコウ"
           },
           "branch_code": {
             "type": "string",
             "maxLength": 3,
-            "description": "支店番号（半角数字1桁〜3桁）<br>\n支払先指定時には無効\n",
+            "description": "支店番号（半角数字1桁〜3桁）\npartner_id / partner_code で支払先を指定した場合は無視され、取引先の振込先口座の値が採用されます。",
             "example": "101"
           },
           "branch_name": {
             "type": "string",
             "maxLength": 255,
-            "description": "支店名（255文字以内）<br>\n支払先指定時には無効\n",
+            "description": "支店名（255文字以内）\npartner_id / partner_code で支払先を指定した場合は無視され、取引先の振込先口座の値が採用されます。",
             "example": "銀座支店"
           },
           "branch_kana": {
             "type": "string",
             "maxLength": 15,
-            "description": "支店名（カナ）（15文字以内）<br>\n指定可能な文字は、英数・カナ・丸括弧・ハイフン・スペースのみです。<br>\n支払先指定時には無効\n",
+            "description": "支店名（カナ）（15文字以内）\n指定可能な文字は、英数・カナ・丸括弧・ハイフン・スペースのみです。\npartner_id / partner_code で支払先を指定した場合は無視され、取引先の振込先口座の値が採用されます。",
             "example": "ギンザシテン"
           },
           "account_name": {
             "type": "string",
             "maxLength": 48,
-            "description": "受取人名（カナ）（48文字以内）<br>\n支払先指定時には無効\n",
+            "description": "受取人名（カナ）（48文字以内）\npartner_id / partner_code で支払先を指定した場合は無視され、取引先の振込先口座の値が採用されます。",
             "example": "フリータロウ"
           },
           "account_number": {
             "type": "string",
             "maxLength": 7,
-            "description": "口座番号（半角数字1桁〜7桁）<br>\n支払先指定時には無効\n",
+            "description": "口座番号（半角数字1桁〜7桁）\npartner_id / partner_code で支払先を指定した場合は無視され、取引先の振込先口座の値が採用されます。",
             "example": "1010101"
           },
           "account_type": {
             "type": "string",
-            "description": "'口座種別(ordinary: 普通、checking: 当座、earmarked: 納税準備預金、savings: 貯蓄、other: その他)'<br>\n'支払先指定時には無効'<br>\n'デフォルトは ordinary: 普通 です'\n",
+            "description": "口座種別（デフォルトは `ordinary`）\n* `ordinary` - 普通\n* `checking` - 当座\n* `earmarked` - 納税準備預金\n* `savings` - 貯蓄\n* `other` - その他\n\npartner_id / partner_code で支払先を指定した場合は無視され、取引先の振込先口座の値が採用されます。",
             "example": "ordinary",
             "enum": [
               "ordinary",
@@ -23051,7 +23094,7 @@
           },
           "qualified_invoice_status": {
             "type": "string",
-            "description": "適格請求書発行事業者（qualified: 該当する、not_qualified: 該当しない、unspecified: 未選択）\n- 支払依頼をインボイス要件をみたす申請として扱うかどうかを表します。\n- qualified_invoice_statusキーをリクエストに含めない場合、unspecifiedが適用されます。\n- issue_dateが2023年9月30日以前の場合、unspecified以外利用できません。\n- インボイス経過措置の税区分の設定が使用する設定になっていない場合、unspecified以外利用できません。\n",
+            "description": "適格請求書発行事業者の区分（キーを省略した場合は `unspecified` が適用されます）\n* `qualified` - 該当する\n* `not_qualified` - 該当しない\n* `unspecified` - 未選択\n\n支払依頼をインボイス要件をみたす申請として扱うかどうかを表します。\n以下の場合は `unspecified` 以外を指定できません:\n- issue_date が 2023年9月30日以前の場合\n- 事業所側のインボイス経過措置の税区分の設定が「使用する」になっていない場合",
             "enum": [
               "qualified",
               "not_qualified",
@@ -23080,22 +23123,22 @@
           },
           "title": {
             "type": "string",
-            "description": "申請タイトル<br>\n申請者が、下書き状態もしくは差戻し状態の支払依頼に対して指定する場合のみ有効\n",
+            "description": "申請タイトル（250文字以内）\n申請中 (in_progress) の支払依頼に対しては更新できません。下書き状態もしくは差戻し状態の場合のみ有効です。",
             "example": "仕入代金支払い"
           },
           "application_date": {
             "type": "string",
-            "description": "申請日 (yyyy-mm-dd)<br>\n指定しない場合は当日の日付が登録されます。<br>\n申請者が、下書き状態もしくは差戻し状態の支払依頼に対して指定する場合のみ有効\n",
+            "description": "申請日 (yyyy-mm-dd)\n指定しない場合は当日の日付が登録されます。\n申請中 (in_progress) の支払依頼に対しては更新できません。下書き状態もしくは差戻し状態の場合のみ有効です。",
             "example": "2019-12-17"
           },
           "description": {
             "type": "string",
-            "description": "備考",
+            "description": "備考。未指定の場合は空文字列で登録されます。",
             "example": "◯◯連携先ID: cx12345"
           },
           "payment_request_lines": {
             "type": "array",
-            "description": "支払依頼の項目行一覧（配列）",
+            "description": "支払依頼の項目行一覧（配列）。最大100行までです。\n通常行 (line_type=`deal_line`) を最低1行含める必要があり、控除・マイナス行 (`negative_line`) や源泉所得税行 (`withholding_tax`) だけで構成することはできません。\n申請中 (draft=false) で更新する場合は、通常行の合計金額が控除・マイナス行と源泉所得税行の合計金額より大きい必要があります。",
             "items": {
               "type": "object",
               "required": [
@@ -23106,12 +23149,12 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "支払依頼の項目行ID: 既存項目行を更新する場合に指定します。IDを指定しない項目行は、新規行として扱われ追加されます。また、payment_request_linesに含まれない既存の項目行は削除されます。更新後も残したい行は、必ず支払依頼の項目行IDを指定してpayment_request_linesに含めてください。",
+                  "description": "支払依頼の項目行ID\n既存項目行を更新する場合に指定します。ID を指定しない項目行は新規行として追加されます。\npayment_request_lines に含まれない既存の項目行は削除されます。更新後も残したい行は、必ず支払依頼の項目行 ID を指定して payment_request_lines に含めてください。",
                   "example": 1
                 },
                 "line_type": {
                   "type": "string",
-                  "description": "'行の種類 (deal_line: 支払依頼の通常取引行, negative_line: 支払依頼の控除・マイナス行, withholding_tax: 源泉所得税行)'<br>\n'デフォルトは deal_line: 支払依頼の通常取引行 です'\n",
+                  "description": "行の種類（デフォルトは `deal_line`）\n* `deal_line` - 支払依頼の通常取引行\n* `negative_line` - 支払依頼の控除・マイナス行\n* `withholding_tax` - 源泉所得税行（1件のみ指定可能）",
                   "example": "deal_line",
                   "enum": [
                     "deal_line",
@@ -23129,14 +23172,14 @@
                   "format": "int64",
                   "minimum": 0,
                   "maximum": 99999999999,
-                  "description": "金額",
+                  "description": "金額（円、税込）。申請中 (draft=false) で更新する場合は0より大きい値を指定してください。",
                   "example": 30000
                 },
                 "account_item_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "勘定科目ID",
+                  "description": "勘定科目ID（`/api/1/account_items` のレスポンス id で取得できます）",
                   "example": 1,
                   "nullable": true
                 },
@@ -23145,26 +23188,26 @@
                   "format": "int64",
                   "minimum": 0,
                   "maximum": 2147483647,
-                  "description": "税区分コード<br>\n勘定科目IDを指定する場合は必須です。\n",
+                  "description": "税区分コード\n勘定科目IDを指定する場合は必須です。税区分コードは `/api/1/taxes/codes` で取得できます。",
                   "example": 1
                 },
                 "item_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "品目ID",
+                  "description": "品目ID（`/api/1/items` のレスポンス id で取得できます）",
                   "example": 1
                 },
                 "section_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "部門ID",
+                  "description": "部門ID（`/api/1/sections` のレスポンス id で取得できます）",
                   "example": 1
                 },
                 "tag_ids": {
                   "type": "array",
-                  "description": "メモタグID",
+                  "description": "メモタグID の配列（`/api/1/tags` のレスポンス id で取得できます）",
                   "example": [
                     1,
                     2,
@@ -23180,21 +23223,21 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント１タグID<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+                  "description": "セグメント１タグID\nセグメントタグ一覧API (`/api/1/segments/{segment_id}/tags`) で取得できます。\n事業所側でセグメント１が利用可能なプラン契約になっている必要があります。\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a>",
                   "example": 1
                 },
                 "segment_2_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント２タグID<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+                  "description": "セグメント２タグID\nセグメントタグ一覧API (`/api/1/segments/{segment_id}/tags`) で取得できます。\n事業所側でセグメント２が利用可能なプラン契約になっている必要があります。\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a>",
                   "example": 1
                 },
                 "segment_3_tag_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "セグメント３タグID<br>\nセグメントタグ一覧の取得APIを利用して取得してください。<br>\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br>\n",
+                  "description": "セグメント３タグID\nセグメントタグ一覧API (`/api/1/segments/{segment_id}/tags`) で取得できます。\n事業所側でセグメント３が利用可能なプラン契約になっている必要があります。\n<a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a>",
                   "example": 1
                 }
               }
@@ -23204,19 +23247,19 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "承認者のユーザーID<br>\n「承認者を指定」の経路を申請経路として使用する場合に指定してください。<br>\n指定する承認者のユーザーIDは、申請経路APIを利用して取得してください。\n",
+            "description": "承認者のユーザーID\n「承認者を指定」の申請経路 (resource_type: `selected_user`) を利用する場合に指定してください。\n指定する承認者のユーザーIDは、申請経路取得API (`/api/1/approval_flow_routes`) のレスポンス steps[].users_ids から取得できます。\n申請中 (in_progress) の支払依頼に対しては更新できません。下書き状態もしくは差戻し状態の場合のみ有効です。",
             "example": 1
           },
           "approval_flow_route_id": {
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "申請経路ID<br>\n指定する申請経路IDは、申請経路APIを利用して取得してください。\n",
+            "description": "申請経路ID\n指定する申請経路IDは、申請経路一覧API (`/api/1/approval_flow_routes`) のレスポンス id から取得してください。\nusages に `PaymentRequest` を含む申請経路のみ利用可能です。\n申請中 (in_progress) の支払依頼に対しては更新できません。下書き状態もしくは差戻し状態の場合のみ有効です。",
             "example": 1
           },
           "draft": {
             "type": "boolean",
-            "description": "支払依頼のステータス<br>\nfalseを指定した時は申請中（in_progress）で支払依頼を更新します。<br>\ntrueを指定した時は下書き（draft）で支払依頼を更新します。\n",
+            "description": "支払依頼のステータス\n* `true` - 下書き (draft) で支払依頼を更新します\n* `false` - 申請中 (in_progress) で支払依頼を更新します",
             "example": true
           },
           "document_code": {
@@ -23227,7 +23270,7 @@
           },
           "receipt_ids": {
             "type": "array",
-            "description": "ファイルボックス（証憑ファイル）ID（配列）",
+            "description": "ファイルボックス（証憑ファイル）ID の配列（`/api/1/receipts` で取得できます）",
             "items": {
               "type": "integer",
               "format": "int64",
@@ -23242,13 +23285,13 @@
           },
           "payment_date": {
             "type": "string",
-            "description": "支払期限 (yyyy-mm-dd)",
+            "description": "支払期限 (yyyy-mm-dd)。指定しない場合は null で登録されます。",
             "example": "2019-12-17",
             "nullable": true
           },
           "payment_method": {
             "type": "string",
-            "description": "'支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)'<br>\n'デフォルトは none: 指定なし です。'\n",
+            "description": "支払方法（デフォルトは `none`）\n* `none` - 指定なし\n* `domestic_bank_transfer` - 国内振込\n* `abroad_bank_transfer` - 国外振込\n* `account_transfer` - 口座振替\n* `credit_card` - クレジットカード",
             "example": "none",
             "enum": [
               "none",
@@ -23262,67 +23305,67 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "支払先の取引先ID",
+            "description": "支払先の取引先ID（`/api/1/partners` のレスポンス id で取得できます）",
             "example": 201,
             "nullable": true
           },
           "partner_code": {
             "type": "string",
-            "description": "支払先の取引先コード<br>\n支払先の取引先ID指定時には無効\n",
+            "description": "支払先の取引先コード\npartner_id と同時指定した場合は partner_id が優先され、partner_code は無視されます。\n取引先コードを利用するには事業所側で「取引先コードを利用する」設定が有効になっている必要があります。",
             "example": "code001",
             "nullable": true
           },
           "bank_code": {
             "type": "string",
             "maxLength": 4,
-            "description": "銀行コード（半角数字1桁〜4桁）<br>\n支払先指定時には無効\n",
+            "description": "銀行コード（半角数字1桁〜4桁）\npartner_id / partner_code で支払先を指定した場合は無視され、取引先の振込先口座の値が採用されます。",
             "example": "0001"
           },
           "bank_name": {
             "type": "string",
             "maxLength": 255,
-            "description": "銀行名（255文字以内）<br>\n支払先指定時には無効\n",
+            "description": "銀行名（255文字以内）\npartner_id / partner_code で支払先を指定した場合は無視され、取引先の振込先口座の値が採用されます。",
             "example": "freee銀行"
           },
           "bank_name_kana": {
             "type": "string",
             "maxLength": 15,
-            "description": "銀行名（カナ）（15文字以内）<br>\n支払先指定時には無効\n",
+            "description": "銀行名（カナ）（15文字以内）\npartner_id / partner_code で支払先を指定した場合は無視され、取引先の振込先口座の値が採用されます。",
             "example": "フリーギンコウ"
           },
           "branch_code": {
             "type": "string",
             "maxLength": 3,
-            "description": "支店番号（半角数字1桁〜3桁）<br>\n支払先指定時には無効\n",
+            "description": "支店番号（半角数字1桁〜3桁）\npartner_id / partner_code で支払先を指定した場合は無視され、取引先の振込先口座の値が採用されます。",
             "example": "101"
           },
           "branch_name": {
             "type": "string",
             "maxLength": 255,
-            "description": "支店名（255文字以内）<br>\n支払先指定時には無効\n",
+            "description": "支店名（255文字以内）\npartner_id / partner_code で支払先を指定した場合は無視され、取引先の振込先口座の値が採用されます。",
             "example": "銀座支店"
           },
           "branch_kana": {
             "type": "string",
             "maxLength": 15,
-            "description": "支店名（カナ）（15文字以内）<br>\n指定可能な文字は、英数・カナ・丸括弧・ハイフン・スペースのみです。<br>\n支払先指定時には無効\n",
+            "description": "支店名（カナ）（15文字以内）\n指定可能な文字は、英数・カナ・丸括弧・ハイフン・スペースのみです。\npartner_id / partner_code で支払先を指定した場合は無視され、取引先の振込先口座の値が採用されます。",
             "example": "ギンザシテン"
           },
           "account_name": {
             "type": "string",
             "maxLength": 48,
-            "description": "受取人名（カナ）（48文字以内）<br>\n支払先指定時には無効\n",
+            "description": "受取人名（カナ）（48文字以内）\npartner_id / partner_code で支払先を指定した場合は無視され、取引先の振込先口座の値が採用されます。",
             "example": "フリータロウ"
           },
           "account_number": {
             "type": "string",
             "maxLength": 7,
-            "description": "口座番号（半角数字1桁〜7桁）<br>\n支払先指定時には無効\n",
+            "description": "口座番号（半角数字1桁〜7桁）\npartner_id / partner_code で支払先を指定した場合は無視され、取引先の振込先口座の値が採用されます。",
             "example": "1010101"
           },
           "account_type": {
             "type": "string",
-            "description": "'口座種別(ordinary: 普通、checking: 当座、earmarked: 納税準備預金、savings: 貯蓄、other: その他)'<br>\n'支払先指定時には無効'<br>\n'デフォルトは ordinary: 普通 です'\n",
+            "description": "口座種別（デフォルトは `ordinary`）\n* `ordinary` - 普通\n* `checking` - 当座\n* `earmarked` - 納税準備預金\n* `savings` - 貯蓄\n* `other` - その他\n\npartner_id / partner_code で支払先を指定した場合は無視され、取引先の振込先口座の値が採用されます。",
             "example": "ordinary",
             "enum": [
               "ordinary",
@@ -23334,7 +23377,7 @@
           },
           "qualified_invoice_status": {
             "type": "string",
-            "description": "適格請求書発行事業者（qualified: 該当する、not_qualified: 該当しない、unspecified: 未選択）\n- 支払依頼をインボイス要件をみたす申請として扱うかどうかを表します。\n- qualified_invoice_statusキーをリクエストに含めない場合、unspecifiedが適用されます。\n- issue_dateが2023年9月30日以前の場合、unspecified以外利用できません。\n- インボイス経過措置の税区分の設定が使用する設定になっていない場合、unspecified以外利用できません。\n",
+            "description": "適格請求書発行事業者の区分（キーを省略した場合は `unspecified` が適用されます）\n* `qualified` - 該当する\n* `not_qualified` - 該当しない\n* `unspecified` - 未選択\n\n支払依頼をインボイス要件をみたす申請として扱うかどうかを表します。\n以下の場合は `unspecified` 以外を指定できません:\n- issue_date が 2023年9月30日以前の場合\n- 事業所側のインボイス経過措置の税区分の設定が「使用する」になっていない場合",
             "enum": [
               "qualified",
               "not_qualified",
@@ -24801,7 +24844,15 @@
           "journals": {
             "required": [
               "company_id",
-              "id"
+              "download_type",
+              "encoding",
+              "end_date",
+              "id",
+              "messages",
+              "start_date",
+              "status_url",
+              "up_to_date",
+              "up_to_date_reasons"
             ],
             "type": "object",
             "properties": {
@@ -24809,15 +24860,15 @@
                 "type": "integer",
                 "format": "int64",
                 "minimum": 1,
-                "description": "受け付けID",
+                "description": "受け付けID。仕訳帳のステータスの取得（GET /api/1/journals/reports/{id}/status）・仕訳帳のダウンロード（GET /api/1/journals/reports/{id}/download）の id として使用します。",
                 "example": 1
               },
               "messages": {
                 "type": "array",
+                "description": "受け付けメッセージ",
                 "items": {
                   "type": "string",
-                  "description": "受け付けメッセージ",
-                  "example": "id でリクエストを受け付けました。"
+                  "example": "ID:1 でリクエストを受け付けました。"
                 }
               },
               "company_id": {
@@ -24829,7 +24880,7 @@
               },
               "download_type": {
                 "type": "string",
-                "description": "ダウンロード形式",
+                "description": "ダウンロード形式\n* `generic` - 旧CSV形式\n* `generic_v2` - 新CSV形式（freee汎用形式）\n* `csv` - 弥生会計形式のCSV\n* `pdf` - PDF形式",
                 "example": "csv",
                 "enum": [
                   "generic",
@@ -24840,7 +24891,7 @@
               },
               "encoding": {
                 "type": "string",
-                "description": "文字コード",
+                "description": "出力ファイルの文字コード。download_type が csv の場合は常に sjis、pdf の場合は null になります。",
                 "example": "sjis",
                 "nullable": true,
                 "enum": [
@@ -24850,20 +24901,21 @@
               },
               "start_date": {
                 "type": "string",
-                "description": "取得開始日 (yyyy-mm-dd)",
+                "description": "取得開始日（yyyy-mm-dd）。リクエストで未指定の場合は当期の会計年度の開始日が設定されます。",
                 "example": "2019-12-17"
               },
               "end_date": {
                 "type": "string",
-                "description": "取得終了日 (yyyy-mm-dd)",
+                "description": "取得終了日（yyyy-mm-dd）。リクエストで未指定の場合は当期の会計年度の終了日が設定されます。",
                 "example": "2019-12-17"
               },
               "visible_tags": {
                 "type": "array",
+                "description": "補助科目やコメントとして出力する項目。リクエストで visible_tags を指定した場合のみ返ります。all を指定した場合は展開された個別の項目が返ります。",
                 "items": {
                   "type": "string",
-                  "description": "補助科目やコメントとして出力する項目",
-                  "example": "all",
+                  "description": "出力する項目\n* `partner` - 取引先タグ\n* `item` - 品目タグ\n* `tag` - メモタグ\n* `section` - 部門タグ\n* `description` - 備考欄\n* `wallet_txn_description` - 明細の備考欄\n* `segment_1_tag` - セグメント１タグ\n* `segment_2_tag` - セグメント２タグ\n* `segment_3_tag` - セグメント３タグ\n* `all` - すべて",
+                  "example": "partner",
                   "enum": [
                     "partner",
                     "item",
@@ -24880,9 +24932,10 @@
               },
               "visible_ids": {
                 "type": "array",
+                "description": "追加出力するID項目。リクエストで visible_ids を指定した場合のみ返ります。",
                 "items": {
                   "type": "string",
-                  "description": "追加出力するID項目",
+                  "description": "追加出力するID項目\n* `deal_id` - 取引ID\n* `transfer_id` - 取引（振替）ID\n* `manual_journal_id` - 振替伝票ID",
                   "example": "deal_id",
                   "enum": [
                     "deal_id",
@@ -24893,17 +24946,17 @@
               },
               "status_url": {
                 "type": "string",
-                "description": "仕訳帳のステータスの取得用URL",
+                "description": "仕訳帳のステータスの取得（GET /api/1/journals/reports/{id}/status）用URL。作成の進捗はこのURLで確認します。",
                 "example": "https://api.freee.co.jp/api/1/journals/reports/4/status"
               },
               "up_to_date": {
                 "type": "boolean",
-                "description": "集計結果が最新かどうか",
+                "description": "集計結果が最新かどうか。false の場合は up_to_date_reasons に要因が入ります。",
                 "example": true
               },
               "up_to_date_reasons": {
                 "type": "array",
-                "description": "集計が最新でない場合の要因情報",
+                "description": "集計が最新でない場合の要因情報。up_to_date が true の場合は空配列になります。",
                 "items": {
                   "type": "object",
                   "required": [
@@ -24913,7 +24966,7 @@
                   "properties": {
                     "code": {
                       "type": "string",
-                      "description": "コード",
+                      "description": "集計が最新でない要因のコード\n* `depreciation_creating` - 当期の固定資産の償却作成が実行中\n* `depreciation_create_error` - 当期の固定資産の償却作成がエラー終了",
                       "example": "depreciation_creating",
                       "enum": [
                         "depreciation_creating",
@@ -24943,6 +24996,7 @@
             "required": [
               "company_id",
               "download_type",
+              "encoding",
               "end_date",
               "id",
               "start_date",
@@ -24953,7 +25007,7 @@
                 "type": "integer",
                 "format": "int64",
                 "minimum": 1,
-                "description": "受け付けID",
+                "description": "受け付けID。仕訳帳のダウンロード要求（GET /api/1/journals）のレスポンスで返る id です。",
                 "example": 1
               },
               "company_id": {
@@ -24965,7 +25019,7 @@
               },
               "download_type": {
                 "type": "string",
-                "description": "ダウンロード形式",
+                "description": "ダウンロード形式\n* `generic` - 旧CSV形式\n* `generic_v2` - 新CSV形式（freee汎用形式）\n* `csv` - 弥生会計形式のCSV\n* `pdf` - PDF形式",
                 "example": "csv",
                 "enum": [
                   "generic",
@@ -24976,7 +25030,7 @@
               },
               "encoding": {
                 "type": "string",
-                "description": "文字コード",
+                "description": "出力ファイルの文字コード。download_type が csv の場合は常に sjis、pdf の場合は null になります。",
                 "example": "sjis",
                 "nullable": true,
                 "enum": [
@@ -24986,7 +25040,7 @@
               },
               "status": {
                 "type": "string",
-                "description": "ダウンロードリクエストのステータス",
+                "description": "ダウンロードリクエストのステータス\n* `enqueued` - 実行待ち\n* `working` - 実行中\n* `uploaded` - 準備完了（仕訳帳のダウンロード（GET /api/1/journals/reports/{id}/download）でダウンロードできます）\n* `failed` - ファイルの作成に失敗（仕訳帳のダウンロード要求（GET /api/1/journals）から再度やり直してください）",
                 "example": "enqueued",
                 "enum": [
                   "enqueued",
@@ -24997,20 +25051,21 @@
               },
               "start_date": {
                 "type": "string",
-                "description": "取得開始日 (yyyy-mm-dd)",
+                "description": "取得開始日（yyyy-mm-dd）",
                 "example": "2019-12-17"
               },
               "end_date": {
                 "type": "string",
-                "description": "取得終了日 (yyyy-mm-dd)",
+                "description": "取得終了日（yyyy-mm-dd）",
                 "example": "2019-12-17"
               },
               "visible_tags": {
                 "type": "array",
+                "description": "補助科目やコメントとして出力する項目。ダウンロード要求時に visible_tags を指定した場合のみ返ります。all を指定した場合は展開された個別の項目が返ります。",
                 "items": {
                   "type": "string",
-                  "description": "補助科目やコメントとして出力する項目",
-                  "example": "all",
+                  "description": "出力する項目\n* `partner` - 取引先タグ\n* `item` - 品目タグ\n* `tag` - メモタグ\n* `section` - 部門タグ\n* `description` - 備考欄\n* `wallet_txn_description` - 明細の備考欄\n* `segment_1_tag` - セグメント１タグ\n* `segment_2_tag` - セグメント２タグ\n* `segment_3_tag` - セグメント３タグ\n* `all` - すべて",
+                  "example": "partner",
                   "enum": [
                     "partner",
                     "item",
@@ -25027,9 +25082,10 @@
               },
               "visible_ids": {
                 "type": "array",
+                "description": "追加出力するID項目。ダウンロード要求時に visible_ids を指定した場合のみ返ります。",
                 "items": {
                   "type": "string",
-                  "description": "追加出力するID項目",
+                  "description": "追加出力するID項目\n* `deal_id` - 取引ID\n* `transfer_id` - 取引（振替）ID\n* `manual_journal_id` - 振替伝票ID",
                   "example": "deal_id",
                   "enum": [
                     "deal_id",
@@ -25040,7 +25096,7 @@
               },
               "download_url": {
                 "type": "string",
-                "description": "ダウンロードURL",
+                "description": "仕訳帳のダウンロード（GET /api/1/journals/reports/{id}/download）用URL。status が uploaded の場合のみ返ります。",
                 "example": "https://api.freee.co.jp/api/1/journals/reports/1/download"
               }
             }
@@ -36797,7 +36853,7 @@
           },
           "date": {
             "type": "string",
-            "description": "取引日(yyyy-mm-dd)",
+            "description": "取引日 (yyyy-mm-dd)",
             "example": "2019-12-17"
           },
           "amount": {
@@ -36805,25 +36861,25 @@
             "format": "int64",
             "minimum": -9223372036854775808,
             "maximum": 9223372036854775807,
-            "description": "取引金額",
+            "description": "取引金額（単位: 円）。入金・出金の区別は entry_side で表されます。",
             "example": 5000
           },
           "due_amount": {
             "type": "integer",
             "format": "int64",
-            "description": "未決済金額",
+            "description": "取引登録待ち金額（単位: 円）。明細に対してまだ取引が登録されていない金額を表します。取引が未登録（status が 1）の場合は取引金額と同額になり、取引登録が完了する（status が 2 になる）と 0 になります。",
             "example": 0
           },
           "balance": {
             "type": "integer",
             "format": "int64",
-            "description": "残高(銀行口座等)(Webで残高未設定で登録した場合や口座明細の作成APIでキーを指定しないで登録した場合などはnullとなります)",
+            "description": "残高（単位: 円）。銀行口座等の残高が入ります。Webで残高未設定で登録した場合や、口座明細の作成APIで balance を指定せずに登録した場合などは null になります。",
             "example": 10000,
             "nullable": true
           },
           "entry_side": {
             "type": "string",
-            "description": "入金／出金 (入金: income, 出金: expense)",
+            "description": "入金・出金の区分\n* `income` - 入金\n* `expense` - 出金",
             "example": "income",
             "enum": [
               "income",
@@ -36832,7 +36888,7 @@
           },
           "walletable_type": {
             "type": "string",
-            "description": "口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)",
+            "description": "口座区分\n* `bank_account` - 銀行口座\n* `credit_card` - クレジットカード\n* `wallet` - 現金・その他の決済口座",
             "example": "bank_account",
             "enum": [
               "bank_account",
@@ -36844,12 +36900,12 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "口座ID",
+            "description": "口座ID（walletable_type で示される口座のID）。口座の詳細は口座一覧の取得API（GET /api/1/walletables）で確認できます。",
             "example": 1
           },
           "description": {
             "type": "string",
-            "description": "取引内容",
+            "description": "取引内容（銀行やクレジットカードの明細に記載された摘要等）。未設定の場合は空文字列になります。",
             "example": "振込 カ）ABC"
           },
           "status": {
@@ -36857,7 +36913,8 @@
             "format": "int64",
             "minimum": 1,
             "maximum": 6,
-            "description": "明細のステータス（消込待ち: 1, 消込済み: 2, 無視: 3, 消込中: 4, 対象外: 6）"
+            "description": "明細のステータス\n* `1` - 消込待ち（明細に対する取引が未登録の状態）\n* `2` - 消込済み（明細に対する取引の登録が完了した状態）\n* `3` - 無視（取引を登録せず明細を無視した状態）\n* `4` - 消込中（明細の一部の金額のみ取引登録された状態）\n* `6` - 対象外（取引登録の対象外の明細）",
+            "example": 1
           },
           "rule_matched": {
             "type": "boolean",
@@ -38609,18 +38666,18 @@
               },
               "description": {
                 "type": "string",
-                "description": "備考",
+                "description": "備考。未入力の場合は空文字列になります。",
                 "example": "◯◯連携先ID: cx12345"
               },
               "total_amount": {
                 "type": "integer",
                 "format": "int64",
-                "description": "合計金額",
+                "description": "合計金額（円、税込）\n通常取引行 (deal_line) の合計金額から控除・マイナス行 (negative_line) と源泉所得税行 (withholding_tax) の合計金額を差し引いた値です。",
                 "example": 30000
               },
               "status": {
                 "type": "string",
-                "description": "申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下, feedback:差戻し)",
+                "description": "申請ステータス\n* `draft` - 下書き\n* `in_progress` - 申請中\n* `approved` - 承認済\n* `rejected` - 却下\n* `feedback` - 差戻し",
                 "example": "draft",
                 "enum": [
                   "draft",
@@ -38656,7 +38713,7 @@
                     },
                     "line_type": {
                       "type": "string",
-                      "description": "'行の種類 (deal_line: 支払依頼の通常取引行, negative_line: 支払依頼の控除・マイナス行, withholding_tax: 源泉所得税行)'\n",
+                      "description": "行の種類\n* `deal_line` - 支払依頼の通常取引行\n* `negative_line` - 支払依頼の控除・マイナス行\n* `withholding_tax` - 源泉所得税行",
                       "example": "deal_line",
                       "enum": [
                         "deal_line",
@@ -38755,13 +38812,13 @@
                 "type": "integer",
                 "format": "int64",
                 "minimum": 1,
-                "description": "取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)",
+                "description": "取引ID\n申請ステータス (status) が `approved` (承認済) で、支払依頼から作成された取引が存在する場合のみ値が入ります。\nそれ以外の場合は null になります。",
                 "example": 1,
                 "nullable": true
               },
               "deal_status": {
                 "type": "string",
-                "description": "取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます settled:支払済み, unsettled:支払待ち)",
+                "description": "取引ステータス\n* `settled` - 支払済み\n* `unsettled` - 支払待ち\n\n申請ステータス (status) が `approved` (承認済) で、支払依頼から作成された取引が存在する場合のみ値が入ります。\nそれ以外の場合は null になります。",
                 "example": "settled",
                 "enum": [
                   "settled",
@@ -38773,7 +38830,7 @@
                 "type": "integer",
                 "format": "int64",
                 "minimum": 1,
-                "description": "申請者のユーザーID",
+                "description": "申請者のユーザーID（`/api/1/users` のレスポンス id と同じ値）",
                 "example": 1
               },
               "approvers": {
@@ -38817,12 +38874,12 @@
                     },
                     "is_force_action": {
                       "type": "boolean",
-                      "description": "特権承認済みかどうか",
+                      "description": "特権承認済みかどうか（true の場合、特権承認によって承認されたことを示します）",
                       "example": true
                     },
                     "resource_type": {
                       "type": "string",
-                      "description": "承認ステップの承認方法\n* ` predefined_user` - メンバー指定 (1人),\n* ` selected_user` - 申請時にメンバー指定\n* ` unspecified` - 指定なし\n* ` and_resource` - メンバー指定 (複数、全員の承認),\n* ` or_resource` - メンバー指定 (複数、1人の承認)\n* ` and_position` - 役職指定 (複数、全員の承認)\n* ` or_position` - 役職指定 (複数、1人の承認)",
+                      "description": "承認ステップの承認方法\n* `predefined_user` - メンバー指定 (1人)\n* `selected_user` - 申請時にメンバー指定\n* `unspecified` - 指定なし\n* `and_resource` - メンバー指定 (複数、全員の承認)\n* `or_resource` - メンバー指定 (複数、1人の承認)\n* `and_position` - 役職指定 (複数、全員の承認)\n* `or_position` - 役職指定 (複数、1人の承認)",
                       "enum": [
                         "predefined_user",
                         "selected_user",
@@ -38839,19 +38896,19 @@
               },
               "application_number": {
                 "type": "string",
-                "description": "申請No.",
+                "description": "申請No.（事業所内で申請単位に自動採番される番号）",
                 "example": "2"
               },
               "approval_flow_route_id": {
                 "type": "integer",
                 "format": "int64",
                 "minimum": 1,
-                "description": "申請経路ID",
+                "description": "申請経路ID（`/api/1/approval_flow_routes` のレスポンス id と同じ値）",
                 "example": 1
               },
               "comments": {
                 "type": "array",
-                "description": "支払依頼のコメント一覧（配列）",
+                "description": "支払依頼のコメント一覧（配列）。コメントが登録された順に並びます。",
                 "items": {
                   "type": "object",
                   "required": [
@@ -38882,7 +38939,7 @@
               },
               "approval_flow_logs": {
                 "type": "array",
-                "description": "支払依頼の承認履歴（配列）",
+                "description": "支払依頼の承認履歴（配列）。承認操作が行われた順に並びます。",
                 "items": {
                   "type": "object",
                   "required": [
@@ -38893,7 +38950,7 @@
                   "properties": {
                     "action": {
                       "type": "string",
-                      "description": "操作(apply: 申請, approve: 承認, force_approve: 特権承認, cancel: 取消, reject: 却下, feedback: 差戻し)",
+                      "description": "操作\n* `apply` - 申請\n* `approve` - 承認\n* `force_approve` - 特権承認\n* `cancel` - 取消\n* `reject` - 却下\n* `feedback` - 差戻し",
                       "enum": [
                         "apply",
                         "approve",
@@ -38923,7 +38980,7 @@
                 "type": "integer",
                 "format": "int64",
                 "minimum": 1,
-                "description": "現在承認ステップID",
+                "description": "現在の承認ステップID（承認操作 API `POST /api/1/payment_requests/{id}/actions` の target_step_id に指定します）\n下書き・差戻し状態の場合は null になります。",
                 "example": 1,
                 "nullable": true
               },
@@ -38932,17 +38989,17 @@
                 "format": "int64",
                 "minimum": 0,
                 "maximum": 2147483647,
-                "description": "現在のround。差し戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。",
+                "description": "現在の round（承認操作 API `POST /api/1/payment_requests/{id}/actions` の target_round に指定します）\n差戻し等により申請が step の最初からやり直しになると round の値が増えます。",
                 "example": 1
               },
               "document_code": {
                 "type": "string",
-                "description": "請求書番号",
+                "description": "請求書番号。未設定の場合は空文字列になります。",
                 "example": "2"
               },
               "receipt_ids": {
                 "type": "array",
-                "description": "ファイルボックス（証憑ファイル）ID",
+                "description": "ファイルボックス（証憑ファイル）ID の配列\n添付されているファイルボックスの ID を返します。添付が無い場合は空配列になります。",
                 "example": [
                   1,
                   2,
@@ -38961,13 +39018,13 @@
               },
               "payment_date": {
                 "type": "string",
-                "description": "支払期限 (yyyy-mm-dd)",
+                "description": "支払期限 (yyyy-mm-dd)。指定されていない場合は null になります。",
                 "example": "2019-12-17",
                 "nullable": true
               },
               "payment_method": {
                 "type": "string",
-                "description": "支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)",
+                "description": "支払方法\n* `none` - 指定なし\n* `domestic_bank_transfer` - 国内振込\n* `abroad_bank_transfer` - 国外振込\n* `account_transfer` - 口座振替\n* `credit_card` - クレジットカード",
                 "example": "none",
                 "enum": [
                   "none",
@@ -38981,55 +39038,55 @@
                 "type": "integer",
                 "format": "int64",
                 "minimum": 1,
-                "description": "取引先ID",
+                "description": "取引先ID（取引先が指定されていない支払依頼の場合は null になります）",
                 "example": 201,
                 "nullable": true
               },
               "partner_code": {
                 "type": "string",
-                "description": "取引先コード",
+                "description": "取引先コード\n取引先コードが設定されていない場合、および事業所が取引先コードを利用していない場合は null になります。",
                 "example": "code001",
                 "nullable": true
               },
               "partner_name": {
                 "type": "string",
-                "description": "取引先名",
+                "description": "取引先名（取引先が指定されていない支払依頼の場合は null になります）",
                 "example": "freee",
                 "nullable": true
               },
               "bank_name": {
                 "type": "string",
-                "description": "銀行名",
+                "description": "銀行名。支払先の取引先が指定されている場合は取引先の振込先口座から引用されます。未設定の場合は空文字列になります。",
                 "example": "freee銀行"
               },
               "bank_name_kana": {
                 "type": "string",
-                "description": "銀行名（カナ）",
+                "description": "銀行名（カナ）。支払先の取引先が指定されている場合は取引先の振込先口座から引用されます。未設定の場合は空文字列になります。",
                 "example": "フリーギンコウ"
               },
               "bank_code": {
                 "type": "string",
-                "description": "銀行コード",
+                "description": "銀行コード。支払先の取引先が指定されている場合は取引先の振込先口座から引用されます。未設定の場合は空文字列になります。",
                 "example": "0001"
               },
               "branch_name": {
                 "type": "string",
-                "description": "支店名",
+                "description": "支店名。支払先の取引先が指定されている場合は取引先の振込先口座から引用されます。未設定の場合は空文字列になります。",
                 "example": "銀座支店"
               },
               "branch_kana": {
                 "type": "string",
-                "description": "支店名（カナ）",
+                "description": "支店名（カナ）。支払先の取引先が指定されている場合は取引先の振込先口座から引用されます。未設定の場合は空文字列になります。",
                 "example": "ギンザシテン"
               },
               "branch_code": {
                 "type": "string",
-                "description": "支店番号",
+                "description": "支店番号。支払先の取引先が指定されている場合は取引先の振込先口座から引用されます。未設定の場合は空文字列になります。",
                 "example": "101"
               },
               "account_type": {
                 "type": "string",
-                "description": "口座種別(ordinary:普通、checking:当座、earmarked:納税準備預金、savings:貯蓄、other:その他)",
+                "description": "口座種別\n* `ordinary` - 普通\n* `checking` - 当座\n* `earmarked` - 納税準備預金\n* `savings` - 貯蓄\n* `other` - その他",
                 "example": "ordinary",
                 "enum": [
                   "ordinary",
@@ -39041,17 +39098,17 @@
               },
               "account_number": {
                 "type": "string",
-                "description": "口座番号",
+                "description": "口座番号。支払先の取引先が指定されている場合は取引先の振込先口座から引用されます。未設定の場合は空文字列になります。",
                 "example": "1010101"
               },
               "account_name": {
                 "type": "string",
-                "description": "受取人名（カナ）",
+                "description": "受取人名（カナ）。支払先の取引先が指定されている場合は取引先の振込先口座から引用されます。未設定の場合は空文字列になります。",
                 "example": "フリータロウ"
               },
               "qualified_invoice_status": {
                 "type": "string",
-                "description": "適格請求書発行事業者（qualified: 該当する、not_qualified: 該当しない、unspecified: 未選択）\n- 支払依頼をインボイス要件をみたす申請として扱うかどうかを表します。\n",
+                "description": "適格請求書発行事業者の区分\n* `qualified` - 該当する\n* `not_qualified` - 該当しない\n* `unspecified` - 未選択\n\n支払依頼をインボイス要件をみたす申請として扱うかどうかを表します。",
                 "enum": [
                   "qualified",
                   "not_qualified",
@@ -39071,6 +39128,7 @@
         "properties": {
           "payment_requests": {
             "type": "array",
+            "description": "支払依頼の一覧。詳細フィールド（description / payment_request_lines / approval_flow_route_id / comments / approval_flow_logs / receipt_ids / 振込先口座情報）は含まれません。詳細は `/api/1/payment_requests/{id}` で取得してください。",
             "items": {
               "type": "object",
               "required": [
@@ -39121,12 +39179,12 @@
                 "total_amount": {
                   "type": "integer",
                   "format": "int64",
-                  "description": "合計金額",
+                  "description": "合計金額（円、税込）\n通常取引行 (deal_line) の合計金額から控除・マイナス行 (negative_line) と源泉所得税行 (withholding_tax) の合計金額を差し引いた値です。",
                   "example": 30000
                 },
                 "status": {
                   "type": "string",
-                  "description": "申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下, feedback:差戻し)",
+                  "description": "申請ステータス\n* `draft` - 下書き\n* `in_progress` - 申請中\n* `approved` - 承認済\n* `rejected` - 却下\n* `feedback` - 差戻し",
                   "example": "draft",
                   "enum": [
                     "draft",
@@ -39140,13 +39198,13 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)",
+                  "description": "取引ID\n申請ステータス (status) が `approved` (承認済) で、支払依頼から作成された取引が存在する場合のみ値が入ります。\nそれ以外の場合は null になります。",
                   "example": 1,
                   "nullable": true
                 },
                 "deal_status": {
                   "type": "string",
-                  "description": "取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます settled:支払済み, unsettled:支払待ち)",
+                  "description": "取引ステータス\n* `settled` - 支払済み\n* `unsettled` - 支払待ち\n\n申請ステータス (status) が `approved` (承認済) で、支払依頼から作成された取引が存在する場合のみ値が入ります。\nそれ以外の場合は null になります。",
                   "example": "settled",
                   "enum": [
                     "settled",
@@ -39158,7 +39216,7 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "申請者のユーザーID",
+                  "description": "申請者のユーザーID（`/api/1/users` のレスポンス id と同じ値）",
                   "example": 1
                 },
                 "approvers": {
@@ -39202,12 +39260,12 @@
                       },
                       "is_force_action": {
                         "type": "boolean",
-                        "description": "特権承認済みかどうか",
+                        "description": "特権承認済みかどうか（true の場合、特権承認によって承認されたことを示します）",
                         "example": true
                       },
                       "resource_type": {
                         "type": "string",
-                        "description": "承認ステップの承認方法\n* ` predefined_user` - メンバー指定 (1人),\n* ` selected_user` - 申請時にメンバー指定\n* ` unspecified` - 指定なし\n* ` and_resource` - メンバー指定 (複数、全員の承認),\n* ` or_resource` - メンバー指定 (複数、1人の承認)\n* ` and_position` - 役職指定 (複数、全員の承認)\n* ` or_position` - 役職指定 (複数、1人の承認)",
+                        "description": "承認ステップの承認方法\n* `predefined_user` - メンバー指定 (1人)\n* `selected_user` - 申請時にメンバー指定\n* `unspecified` - 指定なし\n* `and_resource` - メンバー指定 (複数、全員の承認)\n* `or_resource` - メンバー指定 (複数、1人の承認)\n* `and_position` - 役職指定 (複数、全員の承認)\n* `or_position` - 役職指定 (複数、1人の承認)",
                         "enum": [
                           "predefined_user",
                           "selected_user",
@@ -39224,14 +39282,14 @@
                 },
                 "application_number": {
                   "type": "string",
-                  "description": "申請No.",
+                  "description": "申請No.（事業所内で申請単位に自動採番される番号）",
                   "example": "2"
                 },
                 "current_step_id": {
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "現在承認ステップID",
+                  "description": "現在の承認ステップID（承認操作 API `POST /api/1/payment_requests/{id}/actions` の target_step_id に指定します）\n下書き・差戻し状態の場合は null になります。",
                   "example": 1,
                   "nullable": true
                 },
@@ -39240,12 +39298,12 @@
                   "format": "int64",
                   "minimum": 0,
                   "maximum": 2147483647,
-                  "description": "現在のround。差し戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。",
+                  "description": "現在の round（承認操作 API `POST /api/1/payment_requests/{id}/actions` の target_round に指定します）\n差戻し等により申請が step の最初からやり直しになると round の値が増えます。",
                   "example": 1
                 },
                 "document_code": {
                   "type": "string",
-                  "description": "請求書番号",
+                  "description": "請求書番号。未設定の場合は空文字列になります。",
                   "example": "2"
                 },
                 "issue_date": {
@@ -39255,13 +39313,13 @@
                 },
                 "payment_date": {
                   "type": "string",
-                  "description": "支払期限 (yyyy-mm-dd)",
+                  "description": "支払期限 (yyyy-mm-dd)。指定されていない場合は null になります。",
                   "example": "2019-12-17",
                   "nullable": true
                 },
                 "payment_method": {
                   "type": "string",
-                  "description": "支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)",
+                  "description": "支払方法\n* `none` - 指定なし\n* `domestic_bank_transfer` - 国内振込\n* `abroad_bank_transfer` - 国外振込\n* `account_transfer` - 口座振替\n* `credit_card` - クレジットカード",
                   "example": "none",
                   "enum": [
                     "none",
@@ -39275,25 +39333,25 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 1,
-                  "description": "取引先ID",
+                  "description": "取引先ID（取引先が指定されていない支払依頼の場合は null になります）",
                   "example": 201,
                   "nullable": true
                 },
                 "partner_code": {
                   "type": "string",
-                  "description": "取引先コード",
+                  "description": "取引先コード\n取引先コードが設定されていない場合、および事業所が取引先コードを利用していない場合は null になります。",
                   "example": "code001",
                   "nullable": true
                 },
                 "partner_name": {
                   "type": "string",
-                  "description": "取引先名",
+                  "description": "取引先名（取引先が指定されていない支払依頼の場合は null になります）",
                   "example": "freee",
                   "nullable": true
                 },
                 "qualified_invoice_status": {
                   "type": "string",
-                  "description": "適格請求書発行事業者（qualified: 該当する、not_qualified: 該当しない、unspecified: 未選択）\n- 支払依頼をインボイス要件をみたす申請として扱うかどうかを表します。\n",
+                  "description": "適格請求書発行事業者の区分\n* `qualified` - 該当する\n* `not_qualified` - 該当しない\n* `unspecified` - 未選択\n\n支払依頼をインボイス要件をみたす申請として扱うかどうかを表します。",
                   "enum": [
                     "qualified",
                     "not_qualified",
@@ -39303,7 +39361,7 @@
                 },
                 "input_mode": {
                   "type": "string",
-                  "description": "内税/外税（inclusive: 内税、exclusive: 外税）\n外税の支払依頼は他のエンドポイントで利用できないため、Web 画面からご確認ください。",
+                  "description": "内税/外税の区分\n* `inclusive` - 内税\n* `exclusive` - 外税\n\n外税の支払依頼は他のエンドポイント（`GET /api/1/payment_requests/{id}` / `PUT` / `DELETE`）で利用できないため、Web 画面からご確認ください。",
                   "enum": [
                     "inclusive",
                     "exclusive"
@@ -39333,7 +39391,7 @@
           },
           "approval_action": {
             "type": "string",
-            "description": "操作(approve: 承認する、force_approve: 特権承認する、cancel: 申請を取り消す、reject: 却下する、feedback: 申請者へ差し戻す、force_feedback: 承認済み・却下済みを取り消す)",
+            "description": "承認操作\n* `approve` - 承認する\n* `force_approve` - 特権承認する\n* `cancel` - 申請を取り消す\n* `reject` - 却下する\n* `feedback` - 申請者へ差し戻す\n* `force_feedback` - 承認済み・却下済みを取り消す\n\n承認操作は申請ステータスが `in_progress` (申請中) / `approved` (承認済) / `rejected` (却下) のもののみが対象です。",
             "example": "approve",
             "enum": [
               "approve",
@@ -39348,7 +39406,7 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "対象承認ステップID 支払依頼の取得APIレスポンス.current_step_idを送信してください。",
+            "description": "対象承認ステップID。支払依頼の取得API (`GET /api/1/payment_requests/{id}`) のレスポンス current_step_id を送信してください。",
             "example": 1
           },
           "target_round": {
@@ -39356,14 +39414,14 @@
             "format": "int64",
             "minimum": 0,
             "maximum": 2147483647,
-            "description": "対象round。差し戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。支払依頼の取得APIレスポンス.current_roundを送信してください。",
+            "description": "対象 round。支払依頼の取得API (`GET /api/1/payment_requests/{id}`) のレスポンス current_round を送信してください。\n差し戻し等により申請が step の最初からやり直しになると round の値が増えます。",
             "example": 1
           },
           "next_approver_id": {
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "次ステップの承認者のユーザーID",
+            "description": "次ステップの承認者のユーザーID\n次の承認ステップが「申請時にメンバー指定」(resource_type: `selected_user`) の場合に、承認させるユーザーを指定してください。\n該当しない場合は null を指定するか省略できます。",
             "example": 1,
             "nullable": true
           }
