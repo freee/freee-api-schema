@@ -10,6 +10,7 @@ info:
     name: © Since 2013 freee K.K.
   description: |-
     <h2 id="start_guide">スタートガイド</h2> <p>freee API開発がはじめての方は<a href="https://developer.freee.co.jp/getting-started">freee APIスタートガイド</a>を参照してください。</p>
+    <p>freee販売のPublicAPIは、スタンダードプランのみでのご利用となります。テスト環境のプラン付与に関しては準備中です。</p>
     <hr />
     <h2 id="specification">仕様</h2>
     <h3 id="api_endpoint">APIエンドポイント</h3> <p>https://api.freee.co.jp/sm (httpsのみ)</p>
