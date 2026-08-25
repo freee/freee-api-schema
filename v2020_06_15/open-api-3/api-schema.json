@@ -2404,40 +2404,43 @@
           "Sections"
         ],
         "summary": "部門一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の部門一覧を取得する</p>\n<p>事業所の設定で部門コードを使用する設定にしている場合、レスポンスで部門コード(code)を返します</p>\n\n<h2 id=\"_2\">レスポンスの例</h2>\n\n<blockquote>\n<p>GET https://api.freee.co.jp/api/1/sections?company_id=1</p>\n</blockquote>\n\n<pre><code>// プレミアムプラン、法人スタンダードプラン（および旧法人ベーシックプラン）以上\n{\n  &quot;sections&quot; : [\n    {\n      &quot;id&quot; : 101,\n      &quot;company_id&quot; : 1,\n      &quot;name&quot; : &quot;開発部門&quot;,\n      &quot;long_name&quot;: &quot;開発部門&quot;,\n      &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n      &quot;shortcut2&quot; : &quot;123&quot;,\n      &quot;indent_count&quot;: 1,\n      &quot;parent_id&quot;: 11\n    },\n    ...\n  ]\n}\n// それ以外のプラン\n{\n  &quot;sections&quot; : [\n    {\n      &quot;id&quot; : 101,\n      &quot;company_id&quot; : 1,\n      &quot;name&quot; : &quot;開発部門&quot;,\n      &quot;long_name&quot;: &quot;開発部門&quot;,\n      &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n      &quot;shortcut2&quot; : &quot;123&quot;\n    },\n    ...\n  ]\n}</code></pre>\n",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所に登録されている部門の一覧を取得します。取引や振替伝票の明細に付与する部門マスタを参照する用途を想定しています。</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>start_update_date / end_update_date で部門の更新日を範囲指定して絞り込めます。JST の日付を <code>yyyy-mm-dd</code> で指定してください（どちらも指定日を含みます）。部門階層を利用している場合、階層構造を維持するため、更新日が範囲外の親部門を含むことがあります。</li>\n  <li>部門階層を利用できるプランでは indent_count と parent_id を返します。利用できないプランでは、これらのキー自体が返りません。</li>\n  <li>部門コード（code）は、事業所の設定で部門コードを使用する設定にしている場合のみレスポンスに含まれます。設定が無効の場合は code キー自体が返りません。</li>\n</ul>",
         "operationId": "get_sections",
         "parameters": [
           {
             "name": "company_id",
             "in": "query",
-            "description": "事業所ID",
+            "description": "事業所ID。取得対象の事業所を指定します。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
-              "minimum": 1
+              "minimum": 1,
+              "example": 1
             }
           },
           {
             "name": "start_update_date",
             "in": "query",
-            "description": "更新日で絞込：開始日(yyyy-mm-dd)",
+            "description": "更新日で絞り込む開始日 (yyyy-mm-dd, JST)。指定日を含む、それ以降に更新された部門を対象にします。",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "2024-01-01"
             }
           },
           {
             "name": "end_update_date",
             "in": "query",
-            "description": "更新日で絞込：終了日(yyyy-mm-dd)",
+            "description": "更新日で絞り込む終了日 (yyyy-mm-dd, JST)。指定日を含む、それ以前に更新された部門を対象にします。",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "2024-01-31"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "部門一覧の取得に成功しました。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2448,6 +2451,7 @@
                   "properties": {
                     "sections": {
                       "type": "array",
+                      "description": "部門の一覧",
                       "items": {
                         "$ref": "#/components/schemas/section"
                       }
@@ -2458,7 +2462,7 @@
             }
           },
           "400": {
-            "description": "",
+            "description": "リクエストパラメータが不正です。日付形式などを確認してください。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2468,7 +2472,7 @@
             }
           },
           "401": {
-            "description": "",
+            "description": "アクセストークンが不正、期限切れ、または対象事業所を参照する権限がありません。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2478,7 +2482,7 @@
             }
           },
           "403": {
-            "description": "",
+            "description": "指定した事業所または部門マスタへのアクセス権限がありません。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2488,7 +2492,7 @@
             }
           },
           "500": {
-            "description": "",
+            "description": "サーバ内部エラー。時間を空けて再試行してください。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2504,7 +2508,7 @@
           "Sections"
         ],
         "summary": "部門の作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の部門を作成する</p>\n<p>codeを利用するには、事業所の設定で部門コードを使用する設定にする必要があります。</p>\n\n<h2 id=\"_2\">レスポンスの例</h2>\n\n<pre><code>// プレミアムプラン、法人スタンダードプラン（および旧法人ベーシックプラン）以上\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;,\n    &quot;indent_count&quot;: 1,\n    &quot;parent_id&quot;: 101\n  }\n}\n// それ以外のプラン\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;\n  }\n}</code></pre>\n",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所に新しい部門を作成します。作成された部門は使用設定（available）が true の状態で登録され、取引作成時などに指定できるようになります。</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>部門名（name）は事業所内で重複できません。既に同名の部門が存在する場合は 400 エラーになります。</li>\n  <li>部門コード（code）を利用するには、事業所の設定で部門コードを使用する設定にする必要があります。設定が無効の場合、code を指定しても無視され保存されません。</li>\n  <li>親部門ID（parent_id）は部門階層を利用できるプランでのみ反映されます。利用できないプランでは指定しても親子関係は作成されません。</li>\n</ul>",
         "operationId": "create_section",
         "requestBody": {
           "content": {
@@ -2523,7 +2527,7 @@
         },
         "responses": {
           "201": {
-            "description": "",
+            "description": "部門の作成に成功しました。作成された部門を返します。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2533,7 +2537,7 @@
             }
           },
           "400": {
-            "description": "",
+            "description": "リクエストパラメータが不正です。部門名・部門コードの重複や文字数制限などを確認してください。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2543,7 +2547,7 @@
             }
           },
           "401": {
-            "description": "",
+            "description": "アクセストークンが不正、期限切れ、または対象事業所を参照する権限がありません。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2553,7 +2557,7 @@
             }
           },
           "403": {
-            "description": "",
+            "description": "指定した事業所または部門マスタへのアクセス権限がありません。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2562,8 +2566,18 @@
               }
             }
           },
+          "404": {
+            "description": "指定した親部門が存在しないか、既に削除されています。部門一覧を再取得してIDを確認してください。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
+            }
+          },
           "500": {
-            "description": "",
+            "description": "サーバ内部エラー。時間を空けて再試行してください。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2581,35 +2595,37 @@
           "Sections"
         ],
         "summary": "部門の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の部門を取得する</p>\n<p>事業所の設定で部門コードを使用する設定にしている場合、レスポンスで部門コード(code)を返します</p>\n\n<h2 id=\"_2\">レスポンスの例</h2>\n\n<pre><code>// プレミアムプラン、法人スタンダードプラン（および旧法人ベーシックプラン）以上\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;long_name&quot;: &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;,\n    &quot;indent_count&quot;: 1,\n    &quot;parent_id&quot;: 101\n  }\n}\n// それ以外のプラン\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;long_name&quot;: &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;\n  }\n}</code></pre>\n",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の部門を 1 件取得します。部門ID（id）は部門一覧の取得APIで確認できます。</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>部門階層を利用できるプランでは indent_count と parent_id を返します。利用できないプランでは、これらのキー自体が返りません。</li>\n  <li>部門コード（code）は、事業所の設定で部門コードを使用する設定にしている場合のみレスポンスに含まれます。設定が無効の場合は code キー自体が返りません。</li>\n  <li>存在しないか既に削除された部門IDを指定した場合は 404 を返します。</li>\n</ul>",
         "operationId": "get_section",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "部門ID",
+            "description": "部門ID。部門一覧の取得APIのレスポンスに含まれる id を指定します。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
-              "minimum": 1
+              "minimum": 1,
+              "example": 101
             }
           },
           {
             "name": "company_id",
             "in": "query",
-            "description": "事業所ID",
+            "description": "事業所ID。取得対象の事業所を指定します。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
-              "minimum": 1
+              "minimum": 1,
+              "example": 1
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "部門の取得に成功しました。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2619,7 +2635,7 @@
             }
           },
           "400": {
-            "description": "",
+            "description": "リクエストパラメータが不正です。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2629,7 +2645,7 @@
             }
           },
           "401": {
-            "description": "",
+            "description": "アクセストークンが不正、期限切れ、または対象事業所を参照する権限がありません。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2639,7 +2655,7 @@
             }
           },
           "403": {
-            "description": "",
+            "description": "指定した事業所または部門マスタへのアクセス権限がありません。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2649,7 +2665,7 @@
             }
           },
           "404": {
-            "description": "",
+            "description": "指定した部門が存在しないか、既に削除されています。部門一覧を再取得してIDを確認してください。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2659,7 +2675,7 @@
             }
           },
           "500": {
-            "description": "",
+            "description": "サーバ内部エラー。時間を空けて再試行してください。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2675,17 +2691,19 @@
           "Sections"
         ],
         "summary": "部門の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の部門を更新する</p>\n<p>codeを利用するには、事業所の設定で部門コードを使用する設定にする必要があります。</p>\n\n<h2 id=\"_2\">レスポンスの例</h2>\n\n<pre><code>// プレミアムプラン、法人スタンダードプラン（および旧法人ベーシックプラン）以上\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;long_name&quot;: &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;,\n    &quot;indent_count&quot;: 1,\n    &quot;parent_id&quot;: 101\n  }\n}\n// それ以外のプラン\n{\n  &quot;section&quot; : {\n    &quot;id&quot; : 102,\n    &quot;company_id&quot; : 1,\n    &quot;name&quot; : &quot;開発部門&quot;,\n    &quot;long_name&quot;: &quot;開発部門&quot;,\n    &quot;shortcut1&quot; : &quot;DEVELOPER&quot;,\n    &quot;shortcut2&quot; : &quot;123&quot;\n  }\n}</code></pre>\n",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の部門を更新します。このAPIは部門の作成は行いません。部門コードをキーに更新（存在しない場合は作成）したい場合は PUT /api/1/sections/code/upsert を利用してください。</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>部門名（name）は事業所内で重複できません。別の部門と同名になる更新は 400 エラーになります。</li>\n  <li>long_name と parent_id は、省略した場合に現在の値・親子関係を維持します。null を指定すると未設定・親部門なしに更新します。</li>\n  <li>shortcut1 / shortcut2 / code は、省略または null を指定した場合に未設定（null）へ更新されます。値を維持したい場合は現在の値を指定してください。</li>\n  <li>部門コード（code）は、事業所の設定で部門コードを使用する設定にしている場合のみ更新されます。設定が無効の場合、code を指定しても無視されます。</li>\n  <li>親部門ID（parent_id）は部門階層を利用できるプランでのみ反映されます。</li>\n</ul>",
         "operationId": "update_section",
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "部門ID。部門一覧の取得APIのレスポンスに含まれる id を指定します。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
-              "minimum": 1
+              "minimum": 1,
+              "example": 101
             }
           }
         ],
@@ -2706,7 +2724,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "部門の更新に成功しました。更新後の部門を返します。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2716,7 +2734,7 @@
             }
           },
           "400": {
-            "description": "",
+            "description": "リクエストパラメータが不正です。部門名・部門コードの重複や文字数制限などを確認してください。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2726,7 +2744,7 @@
             }
           },
           "401": {
-            "description": "",
+            "description": "アクセストークンが不正、期限切れ、または対象事業所を更新する権限がありません。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2736,7 +2754,7 @@
             }
           },
           "403": {
-            "description": "",
+            "description": "指定した事業所または部門マスタへのアクセス権限がありません。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2745,8 +2763,18 @@
               }
             }
           },
+          "404": {
+            "description": "指定した部門が存在しないか、既に削除されています。部門一覧を再取得してIDを確認してください。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
+            }
+          },
           "500": {
-            "description": "",
+            "description": "サーバ内部エラー。時間を空けて再試行してください。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2762,38 +2790,41 @@
           "Sections"
         ],
         "summary": "部門の削除",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の部門を削除する</p>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の部門を削除します。</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>取引明細・申請・配賦設定などで使用されている部門は削除できず、400 エラーになります。部門を入力候補から外したい場合は、Web画面から使用設定（available）を「使用しない」に変更してください。</li>\n  <li>存在しないか既に削除された部門IDを指定した場合は 404 を返します。</li>\n</ul>",
         "operationId": "destroy_section",
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "部門ID。部門一覧の取得APIのレスポンスに含まれる id を指定します。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
-              "minimum": 1
+              "minimum": 1,
+              "example": 101
             }
           },
           {
             "name": "company_id",
             "in": "query",
-            "description": "事業所ID",
+            "description": "事業所ID。削除対象の部門が属する事業所を指定します。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
-              "minimum": 1
+              "minimum": 1,
+              "example": 1
             }
           }
         ],
         "responses": {
           "204": {
-            "description": "",
+            "description": "部門の削除に成功しました。レスポンスボディはありません。",
             "content": {}
           },
           "400": {
-            "description": "",
+            "description": "部門が取引明細や設定などで使用されているため削除できません。エラーメッセージで利用箇所を確認してください。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2803,7 +2834,7 @@
             }
           },
           "401": {
-            "description": "",
+            "description": "アクセストークンが不正、期限切れ、または対象事業所を更新する権限がありません。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2813,7 +2844,7 @@
             }
           },
           "403": {
-            "description": "",
+            "description": "指定した事業所または部門マスタへのアクセス権限がありません。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2822,8 +2853,18 @@
               }
             }
           },
+          "404": {
+            "description": "指定した部門が存在しないか、既に削除されています。部門一覧を再取得してIDを確認してください。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
+            }
+          },
           "500": {
-            "description": "",
+            "description": "サーバ内部エラー。時間を空けて再試行してください。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2841,7 +2882,7 @@
           "Sections"
         ],
         "summary": "部門の更新（存在しない場合は作成）",
-        "description": "<h2 id=\"\">概要</h2>\n<p>部門コードをキーに、指定した部門の情報を更新（存在しない場合は作成）する</p>\n<h2 id=\"_1\">注意点</h2>\n<p>codeを利用するには、事業所の設定で部門コードを使用する設定にする必要があります。</p>",
+        "description": "<h2 id=\"_1\">概要</h2>\n<p>部門コード（code）をキーに、指定した部門の情報を更新します。該当する部門が存在しない場合は新規作成します（upsert）。外部システムとの連携で、部門マスタを一括で登録・更新する用途を想定しています。</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIを利用するには、事業所の設定で部門コードを使用する設定にする必要があります。設定が無効な事業所への呼び出しは 400 エラーになります。</li>\n  <li>section オブジェクト内で code を指定することはできません（部門コードは変更不可）。指定した場合は 400 エラーになります。リクエストボディ直下の code のみが有効です。</li>\n  <li>更新レスポンスは 200 OK、新規作成レスポンスは 201 Created で返ります。作成・更新のどちらが行われたかは HTTP ステータスコードで判別してください。</li>\n  <li>long_name と parent_code は、省略した場合に現在の値・親子関係を維持します。null を指定すると未設定・親部門なしに更新します。</li>\n  <li>shortcut1 / shortcut2 は、省略または null を指定した場合に未設定（null）へ更新されます。値を維持したい場合は現在の値を指定してください。</li>\n  <li>部門名（name）は事業所内で重複できません。別の部門と同名になる場合は 400 エラーになります。</li>\n</ul>",
         "operationId": "api/v1/sections#upsert_by_code",
         "requestBody": {
           "content": {
@@ -2858,18 +2899,19 @@
                     "type": "integer",
                     "format": "int64",
                     "minimum": 1,
-                    "description": "事業所ID",
+                    "description": "事業所ID。部門を更新・作成する対象の事業所を指定します。",
                     "example": 1
                   },
                   "code": {
                     "type": "string",
                     "maxLength": 20,
-                    "description": "部門コード",
+                    "description": "部門コード (20文字以内、半角英数字・ハイフン・アンダースコアのみ)。更新・作成対象の部門を特定するキーです。このコードを持つ部門が存在する場合は更新し、存在しない場合は新規作成します。",
                     "example": "code001",
                     "pattern": "^[0-9a-zA-Z_-]+$"
                   },
                   "section": {
                     "type": "object",
+                    "description": "部門に設定する内容。code（部門コード）はこのオブジェクト内には指定できません（部門コードは変更不可のため、指定すると 400 エラーになります）。",
                     "required": [
                       "name"
                     ],
@@ -2877,33 +2919,37 @@
                       "name": {
                         "type": "string",
                         "maxLength": 30,
-                        "description": "部門名 (30文字以内)",
+                        "description": "部門名 (30文字以内)。事業所内で重複できません。既に同名の部門が存在する場合は 400 エラーになります。",
                         "example": "開発部門"
                       },
                       "long_name": {
                         "type": "string",
                         "maxLength": 255,
-                        "description": "正式名称 (255文字以内)",
-                        "example": "xxxx開発部門"
+                        "description": "部門の正式名称 (255文字以内)。更新時に省略した場合は現在の値を維持し、null を指定した場合は未設定に更新します。",
+                        "example": "開発本部",
+                        "nullable": true
                       },
                       "shortcut1": {
                         "type": "string",
                         "maxLength": 20,
-                        "description": "ショートカット１ (20文字以内)",
-                        "example": "DEVELOPER"
+                        "description": "ショートカット1 (20文字以内)。Web画面などで部門を検索する際のキーワードとして使用します。更新時に省略または null を指定した場合は未設定（null）に更新されます。",
+                        "example": "DEVELOPER",
+                        "nullable": true
                       },
                       "shortcut2": {
                         "type": "string",
                         "maxLength": 20,
-                        "description": "ショートカット２ (20文字以内)",
-                        "example": "123"
+                        "description": "ショートカット2 (20文字以内)。Web画面などで部門を検索する際のキーワードとして使用します。更新時に省略または null を指定した場合は未設定（null）に更新されます。",
+                        "example": "123",
+                        "nullable": true
                       },
                       "parent_code": {
                         "type": "string",
                         "maxLength": 20,
-                        "description": "親部門コード。親部門コードの値が空の場合は、codeで指定した部門が親部門になる。",
-                        "example": "code001",
-                        "pattern": "^[0-9a-zA-Z_-]+$"
+                        "description": "親部門コード。部門階層を利用できるプランでのみ反映されます。更新時に省略した場合は現在の親子関係を維持し、null を指定した場合は親部門との関係を解除します。",
+                        "example": "parent001",
+                        "pattern": "^[0-9a-zA-Z_-]+$",
+                        "nullable": true
                       }
                     }
                   }
@@ -2920,7 +2966,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "部門の更新に成功しました。更新後の部門を返します。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2930,7 +2976,7 @@
             }
           },
           "201": {
-            "description": "",
+            "description": "指定した部門コードの部門が存在しなかったため、部門を新規作成しました。作成された部門を返します。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2940,7 +2986,7 @@
             }
           },
           "400": {
-            "description": "",
+            "description": "リクエストパラメータが不正です。部門コードを使用する設定、部門名の重複、文字数制限などを確認してください。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2950,7 +2996,7 @@
             }
           },
           "401": {
-            "description": "",
+            "description": "アクセストークンが不正、期限切れ、または対象事業所を更新する権限がありません。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2960,7 +3006,7 @@
             }
           },
           "403": {
-            "description": "",
+            "description": "指定した事業所または部門マスタへのアクセス権限がありません。",
             "content": {
               "application/json": {
                 "schema": {
@@ -2969,8 +3015,18 @@
               }
             }
           },
+          "404": {
+            "description": "指定した親部門コードに対応する部門が存在しません。部門一覧を再取得して code を確認してください。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
+            }
+          },
           "500": {
-            "description": "",
+            "description": "サーバ内部エラー。時間を空けて再試行してください。",
             "content": {
               "application/json": {
                 "schema": {
@@ -18503,30 +18559,32 @@
           "Segment tags"
         ],
         "summary": "セグメントタグ一覧の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のセグメントタグ一覧を取得する</p>\n\n<h2 id=\"\">注意点</h2>\n\n<ul>\n  <li>事業所の設定でセグメントタグコードを使用する設定にしている場合、レスポンスでセグメントタグコード(code)を返します</li>\n</ul>",
+        "description": "<h2 id=\"_1\">概要</h2>\n<p>指定した事業所に登録されているセグメントタグの一覧を取得します。取引や振替伝票の明細に付与するセグメントタグを参照する用途を想定しています。</p>\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>segment_id にはセグメント区分（1、2、3）を指定します。利用できるセグメント区分は事業所の契約プランによって異なり、利用できない区分を指定した場合はエラーになります。</li>\n  <li>start_update_date / end_update_date でセグメントタグの更新日を範囲指定して絞り込めます。JST の日付を yyyy-mm-dd で指定してください（どちらも指定日を含みます）。</li>\n  <li>セグメントタグコード（code）は、事業所の設定でセグメントタグコードを使用する設定にしている場合のみレスポンスに含まれます。設定が無効の場合は code キー自体が返りません。</li>\n</ul>",
         "operationId": "get_segment_tags",
         "parameters": [
           {
             "name": "company_id",
             "in": "query",
-            "description": "事業所ID",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64",
-              "minimum": 1
-            }
-          },
-          {
-            "name": "segment_id",
-            "in": "path",
-            "description": "セグメントID（1,2,3のいずれか）\n該当プラン以外で参照した場合にはエラーとなります。\n",
+            "description": "取得対象の事業所ID",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 1,
-              "maximum": 3
+              "example": 1
+            }
+          },
+          {
+            "name": "segment_id",
+            "in": "path",
+            "description": "セグメント区分（1、2、3のいずれか）。利用できる区分は事業所の契約プランによって異なります。",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 3,
+              "example": 1
             }
           },
           {
@@ -18537,7 +18595,8 @@
               "type": "integer",
               "format": "int64",
               "minimum": 0,
-              "maximum": 9223372036854775807
+              "maximum": 9223372036854775807,
+              "example": 0
             }
           },
           {
@@ -18548,29 +18607,32 @@
               "type": "integer",
               "format": "int64",
               "minimum": 1,
-              "maximum": 500
+              "maximum": 500,
+              "example": 20
             }
           },
           {
             "name": "start_update_date",
             "in": "query",
-            "description": "更新日で絞込：開始日(yyyy-mm-dd)",
+            "description": "更新日で絞り込む開始日 (yyyy-mm-dd, JST)。指定日を含む、それ以降に更新されたセグメントタグを対象にします。",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "2026-07-01"
             }
           },
           {
             "name": "end_update_date",
             "in": "query",
-            "description": "更新日で絞込：終了日(yyyy-mm-dd)",
+            "description": "更新日で絞り込む終了日 (yyyy-mm-dd, JST)。指定日を含む、それ以前に更新されたセグメントタグを対象にします。",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "2026-07-31"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "セグメントタグの一覧",
             "content": {
               "application/json": {
                 "schema": {
@@ -18581,6 +18643,7 @@
                   "properties": {
                     "segment_tags": {
                       "type": "array",
+                      "description": "セグメントタグの一覧",
                       "items": {
                         "$ref": "#/components/schemas/segment_tag"
                       }
@@ -18591,7 +18654,7 @@
             }
           },
           "400": {
-            "description": "",
+            "description": "リクエストパラメータが不正です",
             "content": {
               "application/json": {
                 "schema": {
@@ -18601,7 +18664,7 @@
             }
           },
           "401": {
-            "description": "",
+            "description": "アクセストークンが無効です",
             "content": {
               "application/json": {
                 "schema": {
@@ -18611,7 +18674,7 @@
             }
           },
           "403": {
-            "description": "",
+            "description": "指定した事業所またはセグメント区分を利用する権限がありません",
             "content": {
               "application/json": {
                 "schema": {
@@ -18621,7 +18684,7 @@
             }
           },
           "500": {
-            "description": "",
+            "description": "内部エラーが発生しました",
             "content": {
               "application/json": {
                 "schema": {
@@ -18637,23 +18700,25 @@
           "Segment tags"
         ],
         "summary": "セグメントタグの作成",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のセグメントタグを作成する</p>\n\n<h2 id=\"\">注意点</h2>\n\n<ul>\n  <li>codeを利用するには、事業所の設定でセグメントタグコードを使用する設定にする必要があります。</li>\n</ul>",
+        "description": "<h2 id=\"_1\">概要</h2>\n<p>指定した事業所のセグメント区分に、新しいセグメントタグを作成します。作成したタグは取引や振替伝票の明細に付与できます。</p>\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>segment_id にはセグメント区分（1、2、3）を指定します。利用できない区分を指定した場合はエラーになります。</li>\n  <li>セグメントタグ名（name）は、事業所内の同じセグメント区分で重複できません。</li>\n  <li>セグメントタグコード（code）は、事業所の設定でセグメントタグコードを使用する設定にしている場合のみ保存されます。設定が無効の場合は指定しても保存されません。</li>\n</ul>",
         "operationId": "create_segment_tag",
         "parameters": [
           {
             "name": "segment_id",
             "in": "path",
-            "description": "セグメントID（1,2,3のいずれか）\n該当プラン以外で参照した場合にはエラーとなります。\n",
+            "description": "セグメント区分（1、2、3のいずれか）。利用できる区分は事業所の契約プランによって異なります。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 1,
-              "maximum": 3
+              "maximum": 3,
+              "example": 1
             }
           }
         ],
         "requestBody": {
+          "description": "作成するセグメントタグの情報",
           "content": {
             "application/json": {
               "schema": {
@@ -18670,7 +18735,7 @@
         },
         "responses": {
           "201": {
-            "description": "",
+            "description": "セグメントタグを作成しました",
             "content": {
               "application/json": {
                 "schema": {
@@ -18680,7 +18745,7 @@
             }
           },
           "400": {
-            "description": "",
+            "description": "リクエストパラメータが不正です",
             "content": {
               "application/json": {
                 "schema": {
@@ -18690,7 +18755,7 @@
             }
           },
           "401": {
-            "description": "",
+            "description": "アクセストークンが無効です",
             "content": {
               "application/json": {
                 "schema": {
@@ -18700,7 +18765,7 @@
             }
           },
           "403": {
-            "description": "",
+            "description": "指定した事業所またはセグメント区分を利用する権限がありません",
             "content": {
               "application/json": {
                 "schema": {
@@ -18710,7 +18775,7 @@
             }
           },
           "500": {
-            "description": "",
+            "description": "内部エラーが発生しました",
             "content": {
               "application/json": {
                 "schema": {
@@ -18728,34 +18793,37 @@
           "Segment tags"
         ],
         "summary": "セグメントタグの更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のセグメントタグを更新する</p>\n\n<h2 id=\"\">注意点</h2>\n\n<ul>\n  <li>codeを利用するには、事業所の設定でセグメントタグコードを使用する設定にする必要があります。</li>\n</ul>",
+        "description": "<h2 id=\"_1\">概要</h2>\n<p>セグメントタグIDを指定して、セグメントタグの情報を更新します。このAPIはセグメントタグの作成は行いません。</p>\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>セグメントタグ名（name）は、事業所内の同じセグメント区分で重複できません。</li>\n  <li>description / shortcut1 / shortcut2 / code は、省略した場合に未設定（null）へ更新されます。値を維持したい場合は現在の値を指定してください。</li>\n  <li>セグメントタグコード（code）は、事業所の設定でセグメントタグコードを使用する設定にしている場合のみ更新されます。設定が無効の場合は指定しても保存されません。</li>\n  <li>存在しないか既に削除されたセグメントタグIDを指定した場合は 404 エラーになります。</li>\n</ul>",
         "operationId": "update_segment_tag",
         "parameters": [
           {
             "name": "segment_id",
             "in": "path",
-            "description": "セグメントID（1,2,3のいずれか）\n該当プラン以外で参照した場合にはエラーとなります。\n",
+            "description": "セグメント区分（1、2、3のいずれか）。利用できる区分は事業所の契約プランによって異なります。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 1,
-              "maximum": 3
+              "maximum": 3,
+              "example": 1
             }
           },
           {
             "name": "id",
             "in": "path",
-            "description": "セグメントタグID",
+            "description": "更新対象のセグメントタグID。一覧取得APIのレスポンスに含まれる id を指定します。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
-              "minimum": 1
+              "minimum": 1,
+              "example": 101
             }
           }
         ],
         "requestBody": {
+          "description": "更新後のセグメントタグの情報",
           "content": {
             "application/json": {
               "schema": {
@@ -18772,7 +18840,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "セグメントタグを更新しました",
             "content": {
               "application/json": {
                 "schema": {
@@ -18782,7 +18850,7 @@
             }
           },
           "400": {
-            "description": "",
+            "description": "リクエストパラメータが不正です",
             "content": {
               "application/json": {
                 "schema": {
@@ -18792,7 +18860,7 @@
             }
           },
           "401": {
-            "description": "",
+            "description": "アクセストークンが無効です",
             "content": {
               "application/json": {
                 "schema": {
@@ -18802,7 +18870,7 @@
             }
           },
           "403": {
-            "description": "",
+            "description": "指定した事業所またはセグメント区分を利用する権限がありません",
             "content": {
               "application/json": {
                 "schema": {
@@ -18811,8 +18879,18 @@
               }
             }
           },
+          "404": {
+            "description": "指定したセグメントタグIDに該当するタグが存在しないか、既に削除されています",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
+            }
+          },
           "500": {
-            "description": "",
+            "description": "内部エラーが発生しました",
             "content": {
               "application/json": {
                 "schema": {
@@ -18828,51 +18906,54 @@
           "Segment tags"
         ],
         "summary": "セグメントタグの削除",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所のセグメントタグを削除する</p>",
+        "description": "<h2 id=\"_1\">概要</h2>\n<p>セグメントタグIDを指定して、セグメントタグを削除します。</p>\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>取引明細や振替伝票などで使用されているセグメントタグは削除できず、400 エラーになります。</li>\n  <li>存在しないか既に削除されたセグメントタグIDを指定した場合は 404 エラーになります。</li>\n</ul>",
         "operationId": "destroy_segments_tag",
         "parameters": [
           {
             "name": "segment_id",
             "in": "path",
-            "description": "セグメントID（1,2,3のいずれか）\n該当プラン以外で参照した場合にはエラーとなります。\n",
+            "description": "セグメント区分（1、2、3のいずれか）。利用できる区分は事業所の契約プランによって異なります。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 1,
-              "maximum": 3
+              "maximum": 3,
+              "example": 1
             }
           },
           {
             "name": "id",
             "in": "path",
-            "description": "セグメントタグID",
+            "description": "削除対象のセグメントタグID。一覧取得APIのレスポンスに含まれる id を指定します。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
-              "minimum": 1
+              "minimum": 1,
+              "example": 101
             }
           },
           {
             "name": "company_id",
             "in": "query",
-            "description": "事業所ID",
+            "description": "削除対象のセグメントタグが属する事業所ID",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
-              "minimum": 1
+              "minimum": 1,
+              "example": 1
             }
           }
         ],
         "responses": {
           "204": {
-            "description": "",
+            "description": "セグメントタグを削除しました",
             "content": {}
           },
           "400": {
-            "description": "",
+            "description": "使用中のセグメントタグなど、削除できない対象が指定されました",
             "content": {
               "application/json": {
                 "schema": {
@@ -18882,7 +18963,7 @@
             }
           },
           "401": {
-            "description": "",
+            "description": "アクセストークンが無効です",
             "content": {
               "application/json": {
                 "schema": {
@@ -18892,7 +18973,7 @@
             }
           },
           "403": {
-            "description": "",
+            "description": "指定した事業所またはセグメント区分を利用する権限がありません",
             "content": {
               "application/json": {
                 "schema": {
@@ -18901,8 +18982,18 @@
               }
             }
           },
+          "404": {
+            "description": "指定したセグメントタグIDに該当するタグが存在しないか、既に削除されています",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                }
+              }
+            }
+          },
           "500": {
-            "description": "",
+            "description": "内部エラーが発生しました",
             "content": {
               "application/json": {
                 "schema": {
@@ -18920,23 +19011,25 @@
           "Segment tags"
         ],
         "summary": "セグメントタグの更新（作成）",
-        "description": "\n  <h2 id=\"\">概要</h2>\n\n  <p>セグメントタグコードをキーに、指定したセグメントタグの情報を更新（存在しない場合は作成）する</p>\n\n  <h2 id=\"\">注意点</h2>\n\n  <ul>\n    <li>codeを利用するには、事業所の設定でセグメントタグコードを使用する設定にする必要があります。</li>\n  </ul>",
+        "description": "<h2 id=\"_1\">概要</h2>\n<p>セグメントタグコード（code）をキーにセグメントタグを更新し、該当するタグが存在しない場合は新規作成します。外部システムとの連携でセグメントタグマスタを登録・更新する用途を想定しています。</p>\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIを利用するには、事業所の設定でセグメントタグコードを使用する設定にする必要があります。設定が無効な事業所への呼び出しは 400 エラーになります。</li>\n  <li>segment_tag オブジェクト内で code を指定することはできません。セグメントタグコードは変更できないため、リクエストボディ直下の code のみを指定してください。</li>\n  <li>更新した場合は 200 OK、新規作成した場合は 201 Created を返します。処理結果は HTTP ステータスコードで判別してください。</li>\n  <li>description / shortcut1 / shortcut2 は、省略した場合に未設定（null）へ更新されます。値を維持したい場合は現在の値を指定してください。</li>\n  <li>セグメントタグ名（name）は、事業所内の同じセグメント区分で重複できません。</li>\n</ul>",
         "operationId": "upsert_segment_tag",
         "parameters": [
           {
             "name": "segment_id",
             "in": "path",
-            "description": "セグメントID（1,2,3のいずれか）\n該当プラン以外で参照した場合にはエラーとなります。\n",
+            "description": "セグメント区分（1、2、3のいずれか）。利用できる区分は事業所の契約プランによって異なります。",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64",
               "minimum": 1,
-              "maximum": 3
+              "maximum": 3,
+              "example": 1
             }
           }
         ],
         "requestBody": {
+          "description": "更新または作成するセグメントタグのコードと属性",
           "content": {
             "application/json": {
               "schema": {
@@ -18951,18 +19044,19 @@
                     "type": "integer",
                     "format": "int64",
                     "minimum": 1,
-                    "description": "事業所ID",
+                    "description": "セグメントタグを更新・作成する対象の事業所ID",
                     "example": 1
                   },
                   "code": {
                     "type": "string",
                     "maxLength": 20,
-                    "description": "セグメントタグコード",
+                    "description": "セグメントタグコード (20文字以内、半角英数字・ハイフン・アンダースコアのみ)。更新・作成対象を特定するキーであり、このコード自体は変更できません。",
                     "example": "code001",
                     "pattern": "^[0-9a-zA-Z_-]+$"
                   },
                   "segment_tag": {
                     "type": "object",
+                    "description": "セグメントタグに設定する内容。code（セグメントタグコード）はこのオブジェクト内には指定できません。",
                     "required": [
                       "name"
                     ],
@@ -18970,25 +19064,28 @@
                       "name": {
                         "maxLength": 100,
                         "type": "string",
-                        "description": "セグメントタグ名 (100文字以内)",
+                        "description": "セグメントタグ名 (100文字以内)。事業所内の同じセグメント区分で重複できません。",
                         "example": "プロジェクトA"
                       },
                       "description": {
                         "maxLength": 30,
                         "type": "string",
-                        "description": "備考 (30文字以内)",
-                        "example": "備考"
+                        "nullable": true,
+                        "description": "備考 (30文字以内)。更新時に省略した場合は未設定（null）に更新されます。",
+                        "example": "新規事業の収支管理用"
                       },
                       "shortcut1": {
                         "type": "string",
                         "maxLength": 20,
-                        "description": "ショートカット１ (20文字以内)",
-                        "example": "A"
+                        "nullable": true,
+                        "description": "ショートカット1 (20文字以内)。Web画面などでセグメントタグを検索する際のキーワードとして使用します。更新時に省略した場合は未設定（null）に更新されます。",
+                        "example": "PROJECT"
                       },
                       "shortcut2": {
                         "type": "string",
                         "maxLength": 20,
-                        "description": "ショートカット２ (20文字以内)",
+                        "nullable": true,
+                        "description": "ショートカット2 (20文字以内)。Web画面などでセグメントタグを検索する際のキーワードとして使用します。更新時に省略した場合は未設定（null）に更新されます。",
                         "example": "123"
                       }
                     }
@@ -19006,7 +19103,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "既存のセグメントタグを更新しました",
             "content": {
               "application/json": {
                 "schema": {
@@ -19016,7 +19113,7 @@
             }
           },
           "201": {
-            "description": "",
+            "description": "セグメントタグを作成しました",
             "content": {
               "application/json": {
                 "schema": {
@@ -19026,7 +19123,7 @@
             }
           },
           "400": {
-            "description": "",
+            "description": "リクエストパラメータが不正です",
             "content": {
               "application/json": {
                 "schema": {
@@ -19036,7 +19133,7 @@
             }
           },
           "401": {
-            "description": "",
+            "description": "アクセストークンが無効です",
             "content": {
               "application/json": {
                 "schema": {
@@ -19046,7 +19143,7 @@
             }
           },
           "403": {
-            "description": "",
+            "description": "指定した事業所またはセグメント区分を利用する権限がありません",
             "content": {
               "application/json": {
                 "schema": {
@@ -19056,7 +19153,7 @@
             }
           },
           "500": {
-            "description": "",
+            "description": "内部エラーが発生しました",
             "content": {
               "application/json": {
                 "schema": {
@@ -32844,46 +32941,51 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "事業所ID",
+            "description": "事業所ID。部門を作成・更新する対象の事業所を指定します。",
             "example": 1
           },
           "name": {
             "type": "string",
             "maxLength": 30,
-            "description": "部門名 (30文字以内)",
+            "description": "部門名 (30文字以内)。事業所内で重複できません。既に同名の部門が存在する場合は 400 エラーになります。",
             "example": "開発部門"
           },
           "long_name": {
             "type": "string",
             "maxLength": 255,
-            "description": "正式名称 (255文字以内)",
-            "example": "xxxx開発部門"
+            "description": "部門の正式名称 (255文字以内)。作成時に省略した場合は未設定（null）になります。更新時に省略した場合は現在の値を維持し、null を指定した場合は未設定に更新します。",
+            "example": "開発本部",
+            "nullable": true
           },
           "shortcut1": {
             "type": "string",
             "maxLength": 20,
-            "description": "ショートカット１ (20文字以内)",
-            "example": "DEVELOPER"
+            "description": "ショートカット1 (20文字以内)。Web画面などで部門を検索する際のキーワードとして使用します。更新時に省略または null を指定した場合は未設定（null）に更新されます。",
+            "example": "DEVELOPER",
+            "nullable": true
           },
           "shortcut2": {
             "type": "string",
             "maxLength": 20,
-            "description": "ショートカット２ (20文字以内)",
-            "example": "123"
+            "description": "ショートカット2 (20文字以内)。Web画面などで部門を検索する際のキーワードとして使用します。更新時に省略または null を指定した場合は未設定（null）に更新されます。",
+            "example": "123",
+            "nullable": true
           },
           "code": {
             "type": "string",
             "maxLength": 20,
-            "description": "部門コード",
+            "description": "部門コード (20文字以内、半角英数字・ハイフン・アンダースコアのみ)。事業所内で重複できません。事業所の設定で部門コードを使用する設定にしている場合のみ保存され、設定が無効の場合は指定しても無視されます。更新時に省略または null を指定した場合は未設定（null）に更新されます。",
             "example": "code001",
-            "pattern": "^[0-9a-zA-Z_-]+$"
+            "pattern": "^[0-9a-zA-Z_-]+$",
+            "nullable": true
           },
           "parent_id": {
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "親部門ID (プレミアムプラン、法人スタンダードプラン（および旧法人ベーシックプラン）以上)",
-            "example": 101
+            "description": "親部門ID。部門階層を利用できるプランでのみ反映されます。更新時に省略した場合は現在の親子関係を維持し、null を指定した場合は親部門との関係を解除します。",
+            "example": 101,
+            "nullable": true
           }
         }
       },
@@ -32893,31 +32995,34 @@
           "company_id",
           "id",
           "name",
-          "available"
+          "available",
+          "long_name",
+          "shortcut1",
+          "shortcut2"
         ],
         "properties": {
           "id": {
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "部門ID",
-            "example": 1
+            "description": "部門ID。部門の取得・更新・削除APIのパスパラメータや、取引作成時の明細（details）の section_id に指定します。",
+            "example": 101
           },
           "name": {
             "type": "string",
             "maxLength": 30,
-            "description": "部門名 (30文字以内)",
+            "description": "部門名 (30文字以内)。事業所内で重複しません。",
             "example": "開発部門"
           },
           "available": {
             "type": "boolean",
-            "description": "部門の使用設定（true: 使用する、false: 使用しない）\n<br>\n<ul>\n  <li>\n    本APIでsectionを作成した場合はtrueになります。\n  </li>\n  <li>\n    falseにする場合はWeb画面から変更できます。\n  </li>\n  <li>\n    trueの場合、Web画面での取引登録時などに入力候補として表示されます。\n  </li>\n  <li>\n    falseの場合、部門自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入・支出）の作成APIなどでfalseの部門をパラメータに指定すれば、取引などにfalseの部門を設定できます。\n  </li>\n</ul>",
+            "description": "部門の使用設定（true: 使用する、false: 使用しない）。\n<br>\n<ul>\n  <li>\n    本APIで部門を作成した場合は true になります。\n  </li>\n  <li>\n    false にする場合はWeb画面から変更できます。\n  </li>\n  <li>\n    true の場合、Web画面での取引登録時などに入力候補として表示されます。\n  </li>\n  <li>\n    false の場合、部門自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入・支出）の作成APIなどでは、false の部門もパラメータに指定できます。\n  </li>\n</ul>",
             "example": true
           },
           "long_name": {
             "type": "string",
             "maxLength": 255,
-            "description": "正式名称（255文字以内）",
+            "description": "部門の正式名称 (255文字以内)。未設定の場合は null が返ります。",
             "example": "開発部門",
             "nullable": true
           },
@@ -32925,27 +33030,27 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "事業所ID",
+            "description": "部門が属する事業所ID",
             "example": 1
           },
           "shortcut1": {
             "type": "string",
             "maxLength": 20,
-            "description": "ショートカット１ (20文字以内)",
+            "description": "ショートカット1 (20文字以内)。Web画面などで部門を検索する際のキーワードとして使用します。未設定の場合は null が返ります。",
             "example": "DEVELOPER",
             "nullable": true
           },
           "shortcut2": {
             "type": "string",
             "maxLength": 20,
-            "description": "ショートカット２ (20文字以内)",
+            "description": "ショートカット2 (20文字以内)。Web画面などで部門を検索する際のキーワードとして使用します。未設定の場合は null が返ります。",
             "example": "123",
             "nullable": true
           },
           "code": {
             "type": "string",
             "maxLength": 20,
-            "description": "部門コード",
+            "description": "部門コード (20文字以内)。事業所の設定で部門コードを使用する設定にしている場合のみレスポンスに含まれます（設定が無効の場合は code キー自体が返りません）。部門コードが未設定の場合は null が返ります。",
             "example": "code001",
             "pattern": "^[0-9a-zA-Z_-]+$",
             "nullable": true
@@ -32954,26 +33059,27 @@
             "type": "integer",
             "format": "int64",
             "minimum": 0,
-            "description": "<a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/209093566\">部門階層</a>\n<br>\n※ indent_count が 0 のときは第一階層の親部門です。\n",
+            "description": "<a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/209093566\">部門階層</a>の深さ。最上位の部門は 0 です。部門階層を利用できるプランの場合のみレスポンスに含まれます。",
             "example": 0
           },
           "parent_id": {
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "<a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/209093566\">親部門ID</a>\n<br>\n※ parent_id が null のときは第一階層の親部門です。\n",
-            "example": 1,
+            "description": "<a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/209093566\">親部門ID</a>。最上位の部門では null が返ります。部門階層を利用できるプランの場合のみレスポンスに含まれます。",
+            "example": 100,
             "nullable": true
           },
           "update_date": {
             "type": "string",
-            "description": "更新日(yyyy-mm-dd)",
-            "example": "2020-06-15"
+            "description": "部門の最終更新日 (yyyy-mm-dd, JST)。部門一覧の取得APIでのみレスポンスに含まれ、start_update_date / end_update_date による絞り込みの対象です。",
+            "example": "2024-01-15"
           }
         }
       },
       "sectionResponse": {
         "type": "object",
+        "description": "部門の取得・作成・更新結果",
         "required": [
           "section"
         ],
@@ -43260,53 +43366,57 @@
           "id",
           "name",
           "shortcut1",
-          "shortcut2"
+          "shortcut2",
+          "update_date"
         ],
         "properties": {
           "id": {
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "セグメントタグID",
-            "example": 1
+            "description": "セグメントタグID。更新・削除APIのパスパラメータや、取引・振替伝票の明細に指定します。",
+            "example": 101
           },
           "name": {
             "type": "string",
-            "description": "セグメントタグ名",
+            "maxLength": 100,
+            "description": "セグメントタグ名 (100文字以内)。事業所内の同じセグメント区分で重複しません。",
             "example": "プロジェクトA"
           },
           "description": {
             "type": "string",
-            "description": "備考",
-            "example": "備考",
+            "description": "備考 (30文字以内)。未設定の場合は null が返ります。",
+            "maxLength": 30,
+            "example": "新規事業の収支管理用",
             "nullable": true
           },
           "shortcut1": {
             "type": "string",
             "maxLength": 20,
-            "description": "ショートカット１ (20文字以内)",
-            "example": "A",
+            "description": "ショートカット1 (20文字以内)。Web画面などでセグメントタグを検索する際のキーワードとして使用します。未設定の場合は null が返ります。",
+            "example": "PROJECT",
             "nullable": true
           },
           "shortcut2": {
             "type": "string",
             "maxLength": 20,
-            "description": "ショートカット２ (20文字以内)",
+            "description": "ショートカット2 (20文字以内)。Web画面などでセグメントタグを検索する際のキーワードとして使用します。未設定の場合は null が返ります。",
             "example": "123",
             "nullable": true
           },
           "code": {
             "type": "string",
             "maxLength": 20,
-            "description": "セグメントタグコード",
+            "description": "セグメントタグコード (20文字以内)。事業所の設定でセグメントタグコードを使用する設定にしている場合のみレスポンスに含まれます。コードが未設定の場合は null が返ります。",
             "example": "code001",
             "pattern": "^[0-9a-zA-Z_-]+$",
             "nullable": true
           },
           "update_date": {
             "type": "string",
-            "description": "更新日(yyyy-mm-dd)",
-            "example": "2020-06-15"
+            "format": "date",
+            "description": "セグメントタグの最終更新日 (yyyy-mm-dd, JST)。一覧取得APIの start_update_date / end_update_date による絞り込みの対象です。",
+            "example": "2026-07-15"
           }
         }
       },
@@ -43317,6 +43427,7 @@
         ],
         "properties": {
           "segment_tag": {
+            "description": "作成または更新されたセグメントタグ",
             "$ref": "#/components/schemas/segment_tag"
           }
         }
@@ -43332,37 +43443,41 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "事業所ID",
+            "description": "セグメントタグを作成・更新する対象の事業所ID",
             "example": 1
           },
           "name": {
             "maxLength": 100,
             "type": "string",
-            "description": "セグメントタグ名 (100文字以内)",
+            "description": "セグメントタグ名 (100文字以内)。事業所内の同じセグメント区分で重複できません。",
             "example": "プロジェクトA"
           },
           "description": {
             "maxLength": 30,
             "type": "string",
-            "description": "備考 (30文字以内)",
-            "example": "備考"
+            "nullable": true,
+            "description": "備考 (30文字以内)。更新時に省略した場合は未設定（null）に更新されます。",
+            "example": "新規事業の収支管理用"
           },
           "shortcut1": {
             "type": "string",
             "maxLength": 20,
-            "description": "ショートカット１ (20文字以内)",
-            "example": "A"
+            "nullable": true,
+            "description": "ショートカット1 (20文字以内)。Web画面などでセグメントタグを検索する際のキーワードとして使用します。更新時に省略した場合は未設定（null）に更新されます。",
+            "example": "PROJECT"
           },
           "shortcut2": {
             "type": "string",
             "maxLength": 20,
-            "description": "ショートカット２ (20文字以内)",
+            "nullable": true,
+            "description": "ショートカット2 (20文字以内)。Web画面などでセグメントタグを検索する際のキーワードとして使用します。更新時に省略した場合は未設定（null）に更新されます。",
             "example": "123"
           },
           "code": {
             "type": "string",
             "maxLength": 20,
-            "description": "セグメントタグコード",
+            "nullable": true,
+            "description": "セグメントタグコード (20文字以内、半角英数字・ハイフン・アンダースコアのみ)。事業所内の同じセグメント区分で重複できません。事業所の設定でセグメントタグコードを使用する設定にしている場合のみ保存され、設定が無効の場合は指定しても保存されません。更新時に省略した場合は未設定（null）に更新されます。",
             "example": "code001",
             "pattern": "^[0-9a-zA-Z_-]+$"
           }
