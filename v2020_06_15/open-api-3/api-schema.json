@@ -2791,7 +2791,7 @@
             }
           },
           "404": {
-            "description": "指定した部門が存在しないか、既に削除されています。部門一覧を再取得してIDを確認してください。",
+            "description": "指定した部門が存在しないか、既に削除されています。部門一覧を再取得してIDを確認してください。\nparent_id で指定した親部門が存在しないか、既に削除されている場合もこのエラーになります。",
             "content": {
               "application/json": {
                 "schema": {
@@ -3013,7 +3013,7 @@
             }
           },
           "400": {
-            "description": "リクエストパラメータが不正です。部門コードを使用する設定、部門名の重複、文字数制限などを確認してください。",
+            "description": "リクエストパラメータが不正です。部門コードを使用する設定、部門名の重複、文字数制限などを確認してください。\nparent_code で指定した親部門が存在しない場合もこのエラーになります。",
             "content": {
               "application/json": {
                 "schema": {
@@ -3038,16 +3038,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/forbiddenError"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "指定した親部門コードに対応する部門が存在しません。部門一覧を再取得して code を確認してください。",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/badRequestNotFoundError"
                 }
               }
             }
@@ -16037,6 +16027,161 @@
         }
       }
     },
+    "/api/1/expense_applications/form": {
+      "get": {
+        "tags": [
+          "Expense application forms"
+        ],
+        "summary": "経費申請フォームの取得",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費申請フォームの設定を取得します。設定が未作成の場合は初期値を返します。</p>",
+        "operationId": "get_expense_application_form",
+        "parameters": [
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "事業所ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/expense_application_form"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Expense application forms"
+        ],
+        "summary": "経費申請フォームの更新",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費申請フォームの設定を更新します。設定が未作成の場合は作成します。</p>",
+        "operationId": "update_expense_application_form",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/expenseApplicationFormParams"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/expense_application_form"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/forbiddenError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/conflictError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/internalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/1/expense_application_line_templates": {
       "get": {
         "tags": [
@@ -19669,21 +19814,21 @@
                         "maxLength": 30,
                         "type": "string",
                         "nullable": true,
-                        "description": "備考 (30文字以内)。更新時に省略した場合は未設定（null）に更新されます。",
+                        "description": "備考 (30文字以内)。省略した場合は未設定（null）になります。",
                         "example": "新規事業の収支管理用"
                       },
                       "shortcut1": {
                         "type": "string",
                         "maxLength": 20,
                         "nullable": true,
-                        "description": "ショートカット1 (20文字以内)。Web画面などでセグメントタグを検索する際のキーワードとして使用します。更新時に省略した場合は未設定（null）に更新されます。",
+                        "description": "ショートカット1 (20文字以内)。Web画面などでセグメントタグを検索する際のキーワードとして使用します。省略した場合は未設定（null）になります。",
                         "example": "PROJECT"
                       },
                       "shortcut2": {
                         "type": "string",
                         "maxLength": 20,
                         "nullable": true,
-                        "description": "ショートカット2 (20文字以内)。Web画面などでセグメントタグを検索する際のキーワードとして使用します。更新時に省略した場合は未設定（null）に更新されます。",
+                        "description": "ショートカット2 (20文字以内)。Web画面などでセグメントタグを検索する際のキーワードとして使用します。省略した場合は未設定（null）になります。",
                         "example": "123"
                       }
                     }
@@ -31146,8 +31291,8 @@
                     },
                     "account_category_name": {
                       "type": "string",
-                      "description": "勘定科目カテゴリー名（例: 材料費、労務費、総製造費用など）",
-                      "example": "販売管理費"
+                      "description": "勘定科目カテゴリー名（例: 材料費、労務費、総製造費用 など）",
+                      "example": "材料費"
                     },
                     "total_line": {
                       "type": "boolean",
@@ -31638,8 +31783,8 @@
                     },
                     "account_category_name": {
                       "type": "string",
-                      "description": "勘定科目カテゴリー名（例: 材料費、労務費、総製造費用など）",
-                      "example": "販売管理費"
+                      "description": "勘定科目カテゴリー名（例: 材料費、労務費、総製造費用 など）",
+                      "example": "材料費"
                     },
                     "total_line": {
                       "type": "boolean",
@@ -32154,8 +32299,8 @@
                     },
                     "account_category_name": {
                       "type": "string",
-                      "description": "勘定科目カテゴリー名（例: 材料費、労務費、総製造費用など）",
-                      "example": "販売管理費"
+                      "description": "勘定科目カテゴリー名（例: 材料費、労務費、総製造費用 など）",
+                      "example": "材料費"
                     },
                     "total_line": {
                       "type": "boolean",
@@ -32572,8 +32717,8 @@
                     },
                     "account_category_name": {
                       "type": "string",
-                      "description": "勘定科目カテゴリー名（例: 材料費、労務費、総製造費用など）",
-                      "example": "販売管理費"
+                      "description": "勘定科目カテゴリー名（例: 材料費、労務費、総製造費用 など）",
+                      "example": "材料費"
                     },
                     "total_line": {
                       "type": "boolean",
@@ -32918,8 +33063,8 @@
                     },
                     "account_category_name": {
                       "type": "string",
-                      "description": "勘定科目カテゴリー名（例: 材料費、労務費、総製造費用など）",
-                      "example": "販売管理費"
+                      "description": "勘定科目カテゴリー名（例: 材料費、労務費、総製造費用 など）",
+                      "example": "材料費"
                     },
                     "total_line": {
                       "type": "boolean",
@@ -33264,8 +33409,8 @@
                     },
                     "account_category_name": {
                       "type": "string",
-                      "description": "勘定科目カテゴリー名（例: 材料費、労務費、総製造費用など）",
-                      "example": "販売管理費"
+                      "description": "勘定科目カテゴリー名（例: 材料費、労務費、総製造費用 など）",
+                      "example": "材料費"
                     },
                     "total_line": {
                       "type": "boolean",
@@ -33610,8 +33755,8 @@
                     },
                     "account_category_name": {
                       "type": "string",
-                      "description": "勘定科目カテゴリー名（例: 材料費、労務費、総製造費用など）",
-                      "example": "販売管理費"
+                      "description": "勘定科目カテゴリー名（例: 材料費、労務費、総製造費用 など）",
+                      "example": "材料費"
                     },
                     "total_line": {
                       "type": "boolean",
@@ -35925,7 +36070,6 @@
                 "company_id": {
                   "type": "integer",
                   "format": "int64",
-                  "minimum": 1,
                   "description": "事業所ID",
                   "example": 1
                 },
@@ -35934,8 +36078,8 @@
                   "format": "int64",
                   "minimum": 0,
                   "maximum": 4,
-                  "description": "取引明細で利用する補助項目の種類\n* `0` - 補助項目なし\n* `1` - 勘定科目\n* `2` - 取引先\n* `3` - 品目\n* `4` - 部門",
-                  "example": 1,
+                  "description": "補助項目種別（現状は常に `0`（補助項目なし）が返ります）",
+                  "example": 0,
                   "enum": [
                     0,
                     1,
@@ -41961,6 +42105,368 @@
         },
         "additionalProperties": false
       },
+      "expense_application_form": {
+        "type": "object",
+        "required": [
+          "section_setting",
+          "tag_setting",
+          "line_template_setting",
+          "segment_1_tag_setting",
+          "segment_2_tag_setting",
+          "segment_3_tag_setting",
+          "description_setting",
+          "commuter_pass_deduction",
+          "default_flow_route_src_id",
+          "observer_addition",
+          "receipt_partner_name_setting",
+          "default_title",
+          "use_currency",
+          "auto_calculation_amount_fraction",
+          "allow_modify_parent_application_by_applicant",
+          "allow_modify_parent_application_by_approver",
+          "allow_modify_parent_application_by_admin",
+          "require_parent_purchase_request",
+          "allow_modify_on_approval"
+        ],
+        "properties": {
+          "section_setting": {
+            "type": "string",
+            "enum": [
+              "optional",
+              "required"
+            ],
+            "description": "部門の入力設定 (optional: 任意入力, required: 必須入力)",
+            "example": "optional"
+          },
+          "tag_setting": {
+            "type": "string",
+            "enum": [
+              "optional",
+              "required",
+              "disable"
+            ],
+            "description": "メモタグの入力設定 (optional: 任意入力, required: 必須入力, disable: 非表示)",
+            "example": "optional"
+          },
+          "line_template_setting": {
+            "type": "string",
+            "enum": [
+              "optional",
+              "required",
+              "disable"
+            ],
+            "description": "経費科目の入力設定 (optional: 任意入力, required: 必須入力, disable: 非表示)。経費科目は `/api/1/expense_application_line_templates` で取得できます。",
+            "example": "optional"
+          },
+          "segment_1_tag_setting": {
+            "type": "string",
+            "enum": [
+              "optional",
+              "required",
+              "disable"
+            ],
+            "description": "セグメント1タグの入力設定 (optional: 任意入力, required: 必須入力, disable: 非表示)",
+            "example": "optional"
+          },
+          "segment_2_tag_setting": {
+            "type": "string",
+            "enum": [
+              "optional",
+              "required",
+              "disable"
+            ],
+            "description": "セグメント2タグの入力設定 (optional: 任意入力, required: 必須入力, disable: 非表示)",
+            "example": "optional"
+          },
+          "segment_3_tag_setting": {
+            "type": "string",
+            "enum": [
+              "optional",
+              "required",
+              "disable"
+            ],
+            "description": "セグメント3タグの入力設定 (optional: 任意入力, required: 必須入力, disable: 非表示)",
+            "example": "optional"
+          },
+          "description_setting": {
+            "type": "string",
+            "enum": [
+              "optional",
+              "required"
+            ],
+            "description": "備考の入力設定 (optional: 任意入力, required: 必須入力)",
+            "example": "optional"
+          },
+          "commuter_pass_deduction": {
+            "type": "string",
+            "enum": [
+              "disable",
+              "enable"
+            ],
+            "description": "定期券区間控除の利用設定 (disable: 利用しない, enable: 利用する)",
+            "example": "disable"
+          },
+          "default_flow_route_src_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true,
+            "minimum": 1,
+            "description": "デフォルトで選択する申請経路のID (未設定の場合は null)。申請経路一覧の取得API (`/api/1/approval_flow_routes`) のレスポンス id と同じ値です。",
+            "example": 101
+          },
+          "observer_addition": {
+            "type": "string",
+            "enum": [
+              "disable",
+              "enable"
+            ],
+            "description": "承認者以外の閲覧者追加の利用設定 (disable: 利用しない, enable: 利用する)",
+            "example": "disable"
+          },
+          "receipt_partner_name_setting": {
+            "type": "string",
+            "enum": [
+              "optional",
+              "required",
+              "disable"
+            ],
+            "description": "支払先の入力設定 (optional: 任意入力, required: 必須入力, disable: 非表示)",
+            "example": "disable"
+          },
+          "default_title": {
+            "type": "string",
+            "maxLength": 255,
+            "description": "申請タイトルの初期値 (255文字以内)",
+            "example": "交通費精算"
+          },
+          "use_currency": {
+            "type": "boolean",
+            "description": "外貨の利用設定",
+            "example": true
+          },
+          "auto_calculation_amount_fraction": {
+            "type": "string",
+            "enum": [
+              "omit",
+              "round_up",
+              "round"
+            ],
+            "description": "金額の自動計算結果の端数処理 (omit: 切り捨て, round_up: 切り上げ, round: 四捨五入)",
+            "example": "round_up"
+          },
+          "allow_modify_parent_application_by_applicant": {
+            "type": "boolean",
+            "description": "申請者による親申請の変更を許可するか",
+            "example": true
+          },
+          "allow_modify_parent_application_by_approver": {
+            "type": "boolean",
+            "description": "承認者による親申請の変更を許可するか",
+            "example": false
+          },
+          "allow_modify_parent_application_by_admin": {
+            "type": "boolean",
+            "description": "管理者による親申請の変更を許可するか",
+            "example": false
+          },
+          "require_parent_purchase_request": {
+            "type": "boolean",
+            "description": "親となる購買申請を必須にするか",
+            "example": false
+          },
+          "allow_modify_on_approval": {
+            "type": "boolean",
+            "description": "承認中の申請の変更を許可するか",
+            "example": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "expenseApplicationFormParams": {
+        "type": "object",
+        "required": [
+          "company_id",
+          "section_setting",
+          "tag_setting",
+          "line_template_setting",
+          "segment_1_tag_setting",
+          "segment_2_tag_setting",
+          "segment_3_tag_setting",
+          "description_setting",
+          "commuter_pass_deduction",
+          "default_flow_route_src_id",
+          "observer_addition",
+          "receipt_partner_name_setting",
+          "default_title",
+          "use_currency",
+          "auto_calculation_amount_fraction",
+          "allow_modify_parent_application_by_applicant",
+          "allow_modify_parent_application_by_approver",
+          "allow_modify_parent_application_by_admin",
+          "require_parent_purchase_request",
+          "allow_modify_on_approval"
+        ],
+        "properties": {
+          "company_id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "description": "事業所ID",
+            "example": 1
+          },
+          "section_setting": {
+            "type": "string",
+            "enum": [
+              "optional",
+              "required"
+            ],
+            "description": "部門の入力設定 (optional: 任意入力, required: 必須入力)",
+            "example": "optional"
+          },
+          "tag_setting": {
+            "type": "string",
+            "enum": [
+              "optional",
+              "required",
+              "disable"
+            ],
+            "description": "メモタグの入力設定 (optional: 任意入力, required: 必須入力, disable: 非表示)",
+            "example": "optional"
+          },
+          "line_template_setting": {
+            "type": "string",
+            "enum": [
+              "optional",
+              "required",
+              "disable"
+            ],
+            "description": "経費科目の入力設定 (optional: 任意入力, required: 必須入力, disable: 非表示)。経費科目は `/api/1/expense_application_line_templates` で取得できます。",
+            "example": "optional"
+          },
+          "segment_1_tag_setting": {
+            "type": "string",
+            "enum": [
+              "optional",
+              "required",
+              "disable"
+            ],
+            "description": "セグメント1タグの入力設定 (optional: 任意入力, required: 必須入力, disable: 非表示)",
+            "example": "optional"
+          },
+          "segment_2_tag_setting": {
+            "type": "string",
+            "enum": [
+              "optional",
+              "required",
+              "disable"
+            ],
+            "description": "セグメント2タグの入力設定 (optional: 任意入力, required: 必須入力, disable: 非表示)",
+            "example": "optional"
+          },
+          "segment_3_tag_setting": {
+            "type": "string",
+            "enum": [
+              "optional",
+              "required",
+              "disable"
+            ],
+            "description": "セグメント3タグの入力設定 (optional: 任意入力, required: 必須入力, disable: 非表示)",
+            "example": "optional"
+          },
+          "description_setting": {
+            "type": "string",
+            "enum": [
+              "optional",
+              "required"
+            ],
+            "description": "備考の入力設定 (optional: 任意入力, required: 必須入力)",
+            "example": "optional"
+          },
+          "commuter_pass_deduction": {
+            "type": "string",
+            "enum": [
+              "disable",
+              "enable"
+            ],
+            "description": "定期券区間控除の利用設定 (disable: 利用しない, enable: 利用する)",
+            "example": "disable"
+          },
+          "default_flow_route_src_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true,
+            "minimum": 1,
+            "description": "デフォルトで選択する申請経路のID (未設定の場合は null)。申請経路一覧の取得API (`/api/1/approval_flow_routes`) のレスポンス id と同じ値です。",
+            "example": 101
+          },
+          "observer_addition": {
+            "type": "string",
+            "enum": [
+              "disable",
+              "enable"
+            ],
+            "description": "承認者以外の閲覧者追加の利用設定 (disable: 利用しない, enable: 利用する)",
+            "example": "disable"
+          },
+          "receipt_partner_name_setting": {
+            "type": "string",
+            "enum": [
+              "optional",
+              "required",
+              "disable"
+            ],
+            "description": "支払先の入力設定 (optional: 任意入力, required: 必須入力, disable: 非表示)",
+            "example": "disable"
+          },
+          "default_title": {
+            "type": "string",
+            "maxLength": 255,
+            "description": "申請タイトルの初期値 (255文字以内)",
+            "example": "交通費精算"
+          },
+          "use_currency": {
+            "type": "boolean",
+            "description": "外貨の利用設定",
+            "example": true
+          },
+          "auto_calculation_amount_fraction": {
+            "type": "string",
+            "enum": [
+              "omit",
+              "round_up",
+              "round"
+            ],
+            "description": "金額の自動計算結果の端数処理 (omit: 切り捨て, round_up: 切り上げ, round: 四捨五入)",
+            "example": "round_up"
+          },
+          "allow_modify_parent_application_by_applicant": {
+            "type": "boolean",
+            "description": "申請者による親申請の変更を許可するか",
+            "example": true
+          },
+          "allow_modify_parent_application_by_approver": {
+            "type": "boolean",
+            "description": "承認者による親申請の変更を許可するか",
+            "example": false
+          },
+          "allow_modify_parent_application_by_admin": {
+            "type": "boolean",
+            "description": "管理者による親申請の変更を許可するか",
+            "example": false
+          },
+          "require_parent_purchase_request": {
+            "type": "boolean",
+            "description": "親となる購買申請を必須にするか",
+            "example": false
+          },
+          "allow_modify_on_approval": {
+            "type": "boolean",
+            "description": "承認中の申請の変更を許可するか",
+            "example": false
+          }
+        },
+        "additionalProperties": false
+      },
       "approvalRequestsIndexResponse": {
         "type": "object",
         "required": [
@@ -45056,28 +45562,28 @@
             "maxLength": 30,
             "type": "string",
             "nullable": true,
-            "description": "備考 (30文字以内)。更新時に省略した場合は未設定（null）に更新されます。",
+            "description": "備考 (30文字以内)。省略した場合は未設定（null）になります。",
             "example": "新規事業の収支管理用"
           },
           "shortcut1": {
             "type": "string",
             "maxLength": 20,
             "nullable": true,
-            "description": "ショートカット1 (20文字以内)。Web画面などでセグメントタグを検索する際のキーワードとして使用します。更新時に省略した場合は未設定（null）に更新されます。",
+            "description": "ショートカット1 (20文字以内)。Web画面などでセグメントタグを検索する際のキーワードとして使用します。省略した場合は未設定（null）になります。",
             "example": "PROJECT"
           },
           "shortcut2": {
             "type": "string",
             "maxLength": 20,
             "nullable": true,
-            "description": "ショートカット2 (20文字以内)。Web画面などでセグメントタグを検索する際のキーワードとして使用します。更新時に省略した場合は未設定（null）に更新されます。",
+            "description": "ショートカット2 (20文字以内)。Web画面などでセグメントタグを検索する際のキーワードとして使用します。省略した場合は未設定（null）になります。",
             "example": "123"
           },
           "code": {
             "type": "string",
             "maxLength": 20,
             "nullable": true,
-            "description": "セグメントタグコード (20文字以内、半角英数字・ハイフン・アンダースコアのみ)。事業所内の同じセグメント区分で重複できません。事業所の設定でセグメントタグコードを使用する設定にしている場合のみ保存され、設定が無効の場合は指定しても保存されません。更新時に省略した場合は未設定（null）に更新されます。",
+            "description": "セグメントタグコード (20文字以内、半角英数字・ハイフン・アンダースコアのみ)。事業所内の同じセグメント区分で重複できません。事業所の設定でセグメントタグコードを使用する設定にしている場合のみ保存され、設定が無効の場合は指定しても保存されません。省略した場合は未設定（null）になります。",
             "example": "code001",
             "pattern": "^[0-9a-zA-Z_-]+$"
           }
