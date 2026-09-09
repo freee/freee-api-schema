@@ -23082,6 +23082,68 @@
             "description": "振替金額（円・単一振替先の場合に指定）。to_walletablesと同時に指定することはできません。将来廃止予定。振替先の複数指定に対応していないため、to_walletablesの各行amountを利用してください。",
             "example": 5000
           },
+          "from_partner_id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "nullable": true,
+            "description": "振替元口座行の取引先ID。更新時にキーを省略すると既存値を引き継ぎます。0またはnullは取引先を外す指定です。作成時にキーを省略するか、0またはnullを指定すると取引先なしになります。「口座振替（口座間移動）での取引先タグ付与ルール」が未設定の場合、既存値と同じIDの指定を除き、取引先の追加・変更・削除はできません。",
+            "example": 201
+          },
+          "from_section_id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "nullable": true,
+            "description": "振替元口座行の部門ID。更新時にキーを省略すると既存値を引き継ぎます。0またはnullは部門を外す指定です。作成時にキーを省略すると口座タグ設定に従います。口座タグ設定が固定の場合は設定タグを優先し、未設定の場合は有効なIDを指定できません。部門の入力が必須（全ての科目）の事業所では、部門なしになる保存はエラーです。",
+            "example": 1
+          },
+          "from_item_id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "nullable": true,
+            "description": "振替元口座行の品目ID。更新時にキーを省略すると既存値を引き継ぎます。0またはnullは品目を外す指定です。作成時にキーを省略すると口座タグ設定に従います。口座タグ設定が固定の場合は設定タグを優先し、未設定の場合は有効なIDを指定できません。",
+            "example": 501
+          },
+          "from_tag_ids": {
+            "type": "array",
+            "nullable": true,
+            "description": "振替元口座行のメモタグID。更新時にキーを省略すると既存値を引き継ぎます。空配列またはnullはメモタグをすべて外す指定です。作成時にキーを省略すると口座タグ設定に従います。口座タグ設定が固定の場合は設定タグを優先し、未設定の場合は有効なIDを指定できません。",
+            "example": [
+              1,
+              2
+            ],
+            "items": {
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
+            }
+          },
+          "from_segment_1_tag_id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "nullable": true,
+            "description": "振替元口座行のセグメント１タグID。更新時にキーを省略すると既存値を引き継ぎます。0またはnullはタグを外す指定です。作成時にキーを省略すると口座タグ設定に従います。口座タグ設定が固定の場合は設定タグを優先し、未設定の場合は有効なIDを指定できません。セグメントタグを利用できないプランでは指定を無視します。",
+            "example": 1
+          },
+          "from_segment_2_tag_id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "nullable": true,
+            "description": "振替元口座行のセグメント２タグID。更新時にキーを省略すると既存値を引き継ぎます。0またはnullはタグを外す指定です。作成時にキーを省略すると口座タグ設定に従います。口座タグ設定が固定の場合は設定タグを優先し、未設定の場合は有効なIDを指定できません。セグメントタグを利用できないプランでは指定を無視します。",
+            "example": 1
+          },
+          "from_segment_3_tag_id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "nullable": true,
+            "description": "振替元口座行のセグメント３タグID。更新時にキーを省略すると既存値を引き継ぎます。0またはnullはタグを外す指定です。作成時にキーを省略すると口座タグ設定に従います。口座タグ設定が固定の場合は設定タグを優先し、未設定の場合は有効なIDを指定できません。セグメントタグを利用できないプランでは指定を無視します。",
+            "example": 1
+          },
           "date": {
             "type": "string",
             "description": "振替日 (yyyy-mm-dd)",
@@ -23142,6 +23204,68 @@
                   "type": "string",
                   "description": "備考",
                   "example": "備考"
+                },
+                "partner_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": 0,
+                  "nullable": true,
+                  "description": "振替先口座行の取引先ID。更新時にキーを省略すると同一口座の既存行から引き継ぎます。0またはnullは取引先を外す指定です。作成時にキーを省略するか、0またはnullを指定すると取引先なしになります。「口座振替（口座間移動）での取引先タグ付与ルール」が未設定の場合、既存値と同じIDの指定を除き、取引先の追加・変更・削除はできません。",
+                  "example": 201
+                },
+                "section_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": 0,
+                  "nullable": true,
+                  "description": "振替先口座行の部門ID。更新時にキーを省略すると同一口座の既存行から引き継ぎます。0またはnullは部門を外す指定です。作成時にキーを省略すると口座タグ設定に従います。口座タグ設定が固定の場合は設定タグを優先し、未設定の場合は有効なIDを指定できません。部門の入力が必須（全ての科目）の事業所では、部門なしになる保存はエラーです。",
+                  "example": 2
+                },
+                "item_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": 0,
+                  "nullable": true,
+                  "description": "振替先口座行の品目ID。更新時にキーを省略すると同一口座の既存行から引き継ぎます。0またはnullは品目を外す指定です。作成時にキーを省略すると口座タグ設定に従います。口座タグ設定が固定の場合は設定タグを優先し、未設定の場合は有効なIDを指定できません。",
+                  "example": 501
+                },
+                "tag_ids": {
+                  "type": "array",
+                  "nullable": true,
+                  "description": "振替先口座行のメモタグID。更新時にキーを省略すると同一口座の既存行から引き継ぎます。空配列またはnullはメモタグをすべて外す指定です。作成時にキーを省略すると口座タグ設定に従います。口座タグ設定が固定の場合は設定タグを優先し、未設定の場合は有効なIDを指定できません。",
+                  "example": [
+                    1,
+                    2
+                  ],
+                  "items": {
+                    "type": "integer",
+                    "format": "int64",
+                    "minimum": 1
+                  }
+                },
+                "segment_1_tag_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": 0,
+                  "nullable": true,
+                  "description": "振替先口座行のセグメント１タグID。更新時にキーを省略すると同一口座の既存行から引き継ぎます。0またはnullはタグを外す指定です。作成時にキーを省略すると口座タグ設定に従います。口座タグ設定が固定の場合は設定タグを優先し、未設定の場合は有効なIDを指定できません。セグメントタグを利用できないプランでは指定を無視します。",
+                  "example": 1
+                },
+                "segment_2_tag_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": 0,
+                  "nullable": true,
+                  "description": "振替先口座行のセグメント２タグID。更新時にキーを省略すると同一口座の既存行から引き継ぎます。0またはnullはタグを外す指定です。作成時にキーを省略すると口座タグ設定に従います。口座タグ設定が固定の場合は設定タグを優先し、未設定の場合は有効なIDを指定できません。セグメントタグを利用できないプランでは指定を無視します。",
+                  "example": 1
+                },
+                "segment_3_tag_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": 0,
+                  "nullable": true,
+                  "description": "振替先口座行のセグメント３タグID。更新時にキーを省略すると同一口座の既存行から引き継ぎます。0またはnullはタグを外す指定です。作成時にキーを省略すると口座タグ設定に従います。口座タグ設定が固定の場合は設定タグを優先し、未設定の場合は有効なIDを指定できません。セグメントタグを利用できないプランでは指定を無視します。",
+                  "example": 1
                 }
               }
             }
@@ -38251,6 +38375,13 @@
           "company_id",
           "date",
           "description",
+          "from_item_code",
+          "from_item_id",
+          "from_partner_code",
+          "from_partner_id",
+          "from_section_code",
+          "from_section_id",
+          "from_tag_ids",
           "from_walletable_id",
           "from_walletable_type",
           "id",
@@ -38305,6 +38436,96 @@
             "description": "振替元口座ID。口座一覧の取得（GET /api/1/walletables）で取得できるIDです。",
             "example": 101
           },
+          "from_partner_id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "振替元口座行の取引先ID。取引先が設定されていない場合は0を返します。",
+            "example": 201
+          },
+          "from_partner_code": {
+            "type": "string",
+            "description": "振替元口座行の取引先コード。事業所の設定で取引先コードの利用が無効の場合、または取引先が設定されていない場合はnullを返します。",
+            "example": "code001",
+            "nullable": true
+          },
+          "from_section_id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "振替元口座行の部門ID。部門が設定されていない場合はnullを返します。",
+            "example": 1,
+            "nullable": true
+          },
+          "from_section_code": {
+            "type": "string",
+            "description": "振替元口座行の部門コード。事業所の設定で部門コードの利用が無効の場合、または部門が設定されていない場合はnullを返します。",
+            "example": "code001",
+            "nullable": true
+          },
+          "from_item_id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "振替元口座行の品目ID。品目が設定されていない場合はnullを返します。",
+            "example": 501,
+            "nullable": true
+          },
+          "from_item_code": {
+            "type": "string",
+            "description": "振替元口座行の品目コード。事業所の設定で品目コードの利用が無効の場合、または品目が設定されていない場合はnullを返します。",
+            "example": "code001",
+            "nullable": true
+          },
+          "from_tag_ids": {
+            "type": "array",
+            "description": "振替元口座行のメモタグID",
+            "example": [
+              1,
+              2,
+              3
+            ],
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "from_segment_1_tag_id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "振替元口座行のセグメント１タグID。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。セグメント１タグが設定されていない場合はnullを返します。",
+            "example": 1,
+            "nullable": true
+          },
+          "from_segment_1_tag_code": {
+            "type": "string",
+            "description": "振替元口座行のセグメント１タグコード。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。事業所の設定でセグメントタグコードの利用が無効の場合、またはセグメント１タグが設定されていない場合はnullを返します。",
+            "example": "code001",
+            "nullable": true
+          },
+          "from_segment_2_tag_id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "振替元口座行のセグメント２タグID。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。セグメント２タグが設定されていない場合はnullを返します。",
+            "example": 1,
+            "nullable": true
+          },
+          "from_segment_2_tag_code": {
+            "type": "string",
+            "description": "振替元口座行のセグメント２タグコード。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。事業所の設定でセグメントタグコードの利用が無効の場合、またはセグメント２タグが設定されていない場合はnullを返します。",
+            "example": "code001",
+            "nullable": true
+          },
+          "from_segment_3_tag_id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "振替元口座行のセグメント３タグID。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。セグメント３タグが設定されていない場合はnullを返します。",
+            "example": 1,
+            "nullable": true
+          },
+          "from_segment_3_tag_code": {
+            "type": "string",
+            "description": "振替元口座行のセグメント３タグコード。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。事業所の設定でセグメントタグコードの利用が無効の場合、またはセグメント３タグが設定されていない場合はnullを返します。",
+            "example": "code001",
+            "nullable": true
+          },
           "to_walletable_type": {
             "type": "string",
             "deprecated": true,
@@ -38341,7 +38562,14 @@
                 "type",
                 "id",
                 "amount",
-                "description"
+                "description",
+                "partner_id",
+                "partner_code",
+                "section_id",
+                "section_code",
+                "item_id",
+                "item_code",
+                "tag_ids"
               ],
               "properties": {
                 "type": {
@@ -38373,6 +38601,96 @@
                   "type": "string",
                   "description": "備考。振替先の複数指定に対応する以前に作成された取引（振替）では、行の備考が未設定の場合に取引（振替）全体の備考を返します。備考が未設定の場合はnullを返します。",
                   "example": "備考",
+                  "nullable": true
+                },
+                "partner_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "振替先口座行の取引先ID。取引先が設定されていない場合は0を返します。",
+                  "example": 201
+                },
+                "partner_code": {
+                  "type": "string",
+                  "description": "振替先口座行の取引先コード。事業所の設定で取引先コードの利用が無効の場合、または取引先が設定されていない場合はnullを返します。",
+                  "example": "code001",
+                  "nullable": true
+                },
+                "section_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "振替先口座行の部門ID。部門が設定されていない場合はnullを返します。",
+                  "example": 1,
+                  "nullable": true
+                },
+                "section_code": {
+                  "type": "string",
+                  "description": "振替先口座行の部門コード。事業所の設定で部門コードの利用が無効の場合、または部門が設定されていない場合はnullを返します。",
+                  "example": "code001",
+                  "nullable": true
+                },
+                "item_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "振替先口座行の品目ID。品目が設定されていない場合はnullを返します。",
+                  "example": 501,
+                  "nullable": true
+                },
+                "item_code": {
+                  "type": "string",
+                  "description": "振替先口座行の品目コード。事業所の設定で品目コードの利用が無効の場合、または品目が設定されていない場合はnullを返します。",
+                  "example": "code001",
+                  "nullable": true
+                },
+                "tag_ids": {
+                  "type": "array",
+                  "description": "振替先口座行のメモタグID",
+                  "example": [
+                    1,
+                    2,
+                    3
+                  ],
+                  "items": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                },
+                "segment_1_tag_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "振替先口座行のセグメント１タグID。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。セグメント１タグが設定されていない場合はnullを返します。",
+                  "example": 1,
+                  "nullable": true
+                },
+                "segment_1_tag_code": {
+                  "type": "string",
+                  "description": "振替先口座行のセグメント１タグコード。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。事業所の設定でセグメントタグコードの利用が無効の場合、またはセグメント１タグが設定されていない場合はnullを返します。",
+                  "example": "code001",
+                  "nullable": true
+                },
+                "segment_2_tag_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "振替先口座行のセグメント２タグID。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。セグメント２タグが設定されていない場合はnullを返します。",
+                  "example": 1,
+                  "nullable": true
+                },
+                "segment_2_tag_code": {
+                  "type": "string",
+                  "description": "振替先口座行のセグメント２タグコード。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。事業所の設定でセグメントタグコードの利用が無効の場合、またはセグメント２タグが設定されていない場合はnullを返します。",
+                  "example": "code001",
+                  "nullable": true
+                },
+                "segment_3_tag_id": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "振替先口座行のセグメント３タグID。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。セグメント３タグが設定されていない場合はnullを返します。",
+                  "example": 1,
+                  "nullable": true
+                },
+                "segment_3_tag_code": {
+                  "type": "string",
+                  "description": "振替先口座行のセグメント３タグコード。セグメントタグが利用できないプランの場合、キー自体がレスポンスに含まれません。事業所の設定でセグメントタグコードの利用が無効の場合、またはセグメント３タグが設定されていない場合はnullを返します。",
+                  "example": "code001",
                   "nullable": true
                 }
               }
