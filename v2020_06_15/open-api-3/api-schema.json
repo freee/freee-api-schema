@@ -2568,7 +2568,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/badRequestError"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/badRequestError"
+                    },
+                    {
+                      "$ref": "#/components/schemas/messagesError"
+                    }
+                  ]
                 }
               }
             }
@@ -2598,7 +2605,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/badRequestNotFoundError"
+                    },
+                    {
+                      "$ref": "#/components/schemas/messagesError"
+                    }
+                  ]
                 }
               }
             }
@@ -2765,7 +2779,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/badRequestError"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/badRequestError"
+                    },
+                    {
+                      "$ref": "#/components/schemas/messagesError"
+                    }
+                  ]
                 }
               }
             }
@@ -2795,7 +2816,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/badRequestNotFoundError"
+                    },
+                    {
+                      "$ref": "#/components/schemas/messagesError"
+                    }
+                  ]
                 }
               }
             }
@@ -2855,7 +2883,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/badRequestError"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/badRequestError"
+                    },
+                    {
+                      "$ref": "#/components/schemas/messagesError"
+                    }
+                  ]
                 }
               }
             }
@@ -2885,7 +2920,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/badRequestNotFoundError"
+                    },
+                    {
+                      "$ref": "#/components/schemas/messagesError"
+                    }
+                  ]
                 }
               }
             }
@@ -3017,7 +3059,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/badRequestError"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/badRequestError"
+                    },
+                    {
+                      "$ref": "#/components/schemas/messagesError"
+                    }
+                  ]
                 }
               }
             }
@@ -16188,7 +16237,7 @@
           "Expense application line templates"
         ],
         "summary": "経費科目一覧の取得",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費科目一覧を取得する</p>\n\n<p>経費科目は、経費申請の作成時に申請者が選択する項目で、勘定科目・税区分・品目などの組み合わせをあらかじめ設定したものです。</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>カスタム申請項目を含むなど、Web版freee会計専用の設定を含む経費科目も一覧には含まれます。ただし、これらの経費科目は経費科目の取得・更新APIでは404エラーになります。</li>\n</ul>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費科目一覧を取得する</p>\n\n<p>経費科目は、経費申請の作成時に申請者が選択する項目で、勘定科目・税区分・品目などの組み合わせをあらかじめ設定したものです。</p>",
         "operationId": "get_expense_application_line_templates",
         "parameters": [
           {
@@ -16384,7 +16433,7 @@
           "Expense application line templates"
         ],
         "summary": "経費科目の取得",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費科目を取得する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>\n    以下のいずれかに該当する経費科目はWeb版freee会計専用のため、本APIでは404エラーになります（経費科目一覧の取得APIでは取得できます）。\n    <ul>\n      <li>カスタム申請項目を含む</li>\n      <li>内容の入力設定が「必須」以外</li>\n      <li>金額の設定が「なし」以外</li>\n    </ul>\n  </li>\n</ul>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費科目を取得する</p>",
         "operationId": "get_expense_application_line_template",
         "parameters": [
           {
@@ -16478,7 +16527,7 @@
           "Expense application line templates"
         ],
         "summary": "経費科目の更新",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費科目を更新する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIはリクエストボディで指定した内容への全置換で更新します。任意パラメータ（item_id, description, line_description, required_receipt）を未指定にした場合、その項目は未設定（required_receiptは任意 = false）にリセットされます。更新前の値を維持したい場合は、経費科目の取得APIで現在の値を確認し、すべてのパラメータを指定してください。</li>\n  <li>custom_form_parts と amount_calculation_setting は、パラメータ自体を省略した場合のみ現在の設定を維持します。指定した場合はその内容で全置換し、空配列（custom_form_parts: []）を指定した場合はカスタム申請項目をすべて削除します。既存のカスタム申請項目を残す場合は取得した id と key をそのまま指定してください。</li>\n  <li>\n    更新内容によっては経費科目が作り直され、レスポンスのidが更新前と変わります。カスタム申請項目や金額計算設定を変更した場合に発生し、custom_form_parts[].idも同時に振り直されます。custom_form_parts[].key は作り直されても変わらないため、カスタム申請項目を識別する用途には key を使ってください。\n    <ul>\n      <li>設定を変更してもsource_line_template_idは変わりません。経費科目を長期的に識別する用途にはこちらを保存してください。</li>\n      <li>本APIのidパラメータは変更前の経費科目IDでも受け付けますが、取得・更新・削除の前に一覧取得または経費科目の取得APIで最新のidを引き直すことを推奨します。</li>\n    </ul>\n  </li>\n  <li>\n    以下のいずれかに該当する経費科目はWeb版freee会計専用のため、本APIでは404エラーになります。\n    <ul>\n      <li>カスタム申請項目を含む</li>\n      <li>内容の入力設定が「必須」以外</li>\n      <li>金額の設定が「なし」以外</li>\n    </ul>\n  </li>\n</ul>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費科目を更新する</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIはリクエストボディで指定した内容への全置換で更新します。任意パラメータ（item_id, description, line_description, required_receipt）を未指定にした場合、その項目は未設定（required_receiptは任意 = false）にリセットされます。更新前の値を維持したい場合は、経費科目の取得APIで現在の値を確認し、すべてのパラメータを指定してください。</li>\n  <li>custom_form_parts と amount_calculation_setting は、パラメータ自体を省略した場合のみ現在の設定を維持します。指定した場合はその内容で全置換し、空配列（custom_form_parts: []）を指定した場合はカスタム申請項目をすべて削除します。既存のカスタム申請項目を残す場合は取得した id と key をそのまま指定してください。</li>\n  <li>\n    更新内容によっては経費科目が作り直され、レスポンスのidが更新前と変わります。カスタム申請項目や金額計算設定を変更した場合に発生し、custom_form_parts[].idも同時に振り直されます。custom_form_parts[].key は作り直されても変わらないため、カスタム申請項目を識別する用途には key を使ってください。\n    <ul>\n      <li>設定を変更してもsource_line_template_idは変わりません。経費科目を長期的に識別する用途にはこちらを保存してください。</li>\n      <li>本APIのidパラメータは変更前の経費科目IDでも受け付けますが、取得・更新・削除の前に一覧取得または経費科目の取得APIで最新のidを引き直すことを推奨します。</li>\n    </ul>\n  </li>\n</ul>",
         "operationId": "update_expense_application_line_template",
         "parameters": [
           {
@@ -37370,26 +37419,205 @@
         }
       },
       "unauthorizedError": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string"
+        "anyOf": [
+          {
+            "type": "object",
+            "description": "アクセストークンやプラン限定アプリの判定で返るエラー",
+            "properties": {
+              "message": {
+                "type": "string"
+              },
+              "messages": {
+                "type": "string"
+              },
+              "code": {
+                "type": "string",
+                "example": "not_available_plan_limited_app"
+              }
+            }
           },
-          "messages": {
-            "type": "string"
+          {
+            "type": "object",
+            "description": "事業所・ユーザー・IP アドレスの判定で返るエラー",
+            "required": [
+              "status_code",
+              "errors"
+            ],
+            "properties": {
+              "status_code": {
+                "type": "integer",
+                "example": 401
+              },
+              "errors": {
+                "type": "array",
+                "items": {
+                  "required": [
+                    "messages",
+                    "type"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "messages": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "ログインしたユーザーに権限がありません。"
+                      }
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "status",
+                      "enum": [
+                        "status",
+                        "validation",
+                        "error"
+                      ]
+                    },
+                    "codes": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "company_not_found"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
-        }
+        ]
       },
       "forbiddenError": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string"
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string"
+              },
+              "messages": {
+                "type": "string"
+              }
+            }
           },
-          "messages": {
-            "type": "string"
+          {
+            "type": "object",
+            "description": "事業所ロック等の判定で返るエラー",
+            "required": [
+              "status_code",
+              "errors"
+            ],
+            "properties": {
+              "status_code": {
+                "type": "integer",
+                "example": 403
+              },
+              "errors": {
+                "type": "array",
+                "items": {
+                  "required": [
+                    "messages",
+                    "type"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "messages": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "アクセス権限がありません。"
+                      }
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "status",
+                      "enum": [
+                        "status",
+                        "validation",
+                        "error"
+                      ]
+                    },
+                    "codes": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "user_do_not_have_permission"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "description": "アクセストークンのスコープ不足で返るエラー",
+            "required": [
+              "error",
+              "message"
+            ],
+            "properties": {
+              "error": {
+                "type": "string",
+                "example": "access_denied"
+              },
+              "message": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "description": "事業所の利用準備が完了していない場合に返るエラー",
+            "required": [
+              "message",
+              "error_code"
+            ],
+            "properties": {
+              "message": {
+                "type": "string"
+              },
+              "error_code": {
+                "type": "string",
+                "example": "not_activated"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "description": "管理者による代理ログイン中の操作制限で返るエラー",
+            "required": [
+              "result",
+              "message",
+              "info"
+            ],
+            "properties": {
+              "result": {
+                "type": "string",
+                "example": "error"
+              },
+              "message": {
+                "type": "string"
+              },
+              "info": {
+                "type": "object",
+                "required": [
+                  "result",
+                  "message"
+                ],
+                "properties": {
+                  "result": {
+                    "type": "string",
+                    "example": "error"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
           }
-        }
+        ]
       },
       "badRequestError": {
         "type": "object",
@@ -37583,41 +37811,76 @@
         }
       },
       "serviceUnavailableError": {
-        "type": "object",
-        "required": [
-          "status_code",
-          "errors"
-        ],
-        "properties": {
-          "status_code": {
-            "type": "integer",
-            "example": 503
-          },
-          "errors": {
-            "type": "array",
-            "items": {
-              "required": [
-                "messages",
-                "type"
-              ],
-              "type": "object",
-              "properties": {
-                "messages": {
-                  "type": "array",
-                  "items": {
-                    "type": "string",
-                    "example": "このAPIは現在ご利用いただけません。"
+        "anyOf": [
+          {
+            "type": "object",
+            "required": [
+              "status_code",
+              "errors"
+            ],
+            "properties": {
+              "status_code": {
+                "type": "integer",
+                "example": 503
+              },
+              "errors": {
+                "type": "array",
+                "items": {
+                  "required": [
+                    "messages",
+                    "type"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "messages": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "このAPIは現在ご利用いただけません。"
+                      }
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "error",
+                      "enum": [
+                        "status",
+                        "error"
+                      ]
+                    }
                   }
-                },
-                "type": {
-                  "type": "string",
-                  "example": "error",
-                  "enum": [
-                    "status",
-                    "error"
-                  ]
                 }
               }
+            }
+          },
+          {
+            "type": "object",
+            "description": "一時的な利用停止や年度締めの処理中に返るエラー",
+            "required": [
+              "message"
+            ],
+            "properties": {
+              "message": {
+                "type": "string"
+              },
+              "code": {
+                "type": "string",
+                "example": "temporarily_unavailable"
+              }
+            }
+          }
+        ]
+      },
+      "messagesError": {
+        "type": "object",
+        "required": [
+          "messages"
+        ],
+        "properties": {
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "存在しないか既に削除された部門です。"
             }
           }
         }
