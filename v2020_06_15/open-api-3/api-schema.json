@@ -3789,6 +3789,17 @@
             }
           },
           {
+            "name": "min_due_amount",
+            "in": "query",
+            "description": "支払残額（due_amount、未決済残高）の下限値（円）で絞込。指定した金額以上の支払残額を持つ取引のみを返します。支払残額がマイナスの取引（赤伝）は本条件で除外されます。",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "minimum": 0,
+              "maximum": 9223372036854775807
+            }
+          },
+          {
             "name": "offset",
             "in": "query",
             "description": "取得レコードのオフセット (デフォルト: 0)",
@@ -5973,6 +5984,7 @@
                     "payroll_item_sets",
                     "proxy_application_settings",
                     "purchase_requests",
+                    "receipt_folders",
                     "receipt_stream_editor",
                     "receipts",
                     "reports",
@@ -6031,6 +6043,9 @@
                     },
                     "receipts": {
                       "$ref": "#/components/schemas/userCapabilityWithSelfOnly"
+                    },
+                    "receipt_folders": {
+                      "$ref": "#/components/schemas/userCapabilityJustReadWrite"
                     },
                     "receipt_stream_editor": {
                       "$ref": "#/components/schemas/userCapabilityJustRead"
@@ -34295,7 +34310,8 @@
                     "description": {
                       "type": "string",
                       "description": "備考",
-                      "example": "備考"
+                      "example": "備考",
+                      "nullable": true
                     },
                     "entry_side": {
                       "type": "string",
@@ -34876,7 +34892,8 @@
                 "description": {
                   "type": "string",
                   "description": "備考",
-                  "example": "備考"
+                  "example": "備考",
+                  "nullable": true
                 },
                 "entry_side": {
                   "type": "string",
@@ -36205,8 +36222,8 @@
           },
           "name": {
             "type": "string",
-            "maxLength": 30,
-            "description": "品目名 (30文字以内)。事業所内で重複しません。",
+            "maxLength": 255,
+            "description": "品目名 (255文字以内)。事業所内で重複しません。",
             "example": "タクシー代"
           },
           "update_date": {
@@ -36526,7 +36543,8 @@
                 "description": {
                   "type": "string",
                   "description": "備考",
-                  "example": "備考"
+                  "example": "備考",
+                  "nullable": true
                 }
               }
             }
@@ -36715,7 +36733,18 @@
                     "simple_accounting",
                     "self_only",
                     "read_only",
-                    "workflow"
+                    "workflow",
+                    "product_linkage",
+                    "bookkeeping",
+                    "bookkeeping_report",
+                    "bookkeeping_simple",
+                    "bookkeeping_simple_report",
+                    "bookkeeping_prime",
+                    "bookkeeping_prime_report",
+                    "voucher_mgt",
+                    "voucher_mgt_report",
+                    "bank_accountant",
+                    "bank_accountant_report"
                   ]
                 }
               }
@@ -36871,7 +36900,18 @@
                   "simple_accounting",
                   "self_only",
                   "read_only",
-                  "workflow"
+                  "workflow",
+                  "product_linkage",
+                  "bookkeeping",
+                  "bookkeeping_report",
+                  "bookkeeping_simple",
+                  "bookkeeping_simple_report",
+                  "bookkeeping_prime",
+                  "bookkeeping_prime_report",
+                  "voucher_mgt",
+                  "voucher_mgt_report",
+                  "bank_accountant",
+                  "bank_accountant_report"
                 ]
               },
               "phone1": {
@@ -37218,8 +37258,8 @@
                     },
                     "name": {
                       "type": "string",
-                      "maxLength": 30,
-                      "description": "品目名 (30文字以内)",
+                      "maxLength": 255,
+                      "description": "品目名 (255文字以内)",
                       "example": "タクシー代"
                     },
                     "shortcut1": {
@@ -39325,7 +39365,17 @@
                         "self_only",
                         "read_only",
                         "workflow",
-                        "product_linkage"
+                        "product_linkage",
+                        "bookkeeping",
+                        "bookkeeping_report",
+                        "bookkeeping_simple",
+                        "bookkeeping_simple_report",
+                        "bookkeeping_prime",
+                        "bookkeeping_prime_report",
+                        "voucher_mgt",
+                        "voucher_mgt_report",
+                        "bank_accountant",
+                        "bank_accountant_report"
                       ]
                     },
                     "use_custom_role": {
