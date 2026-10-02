@@ -2568,7 +2568,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/badRequestError"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/badRequestError"
+                    },
+                    {
+                      "$ref": "#/components/schemas/messagesError"
+                    }
+                  ]
                 }
               }
             }
@@ -2598,7 +2605,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/badRequestNotFoundError"
+                    },
+                    {
+                      "$ref": "#/components/schemas/messagesError"
+                    }
+                  ]
                 }
               }
             }
@@ -2765,7 +2779,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/badRequestError"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/badRequestError"
+                    },
+                    {
+                      "$ref": "#/components/schemas/messagesError"
+                    }
+                  ]
                 }
               }
             }
@@ -2795,7 +2816,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/badRequestNotFoundError"
+                    },
+                    {
+                      "$ref": "#/components/schemas/messagesError"
+                    }
+                  ]
                 }
               }
             }
@@ -2855,7 +2883,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/badRequestError"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/badRequestError"
+                    },
+                    {
+                      "$ref": "#/components/schemas/messagesError"
+                    }
+                  ]
                 }
               }
             }
@@ -2885,7 +2920,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/badRequestNotFoundError"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/badRequestNotFoundError"
+                    },
+                    {
+                      "$ref": "#/components/schemas/messagesError"
+                    }
+                  ]
                 }
               }
             }
@@ -3017,7 +3059,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/badRequestError"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/badRequestError"
+                    },
+                    {
+                      "$ref": "#/components/schemas/messagesError"
+                    }
+                  ]
                 }
               }
             }
@@ -37370,26 +37419,205 @@
         }
       },
       "unauthorizedError": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string"
+        "anyOf": [
+          {
+            "type": "object",
+            "description": "アクセストークンやプラン限定アプリの判定で返るエラー",
+            "properties": {
+              "message": {
+                "type": "string"
+              },
+              "messages": {
+                "type": "string"
+              },
+              "code": {
+                "type": "string",
+                "example": "not_available_plan_limited_app"
+              }
+            }
           },
-          "messages": {
-            "type": "string"
+          {
+            "type": "object",
+            "description": "事業所・ユーザー・IP アドレスの判定で返るエラー",
+            "required": [
+              "status_code",
+              "errors"
+            ],
+            "properties": {
+              "status_code": {
+                "type": "integer",
+                "example": 401
+              },
+              "errors": {
+                "type": "array",
+                "items": {
+                  "required": [
+                    "messages",
+                    "type"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "messages": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "ログインしたユーザーに権限がありません。"
+                      }
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "status",
+                      "enum": [
+                        "status",
+                        "validation",
+                        "error"
+                      ]
+                    },
+                    "codes": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "company_not_found"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
-        }
+        ]
       },
       "forbiddenError": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string"
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string"
+              },
+              "messages": {
+                "type": "string"
+              }
+            }
           },
-          "messages": {
-            "type": "string"
+          {
+            "type": "object",
+            "description": "事業所ロック等の判定で返るエラー",
+            "required": [
+              "status_code",
+              "errors"
+            ],
+            "properties": {
+              "status_code": {
+                "type": "integer",
+                "example": 403
+              },
+              "errors": {
+                "type": "array",
+                "items": {
+                  "required": [
+                    "messages",
+                    "type"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "messages": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "アクセス権限がありません。"
+                      }
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "status",
+                      "enum": [
+                        "status",
+                        "validation",
+                        "error"
+                      ]
+                    },
+                    "codes": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "user_do_not_have_permission"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "description": "アクセストークンのスコープ不足で返るエラー",
+            "required": [
+              "error",
+              "message"
+            ],
+            "properties": {
+              "error": {
+                "type": "string",
+                "example": "access_denied"
+              },
+              "message": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "description": "事業所の利用準備が完了していない場合に返るエラー",
+            "required": [
+              "message",
+              "error_code"
+            ],
+            "properties": {
+              "message": {
+                "type": "string"
+              },
+              "error_code": {
+                "type": "string",
+                "example": "not_activated"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "description": "管理者による代理ログイン中の操作制限で返るエラー",
+            "required": [
+              "result",
+              "message",
+              "info"
+            ],
+            "properties": {
+              "result": {
+                "type": "string",
+                "example": "error"
+              },
+              "message": {
+                "type": "string"
+              },
+              "info": {
+                "type": "object",
+                "required": [
+                  "result",
+                  "message"
+                ],
+                "properties": {
+                  "result": {
+                    "type": "string",
+                    "example": "error"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
           }
-        }
+        ]
       },
       "badRequestError": {
         "type": "object",
@@ -37583,41 +37811,76 @@
         }
       },
       "serviceUnavailableError": {
-        "type": "object",
-        "required": [
-          "status_code",
-          "errors"
-        ],
-        "properties": {
-          "status_code": {
-            "type": "integer",
-            "example": 503
-          },
-          "errors": {
-            "type": "array",
-            "items": {
-              "required": [
-                "messages",
-                "type"
-              ],
-              "type": "object",
-              "properties": {
-                "messages": {
-                  "type": "array",
-                  "items": {
-                    "type": "string",
-                    "example": "このAPIは現在ご利用いただけません。"
+        "anyOf": [
+          {
+            "type": "object",
+            "required": [
+              "status_code",
+              "errors"
+            ],
+            "properties": {
+              "status_code": {
+                "type": "integer",
+                "example": 503
+              },
+              "errors": {
+                "type": "array",
+                "items": {
+                  "required": [
+                    "messages",
+                    "type"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "messages": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "このAPIは現在ご利用いただけません。"
+                      }
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "error",
+                      "enum": [
+                        "status",
+                        "error"
+                      ]
+                    }
                   }
-                },
-                "type": {
-                  "type": "string",
-                  "example": "error",
-                  "enum": [
-                    "status",
-                    "error"
-                  ]
                 }
               }
+            }
+          },
+          {
+            "type": "object",
+            "description": "一時的な利用停止や年度締めの処理中に返るエラー",
+            "required": [
+              "message"
+            ],
+            "properties": {
+              "message": {
+                "type": "string"
+              },
+              "code": {
+                "type": "string",
+                "example": "temporarily_unavailable"
+              }
+            }
+          }
+        ]
+      },
+      "messagesError": {
+        "type": "object",
+        "required": [
+          "messages"
+        ],
+        "properties": {
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "存在しないか既に削除された部門です。"
             }
           }
         }
