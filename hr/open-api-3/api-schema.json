@@ -22989,7 +22989,8 @@
           },
           "description": {
             "type": "string",
-            "description": "説明",
+            "description": "説明。最大255文字",
+            "maxLength": 255,
             "nullable": true
           },
           "frequency": {
