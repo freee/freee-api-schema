@@ -15104,7 +15104,7 @@
           "Expense applications"
         ],
         "summary": "経費申請の作成",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費申請を作成する</p>\n\n<p>経費精算APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計経費精算APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、特権承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>\n    承認者の指定に部門役職データ連携を活用した、以下のいずれかの承認ステップを含む申請経路にも対応しています。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n    申請者がどの所属部門として申請するかは applicant_group_id で指定します。申請者が複数の部門に所属している場合は必須です。1段階目の承認ステップが部門選択型の場合は approval_flow_group_id を指定してください。\n  </li>\n  <li>申請時には、申請タイトル(title)に加え、項目行については金額(amount)、日付(transaction_date)、内容(description)が必須項目となります。申請時の業務効率化のため、API入力をお勧めします。</li>\n  <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は作成できません。</li>\n  <li>本APIは外貨には非対応です。外貨を利用する経費申請は作成できません。</li>\n  <li>本APIはカスタム申請項目には非対応です。カスタム申請項目を使用した経費申請は作成できません。</li>\n  <li>本APIは金額計算方法には非対応です。金額計算方法を設定した経費申請は作成できません。</li>\n  <li>本APIは条件分岐を含む申請経路にも対応しています。</li>\n</ul>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費申請を作成する</p>\n\n<p>経費精算APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計経費精算APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、特権承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>\n    承認者の指定に部門役職データ連携を活用した、以下のいずれかの承認ステップを含む申請経路にも対応しています。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n    申請者がどの所属部門として申請するかは applicant_group_id で指定します。申請者が複数の部門に所属している場合は必須です。1段階目の承認ステップが部門選択型の場合は approval_flow_group_id を指定してください。\n  </li>\n  <li>申請時には、申請タイトル(title)に加え、項目行については金額(amount)、日付(transaction_date)、内容(description)が必須項目となります。申請時の業務効率化のため、API入力をお勧めします。</li>\n  <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は作成できません。</li>\n  <li>本APIは外貨には非対応です。外貨を利用する経費申請は作成できません。</li>\n  <li>本APIは条件分岐を含む申請経路にも対応しています。</li>\n</ul>",
         "operationId": "create_expense_application",
         "requestBody": {
           "content": {
@@ -15181,7 +15181,7 @@
           "Expense applications"
         ],
         "summary": "経費申請詳細の取得",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の経費申請を取得する</p>\n\n<p>経費精算APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計経費精算APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIは外貨には非対応です。外貨を利用する経費申請は取得できません。</li>\n  <li>本APIはカスタム申請項目には非対応です。カスタム申請項目を使用した経費申請は取得できません。</li>\n  <li>本APIは金額計算方法には非対応です。金額計算方法を設定した経費申請は取得できません。</li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の経費申請を取得する</p>\n\n<p>経費精算APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計経費精算APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIは外貨には非対応です。外貨を利用する経費申請は取得できません。</li>\n</ul>",
         "operationId": "get_expense_application",
         "parameters": [
           {
@@ -15275,7 +15275,7 @@
           "Expense applications"
         ],
         "summary": "経費申請の更新",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の経費申請を更新する</p>\n\n<p>経費精算APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計経費精算APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、経費申請を更新することができます。</li>\n  <li>本APIでは、status(申請ステータス): draft:下書き, feedback:差戻しのみ更新可能です。</li>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、特権承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>\n    承認者の指定に部門役職データ連携を活用した、以下のいずれかの承認ステップを含む申請経路にも対応しています。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n    申請者がどの所属部門として申請するかは applicant_group_id で指定します。申請者が複数の部門に所属している場合は必須です。1段階目の承認ステップが部門選択型の場合は approval_flow_group_id を指定してください。\n  </li>\n  <li>申請時には、申請タイトル(title)に加え、項目行については金額(amount)、日付(transaction_date)、内容(description)が必須項目となります。申請時の業務効率化のため、API入力をお勧めします。</li>\n  <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は更新できません。</li>\n  <li>本APIは外貨には非対応です。外貨を利用する経費申請は更新できません。</li>\n  <li>本APIはカスタム申請項目には非対応です。カスタム申請項目を使用した経費申請は更新できません。</li>\n  <li>本APIは金額計算方法には非対応です。金額計算方法を設定した経費申請は更新できません。</li>\n  <li>本APIは条件分岐を含む申請経路にも対応しています。</li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の経費申請を更新する</p>\n\n<p>経費精算APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計経費精算APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、経費申請を更新することができます。</li>\n  <li>本APIでは、status(申請ステータス): draft:下書き, feedback:差戻しのみ更新可能です。</li>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、特権承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>\n    承認者の指定に部門役職データ連携を活用した、以下のいずれかの承認ステップを含む申請経路にも対応しています。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n    申請者がどの所属部門として申請するかは applicant_group_id で指定します。申請者が複数の部門に所属している場合は必須です。1段階目の承認ステップが部門選択型の場合は approval_flow_group_id を指定してください。\n  </li>\n  <li>申請時には、申請タイトル(title)に加え、項目行については金額(amount)、日付(transaction_date)、内容(description)が必須項目となります。申請時の業務効率化のため、API入力をお勧めします。</li>\n  <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は更新できません。</li>\n  <li>本APIは外貨には非対応です。外貨を利用する経費申請は更新できません。</li>\n  <li>本APIは条件分岐を含む申請経路にも対応しています。</li>\n</ul>",
         "operationId": "update_expense_application",
         "parameters": [
           {
@@ -15373,7 +15373,7 @@
           "Expense applications"
         ],
         "summary": "経費申請の削除",
-        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の経費申請を削除する</p>\n\n<p>経費精算APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計経費精算APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、特権承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n      <li>自分が申請者でない申請の削除が可能なのはユーザーの権限が管理者権限、且つ申請ステータスが差し戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は削除できません。</li>\n  <li>本APIはカスタム申請項目には非対応です。カスタム申請項目を使用した経費申請は削除できません。</li>\n  <li>本APIは金額計算方法には非対応です。金額計算方法を設定した経費申請は削除できません。</li>\n</ul>",
+        "description": "\n<h2 id=\"\">概要</h2>\n\n<p>指定した事業所の経費申請を削除する</p>\n\n<p>経費精算APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計経費精算APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、特権承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n      <li>自分が申請者でない申請の削除が可能なのはユーザーの権限が管理者権限、且つ申請ステータスが差し戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は削除できません。</li>\n</ul>",
         "operationId": "destroy_expense_application",
         "parameters": [
           {
@@ -15463,7 +15463,7 @@
           "Expense applications"
         ],
         "summary": "経費申請の承認操作",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費申請の承認操作を行う</p>\n\n<p>経費精算APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計経費精算APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、経費申請の承認操作（承認する、却下する、申請者へ差し戻す、特権承認する、承認済み・却下済みを取り消す）を行うことができます。</li>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、特権承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>\n    承認者の指定に部門役職データ連携を活用した、以下のいずれかの承認ステップを含む申請経路にも対応しています。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n    次の承認ステップが部門選択型の場合は next_group_id を指定してください。\n  </li>\n  <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は承認操作できません。</li>\n  <li>本APIはカスタム申請項目には非対応です。カスタム申請項目を使用した経費申請は承認操作できません。</li>\n  <li>本APIは金額計算方法には非対応です。金額計算方法を設定した経費申請は承認操作できません。</li>\n  <li>本APIは条件分岐を含む申請経路にも対応しています。</li>\n</ul>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の経費申請の承認操作を行う</p>\n\n<p>経費精算APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計経費精算APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、経費申請の承認操作（承認する、却下する、申請者へ差し戻す、特権承認する、承認済み・却下済みを取り消す）を行うことができます。</li>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、特権承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>\n    承認者の指定に部門役職データ連携を活用した、以下のいずれかの承認ステップを含む申請経路にも対応しています。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n    次の承認ステップが部門選択型の場合は next_group_id を指定してください。\n  </li>\n  <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は承認操作できません。</li>\n  <li>本APIは条件分岐を含む申請経路にも対応しています。</li>\n</ul>",
         "operationId": "update_expense_application_action",
         "parameters": [
           {
@@ -23671,6 +23671,47 @@
                         "minimum": 1,
                         "description": "経費科目ID<br>\n申請時（draftにfalseを指定した時）は、経費科目の利用可能範囲（部門・申請者）により、section_idの部門と申請者で利用できない経費科目を指定すると400エラーになります。下書きでは利用可否を検証しません。<br>\n利用可能な経費科目は、経費科目一覧APIのsection_ids[]に部門IDを指定して取得してください。",
                         "example": 505
+                      },
+                      "custom_values": {
+                        "type": "array",
+                        "description": "カスタム申請項目の値一覧（配列）<br>\n経費科目に設定されたカスタム申請項目に対する入力値を指定します。カスタム申請項目の一覧は経費科目APIから取得してください。<br>\n金額の自動計算が設定された経費科目では、custom_valuesから計算した金額とamountが一致しない場合は400エラーになります（サーバー側の計算結果でamountを上書きすることはありません）。",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "key",
+                            "type"
+                          ],
+                          "properties": {
+                            "key": {
+                              "type": "string",
+                              "maxLength": 64,
+                              "pattern": "^[a-z][a-z0-9_]*$",
+                              "description": "カスタム申請項目のキー。経費科目APIのカスタム申請項目が返すkeyを指定します。<br>\n明細行の経費科目に存在しないキーを指定した場合は400エラーになります。",
+                              "example": "travel_days"
+                            },
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "single_line_string",
+                                "multi_line_string",
+                                "date",
+                                "date_range",
+                                "datetime",
+                                "pulldown",
+                                "radio_button",
+                                "checkbox",
+                                "number"
+                              ],
+                              "description": "カスタム申請項目の入力形式<br>\n経費科目に登録されているカスタム申請項目の入力形式と一致しない場合は400エラーになります。",
+                              "example": "number"
+                            },
+                            "value": {
+                              "description": "カスタム申請項目の値。typeによって指定できる形式が変わります。<br>\n<ul>\n  <li>single_line_string: 文字列 (255文字以内)</li>\n  <li>multi_line_string: 文字列 (10000文字以内)</li>\n  <li>date: 文字列 (yyyy-mm-dd)</li>\n  <li>date_range: start_date（開始日 yyyy-mm-dd）とend_date（終了日 yyyy-mm-dd）を持つオブジェクト</li>\n  <li>datetime: 文字列 (yyyy-mm-dd hh:mm)</li>\n  <li>pulldown: 文字列。カスタム申請項目の選択肢のいずれか</li>\n  <li>radio_button: 文字列。カスタム申請項目の選択肢のいずれか</li>\n  <li>checkbox: 文字列の配列。カスタム申請項目の選択肢のうち選択されたもの</li>\n  <li>number: 数値 (10桁以内、小数3桁まで)</li>\n</ul>\nnullまたは未指定の場合は未入力として扱います。入力設定が必須のカスタム申請項目を未入力で申請すると400エラーになります。",
+                              "example": 2,
+                              "nullable": true
+                            }
+                          }
+                        }
                       }
                     }
                   }
@@ -23867,6 +23908,47 @@
                         "minimum": 1,
                         "description": "経費科目ID<br>\n申請時（draftにfalseを指定した時）は、経費科目の利用可能範囲（部門・申請者）により、section_idの部門と申請者で利用できない経費科目を指定すると400エラーになります。下書きでは利用可否を検証しません。<br>\n利用可能な経費科目は、経費科目一覧APIのsection_ids[]に部門IDを指定して取得してください。",
                         "example": 505
+                      },
+                      "custom_values": {
+                        "type": "array",
+                        "description": "カスタム申請項目の値一覧（配列）<br>\n経費科目に設定されたカスタム申請項目に対する入力値を指定します。カスタム申請項目の一覧は経費科目APIから取得してください。<br>\n明細行のカスタム申請項目の値は、指定したcustom_valuesの内容で置き換えられます。custom_valuesに含まれない既存の値は削除されるため、更新後も残したい値は必ずcustom_valuesに含めてください。<br>\n金額の自動計算が設定された経費科目では、custom_valuesから計算した金額とamountが一致しない場合は400エラーになります（サーバー側の計算結果でamountを上書きすることはありません）。",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "key",
+                            "type"
+                          ],
+                          "properties": {
+                            "key": {
+                              "type": "string",
+                              "maxLength": 64,
+                              "pattern": "^[a-z][a-z0-9_]*$",
+                              "description": "カスタム申請項目のキー。経費科目APIのカスタム申請項目が返すkeyを指定します。<br>\n明細行の経費科目に存在しないキーを指定した場合は400エラーになります。",
+                              "example": "travel_days"
+                            },
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "single_line_string",
+                                "multi_line_string",
+                                "date",
+                                "date_range",
+                                "datetime",
+                                "pulldown",
+                                "radio_button",
+                                "checkbox",
+                                "number"
+                              ],
+                              "description": "カスタム申請項目の入力形式<br>\n経費科目に登録されているカスタム申請項目の入力形式と一致しない場合は400エラーになります。",
+                              "example": "number"
+                            },
+                            "value": {
+                              "description": "カスタム申請項目の値。typeによって指定できる形式が変わります。<br>\n<ul>\n  <li>single_line_string: 文字列 (255文字以内)</li>\n  <li>multi_line_string: 文字列 (10000文字以内)</li>\n  <li>date: 文字列 (yyyy-mm-dd)</li>\n  <li>date_range: start_date（開始日 yyyy-mm-dd）とend_date（終了日 yyyy-mm-dd）を持つオブジェクト</li>\n  <li>datetime: 文字列 (yyyy-mm-dd hh:mm)</li>\n  <li>pulldown: 文字列。カスタム申請項目の選択肢のいずれか</li>\n  <li>radio_button: 文字列。カスタム申請項目の選択肢のいずれか</li>\n  <li>checkbox: 文字列の配列。カスタム申請項目の選択肢のうち選択されたもの</li>\n  <li>number: 数値 (10桁以内、小数3桁まで)</li>\n</ul>\nnullまたは未指定の場合は未入力として扱います。入力設定が必須のカスタム申請項目を未入力で申請すると400エラーになります。",
+                              "example": 2,
+                              "nullable": true
+                            }
+                          }
+                        }
                       }
                     }
                   }
@@ -40603,6 +40685,109 @@
                             "minimum": 1,
                             "description": "経費科目ID",
                             "example": 505,
+                            "nullable": true
+                          },
+                          "custom_values": {
+                            "type": "array",
+                            "description": "カスタム申請項目の入力値（配列）\n経費科目に設定されたカスタム申請項目のうち、値が登録されているものを返します。",
+                            "items": {
+                              "type": "object",
+                              "required": [
+                                "key",
+                                "type",
+                                "value"
+                              ],
+                              "properties": {
+                                "key": {
+                                  "type": "string",
+                                  "maxLength": 64,
+                                  "description": "カスタム申請項目のキー。経費科目API のカスタム申請項目が返すkeyと同じ値です。\n経費科目の中で一意で、経費申請の作成時にも同じキーで指定します。",
+                                  "example": "travel_days"
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "single_line_string",
+                                    "multi_line_string",
+                                    "date",
+                                    "date_range",
+                                    "datetime",
+                                    "pulldown",
+                                    "radio_button",
+                                    "checkbox",
+                                    "number"
+                                  ],
+                                  "description": "カスタム申請項目の入力形式\n(single_line_string: 一行文字列, multi_line_string: 複数行文字列, date: 日付,\ndate_range: 期間, datetime: 日時, pulldown: プルダウン, radio_button: ラジオボタン,\ncheckbox: チェックボックス, number: 数値)",
+                                  "example": "number"
+                                },
+                                "value": {
+                                  "description": "入力値。形式はtypeによって決まります。\nsingle_line_string, multi_line_string, pulldown, radio_button: 文字列\ndate: 日付の文字列 (yyyy-mm-dd)\ndatetime: 日時の文字列 (yyyy-mm-dd hh:mm)\ndate_range: start_date（開始日, yyyy-mm-dd）とend_date（終了日, yyyy-mm-dd）を持つオブジェクト\ncheckbox: 選択された選択肢の文字列（配列）\nnumber: 数値\n未入力の場合はnullになります。",
+                                  "example": 3,
+                                  "nullable": true
+                                }
+                              }
+                            }
+                          },
+                          "amount_calculate_result": {
+                            "type": "object",
+                            "description": "金額計算方法による計算結果\n経費科目に金額計算方法が設定されている明細行のみ値が入ります。設定されていない場合はnullになります。",
+                            "required": [
+                              "calculated_amount",
+                              "applied_rule",
+                              "evaluated_as"
+                            ],
+                            "properties": {
+                              "calculated_amount": {
+                                "type": "integer",
+                                "format": "int64",
+                                "description": "計算式によって算出された金額",
+                                "example": 15000
+                              },
+                              "applied_rule": {
+                                "type": "object",
+                                "description": "適用された金額計算ルール。\n経費科目APIのamount_calculation_setting.rulesと同じ構造なので、\nどのルールが適用されたかを突き合わせられます。",
+                                "required": [
+                                  "condition",
+                                  "formula"
+                                ],
+                                "properties": {
+                                  "condition": {
+                                    "$ref": "#/components/schemas/expenseApplicationLineTemplateAmountCalculationCondition"
+                                  },
+                                  "formula": {
+                                    "type": "string",
+                                    "description": "適用された金額計算式。カスタム申請項目の参照は{key}で表します。\n経費科目APIのamount_calculation_setting.rules[].formulaと同じ公開文法です。",
+                                    "example": "{travel_days}*5000"
+                                  }
+                                }
+                              },
+                              "evaluated_as": {
+                                "type": "object",
+                                "description": "金額計算の条件判定に用いた申請者の所属情報",
+                                "required": [
+                                  "group_id",
+                                  "position_id"
+                                ],
+                                "properties": {
+                                  "group_id": {
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "minimum": 1,
+                                    "description": "申請者の所属部門ID。未設定の場合はnull",
+                                    "example": 10,
+                                    "nullable": true
+                                  },
+                                  "position_id": {
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "minimum": 1,
+                                    "description": "申請者の役職ID。未設定の場合はnull",
+                                    "example": 3,
+                                    "nullable": true
+                                  }
+                                }
+                              }
+                            },
                             "nullable": true
                           }
                         }
