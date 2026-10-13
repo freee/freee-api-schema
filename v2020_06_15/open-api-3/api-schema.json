@@ -25781,7 +25781,7 @@
               },
               "name": {
                 "type": "string",
-                "maxLength": 30,
+                "maxLength": 255,
                 "description": "勘定科目名 (30文字以内)",
                 "example": "ソフトウェア"
               },
@@ -34597,7 +34597,8 @@
                     "description": {
                       "type": "string",
                       "description": "メモ",
-                      "example": "タクシー利用"
+                      "example": "タクシー利用",
+                      "nullable": true
                     },
                     "mime_type": {
                       "type": "string",
@@ -34677,6 +34678,7 @@
                         "id"
                       ],
                       "type": "object",
+                      "nullable": true,
                       "description": "ファイルをアップロードしたユーザー",
                       "properties": {
                         "id": {
@@ -35467,7 +35469,8 @@
                 "description": {
                   "type": "string",
                   "description": "メモ",
-                  "example": "タクシー利用"
+                  "example": "タクシー利用",
+                  "nullable": true
                 },
                 "mime_type": {
                   "type": "string",
@@ -35547,6 +35550,7 @@
                     "id"
                   ],
                   "type": "object",
+                  "nullable": true,
                   "description": "ファイルをアップロードしたユーザー",
                   "properties": {
                     "id": {
@@ -42350,6 +42354,7 @@
               },
               "account_type": {
                 "type": "string",
+                "nullable": true,
                 "description": "口座種別\n* `ordinary` - 普通\n* `checking` - 当座\n* `earmarked` - 納税準備預金\n* `savings` - 貯蓄\n* `other` - その他",
                 "example": "ordinary",
                 "enum": [
@@ -44769,7 +44774,6 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 0,
-                  "maximum": 2147483647,
                   "description": "金額（非推奨。budget_amount を使用してください）",
                   "example": 1000,
                   "deprecated": true
@@ -44778,12 +44782,12 @@
                   "type": "integer",
                   "format": "int64",
                   "minimum": 0,
-                  "maximum": 2147483647,
                   "description": "金額",
                   "example": 1000
                 },
                 "applicant": {
                   "type": "object",
+                  "nullable": true,
                   "required": [
                     "id"
                   ],
