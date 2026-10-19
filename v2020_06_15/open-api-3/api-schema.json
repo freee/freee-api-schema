@@ -17141,7 +17141,7 @@
           "Payment requests"
         ],
         "summary": "支払依頼の作成",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の支払依頼を作成する</p>\n\n<p>支払依頼APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-payment-requests\" target=\"_blank\">freee会計支払依頼APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、特権承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>\n    承認者の指定に部門役職データ連携を活用した、以下のいずれかの承認ステップを含む申請経路にも対応しています。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n    申請者がどの所属部門として申請するかは applicant_group_id で指定します。申請者が複数の部門に所属している場合は必須です。1段階目の承認ステップが部門選択型の場合は approval_flow_group_id を指定してください。\n  </li>\n  <li>本APIは条件分岐を含む申請経路にも対応しています。</li>\n  <li>本APIでは支払依頼の項目行一覧(payment_request_lines)は、最大100行までになります。</li>\n</ul>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の支払依頼を作成する</p>\n\n<p>支払依頼APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-payment-requests\" target=\"_blank\">freee会計支払依頼APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、特権承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>\n    承認者の指定に部門役職データ連携を活用した、以下のいずれかの承認ステップを含む申請経路にも対応しています。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n    申請者がどの所属部門として申請するかは applicant_group_id で指定します。申請者が複数の部門に所属している場合は必須です。1段階目の承認ステップが部門選択型の場合は approval_flow_group_id を指定してください。\n  </li>\n  <li>本APIは条件分岐を含む申請経路にも対応しています。</li>\n  <li>本APIでは支払依頼の項目行一覧(payment_request_lines)は、最大100行までになります。</li>\n  <li>parent_id と parent_type で、各種申請または購買申請を親申請として関連付けられます。</li>\n</ul>",
         "operationId": "create_payment_request",
         "requestBody": {
           "content": {
@@ -17312,7 +17312,7 @@
           "Payment requests"
         ],
         "summary": "支払依頼の更新",
-        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の支払依頼を更新する</p>\n\n<p>支払依頼APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-payment-requests\" target=\"_blank\">freee会計支払依頼APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、支払依頼を更新することができます。</li>\n  <li>本APIでは、status(申請ステータス): draft:下書き, in_progress:申請中, feedback:差戻しのみ更新可能です。</li>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、特権承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>\n    承認者の指定に部門役職データ連携を活用した、以下のいずれかの承認ステップを含む申請経路にも対応しています。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n    申請者がどの所属部門として申請するかは applicant_group_id で指定します。申請者が複数の部門に所属している場合は必須です。1段階目の承認ステップが部門選択型の場合は approval_flow_group_id を指定してください。\n  </li>\n  <li>本APIは条件分岐を含む申請経路にも対応しています。</li>\n  <li>申請ステータスが申請中の場合には、申請タイトル(title)、申請日(application_date)、申請経路ID(approval_flow_route_id)、承認者のユーザーID(approver_id)は更新ができません。</li>\n  <li>本APIでは支払依頼の項目行一覧(payment_request_lines)は、最大100行までになります。</li>\n</ul>",
+        "description": "\n<h2 id=\"_1\">概要</h2>\n\n<p>指定した事業所の支払依頼を更新する</p>\n\n<p>支払依頼APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-payment-requests\" target=\"_blank\">freee会計支払依頼APIの使い方</a>をご参照ください</p>\n\n<h2 id=\"_2\">注意点</h2>\n<ul>\n  <li>本APIでは、支払依頼を更新することができます。</li>\n  <li>本APIでは、status(申請ステータス): draft:下書き, in_progress:申請中, feedback:差戻しのみ更新可能です。</li>\n  <li>\n    申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、特権承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。\n    <ul>\n      <li>\n        承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。\n        <ul>\n          <li>\n            初回申請の場合\n            <ul><li>申請の作成（POST）</li></ul>\n          </li>\n          <li>\n            作成済みの申請の申請ステータス変更・更新する場合\n            <ul><li>申請の更新（PUT）</li></ul>\n          </li>\n          <li>\n            申請中、承認済み、却下の申請の承認操作を行う場合\n            <ul><li>承認操作の実行（POST）</li></ul>\n          </li>\n        </ul>\n      </li>\n      <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>\n    </ul>\n  </li>\n  <li>\n    承認者の指定に部門役職データ連携を活用した、以下のいずれかの承認ステップを含む申請経路にも対応しています。\n    <ul>\n      <li>役職指定（申請者の所属部門）</li>\n      <li>役職指定（申請時に部門指定）</li>\n      <li>部門および役職指定</li>\n    </ul>\n    申請者がどの所属部門として申請するかは applicant_group_id で指定します。申請者が複数の部門に所属している場合は必須です。1段階目の承認ステップが部門選択型の場合は approval_flow_group_id を指定してください。\n  </li>\n  <li>本APIは条件分岐を含む申請経路にも対応しています。</li>\n  <li>申請ステータスが申請中の場合には、申請タイトル(title)、申請日(application_date)、申請経路ID(approval_flow_route_id)、承認者のユーザーID(approver_id)は更新ができません。</li>\n  <li>本APIでは支払依頼の項目行一覧(payment_request_lines)は、最大100行までになります。</li>\n  <li>parent_id と parent_type で、各種申請または購買申請を親申請として関連付けられます。parent_id に null を指定すると関連付けを解除し、キーを指定しない場合は親申請を更新しません。</li>\n</ul>",
         "operationId": "update_payment_request",
         "parameters": [
           {
@@ -23731,6 +23731,34 @@
                     "example": 606
                   }
                 },
+                "use_currency": {
+                  "type": "boolean",
+                  "description": "外貨を利用するか<br>\ntrueを指定する場合は、expense_application_purchase_line_currencyも指定してください。事業所の外貨利用設定が無効な場合は400エラーになります。<br>",
+                  "example": true
+                },
+                "expense_application_purchase_line_currency": {
+                  "type": "object",
+                  "description": "申請行の通貨情報<br>\nuse_currencyにtrueを指定した場合に有効です。",
+                  "properties": {
+                    "currency_id": {
+                      "type": "integer",
+                      "format": "int64",
+                      "minimum": 1,
+                      "description": "通貨ID。事業所で利用可能な通貨を指定します。存在しない通貨IDを指定すると400エラーになります。",
+                      "example": 1
+                    },
+                    "currency_code": {
+                      "type": "string",
+                      "description": "通貨コード（ISO 4217）。currency_idの通貨コードと一致しない場合は400エラーになります。",
+                      "example": "USD"
+                    },
+                    "exchange_rate": {
+                      "type": "number",
+                      "description": "為替レート（小数点以下4桁まで）。5桁以上を指定すると400エラーになります。",
+                      "example": 150.25
+                    }
+                  }
+                },
                 "expense_application_lines": {
                   "type": "array",
                   "description": "明細行一覧（配列）",
@@ -23757,6 +23785,17 @@
                         "minimum": 1,
                         "description": "経費科目ID<br>\n申請時（draftにfalseを指定した時）は、経費科目の利用可能範囲（部門・申請者）により、section_idの部門と申請者で利用できない経費科目を指定すると400エラーになります。下書きでは利用可否を検証しません。<br>\n利用可能な経費科目は、経費科目一覧APIのsection_ids[]に部門IDを指定して取得してください。",
                         "example": 505
+                      },
+                      "expense_application_line_currency_amount": {
+                        "type": "object",
+                        "description": "明細行の外貨額<br>\n申請行でuse_currencyにtrueを指定した場合に有効です。外貨額と為替レートから円換算した金額がamountに設定されます。",
+                        "properties": {
+                          "currency_amount": {
+                            "type": "number",
+                            "description": "外貨額（小数点以下4桁まで）。5桁以上を指定すると400エラーになります。",
+                            "example": 100.5
+                          }
+                        }
                       },
                       "custom_values": {
                         "type": "array",
@@ -23961,6 +24000,34 @@
                     "example": 606
                   }
                 },
+                "use_currency": {
+                  "type": "boolean",
+                  "description": "外貨を利用するか<br>\ntrueを指定する場合は、expense_application_purchase_line_currencyも指定してください。事業所の外貨利用設定が無効な場合は400エラーになります。<br>\n更新時、use_currencyを省略した場合は既存の外貨情報が保持されます。falseを指定した場合のみ外貨情報が削除されます。<br>",
+                  "example": true
+                },
+                "expense_application_purchase_line_currency": {
+                  "type": "object",
+                  "description": "申請行の通貨情報<br>\nuse_currencyにtrueを指定した場合に有効です。",
+                  "properties": {
+                    "currency_id": {
+                      "type": "integer",
+                      "format": "int64",
+                      "minimum": 1,
+                      "description": "通貨ID。事業所で利用可能な通貨を指定します。存在しない通貨IDを指定すると400エラーになります。",
+                      "example": 1
+                    },
+                    "currency_code": {
+                      "type": "string",
+                      "description": "通貨コード（ISO 4217）。currency_idの通貨コードと一致しない場合は400エラーになります。",
+                      "example": "USD"
+                    },
+                    "exchange_rate": {
+                      "type": "number",
+                      "description": "為替レート（小数点以下4桁まで）。5桁以上を指定すると400エラーになります。",
+                      "example": 150.25
+                    }
+                  }
+                },
                 "expense_application_lines": {
                   "type": "array",
                   "description": "明細行一覧（配列）",
@@ -23994,6 +24061,17 @@
                         "minimum": 1,
                         "description": "経費科目ID<br>\n申請時（draftにfalseを指定した時）は、経費科目の利用可能範囲（部門・申請者）により、section_idの部門と申請者で利用できない経費科目を指定すると400エラーになります。下書きでは利用可否を検証しません。<br>\n利用可能な経費科目は、経費科目一覧APIのsection_ids[]に部門IDを指定して取得してください。",
                         "example": 505
+                      },
+                      "expense_application_line_currency_amount": {
+                        "type": "object",
+                        "description": "明細行の外貨額<br>\n申請行でuse_currencyにtrueを指定した場合に有効です。外貨額と為替レートから円換算した金額がamountに設定されます。",
+                        "properties": {
+                          "currency_amount": {
+                            "type": "number",
+                            "description": "外貨額（小数点以下4桁まで）。5桁以上を指定すると400エラーになります。",
+                            "example": 100.5
+                          }
+                        }
                       },
                       "custom_values": {
                         "type": "array",
@@ -24366,8 +24444,18 @@
             "type": "integer",
             "format": "int64",
             "minimum": 1,
-            "description": "親申請ID\n法人エンタープライズプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）で利用できます。\n承認済みの既存各種申請IDのみ指定可能です（各種申請一覧API `/api/1/approval_requests` で取得できます）。",
+            "description": "親申請ID\n法人エンタープライズプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）で利用できます。\n承認済みの既存各種申請IDまたは購買申請IDのみ指定可能です（各種申請一覧API `/api/1/approval_requests`、購買申請一覧API `/api/1/purchase_requests` で取得できます）。\n親申請の種別を購買申請にする場合は parent_type に `PurchaseRequest` を指定してください。",
             "example": 2,
+            "nullable": true
+          },
+          "parent_type": {
+            "type": "string",
+            "description": "親申請の種別（parent_id を指定した場合のみ有効）\n* `ApprovalRequest` - 各種申請（parent_type 未指定時のデフォルト）\n* `PurchaseRequest` - 購買申請\n\n上記以外の値を指定するとバリデーションエラーになります。",
+            "example": "ApprovalRequest",
+            "enum": [
+              "ApprovalRequest",
+              "PurchaseRequest"
+            ],
             "nullable": true
           },
           "draft": {
@@ -24667,6 +24755,24 @@
             "minimum": 1,
             "description": "申請経路の承認部門ID<br>\n1段階目の承認ステップが部門選択型の場合に、承認させる部門を指定してください。\n",
             "example": 1,
+            "nullable": true
+          },
+          "parent_id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "description": "親申請ID\n法人エンタープライズプラン、法人アドバンスプラン（および旧法人プロフェッショナルプラン）で利用できます。\n承認済みの既存各種申請IDまたは購買申請IDのみ指定可能です（各種申請一覧API `/api/1/approval_requests`、購買申請一覧API `/api/1/purchase_requests` で取得できます）。\n* 親申請の種別を購買申請にする場合は parent_type に `PurchaseRequest` を指定してください。\n* `null` を指定すると、現在設定されている親申請との関連付けを解除します。\n* キーを指定しない場合、親申請は更新されません。\n* 親申請の更新には、申請フォームの設定で申請者（申請中の場合は承認者）による親申請の変更が許可されている必要があります。",
+            "example": 2,
+            "nullable": true
+          },
+          "parent_type": {
+            "type": "string",
+            "description": "親申請の種別（parent_id を指定した場合のみ有効）\n* `ApprovalRequest` - 各種申請（parent_type 未指定時のデフォルト）\n* `PurchaseRequest` - 購買申請\n\n上記以外の値を指定するとバリデーションエラーになります。",
+            "example": "ApprovalRequest",
+            "enum": [
+              "ApprovalRequest",
+              "PurchaseRequest"
+            ],
             "nullable": true
           },
           "draft": {
@@ -40739,6 +40845,36 @@
                         "example": 606
                       }
                     },
+                    "use_currency": {
+                      "type": "boolean",
+                      "description": "外貨を利用しているか",
+                      "example": true
+                    },
+                    "expense_application_purchase_line_currency": {
+                      "type": "object",
+                      "nullable": true,
+                      "description": "申請行の通貨情報。外貨を利用していない場合はnullになります。",
+                      "properties": {
+                        "currency_id": {
+                          "type": "integer",
+                          "format": "int64",
+                          "minimum": 1,
+                          "description": "通貨ID",
+                          "example": 1
+                        },
+                        "currency_code": {
+                          "type": "string",
+                          "description": "通貨コード（ISO 4217）",
+                          "example": "USD"
+                        },
+                        "exchange_rate": {
+                          "type": "string",
+                          "nullable": true,
+                          "description": "為替レート（小数文字列）。未設定の場合はnullになります。",
+                          "example": "150.25"
+                        }
+                      }
+                    },
                     "expense_application_lines": {
                       "type": "array",
                       "description": "明細行一覧（配列）",
@@ -40776,6 +40912,25 @@
                             "description": "経費科目ID",
                             "example": 505,
                             "nullable": true
+                          },
+                          "expense_application_line_currency_amount": {
+                            "type": "object",
+                            "nullable": true,
+                            "description": "明細行の外貨額。外貨を利用していない場合はnullになります。",
+                            "properties": {
+                              "currency_amount": {
+                                "type": "string",
+                                "nullable": true,
+                                "description": "外貨額（小数文字列）。未設定の場合はnullになります。",
+                                "example": "100.5"
+                              },
+                              "system_calc_amount": {
+                                "type": "integer",
+                                "format": "int64",
+                                "description": "外貨額と為替レートからシステムが計算した円換算額",
+                                "example": 15075
+                              }
+                            }
                           },
                           "custom_values": {
                             "type": "array",
@@ -42345,6 +42500,24 @@
                 "maximum": 2147483647,
                 "description": "現在の round（承認操作 API `POST /api/1/payment_requests/{id}/actions` の target_round に指定します）\n差戻し等により申請が step の最初からやり直しになると round の値が増えます。",
                 "example": 1
+              },
+              "parent_id": {
+                "type": "integer",
+                "format": "int64",
+                "minimum": 1,
+                "description": "親申請ID。\n各種申請または購買申請が使用可能なプランの事業所でのみレスポンスに含まれる（キー自体が存在しない場合がある）。\n関連付けが解除されている場合や親申請が未設定の場合は null。",
+                "example": 2,
+                "nullable": true
+              },
+              "parent_type": {
+                "type": "string",
+                "description": "親申請の種別。parent_id とペアで返却される。\n* `ApprovalRequest` - 各種申請\n* `PurchaseRequest` - 購買申請\n\n各種申請または購買申請が使用可能なプランの事業所でのみレスポンスに含まれる（キー自体が存在しない場合がある）。\n関連付けが解除されている場合や親申請が未設定の場合は null。",
+                "example": "ApprovalRequest",
+                "enum": [
+                  "ApprovalRequest",
+                  "PurchaseRequest"
+                ],
+                "nullable": true
               },
               "document_code": {
                 "type": "string",
