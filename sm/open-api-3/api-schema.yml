@@ -197,6 +197,9 @@ paths:
         <p>charge_employee_ids : 社内担当者の従業員ID(複数指定可)</p>
         </li>
         <li>
+        <p>charge_member_ids : 社内担当者のメンバーID(複数指定可)</p>
+        </li>
+        <li>
         <p>customer_ids : 顧客の取引先ID(複数指定可)</p>
         </li>
         <li>
@@ -220,6 +223,7 @@ paths:
         - $ref: '#/components/parameters/sales_progression_ids'
         - $ref: '#/components/parameters/business_phase_ids'
         - $ref: '#/components/parameters/charge_employee_ids'
+        - $ref: '#/components/parameters/charge_member_ids'
         - $ref: '#/components/parameters/customer_ids'
         - $ref: '#/components/parameters/code'
         - $ref: '#/components/parameters/canceled'
@@ -269,6 +273,9 @@ paths:
         </li>
         <li>
         <p>charge_employee_id : 社内担当者の従業員ID</p>
+        </li>
+        <li>
+        <p>charge_member_id : 社内担当者のメンバーID</p>
         </li>
         <li>
         <p>customer_id : 顧客の取引先ID</p>
@@ -375,6 +382,7 @@ paths:
         <li><p>code : 案件コード</p></li>
         <li><p>business_date : 案件登録日</p></li>
         <li><p>charge_employee_id : 社内担当者の従業員ID</p></li>
+        <li><p>charge_member_id : 社内担当者のメンバーID</p></li>
         <li><p>customer_id : 顧客の取引先ID</p></li>
         <li><p>prospect_sales_order : 受注見込</p></li>
         <li><p>sales_progression_id : 受注確度ID</p></li>
@@ -559,6 +567,7 @@ paths:
         <li><p>start_unit_price : 単価:下限</p></li>
         <li><p>end_unit_price : 単価:上限</p></li>
         <li><p>charge_employee_ids : 社内担当者の従業員ID(複数指定可)</p></li>
+        <li><p>charge_member_ids : 社内担当者のメンバーID(複数指定可)</p></li>
         <li><p>reporting_section_ids : 担当部門ID(複数指定可)</p></li>
         <li><p>supplier_ids : 仕入先の取引先ID(複数指定可)</p></li>
         <li><p>payment_partner_ids : 支払先の取引先ID(複数指定可)</p></li>
@@ -591,6 +600,7 @@ paths:
         - $ref: '#/components/parameters/start_unit_price'
         - $ref: '#/components/parameters/end_unit_price'
         - $ref: '#/components/parameters/charge_employee_ids'
+        - $ref: '#/components/parameters/charge_member_ids'
         - $ref: '#/components/parameters/reporting_section_ids'
         - $ref: '#/components/parameters/supplier_ids'
         - $ref: '#/components/parameters/payment_partner_ids'
@@ -639,6 +649,7 @@ paths:
         <li><p>business_id : 案件ID</p></li>
         <li><p>memo : 備考</p></li>
         <li><p>charge_employee_id : 社内担当者ID</p></li>
+        <li><p>charge_member_id : 社内担当者のメンバーID</p></li>
         <li><p>reporting_section_id : 担当部門ID</p></li>
         </ul>
         <h3 id="_4">type=procurement 固有フィールド</h3>
@@ -736,6 +747,7 @@ paths:
         <li><p>business_id : 案件ID</p></li>
         <li><p>memo : 備考</p></li>
         <li><p>charge_employee_id : 社内担当者ID</p></li>
+        <li><p>charge_member_id : 社内担当者のメンバーID</p></li>
         <li><p>reporting_section_id : 担当部門ID</p></li>
         </ul>
         <h3 id="_4">type=procurement 固有フィールド（外部仕入・その他原価では送信不可）</h3>
@@ -1007,6 +1019,45 @@ paths:
           $ref: '#/components/responses/TooManyRequestsErrorResponse'
         '500':
           $ref: '#/components/responses/InternalServerErrorResponse'
+  /master/members:
+    get:
+      tags:
+        - master
+      summary: メンバー一覧
+      description: |-
+        <h2 id="">概要</h2>
+        <p>メンバー一覧を取得します。
+        使用可能なもののみを返却します。
+        </p>
+      operationId: get_master_members
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/offset'
+        - name: limit
+          description: 取得レコードの件数（デフォルト：100, 最小：1, 最大：500）
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 500
+            default: 100
+      responses:
+        '200':
+          $ref: '#/components/responses/MembersIndexResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerErrorResponse'
   /master/custom_fields/business/definitions:
     get:
       tags:
@@ -1032,6 +1083,7 @@ paths:
           <li><code>employee</code>: 従業員</li>
           <li><code>section</code>: 部門</li>
           <li><code>master_item</code>: 商品</li>
+          <li><code>member</code>: メンバー</li>
         </ul>
       operationId: get_master_custom_fields_business_definitions
       parameters:
@@ -1086,6 +1138,9 @@ paths:
         <p>charge_employee_ids : 社内担当者の従業員ID(複数指定可)</p>
         </li>
         <li>
+        <p>charge_member_ids : 社内担当者のメンバーID(複数指定可)</p>
+        </li>
+        <li>
         <p>supplier_ids : 仕入先の取引先ID(複数指定可)</p>
         </li>
         <li>
@@ -1121,6 +1176,7 @@ paths:
         - $ref: '#/components/parameters/start_purchase_order_date'
         - $ref: '#/components/parameters/end_purchase_order_date'
         - $ref: '#/components/parameters/charge_employee_ids'
+        - $ref: '#/components/parameters/charge_member_ids'
         - $ref: '#/components/parameters/supplier_ids'
         - $ref: '#/components/parameters/business_ids'
         - $ref: '#/components/parameters/purchase_order_no'
@@ -1210,6 +1266,9 @@ paths:
         </li>
         <li>
         <p>charge_employee_id : 社内担当者の従業員ID</p>
+        </li>
+        <li>
+        <p>charge_member_id : 社内担当者のメンバーID</p>
         </li>
         <li>
         <p>reporting_section_id : 担当部門ID</p>
@@ -1364,6 +1423,9 @@ paths:
         <p>charge_employee_id : 社内担当者の従業員ID</p>
         </li>
         <li>
+        <p>charge_member_id : 社内担当者のメンバーID</p>
+        </li>
+        <li>
         <p>reporting_section_id : 担当部門ID</p>
         </li>
         <li>
@@ -1505,6 +1567,9 @@ paths:
         <p>charge_employee_ids : 社内担当者の従業員ID(複数指定可)</p>
         </li>
         <li>
+        <p>charge_member_ids : 社内担当者のメンバーID(複数指定可)</p>
+        </li>
+        <li>
         <p>customer_ids : 顧客の取引先ID(複数指定可)</p>
         </li>
         <li>
@@ -1537,6 +1602,7 @@ paths:
         - $ref: '#/components/parameters/start_quotation_date'
         - $ref: '#/components/parameters/end_quotation_date'
         - $ref: '#/components/parameters/charge_employee_ids'
+        - $ref: '#/components/parameters/charge_member_ids'
         - $ref: '#/components/parameters/customer_ids'
         - name: business_ids[]
           description: 案件ID
@@ -1629,6 +1695,9 @@ paths:
         </li>
         <li>
         <p>charge_employee_id : 社内担当者の従業員ID</p>
+        </li>
+        <li>
+        <p>charge_member_id : 社内担当者のメンバーID</p>
         </li>
         <li>
         <p>reporting_section_id : 担当部門ID</p>
@@ -1746,6 +1815,9 @@ paths:
         </li>
         <li>
         <p>charge_employee_id : 社内担当者の従業員ID</p>
+        </li>
+        <li>
+        <p>charge_member_id : 社内担当者のメンバーID</p>
         </li>
         <li>
         <p>reporting_section_id : 担当部門ID</p>
@@ -1926,6 +1998,9 @@ paths:
         <p>charge_employee_ids : 社内担当者の従業員ID(複数指定可)</p>
         </li>
         <li>
+        <p>charge_member_ids : 社内担当者のメンバーID(複数指定可)</p>
+        </li>
+        <li>
         <p>customer_ids : 顧客の取引先ID(複数指定可)</p>
         </li>
         <li>
@@ -1947,6 +2022,7 @@ paths:
         - $ref: '#/components/parameters/start_sales_order_date'
         - $ref: '#/components/parameters/end_sales_order_date'
         - $ref: '#/components/parameters/charge_employee_ids'
+        - $ref: '#/components/parameters/charge_member_ids'
         - $ref: '#/components/parameters/customer_ids'
         - $ref: '#/components/parameters/sales_order_no'
         - $ref: '#/components/parameters/canceled'
@@ -2163,6 +2239,9 @@ paths:
         <p>charge_employee_id : 社内担当者の従業員ID</p>
         </li>
         <li>
+        <p>charge_member_id : 社内担当者のメンバーID</p>
+        </li>
+        <li>
         <p>reporting_section_id : 担当部門ID</p>
         </li>
         <li>
@@ -2293,6 +2372,9 @@ paths:
         <p>charge_employee_ids : 社内担当者の従業員ID(複数指定可)</p>
         </li>
         <li>
+        <p>charge_member_ids : 社内担当者のメンバーID(複数指定可)</p>
+        </li>
+        <li>
         <p>customer_ids : 顧客の取引先ID(複数指定可)</p>
         </li>
         <li>
@@ -2321,6 +2403,7 @@ paths:
         - $ref: '#/components/parameters/start_acceptance_date'
         - $ref: '#/components/parameters/end_acceptance_date'
         - $ref: '#/components/parameters/charge_employee_ids'
+        - $ref: '#/components/parameters/charge_member_ids'
         - $ref: '#/components/parameters/customer_ids'
         - $ref: '#/components/parameters/delivery_no'
         - $ref: '#/components/parameters/delivery_status'
@@ -2422,6 +2505,9 @@ paths:
         </li>
         <li>
         <p>charge_employee_id : 社内担当者の従業員ID</p>
+        </li>
+        <li>
+        <p>charge_member_id : 社内担当者のメンバーID</p>
         </li>
         <li>
         <p>reporting_section_id : 担当部門ID</p>
@@ -2563,6 +2649,9 @@ paths:
         </li>
         <li>
         <p>charge_employee_id : 社内担当者の従業員ID</p>
+        </li>
+        <li>
+        <p>charge_member_id : 社内担当者のメンバーID</p>
         </li>
         <li>
         <p>reporting_section_id : 担当部門ID</p>
@@ -2790,6 +2879,9 @@ paths:
         <p>charge_employee_ids : 社内担当者の従業員ID(複数指定可)</p>
         </li>
         <li>
+        <p>charge_member_ids : 社内担当者のメンバーID(複数指定可)</p>
+        </li>
+        <li>
         <p>customer_ids : 顧客の取引先ID(複数指定可)</p>
         </li>
         <li>
@@ -2817,10 +2909,15 @@ paths:
         - $ref: '#/components/parameters/company_id'
         - $ref: '#/components/parameters/start_registered_date-3'
         - $ref: '#/components/parameters/end_registered_date-3'
+        - $ref: '#/components/parameters/start_last_updated_date-4'
+        - $ref: '#/components/parameters/end_last_updated_date-4'
         - $ref: '#/components/parameters/start_revenue_recognition_date'
         - $ref: '#/components/parameters/end_revenue_recognition_date'
         - $ref: '#/components/parameters/charge_employee_ids'
+        - $ref: '#/components/parameters/charge_member_ids'
         - $ref: '#/components/parameters/customer_ids'
+        - $ref: '#/components/parameters/business_ids'
+        - $ref: '#/components/parameters/sales_no'
         - $ref: '#/components/parameters/billing_status-2'
         - $ref: '#/components/parameters/collection_status'
         - $ref: '#/components/parameters/canceled'
@@ -2909,6 +3006,9 @@ paths:
         </li>
         <li>
         <p>charge_employee_id : 社内担当者の従業員ID</p>
+        </li>
+        <li>
+        <p>charge_member_id : 社内担当者のメンバーID</p>
         </li>
         <li>
         <p>reporting_section_id : 担当部門ID</p>
@@ -3029,6 +3129,9 @@ paths:
         </li>
         <li>
         <p>charge_employee_id : 社内担当者の従業員ID</p>
+        </li>
+        <li>
+        <p>charge_member_id : 社内担当者のメンバーID</p>
         </li>
         <li>
         <p>reporting_section_id : 担当部門ID</p>
@@ -3227,6 +3330,9 @@ paths:
         <p>charge_employee_ids : 社内担当者の従業員ID(複数指定可)</p>
         </li>
         <li>
+        <p>charge_member_ids : 社内担当者のメンバーID(複数指定可)</p>
+        </li>
+        <li>
         <p>reporting_section_ids : 担当部門ID(複数指定可)</p>
         </li>
         <li>
@@ -3256,6 +3362,7 @@ paths:
         - $ref: '#/components/parameters/end_last_revenue_recognition_date'
         - $ref: '#/components/parameters/customer_ids'
         - $ref: '#/components/parameters/charge_employee_ids'
+        - $ref: '#/components/parameters/charge_member_ids'
         - $ref: '#/components/parameters/reporting_section_ids'
         - $ref: '#/components/parameters/business_ids'
         - $ref: '#/components/parameters/periodic_sales_no'
@@ -3339,6 +3446,9 @@ paths:
         </li>
         <li>
         <p>charge_employee_id : 社内担当者の従業員ID</p>
+        </li>
+        <li>
+        <p>charge_member_id : 社内担当者のメンバーID</p>
         </li>
         <li>
         <p>reporting_section_id : 担当部門ID</p>
@@ -3456,6 +3566,9 @@ paths:
         </li>
         <li>
         <p>charge_employee_id : 社内担当者の従業員ID</p>
+        </li>
+        <li>
+        <p>charge_member_id : 社内担当者のメンバーID</p>
         </li>
         <li>
         <p>reporting_section_id : 担当部門ID</p>
@@ -3632,6 +3745,9 @@ paths:
         <p>charge_employee_ids : 社内担当者の従業員ID(複数指定可)</p>
         </li>
         <li>
+        <p>charge_member_ids : 社内担当者のメンバーID(複数指定可)</p>
+        </li>
+        <li>
         <p>reporting_section_ids : 担当部門ID(複数指定可)</p>
         </li>
         <li>
@@ -3660,10 +3776,11 @@ paths:
         - $ref: '#/components/parameters/start_collects_on'
         - $ref: '#/components/parameters/end_collects_on'
         - $ref: '#/components/parameters/charge_employee_ids'
+        - $ref: '#/components/parameters/charge_member_ids'
         - $ref: '#/components/parameters/reporting_section_ids'
         - $ref: '#/components/parameters/business_ids'
-        - $ref: '#/components/parameters/start_last_updated_date-4'
-        - $ref: '#/components/parameters/end_last_updated_date-4'
+        - $ref: '#/components/parameters/start_last_updated_date-5'
+        - $ref: '#/components/parameters/end_last_updated_date-5'
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/offset'
       responses:
@@ -3771,6 +3888,9 @@ paths:
         </li>
         <li>
         <p>charge_employee_id : 社内担当者の従業員ID</p>
+        </li>
+        <li>
+        <p>charge_member_id : 社内担当者のメンバーID</p>
         </li>
         <li>
         <p>reporting_section_id : 担当部門ID</p>
@@ -4261,6 +4381,9 @@ paths:
         <p>charge_employee_ids : 社内担当者の従業員ID(複数指定可)</p>
         </li>
         <li>
+        <p>charge_member_ids : 社内担当者のメンバーID(複数指定可)</p>
+        </li>
+        <li>
         <p>supplier_ids : 仕入先の取引先ID(複数指定可)</p>
         </li>
         <li>
@@ -4288,11 +4411,12 @@ paths:
         - $ref: '#/components/parameters/company_id'
         - $ref: '#/components/parameters/start_registered_date-4'
         - $ref: '#/components/parameters/end_registered_date-4'
-        - $ref: '#/components/parameters/start_last_updated_date-5'
-        - $ref: '#/components/parameters/end_last_updated_date-5'
+        - $ref: '#/components/parameters/start_last_updated_date-6'
+        - $ref: '#/components/parameters/end_last_updated_date-6'
         - $ref: '#/components/parameters/start_procurement_date'
         - $ref: '#/components/parameters/end_procurement_date'
         - $ref: '#/components/parameters/charge_employee_ids'
+        - $ref: '#/components/parameters/charge_member_ids'
         - $ref: '#/components/parameters/supplier_ids'
         - $ref: '#/components/parameters/business_ids-2'
         - $ref: '#/components/parameters/procurement_no'
@@ -4356,6 +4480,9 @@ paths:
         </li>
         <li>
         <p>charge_employee_id : 社内担当者の従業員ID</p>
+        </li>
+        <li>
+        <p>charge_member_id : 社内担当者のメンバーID</p>
         </li>
         <li>
         <p>reporting_section_id : 担当部門ID</p>
@@ -4443,6 +4570,9 @@ paths:
         </li>
         <li>
         <p>charge_employee_id : 社内担当者の従業員ID</p>
+        </li>
+        <li>
+        <p>charge_member_id : 社内担当者のメンバーID</p>
         </li>
         <li>
         <p>reporting_section_id : 担当部門ID</p>
@@ -4684,6 +4814,9 @@ paths:
         <p>charge_employee_ids : 社内担当者の従業員ID(複数指定可)</p>
         </li>
         <li>
+        <p>charge_member_ids : 社内担当者のメンバーID(複数指定可)</p>
+        </li>
+        <li>
         <p>business_ids : 案件ID(複数指定可)</p>
         </li>
         <li>
@@ -4708,10 +4841,11 @@ paths:
         - $ref: '#/components/parameters/end_advance_receipt_date'
         - $ref: '#/components/parameters/start_registered_date-5'
         - $ref: '#/components/parameters/end_registered_date-5'
-        - $ref: '#/components/parameters/start_last_updated_date-6'
-        - $ref: '#/components/parameters/end_last_updated_date-6'
+        - $ref: '#/components/parameters/start_last_updated_date-7'
+        - $ref: '#/components/parameters/end_last_updated_date-7'
         - $ref: '#/components/parameters/customer_ids'
         - $ref: '#/components/parameters/charge_employee_ids'
+        - $ref: '#/components/parameters/charge_member_ids'
         - $ref: '#/components/parameters/business_ids'
         - $ref: '#/components/parameters/billing_status'
         - $ref: '#/components/parameters/collection_status-2'
@@ -4786,6 +4920,9 @@ paths:
         </li>
         <li>
         <p>charge_employee_id : 社内担当者の従業員ID</p>
+        </li>
+        <li>
+        <p>charge_member_id : 社内担当者のメンバーID</p>
         </li>
         <li>
         <p>customer_order_no : 顧客注文No.</p>
@@ -4923,6 +5060,9 @@ paths:
         </li>
         <li>
         <p>charge_employee_id : 社内担当者の従業員ID</p>
+        </li>
+        <li>
+        <p>charge_member_id : 社内担当者のメンバーID</p>
         </li>
         <li>
         <p>customer_order_no : 顧客注文No.</p>
@@ -5245,7 +5385,10 @@ components:
           example: 01K35WX4YTCRD5KG58GGWEV8JT
     charge_employee_ids:
       name: charge_employee_ids[]
-      description: 社内担当者の従業員ID
+      description: |-
+        社内担当者の従業員ID
+
+        charge_member_ids[] と同時に指定した場合は AND 条件となり、意図した検索結果になりません。
       in: query
       required: false
       style: form
@@ -5258,6 +5401,23 @@ components:
           minimum: 1
           maximum: 9223372036854775807
           example: 1001
+    charge_member_ids:
+      name: charge_member_ids[]
+      description: |-
+        社内担当者のメンバーID
+
+        charge_employee_ids[] と同時に指定した場合は AND 条件となり、意図した検索結果になりません。
+      in: query
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+          maxLength: 26
+          minLength: 26
+          example: 01JPP4FD1CVQWCDSWA90VE1ZTM
     customer_ids:
       name: customer_ids[]
       description: 顧客の取引先ID
@@ -5913,6 +6073,24 @@ components:
         type: string
         format: date
         example: '2024-12-31'
+    start_last_updated_date-4:
+      name: start_last_updated_date
+      description: 売上更新日で絞込：開始日(yyyy-mm-dd)
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date
+        example: '2024-01-01'
+    end_last_updated_date-4:
+      name: end_last_updated_date
+      description: 売上更新日で絞込：終了日(yyyy-mm-dd)
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date
+        example: '2024-12-31'
     start_revenue_recognition_date:
       name: start_revenue_recognition_date
       description: 売上日で絞込：開始日(yyyy-mm-dd)
@@ -5931,6 +6109,14 @@ components:
         type: string
         format: date
         example: '2024-12-31'
+    sales_no:
+      name: sales_no
+      description: 売上No.で絞込
+      in: query
+      required: false
+      schema:
+        type: string
+        example: S-2024-0001
     billing_status-2:
       name: billing_status
       description: '請求書送付ステータス (未送付: not_billed, 送付済: billed, 対象外: none)'
@@ -6126,7 +6312,7 @@ components:
         type: string
         format: date
         example: '2025-12-31'
-    start_last_updated_date-4:
+    start_last_updated_date-5:
       name: start_last_updated_date
       description: 変更日時で絞込：開始日(yyyy-mm-dd)
       in: query
@@ -6135,7 +6321,7 @@ components:
         type: string
         format: date
         example: '2025-01-01'
-    end_last_updated_date-4:
+    end_last_updated_date-5:
       name: end_last_updated_date
       description: 変更日時で絞込：終了日(yyyy-mm-dd)
       in: query
@@ -6170,7 +6356,7 @@ components:
         type: string
         format: date
         example: '2025-05-01'
-    start_last_updated_date-5:
+    start_last_updated_date-6:
       name: start_last_updated_date
       description: 仕入更新日で絞込：開始日(yyyy-mm-dd)
       in: query
@@ -6179,7 +6365,7 @@ components:
         type: string
         format: date
         example: '2025-01-01'
-    end_last_updated_date-5:
+    end_last_updated_date-6:
       name: end_last_updated_date
       description: 仕入更新日で絞込：終了日(yyyy-mm-dd)
       in: query
@@ -6288,7 +6474,7 @@ components:
         type: string
         format: date
         example: '2025-05-01'
-    start_last_updated_date-6:
+    start_last_updated_date-7:
       name: start_last_updated_date
       description: 前受金更新日で絞込：開始日(yyyy-mm-dd)
       in: query
@@ -6297,7 +6483,7 @@ components:
         type: string
         format: date
         example: '2025-01-01'
-    end_last_updated_date-6:
+    end_last_updated_date-7:
       name: end_last_updated_date
       description: 前受金更新日で絞込：終了日(yyyy-mm-dd)
       in: query
@@ -6335,6 +6521,24 @@ components:
           type: string
           description: 従業員名
           example: 田中太郎
+      required:
+        - id
+        - display_name
+      additionalProperties: false
+    Member:
+      description: 社内担当者
+      type: object
+      properties:
+        id:
+          type: string
+          description: メンバーID
+          maxLength: 26
+          minLength: 26
+          example: 01JPP4FD1CVQWCDSWA90VE1ZTM
+        display_name:
+          type: string
+          description: メンバー名
+          example: 山田花子
       required:
         - id
         - display_name
@@ -6435,6 +6639,11 @@ components:
           nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        charge_member:
+          description: 社内担当者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         code:
           type: string
           description: 案件コード
@@ -6477,8 +6686,14 @@ components:
           example: '2025-04-01T09:00:00+09:00'
         registered_by:
           description: 登録者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        registered_by_member:
+          description: 登録者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         last_updated_at:
           type: string
           format: date-time
@@ -6486,8 +6701,14 @@ components:
           example: '2025-04-15T14:30:00+09:00'
         last_updated_by:
           description: 変更者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        last_updated_by_member:
+          description: 変更者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
       required:
         - id
         - name
@@ -6604,13 +6825,26 @@ components:
       required:
         - company_id
     ChargeEmployeeId:
-      description: 社内担当者の従業員ID
+      description: |-
+        社内担当者の従業員ID
+
+        charge_member_id と同時に指定した場合は charge_member_id が優先されます。
       type: integer
       format: int64
       minimum: 0
       maximum: 9223372036854775807
       nullable: true
       example: 101
+    ChargeMemberId:
+      description: |-
+        社内担当者のメンバーID
+
+        charge_employee_id と同時に指定した場合は charge_member_id が優先されます。
+      type: string
+      nullable: true
+      maxLength: 26
+      minLength: 26
+      example: 01JPP4FD1CVQWCDSWA90VE1ZTM
     CustomerId:
       description: 顧客の取引先ID
       type: integer
@@ -6657,6 +6891,8 @@ components:
           example: '2025-04-01'
         charge_employee_id:
           $ref: '#/components/schemas/ChargeEmployeeId'
+        charge_member_id:
+          $ref: '#/components/schemas/ChargeMemberId'
         customer_id:
           $ref: '#/components/schemas/CustomerId'
         prospect_sales_order:
@@ -6859,6 +7095,29 @@ components:
         - id
         - name
       additionalProperties: false
+    CustomFieldMemberValue:
+      type: object
+      description: メンバー型カスタム項目の値
+      properties:
+        type:
+          type: string
+          enum:
+            - member
+          description: マスタ型の種別
+          example: member
+        id:
+          type: string
+          description: メンバーID
+          example: 01JPP4FD1CVQWCDSWA90VE1ZTM
+        name:
+          type: string
+          description: メンバー名
+          example: サンプルメンバー
+      required:
+        - type
+        - id
+        - name
+      additionalProperties: false
     CustomFieldMasterValue:
       description: マスタ型カスタム項目の値
       oneOf:
@@ -6866,6 +7125,7 @@ components:
         - $ref: '#/components/schemas/CustomFieldEmployeeValue'
         - $ref: '#/components/schemas/CustomFieldSectionValue'
         - $ref: '#/components/schemas/CustomFieldMasterItemValue'
+        - $ref: '#/components/schemas/CustomFieldMemberValue'
       discriminator:
         propertyName: type
         mapping:
@@ -6873,6 +7133,7 @@ components:
           employee: '#/components/schemas/CustomFieldEmployeeValue'
           section: '#/components/schemas/CustomFieldSectionValue'
           master_item: '#/components/schemas/CustomFieldMasterItemValue'
+          member: '#/components/schemas/CustomFieldMemberValue'
     CustomField:
       type: object
       description: カスタム項目
@@ -6883,7 +7144,7 @@ components:
             * 文字列型（text, textarea, date）: 文字列
             * 数値型（number, amount, quantity）: 数値
             * プルダウン型（enum）: 選択肢の名称（文字列）
-            * マスタ型（partner, employee, section, master_item）: マスタ情報オブジェクト
+            * マスタ型（partner, employee, section, master_item, member）: マスタ情報オブジェクト
           nullable: true
           anyOf:
             - type: string
@@ -7171,14 +7432,31 @@ components:
           nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        charge_member:
+          description: 社内担当者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         registered_by:
           description: 登録者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        registered_by_member:
+          description: 登録者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         last_updated_by:
           description: 変更者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        last_updated_by_member:
+          description: 変更者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         registered_at:
           type: string
           format: date-time
@@ -7490,13 +7768,9 @@ components:
           description: 備考
           example: 備考テキスト
         charge_employee_id:
-          type: integer
-          format: int64
-          minimum: 1
-          maximum: 9223372036854775807
-          description: 社内担当者ID
-          nullable: true
-          example: 1
+          $ref: '#/components/schemas/ChargeEmployeeId'
+        charge_member_id:
+          $ref: '#/components/schemas/ChargeMemberId'
         reporting_section_id:
           type: integer
           format: int64
@@ -7877,6 +8151,28 @@ components:
       required:
         - id
         - display_name
+    MasterMember:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: メンバーID
+          maxLength: 26
+          minLength: 26
+          example: 01JPP4FD1CVQWCDSWA90VE1ZTM
+        num:
+          type: string
+          description: 従業員番号。未設定の場合は空文字。
+          example: A001
+        display_name:
+          type: string
+          description: 表示名。従業員マスタに未設定の場合はアカウント管理の表示名・メールアドレスで補完します。
+          example: 山田太郎
+      required:
+        - id
+        - num
+        - display_name
     CustomFieldDefinitionBase:
       type: object
       properties:
@@ -7907,6 +8203,7 @@ components:
             * `employee` - 従業員
             * `section` - 部門
             * `master_item` - 商品
+            * `member` - メンバー
           enum:
             - text
             - textarea
@@ -7919,6 +8216,7 @@ components:
             - employee
             - section
             - master_item
+            - member
           example: text
         required:
           type: boolean
@@ -8108,6 +8406,19 @@ components:
               example: master_item
           required:
             - type
+    MemberCustomFieldDefinition:
+      allOf:
+        - $ref: '#/components/schemas/CustomFieldDefinitionBase'
+        - type: object
+          additionalProperties: false
+          properties:
+            type:
+              type: string
+              enum:
+                - member
+              example: member
+          required:
+            - type
     CustomFieldDefinition:
       oneOf:
         - $ref: '#/components/schemas/TextCustomFieldDefinition'
@@ -8121,6 +8432,7 @@ components:
         - $ref: '#/components/schemas/EmployeeCustomFieldDefinition'
         - $ref: '#/components/schemas/SectionCustomFieldDefinition'
         - $ref: '#/components/schemas/MasterItemCustomFieldDefinition'
+        - $ref: '#/components/schemas/MemberCustomFieldDefinition'
       discriminator:
         propertyName: type
         mapping:
@@ -8135,6 +8447,7 @@ components:
           employee: '#/components/schemas/EmployeeCustomFieldDefinition'
           section: '#/components/schemas/SectionCustomFieldDefinition'
           master_item: '#/components/schemas/MasterItemCustomFieldDefinition'
+          member: '#/components/schemas/MemberCustomFieldDefinition'
     ProcurementStatus:
       description: '仕入ステータス (未計上: not_sold, 一部計上済: partially_sold, 計上済: sold)'
       enum:
@@ -8205,8 +8518,14 @@ components:
           example: false
         registered_by:
           description: 登録者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        registered_by_member:
+          description: 登録者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         registered_at:
           type: string
           format: date-time
@@ -8214,8 +8533,14 @@ components:
           example: '2025-01-15T10:30:00+09:00'
         last_updated_by:
           description: 変更者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        last_updated_by_member:
+          description: 変更者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         last_updated_at:
           type: string
           format: date-time
@@ -8350,6 +8675,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/Employee'
           nullable: true
+        charge_member:
+          description: 社内担当者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         reporting_section:
           $ref: '#/components/schemas/ReportingSection'
         internal_memo:
@@ -8660,6 +8990,8 @@ components:
           example: 1002
         charge_employee_id:
           $ref: '#/components/schemas/ChargeEmployeeId'
+        charge_member_id:
+          $ref: '#/components/schemas/ChargeMemberId'
         reporting_section_id:
           $ref: '#/components/schemas/ReportingSectionId'
         internal_memo:
@@ -8897,8 +9229,14 @@ components:
           example: false
         registered_by:
           description: 登録者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        registered_by_member:
+          description: 登録者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         quotation_no:
           type: string
           description: 見積No.
@@ -8997,6 +9335,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/Employee'
           nullable: true
+        charge_member:
+          description: 社内担当者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         reporting_section:
           $ref: '#/components/schemas/ReportingSection'
         business:
@@ -9011,8 +9354,14 @@ components:
           example: 見積書備考
         last_updated_by:
           description: 変更者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        last_updated_by_member:
+          description: 変更者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
       required:
         - id
         - canceled
@@ -9168,6 +9517,8 @@ components:
           $ref: '#/components/schemas/RecipientAddress'
         charge_employee_id:
           $ref: '#/components/schemas/ChargeEmployeeId'
+        charge_member_id:
+          $ref: '#/components/schemas/ChargeMemberId'
         reporting_section_id:
           $ref: '#/components/schemas/ReportingSectionId'
         internal_memo:
@@ -9407,8 +9758,14 @@ components:
           example: '2025-01-15T10:30:00+09:00'
         registered_by:
           description: 登録者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        registered_by_member:
+          description: 登録者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         last_updated_at:
           type: string
           format: date-time
@@ -9416,8 +9773,14 @@ components:
           example: '2025-01-16T14:45:00+09:00'
         last_updated_by:
           description: 変更者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        last_updated_by_member:
+          description: 変更者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         customer:
           description: 顧客
           allOf:
@@ -9615,6 +9978,8 @@ components:
           $ref: '#/components/schemas/CollectionMethodType'
         charge_employee_id:
           $ref: '#/components/schemas/ChargeEmployeeId'
+        charge_member_id:
+          $ref: '#/components/schemas/ChargeMemberId'
         reporting_section_id:
           $ref: '#/components/schemas/ReportingSectionId'
         internal_memo:
@@ -9776,6 +10141,11 @@ components:
               nullable: true
               allOf:
                 - $ref: '#/components/schemas/Employee'
+            charge_member:
+              description: 社内担当者
+              nullable: true
+              allOf:
+                - $ref: '#/components/schemas/Member'
             reporting_section:
               $ref: '#/components/schemas/ReportingSection'
             internal_memo:
@@ -9836,8 +10206,14 @@ components:
           example: '2025-01-15T10:30:00+09:00'
         registered_by:
           description: 登録者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        registered_by_member:
+          description: 登録者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         last_updated_at:
           type: string
           format: date-time
@@ -9845,8 +10221,14 @@ components:
           example: '2025-01-16T14:45:00+09:00'
         last_updated_by:
           description: 変更者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        last_updated_by_member:
+          description: 変更者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         amount_set:
           $ref: '#/components/schemas/AmountSet'
         amount_of_withholding_tax:
@@ -10062,6 +10444,8 @@ components:
           example: 1003
         charge_employee_id:
           $ref: '#/components/schemas/ChargeEmployeeId'
+        charge_member_id:
+          $ref: '#/components/schemas/ChargeMemberId'
         reporting_section_id:
           $ref: '#/components/schemas/ReportingSectionId'
         internal_memo:
@@ -10173,6 +10557,11 @@ components:
               nullable: true
               allOf:
                 - $ref: '#/components/schemas/Employee'
+            charge_member:
+              description: 社内担当者
+              nullable: true
+              allOf:
+                - $ref: '#/components/schemas/Member'
             reporting_section:
               $ref: '#/components/schemas/ReportingSection'
             internal_memo:
@@ -10269,8 +10658,14 @@ components:
           example: '2024-01-15T10:30:00+09:00'
         registered_by:
           description: 登録者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        registered_by_member:
+          description: 登録者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         last_updated_at:
           type: string
           format: date-time
@@ -10278,8 +10673,14 @@ components:
           example: '2024-01-16T14:45:00+09:00'
         last_updated_by:
           description: 変更者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        last_updated_by_member:
+          description: 変更者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         amount_set:
           $ref: '#/components/schemas/AmountSet'
         amount_of_withholding_tax:
@@ -10410,8 +10811,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/Partner'
         charge_employee:
-          $ref: '#/components/schemas/Employee'
+          description: 社内担当者
           nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Employee'
+        charge_member:
+          description: 社内担当者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         reporting_section:
           $ref: '#/components/schemas/ReportingSection'
           nullable: true
@@ -10563,6 +10971,8 @@ components:
           example: 1003
         charge_employee_id:
           $ref: '#/components/schemas/ChargeEmployeeId'
+        charge_member_id:
+          $ref: '#/components/schemas/ChargeMemberId'
         reporting_section_id:
           $ref: '#/components/schemas/ReportingSectionId'
         internal_memo:
@@ -10729,6 +11139,11 @@ components:
               nullable: true
               allOf:
                 - $ref: '#/components/schemas/Employee'
+            charge_member:
+              description: 社内担当者
+              nullable: true
+              allOf:
+                - $ref: '#/components/schemas/Member'
             reporting_section:
               $ref: '#/components/schemas/ReportingSection'
             internal_memo:
@@ -10818,12 +11233,24 @@ components:
           example: '2024-01-16T14:45:00+09:00'
         registered_by:
           description: 登録者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        registered_by_member:
+          description: 登録者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         last_updated_by:
           description: 変更者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        last_updated_by_member:
+          description: 変更者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         customer:
           description: 顧客
           allOf:
@@ -10835,6 +11262,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/Employee'
           nullable: true
+        charge_member:
+          description: 社内担当者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         reporting_section:
           $ref: '#/components/schemas/ReportingSection'
         billing_partner:
@@ -11065,6 +11497,8 @@ components:
               example: 32
         charge_employee_id:
           $ref: '#/components/schemas/ChargeEmployeeId'
+        charge_member_id:
+          $ref: '#/components/schemas/ChargeMemberId'
         reporting_section_id:
           $ref: '#/components/schemas/ReportingSectionId'
         internal_memo:
@@ -11262,8 +11696,14 @@ components:
             - $ref: '#/components/schemas/InternalMemo'
         registered_by:
           description: 登録者（statusが示す側の値）
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        registered_by_member:
+          description: 登録者（statusが示す側の値）
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         registered_at:
           type: string
           format: date-time
@@ -11271,8 +11711,14 @@ components:
           example: '2024-01-15T10:30:00+09:00'
         last_updated_by:
           description: 変更者（statusが示す側の値）
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        last_updated_by_member:
+          description: 変更者（statusが示す側の値）
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         last_updated_at:
           type: string
           format: date-time
@@ -11366,6 +11812,11 @@ components:
           nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        charge_member:
+          description: 社内担当者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         reporting_section:
           description: 担当部門
           nullable: true
@@ -11393,12 +11844,24 @@ components:
             - $ref: '#/components/schemas/Business'
         registered_by:
           description: 登録者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        registered_by_member:
+          description: 登録者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         last_updated_by:
           description: 最新変更者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        last_updated_by_member:
+          description: 最新変更者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         registered_at:
           type: string
           format: date-time
@@ -11544,6 +12007,11 @@ components:
           nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        charge_member:
+          description: 社内担当者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         reporting_section:
           $ref: '#/components/schemas/ReportingSection'
         internal_memo:
@@ -11572,12 +12040,24 @@ components:
           $ref: '#/components/schemas/Business'
         registered_by:
           description: 登録者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        registered_by_member:
+          description: 登録者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         last_updated_by:
           description: 変更者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        last_updated_by_member:
+          description: 変更者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         registered_at:
           type: string
           format: date-time
@@ -11754,6 +12234,8 @@ components:
           $ref: '#/components/schemas/CollectionMethodType'
         charge_employee_id:
           $ref: '#/components/schemas/ChargeEmployeeId'
+        charge_member_id:
+          $ref: '#/components/schemas/ChargeMemberId'
         reporting_section_id:
           $ref: '#/components/schemas/ReportingSectionId'
         internal_memo:
@@ -11835,8 +12317,14 @@ components:
           example: '2025-01-15T10:30:00+09:00'
         registered_by:
           description: 登録者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        registered_by_member:
+          description: 登録者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         last_updated_at:
           type: string
           format: date-time
@@ -11844,8 +12332,14 @@ components:
           example: '2025-01-16T14:45:00+09:00'
         last_updated_by:
           description: 変更者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        last_updated_by_member:
+          description: 変更者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         business:
           $ref: '#/components/schemas/Business'
         deal_line:
@@ -11930,8 +12424,14 @@ components:
           example: false
         registered_by:
           description: 登録者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        registered_by_member:
+          description: 登録者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         procurement_no:
           type: string
           description: 仕入No.
@@ -11976,6 +12476,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/Employee'
           nullable: true
+        charge_member:
+          description: 社内担当者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         reporting_section:
           $ref: '#/components/schemas/ReportingSection'
         business:
@@ -12013,8 +12518,14 @@ components:
           example: '2025-01-16T14:45:00+09:00'
         last_updated_by:
           description: 変更者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        last_updated_by_member:
+          description: 変更者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
       required:
         - id
         - canceled
@@ -12208,6 +12719,8 @@ components:
           example: 1002
         charge_employee_id:
           $ref: '#/components/schemas/ChargeEmployeeId'
+        charge_member_id:
+          $ref: '#/components/schemas/ChargeMemberId'
         reporting_section_id:
           $ref: '#/components/schemas/ReportingSectionId'
         internal_memo:
@@ -12530,6 +13043,8 @@ components:
           example: 1002
         charge_employee_id:
           $ref: '#/components/schemas/ChargeEmployeeId'
+        charge_member_id:
+          $ref: '#/components/schemas/ChargeMemberId'
         reporting_section_id:
           $ref: '#/components/schemas/ReportingSectionId'
         internal_memo:
@@ -12581,8 +13096,14 @@ components:
           example: '2025-01-15T10:30:00+09:00'
         registered_by:
           description: 登録者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        registered_by_member:
+          description: 登録者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         last_updated_at:
           type: string
           format: date-time
@@ -12590,8 +13111,14 @@ components:
           example: '2025-01-16T14:45:00+09:00'
         last_updated_by:
           description: 変更者
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        last_updated_by_member:
+          description: 変更者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         amount_set:
           $ref: '#/components/schemas/AmountSet'
         total_amount:
@@ -12686,6 +13213,11 @@ components:
           nullable: true
           allOf:
             - $ref: '#/components/schemas/Employee'
+        charge_member:
+          description: 社内担当者
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Member'
         reporting_section:
           $ref: '#/components/schemas/ReportingSection'
         internal_memo:
@@ -12842,6 +13374,8 @@ components:
           example: 01JPP4FD1CVQWCDSWA90VE1ZTM
         charge_employee_id:
           $ref: '#/components/schemas/ChargeEmployeeId'
+        charge_member_id:
+          $ref: '#/components/schemas/ChargeMemberId'
         collecting_partner_id:
           description: 入金元の取引先ID
           type: integer
@@ -13590,6 +14124,20 @@ components:
                   $ref: '#/components/schemas/Employee-2'
             required:
               - employees
+    MembersIndexResponse:
+      description: メンバー一覧のレスポンス
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: false
+            properties:
+              members:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MasterMember'
+            required:
+              - members
     CustomFieldDefinitionsIndexResponse:
       description: カスタム項目定義一覧のレスポンス
       content:
@@ -14741,6 +15289,8 @@ components:
                     example: 01JPP4FD1CVQWCDSWA90VE1ZTM
                   charge_employee_id:
                     $ref: '#/components/schemas/ChargeEmployeeId'
+                  charge_member_id:
+                    $ref: '#/components/schemas/ChargeMemberId'
                   customer_id:
                     description: 顧客の取引先ID
                     type: integer
@@ -14870,6 +15420,8 @@ components:
                     example: C-PO-20211212-001
                   charge_employee_id:
                     $ref: '#/components/schemas/ChargeEmployeeId'
+                  charge_member_id:
+                    $ref: '#/components/schemas/ChargeMemberId'
                   reporting_section_id:
                     $ref: '#/components/schemas/ReportingSectionId'
                   internal_memo:
@@ -14939,6 +15491,8 @@ components:
                     example: C-PO-20211212-001
                   charge_employee_id:
                     $ref: '#/components/schemas/ChargeEmployeeId'
+                  charge_member_id:
+                    $ref: '#/components/schemas/ChargeMemberId'
                   reporting_section_id:
                     $ref: '#/components/schemas/ReportingSectionId'
                   internal_memo:
