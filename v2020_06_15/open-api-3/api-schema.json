@@ -27925,14 +27925,14 @@
                 },
                 "shortcut": {
                   "type": "string",
-                  "maxLength": 20,
+                  "maxLength": 255,
                   "description": "ショートカット1 (20文字以内)。未設定の場合はnullが返ります。",
                   "example": "SOFUTO",
                   "nullable": true
                 },
                 "shortcut_num": {
                   "type": "string",
-                  "maxLength": 20,
+                  "maxLength": 255,
                   "description": "ショートカット2 (20文字以内)。未設定の場合はnullが返ります。",
                   "example": "123",
                   "nullable": true
@@ -28108,14 +28108,14 @@
               },
               "shortcut": {
                 "type": "string",
-                "maxLength": 20,
+                "maxLength": 255,
                 "description": "ショートカット1 (20文字以内)。未設定の場合はnullが返ります。",
                 "example": "SOFUTO",
                 "nullable": true
               },
               "shortcut_num": {
                 "type": "string",
-                "maxLength": 20,
+                "maxLength": 255,
                 "description": "ショートカット2 (20文字以内)。未設定の場合はnullが返ります。",
                 "example": "123",
                 "nullable": true
@@ -49417,7 +49417,8 @@
                 "description": {
                   "type": "string",
                   "description": "申請フォームの説明",
-                  "example": "申請フォームの説明"
+                  "example": "申請フォームの説明",
+                  "nullable": true
                 },
                 "status": {
                   "type": "string",
