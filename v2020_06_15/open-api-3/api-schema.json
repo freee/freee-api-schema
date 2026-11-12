@@ -46534,6 +46534,13 @@
             "description": "デフォルトで選択する申請経路のID (未設定の場合は null)。申請経路一覧の取得API (`/api/1/approval_flow_routes`) のレスポンス id と同じ値です。",
             "example": 101
           },
+          "traffic_line_template_src_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true,
+            "description": "交通経路・交通系ICカードから作成した明細にデフォルトで選択する経費科目の source_line_template_id (未設定の場合は null)。経費科目一覧の取得API (`/api/1/expense_application_line_templates`) のレスポンス source_line_template_id と同じ値です。削除済みの経費科目を指していることがあります。更新では null と 0 のどちらも未設定に戻す指示になります。更新で省略した場合は現在の設定を変更しません。ただし更新で line_template_setting に disable を指定した場合は、省略しても未設定に戻します。",
+            "example": 1
+          },
           "observer_addition": {
             "type": "string",
             "enum": [
@@ -46718,6 +46725,13 @@
             "minimum": 1,
             "description": "デフォルトで選択する申請経路のID (未設定の場合は null)。申請経路一覧の取得API (`/api/1/approval_flow_routes`) のレスポンス id と同じ値です。",
             "example": 101
+          },
+          "traffic_line_template_src_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true,
+            "description": "交通経路・交通系ICカードから作成した明細にデフォルトで選択する経費科目の source_line_template_id (未設定の場合は null)。経費科目一覧の取得API (`/api/1/expense_application_line_templates`) のレスポンス source_line_template_id と同じ値です。削除済みの経費科目を指していることがあります。更新では null と 0 のどちらも未設定に戻す指示になります。更新で省略した場合は現在の設定を変更しません。ただし更新で line_template_setting に disable を指定した場合は、省略しても未設定に戻します。",
+            "example": 1
           },
           "observer_addition": {
             "type": "string",
