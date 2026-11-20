@@ -1080,7 +1080,6 @@ paths:
           <li><code>date</code>: 日付</li>
           <li><code>enum</code>: プルダウン</li>
           <li><code>partner</code>: 取引先</li>
-          <li><code>employee</code>: 従業員</li>
           <li><code>section</code>: 部門</li>
           <li><code>master_item</code>: 商品</li>
           <li><code>member</code>: メンバー</li>
@@ -7019,30 +7018,6 @@ components:
         - id
         - name
       additionalProperties: false
-    CustomFieldEmployeeValue:
-      type: object
-      description: 従業員型カスタム項目の値
-      properties:
-        type:
-          type: string
-          enum:
-            - employee
-          description: マスタ型の種別
-          example: employee
-        id:
-          type: integer
-          format: int64
-          description: 従業員ID
-          example: 101
-        name:
-          type: string
-          description: 従業員名
-          example: サンプル従業員
-      required:
-        - type
-        - id
-        - name
-      additionalProperties: false
     CustomFieldSectionValue:
       type: object
       description: 部門型カスタム項目の値
@@ -7122,7 +7097,6 @@ components:
       description: マスタ型カスタム項目の値
       oneOf:
         - $ref: '#/components/schemas/CustomFieldPartnerValue'
-        - $ref: '#/components/schemas/CustomFieldEmployeeValue'
         - $ref: '#/components/schemas/CustomFieldSectionValue'
         - $ref: '#/components/schemas/CustomFieldMasterItemValue'
         - $ref: '#/components/schemas/CustomFieldMemberValue'
@@ -7130,7 +7104,6 @@ components:
         propertyName: type
         mapping:
           partner: '#/components/schemas/CustomFieldPartnerValue'
-          employee: '#/components/schemas/CustomFieldEmployeeValue'
           section: '#/components/schemas/CustomFieldSectionValue'
           master_item: '#/components/schemas/CustomFieldMasterItemValue'
           member: '#/components/schemas/CustomFieldMemberValue'
@@ -7144,7 +7117,7 @@ components:
             * 文字列型（text, textarea, date）: 文字列
             * 数値型（number, amount, quantity）: 数値
             * プルダウン型（enum）: 選択肢の名称（文字列）
-            * マスタ型（partner, employee, section, master_item, member）: マスタ情報オブジェクト
+            * マスタ型（partner, section, master_item, member）: マスタ情報オブジェクト
           nullable: true
           anyOf:
             - type: string
@@ -8011,7 +7984,6 @@ components:
         code:
           type: string
           description: 商品コード
-          nullable: true
           example: ITEM-001
         name:
           type: string
@@ -8075,6 +8047,7 @@ components:
           nullable: true
       required:
         - id
+        - code
         - name
         - display_name
         - memo_tag_ids
@@ -8200,7 +8173,6 @@ components:
             * `date` - 日付
             * `enum` - プルダウン
             * `partner` - 取引先
-            * `employee` - 従業員
             * `section` - 部門
             * `master_item` - 商品
             * `member` - メンバー
@@ -8213,7 +8185,6 @@ components:
             - date
             - enum
             - partner
-            - employee
             - section
             - master_item
             - member
@@ -8367,19 +8338,6 @@ components:
               example: partner
           required:
             - type
-    EmployeeCustomFieldDefinition:
-      allOf:
-        - $ref: '#/components/schemas/CustomFieldDefinitionBase'
-        - type: object
-          additionalProperties: false
-          properties:
-            type:
-              type: string
-              enum:
-                - employee
-              example: employee
-          required:
-            - type
     SectionCustomFieldDefinition:
       allOf:
         - $ref: '#/components/schemas/CustomFieldDefinitionBase'
@@ -8429,7 +8387,6 @@ components:
         - $ref: '#/components/schemas/DateCustomFieldDefinition'
         - $ref: '#/components/schemas/EnumCustomFieldDefinition'
         - $ref: '#/components/schemas/PartnerCustomFieldDefinition'
-        - $ref: '#/components/schemas/EmployeeCustomFieldDefinition'
         - $ref: '#/components/schemas/SectionCustomFieldDefinition'
         - $ref: '#/components/schemas/MasterItemCustomFieldDefinition'
         - $ref: '#/components/schemas/MemberCustomFieldDefinition'
@@ -8444,7 +8401,6 @@ components:
           date: '#/components/schemas/DateCustomFieldDefinition'
           enum: '#/components/schemas/EnumCustomFieldDefinition'
           partner: '#/components/schemas/PartnerCustomFieldDefinition'
-          employee: '#/components/schemas/EmployeeCustomFieldDefinition'
           section: '#/components/schemas/SectionCustomFieldDefinition'
           master_item: '#/components/schemas/MasterItemCustomFieldDefinition'
           member: '#/components/schemas/MemberCustomFieldDefinition'
@@ -14215,8 +14171,8 @@ components:
                 description: null
               - id: 01JPP4FD1CVQWCDSWA90VE1ZTX
                 key: custom_field_009
-                display_name: 担当従業員
-                type: employee
+                display_name: 担当メンバー
+                type: member
                 required: false
                 description: null
               - id: 01JPP4FD1CVQWCDSWA90VE1ZTY
