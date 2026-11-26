@@ -2273,7 +2273,7 @@
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "200": {
@@ -2554,7 +2554,7 @@
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "201": {
@@ -2765,7 +2765,7 @@
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "200": {
@@ -3948,7 +3948,7 @@
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "201": {
@@ -4154,7 +4154,7 @@
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "200": {
@@ -5262,7 +5262,7 @@
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "201": {
@@ -5459,7 +5459,7 @@
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "200": {
@@ -6718,7 +6718,7 @@
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "201": {
@@ -6905,7 +6905,7 @@
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "200": {
@@ -7120,7 +7120,7 @@
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "200": {
@@ -7711,7 +7711,7 @@
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "201": {
@@ -7966,7 +7966,7 @@
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "200": {
@@ -8504,7 +8504,7 @@
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "201": {
@@ -9042,7 +9042,7 @@
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "201": {
@@ -15925,18 +15925,7 @@
           "200": {
             "description": "",
             "content": {
-              "text/csv": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "application/pdf": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              },
-              "image/*": {
+              "*/*": {
                 "schema": {
                   "type": "string",
                   "format": "binary"
@@ -16242,7 +16231,7 @@
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "201": {
@@ -16426,7 +16415,7 @@
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "200": {
@@ -18293,7 +18282,7 @@
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "201": {
@@ -18477,7 +18466,7 @@
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "200": {
@@ -18962,7 +18951,7 @@
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "201": {
@@ -21821,12 +21810,14 @@
                           },
                           "min_amount": {
                             "type": "integer",
+                            "format": "int64",
                             "nullable": true,
                             "description": "最小金額 (単位: 円)。ルールが未設定の場合はnullが返ります。",
                             "example": 1000
                           },
                           "max_amount": {
                             "type": "integer",
+                            "format": "int64",
                             "nullable": true,
                             "description": "最大金額 (単位: 円)。ルールが未設定の場合はnullが返ります。",
                             "example": 10000
@@ -22147,12 +22138,14 @@
                   },
                   "min_amount": {
                     "type": "integer",
+                    "format": "int64",
                     "nullable": true,
                     "description": "最小金額 (単位: 円)",
                     "example": 1000
                   },
                   "max_amount": {
                     "type": "integer",
+                    "format": "int64",
                     "nullable": true,
                     "description": "最大金額 (単位: 円)",
                     "example": 10000
@@ -22334,12 +22327,14 @@
                     },
                     "min_amount": {
                       "type": "integer",
+                      "format": "int64",
                       "nullable": true,
                       "description": "最小金額 (単位: 円)。ルールが未設定の場合はnullが返ります。",
                       "example": 1000
                     },
                     "max_amount": {
                       "type": "integer",
+                      "format": "int64",
                       "nullable": true,
                       "description": "最大金額 (単位: 円)。ルールが未設定の場合はnullが返ります。",
                       "example": 10000
@@ -22686,12 +22681,14 @@
                     },
                     "min_amount": {
                       "type": "integer",
+                      "format": "int64",
                       "nullable": true,
                       "description": "最小金額 (単位: 円)。ルールが未設定の場合はnullが返ります。",
                       "example": 1000
                     },
                     "max_amount": {
                       "type": "integer",
+                      "format": "int64",
                       "nullable": true,
                       "description": "最大金額 (単位: 円)。ルールが未設定の場合はnullが返ります。",
                       "example": 10000
@@ -23049,12 +23046,14 @@
                   },
                   "min_amount": {
                     "type": "integer",
+                    "format": "int64",
                     "nullable": true,
                     "description": "最小金額 (単位: 円)",
                     "example": 1000
                   },
                   "max_amount": {
                     "type": "integer",
+                    "format": "int64",
                     "nullable": true,
                     "description": "最大金額 (単位: 円)",
                     "example": 10000
@@ -23236,12 +23235,14 @@
                     },
                     "min_amount": {
                       "type": "integer",
+                      "format": "int64",
                       "nullable": true,
                       "description": "最小金額 (単位: 円)。ルールが未設定の場合はnullが返ります。",
                       "example": 1000
                     },
                     "max_amount": {
                       "type": "integer",
+                      "format": "int64",
                       "nullable": true,
                       "description": "最大金額 (単位: 円)。ルールが未設定の場合はnullが返ります。",
                       "example": 10000
@@ -40286,7 +40287,7 @@
                     },
                     "shortcut": {
                       "type": "string",
-                      "maxLength": 20,
+                      "maxLength": 255,
                       "description": "ショートカット1 (20文字以内)",
                       "example": "SOFUTO",
                       "nullable": true
@@ -43075,7 +43076,8 @@
                 "issue_date": {
                   "type": "string",
                   "description": "申請日 (yyyy-mm-dd)",
-                  "example": "2019-12-17"
+                  "example": "2019-12-17",
+                  "nullable": true
                 },
                 "description": {
                   "type": "string",
@@ -43433,7 +43435,8 @@
               "issue_date": {
                 "type": "string",
                 "description": "申請日 (yyyy-mm-dd)",
-                "example": "2019-12-17"
+                "example": "2019-12-17",
+                "nullable": true
               },
               "description": {
                 "type": "string",
@@ -49473,6 +49476,14 @@
                   "description": "表示順（申請者が選択する申請フォームの表示順を設定できます。小さい数ほど上位に表示されます。（0を除く整数のみ。マイナス不可）未入力の場合、表示順が後ろになります。同じ数字が入力された場合、登録順で表示されます。）",
                   "example": 1,
                   "nullable": true
+                },
+                "route_setting_count": {
+                  "type": "integer",
+                  "format": "int64",
+                  "minimum": 0,
+                  "maximum": 2147483647,
+                  "description": "申請フォームに設定された経路数",
+                  "example": 1
                 }
               }
             }
